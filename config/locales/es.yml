@@ -1,0 +1,31 @@
+
+es:
+  attributes:
+    fechaexpulsion: Fecha de Expulsión
+    expulsion: Sitio de Expulsión
+    fechallegada:  Fecha de Llegada 
+    llegada: Sitio de Llegada
+    clasifdesp: Clasificación
+    tipodesp: Tipo
+    descripcion: Descripción
+    otrosdatos: Otros Datos
+    declaro:  Declaro Ante
+    hechosdeclarados: Hechos Declarados 
+    fechadeclaracion:  Fecha de Declaración 
+    declaroante: Declaro Ante
+    inclusion: Inclusión RUV
+    acreditacion: Acreditación
+    retornado:  Retornado
+    reubicado:  Reubicado
+    connacionalretorno:  Connacional con Retorno Voluntario
+    acompestado:  Acompañamiento Estado
+    connacionaldeportado:  Connacional Deportado
+    oficioantes: Oficio antes
+    modalidadtierra: Modalidad Ten. Tierra
+    materialesperdidos: Bienes Materiales Perdidos 
+    inmaterialesperdidos: Bienes Inmateriales Perdidos 
+    protegiorupta:  Protegió predio en RUPTA
+    documentostierra:  Documentos sobre la tierra
+  activerecord:
+    attributes:
+  

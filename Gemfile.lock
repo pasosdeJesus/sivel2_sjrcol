@@ -1,4 +1,19 @@
 GIT
+  remote: git://github.com/pasosdeJesus/sivel2_gen.git
+  revision: 69617640ccb2a5d0377417dfa2ecb07f216f25c3
+  specs:
+    sivel2_gen (2.0.a1)
+      devise
+      rails (~> 4.1.4)
+
+GIT
+  remote: git://github.com/pasosdeJesus/sivel2_sjr.git
+  revision: 3093ad34b0db37eda1e63733ad517d638156f987
+  specs:
+    sivel2_sjr (2.0.a1)
+      rails (~> 4.1.5)
+
+GIT
   remote: git://github.com/vtamara/cocoon.git
   revision: 836a331276ea1452d63325a6662483b9f1cb28be
   specs:
@@ -10,19 +25,6 @@ GIT
   specs:
     jquery-ui-bootstrap-rails (0.1.1)
       rails
-
-PATH
-  remote: ../sivel2_gen
-  specs:
-    sivel2_gen (2.0.a1)
-      devise
-      rails (~> 4.1.4)
-
-PATH
-  remote: ../sivel2_sjr
-  specs:
-    sivel2_sjr (2.0.a1)
-      rails (~> 4.1.5)
 
 GEM
   remote: https://rubygems.org/
@@ -62,7 +64,7 @@ GEM
       sass (~> 3.2)
     builder (3.2.2)
     cancan (1.6.10)
-    capybara (2.4.1)
+    capybara (2.4.3)
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
       rack (>= 1.0.0)
@@ -204,12 +206,12 @@ GEM
       rspec-core (~> 3.1.0)
       rspec-expectations (~> 3.1.0)
       rspec-mocks (~> 3.1.0)
-    rspec-core (3.1.3)
+    rspec-core (3.1.4)
       rspec-support (~> 3.1.0)
     rspec-expectations (3.1.1)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.1.0)
-    rspec-mocks (3.1.0)
+    rspec-mocks (3.1.1)
       rspec-support (~> 3.1.0)
     rspec-rails (3.1.0)
       actionpack (>= 3.0)
@@ -232,9 +234,9 @@ GEM
     simple_form (3.0.2)
       actionpack (~> 4.0)
       activemodel (~> 4.0)
-    simplecov (0.9.0)
+    simplecov (0.9.1)
       docile (~> 1.1.0)
-      multi_json
+      multi_json (~> 1.0)
       simplecov-html (~> 0.8.0)
     simplecov-html (0.8.0)
     slop (3.6.0)

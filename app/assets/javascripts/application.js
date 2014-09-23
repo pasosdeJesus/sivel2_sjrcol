@@ -10,7 +10,7 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require sivel2_gen/application
+//= require sivel2_sjr/application
 //= require_tree .
 
 

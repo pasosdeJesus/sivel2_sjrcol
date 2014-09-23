@@ -86,6 +86,10 @@
                       label_method: :nombre, 
 											value_method: :id 
 										%>
+                    <%= s.input :comosupo, 
+                      label: "Detalle como supo"
+										%>
+
                     <%= render 'contacto_fields', :f => victima %>
                     <%= s.input :concentimientosjr, 
                       label: "Consentimiento Informado compartir SJR",
@@ -132,9 +136,9 @@
           </div>
           <div id="victimacolectiva" class="accordion-body collapse">
             <div class="accordion-inner">
-              <!-- %= f.simple_fields_for :victimacolectiva do |victimacolectiva| %-->
-                <!-- %= render 'victimacolectiva_fields', :f => victimacolectiva %-->
-              <!-- % end %-->
+              <!--%= f.simple_fields_for :victimacolectiva do |victimacolectiva| %-->
+                <!--%= render 'victimacolectiva_fields', :f => victimacolectiva %-->
+              <!--% end %-->
               <div class="links">
                 <!--%= link_to_add_association 'Añadir Víctima Colectiva', f, 
                   :victimacolectiva, 

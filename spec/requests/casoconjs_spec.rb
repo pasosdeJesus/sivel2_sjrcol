@@ -23,11 +23,11 @@ describe "Llenar caso con javascript", :js => true do
 
       # Datos básicos
       fill_in "Fecha de Recepción", with: '2014-08-04'
-      fill_in "Fecha del Hecho", with: '2014-08-03'
-      fill_in "Descripción", with: 'datos mínimos'
+      fill_in "Fecha del Desplazamiento", with: '2014-08-03'
+      fill_in "Memo", with: 'datos mínimos'
 
       # Sol principal
-      click_on "Solicitante Principal"
+      click_on "Contacto"
       #if (!find_link('Añadir Sitio Geográfico').visible?)
       #  click_link "Sitios geográficos de refugios y desplazamientos"
       #end
@@ -49,11 +49,11 @@ describe "Llenar caso con javascript", :js => true do
       visit new_caso_path
       # Datos básicos
       fill_in "Fecha de Recepción", with: '2014-08-04'
-      fill_in "Fecha del Hecho", with: '2014-08-03'
-      fill_in "Descripción", with: 'con familiar'
+      fill_in "Fecha del Desplazamiento", with: '2014-08-03'
+      fill_in "Memo", with: 'con familiar'
 
       # Sol principal
-      click_on "Solicitante Principal"
+      click_on "Contacto"
       #if (!find_link('Añadir Sitio Geográfico').visible?)
       #  click_link "Sitios geográficos de refugios y desplazamientos"
       #end
@@ -63,7 +63,7 @@ describe "Llenar caso con javascript", :js => true do
         fill_in "Apellidos", with: 'Apellidos Solicitante'
       end
       page.save_screenshot('s-sol1.png')
-      click_on "Solicitante Principal"
+      click_on "Contacto"
       page.save_screenshot('s-sol2.png')
 
       # Núcleo familiar
@@ -83,13 +83,10 @@ describe "Llenar caso con javascript", :js => true do
         select('OTRO', from: 'Profesión')
         select('De 0 a 15 Años', from: 'Rango de Edad')
         select('ROM', from: 'Etnia') 
-        select('IGLESIA DE DIOS', from: 'Religión/Iglesia') 
         select('HETEROSEXUAL', from: 'Orientación Sexual') 
         select('CASADO/A', from: 'Estado Civil') 
         select('HIJO(A)', from: 'Rol en Familia') 
         select('GESTANTE', from: 'Maternidad') 
-        select('SENSORIAL', from: 'Discapacidad') 
-        fill_in "Enfermedad", with: 'Enfermedad'
         select('PESCADOR', from: 'Actividad/Oficio actual') 
         select('PRIMARIA', from: 'Nivel Escolar') 
       end
@@ -103,11 +100,11 @@ describe "Llenar caso con javascript", :js => true do
       visit new_caso_path
       # Datos básicos
       fill_in "Fecha de Recepción", with: '2014-08-04'
-      fill_in "Fecha del Hecho", with: '2014-08-03'
-      fill_in "Descripción", with: 'descripcion con javascript'
+      fill_in "Fecha del Desplazamiento", with: '2014-08-03'
+      fill_in "Memo", with: 'descripcion con javascript'
 
       # Sol principal
-      click_on "Solicitante Principal"
+      click_on "Contacto"
       #if (!find_link('Añadir Sitio Geográfico').visible?)
       #  click_link "Sitios geográficos de refugios y desplazamientos"
       #end
@@ -117,7 +114,7 @@ describe "Llenar caso con javascript", :js => true do
         fill_in "Apellidos", with: 'Apellidos Solicitante'
       end
       page.save_screenshot('s-sol1.png')
-      click_on "Solicitante Principal"
+      click_on "Contacto"
       page.save_screenshot('s-sol2.png')
 
       # Núcleo familiar
@@ -132,13 +129,13 @@ describe "Llenar caso con javascript", :js => true do
       page.save_screenshot('s-fam2.png')
 
       # Sitios Geográficos
-      click_link "Sitios geográficos de refugios y desplazamientos"
-      if (!find_link('Añadir Sitio Geográfico').visible?)
-        click_link "Sitios geográficos de refugios y desplazamientos"
+      click_link "Ubicación"
+      if (!find_link('Añadir Ubicación').visible?)
+        click_link "Ubicación"
       end
-      expect(page).to have_content "Añadir Sitio Geográfico"
+      expect(page).to have_content "Añadir Ubicación"
       page.save_screenshot('s-geo0.png')
-      click_on "Añadir Sitio Geográfico"
+      click_on "Añadir Ubicación"
       within ("div#ubicacion") do 
         select('VENEZUELA', from: 'País') 
         select('ARAGUA', from: 'Estado/Departamento') 
@@ -159,11 +156,11 @@ describe "Llenar caso con javascript", :js => true do
       visit new_caso_path
       # Datos básicos
       fill_in "Fecha de Recepción", with: '2014-08-04'
-      fill_in "Fecha del Hecho", with: '2014-08-03'
-      fill_in "Descripción", with: 'descripcion con javascript'
+      fill_in "Fecha del Desplazamiento", with: '2014-08-03'
+      fill_in "Memo", with: 'descripcion con javascript'
 
       # Sol principal
-      click_on "Solicitante Principal"
+      click_on "Contacto"
       #if (!find_link('Añadir Sitio Geográfico').visible?)
       #  click_link "Sitios geográficos de refugios y desplazamientos"
       #end
@@ -173,7 +170,7 @@ describe "Llenar caso con javascript", :js => true do
         fill_in "Apellidos", with: 'Apellidos Solicitante'
       end
       page.save_screenshot('s-sol1.png')
-      click_on "Solicitante Principal"
+      click_on "Contacto"
       page.save_screenshot('s-sol2.png')
 
       # Núcleo familiar
@@ -188,13 +185,13 @@ describe "Llenar caso con javascript", :js => true do
       page.save_screenshot('s-fam2.png')
 
       # Sitios Geográficos
-      click_link "Sitios geográficos de refugios y desplazamientos"
-      if (!find_link('Añadir Sitio Geográfico').visible?)
-        click_link "Sitios geográficos de refugios y desplazamientos"
+      click_link "Ubicación"
+      if (!find_link('Añadir Ubicación').visible?)
+        click_link "Ubicación"
       end
-      expect(page).to have_content "Añadir Sitio Geográfico"
+      expect(page).to have_content "Añadir Ubicación"
       page.save_screenshot('s-geo0.png')
-      click_on "Añadir Sitio Geográfico"
+      click_on "Añadir Ubicación"
       within ("div#ubicacion") do 
         select('VENEZUELA', from: 'País') 
         select('ARAGUA', from: 'Estado/Departamento') 
@@ -207,8 +204,8 @@ describe "Llenar caso con javascript", :js => true do
         select('URBANO', from: 'Tipo de Sitio') 
       end
       page.save_screenshot('s-geo1.png')
-      expect(find_link('Añadir Sitio Geográfico').visible?).to be true
-      click_on "Añadir Sitio Geográfico"
+      expect(find_link('Añadir Ubicación').visible?).to be true
+      click_on "Añadir Ubicación"
       page.save_screenshot('s-geo2.png')
       su = "//div[@id='ubicacion']/div/div[2]"
       within(:xpath, su) do 
@@ -223,7 +220,7 @@ describe "Llenar caso con javascript", :js => true do
         select('RURAL', from: 'Tipo de Sitio') 
       end
       page.save_screenshot('s-geo3.png')
-      click_on "Sitios geográficos de refugios y desplazamientos"
+      click_on "Ubicación"
 
       # Refugio
       click_on "Refugio"
@@ -276,11 +273,11 @@ describe "Llenar caso con javascript", :js => true do
       visit new_caso_path
       # Datos básicos
       fill_in "Fecha de Recepción", with: '2014-08-04'
-      fill_in "Fecha del Hecho", with: '2014-08-03'
-      fill_in "Descripción", with: 'descripcion con javascript'
+      fill_in "Fecha del Desplazamiento", with: '2014-08-03'
+      fill_in "Memo", with: 'descripcion con javascript'
 
       # Sol principal
-      click_on "Solicitante Principal"
+      click_on "Contacto"
       #if (!find_link('Añadir Sitio Geográfico').visible?)
       #  click_link "Sitios geográficos de refugios y desplazamientos"
       #end
@@ -290,18 +287,18 @@ describe "Llenar caso con javascript", :js => true do
         fill_in "Apellidos", with: 'Apellidos Solicitante'
       end
       page.save_screenshot('s-sol1.png')
-      click_on "Solicitante Principal"
+      click_on "Contacto"
       page.save_screenshot('s-sol2.png')
 
       #Desplazamiento
-      click_on "Agente de Persecución"
-      if (!find_link('Añadir Agente de Persecución').visible?)
-        click_on "Agente de Persecución"
+      click_on "Presuntos Responsables"
+      if (!find_link('Añadir Presunto Responsable').visible?)
+        click_on "Presuntos Responsables"
       end
-      click_on "Añadir Agente de Persecución"
+      click_on "Añadir Presunto Responsable"
       page.save_screenshot('s-pr1.png')
       if (!find_field('Presunto Responsable').visible?)
-        click_on "Añadir Desplazamiento"
+        click_on "Añadir Presunto Responsable"
       end
       expect(find('#presponsable')).to have_field( 'Presunto Responsable')
       within ("#presponsable") do 
@@ -312,7 +309,7 @@ describe "Llenar caso con javascript", :js => true do
         fill_in "Otro", with: 'o1'
       end
       page.save_screenshot('s-pr2.png')
-      click_on "Agente de Persecución"
+      click_on "Presuntos Responsables"
       page.save_screenshot('s-pr3.png')
 
       #Acto

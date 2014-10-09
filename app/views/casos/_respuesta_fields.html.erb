@@ -5,6 +5,71 @@
       :input_html => { "data-behaviour" => "datepicker" },
       :as => :string, :label => "Fecha de Atención" 
     %>
+    <%= f.association :derecho, 
+      collection: Derecho.habilitados,
+      label: "Derechos Vulnerados",
+      label_method: :nombre, 
+      value_method: :id 
+    %>
+    <%= f.input :informacionder, 
+      label: "Se brindó información",
+      wrapper_html: { class: "span11 offset1" }  
+    %>
+    <%= f.input :accionesder, label: "Acciones D.V." %>
+
+    <%= f.association :ayudaestado, 
+      collection: Ayudaestado.habilitados,
+      label: "Ayuda del Estado",
+      label_method: :nombre, 
+      value_method: :id 
+    %>
+    <%= f.input :institucionayes, 
+      label: "Instituciones que ayudaron",
+      wrapper_html: { style: "padding-bottom: 18px;" }
+    %>
+    <%= f.input :cantidadayes, label: "Detalle A. Estado" %>
+
+    <%= f.association :progestado, 
+      collection: Progestado.habilitados,
+      label: "Programas y Respuesta del Estado",
+      label_method: :nombre, 
+      value_method: :id 
+    %>
+    <%= f.input :difobsprog, 
+      label: "Dificultades y Observaciones",
+      wrapper_html: { style: "padding-bottom: 18px;" }
+    %>
+    <%= f.association :ayudasjr, 
+      collection: Ayudasjr.habilitados,
+      label: "Asistencia Humanitaria",
+      label_method: :nombre, 
+      value_method: :id 
+    %>
+    <%= f.input :detallear, 
+      label: "Detalle A. Humanitaria",
+      wrapper_html: { style: "padding-bottom: 18px;" }
+    %>
+    <%= f.input :montoar, label: "Monto A. Humanitaria" %>
+
+    <%= f.association :motivosjr, 
+      collection: Motivosjr.habilitados,
+      label: "Servicios y Asesorias del SJR",
+      label_method: :nombre, 
+      value_method: :id 
+    %>
+    <%= f.input :detallemotivo, label: "Detalle" %>
+
+    <%= f.association :aslegal, 
+      collection: Aslegal.habilitados,
+      label: 'Seguimiento Judicial',
+      label_method: :nombre, 
+      value_method: :id 
+    %>
+    <%= f.input :detalleal, label: "Detalle S. Judicial" %>
+    <%= f.input :montoal, label: "Monto S. Judicial" %>
+
+
+
     <%= f.input :numprorrogas, as: :integer, 
       label: "Número de Prorrogas" 
     %>
@@ -41,7 +106,7 @@
       label: "Observaciones del caso" 
     %>
     <%= f.input :id_personadesea, 
-      collection: Personadesea.where(fechadeshabilitacion: nil).order(:nombre).all,
+      collection: Personadesea.habilitados,
       label: "Persona desea",
       label_method: :nombre, 
       value_method: :id 
@@ -57,66 +122,6 @@
     <%= f.input :efectividad, as: :text, 
       label: "Efectividad en la Acción" 
     %>
-
-    <%= f.association :derecho, 
-      collection: Derecho.where(fechadeshabilitacion: nil).order(:nombre).all,
-      label: "Derechos Vulnerados",
-      label_method: :nombre, 
-      value_method: :id 
-    %>
-    <%= f.input :informacionder, 
-      label: "Se brindó información",
-      wrapper_html: { class: "span11 offset1" }  
-    %>
-    <%= f.input :accionesder, label: "Acciones D.V." %>
-
-    <%= f.association :ayudaestado, 
-      collection: Ayudaestado.where(
-        fechadeshabilitacion: nil
-    ).order(:nombre).all,
-      label: "Ayuda del Estado",
-      label_method: :nombre, 
-      value_method: :id 
-    %>
-    <%= f.input :institucionayes, 
-      label: "Instituciones que ayudaron",
-      wrapper_html: { style: "padding-bottom: 18px;" }
-    %>
-    <%= f.input :cantidadayes, label: "Detalle A. Estado" %>
-
-    <%= f.association :progestado, 
-      collection: Progestado.where(
-        fechadeshabilitacion: nil
-    ).order(:nombre).all,
-      label: "Programas y Respuesta del Estado",
-      label_method: :nombre, 
-      value_method: :id 
-    %>
-    <%= f.input :difobsprog, 
-      label: "Dificultades y Observaciones",
-      wrapper_html: { style: "padding-bottom: 18px;" }
-    %>
-
-    <%= f.association :ayudasjr, 
-      collection: Ayudasjr.where(fechadeshabilitacion: nil).order(:nombre).all,
-      label: "Asistencia Humanitaria",
-      label_method: :nombre, 
-      value_method: :id 
-    %>
-    <%= f.input :detallear, 
-      label: "Detalle A. Humanitaria",
-      wrapper_html: { style: "padding-bottom: 18px;" }
-    %>
-    <%= f.input :montoar, label: "Monto A. Humanitaria" %>
-
-    <%= f.association :motivosjr, 
-      collection: Motivosjr.where(fechadeshabilitacion: nil).order(:nombre).all,
-      label: "Servicios y Asesorias del SJR",
-      label_method: :nombre, 
-      value_method: :id 
-    %>
-    <%= f.input :detallemotivo, label: "Detalle" %>
-
 
     <!--%= f.association :emprendimiento, 
       collection: Emprendimiento.where(fechadeshabilitacion: nil).order(:nombre).all,
@@ -141,16 +146,6 @@
     %-->
     <!--%= f.input :detalleap, label: "Detalle A. Psicosocial" %>
     <!--%= f.input :montoap, label: "Monto A. Psicosocial" %-->
-
-    <!--%= f.association :aslegal, 
-      collection: Aslegal.where(fechadeshabilitacion: nil).order(:nombre).all,
-      label: "Asistencia Legal",
-      label_method: :nombre, 
-      value_method: :id 
-    %-->
-    <!--%= f.input :detalleal, label: "Detalle A. Legal" %-->
-    <!--%= f.input :montoal, label: "Monto A. Legal" %-->
-
 
     <%= link_to_remove_association "Eliminar Respuesta", f, 
       {:class => 'btn-danger', :'data-existing' => 'true'} 

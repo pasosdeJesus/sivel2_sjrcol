@@ -1,6 +1,17 @@
 
 es:
   attributes:
+    fechacreacion: Creación
+    fechadeshabilitacion: Deshabilitación 
+    formatoregex: Formato (exp. reg)
+    id_municipio: Municipio
+    id_departamento: Departamento/Estado
+    id_tclase: Tipo de Centro Poblado
+    id_pais: País
+    id_supracategoria: Supracategoria
+    id_tviolencia: Tipo de Violencia
+    limiteinferior: Límite Inferior
+    limitesuperior: Límite Superior
     fechaexpulsion: Fecha de Expulsión
     expulsion: Sitio de Expulsión
     fechallegada:  Fecha de Llegada 
@@ -28,4 +39,6 @@ es:
     documentostierra:  Documentos sobre la tierra
   activerecord:
     attributes:
-  
+      aslegal: 
+        Aslegal: Seguimiento Judicial
+        Aslegales: Seguimientos Judiciales

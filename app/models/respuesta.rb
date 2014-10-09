@@ -4,6 +4,12 @@ class Respuesta < ActiveRecord::Base
   # Debería ser: belongs_to :casosjr, foreign_key: "id_caso", validate: true
   belongs_to :caso, foreign_key: "id_caso", validate: true
 
+  has_many :aslegal, :through => :aslegal_respuesta
+  has_many :aslegal_respuesta,  foreign_key: "id_respuesta", 
+    dependent: :destroy, validate: true
+  accepts_nested_attributes_for :aslegal_respuesta, 
+    reject_if: :all_blank, update_only: true
+
   has_many :ayudaestado, :through => :ayudaestado_respuesta
   has_many :ayudaestado_respuesta,  foreign_key: "id_respuesta", 
     dependent: :destroy, validate: true

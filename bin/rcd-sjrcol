@@ -1,0 +1,18 @@
+#!/bin/sh
+# Para iniciar sitio de produccion en adJ - OpenBSD, ubicar en /etc/rc.d con
+# nombre /etc/rc.d/sjrcol y agregar sjrcol a pkg_scripts en /etc/rc.conf.local
+
+servicio="SECRET_KEY_BASE=6f36b33c6aa563a368542de28c1a6f5dd846cab1da16c144a0f044a6e4c84f268bbdf0c1ee6ef0118a48c1432a8665f4d0afc118b6ff061426bcac163b1ec645 /var/www/htdocs/sivel2_sjrcol/bin/u.sh"
+
+. /etc/rc.d/rc.subr
+
+rc_check() {
+	ps ax | grep "[r]uby.*unicorn_rails .*sivel2_sjrcol" > /dev/null 
+}
+
+rc_stop() {
+	p=`ps ax | grep "[r]uby.*unicorn_rails.*master .*sivel2_sjrcol" | sed -e "s/^ *\([0-9]*\) .*/\1/g"`
+	kill $p
+}
+
+rc_cmd $1

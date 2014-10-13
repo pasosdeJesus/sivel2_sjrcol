@@ -605,7 +605,7 @@ CREATE TABLE aslegal (
     fechadeshabilitacion date,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    derecho_id integer NOT NULL,
+    derecho_id integer,
     CONSTRAINT aslegal_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
 
@@ -1444,6 +1444,192 @@ CREATE VIEW cons2 AS
    FROM ubicacion,
     cons
   WHERE (cons.id_caso = ubicacion.id_caso);
+
+
+--
+-- Name: regionsjr_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE regionsjr_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: regionsjr; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE regionsjr (
+    id integer DEFAULT nextval('regionsjr_seq'::regclass) NOT NULL,
+    nombre character varying(50) NOT NULL,
+    fechacreacion date DEFAULT ('now'::text)::date NOT NULL,
+    fechadeshabilitacion date,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    CONSTRAINT regionsjr_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
+);
+
+
+--
+-- Name: respuesta_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE respuesta_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: respuesta; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE respuesta (
+    id_caso integer NOT NULL,
+    fechaatencion date NOT NULL,
+    prorrogas boolean,
+    numprorrogas integer,
+    montoprorrogas integer,
+    fechaultima date,
+    lugarultima character varying(500),
+    entregada boolean,
+    proxprorroga boolean,
+    turno character varying(100),
+    lugar character varying(500),
+    descamp character varying(5000),
+    compromisos character varying(5000),
+    remision character varying(5000),
+    orientaciones character varying(5000),
+    gestionessjr character varying(5000),
+    observaciones character varying(5000),
+    id_personadesea integer DEFAULT 0,
+    verifcsjr character varying(5000),
+    verifcper character varying(5000),
+    efectividad character varying(5000),
+    detallear character varying(5000),
+    cantidadayes character varying(50),
+    institucionayes character varying(500),
+    informacionder boolean,
+    accionesder character varying(5000),
+    detallemotivo character varying(5000),
+    difobsprog character varying(5000),
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    id integer DEFAULT nextval('respuesta_seq'::regclass) NOT NULL,
+    montoar integer,
+    montoal integer,
+    detalleal character varying(5000)
+);
+
+
+--
+-- Name: usuario_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE usuario_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: usuario; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE usuario (
+    nusuario character varying(15) NOT NULL,
+    password character varying(64) DEFAULT ''::character varying NOT NULL,
+    nombre character varying(50) COLLATE public.es_co_utf_8,
+    descripcion character varying(50),
+    rol integer DEFAULT 4,
+    idioma character varying(6) DEFAULT 'es_CO'::character varying NOT NULL,
+    id integer DEFAULT nextval('usuario_seq'::regclass) NOT NULL,
+    fechacreacion date DEFAULT ('now'::text)::date NOT NULL,
+    fechadeshabilitacion date,
+    email character varying(255) DEFAULT ''::character varying NOT NULL,
+    encrypted_password character varying(255) DEFAULT ''::character varying NOT NULL,
+    sign_in_count integer DEFAULT 0 NOT NULL,
+    failed_attempts integer,
+    unlock_token character varying(64),
+    locked_at timestamp without time zone,
+    reset_password_token character varying(255),
+    reset_password_sent_at timestamp without time zone,
+    remember_created_at timestamp without time zone,
+    current_sign_in_at timestamp without time zone,
+    last_sign_in_at timestamp without time zone,
+    current_sign_in_ip character varying(255),
+    last_sign_in_ip character varying(255),
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    regionsjr_id integer,
+    CONSTRAINT usuario_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion))),
+    CONSTRAINT usuario_rol_check CHECK (((rol >= 1) AND (rol <= 6)))
+);
+
+
+--
+-- Name: conscaso1; Type: VIEW; Schema: public; Owner: -
+--
+
+CREATE VIEW conscaso1 AS
+ SELECT casosjr.id_caso AS caso_id,
+    array_to_string(ARRAY( SELECT (((persona.nombres)::text || ' '::text) || (persona.apellidos)::text)
+           FROM persona
+          WHERE (persona.id = casosjr.contacto)), ', '::text) AS contacto_nombre,
+    casosjr.fecharec,
+    regionsjr.nombre AS regionsjr_nombre,
+    usuario.nusuario,
+    caso.fecha AS caso_fecha,
+    array_to_string(ARRAY( SELECT (((departamento.nombre)::text || '/'::text) || (municipio.nombre)::text)
+           FROM departamento,
+            municipio,
+            ubicacion,
+            desplazamiento
+          WHERE ((((((desplazamiento.fechaexpulsion = caso.fecha) AND (desplazamiento.id_caso = caso.id)) AND (desplazamiento.id_expulsion = ubicacion.id)) AND (ubicacion.id_departamento = departamento.id)) AND (ubicacion.id_departamento = municipio.id)) AND (ubicacion.id_municipio = municipio.id))), ', '::text) AS expulsion,
+    array_to_string(ARRAY( SELECT (((departamento.nombre)::text || '/'::text) || (municipio.nombre)::text)
+           FROM departamento,
+            municipio,
+            ubicacion,
+            desplazamiento
+          WHERE ((((((desplazamiento.fechaexpulsion = caso.fecha) AND (desplazamiento.id_caso = caso.id)) AND (desplazamiento.id_llegada = ubicacion.id)) AND (ubicacion.id_departamento = departamento.id)) AND (ubicacion.id_departamento = municipio.id)) AND (ubicacion.id_municipio = municipio.id))), ', '::text) AS llegada,
+    array_to_string(ARRAY( SELECT respuesta.fechaatencion
+           FROM respuesta
+          WHERE (respuesta.id_caso = casosjr.id_caso)
+          ORDER BY respuesta.fechaatencion DESC
+         LIMIT 1), ', '::text) AS respuesta_ultimafechaatencion,
+    caso.memo AS caso_memo
+   FROM casosjr,
+    caso,
+    regionsjr,
+    usuario
+  WHERE (((casosjr.id_caso = caso.id) AND (regionsjr.id = casosjr.id_regionsjr)) AND (usuario.id = casosjr.asesor));
+
+
+--
+-- Name: conscaso; Type: MATERIALIZED VIEW; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE MATERIALIZED VIEW conscaso AS
+ SELECT conscaso1.caso_id,
+    conscaso1.contacto_nombre,
+    conscaso1.fecharec,
+    conscaso1.regionsjr_nombre,
+    conscaso1.nusuario,
+    conscaso1.caso_fecha,
+    conscaso1.expulsion,
+    conscaso1.llegada,
+    conscaso1.respuesta_ultimafechaatencion,
+    conscaso1.caso_memo,
+    to_tsvector('spanish'::regconfig, unaccent(((((((((((((((((((conscaso1.caso_id || ' '::text) || conscaso1.contacto_nombre) || ' '::text) || replace(((conscaso1.fecharec)::character varying)::text, '-'::text, ' '::text)) || ' '::text) || (conscaso1.regionsjr_nombre)::text) || ' '::text) || (conscaso1.nusuario)::text) || ' '::text) || replace(((conscaso1.caso_fecha)::character varying)::text, '-'::text, ' '::text)) || ' '::text) || conscaso1.expulsion) || ' '::text) || conscaso1.llegada) || ' '::text) || replace(((conscaso1.respuesta_ultimafechaatencion)::character varying)::text, '-'::text, ' '::text)) || ' '::text) || conscaso1.caso_memo))) AS q
+   FROM conscaso1
+  WITH NO DATA;
 
 
 --
@@ -2565,33 +2751,6 @@ CREATE TABLE region (
 
 
 --
--- Name: regionsjr_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE regionsjr_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: regionsjr; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE regionsjr (
-    id integer DEFAULT nextval('regionsjr_seq'::regclass) NOT NULL,
-    nombre character varying(50) NOT NULL,
-    fechacreacion date DEFAULT ('now'::text)::date NOT NULL,
-    fechadeshabilitacion date,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone,
-    CONSTRAINT regionsjr_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
-);
-
-
---
 -- Name: resagresion_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -2615,60 +2774,6 @@ CREATE TABLE resagresion (
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     CONSTRAINT resagresion_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
-);
-
-
---
--- Name: respuesta_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE respuesta_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: respuesta; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE respuesta (
-    id_caso integer NOT NULL,
-    fechaatencion date NOT NULL,
-    prorrogas boolean,
-    numprorrogas integer,
-    montoprorrogas integer,
-    fechaultima date,
-    lugarultima character varying(500),
-    entregada boolean,
-    proxprorroga boolean,
-    turno character varying(100),
-    lugar character varying(500),
-    descamp character varying(5000),
-    compromisos character varying(5000),
-    remision character varying(5000),
-    orientaciones character varying(5000),
-    gestionessjr character varying(5000),
-    observaciones character varying(5000),
-    id_personadesea integer DEFAULT 0,
-    verifcsjr character varying(5000),
-    verifcper character varying(5000),
-    efectividad character varying(5000),
-    detallear character varying(5000),
-    cantidadayes character varying(50),
-    institucionayes character varying(500),
-    informacionder boolean,
-    accionesder character varying(5000),
-    detallemotivo character varying(5000),
-    difobsprog character varying(5000),
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone,
-    id integer DEFAULT nextval('respuesta_seq'::regclass) NOT NULL,
-    montoar integer,
-    montoal integer,
-    detalleal character varying(5000)
 );
 
 
@@ -2939,53 +3044,6 @@ CREATE TABLE tviolencia (
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     CONSTRAINT tviolencia_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
-);
-
-
---
--- Name: usuario_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE usuario_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: usuario; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE usuario (
-    nusuario character varying(15) NOT NULL,
-    password character varying(64) DEFAULT ''::character varying NOT NULL,
-    nombre character varying(50) COLLATE public.es_co_utf_8,
-    descripcion character varying(50),
-    rol integer DEFAULT 4,
-    idioma character varying(6) DEFAULT 'es_CO'::character varying NOT NULL,
-    id integer DEFAULT nextval('usuario_seq'::regclass) NOT NULL,
-    fechacreacion date DEFAULT ('now'::text)::date NOT NULL,
-    fechadeshabilitacion date,
-    email character varying(255) DEFAULT ''::character varying NOT NULL,
-    encrypted_password character varying(255) DEFAULT ''::character varying NOT NULL,
-    sign_in_count integer DEFAULT 0 NOT NULL,
-    failed_attempts integer,
-    unlock_token character varying(64),
-    locked_at timestamp without time zone,
-    reset_password_token character varying(255),
-    reset_password_sent_at timestamp without time zone,
-    remember_created_at timestamp without time zone,
-    current_sign_in_at timestamp without time zone,
-    last_sign_in_at timestamp without time zone,
-    current_sign_in_ip character varying(255),
-    last_sign_in_ip character varying(255),
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone,
-    regionsjr_id integer,
-    CONSTRAINT usuario_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion))),
-    CONSTRAINT usuario_rol_check CHECK (((rol >= 1) AND (rol <= 6)))
 );
 
 
@@ -4103,6 +4161,13 @@ ALTER TABLE ONLY victimasjr
 
 ALTER TABLE ONLY vinculoestado
     ADD CONSTRAINT vinculoestado_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: busca_conscaso; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX busca_conscaso ON conscaso USING gin (q);
 
 
 --

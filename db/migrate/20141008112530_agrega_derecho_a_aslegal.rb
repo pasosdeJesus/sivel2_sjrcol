@@ -1,6 +1,6 @@
 class AgregaDerechoAAslegal < ActiveRecord::Migration
   def up
-    add_reference :aslegal, :derecho, index: true, null: false
+    add_reference :aslegal, :derecho, index: true
     execute <<-SQL
         ALTER TABLE aslegal ADD
         CONSTRAINT fk_aslegal_derecho

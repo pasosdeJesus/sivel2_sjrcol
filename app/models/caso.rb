@@ -134,7 +134,7 @@ class Caso < ActiveRecord::Base
         AND desplazamiento.id_caso=caso.id
         AND desplazamiento.id_expulsion=ubicacion.id
         AND ubicacion.id_departamento=departamento.id
-        AND ubicacion.id_departamento=municipio.id
+        AND ubicacion.id_departamento=municipio.id_departamento
         AND ubicacion.id_municipio=municipio.id ), ', ') AS expulsion,
         ARRAY_TO_STRING(ARRAY(SELECT departamento.nombre || '/' || 
         municipio.nombre
@@ -143,7 +143,7 @@ class Caso < ActiveRecord::Base
         AND desplazamiento.id_caso=caso.id
         AND desplazamiento.id_llegada=ubicacion.id
         AND ubicacion.id_departamento=departamento.id
-        AND ubicacion.id_departamento=municipio.id
+        AND ubicacion.id_departamento=municipio.id_departamento
         AND ubicacion.id_municipio=municipio.id ), ', ') AS llegada,
         ARRAY_TO_STRING(ARRAY(SELECT fechaatencion FROM respuesta
           WHERE respuesta.id_caso=casosjr.id_caso 

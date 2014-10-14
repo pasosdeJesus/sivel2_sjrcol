@@ -116,7 +116,6 @@ class Caso < ActiveRecord::Base
 
 
   def self.refresca_conscaso
-    debugger
     if !ActiveRecord::Base.connection.table_exists? 'conscaso'
       ActiveRecord::Base.connection.execute(
         "CREATE OR REPLACE VIEW conscaso1 

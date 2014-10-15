@@ -98,7 +98,7 @@ group :development, :test do
   gem "launchy"
 
   # Depurar
-  #gem 'debugger'
+  gem 'debugger'
 end
 
 # Los siguientes son para pruebas y no tiene generadores requeridos en desarrollo

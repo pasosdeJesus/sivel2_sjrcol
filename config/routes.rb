@@ -9,6 +9,10 @@ Rails.application.routes.draw do
 
   mount Sivel2Gen::Engine, at: "/"
 
+  get "/conteos/municipios" => 'conteos#municipios'
+  get "/conteos/rutas" => 'conteos#rutas'
+  get "/conteos/desplazamientos" => 'conteos#desplazamientos'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

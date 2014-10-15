@@ -43,6 +43,11 @@
         <% if !current_usuario.nil? %>
           <%= menu_item "Casos", casos_path %>
           <%= menu_item "Actividades", actividades_path %>
+					<%= drop_down "Conteos" do %>
+            <%= menu_item "Municipios expulsores/receptores", conteos_municipios_path %>
+            <%= menu_item "Rutas de desplazamiento", conteos_rutas_path %>
+            <%= menu_item "Desplazamientos por persona", conteos_desplazamientos_path %>
+				  <% end %>
         <% end %>
       <% end %>
       <%= menu_group :pull => :right do %>

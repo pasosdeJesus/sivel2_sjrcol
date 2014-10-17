@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/pasosdeJesus/sivel2_gen.git
-  revision: d76cede9e9b311c70a8c45e87153ccba017abe83
+  revision: 123bc62e66341e3254d9de6b91af44f0158b9ffb
   specs:
     sivel2_gen (2.0.a2)
       devise
@@ -8,7 +8,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 65f833a063a080039ae1d6ad1c3e91ca3394aed7
+  revision: 7022211f2ae157e8bea1d4ae4273aa7b1cd861e8
   specs:
     sivel2_sjr (2.0.a2)
       rails
@@ -95,20 +95,13 @@ GEM
     codeclimate-test-reporter (0.4.1)
       simplecov (>= 0.7.1, < 1.0.0)
     coderay (1.1.0)
-    coffee-rails (4.0.1)
+    coffee-rails (4.1.0)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.0)
     coffee-script (2.3.0)
       coffee-script-source
       execjs
     coffee-script-source (1.8.0)
-    columnize (0.8.9)
-    debugger (1.6.8)
-      columnize (>= 0.3.1)
-      debugger-linecache (~> 1.2.0)
-      debugger-ruby_core_source (~> 1.3.5)
-    debugger-linecache (1.2.0)
-    debugger-ruby_core_source (1.3.5)
     devise (3.4.0)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -174,7 +167,7 @@ GEM
     mail (2.6.1)
       mime-types (>= 1.16, < 3)
     method_source (0.8.2)
-    mime-types (2.4.1)
+    mime-types (2.4.2)
     mini_portile (0.6.0)
     minitest (5.4.2)
     multi_json (1.10.1)
@@ -208,8 +201,8 @@ GEM
       sprockets-rails (~> 3.0.0.beta1)
     rails-deprecated_sanitizer (1.0.3)
       activesupport (>= 4.2.0.alpha)
-    rails-dom-testing (1.0.3)
-      activesupport
+    rails-dom-testing (1.0.4)
+      activesupport (>= 4.2.0.beta, < 5.0)
       nokogiri (~> 1.6.0)
       rails-deprecated_sanitizer (>= 1.0.1)
     rails-html-sanitizer (1.0.1)
@@ -256,7 +249,7 @@ GEM
       rspec-mocks (~> 3.1.0)
       rspec-support (~> 3.1.0)
     rspec-support (3.1.2)
-    sass (3.4.5)
+    sass (3.4.6)
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
@@ -328,8 +321,7 @@ DEPENDENCIES
   capybara-webkit
   cocoon!
   codeclimate-test-reporter
-  coffee-rails (~> 4.0.0)
-  debugger
+  coffee-rails (~> 4.1.0)
   devise
   devise-i18n
   factory_girl_rails (~> 4.0)

@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
 
-  resources :paises
-
   devise_for :users, {
     class_name: 'Usuario',
     module: :devise

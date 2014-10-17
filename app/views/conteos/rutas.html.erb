@@ -1,0 +1,22 @@
+<div class="page-header">
+  <h1><%=t '.title', :default => "Rutas de desplazamiento (longitudes 1 y 2)" %></h1>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= "Ruta" %></th>
+      <th><%= "Grupos Familiares" %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @rutas.try(:each) do |ruta| %>
+      <tr>
+        <td><%= ruta['ruta'] %></td>
+        <td><%= ruta['cuenta'] %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+

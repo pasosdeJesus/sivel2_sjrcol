@@ -1,0 +1,38 @@
+<div class="page-header">
+  <h1><%=t '.title', :default => "Desplazamientos por persona" %></h1>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= "Caso" %></th>
+      <th><%= "Cod. Persona" %></th>
+      <th>Sexo 
+        <%= link_to "^", conteos_desplazamientos_path(ordenar: "Sexo") %>
+      </th>
+      <th><%= "Rango de Edad" %>
+        <%= link_to "^", conteos_desplazamientos_path(ordenar: "Edad") %>
+      </th>
+      <th><%= "Sector Social" %>
+        <%= link_to "^", conteos_desplazamientos_path(ordenar: "Sector") %>
+      </th>
+      <th><%= "N. Desplazamientos" %>
+        <%= link_to "^", conteos_desplazamientos_path(ordenar: "Desp") %>
+        </th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @desplazamientos.try(:each) do |ruta| %>
+      <tr>
+        <td><%= ruta['id_caso'] %></td>
+        <td><%= ruta['persona'] %></td>
+        <td><%= ruta['sexo'] %></td>
+        <td><%= ruta['rangoedad'] %></td>
+        <td><%= ruta['sectorsocial'] %></td>
+        <td><%= ruta['cuenta'] %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+

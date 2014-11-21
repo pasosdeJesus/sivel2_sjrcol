@@ -27,7 +27,6 @@
 	label: "Vínculo con el Estado",
 	label_method: :nombre, 
 	value_method: :id
-  #wrapper_html: { style: "padding-bottom: 18px;" }
 %>
 <%= f.association :etnia,
 	collection: Etnia.all.order(:nombre),
@@ -73,12 +72,11 @@
   %>
 
   <%= s.input :sindocumento, 
-    label: "Sin Doc. Identidad",
-    wrapper_html: { class: "span11 offset1" }  
-  %>
+    boolean_style: :nested, 
+    inline_label: "Sin Doc. Identidad" %>
   <%= s.input :cabezafamilia, 
-    label: "Cabeza de Familia",
-    wrapper_html: { class: "span11 offset1" }  
+    boolean_style: :nested, 
+    inline_label: "Cabeza de Familia"
   %>
 	<%= s.association :maternidad,
 		collection: Maternidad.all.order(:nombre),
@@ -102,8 +100,8 @@
 		value_method: :id
   %>
   <%= s.input :asisteescuela, 
-    label: "Asiste a Escuela",
-    wrapper_html: { class: "span11 offset1" }  
+    inline_label: "Asiste a Escuela",
+    boolean_style: :nested
   %>
 	<%= s.association :regimensalud,
 		collection: Regimensalud.all.order(:nombre),
@@ -115,8 +113,8 @@
   <%= s.input :eps, label: 'EPS o ARS' %>
 
   <%= s.input :tienesisben, 
-    label: "Tiene SISBEN",
-    wrapper_html: { class: "span11 offset1" }  
+    inline_label: "Tiene SISBEN",
+    boolean_style: :nested
   %>
 
 	<%= s.input :id_victima, as: :hidden %>

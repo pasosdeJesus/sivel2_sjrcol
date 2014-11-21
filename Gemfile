@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Rails (internacionalización)
-gem "rails", '~> 4.2.0.beta2'
+gem "rails", '~> 4.2.0.beta4'
 gem "rails-i18n"
 
 # Postgresql
@@ -31,12 +31,13 @@ gem "jquery-ui-bootstrap-rails", git: "https://github.com/kristianmandrup/jquery
 gem "turbolinks"
 
 # Ambiente de CSS
-gem "twitter-bootstrap-rails", "=2.2.8"
+gem "twitter-bootstrap-rails"#, "=2.2.8"
 gem "bootstrap-datepicker-rails"
 gem "bootstrap-sass"
 
 # Formularios simples 
-gem "simple_form"
+#gem "simple_form", git: "https://github.com/plataformatec/simple_form"
+gem "simple_form", "~> 3.1.0.rc2"
 
 # Formularios anidados (algunos con ajax)
 gem "cocoon", github: "vtamara/cocoon"
@@ -65,8 +66,8 @@ gem 'sivel2_gen', github: 'pasosdeJesus/sivel2_gen'
 #gem 'sivel2_gen', path: '../sivel2_gen'
 
 # Motor de SIVeL 2 - SJR
-gem 'sivel2_sjr', github: 'pasosdeJesus/sivel2_sjr'
-#gem 'sivel2_sjr', path: '../sivel2_sjr'
+#gem 'sivel2_sjr', github: 'pasosdeJesus/sivel2_sjr'
+gem 'sivel2_sjr', path: '../sivel2_sjr'
 
 
 group :doc do
@@ -83,12 +84,8 @@ group :development, :test do
   gem 'spring-commands-rspec'
   gem 'rspec-rails'
 
-  # Monitor para lanzar pruebas automáticamente
-  gem "guard-rspec", group: [:development, :test]
-
   # Un proceso para cada prueba -- acelera
   gem 'spork', '~> 1.0rc'
-  gem 'guard-spork'
 
   # Maneja datos de prueba
   gem "factory_girl_rails", "~> 4.0", group: [:development, :test]

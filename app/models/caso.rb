@@ -87,6 +87,8 @@ class Caso < ActiveRecord::Base
     reject_if: :all_blank
 	has_many :victimacolectiva, foreign_key: "id_caso", validate: true, 
     dependent: :destroy
+	has_many :desplazamiento, foreign_key: "id_caso", validate: true, 
+    dependent: :destroy
 
   has_one :conscaso, foreign_key: "caso_id"
 
@@ -133,7 +135,9 @@ class Caso < ActiveRecord::Base
         WHERE desplazamiento.fechaexpulsion=caso.fecha
         AND desplazamiento.id_caso=caso.id
         AND desplazamiento.id_expulsion=ubicacion.id
+        AND ubicacion.id_pais = departamento.id_pais
         AND ubicacion.id_departamento=departamento.id
+        AND ubicacion.id_pais = municipio.id_pais
         AND ubicacion.id_departamento=municipio.id_departamento
         AND ubicacion.id_municipio=municipio.id ), ', ') AS expulsion,
         ARRAY_TO_STRING(ARRAY(SELECT departamento.nombre || '/' || 
@@ -142,8 +146,10 @@ class Caso < ActiveRecord::Base
         WHERE desplazamiento.fechaexpulsion=caso.fecha
         AND desplazamiento.id_caso=caso.id
         AND desplazamiento.id_llegada=ubicacion.id
+        AND ubicacion.id_pais = departamento.id_pais
         AND ubicacion.id_departamento=departamento.id
         AND ubicacion.id_departamento=municipio.id_departamento
+        AND ubicacion.id_pais = municipio.id_pais
         AND ubicacion.id_municipio=municipio.id ), ', ') AS llegada,
         ARRAY_TO_STRING(ARRAY(SELECT fechaatencion FROM respuesta
           WHERE respuesta.id_caso=casosjr.id_caso 

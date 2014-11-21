@@ -92,12 +92,12 @@
 
                     <%= render 'contacto_fields', :f => victima %>
                     <%= s.input :concentimientosjr, 
-                      label: "Consentimiento Informado compartir SJR",
-                      wrapper_html: { class: "span11 offset1" }  
+                      boolean_style: :nested,
+                      inline_label: "Consentimiento Informado compartir SJR"
                     %>
                     <%= s.input :concentimientobd, 
-                      label: "Consentimiento Informado compartir BD CINEP",
-                      wrapper_html: { class: "span11 offset1" }  
+                      boolean_style: :nested,
+                      inline_label: "Consentimiento Informado compartir BD CINEP"
                     %>
                   <% end %>
                 <% end %>

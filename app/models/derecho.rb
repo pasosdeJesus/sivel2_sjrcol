@@ -1,6 +1,6 @@
 # encoding: UTF-8
 class Derecho < ActiveRecord::Base
-  extend Basica
+  include Basica
 
   has_many :aslegal, class_name: 'Aslegal', foreign_key: "derecho_id"
   has_many :ayudaestado, class_name: 'Ayudaestado', foreign_key: "derecho_id"

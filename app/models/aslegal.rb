@@ -1,6 +1,6 @@
 # encoding: UTF-8
 class Aslegal < ActiveRecord::Base
-  extend Basica
+  include Basica
 
   belongs_to :derecho
 	has_many :aslegal_respuesta, class_name: 'AslegalRespuesta', 

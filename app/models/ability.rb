@@ -23,12 +23,11 @@ class Ability
     'ayudasjr', 
     'categoria', 'clase', 'comosupo',
     'departamento', 'derecho',
-    'emprendimiento', 'escolaridad', 'estadocivil', 'etiqueta', 'etnia', 
-    'idioma', 'iglesia', 
+    'escolaridad', 'estadocivil', 'etiqueta', 'etnia', 
+    'iglesia', 
     'maternidad', 'motivosjr', 'municipio', 
     'pais', 'presponsable', 'profesion', 'progestado',
-    'statusmigratorio', 'supracategoria',
-    'proteccion',
+    'supracategoria',
     'rangoedad', 'rangoedadac', 'regionsjr', 'rolfamilia', 
     'tclase', 'tdocumento', 'tsitio', 'tviolencia'
   ]

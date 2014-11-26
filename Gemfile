@@ -4,6 +4,9 @@ source 'https://rubygems.org'
 gem "rails", '~> 4.2.0.beta4'
 gem "rails-i18n"
 
+# Problemas con arel 6.0.0 al ejecutar rspec
+gem "arel", '6.0.0.beta2'
+
 # Postgresql
 gem "pg"
 
@@ -23,7 +26,8 @@ gem "uglifier", '>= 1.3.0'
 gem "coffee-rails", '~> 4.1.0'
 
 # jquery como librería JavaScript
-gem "jquery-rails"
+gem "jquery-rails", '3.1.2'
+# Problema al actualiza a 4.0.0, al lanzar servidor reporta que jquery no existe
 gem "jquery-ui-rails"
 gem "jquery-ui-bootstrap-rails", git: "https://github.com/kristianmandrup/jquery-ui-bootstrap-rails"
 
@@ -62,12 +66,12 @@ gem "tzinfo"
 gem "tzinfo-data"
 
 # Motor de SIVeL 2
-gem 'sivel2_gen', github: 'pasosdeJesus/sivel2_gen'
-#gem 'sivel2_gen', path: '../sivel2_gen'
+#gem 'sivel2_gen', github: 'pasosdeJesus/sivel2_gen'
+gem 'sivel2_gen', path: '../sivel2_gen_aislado'
 
 # Motor de SIVeL 2 - SJR
 #gem 'sivel2_sjr', github: 'pasosdeJesus/sivel2_sjr'
-gem 'sivel2_sjr', path: '../sivel2_sjr'
+gem 'sivel2_sjr', path: '../sivel2_sjr_aislado'
 
 
 group :doc do
@@ -95,7 +99,16 @@ group :development, :test do
   gem "launchy"
 
   # Depurar
-  #gem 'debugger'
+  gem "byebug"
+  
+  # Consola irb en páginas con excepciones o usando <%= console %> en vistasA
+  gem 'web-console', '~> 2.0.0.beta4'
+
+  # Para examinar errores, usar "rescue rspec" en lugar de "rspec"
+  gem 'pry-rescue'
+  gem 'pry-stack_explorer'
+
+
 end
 
 # Los siguientes son para pruebas y no tiene generadores requeridos en desarrollo

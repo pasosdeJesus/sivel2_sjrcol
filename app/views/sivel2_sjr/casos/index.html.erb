@@ -1,4 +1,4 @@
-<%- model_class = Caso -%>
+<%- model_class = Sivel2Gen::Caso -%>
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
 </div>
@@ -28,16 +28,16 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= Caso.human_attribute_name(:id) %></th>
-      <th><%= Casosjr.human_attribute_name(:contacto) %></th>
-      <th><%= Casosjr.human_attribute_name(:fecharec) %></th>
-      <th><%= Casosjr.human_attribute_name(:regionsjr) %></th>
-      <th><%= Casosjr.human_attribute_name(:asesor) %></th>
+      <th><%= Sivel2Gen::Caso.human_attribute_name(:id) %></th>
+      <th><%= Sivel2Sjr::Casosjr.human_attribute_name(:contacto) %></th>
+      <th><%= Sivel2Sjr::Casosjr.human_attribute_name(:fecharec) %></th>
+      <th><%= Sivel2Sjr::Casosjr.human_attribute_name(:regionsjr) %></th>
+      <th><%= Sivel2Sjr::Casosjr.human_attribute_name(:asesor) %></th>
       <th><%= "Fecha Desp. Emb." %></th>
       <th><%= "Mun. Expulsor D.E" %></th>
       <th><%= "Mun. Receptor D.E" %></th>
       <th><%= "Ult. Atencion" %></th>
-      <th><%= Caso.human_attribute_name(:memo) %></th>
+      <th><%= Sivel2Gen::Caso.human_attribute_name(:memo) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>

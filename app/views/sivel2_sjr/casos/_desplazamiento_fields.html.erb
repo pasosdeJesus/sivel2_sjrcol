@@ -8,7 +8,7 @@
         :as => :string
     %>
     <%= f.association :expulsion,
-        collection: Ubicacion.where(:id_caso => @caso.id),
+        collection: Sivel2Gen::Ubicacion.where(:id_caso => @caso.id),
         label_method: lambda {|t| t.muestra(conclase: true) },
         value_method: :id 
     %>
@@ -17,17 +17,17 @@
           :as => :string
     %>
     <%= f.association :llegada,
-          collection: Ubicacion.where(:id_caso => @caso.id),
+          collection: Sivel2Gen::Ubicacion.where(:id_caso => @caso.id),
           label_method: lambda {|t| t.muestra(conclase: true) },
           value_method: :id 
     %>
     <%= f.association :clasifdesp,
-          collection: Clasifdesp.where(fechadeshabilitacion: nil),
+          collection: Sivel2Sjr::Clasifdesp.where(fechadeshabilitacion: nil),
           label_method: :nombre,
           value_method: :id 
     %>
     <%= f.association :tipodesp,
-          collection: Tipodesp.where(fechadeshabilitacion: nil),
+          collection: Sivel2Sjr::Tipodesp.where(fechadeshabilitacion: nil),
           label_method: :nombre,
           value_method: :id 
     %>
@@ -43,43 +43,43 @@
           :as => :string
     %>
     <%= f.association :declaroante,
-          collection: Declaroante.where(fechadeshabilitacion: nil),
+          collection: Sivel2Sjr::Declaroante.where(fechadeshabilitacion: nil),
           label_method: :nombre,
           value_method: :id 
     %>
     <%= f.association :inclusion,
-          collection: Inclusion.where(fechadeshabilitacion: nil),
+          collection: Sivel2Sjr::Inclusion.where(fechadeshabilitacion: nil),
           label_method: :nombre,
           value_method: :id 
     %>
     <%= f.association :acreditacion,
-          collection: Acreditacion.where(fechadeshabilitacion: nil),
+          collection: Sivel2Sjr::Acreditacion.where(fechadeshabilitacion: nil),
           label_method: :nombre,
           value_method: :id 
     %>
     <%= f.input :retornado, 
         boolean_style: :nested,
-        inline_label: Desplazamiento.human_attribute_name(:retornado)
+        inline_label: Sivel2Sjr::Desplazamiento.human_attribute_name(:retornado)
     %>
     <%= f.input :reubicado, 
         boolean_style: :nested,
-        inline_label: Desplazamiento.human_attribute_name(:reubicado)
+        inline_label: Sivel2Sjr::Desplazamiento.human_attribute_name(:reubicado)
     %>
     <%= f.input :connacionalretorno, 
         boolean_style: :nested,
-        inline_label: Desplazamiento.human_attribute_name(:connacionalretorno)
+        inline_label: Sivel2Sjr::Desplazamiento.human_attribute_name(:connacionalretorno)
     %>
     <%= f.input :acompestado, 
         boolean_style: :nested,
-        inline_label: Desplazamiento.human_attribute_name(:acompestado)
+        inline_label: Sivel2Sjr::Desplazamiento.human_attribute_name(:acompestado)
     %>
     <%= f.input :connacionaldeportado, 
         boolean_style: :nested,
-        inline_label: Desplazamiento.human_attribute_name(:connacionaldeportado)
+        inline_label: Sivel2Sjr::Desplazamiento.human_attribute_name(:connacionaldeportado)
     %>
     <%= f.input :oficioantes %>
     <%= f.association :modalidadtierra,
-      collection: Modalidadtierra .where(fechadeshabilitacion: nil),
+      collection: Sivel2Sjr::Modalidadtierra .where(fechadeshabilitacion: nil),
       label_method: :nombre,
       value_method: :id 
     %>
@@ -87,7 +87,7 @@
     <%= f.input :inmaterialesperdidos, as: :text %>
     <%= f.input :protegiorupta, 
         boolean_style: :nested,
-        inline_label: Desplazamiento.human_attribute_name(:protegiorupta)
+        inline_label: Sivel2Sjr::Desplazamiento.human_attribute_name(:protegiorupta)
     %>
     <%= f.input :documentostierra, as: :text %>
 

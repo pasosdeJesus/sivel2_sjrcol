@@ -47,6 +47,34 @@ COMMENT ON EXTENSION unaccent IS 'text search dictionary that removes accents';
 
 
 --
+-- Name: cadubicacion(integer); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION cadubicacion(integer) RETURNS character varying
+    LANGUAGE sql
+    AS $_$ SELECT (select nombre from pais where pais.id=ubicacion.id_pais) FROM ubicacion WHERE ubicacion.id=$1 $_$;
+
+
+--
+-- Name: municipioubicacion(integer); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION municipioubicacion(integer) RETURNS character varying
+    LANGUAGE sql
+    AS $_$
+        SELECT (SELECT nombre FROM pais WHERE id=ubicacion.id_pais) 
+            || COALESCE((SELECT '/' || nombre FROM departamento 
+            WHERE departamento.id_pais=ubicacion.id_pais 
+            AND departamento.id=ubicacion.id_departamento),'') 
+            || COALESCE((SELECT '/' || nombre FROM municipio 
+            WHERE municipio.id_pais=ubicacion.id_pais 
+            AND municipio.id_departamento=ubicacion.id_departamento 
+            AND municipio.id=ubicacion.id_municipio),'') FROM ubicacion
+            WHERE ubicacion.id=$1;
+      $_$;
+
+
+--
 -- Name: soundexesp(text); Type: FUNCTION; Schema: public; Owner: -
 --
 
@@ -1592,13 +1620,13 @@ CREATE VIEW conscaso1 AS
             municipio,
             ubicacion,
             desplazamiento
-          WHERE ((((((desplazamiento.fechaexpulsion = caso.fecha) AND (desplazamiento.id_caso = caso.id)) AND (desplazamiento.id_expulsion = ubicacion.id)) AND (ubicacion.id_departamento = departamento.id)) AND (ubicacion.id_departamento = municipio.id)) AND (ubicacion.id_municipio = municipio.id))), ', '::text) AS expulsion,
+          WHERE ((((((desplazamiento.fechaexpulsion = caso.fecha) AND (desplazamiento.id_caso = caso.id)) AND (desplazamiento.id_expulsion = ubicacion.id)) AND (ubicacion.id_departamento = departamento.id)) AND (ubicacion.id_departamento = municipio.id_departamento)) AND (ubicacion.id_municipio = municipio.id))), ', '::text) AS expulsion,
     array_to_string(ARRAY( SELECT (((departamento.nombre)::text || '/'::text) || (municipio.nombre)::text)
            FROM departamento,
             municipio,
             ubicacion,
             desplazamiento
-          WHERE ((((((desplazamiento.fechaexpulsion = caso.fecha) AND (desplazamiento.id_caso = caso.id)) AND (desplazamiento.id_llegada = ubicacion.id)) AND (ubicacion.id_departamento = departamento.id)) AND (ubicacion.id_departamento = municipio.id)) AND (ubicacion.id_municipio = municipio.id))), ', '::text) AS llegada,
+          WHERE ((((((desplazamiento.fechaexpulsion = caso.fecha) AND (desplazamiento.id_caso = caso.id)) AND (desplazamiento.id_llegada = ubicacion.id)) AND (ubicacion.id_departamento = departamento.id)) AND (ubicacion.id_departamento = municipio.id_departamento)) AND (ubicacion.id_municipio = municipio.id))), ', '::text) AS llegada,
     array_to_string(ARRAY( SELECT respuesta.fechaatencion
            FROM respuesta
           WHERE (respuesta.id_caso = casosjr.id_caso)

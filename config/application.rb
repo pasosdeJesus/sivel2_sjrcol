@@ -28,6 +28,6 @@ module Sivel2Sjrcol
     config.time_zone = 'America/Bogota'
     config.i18n.default_locale = :es
     config.active_record.schema_format = :sql
-    config.version = '2.0a1'
+    config.active_record.raise_in_transactional_callbacks = true
   end
 end

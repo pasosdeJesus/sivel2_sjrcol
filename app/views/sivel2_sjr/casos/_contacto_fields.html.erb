@@ -1,36 +1,37 @@
 <%= f.simple_fields_for :persona do |p| %>
-	<%= render 'persona_fields', :f => p %>
+	<%= render 'sivel2_gen/casos/persona_fields', :f => p %>
 <% end %>
+
 <%= f.association :rangoedad,
+	collection: Sivel2Gen::Rangoedad.habilitados,
 	include_blank: false,
 	label: "Rango de Edad",
 	label_method: :rango, 
 	value_method: :id 
 %>
 <%= f.association :filiacion,
-	collection: Filiacion.all.order(:nombre),
+	collection: Sivel2Gen::Filiacion.habilitados,
 	include_blank: false,
 	label: "Filiación",
 	label_method: :nombre, 
 	value_method: :id 
 %>
 <%= f.association :organizacion,
-	collection: Organizacion.all.order(:nombre),
+	collection: Sivel2Gen::Organizacion.habilitados,
 	include_blank: false,
 	label: "Organización",
 	label_method: :nombre, 
 	value_method: :id 
 %>
 <%= f.association :vinculoestado,
-	collection: Vinculoestado.all.order(:nombre),
+	collection: Sivel2Gen::Vinculoestado.habilitados,
 	include_blank: false,
 	label: "Vínculo con el Estado",
 	label_method: :nombre, 
 	value_method: :id
-  #wrapper_html: { style: "padding-bottom: 18px;" }
 %>
 <%= f.association :etnia,
-	collection: Etnia.all.order(:nombre),
+	collection: Sivel2Gen::Etnia.habilitados,
 	include_blank: false,
 	label: "Etnia",
 	label_method: :nombre, 
@@ -46,26 +47,35 @@
 
 <%= f.input :anotaciones %>
 
-<%= f.association :profesion,
-	collection: Profesion.all.order(:nombre),
-	include_blank: false,
-	label: "Profesión",
-	label_method: :nombre, 
-	value_method: :id 
-%>
-
 <%= f.input :id, as: :hidden %>
 
 <%= f.simple_fields_for :victimasjr do |s| %>
+  <%= s.association :actividadoficio,
+		collection: Sivel2Gen::Actividadoficio.habilitados,
+		include_blank: false,
+		label: "Actividad/Oficio actual",
+		label_method: :nombre, 
+    value_method: :id,
+    wrapper_html: { style: "padding-bottom: 18px;" }
+	%>
+
+  <%= f.association :profesion,
+    collection: Sivel2Gen::Profesion.habilitados,
+    include_blank: false,
+    label: "Profesión Universitaria",
+    label_method: :nombre, 
+    value_method: :id 
+  %>
+
 	<%= s.association :estadocivil,
-		collection: Estadocivil.all.order(:nombre),
+		collection: Sivel2Gen::Estadocivil.habilitados,
 		include_blank: false,
 		label: "Estado Civil",
 		label_method: :nombre, 
 		value_method: :id 
 	%>
 	<%= s.association :rolfamilia,
-		collection: Rolfamilia.all.order(:nombre),
+		collection: Sivel2Sjr::Rolfamilia.habilitados,
 		include_blank: false,
 		label: "Rol en Familia",
 		label_method: :nombre, 
@@ -73,40 +83,31 @@
   %>
 
   <%= s.input :sindocumento, 
-    label: "Sin Doc. Identidad",
-    wrapper_html: { class: "span11 offset1" }  
-  %>
+    boolean_style: :nested, 
+    inline_label: "Sin Doc. Identidad" %>
   <%= s.input :cabezafamilia, 
-    label: "Cabeza de Familia",
-    wrapper_html: { class: "span11 offset1" }  
+    boolean_style: :nested, 
+    inline_label: "Cabeza de Familia"
   %>
 	<%= s.association :maternidad,
-		collection: Maternidad.all.order(:nombre),
+		collection: Sivel2Gen::Maternidad.habilitados,
 		label: "Maternidad",
 		label_method: :nombre, 
 		value_method: :id 
   %>	
-	<%= s.association :actividadoficio,
-		collection: Actividadoficio.all.order(:nombre),
-		include_blank: false,
-		label: "Actividad/Oficio actual",
-		label_method: :nombre, 
-    value_method: :id,
-    wrapper_html: { style: "padding-bottom: 18px;" }
-	%>
 	<%= s.association :escolaridad,
-		collection: Escolaridad.all.order(:nombre),
+		collection: Sivel2Gen::Escolaridad.habilitados,
 		include_blank: false,
 		label: "Nivel Escolar",
 		label_method: :nombre, 
 		value_method: :id
   %>
   <%= s.input :asisteescuela, 
-    label: "Asiste a Escuela",
-    wrapper_html: { class: "span11 offset1" }  
+    inline_label: "Asiste a Escuela",
+    boolean_style: :nested
   %>
 	<%= s.association :regimensalud,
-		collection: Regimensalud.all.order(:nombre),
+		collection: Sivel2Sjr::Regimensalud.all.order(:nombre),
 		include_blank: false,
 		label: "Régimen de Salud",
 		label_method: :nombre, 
@@ -115,8 +116,8 @@
   <%= s.input :eps, label: 'EPS o ARS' %>
 
   <%= s.input :tienesisben, 
-    label: "Tiene SISBEN",
-    wrapper_html: { class: "span11 offset1" }  
+    inline_label: "Tiene SISBEN",
+    boolean_style: :nested
   %>
 
 	<%= s.input :id_victima, as: :hidden %>

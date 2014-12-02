@@ -18,7 +18,7 @@ describe "Llenar caso con javascript", :js => true do
 
   describe "administrador llena" do
     it "puede crear caso con datos mínimos" do
-      visit new_caso_path
+      visit 'casos/nuevo'
       @numcaso=find_field('Código').value
 
       # Datos básicos
@@ -46,7 +46,7 @@ describe "Llenar caso con javascript", :js => true do
     end
 
     it "puede crear caso con familiar" do
-      visit new_caso_path
+      visit 'casos/nuevo'
       # Datos básicos
       fill_in "Fecha de Recepción", with: '2014-08-04'
       fill_in "Fecha del Desplazamiento", with: '2014-08-03'
@@ -97,8 +97,9 @@ describe "Llenar caso con javascript", :js => true do
     end
 
     it "puede crear caso con familiar mínimo y 1 ubicación" do
-      visit new_caso_path
+      visit 'casos/nuevo'
       # Datos básicos
+      page.save_screenshot('s-sol0.png')
       fill_in "Fecha de Recepción", with: '2014-08-04'
       fill_in "Fecha del Desplazamiento", with: '2014-08-03'
       fill_in "Memo", with: 'descripcion con javascript'
@@ -153,7 +154,7 @@ describe "Llenar caso con javascript", :js => true do
     end
 
     it "puede crear caso con familiar mínimo, 2 ubicaciones, ref y desp" do
-      visit new_caso_path
+      visit 'casos/nuevo'
       # Datos básicos
       fill_in "Fecha de Recepción", with: '2014-08-04'
       fill_in "Fecha del Desplazamiento", with: '2014-08-03'
@@ -270,7 +271,7 @@ describe "Llenar caso con javascript", :js => true do
     end
 
     it "puede crear caso con solicitante, p. resp y acto" do
-      visit new_caso_path
+      visit 'casos/nuevo'
       # Datos básicos
       fill_in "Fecha de Recepción", with: '2014-08-04'
       fill_in "Fecha del Desplazamiento", with: '2014-08-03'

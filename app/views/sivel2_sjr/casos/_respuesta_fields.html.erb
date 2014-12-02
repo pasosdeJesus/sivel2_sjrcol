@@ -6,19 +6,19 @@
       :as => :string, :label => "Fecha de Atención" 
     %>
     <%= f.association :derecho, 
-      collection: Derecho.habilitados,
+      collection: Sivel2Sjr::Derecho.habilitados,
       label: "Derechos Vulnerados",
       label_method: :nombre, 
       value_method: :id 
     %>
     <%= f.input :informacionder, 
-      label: "Se brindó información",
-      wrapper_html: { class: "span11 offset1" }  
+      label_inline: "Se brindó información",
+      boolean_style: :nested
     %>
     <%= f.input :accionesder, label: "Acciones D.V." %>
 
     <%= f.association :ayudaestado, 
-      collection: Ayudaestado.habilitados,
+      collection: Sivel2Sjr::Ayudaestado.habilitados,
       label: "Ayuda del Estado",
       label_method: :nombre, 
       value_method: :id 
@@ -30,7 +30,7 @@
     <%= f.input :cantidadayes, label: "Detalle A. Estado" %>
 
     <%= f.association :progestado, 
-      collection: Progestado.habilitados,
+      collection: Sivel2Sjr::Progestado.habilitados,
       label: "Programas y Respuesta del Estado",
       label_method: :nombre, 
       value_method: :id 
@@ -40,7 +40,7 @@
       wrapper_html: { style: "padding-bottom: 18px;" }
     %>
     <%= f.association :ayudasjr, 
-      collection: Ayudasjr.habilitados,
+      collection: Sivel2Sjr::Ayudasjr.habilitados,
       label: "Asistencia Humanitaria",
       label_method: :nombre, 
       value_method: :id 
@@ -52,7 +52,7 @@
     <%= f.input :montoar, label: "Monto A. Humanitaria" %>
 
     <%= f.association :motivosjr, 
-      collection: Motivosjr.habilitados,
+      collection: Sivel2Sjr::Motivosjr.habilitados,
       label: "Servicios y Asesorias del SJR",
       label_method: :nombre, 
       value_method: :id 
@@ -60,7 +60,7 @@
     <%= f.input :detallemotivo, label: "Detalle" %>
 
     <%= f.association :aslegal, 
-      collection: Aslegal.habilitados,
+      collection: Sivel2Sjr::Aslegal.habilitados,
       label: 'Seguimiento Judicial',
       label_method: :nombre, 
       value_method: :id 
@@ -106,7 +106,7 @@
       label: "Observaciones del caso" 
     %>
     <%= f.input :id_personadesea, 
-      collection: Personadesea.habilitados,
+      collection: Sivel2Sjr::Personadesea.habilitados,
       label: "Persona desea",
       label_method: :nombre, 
       value_method: :id 
@@ -117,35 +117,9 @@
     <%= f.input :verifcper, as: :text, 
       label: "Verificación Compromisos Persona" 
     %>
-
-
     <%= f.input :efectividad, as: :text, 
       label: "Efectividad en la Acción" 
     %>
-
-    <!--%= f.association :emprendimiento, 
-      collection: Emprendimiento.where(fechadeshabilitacion: nil).order(:nombre).all,
-      label: "Emprendimiento",
-      label_method: :nombre, 
-      value_method: :id 
-    %-->
-    <!--%= f.input :detalleem, 
-      label: "Detalle Emprendimiento",
-      wrapper_html: { style: "padding-bottom: 18px;" }
-    %-->
-    <!--%= f.input :montoem, 
-      label: "Monto Emprendimiento",
-      wrapper_html: { style: "padding-bottom: 18px;" }
-    %-->
-
-    <!--%= f.association :aspsicosocial, 
-      collection: Aspsicosocial.where(fechadeshabilitacion: nil).order(:nombre).all,
-      label: "Asistencia Psicosocial",
-      label_method: :nombre, 
-      value_method: :id 
-    %-->
-    <!--%= f.input :detalleap, label: "Detalle A. Psicosocial" %>
-    <!--%= f.input :montoap, label: "Monto A. Psicosocial" %-->
 
     <%= link_to_remove_association "Eliminar Respuesta", f, 
       {:class => 'btn-danger', :'data-existing' => 'true'} 

@@ -4,15 +4,28 @@
 
 connection = ActiveRecord::Base.connection();
 
-# De SIVeL generico
-l = File.readlines(Gem.loaded_specs['sivel2_gen'].full_gem_path +
-                   "/db/datos-basicas.sql")
+# Básicas de motor SIVeL genérico
+l = File.readlines(
+  Gem.loaded_specs['sivel2_gen'].full_gem_path + "/db/datos-basicas.sql"
+)
 connection.execute(l.join("\n"))
 
-# De SIVeL SJR
+# Cambios a básicas de SIVel genérico
+l = File.readlines(Gem.loaded_specs['sivel2_sjr'].full_gem_path +
+                   "/db/cambios-basicas.sql")
+
+# De motor SIVeL SJR
 l = File.readlines(Gem.loaded_specs['sivel2_sjr'].full_gem_path +
                    "/db/datos-basicasn.sql")
-#.select { |line|  line !~ /INTO acreditacion /} 
+connection.execute(l.join("\n"));
+
+# De motor SIVeL SJR
+l = File.readlines(Gem.loaded_specs['sivel2_sjr'].full_gem_path +
+                   "/db/cambios-basicas.sql")
+connection.execute(l.join("\n"));
+
+# De este
+l = File.readlines("db/cambios-basicasp.sql")
 connection.execute(l.join("\n"));
 
 # Usuario inicial: sjrven con clave sjrven123
@@ -22,4 +35,5 @@ connection.execute("INSERT INTO usuario
 	VALUES ('sjrven', 'sjrven@localhost.org', 
 	'$2a$10$uMAciEcJuUXDnpelfSH6He7BxW0yBeq6VMemlWc5xEl6NZRDYVA3G', 
 	'', '2014-01-12', '2013-12-24', '2013-12-24', 1);")
+
 

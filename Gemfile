@@ -1,8 +1,11 @@
 source 'https://rubygems.org'
 
 # Rails (internacionalización)
-gem "rails", '~> 4.2.0.beta2'
+gem "rails", '~> 4.2.0.rc1'
 gem "rails-i18n"
+
+# Problemas con arel 6.0.0 al ejecutar rspec
+#gem "arel", '6.0.0.beta2'
 
 # Postgresql
 gem "pg"
@@ -23,7 +26,8 @@ gem "uglifier", '>= 1.3.0'
 gem "coffee-rails", '~> 4.1.0'
 
 # jquery como librería JavaScript
-gem "jquery-rails"
+gem "jquery-rails", '3.1.2'
+# Problema al actualiza a 4.0.0, al lanzar servidor reporta que jquery no existe
 gem "jquery-ui-rails"
 gem "jquery-ui-bootstrap-rails", git: "https://github.com/kristianmandrup/jquery-ui-bootstrap-rails"
 
@@ -31,12 +35,13 @@ gem "jquery-ui-bootstrap-rails", git: "https://github.com/kristianmandrup/jquery
 gem "turbolinks"
 
 # Ambiente de CSS
-gem "twitter-bootstrap-rails", "=2.2.8"
+gem "twitter-bootstrap-rails"#, "=2.2.8"
 gem "bootstrap-datepicker-rails"
 gem "bootstrap-sass"
 
 # Formularios simples 
-gem "simple_form"
+#gem "simple_form", git: "https://github.com/plataformatec/simple_form"
+gem "simple_form", "~> 3.1.0.rc2"
 
 # Formularios anidados (algunos con ajax)
 gem "cocoon", github: "vtamara/cocoon"
@@ -44,7 +49,7 @@ gem "cocoon", github: "vtamara/cocoon"
 # Autenticación y roles
 gem "devise"
 gem "devise-i18n"
-gem "cancan"
+gem "cancancan"
 gem "bcrypt"
 
 # Listados en páginas
@@ -83,12 +88,8 @@ group :development, :test do
   gem 'spring-commands-rspec'
   gem 'rspec-rails'
 
-  # Monitor para lanzar pruebas automáticamente
-  gem "guard-rspec", group: [:development, :test]
-
   # Un proceso para cada prueba -- acelera
   gem 'spork', '~> 1.0rc'
-  gem 'guard-spork'
 
   # Maneja datos de prueba
   gem "factory_girl_rails", "~> 4.0", group: [:development, :test]
@@ -98,7 +99,16 @@ group :development, :test do
   gem "launchy"
 
   # Depurar
-  #gem 'debugger'
+  gem "byebug"
+  
+  # Consola irb en páginas con excepciones o usando <%= console %> en vistasA
+  gem 'web-console', '~> 2.0.0.beta4'
+
+  # Para examinar errores, usar "rescue rspec" en lugar de "rspec"
+  gem 'pry-rescue'
+  gem 'pry-stack_explorer'
+
+
 end
 
 # Los siguientes son para pruebas y no tiene generadores requeridos en desarrollo

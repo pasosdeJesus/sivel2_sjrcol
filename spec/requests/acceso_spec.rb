@@ -15,7 +15,7 @@ describe "Control de acceso " do
 
   describe "analista" do
     it "puede crear caso" do
-      visit new_caso_path
+      visit '/casos/nuevo'
       @numcaso=find_field('Código').value
 
 		  expect(@numcaso.to_i).to be > 0

@@ -2,7 +2,6 @@
 
 Sivel2Gen::Caso.class_eval do
 
-  puts "OJO en decorador de caso definiendo refresca_conscaso"
   def self.refresca_conscaso
     if !ActiveRecord::Base.connection.table_exists? 'sivel2_gen_conscaso'
       ActiveRecord::Base.connection.execute(

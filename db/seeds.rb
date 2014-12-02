@@ -18,11 +18,15 @@ l = File.readlines(Gem.loaded_specs['sivel2_sjr'].full_gem_path +
 l = File.readlines(Gem.loaded_specs['sivel2_sjr'].full_gem_path +
                    "/db/datos-basicasn.sql")
 connection.execute(l.join("\n"));
+
+# De motor SIVeL SJR
+l = File.readlines(Gem.loaded_specs['sivel2_sjr'].full_gem_path +
+                   "/db/cambios-basicas.sql")
+connection.execute(l.join("\n"));
+
 # De este
 l = File.readlines("db/cambios-basicasp.sql")
 connection.execute(l.join("\n"));
-#l = File.readlines("db/datos-basicasp.sql")
-#connection.execute(l.join("\n"));
 
 # Usuario inicial: sjrven con clave sjrven123
 connection.execute("INSERT INTO usuario 

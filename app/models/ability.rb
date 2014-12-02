@@ -7,6 +7,6 @@ class Ability < Sivel2Sjr::Ability
   @@tablasbasicas << ['Sivel2Sjr', 'derecho']
   @@tablasbasicas << ['Sivel2Sjr', 'motivosjr']
   @@tablasbasicas << ['Sivel2Sjr', 'progestado']
-  @@tablasbasicas << ['', 'regimensalud']
+  @@tablasbasicas << ['Sivel2Sjr', 'regimensalud']
 
 end

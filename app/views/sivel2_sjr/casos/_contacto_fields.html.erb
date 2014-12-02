@@ -107,7 +107,7 @@
     boolean_style: :nested
   %>
 	<%= s.association :regimensalud,
-		collection: Regimensalud.all.order(:nombre),
+		collection: Sivel2Sjr::Regimensalud.all.order(:nombre),
 		include_blank: false,
 		label: "Régimen de Salud",
 		label_method: :nombre, 

@@ -66,12 +66,12 @@ gem "tzinfo"
 gem "tzinfo-data"
 
 # Motor de SIVeL 2
-#gem 'sivel2_gen', github: 'pasosdeJesus/sivel2_gen', branch: 'aislado'
-gem 'sivel2_gen', path: '../sivel2_gen'
+gem 'sivel2_gen', github: 'pasosdeJesus/sivel2_gen'
+#gem 'sivel2_gen', path: '../sivel2_gen'
 
 # Motor de SIVeL 2 - SJR
-#gem 'sivel2_sjr', github: 'pasosdeJesus/sivel2_sjr', branch: 'aislado'
-gem 'sivel2_sjr', path: '../sivel2_sjr'
+gem 'sivel2_sjr', github: 'pasosdeJesus/sivel2_sjr'
+#gem 'sivel2_sjr', path: '../sivel2_sjr'
 
 
 group :doc do

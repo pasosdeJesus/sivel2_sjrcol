@@ -1550,21 +1550,6 @@ CREATE SEQUENCE regimensalud_seq
 
 
 --
--- Name: regimensalud; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE regimensalud (
-    id integer DEFAULT nextval('regimensalud_seq'::regclass) NOT NULL,
-    nombre character varying(50) NOT NULL,
-    fechacreacion date DEFAULT '2013-05-13'::date NOT NULL,
-    fechadeshabilitacion date,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone,
-    CONSTRAINT regimensalud_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
-);
-
-
---
 -- Name: region_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -3134,6 +3119,21 @@ CREATE TABLE sivel2_sjr_progestado_respuesta (
 
 
 --
+-- Name: sivel2_sjr_regimensalud; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE sivel2_sjr_regimensalud (
+    id integer DEFAULT nextval('regimensalud_seq'::regclass) NOT NULL,
+    nombre character varying(50) NOT NULL,
+    fechacreacion date DEFAULT '2013-05-13'::date NOT NULL,
+    fechadeshabilitacion date,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    CONSTRAINT regimensalud_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
+);
+
+
+--
 -- Name: sivel2_sjr_resagresion; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3444,38 +3444,6 @@ ALTER TABLE ONLY sivel2_sjr_acreditacion
 
 
 --
--- Name: actividad_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY sivel2_gen_actividad
-    ADD CONSTRAINT actividad_pkey PRIMARY KEY (id);
-
-
---
--- Name: actividad_rangoedadac_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY sivel2_gen_actividad_rangoedadac
-    ADD CONSTRAINT actividad_rangoedadac_pkey PRIMARY KEY (id);
-
-
---
--- Name: actividadarea_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY sivel2_gen_actividadarea
-    ADD CONSTRAINT actividadarea_pkey PRIMARY KEY (id);
-
-
---
--- Name: actividadareas_actividad_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY sivel2_gen_actividadareas_actividad
-    ADD CONSTRAINT actividadareas_actividad_pkey PRIMARY KEY (id);
-
-
---
 -- Name: actividadoficio_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3529,14 +3497,6 @@ ALTER TABLE ONLY sivel2_sjr_actualizacionbase
 
 ALTER TABLE ONLY sivel2_gen_anexo
     ADD CONSTRAINT anexo_pkey PRIMARY KEY (id);
-
-
---
--- Name: anexoactividad_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY sivel2_gen_anexoactividad
-    ADD CONSTRAINT anexoactividad_pkey PRIMARY KEY (id);
 
 
 --
@@ -3740,14 +3700,6 @@ ALTER TABLE ONLY sivel2_sjr_clasifdesp
 
 
 --
--- Name: comosupo_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY sivel2_sjr_comosupo
-    ADD CONSTRAINT comosupo_pkey PRIMARY KEY (id);
-
-
---
 -- Name: comunidad_filiacion_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3908,14 +3860,6 @@ ALTER TABLE ONLY sivel2_gen_etiqueta
 
 
 --
--- Name: etiqueta_usuario_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY sivel2_sjr_etiqueta_usuario
-    ADD CONSTRAINT etiqueta_usuario_pkey PRIMARY KEY (id);
-
-
---
 -- Name: etnia_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3969,6 +3913,14 @@ ALTER TABLE ONLY obsoleto_funcionario
 
 ALTER TABLE ONLY sivel2_gen_grupoper
     ADD CONSTRAINT grupoper_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: idioma_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY sivel2_sjr_idioma
+    ADD CONSTRAINT idioma_pkey PRIMARY KEY (id);
 
 
 --
@@ -4068,14 +4020,6 @@ ALTER TABLE ONLY sivel2_gen_organizacion
 
 
 --
--- Name: pais_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY sivel2_gen_pais
-    ADD CONSTRAINT pais_pkey PRIMARY KEY (id);
-
-
---
 -- Name: pconsolidado_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -4156,6 +4100,14 @@ ALTER TABLE ONLY sivel2_sjr_progestado_respuesta
 
 
 --
+-- Name: proteccion_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY sivel2_sjr_proteccion
+    ADD CONSTRAINT proteccion_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: rangoedad_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -4164,18 +4116,10 @@ ALTER TABLE ONLY sivel2_gen_rangoedad
 
 
 --
--- Name: rangoedadac_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY sivel2_gen_rangoedadac
-    ADD CONSTRAINT rangoedadac_pkey PRIMARY KEY (id);
-
-
---
 -- Name: regimensalud_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY regimensalud
+ALTER TABLE ONLY sivel2_sjr_regimensalud
     ADD CONSTRAINT regimensalud_pkey PRIMARY KEY (id);
 
 
@@ -4236,27 +4180,91 @@ ALTER TABLE ONLY sivel2_gen_sectorsocial
 
 
 --
--- Name: sivel2_sjr_idioma_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: sivel2_gen_actividad_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY sivel2_sjr_idioma
-    ADD CONSTRAINT sivel2_sjr_idioma_pkey PRIMARY KEY (id);
-
-
---
--- Name: sivel2_sjr_proteccion_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY sivel2_sjr_proteccion
-    ADD CONSTRAINT sivel2_sjr_proteccion_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY sivel2_gen_actividad
+    ADD CONSTRAINT sivel2_gen_actividad_pkey PRIMARY KEY (id);
 
 
 --
--- Name: sivel2_sjr_statusmigratorio_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: sivel2_gen_actividad_rangoedadac_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY sivel2_gen_actividad_rangoedadac
+    ADD CONSTRAINT sivel2_gen_actividad_rangoedadac_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: sivel2_gen_actividadarea_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY sivel2_gen_actividadarea
+    ADD CONSTRAINT sivel2_gen_actividadarea_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: sivel2_gen_actividadareas_actividad_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY sivel2_gen_actividadareas_actividad
+    ADD CONSTRAINT sivel2_gen_actividadareas_actividad_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: sivel2_gen_anexoactividad_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY sivel2_gen_anexoactividad
+    ADD CONSTRAINT sivel2_gen_anexoactividad_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: sivel2_gen_pais_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY sivel2_gen_pais
+    ADD CONSTRAINT sivel2_gen_pais_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: sivel2_gen_rangoedadac_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY sivel2_gen_rangoedadac
+    ADD CONSTRAINT sivel2_gen_rangoedadac_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: sivel2_gen_tdocumento_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY sivel2_gen_tdocumento
+    ADD CONSTRAINT sivel2_gen_tdocumento_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: sivel2_sjr_comosupo_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY sivel2_sjr_comosupo
+    ADD CONSTRAINT sivel2_sjr_comosupo_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: sivel2_sjr_etiqueta_usuario_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY sivel2_sjr_etiqueta_usuario
+    ADD CONSTRAINT sivel2_sjr_etiqueta_usuario_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: statusmigratorio_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY sivel2_sjr_statusmigratorio
-    ADD CONSTRAINT sivel2_sjr_statusmigratorio_pkey PRIMARY KEY (id);
+    ADD CONSTRAINT statusmigratorio_pkey PRIMARY KEY (id);
 
 
 --
@@ -4281,14 +4289,6 @@ ALTER TABLE ONLY taccion
 
 ALTER TABLE ONLY sivel2_gen_tclase
     ADD CONSTRAINT tclase_pkey PRIMARY KEY (id);
-
-
---
--- Name: tdocumento_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY sivel2_gen_tdocumento
-    ADD CONSTRAINT tdocumento_pkey PRIMARY KEY (id);
 
 
 --
@@ -4399,7 +4399,7 @@ ALTER TABLE ONLY sivel2_gen_vinculoestado
 -- Name: busca_conscaso; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX busca_conscaso ON sivel2_gen_conscaso USING gin (q);
+CREATE INDEX busca_conscaso ON conscaso USING gin (q);
 
 
 --
@@ -5888,7 +5888,7 @@ ALTER TABLE ONLY sivel2_sjr_victimasjr
 --
 
 ALTER TABLE ONLY sivel2_sjr_victimasjr
-    ADD CONSTRAINT victimasjr_id_regimensalud_fkey FOREIGN KEY (id_regimensalud) REFERENCES regimensalud(id);
+    ADD CONSTRAINT victimasjr_id_regimensalud_fkey FOREIGN KEY (id_regimensalud) REFERENCES sivel2_sjr_regimensalud(id);
 
 
 --
@@ -6023,15 +6023,15 @@ INSERT INTO schema_migrations (version) VALUES ('20141009131427');
 
 INSERT INTO schema_migrations (version) VALUES ('20141111102451');
 
+INSERT INTO schema_migrations (version) VALUES ('20141111120430');
+
+INSERT INTO schema_migrations (version) VALUES ('20141111120431');
+
+INSERT INTO schema_migrations (version) VALUES ('20141111120432');
+
 INSERT INTO schema_migrations (version) VALUES ('20141111203313');
 
 INSERT INTO schema_migrations (version) VALUES ('20141112111129');
 
 INSERT INTO schema_migrations (version) VALUES ('20141126085907');
-
-INSERT INTO schema_migrations (version) VALUES ('20141126120430');
-
-INSERT INTO schema_migrations (version) VALUES ('20141126120431');
-
-INSERT INTO schema_migrations (version) VALUES ('20141126120432');
 

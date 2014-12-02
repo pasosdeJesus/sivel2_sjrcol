@@ -1,8 +1,6 @@
 #!/bin/sh
 # Hace pruebas, pruebas de regresión, envia a github y sube a heroku
 
-NOKOGIRI_USE_SYSTEM_LIBRARIES=1 MAKE=gmake make=gmake QMAKE=qmake4 bundle update
-NOKOGIRI_USE_SYSTEM_LIBRARIES=1 MAKE=gmake make=gmake QMAKE=qmake4 bundle install
 grep "^ *gem *.sivel2_gen. *, *path:" Gemfile > /dev/null 2> /dev/null
 if (test "$?" = "0") then {
 	echo "Gemfile incluye un sivel2_gen cableado al sistema de archivos"
@@ -18,6 +16,10 @@ if (test "$?" = "0") then {
 	echo "Gemfile incluye debugger que heroku no quiere"
 	exit 1;
 } fi;
+
+
+NOKOGIRI_USE_SYSTEM_LIBRARIES=1 MAKE=gmake make=gmake QMAKE=qmake4 bundle update
+NOKOGIRI_USE_SYSTEM_LIBRARIES=1 MAKE=gmake make=gmake QMAKE=qmake4 bundle install
 
 RAILS_ENV=test rake db:drop db:setup db:migrate sivel2:indices
 if (test "$?" != "0") then {

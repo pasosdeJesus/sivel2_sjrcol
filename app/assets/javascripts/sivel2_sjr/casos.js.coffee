@@ -13,29 +13,19 @@ eliminaPendientes = (elempe) ->
     l = e.find('.remove_fields')
     _cocoon_remove_fields(l)
 
-# Actualiza una ubicacion
-actualizaUbicacion = (idu, idp, idd, idm, idc, lugar, sitio, tu) ->
+# Idea para actualizar de a una pestaña, sería canson 
+# pues tocaria hacer controlador por cada una.
+actualizaUbicacion = ($this, idu) ->
   if (idu > 0)
     alert("Actualizando")  
-    $.ajax({ url: '/ubicaciones/' + idu + '/update/'
-      #data: { id_ubicacion: ,
-      #  id_pais:
-      #  id_departamento:
-      #  id_municipio:
-      #  id_:
-      #}
-    }).done( ->
+    d=$this.closest('.controls').find('input,select').serialize()
+    $.ajax('/ubicaciones/' + idu + '/update/',
+      data: d
+    ).done( ->
       alert("Actualizado")
     ).fail( (jqXHR, texto) ->
       alert("Error al guardar pais")
     )
-
-  for i, e of elempe
-    l = e.find('.remove_fields')
-    _cocoon_remove_fields(l)
-
-
-
 
 $(document).on 'ready page:load',  -> 
 
@@ -206,7 +196,7 @@ $(document).on 'ready page:load',  ->
     # Experimentando actualizar a medida que se modifica:
     idfu = $(this).attr('id').replace('_id_pais', '_id');
     idu = $('#' + idfu).val();
-    #actualizaUbicacion(idu, idp, idd, idm, idc, lugar, sitio, tu)
+    #actualizaUbicacion($(this), idu)
   )
 
   # Al cambiar departamento se recalcula lista de municipios
@@ -451,6 +441,14 @@ $(document).on 'ready page:load',  ->
           alert('Fecha de expulsión repetida')
     )
     return
+  )
+
+  # Guarda lo que se  puede (sin reportar errores) cada vez que cambia
+  # de pestaña.
+  $(document).on('click', 'a[href^="#"]', (e) ->
+    f=$('form')
+    a=f.attr('action')
+    $.post(a, f.serialize())
   )
 
   # Deshabilitar parte para obligar a completar partes para continuar

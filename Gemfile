@@ -26,7 +26,7 @@ gem "uglifier", '>= 1.3.0'
 gem "coffee-rails", '~> 4.1.0'
 
 # jquery como librería JavaScript
-gem "jquery-rails", '3.1.2'
+gem "jquery-rails"#, '3.1.2'
 # Problema al actualiza a 4.0.0, al lanzar servidor reporta que jquery no existe
 gem "jquery-ui-rails"
 gem "jquery-ui-bootstrap-rails", git: "https://github.com/kristianmandrup/jquery-ui-bootstrap-rails"

@@ -4,13 +4,13 @@ class ConteosController < ApplicationController
     authorize! :contar, Sivel2Gen::Caso
     @fechaini = '';
     cfecha = '';
-    if (params[:fechaini]) 
+    if (params[:fechaini] && params[:fechaini] != "") 
         pfechaini = DateTime.strptime(params[:fechaini], '%Y-%m-%d')
         @fechaini = pfechaini.strftime('%Y-%m-%d')
         cfecha += "fechaexpulsion >= '#{@fechaini}' AND "
     end
     @fechafin = '';
-    if (params[:fechafin]) 
+    if (params[:fechafin] && params[:fechafin] != "") 
         pfechafin = DateTime.strptime(params[:fechafin], '%Y-%m-%d')
         @fechafin = pfechafin.strftime('%Y-%m-%d')
         cfecha += "fechaexpulsion <= '#{@fechafin}' AND "

@@ -13,7 +13,7 @@
 //= require sivel2_sjr/application
 //= require_tree .
 
-jQuery.ajaxSetup({
+/*jQuery.ajaxSetup({
 	beforeSend: function(xhr) {
 		$('#spinner').show();
 	},
@@ -21,4 +21,4 @@ jQuery.ajaxSetup({
 	complete: function(xhr, status) {
 		$('#spinner').hide();
 	}
-});
+}); */

@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   end
   resources :usuarios, path_names: { new: 'nuevo', edit: 'edita' } 
 
-  get "/conteos/municipios" => 'conteos#municipios'
+  post "/conteos/municipios" => 'conteos#municipios'
   get "/conteos/rutas" => 'conteos#rutas'
   get "/conteos/desplazamientos" => 'conteos#desplazamientos'
 

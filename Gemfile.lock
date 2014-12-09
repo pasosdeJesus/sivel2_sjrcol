@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 5c169638508e4de94d2bd4db4f8ca9ca24dfa612
+  revision: b04b26e58c34b58d13b2760e23a8f92a6eee71df
   specs:
     sivel2_gen (2.0.a3)
       devise
@@ -9,7 +9,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 15620d465a15dd7517a20ea52b3c353294862bad
+  revision: df62b36411d3e00a5ba588df5f7f17743281c747
   specs:
     sivel2_sjr (2.0.a3)
       rails
@@ -66,7 +66,6 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
-    addressable (2.3.6)
     arel (6.0.0)
     bcrypt (3.1.9)
     binding_of_caller (0.7.2)
@@ -94,7 +93,7 @@ GEM
     cldr-plurals-runtime-rb (1.0.0)
     climate_control (0.0.3)
       activesupport (>= 3.0)
-    cocaine (0.5.4)
+    cocaine (0.5.5)
       climate_control (>= 0.0.3, < 1.0)
     codeclimate-test-reporter (0.4.3)
       simplecov (>= 0.7.1, < 1.0.0)
@@ -146,8 +145,6 @@ GEM
       railties (>= 3.2.16)
     json (1.8.1)
     kgio (2.9.2)
-    launchy (2.4.3)
-      addressable (~> 2.3)
     loofah (2.0.1)
       nokogiri (>= 1.5.9)
     mail (2.6.3)
@@ -161,7 +158,7 @@ GEM
     nokogiri (1.6.5)
       mini_portile (~> 0.6.0)
     orm_adapter (0.5.0)
-    paperclip (4.2.0)
+    paperclip (4.2.1)
       activemodel (>= 3.0.0)
       activesupport (>= 3.0.0)
       cocaine (~> 0.5.3)
@@ -263,7 +260,7 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.4)
     tilt (1.4.1)
-    turbolinks (2.5.2)
+    turbolinks (2.5.3)
       coffee-rails
     twitter-bootstrap-rails (3.2.0)
       actionpack (~> 4.1)
@@ -279,7 +276,7 @@ GEM
       thread_safe (~> 0.1)
     tzinfo-data (1.2014.10)
       tzinfo (>= 1.0.0)
-    uglifier (2.5.3)
+    uglifier (2.6.0)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
     unicorn (4.8.3)
@@ -319,7 +316,6 @@ DEPENDENCIES
   jquery-rails
   jquery-ui-bootstrap-rails!
   jquery-ui-rails
-  launchy
   newrelic_rpm
   paperclip (~> 4.1)
   pg

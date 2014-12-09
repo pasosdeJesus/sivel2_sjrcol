@@ -2,6 +2,7 @@ class ConteosController < ApplicationController
 
   def municipios
     authorize! :contar, Sivel2Gen::Caso
+    #byebug
     @fechaini = '';
     cfecha = '';
     if (params[:fechaini] && params[:fechaini] != "") 
@@ -56,6 +57,12 @@ class ConteosController < ApplicationController
         AND desplazamiento.id_caso=victima.id_caso
       GROUP BY 1,2,3 ORDER BY 4 desc;
     ")
+    respond_to do |format|
+      format.html { }
+      format.json { head :no_content }
+      format.js   { }
+    end
+ 
   end
 
   def rutas

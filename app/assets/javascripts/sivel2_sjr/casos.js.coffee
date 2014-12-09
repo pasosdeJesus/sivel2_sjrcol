@@ -7,6 +7,7 @@
 #//= require cocoon
 #//= require sivel2_gen/geo
 
+
 # Elimina secciones agregadas con cocoon listadas en elempe
 eliminaPendientes = (elempe) ->
   for i, e of elempe
@@ -451,6 +452,7 @@ $(document).on 'ready page:load',  ->
     $.post(a, f.serialize())
   )
 
+ 
   # Deshabilitar parte para obligar a completar partes para continuar
   # http://stackoverflow.com/questions/16777003/what-is-the-easiest-way-to-disable-enable-buttons-and-links-jquery-bootstrap
   #$('body').on('click', 'a.disabled', (e) -> 

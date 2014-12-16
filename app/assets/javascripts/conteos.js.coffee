@@ -27,7 +27,7 @@ $(document).on 'ready page:load',  ->
   $(document).on('change', 'select[data-contarautomatico]', 
     (e) -> enviaFormularioContar()
   )
-  $(document).on('change', 'input[data-contarautomatico]', 
+  $(document).on('change', 'input[data-contarautomatico]:not([data-behaviour])', 
     (e) -> enviaFormularioContar()
   )
 

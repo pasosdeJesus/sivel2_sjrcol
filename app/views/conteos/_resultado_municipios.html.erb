@@ -1,0 +1,44 @@
+<h2>Municipios Expulsores</h2>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= Sivel2Gen::Ubicacion.human_attribute_name(:id_pais) %></th>
+      <th><%= Sivel2Gen::Ubicacion.human_attribute_name(:id_departamento) %></th>
+      <th><%= Sivel2Gen::Ubicacion.human_attribute_name(:id_municipio) %></th>
+      <th><%= "Desp. Individuales" %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @expulsores.try(:each) do |cmun| %>
+      <tr>
+        <td><%= cmun['pais'] %></td>
+        <td><%= cmun['departamento'] %></td>
+        <td><%= cmun['municipio'] %></td>
+        <td><%= cmun['cuenta'] %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+<h2>Municipios Receptores</h2>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= Sivel2Gen::Ubicacion.human_attribute_name(:id_pais) %></th>
+      <th><%= Sivel2Gen::Ubicacion.human_attribute_name(:id_departamento) %></th>
+      <th><%= Sivel2Gen::Ubicacion.human_attribute_name(:id_municipio) %></th>
+      <th><%= "Desp. Individuales" %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @receptores.try(:each) do |cmun| %>
+      <tr>
+        <td><%= cmun['pais'] %></td>
+        <td><%= cmun['departamento'] %></td>
+        <td><%= cmun['municipio'] %></td>
+        <td><%= cmun['cuenta'] %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

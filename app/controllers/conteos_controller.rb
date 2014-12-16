@@ -1,4 +1,434 @@
+# encoding: UTF-8
+
 class ConteosController < ApplicationController
+
+  ##
+  # Agrega una nueva tabla al listado $t
+  #
+  # @param string &$t Listado de tablas separadas por ,
+  # @param string $nt Nueva tabla por agregar si falta
+  #
+  # @return string cadena t completada para asegurar tabla
+  #/
+  def agrega_tabla(t, nt)
+    at = t.split(',')
+    if (!at.include? nt)
+        at << nt
+    end
+    t = at.join(",")
+  end
+
+  ##
+  # Agrega condición a WHERE en un SELECT de SQL
+  #
+  # @param unknown &$db   Conexión a base de datos
+  # @param string  &$w    cadena con WHERE que se completa
+  # @param string  $n     nombre de campo
+  # @param string  $v     valor esperado
+  # @param string  $opcmp operador de comparación por usar.
+  # @param string  $con   con
+  #
+  # @return string cadena w completada con nueva condición
+  def consulta_and(w, n, v, opcmp = '=', con='AND')
+    if (!v || v === '' || $v === ' ') 
+        return
+    end
+    if (w != "") 
+        w += " #{con}"
+    end
+    w += " " + n + opcmp + Sivel2Gen::Caso.sanitize(v)
+  end
+
+
+  ##
+  # Como la función anterior sólo que el valor no lo pone entre apostrofes
+  # y supone que ya viene escapado el valor $v
+  #
+  # @param string &$w    cadena con WHERE que se completa
+  # @param string $n     nombre de campo
+  # @param string $v     valor esperado
+  # @param string $opcmp operador de comparación por usar.
+  # @param string $con   con
+  #
+  # @return string cadena w completada con nueva condición
+  #/
+  def consulta_and_sinap(w, n, v, opcmp = '=', con = "AND")
+    if (w != "") 
+        w += " " + con
+    end
+    w += " " + n + opcmp + v
+  end
+
+  def param_escapa(p)
+    params[p] ? Sivel2Gen::Caso.connection.quote_string(params[p]) : ''
+  end
+
+  def respuestas
+    @pque = { 'derecho' => 'Derecho vulnerado',
+      'ayudaestado' => 'Ayuda del Estado',
+      'ayudasjr' => 'Ayuda Humanitaria del SJR',
+      'motivosjr' => 'Servicio/Asesoria del SJR',
+      'progestado' => 'Subsidio/Programa del Estado'
+    }
+
+    pFaini = param_escapa('fechaini')
+    pFafin = param_escapa('fechafin')
+    pContar = param_escapa('contar')
+    pClase = param_escapa('clase')
+    pMunicipio = param_escapa('municipio')
+    pDepartamento = param_escapa('departamento')
+    pOficina = param_escapa('oficina')
+
+    if (pContar == '') 
+      pContar = 'derecho'
+    end
+
+    cons1 = 'cres1'
+    cons2 = 'cres1'
+    # La estrategia es 
+    # 1. Agrupar en la vista cons1 respuesta con lo que se contará 
+    #    restringiendo por filtros con códigos 
+    # 2. Contar derechos/respuestas cons1, cambiar códigos
+    #    por información por desplegar
+
+    # Validaciones todo caso es casosjr y viceversa
+    # Validaciones todo caso tiene victima
+    # Validaciones todo caso tiene ubicacion
+
+    # Para la vista cons1 emplear que1, tablas1 y where1
+    que1 = 'caso.id AS id_caso, respuesta.fechaatencion AS fechaatencion'
+    tablas1 = 'sivel2_gen_caso AS caso, sivel2_sjr_casosjr AS casosjr, ' +
+      'sivel2_sjr_respuesta AS respuesta'
+    where1 = ''
+
+    # Para la consulta final emplear arreglo que3, que tendrá parejas
+    # (campo, titulo por presentar en tabla)
+    que3 = []
+    tablas3 = cons2
+    where3 = ''
+
+    # where1 = consulta_and(where1, 'caso.id', GLOBALS['idbus'], '<>')
+    where1 = consulta_and_sinap(where1, "caso.id", "casosjr.id_caso")
+    where1 = consulta_and_sinap(where1, "caso.id", "respuesta.id_caso")
+    if (pFaini != '') 
+      where1 = consulta_and(
+        where1, "respuesta.fechaatencion", pFaini, ">="
+      )
+    end
+    if (pFafin != '') 
+      where1 = consulta_and(
+        where1, "respuesta.fechaatencion", pFafin, "<="
+      )
+    end
+
+    if (pOficina != '') 
+      where1 = consulta_and(where1, "casosjr.id_regionsjr", pOficina)
+    end
+
+    que1 = agrega_tabla(que1, "casosjr.id_regionsjr AS id_regionsjr")
+    trel = "#{pContar}_respuesta"
+    idrel = "id_#{pContar}"
+    case (pContar) 
+    when 'ayudasjr', 'ayudaestado', 'derecho', 'motivosjr', 'progestado'
+      que1 = agrega_tabla(que1, "#{trel}.#{idrel} AS #{idrel}")
+      where1 = consulta_and_sinap(
+        where1, "respuesta.id", "#{trel}.id_respuesta"
+      )
+      #where1 = consulta_and_sinap( where1, "respuesta.fechaatencion", "#{trel}.fechaatencion")
+      tablas1 = agrega_tabla(tablas1, "sivel2_sjr_#{trel} AS #{trel}")
+      tablas3 = agrega_tabla(tablas3, "sivel2_sjr_#{pContar} AS #{pContar}")
+      where3 = consulta_and_sinap(where3, idrel, "#{pContar}.id")
+      que3 << ["#{pContar}.nombre", @pque[pContar]]
+    else
+      puts "opción desconocida #{pContar}"
+    end
+
+    ActiveRecord::Base.connection.execute "DROP VIEW  IF EXISTS #{cons2}"
+    ActiveRecord::Base.connection.execute "DROP VIEW  IF EXISTS #{cons1}"
+
+    # Filtrar 
+    q1="CREATE VIEW #{cons1} AS 
+            SELECT #{que1}
+            FROM #{tablas1} WHERE #{where1}"
+    #puts "q1 es #{q1}"
+    ActiveRecord::Base.connection.execute q1
+
+    #puts que3
+    # Generamos 1,2,3 ...n para GROUP BY
+    gb = sep = ""
+    qc = ""
+    i = 1
+    que3.each do |t|
+      if (t[1] != "") 
+        gb += sep + i.to_s
+        qc += t[0] + ", "
+        sep = ", "
+        i += 1
+      end
+    end
+
+    @coltotales = [i-1, i]
+    if (gb != "") 
+      gb ="GROUP BY #{gb} ORDER BY #{gb}"
+    end
+    que3 << ["", "Cantidad"]
+    twhere3 = where3 == "" ? "" : "WHERE " + where3
+    q3 = "SELECT #{qc}
+        COUNT(cast(#{cons2}.id_caso as text) || ' '
+        || cast(#{cons2}.fechaatencion as text))
+        FROM #{tablas3}
+        #{twhere3}
+        #{gb}
+    "
+    #puts "q3 es #{q3}"
+    @cuerpotabla = ActiveRecord::Base.connection.select_all(q3)
+
+    @enctabla = []
+    que3.each do |t|
+      if (t[1] != "") 
+        @enctabla << CGI.escapeHTML(t[1])
+      end
+    end
+
+
+    respond_to do |format|
+      format.html { }
+      format.json { head :no_content }
+      format.js   { render 'resultado' }
+    end
+
+=begin
+
+
+        tcol = array()
+        tfil = array()
+        celda = array()
+        nr = 0
+        while (result->fetchInto(row)) {
+            nc = count(row)
+            for (i = 0; i < nc; i++) {
+                celda[nr][i] = row[i]
+            }
+            nr++
+        }
+
+        #print_r(celda); die("x")
+        encabezado_envia()
+        puts "<table border=\"1\">"
+        puts "<tr>"
+        foreach (que3 as t) {
+            if (t[1] != "") {
+                puts "<th>" . htmlentities(#{"<th>" . htmlentities(}[1], ENT_COMPAT, 'UTF-8') . "</th>"
+            }
+        }
+        puts "</tr>\n"
+
+        row = array()
+        foreach (celda as n => f) {
+            puts "<tr>"
+            foreach (f as nc => c) {
+                puts "<td>"
+                puts htmlentities(c, ENT_COMPAT, 'UTF-8')
+                puts "</td>"
+            }
+            puts "</tr>\n"
+        }
+        puts "</table>"
+        puts '<div align = "right"><a href = "index.php">' .
+            '<b>' . _('Men&uacute; Principal') . '</b></a></div>'
+        pie_envia()
+    }
+=end
+  end
+
+  def personas
+    authorize! :contar, Sivel2Gen::Caso
+    pFaini = param_escapa('faini')
+    pFafin = param_escapa('fafin') 
+    pSegun = param_escapa('segun')
+    pOficina = param_escapa('oficina')
+    pMunicipio = param_escapa('municipio')
+    pDepartamento = param_escapa('departamento')
+
+    # La estrategia es 
+    # 1. Agrupar en la vista cons1 personas con lo que se contará 
+    #    restringiendo por filtros con códigos sin desp. ni info geog.
+    # 2. En vista cons2 dejar lo mismo que en cons1, pero añadiendo
+    #    expulsión más reciente y su ubicacion si la hay.
+    #    Al añadir info. geográfica no es claro
+    #    cual poner, porque un caso debe tener varias ubicaciones 
+    #    correspondientes a los sitios por donde ha pasado durante
+    #    desplazamientos.  Estamos suponiendo que interesa
+    #    el sitio de la ultima expulsion.
+    # 3. Contar beneficiarios contactos sobre cons2, cambiar códigos
+    #    por información por desplegar
+    # 4. Contar beneficiarios no contactos sobre cons2, cambiar códigos
+    #    por información por desplegar
+
+    # Validaciones todo caso es casosjr y viceversa
+    # Validaciones todo caso tiene victima
+    # Validaciones todo caso tiene ubicacion
+
+    cons1 = 'cben1';
+    cons2 = 'cben2';
+    cons3 = 'cben3';
+    @fechaini = '';
+    where1 = '';
+    if (params[:fechaini] && params[:fechaini] != "") 
+        pfechaini = DateTime.strptime(params[:fechaini], '%Y-%m-%d')
+        @fechaini = pfechaini.strftime('%Y-%m-%d')
+        where1 = consulta_and(
+          where1, "casosjr.fecharec", @fechaini, ">="
+        )
+    end
+    @fechafin = '';
+    if (params[:fechafin] && params[:fechafin] != "") 
+        pfechafin = DateTime.strptime(params[:fechafin], '%Y-%m-%d')
+        @fechafin = pfechafin.strftime('%Y-%m-%d')
+        where1 = consulta_and(
+          where1, "casosjr.fecharec", @fechafin, "<="
+        )
+    end
+    que1 = 'caso.id AS id_caso, victima.id_persona AS id_persona,
+            CASE WHEN (casosjr.contacto=victima.id_persona) THEN 1 ELSE 0 END 
+            AS contacto, 
+            CASE WHEN (casosjr.contacto<>victima.id_persona) THEN 1 ELSE 0 END
+            AS beneficiario'
+    tablas1 = 'sivel2_gen_caso AS caso, sivel2_sjr_casosjr AS casosjr, 
+    sivel2_gen_victima AS victima'
+    
+
+    # Para la consulta final emplear arreglo que3, que tendrá parejas
+    # (campo, titulo por presentar en tabla)
+    que3 = []
+    tablas3 = "#{cons2}"
+    where3 = ''
+
+#    consulta_and(where1, 'caso.id', GLOBALS['idbus'], '<>')
+    where1 = consulta_and_sinap(where1, "caso.id", "casosjr.id_caso")
+    where1 = consulta_and_sinap(where1, "caso.id", "victima.id_caso")
+       
+    if (pOficina != '') 
+      where1 = consulta_and(where1, "casosjr.id_regionsjr", pOficina)
+    end
+    #byebug
+    case pSegun
+    when ''
+      titSegun = 'Total'
+      que1 = agrega_tabla(que1, 'cast(\'total\' as text) as total')
+      que3 << ["", ""]
+    when 'RANGO DE EDAD'
+      que1 = agrega_tabla(que1, 'victima.id_rangoedad AS id_rangoedad')
+      tablas3 = agrega_tabla(tablas3, 'sivel2_gen_rangoedad AS rangoedad')
+      where3 = consulta_and_sinap(where3, "id_rangoedad", "rangoedad.id")
+      que3 << ["rangoedad.rango", "Edad"]
+    when 'SEXO'
+      que1 = agrega_tabla(que1, 'persona.sexo AS sexo')
+      tablas1 = agrega_tabla(tablas1, 'sivel2_gen_persona AS persona')
+      where1 = consulta_and_sinap(where1, "persona.id", "victima.id_persona")
+      que3 << ["sexo", "Sexo"]
+    when 'SECTOR SOCIAL'
+      que1 = agrega_tabla(que1, 'victima.id_sectorsocial AS id_sectorsocial')
+      tablas3 = agrega_tabla(tablas3, 'sivel2_gen_sectorsocial AS sectorsocial')
+      where3 = consulta_and_sinap(where3, "id_sectorsocial", "sectorsocial.id")
+      que3 << ["sectorsocial.nombre", "Sector Social"]
+    when 'MES RECEPCIÓN'
+      que1 = agrega_tabla(que1, "extract(year from fecharec) || '-' " +
+                   "|| lpad(cast(extract(month from fecharec) as text), 2, " +
+                   "cast('0' as text)) as mes")
+      que3 << ["mes", "Mes"]
+    else
+      puts "opción desconocida pSegun=#{pSegun}"
+    end
+
+    ActiveRecord::Base.connection.execute "DROP VIEW  IF EXISTS #{cons2}"
+    ActiveRecord::Base.connection.execute "DROP VIEW  IF EXISTS #{cons1}"
+
+    if where1 != ''
+      where1 = 'WHERE ' + where1
+    end
+    # Filtrar 
+    q1="CREATE VIEW #{cons1} AS 
+        SELECT #{que1}
+        FROM #{tablas1} #{where1}"
+    puts "q1 es #{q1}<hr>"
+    ActiveRecord::Base.connection.execute q1
+
+    # Paso 2
+    # Añadimos información geográfica que se pueda
+    q2="CREATE VIEW #{cons2} AS SELECT #{cons1}.*, 
+            ubicacion.id_departamento, 
+            departamento.nombre AS departamento_nombre, 
+            ubicacion.id_municipio, municipio.nombre AS municipio_nombre, 
+            ubicacion.id_clase, clase.nombre AS clase_nombre, 
+            max(sivel2_sjr_desplazamiento.fechaexpulsion) FROM
+            #{cons1} LEFT JOIN sivel2_sjr_desplazamiento ON
+            (#{cons1}.id_caso = sivel2_sjr_desplazamiento.id_caso)
+            LEFT JOIN sivel2_gen_ubicacion AS ubicacion ON 
+              (sivel2_sjr_desplazamiento.id_expulsion = ubicacion.id) 
+            LEFT JOIN sivel2_gen_departamento AS departamento ON 
+              (ubicacion.id_departamento=departamento.id) 
+            LEFT JOIN sivel2_gen_municipio AS municipio ON 
+              (ubicacion.id_municipio=municipio.id 
+                AND ubicacion.id_departamento=municipio.id_departamento) 
+            LEFT JOIN sivel2_gen_clase AS clase ON 
+              (ubicacion.id_clase=clase.id 
+                AND ubicacion.id_municipio=clase.id_municipio 
+                AND ubicacion.id_departamento=clase.id_departamento) 
+            GROUP BY 1,2,3,4,5,6,7,8,9,10,11"
+
+    puts "q2 es #{q2}<hr>"
+    ActiveRecord::Base.connection.execute q2
+
+    if (pDepartamento == "1") 
+      que3 << ["departamento_nombre", "Último Departamento Expulsor"]
+    end
+    if (pMunicipio== "1") 
+      que3 << ["municipio_nombre", "Último Municipio Expulsor"]
+    end
+    #puts "que3 es #{que3}"
+    # Generamos 1,2,3 ...n para GROUP BY
+    gb = sep = ""
+    qc = ""
+    i = 1
+    que3.each do |t|
+      if (t[1] != "") 
+        gb += sep + i.to_s
+        qc += t[0] + ", "
+        sep = ", "
+        i += 1
+      end
+    end
+    if (gb != "") 
+      gb ="GROUP BY #{gb} ORDER BY #{gb}"
+    end
+    @coltotales = [i-1, i]
+    que3 << ["", "Contactos"]
+    que3 << ["", "Beneficiarios"]
+    twhere3 = where3 == "" ? "" : "WHERE " + where3
+    q3="SELECT #{qc}
+            SUM(#{cons2}.contacto) AS contacto, 
+            SUM(#{cons2}.beneficiario) AS beneficiario
+            FROM #{tablas3}
+            #{twhere3}
+            #{gb}"
+    puts "q3 es #{q3}"
+    @cuerpotabla = ActiveRecord::Base.connection.select_all(q3)
+
+    @enctabla = []
+    que3.each do |t|
+      if (t[1] != "") 
+        @enctabla << CGI.escapeHTML(t[1])
+      end
+    end
+
+    respond_to do |format|
+      format.html { }
+      format.json { head :no_content }
+      format.js   { render 'resultado' }
+    end
+  end
+
 
   def municipios
     authorize! :contar, Sivel2Gen::Caso
@@ -16,7 +446,8 @@ class ConteosController < ApplicationController
         @fechafin = pfechafin.strftime('%Y-%m-%d')
         cfecha += "fechaexpulsion <= '#{@fechafin}' AND "
     end
-    
+ 
+
     # expulsores
     @expulsores = ActiveRecord::Base.connection.select_all("
       SELECT (SELECT nombre FROM sivel2_gen_pais WHERE id=id_pais) AS pais, 
@@ -62,7 +493,6 @@ class ConteosController < ApplicationController
       format.json { head :no_content }
       format.js   { }
     end
- 
   end
 
   def rutas

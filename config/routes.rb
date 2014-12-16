@@ -12,9 +12,11 @@ Rails.application.routes.draw do
   end
   resources :usuarios, path_names: { new: 'nuevo', edit: 'edita' } 
 
-  post "/conteos/municipios" => 'conteos#municipios'
+  get "/conteos/municipios" => 'conteos#municipios'
   get "/conteos/rutas" => 'conteos#rutas'
   get "/conteos/desplazamientos" => 'conteos#desplazamientos'
+  get "/conteos/personas" => 'conteos#personas'
+  get "/conteos/respuestas" => 'conteos#respuestas'
 
   root 'sivel2_gen/hogar#index'
   mount Sivel2Sjr::Engine => "/", as: 'sivel2_sjr'

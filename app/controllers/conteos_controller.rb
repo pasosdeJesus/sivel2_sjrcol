@@ -63,6 +63,25 @@ class ConteosController < ApplicationController
     params[p] ? Sivel2Gen::Caso.connection.quote_string(params[p]) : ''
   end
 
+  # Vacíos de protección
+  def vacios
+    @pque = { 'derecho' => 'Derecho vulnerado',
+      'ayudaestado' => 'Ayuda del Estado',
+      'ayudasjr' => 'Ayuda Humanitaria del SJR',
+      'motivosjr' => 'Servicio/Asesoria del SJR',
+      'progestado' => 'Subsidio/Programa del Estado'
+    }
+
+    pFaini = param_escapa('fechaini')
+    pFafin = param_escapa('fechafin')
+    pContar = param_escapa('contar')
+    pClase = param_escapa('clase')
+    pMunicipio = param_escapa('municipio')
+    pDepartamento = param_escapa('departamento')
+    pOficina = param_escapa('oficina')
+
+  end
+
   def respuestas
     @pque = { 'derecho' => 'Derecho vulnerado',
       'ayudaestado' => 'Ayuda del Estado',

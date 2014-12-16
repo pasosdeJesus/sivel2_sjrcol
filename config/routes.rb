@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   get "/conteos/desplazamientos" => 'conteos#desplazamientos'
   get "/conteos/personas" => 'conteos#personas'
   get "/conteos/respuestas" => 'conteos#respuestas'
+  get "/conteos/vacios" => 'conteos#vacios'
 
   root 'sivel2_gen/hogar#index'
   mount Sivel2Sjr::Engine => "/", as: 'sivel2_sjr'

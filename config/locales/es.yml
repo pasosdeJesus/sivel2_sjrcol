@@ -39,6 +39,6 @@ es:
     documentostierra:  Documentos sobre la tierra
   activerecord:
     attributes:
-      aslegal: 
+      "sivel2_sjr/aslegal": 
         Aslegal: Seguimiento Judicial
         Aslegales: Seguimientos Judiciales

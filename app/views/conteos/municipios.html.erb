@@ -3,57 +3,16 @@
 </div>
 
 <div sytle="text-align: right">
-  <%= form_tag(conteos_municipios_path, method: "get") do %>
+  <%= form_tag(conteos_municipios_path, method: "get", remote: true) do %>
     Expulsión entre:
     <%= text_field_tag 'fechaini', @fechaini, maxlength: 10, size: 12, 
-      "data-behaviour" => "datepicker" %> -
+    "data-behaviour" => "datepicker", "data-contarautomatico" => "" %> -
     <%= text_field_tag 'fechafin', @fechafin, maxlength: 10, size: 12, 
-      "data-behaviour" => "datepicker" %>
+    "data-behaviour" => "datepicker", "data-contarautomatico" => "" %>
     <%= submit_tag("Contar") %>
   <% end %>
 </div>
 
-<h2>Municipios Expulsores</h2>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th><%= Sivel2Gen::Ubicacion.human_attribute_name(:id_pais) %></th>
-      <th><%= Sivel2Gen::Ubicacion.human_attribute_name(:id_departamento) %></th>
-      <th><%= Sivel2Gen::Ubicacion.human_attribute_name(:id_municipio) %></th>
-      <th><%= "Desp. Individuales" %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @expulsores.try(:each) do |cmun| %>
-      <tr>
-        <td><%= cmun['pais'] %></td>
-        <td><%= cmun['departamento'] %></td>
-        <td><%= cmun['municipio'] %></td>
-        <td><%= cmun['cuenta'] %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-
-<h2>Municipios Receptores</h2>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th><%= Sivel2Gen::Ubicacion.human_attribute_name(:id_pais) %></th>
-      <th><%= Sivel2Gen::Ubicacion.human_attribute_name(:id_departamento) %></th>
-      <th><%= Sivel2Gen::Ubicacion.human_attribute_name(:id_municipio) %></th>
-      <th><%= "Desp. Individuales" %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @receptores.try(:each) do |cmun| %>
-      <tr>
-        <td><%= cmun['pais'] %></td>
-        <td><%= cmun['departamento'] %></td>
-        <td><%= cmun['municipio'] %></td>
-        <td><%= cmun['cuenta'] %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div id="resultado">
+  <%= render 'resultado_municipios' %>
+</div> <!-- id: resultado -->

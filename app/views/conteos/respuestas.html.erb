@@ -1,0 +1,36 @@
+<div class="page-header">
+  <h1><%=t '.title', :default => "Respuestas y Derechos vulnerados" %></h1>
+</div>
+
+<div sytle="text-align: right">
+  <%= form_tag(conteos_respuestas_path, method: "get", remote: true) do %>
+    Atendido entre:
+    <%= text_field_tag 'fechaini', @fechaini, maxlength: 10, size: 12, 
+    "data-behaviour" => "datepicker", "data-contarautomatico" => "" 
+    %> 
+    -
+    <%= text_field_tag 'fechafin', @fechafin, maxlength: 10, size: 12, 
+    "data-behaviour" => "datepicker", "data-contarautomatico" => "" 
+    %>
+    <br>
+    Contar:
+    <%= select_tag "contar", 
+      options_for_select(@pque.invert),
+      "data-contarautomatico" => ""
+    %>
+    Oficina:
+    <% o = options_from_collection_for_select(
+         Sivel2Gen::Regionsjr.habilitados, "id", "nombre"
+      )
+    %>
+    <%= select_tag "oficina", o, 
+      {include_blank: true, "data-contarautomatico" => ""} 
+    %>
+    <br>
+    <%= submit_tag("Contar") %>
+  <% end %>
+</div>
+
+<div id="resultado">
+  <%= render 'resultado_tabla' %>
+</div> <!-- id: resultado -->

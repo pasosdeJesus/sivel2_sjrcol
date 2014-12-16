@@ -20,26 +20,18 @@
         <% end %>
         <%= f.error_notification %>
       </div>
+      <div class="accordion" id="accordion2">
 
-      <!--div class="accordion" id="accordion2"-->
-      <div role="tabpanel">       
-        <ul class="nav nav-tabs" role="tablist">
-          <li role="presentation" class="active"><a href="#basicos" class="fichacambia" aria-controls="basicos" role="tab" data-toggle="tab">Datos Básicos</a></li>
-          <li role="presentation"><a href="#contacto" class="fichacambia" aria-controls="contacto" role="tab" data-toggle="tab">Contacto</a></li>
-          <li role="presentation"><a href="#victima" class="fichacambia" aria-controls="victima" role="tab" data-toggle="tab">Núcleo Familiar</a></li>
-          <li role="presentation"><a href="#ubicacion" class="fichacambia" aria-controls="ubicacion" role="tab" data-toggle="tab">Ubicación</a></li>
-          <li role="presentation"><a href="#refugio" class="fichacambia" aria-controls="refugio" role="tab" data-toggle="tab">Refugio</a></li>
-          <li role="presentation"><a href="#desplazamiento" class="fichacambia" aria-controls="desplazamiento" role="tab" data-toggle="tab">Desplazamientos</a></li>
-          <li role="presentation"><a href="#presponsable" class="fichacambia" aria-controls="presponsable" role="tab" data-toggle="tab">Presuntos Responsables</a></li>
-          <li role="presentation"><a href="#antecedentes" class="fichacambia" aria-controls="antecedentes" role="tab" data-toggle="tab">Causas/Antecedentes</a></li>
-          <li role="presentation"><a href="#atencion" class="fichacambia" aria-controls="atencion" role="tab" data-toggle="tab">Respuesta Institucional y Seguimiento</a></li>
-          <li role="presentation"><a href="#descripcion" class="fichacambia" aria-controls="descripcion" role="tab" data-toggle="tab">Descripción</a></li>
-          <li role="presentation"><a href="#anexos" class="fichacambia" aria-controls="anexos" role="tab" data-toggle="tab">Anexos</a></li>
-          <li role="presentation"><a href="#etiquetas" class="fichacambia" aria-controls="etiquetas" role="tab" data-toggle="tab">Etiquetas</a></li>
-        </ul>
-        <div class="tab-content">
-          <%= f.simple_fields_for :casosjr do |s| %>
-             <div role="tabpanel" class="tab-pane active" id="basicos" > 
+        <%= f.simple_fields_for :casosjr do |s| %>
+          <div class="accordion-group">
+            <div class="accordion-heading">
+              <a class="accordion-toggle fichacambia" data-toggle="collapse" href="#basicos">
+                Datos Básicos
+              </a>
+            </div>
+            <div id="basicos" class="accordion-body collapse in">
+              <div class="accordion-inner">
+
                 <%= f.input :id, label: "Código", readonly: true%>
 
                 <%= s.input :fecharec, 
@@ -69,9 +61,18 @@
                   :label => "Hora del Desplazamiento"
                 %>
 
-          </div> <! -- basicos -->
+              </div>
+            </div> 
+          </div> <! -- accordion-group basicos -->
 
-            <div role="tabpanel" class="tab-pane" id="contacto" > 
+          <div class="accordion-group">
+            <div class="accordion-heading">
+              <a class="accordion-toggle fichacambia" data-toggle="collapse" href="#contacto">
+                Contacto
+              </a>
+            </div>
+            <div id="contacto" class="accordion-body collapse">
+              <div class="accordion-inner">
                 <%= f.simple_fields_for :victima do |victima| %>
                   <% if !victima.object.persona.nil?  && 
                     victima.object.persona.id == @caso.casosjr.contacto.id 
@@ -100,10 +101,17 @@
                     %>
                   <% end %>
                 <% end %>
-          </div> <! -- contacto -->
+              </div>
+            </div>
+          </div> <! -- accordion-group contacto -->
 
 
-          <div role="tabpanel" class="tab-pane" id="victima" > 
+          <div class="accordion-group">
+          <div class="accordion-heading">
+            <a class="accordion-toggle fichacambia" data-toggle="collapse" href="#victima">Núcleo Familiar</a>
+          </div>
+          <div id="victima" class="accordion-body collapse">
+            <div class="accordion-inner">
               <%= f.simple_fields_for :victima do |victima| %>
                 <% if !victima.object.persona.nil? && victima.object.persona.id != @caso.casosjr.contacto.id %>
                   <%= render 'victima_fields', :f => victima %>
@@ -116,9 +124,18 @@
                     "data-ajaxdata" => "caso_id" }
                 %>
               </div>
-        </div> <! -- victima -->
+            </div>
+          </div>
+        </div> <! -- accordion-group victima -->
 
-          <div role="tabpanel" class="tab-pane" id="ubicacion" > 
+        <div class="accordion-group">
+          <div class="accordion-heading">
+            <a class="accordion-toggle fichacambia" data-toggle="collapse" href="#ubicacion">
+              Ubicación
+            </a>
+          </div>
+          <div id="ubicacion" class="accordion-body collapse">
+            <div class="accordion-inner">
               <%= f.simple_fields_for :ubicacion do |ubicacion| %>
                 <%= render 'ubicacion_fields', :f => ubicacion %>
               <% end %>
@@ -129,9 +146,18 @@
                     "data-ajaxdata" => "caso_id" }
                 %>
               </div>
-        </div> <! -- ubicacion -->
+            </div>
+          </div>
+        </div> <! -- accordion-group ubicacion -->
 
-          <div role="tabpanel" class="tab-pane" id="refugio" > 
+        <div class="accordion-group">
+          <div class="accordion-heading">
+            <a class="accordion-toggle fichacambia" data-toggle="collapse" href="#refugio">
+              Refugio
+            </a>
+          </div>
+          <div id="refugio" class="accordion-body collapse">
+            <div class="accordion-inner">
 							<%= s.input :fechasalida, 
 								input_html: { 
 								"data-behaviour" => "datepicker",
@@ -171,11 +197,20 @@
               <%= s.input :observacionesref, 
                 label: "Observaciones" 
               %>
-        </div> <! -- refugio -->
+            </div>
+          </div>
+        </div> <! -- accordion-group refugio -->
 
         <% end %>
 
-          <div role="tabpanel" class="tab-pane" id="desplazamiento" > 
+        <div class="accordion-group">
+          <div class="accordion-heading">
+            <a class="accordion-toggle fichacambia" data-toggle="collapse" href="#desplazamiento">
+              Desplazamientos
+            </a>
+          </div>
+          <div id="desplazamiento" class="accordion-body collapse">
+            <div class="accordion-inner">
               <%= f.simple_fields_for :desplazamiento do |desplazamiento| %>
                 <%= render 'desplazamiento_fields', :f => desplazamiento %>
               <% end %>
@@ -186,9 +221,18 @@
                     "data-ajaxdata" => "caso_id" }
                 %>
               </div>
-        </div> <! -- desplazamiento -->
+            </div>
+          </div>
+        </div> <! -- accordion-group desplazamiento -->
 
-          <div role="tabpanel" class="tab-pane" id="presponsable"> 
+        <div class="accordion-group">
+          <div class="accordion-heading">
+            <a class="accordion-toggle fichacambia" data-toggle="collapse" href="#presponsable">
+              Presuntos Responsables
+            </a>
+          </div>
+          <div id="presponsable" class="accordion-body collapse">
+            <div class="accordion-inner">
               <%= f.simple_fields_for :caso_presponsable do |caso_presponsable| %>
                 <%= render 'caso_presponsable_fields', :f => caso_presponsable %>
               <% end %>
@@ -199,19 +243,36 @@
                     "data-ajaxdata" => "caso_id"}
                 %>
               </div>
-        </div> <! -- presponsable-->
+            </div>
+          </div>
+        </div> <! -- accordion-group  presponsable-->
   
-          <div role="tabpanel" class="tab-pane" id="antecedentes" > 
+        <div class="accordion-group">
+          <div class="accordion-heading">
+            <a class="accordion-toggle fichacambia" data-toggle="collapse" href="#antecedentes">
+              Causas/Antecedentes
+            </a>
+          </div>
+          <div id="antecedentes" class="accordion-body collapse">
+            <div class="accordion-inner">
               <%= f.simple_fields_for :acto do |acto| %>
                 <%= render 'acto_fields', :f => acto %>
               <% end %>
-              <!--%= render 'nuevos_actos_fields', :f => f %-->
               <div class="links">
                 <%= link_to_add_association 'Añadir Causa/Antecedente', f, :acto, :class => 'btn-primary' %>
               </div>
-        </div> <! -- antecedentes -->
+            </div>
+          </div>
+        </div> <! -- accordion-group antecedentes -->
   
-          <div role="tabpanel" class="tab-pane" id="atencion" > 
+        <div class="accordion-group">
+          <div class="accordion-heading">
+            <a class="accordion-toggle fichacambia" data-toggle="collapse" href="#atencion"> 
+              Respuesta Institucional y Seguimiento
+            </a>
+          </div>
+          <div id="atencion" class="accordion-body collapse">
+            <div class="accordion-inner">
               <%= f.simple_fields_for :respuesta do |respuesta| %>
                 <%= render 'respuesta_fields', :f => respuesta%>
               <% end %>
@@ -222,23 +283,51 @@
                     "data-ajaxdata" => "caso_id" }
                 %>
               </div>
-        </div> <! -- sesiones de atención-->
+            </div>
+          </div>
+        </div> <! -- accordion-group sesiones de atención-->
 
-          <div role="tabpanel" class="tab-pane" id="descripcion" > 
-            <%= f.input :memo, label: 'Memo', input_html: { rows: 10 } %>
-        </div> <! -- Descripción-->
+        <div class="accordion-group">
+          <div class="accordion-heading">
+            <a class="accordion-toggle fichacambia" data-toggle="collapse" href="#descripcion"> 
+              Descripción del Desplazamiento
+            </a>
+          </div>
+          <div id="descripcion" class="accordion-body collapse">
+            <div class="accordion-inner">
+              <%= f.input :memo, label: 'Memo' %>
+            </div>
+          </div>
+        </div> <! -- accordion-group Descripción-->
 
 
-          <div role="tabpanel" class="tab-pane" id="anexos"> 
-              <%= f.simple_fields_for :anexo do |a| %>
-                <%= render 'anexo_fields', :f => a %>
+        <div class="accordion-group">
+          <div class="accordion-heading">
+            <a class="accordion-toggle fichacambia" data-toggle="collapse" href="#anexo"> 
+              Anexos
+            </a>
+          </div>
+          <div id="anexo" class="accordion-body collapse">
+            <div class="accordion-inner">
+              <%= f.simple_fields_for :anexo do |anexo| %>
+                <%= render 'anexo_fields', :f => anexo %>
               <% end %>
               <div class="links">
-                <%= link_to_add_association 'Añadir Anexo', f, :anexo, :class => 'btn-primary' %>
+                <%= link_to_add_association 'Añadir Anexo', f, 
+                  :anexo, :class => 'btn-primary' %>
               </div>
-        </div> <! -- anexos -->
+            </div>
+          </div>
+        </div> <! -- accordion-group -->
 
-          <div role="tabpanel" class="tab-pane" id="etiquetas"> 
+        <div class="accordion-group">
+          <div class="accordion-heading">
+            <a class="accordion-toggle fichacambia" data-toggle="collapse" href="#etiquetas"> 
+              Etiquetas
+            </a>
+          </div>
+          <div id="etiquetas" class="accordion-body collapse">
+            <div class="accordion-inner">
               <%= f.simple_fields_for :caso_etiqueta do |cetiqueta| %>
                 <%= render 'caso_etiqueta_fields', :f => cetiqueta %>
               <% end %>
@@ -246,16 +335,18 @@
                 <%= link_to_add_association 'Añadir Etiqueta', f, 
                   :caso_etiqueta, :class => 'btn-primary' %>
               </div>
-        </div> <! -- etiquetas -->
+            </div>
+          </div>
+        </div> <! -- accordion-group -->
 
-      <div class="form-actions">
-        <%= f.button :submit, 'Validar y Guardar', :class => 'btn-primary' %>
-        <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-          casos_path, :class => 'btn' %>
-      </div>
-    <% end %>
-    </div> <!-- tab-content -->
-</div> <!-- tabpanel -->
+      </div> <!-- accordion -->
+    </div> <!-- form-inputs -->
+    <div class="form-actions">
+      <%= f.button :submit, 'Guardar', :class => 'btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+        casos_path, :class => 'btn' %>
+    </div>
+  <% end %>
   </article>
 <% end -%>
 

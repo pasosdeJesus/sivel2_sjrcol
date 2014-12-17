@@ -45,6 +45,12 @@ Se han implementado algunas pruebas con RSpec a modelos y pruebas de regresión.
 
 RACK_MULTIPART_LIMIT=2048 rails s
 
+Copie y modifique plantilla de pie de página de su sitio en la página
+principal:
+
+cp app/views/sivel2_gen/hogar/_local.html.erb.plantilla app/views/sivel2_gen/hogar/_local.html.erb
+$EDITOR app/views/sivel2_gen/hogar/_local.html.erb
+
 ## Desarrollo
 
 ### Convenciones

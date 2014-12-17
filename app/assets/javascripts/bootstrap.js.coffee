@@ -4,7 +4,7 @@ jQuery ->
 
 $(document).on 'ready page:load',  -> 
 
-  $(document).on('clik', '#vertical', (e) ->
+  $(document).on('click', '#vertical', (e) ->
     $('[data-behaviour~=datepicker]').datepicker({
       format: 'yyyy-mm-dd'
       autoclose: true

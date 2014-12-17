@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/pasosdeJesus/sivel2_gen.git
-  revision: dddb0b540b5a16e259d1da850a536a2318e5c59f
+  revision: e2eec211c7f5169113751279f270f844bec63b5e
   specs:
     sivel2_gen (2.0.a3)
       devise
@@ -9,7 +9,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 42c233c2232800ef7ad5a435ae2d4065d56a974d
+  revision: 7ccb711d1e03ebd980a88d1a1b66a6d9cbc61c78
   specs:
     sivel2_sjr (2.0.a3)
       rails
@@ -137,9 +137,9 @@ GEM
     jbuilder (2.2.5)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
-    jquery-rails (4.0.0)
+    jquery-rails (4.0.1)
       rails-dom-testing (~> 1.0)
-      railties (>= 4.2.0.beta, < 5.0)
+      railties (>= 4.2.0.beta)
       thor (>= 0.14, < 2.0)
     jquery-ui-rails (5.0.3)
       railties (>= 3.2.16)

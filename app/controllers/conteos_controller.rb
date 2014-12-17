@@ -188,7 +188,7 @@ class ConteosController < ApplicationController
 
     @coltotales = [i-1, i]
     if (gb != "") 
-      gb ="GROUP BY #{gb} ORDER BY #{gb}"
+      gb ="GROUP BY #{gb} ORDER BY #{i} DESC"
     end
     que3 << ["", "Cantidad"]
     twhere3 = where3 == "" ? "" : "WHERE " + where3
@@ -215,49 +215,6 @@ class ConteosController < ApplicationController
       format.json { head :no_content }
       format.js   { render 'resultado' }
     end
-
-=begin
-
-
-        tcol = array()
-        tfil = array()
-        celda = array()
-        nr = 0
-        while (result->fetchInto(row)) {
-            nc = count(row)
-            for (i = 0; i < nc; i++) {
-                celda[nr][i] = row[i]
-            }
-            nr++
-        }
-
-        #print_r(celda); die("x")
-        encabezado_envia()
-        puts "<table border=\"1\">"
-        puts "<tr>"
-        foreach (que3 as t) {
-            if (t[1] != "") {
-                puts "<th>" . htmlentities(#{"<th>" . htmlentities(}[1], ENT_COMPAT, 'UTF-8') . "</th>"
-            }
-        }
-        puts "</tr>\n"
-
-        row = array()
-        foreach (celda as n => f) {
-            puts "<tr>"
-            foreach (f as nc => c) {
-                puts "<td>"
-                puts htmlentities(c, ENT_COMPAT, 'UTF-8')
-                puts "</td>"
-            }
-            puts "</tr>\n"
-        }
-        puts "</table>"
-        puts '<div align = "right"><a href = "index.php">' .
-            '<b>' . _('Men&uacute; Principal') . '</b></a></div>'
-        pie_envia()
-    }
-=end
   end
 
   def personas
@@ -312,7 +269,8 @@ class ConteosController < ApplicationController
             CASE WHEN (casosjr.contacto=victima.id_persona) THEN 1 ELSE 0 END 
             AS contacto, 
             CASE WHEN (casosjr.contacto<>victima.id_persona) THEN 1 ELSE 0 END
-            AS beneficiario'
+            AS beneficiario, 
+            1 as npersona'
     tablas1 = 'sivel2_gen_caso AS caso, sivel2_sjr_casosjr AS casosjr, 
     sivel2_gen_victima AS victima'
     
@@ -370,7 +328,7 @@ class ConteosController < ApplicationController
     q1="CREATE VIEW #{cons1} AS 
         SELECT #{que1}
         FROM #{tablas1} #{where1}"
-    puts "q1 es #{q1}<hr>"
+    #puts "q1 es #{q1}<hr>"
     ActiveRecord::Base.connection.execute q1
 
     # Paso 2
@@ -394,9 +352,9 @@ class ConteosController < ApplicationController
               (ubicacion.id_clase=clase.id 
                 AND ubicacion.id_municipio=clase.id_municipio 
                 AND ubicacion.id_departamento=clase.id_departamento) 
-            GROUP BY 1,2,3,4,5,6,7,8,9,10,11"
+            GROUP BY 1,2,3,4,5,6,7,8,9,10,11,12"
 
-    puts "q2 es #{q2}<hr>"
+    #puts "q2 es #{q2}<hr>"
     ActiveRecord::Base.connection.execute q2
 
     if (pDepartamento == "1") 
@@ -421,17 +379,19 @@ class ConteosController < ApplicationController
     if (gb != "") 
       gb ="GROUP BY #{gb} ORDER BY #{gb}"
     end
-    @coltotales = [i-1, i]
+    @coltotales = [i-1, i, i+1]
     que3 << ["", "Contactos"]
     que3 << ["", "Beneficiarios"]
+    que3 << ["", "Total"]
     twhere3 = where3 == "" ? "" : "WHERE " + where3
     q3="SELECT #{qc}
             SUM(#{cons2}.contacto) AS contacto, 
-            SUM(#{cons2}.beneficiario) AS beneficiario
+            SUM(#{cons2}.beneficiario) AS beneficiario,
+            SUM(#{cons2}.npersona) AS npersona
             FROM #{tablas3}
             #{twhere3}
             #{gb}"
-    puts "q3 es #{q3}"
+    #puts "q3 es #{q3}"
     @cuerpotabla = ActiveRecord::Base.connection.select_all(q3)
 
     @enctabla = []

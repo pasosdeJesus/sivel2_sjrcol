@@ -2,15 +2,22 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-enviaFormularioContar= () ->
+
+# Envia con AJAX datos del formulario, junto con el botón Contar.
+# @param root Raiz del documento, para guardar allí variable global.
+enviaFormularioContar= (root) ->
   f = $('form')
   a = f.attr('action')
   d = f.serialize()
   d += '&commit=Contar'
-  $.ajax(url: a, data: d, dataType: "script").fail( (jqXHR, texto) ->
-    alert("Error con ajax " + texto)
-  )
-  #$.get(a, f.serialize())
+  # Parece que en ocasiones lanza 2 veces seguidas el mismo evento
+  # y PostgreSQL produce error por 2 creaciones practicamente
+  # simultaneas de la vista. Evitamos enviar lo mismo.
+  if (!root.dant || root.dant != d)
+    $.ajax(url: a, data: d, dataType: "script").fail( (jqXHR, texto) ->
+      alert("Error con ajax " + texto)
+    )
+  root.dant = d 
   return
 
 
@@ -22,13 +29,15 @@ $(document).on 'ready page:load',  ->
   # tengan
   # afectando ficha caso 
   $(document).on('changeDate', '[data-contarautomatico]', 
-    (e) -> enviaFormularioContar()
+    (e) -> enviaFormularioContar(root)
   )
+
   $(document).on('change', 'select[data-contarautomatico]', 
-    (e) -> enviaFormularioContar()
+    (e) -> enviaFormularioContar(root)
   )
+
   $(document).on('change', 'input[data-contarautomatico]:not([data-behaviour])', 
-    (e) -> enviaFormularioContar()
+    (e) -> enviaFormularioContar(root)
   )
 
 

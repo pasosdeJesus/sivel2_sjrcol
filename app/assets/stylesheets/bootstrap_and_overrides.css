@@ -23,3 +23,6 @@
 	border: 1px solid #aaa;
 	border-bottom-color: transparent;
 }
+.panel-heading {
+	text-align: center;
+}

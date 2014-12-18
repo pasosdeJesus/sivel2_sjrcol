@@ -5,90 +5,106 @@
       :input_html => { "data-behaviour" => "datepicker" },
       :as => :string, :label => "Fecha de Atención" 
     %>
-    <%= f.association :derecho, 
-      collection: Sivel2Sjr::Derecho.habilitados,
-      label: "Derechos Vulnerados",
-      label_method: :nombre, 
-      value_method: :id 
-    %>
-    <%= f.input :informacionder, 
-      label_inline: "Se brindó información",
-      boolean_style: :nested
-    %>
-    <%= f.input :accionesder, label: "Acciones D.V." %>
+    <div class="panel panel-default">
+      <div class="panel-heading">Derechos Vulnerados</div>
+      <div class="panel-body">
+        <%= f.association :derecho, 
+          collection: Sivel2Sjr::Derecho.habilitados,
+          label: "Derechos Vulnerados",
+          label_method: :nombre, 
+          value_method: :id 
+        %>
+        <%= f.input :informacionder, 
+          boolean_style: :nested,
+          inline_label: "Se brindó información"
+        %>
 
-    <%= f.association :ayudaestado, 
-      collection: Sivel2Sjr::Ayudaestado.habilitados,
-      label: "Ayuda del Estado",
-      label_method: :nombre, 
-      value_method: :id 
-    %>
-    <%= f.input :institucionayes, 
-      label: "Instituciones que ayudaron",
-      wrapper_html: { style: "padding-bottom: 18px;" }
-    %>
-    <%= f.input :cantidadayes, label: "Detalle A. Estado" %>
+        <%= f.input :accionesder, label: "Acciones D.V." %>
+      </div>
+    </div>
 
-    <%= f.association :progestado, 
-      collection: Sivel2Sjr::Progestado.habilitados,
-      label: "Programas y Respuesta del Estado",
-      label_method: :nombre, 
-      value_method: :id 
-    %>
-    <%= f.input :difobsprog, 
-      label: "Dificultades y Observaciones",
-      wrapper_html: { style: "padding-bottom: 18px;" }
-    %>
-    <%= f.association :ayudasjr, 
-      collection: Sivel2Sjr::Ayudasjr.habilitados,
-      label: "Asistencia Humanitaria",
-      label_method: :nombre, 
-      value_method: :id 
-    %>
-    <%= f.input :detallear, 
-      label: "Detalle A. Humanitaria",
-      wrapper_html: { style: "padding-bottom: 18px;" }
-    %>
-    <%= f.input :montoar, label: "Monto A. Humanitaria" %>
+    <div class="panel panel-default">
+      <div class="panel-heading">Respuesta del Estado</div>
+      <div class="panel-body">
+        <%= f.association :ayudaestado, 
+          collection: Sivel2Sjr::Ayudaestado.habilitados,
+          label: "Ayuda del Estado",
+          label_method: :nombre, 
+          value_method: :id 
+        %>
+        <%= f.input :cantidadayes, label: "Cantidad Ayuda Estado" %>
+        <%= f.input :institucionayes, 
+          label: "Instituciones que ayudaron",
+          wrapper_html: { style: "padding-bottom: 18px;" }
+        %>
 
-    <%= f.association :motivosjr, 
-      collection: Sivel2Sjr::Motivosjr.habilitados,
-      label: "Servicios y Asesorias del SJR",
-      label_method: :nombre, 
-      value_method: :id 
-    %>
-    <%= f.input :detallemotivo, label: "Detalle" %>
+        <%= f.association :progestado, 
+          collection: Sivel2Sjr::Progestado.habilitados,
+          label: "Programas y Respuesta del Estado",
+          label_method: :nombre, 
+          value_method: :id 
+        %>
+        <%= f.input :difobsprog, 
+          label: "Dificultades y Observaciones respecto a Respuesta del Estado",
+          wrapper_html: { style: "padding-bottom: 18px;" }
+        %>
+        <%= f.input :numprorrogas, as: :integer, 
+          label: "Número de Prorrogas" 
+        %>
+        <%= f.input :montoprorrogas, as: :integer, 
+          label: "Monto Prorrogas" 
+        %>
+        <%= f.input :fechaultima, 
+          :input_html => { "data-behaviour" => "datepicker" },
+          :as => :string, :label => "Fecha última prorroga" 
+        %>
+        <%= f.input :lugarultima, as: :text, 
+          label: "Lugar última prorroga" 
+        %>
+        <%= f.input :turno, as: :text, 
+          label: "Turno próxima prorroga" 
+        %>
+        <%= f.input :lugar, as: :text, 
+          label: "Lugar solicitud Turno" 
+        %>
+      </div>
+    </div>
 
-    <%= f.association :aslegal, 
-      collection: Sivel2Sjr::Aslegal.habilitados,
-      label: 'Seguimiento Judicial',
-      label_method: :nombre, 
-      value_method: :id 
-    %>
-    <%= f.input :detalleal, label: "Detalle S. Judicial" %>
-    <%= f.input :montoal, label: "Monto S. Judicial" %>
+    <div class="panel panel-default">
+      <div class="panel-heading">Respuesta del SJR</div>
+      <div class="panel-body">
+        <%= f.association :ayudasjr, 
+          collection: Sivel2Sjr::Ayudasjr.habilitados,
+          label: "Asistencia Humanitaria",
+          label_method: :nombre, 
+          value_method: :id 
+        %>
+        <%= f.input :detallear, 
+          label: "Detalle A. Humanitaria",
+          wrapper_html: { style: "padding-bottom: 18px;" }
+        %>
+        <%= f.input :montoar, label: "Monto A. Humanitaria" %>
+
+        <%= f.association :motivosjr, 
+          collection: Sivel2Sjr::Motivosjr.habilitados,
+          label: "Servicios y Asesorias del SJR",
+          label_method: :nombre, 
+          value_method: :id 
+        %>
+        <%= f.input :detallemotivo, label: "Detalle" %>
+
+        <%= f.association :aslegal, 
+          collection: Sivel2Sjr::Aslegal.habilitados,
+          label: 'Seguimiento Judicial',
+          label_method: :nombre, 
+          value_method: :id 
+        %>
+        <%= f.input :detalleal, label: "Detalle S. Judicial" %>
+        <%= f.input :montoal, label: "Monto S. Judicial" %>
+      </div>
+    </div>
 
 
-
-    <%= f.input :numprorrogas, as: :integer, 
-      label: "Número de Prorrogas" 
-    %>
-    <%= f.input :montoprorrogas, as: :integer, 
-      label: "Monto Prorrogas" 
-    %>
-    <%= f.input :fechaultima, 
-      :input_html => { "data-behaviour" => "datepicker" },
-      :as => :string, :label => "Fecha última prorroga" 
-    %>
-    <%= f.input :lugarultima, as: :text, 
-      label: "Lugar última prorroga" 
-    %>
-    <%= f.input :turno, as: :text, 
-      label: "Turno próxima prorroga" 
-    %>
-    <%= f.input :lugar, as: :text, 
-      label: "Lugar solicitud Turno" 
-    %>
     <%= f.input :descamp, as: :text, 
       label: "Descripción o ampliación caso" 
     %>

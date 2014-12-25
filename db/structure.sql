@@ -62,14 +62,15 @@ CREATE FUNCTION cadubicacion(integer) RETURNS character varying
 CREATE FUNCTION municipioubicacion(integer) RETURNS character varying
     LANGUAGE sql
     AS $_$
-        SELECT (SELECT nombre FROM pais WHERE id=ubicacion.id_pais) 
-            || COALESCE((SELECT '/' || nombre FROM departamento 
-            WHERE departamento.id_pais=ubicacion.id_pais 
-            AND departamento.id=ubicacion.id_departamento),'') 
-            || COALESCE((SELECT '/' || nombre FROM municipio 
-            WHERE municipio.id_pais=ubicacion.id_pais 
-            AND municipio.id_departamento=ubicacion.id_departamento 
-            AND municipio.id=ubicacion.id_municipio),'') FROM ubicacion
+        SELECT (SELECT nombre FROM sivel2_gen_pais WHERE id=ubicacion.id_pais) 
+            || COALESCE((SELECT '/' || nombre FROM sivel2_gen_departamento 
+            WHERE sivel2_gen_departamento.id_pais=ubicacion.id_pais 
+            AND sivel2_gen_departamento.id=ubicacion.id_departamento),'') 
+            || COALESCE((SELECT '/' || nombre FROM sivel2_gen_municipio 
+            WHERE sivel2_gen_municipio.id_pais=ubicacion.id_pais 
+            AND sivel2_gen_municipio.id_departamento=ubicacion.id_departamento 
+            AND sivel2_gen_municipio.id=ubicacion.id_municipio),'') 
+            FROM sivel2_gen_ubicacion AS ubicacion 
             WHERE ubicacion.id=$1;
       $_$;
 
@@ -466,21 +467,22 @@ CREATE TABLE sivel2_sjr_casosjr (
 --
 
 CREATE VIEW cben1 AS
- SELECT sivel2_gen_caso.id AS id_caso,
-    sivel2_gen_victima.id_persona,
+ SELECT caso.id AS id_caso,
+    victima.id_persona,
         CASE
-            WHEN (sivel2_sjr_casosjr.contacto = sivel2_gen_victima.id_persona) THEN 1
+            WHEN (casosjr.contacto = victima.id_persona) THEN 1
             ELSE 0
         END AS contacto,
         CASE
-            WHEN (sivel2_sjr_casosjr.contacto <> sivel2_gen_victima.id_persona) THEN 1
+            WHEN (casosjr.contacto <> victima.id_persona) THEN 1
             ELSE 0
         END AS beneficiario,
+    1 AS npersona,
     'total'::text AS total
-   FROM sivel2_gen_caso,
-    sivel2_sjr_casosjr,
-    sivel2_gen_victima
-  WHERE ((((((sivel2_gen_caso.id <> (-1)) AND (sivel2_gen_caso.id = sivel2_sjr_casosjr.id_caso)) AND (sivel2_gen_caso.id = sivel2_gen_victima.id_caso)) AND (sivel2_sjr_casosjr.fecharec >= '1999-01-01'::date)) AND (sivel2_sjr_casosjr.fecharec <= '2014-12-31'::date)) AND (sivel2_sjr_casosjr.id_regionsjr = 4));
+   FROM sivel2_gen_caso caso,
+    sivel2_sjr_casosjr casosjr,
+    sivel2_gen_victima victima
+  WHERE (((caso.id = casosjr.id_caso) AND (caso.id = victima.id_caso)) AND (casosjr.id_regionsjr = 5));
 
 
 --
@@ -671,21 +673,22 @@ CREATE VIEW cben2 AS
     cben1.id_persona,
     cben1.contacto,
     cben1.beneficiario,
+    cben1.npersona,
     cben1.total,
-    sivel2_gen_ubicacion.id_departamento,
-    sivel2_gen_departamento.nombre AS departamento_nombre,
-    sivel2_gen_ubicacion.id_municipio,
-    sivel2_gen_municipio.nombre AS municipio_nombre,
-    sivel2_gen_ubicacion.id_clase,
-    sivel2_gen_clase.nombre AS clase_nombre,
+    ubicacion.id_departamento,
+    departamento.nombre AS departamento_nombre,
+    ubicacion.id_municipio,
+    municipio.nombre AS municipio_nombre,
+    ubicacion.id_clase,
+    clase.nombre AS clase_nombre,
     max(sivel2_sjr_desplazamiento.fechaexpulsion) AS max
    FROM (((((cben1
      LEFT JOIN sivel2_sjr_desplazamiento ON ((cben1.id_caso = sivel2_sjr_desplazamiento.id_caso)))
-     LEFT JOIN sivel2_gen_ubicacion ON ((sivel2_sjr_desplazamiento.id_expulsion = sivel2_gen_ubicacion.id)))
-     LEFT JOIN sivel2_gen_departamento ON ((sivel2_gen_ubicacion.id_departamento = sivel2_gen_departamento.id)))
-     LEFT JOIN sivel2_gen_municipio ON (((sivel2_gen_ubicacion.id_municipio = sivel2_gen_municipio.id) AND (sivel2_gen_ubicacion.id_departamento = sivel2_gen_municipio.id_departamento))))
-     LEFT JOIN sivel2_gen_clase ON ((((sivel2_gen_ubicacion.id_clase = sivel2_gen_clase.id) AND (sivel2_gen_ubicacion.id_municipio = sivel2_gen_clase.id_municipio)) AND (sivel2_gen_ubicacion.id_departamento = sivel2_gen_clase.id_departamento))))
-  GROUP BY cben1.id_caso, cben1.id_persona, cben1.contacto, cben1.beneficiario, cben1.total, sivel2_gen_ubicacion.id_departamento, sivel2_gen_departamento.nombre, sivel2_gen_ubicacion.id_municipio, sivel2_gen_municipio.nombre, sivel2_gen_ubicacion.id_clase, sivel2_gen_clase.nombre;
+     LEFT JOIN sivel2_gen_ubicacion ubicacion ON ((sivel2_sjr_desplazamiento.id_expulsion = ubicacion.id)))
+     LEFT JOIN sivel2_gen_departamento departamento ON ((ubicacion.id_departamento = departamento.id)))
+     LEFT JOIN sivel2_gen_municipio municipio ON (((ubicacion.id_municipio = municipio.id) AND (ubicacion.id_departamento = municipio.id_departamento))))
+     LEFT JOIN sivel2_gen_clase clase ON ((((ubicacion.id_clase = clase.id) AND (ubicacion.id_municipio = clase.id_municipio)) AND (ubicacion.id_departamento = clase.id_departamento))))
+  GROUP BY cben1.id_caso, cben1.id_persona, cben1.contacto, cben1.beneficiario, cben1.npersona, cben1.total, ubicacion.id_departamento, departamento.nombre, ubicacion.id_municipio, municipio.nombre, ubicacion.id_clase, clase.nombre;
 
 
 --
@@ -1005,6 +1008,34 @@ CREATE SEQUENCE contexto_seq
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
+
+
+--
+-- Name: sivel2_sjr_motivosjr_respuesta; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE sivel2_sjr_motivosjr_respuesta (
+    id_motivosjr integer DEFAULT 0 NOT NULL,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    id_respuesta integer NOT NULL
+);
+
+
+--
+-- Name: cres1; Type: VIEW; Schema: public; Owner: -
+--
+
+CREATE VIEW cres1 AS
+ SELECT caso.id AS id_caso,
+    respuesta.fechaatencion,
+    casosjr.id_regionsjr,
+    motivosjr_respuesta.id_motivosjr
+   FROM sivel2_gen_caso caso,
+    sivel2_sjr_casosjr casosjr,
+    sivel2_sjr_respuesta respuesta,
+    sivel2_sjr_motivosjr_respuesta motivosjr_respuesta
+  WHERE ((((((caso.id = casosjr.id_caso) AND (caso.id = respuesta.id_caso)) AND (respuesta.fechaatencion >= '2013-12-17'::date)) AND (respuesta.fechaatencion <= '2014-12-17'::date)) AND (casosjr.id_regionsjr = 4)) AND (respuesta.id = motivosjr_respuesta.id_respuesta));
 
 
 --
@@ -2810,6 +2841,16 @@ CREATE TABLE sivel2_sjr_ayudaestado (
 
 
 --
+-- Name: sivel2_sjr_ayudaestado_derecho; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE sivel2_sjr_ayudaestado_derecho (
+    sivel2_sjr_ayudaestado_id integer NOT NULL,
+    sivel2_sjr_derecho_id integer NOT NULL
+);
+
+
+--
 -- Name: sivel2_sjr_ayudaestado_respuesta; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2834,6 +2875,16 @@ CREATE TABLE sivel2_sjr_ayudasjr (
     updated_at timestamp without time zone,
     derecho_id integer,
     CONSTRAINT ayudasjr_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
+);
+
+
+--
+-- Name: sivel2_sjr_ayudasjr_derecho; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE sivel2_sjr_ayudasjr_derecho (
+    sivel2_sjr_ayudasjr_id integer NOT NULL,
+    sivel2_sjr_derecho_id integer NOT NULL
 );
 
 
@@ -2925,6 +2976,26 @@ CREATE TABLE sivel2_sjr_derecho (
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     CONSTRAINT derecho_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
+);
+
+
+--
+-- Name: sivel2_sjr_derecho_motivosjr; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE sivel2_sjr_derecho_motivosjr (
+    sivel2_sjr_motivosjr_id integer NOT NULL,
+    sivel2_sjr_derecho_id integer NOT NULL
+);
+
+
+--
+-- Name: sivel2_sjr_derecho_progestado; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE sivel2_sjr_derecho_progestado (
+    sivel2_sjr_progestado_id integer NOT NULL,
+    sivel2_sjr_derecho_id integer NOT NULL
 );
 
 
@@ -3060,18 +3131,6 @@ CREATE TABLE sivel2_sjr_motivosjr (
     updated_at timestamp without time zone,
     derecho_id integer,
     CONSTRAINT motivosjr_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
-);
-
-
---
--- Name: sivel2_sjr_motivosjr_respuesta; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE sivel2_sjr_motivosjr_respuesta (
-    id_motivosjr integer DEFAULT 0 NOT NULL,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone,
-    id_respuesta integer NOT NULL
 );
 
 
@@ -6034,4 +6093,6 @@ INSERT INTO schema_migrations (version) VALUES ('20141111203313');
 INSERT INTO schema_migrations (version) VALUES ('20141112111129');
 
 INSERT INTO schema_migrations (version) VALUES ('20141126085907');
+
+INSERT INTO schema_migrations (version) VALUES ('20141222174237');
 

@@ -2,10 +2,10 @@
 Sivel2Sjr::Derecho.class_eval do
 
   has_many :aslegal, class_name: 'Sivel2Sjr::Aslegal', foreign_key: "derecho_id"
-  has_many :ayudaestado, class_name: 'Sivel2Sjr::Ayudaestado', foreign_key: "derecho_id"
-  has_many :ayudasjr, class_name: 'Sivel2Sjr::Ayudasjr', foreign_key: "derecho_id"
-  has_many :motivosjr, class_name: 'Sivel2Sjr::Motivosjr', foreign_key: "derecho_id"
-  has_many :progestado, class_name: 'Sivel2Sjr::Progestado', foreign_key: "derecho_id"
+  has_many :ayudaestado_derecho, class_name: 'Sivel2Sjr::AyudaestadoDerecho', foreign_key: "derecho_id"
+  has_many :ayudasjr_derecho, class_name: 'Sivel2Sjr::AyudasjrDerecho', foreign_key: "derecho_id"
+  has_many :motivosjr_derecho, class_name: 'Sivel2Sjr::MotivosjrDerecho', foreign_key: "derecho_id"
+  has_many :progestado_derecho, class_name: 'Sivel2Sjr::ProgestadoDerecho', foreign_key: "derecho_id"
   has_many :respuesta, :through => :derecho_respuesta
 
 end

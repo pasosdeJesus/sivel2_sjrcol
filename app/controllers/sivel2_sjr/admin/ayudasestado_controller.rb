@@ -10,10 +10,9 @@ module Sivel2Sjr
       end
 
       def atributos_index
-        [
-          "id",  "nombre", "derecho_id",
-          "fechacreacion", "fechadeshabilitacion"
-        ]
+        ["id",  "nombre" ] + 
+          [ :derecho_ids =>  [] ] +
+          ["fechacreacion", "fechadeshabilitacion"] 
       end
 
       def set_ayudaestado

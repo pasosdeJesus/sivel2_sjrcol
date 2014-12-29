@@ -1,0 +1,17 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  username: postgres
+
+development:
+  <<: *default
+  database: sivel2sjrcol_des
+
+test:
+  <<: *default
+  database: sivel2sjrcol_pru
+
+production:
+  <<: *default
+  database: sivel2sjrcol

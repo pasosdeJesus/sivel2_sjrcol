@@ -1,17 +1,15 @@
 # SIVeL 2 para el SJR Colombia
 [![Estado Construcción](https://api.travis-ci.org/pasosdeJesus/sivel2_sjrcol.svg?branch=master)](https://travis-ci.org/pasosdeJesus/sivel2_sjrcol) [![Clima del Código](https://codeclimate.com/github/pasosdeJesus/sivel2_sjrcol/badges/gpa.svg)](https://codeclimate.com/github/pasosdeJesus/sivel2_sjrcol) [![Cobertura de Pruebas](https://codeclimate.com/github/pasosdeJesus/sivel2_sjrcol/badges/coverage.svg)](https://codeclimate.com/github/pasosdeJesus/sivel2_sjrcol) [![security](https://hakiri.io/github/pasosdeJesus/sivel2_sjrcol/master.svg)](https://hakiri.io/github/pasosdeJesus/sivel2_sjrcol/master) [![Dependencias](https://gemnasium.com/pasosdeJesus/sivel2_sjrcol.svg)](https://gemnasium.com/pasosdeJesus/sivel2_sjrcol) 
 
-## Tabla de Contenido
-* [Uso](#uso)
-	* [Requerimientos](#requerimientos)
-* [Pruebas](#pruebas)
-* [Desarrollo](#pruebas)
-
 SIVeL 2 para el SJR Colombia.
 
-## Uso
 
-Usar junto con sivel2_gen y sivel2_sjr
+
+Aplican las mismas instrucciones de SIVeL 2
+https://github.com/pasosdeJesus/sivel2
+
+## Uso
+Se usa junto con sivel2_gen y sivel2_sjr.
 
 ### Requerimientos
 * Ruby version >= 1.9

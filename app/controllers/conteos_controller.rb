@@ -220,7 +220,7 @@ class ConteosController < ApplicationController
     respond_to do |format|
       format.html { }
       format.json { head :no_content }
-      format.js   { render 'resultado' }
+      format.js   { render 'vacios' }
     end
 
   end

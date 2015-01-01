@@ -1,0 +1,49 @@
+<% @hg = {} %>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <% @enctabla.try(:each) do |enc| %>
+        <th><%= CGI.escapeHTML(enc) %></th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <% @nom = ""; @tot=[]; @cuerpotabla.try(:each) do |fila| %>
+      <tr>
+        <% i=0; fila.try(:each) do |campo| %>
+          <% 
+             if @coltotales.include? i
+               if @tot[i] 
+                 @tot[i] += campo[1].to_i
+               else 
+                 @tot[i] = campo[1].to_i
+               end 
+             end
+             if i == 0 && campo[1]
+               @nom = campo[1].to_s 
+             end
+             if i == 1 && campo[1]
+               @nom = @nom + ':' + campo[1].to_s
+             end
+             if i == 3 && campo[1] 
+               @hg[@nom] = campo[1].to_i
+             end
+             i += 1
+          %>
+          <td><%= CGI.escapeHTML(campo[1]) if campo[1] %></td>
+        <% end %>
+      </tr>
+    <% end %>
+    <% i=0; @enctabla.try(:each) do |enc| %>
+      <th>
+        <%= if @coltotales.include? i
+              @tot[i]
+            end
+        %>
+      </th>
+      <% i += 1 %>
+    <% end %>
+  </tbody>
+</table>
+
+<%= puts @hg; pie_chart(@hg) %>

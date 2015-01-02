@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/pasosdeJesus/sivel2_gen.git
-  revision: ba45549f935e2010c2f53b3e585d1d25470a8dd6
+  revision: a85b5097456943c492f7d6e8c82b88aa7b33437d
   specs:
     sivel2_gen (2.0.a3)
       devise
@@ -9,7 +9,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: a9343b9f6797056b51373e1591a1878664b97c2b
+  revision: 01f45486bc8360770deee7cf4a1225d18e3a1195
   specs:
     sivel2_sjr (2.0.a3)
       rails
@@ -127,7 +127,7 @@ GEM
     factory_girl_rails (4.5.0)
       factory_girl (~> 4.5.0)
       railties (>= 3.0.0)
-    foreman (0.76.0)
+    foreman (0.77.0)
       dotenv (~> 1.0.2)
       thor (~> 0.19.1)
     globalid (0.3.0)
@@ -277,7 +277,7 @@ GEM
       thread_safe (~> 0.1)
     tzinfo-data (1.2014.10)
       tzinfo (>= 1.0.0)
-    uglifier (2.6.0)
+    uglifier (2.6.1)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
     unicorn (4.8.3)

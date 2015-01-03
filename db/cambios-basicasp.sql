@@ -9,3 +9,8 @@ SET search_path = public, pg_catalog;
 
 UPDATE sivel2_gen_rangoedad SET fechadeshabilitacion='2014-11-28' WHERE nombre LIKE 'R%';
 
+INSERT INTO sivel2_gen_regionsjr (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (3, 'MAGDALENA MEDIO', '2013-05-13', NULL, NULL, NULL);
+INSERT INTO sivel2_gen_regionsjr (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (4, 'CÚCUTA', '2013-05-13', NULL, NULL, NULL);
+INSERT INTO sivel2_gen_regionsjr (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (5, 'NARIÑO', '2013-05-13', NULL, NULL, NULL);
+INSERT INTO sivel2_gen_regionsjr (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (6, 'SOACHA', '2013-05-13', '2014-01-01', NULL, NULL);
+INSERT INTO sivel2_gen_regionsjr (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (7, 'BOGOTÁ', '2013-07-05', NULL, NULL, NULL);

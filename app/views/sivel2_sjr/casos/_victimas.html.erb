@@ -1,0 +1,12 @@
+              <%= f.simple_fields_for :victima do |victima| %>
+                <% if !victima.object.persona.nil? && victima.object.persona.id != @caso.casosjr.contacto.id %>
+                  <%= render 'victima_fields', :f => victima %>
+                <% end %>
+              <% end %>
+              <div class="links">
+                <%= link_to_add_association 'Añadir Víctima', f, :victima, 
+                  { :class => 'btn-primary',
+                    "data-ajax" => "/victimas/nuevo", 
+                    "data-ajaxdata" => "caso_id" }
+                %>
+              </div>

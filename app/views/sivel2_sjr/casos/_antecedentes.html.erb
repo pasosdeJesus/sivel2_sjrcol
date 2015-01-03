@@ -1,0 +1,7 @@
+              <%= f.simple_fields_for :acto do |acto| %>
+                <%= render 'acto_fields', :f => acto %>
+              <% end %>
+              <!--%= render 'nuevos_actos_fields', :f => f %-->
+              <div class="links">
+                <%= link_to_add_association 'Añadir Causa/Antecedente', f, :acto, :class => 'btn-primary' %>
+              </div>

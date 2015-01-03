@@ -4,11 +4,13 @@
   <article>
   <%= simple_form_for @caso, :html => { :class => 'form-horizontal' } do |f| %>
     <div data-role="content" class="form-inputs">
+
       <div id="errores">
         <% if f.object.errors.any? %>
           <div id="error_explanation">
             <div class="alert alert-error">
-              El formulario tiene <%= pluralize(f.object.errors.count, "error") %>.
+              El formulario tiene 
+              <%= pluralize(f.object.errors.count, "error") %>.
             </div>
             <ul>
               <% f.object.errors.full_messages.each do |msg| %>
@@ -16,246 +18,114 @@
               <% end %>
             </ul>
           </div>
-          <!--%= f.error_notification %-->
         <% end %>
         <%= f.error_notification %>
-      </div>
+      </div> <!-- errores -->
 
-      <!--div class="accordion" id="accordion2"-->
       <div role="tabpanel">       
         <ul class="nav nav-tabs" role="tablist">
-          <li role="presentation" class="active"><a href="#basicos" class="fichacambia" aria-controls="basicos" role="tab" data-toggle="tab">Datos Básicos</a></li>
-          <li role="presentation"><a href="#contacto" class="fichacambia" aria-controls="contacto" role="tab" data-toggle="tab">Contacto</a></li>
-          <li role="presentation"><a href="#victima" class="fichacambia" aria-controls="victima" role="tab" data-toggle="tab">Núcleo Familiar</a></li>
-          <li role="presentation"><a href="#ubicacion" class="fichacambia" aria-controls="ubicacion" role="tab" data-toggle="tab">Ubicación</a></li>
-          <li role="presentation"><a href="#refugio" class="fichacambia" aria-controls="refugio" role="tab" data-toggle="tab">Refugio</a></li>
-          <li role="presentation"><a href="#desplazamiento" class="fichacambia" aria-controls="desplazamiento" role="tab" data-toggle="tab">Desplazamientos</a></li>
-          <li role="presentation"><a href="#presponsable" class="fichacambia" aria-controls="presponsable" role="tab" data-toggle="tab">Presuntos Responsables</a></li>
-          <li role="presentation"><a href="#antecedentes" class="fichacambia" aria-controls="antecedentes" role="tab" data-toggle="tab">Causas/Antecedentes</a></li>
-          <li role="presentation"><a href="#atencion" class="fichacambia" aria-controls="atencion" role="tab" data-toggle="tab">Respuesta Institucional y Seguimiento</a></li>
-          <li role="presentation"><a href="#descripcion" class="fichacambia" aria-controls="descripcion" role="tab" data-toggle="tab">Descripción</a></li>
-          <li role="presentation"><a href="#anexos" class="fichacambia" aria-controls="anexos" role="tab" data-toggle="tab">Anexos</a></li>
-          <li role="presentation"><a href="#etiquetas" class="fichacambia" aria-controls="etiquetas" role="tab" data-toggle="tab">Etiquetas</a></li>
+          <li role="presentation" class="active"><a href="#basicos" 
+            class="fichacambia" aria-controls="basicos" role="tab" 
+            data-toggle="tab">Datos Básicos</a></li>
+          <li role="presentation"><a href="#contacto" class="fichacambia" 
+            aria-controls="contacto" role="tab" 
+            data-toggle="tab">Contacto</a></li>
+          <li role="presentation"><a href="#victima" class="fichacambia" 
+            aria-controls="victima" role="tab" 
+            data-toggle="tab">Núcleo Familiar</a></li>
+          <li role="presentation"><a href="#ubicacion" class="fichacambia" 
+            aria-controls="ubicacion" role="tab" 
+            data-toggle="tab">Ubicación</a></li>
+          <li role="presentation"><a href="#refugio" class="fichacambia" 
+            aria-controls="refugio" role="tab" 
+            data-toggle="tab">Refugio</a></li>
+          <li role="presentation"><a href="#desplazamiento" class="fichacambia" 
+            aria-controls="desplazamiento" role="tab" 
+            data-toggle="tab">Desplazamientos</a></li>
+          <li role="presentation"><a href="#presponsable" class="fichacambia" 
+            aria-controls="presponsable" role="tab" 
+            data-toggle="tab">Presuntos Responsables</a></li>
+          <li role="presentation"><a href="#antecedentes" class="fichacambia" 
+            aria-controls="antecedentes" role="tab" 
+            data-toggle="tab">Causas/Antecedentes</a></li>
+          <li role="presentation"><a href="#atencion" class="fichacambia" 
+            aria-controls="atencion" role="tab" 
+            data-toggle="tab">Respuesta Institucional y Seguimiento</a></li>
+          <li role="presentation"><a href="#descripcion" class="fichacambia" 
+            aria-controls="descripcion" role="tab" 
+            data-toggle="tab">Descripción</a></li>
+          <li role="presentation"><a href="#anexos" class="fichacambia" 
+            aria-controls="anexos" role="tab" 
+            data-toggle="tab">Anexos</a></li>
+          <li role="presentation"><a href="#etiquetas" class="fichacambia" 
+            aria-controls="etiquetas" role="tab" 
+            data-toggle="tab">Etiquetas</a></li>
         </ul>
         <div class="tab-content">
           <%= f.simple_fields_for :casosjr do |s| %>
-             <div role="tabpanel" class="tab-pane active" id="basicos" > 
-                <%= f.input :id, label: "Código", readonly: true%>
-
-                <%= s.input :fecharec, 
-                  :input_html => { "data-behaviour" => "datepicker" },
-									:as => :string, :label => "Fecha de Recepción" 
-								%>
-								<%= s.association :usuario,
-									collection: Usuario.all.order(:nombre),
-									include_blank: false,
-									label: "Asesor SJR",
-									label_method: :nusuario, 
-									value_method: :id 
-								%>
-                <%= s.association :regionsjr,
-                  collection: Sivel2Gen::Regionsjr.all.order(:nombre),
-									include_blank: false,
-                  label: "Oficina",
-                  label_method: :nombre, 
-									value_method: :id 
-								%>
-                <%= f.input :fecha, :input_html => { 
-                  "data-behaviour" => "datepicker" },
-                  :as => :string, :label => "F. Desplazamiento Emblemático",
-                  wrapper_html: { style: "padding-bottom: 18px;" }
-                %>
-                <%= f.input :hora, :as => :string, 
-                  :label => "Hora del Desplazamiento"
-                %>
-
-          </div> <! -- basicos -->
+            <div role="tabpanel" class="tab-pane active" id="basicos" > 
+              <%= render 'basicos', :f => f, :s => s %>
+            </div> 
 
             <div role="tabpanel" class="tab-pane" id="contacto" > 
-                <%= f.simple_fields_for :victima do |victima| %>
-                  <% if !victima.object.persona.nil?  && 
-                    victima.object.persona.id == @caso.casosjr.contacto.id 
-                  %>
-                    <%= s.input :direccion, label: "Dirección actual" %>
-										<%= s.input :telefono, label: 'Teléfono' %>
-                    <%= s.association :comosupo,
-                  	  collection: Sivel2Sjr::Comosupo.all.order(:nombre),
-											include_blank: false,
-                      label: "Como supo del SJR",
-                      label_method: :nombre, 
-											value_method: :id 
-										%>
-                    <%= s.input :detcomosupo, 
-                      label: "Detalle como supo"
-										%>
-
-                    <%= render 'contacto_fields', :f => victima %>
-                    <%= s.input :concentimientosjr, 
-                      boolean_style: :nested,
-                      inline_label: "Consentimiento Informado compartir SJR"
-                    %>
-                    <%= s.input :concentimientobd, 
-                      boolean_style: :nested,
-                      inline_label: "Consentimiento Informado compartir BD CINEP"
-                    %>
-                  <% end %>
-                <% end %>
-          </div> <! -- contacto -->
+              <%= render 'contacto', :f => f, :s => s %>
+            </div>
 
 
-          <div role="tabpanel" class="tab-pane" id="victima" > 
-              <%= f.simple_fields_for :victima do |victima| %>
-                <% if !victima.object.persona.nil? && victima.object.persona.id != @caso.casosjr.contacto.id %>
-                  <%= render 'victima_fields', :f => victima %>
-                <% end %>
-              <% end %>
-              <div class="links">
-                <%= link_to_add_association 'Añadir Víctima', f, :victima, 
-                  { :class => 'btn-primary',
-                    "data-ajax" => "/victimas/nuevo", 
-                    "data-ajaxdata" => "caso_id" }
-                %>
-              </div>
-        </div> <! -- victima -->
+            <div role="tabpanel" class="tab-pane" id="victima" > 
+              <%= render 'victimas', :f => f, :s => s %>
+            </div> 
 
-          <div role="tabpanel" class="tab-pane" id="ubicacion" > 
-              <%= f.simple_fields_for :ubicacion do |ubicacion| %>
-                <%= render 'ubicacion_fields', :f => ubicacion %>
-              <% end %>
-              <div class="links">
-                <%= link_to_add_association 'Añadir Ubicación', f, 
-                  :ubicacion, { :class => 'btn-primary',
-                    "data-ajax" => "/ubicaciones/nuevo", 
-                    "data-ajaxdata" => "caso_id" }
-                %>
-              </div>
-        </div> <! -- ubicacion -->
+            <div role="tabpanel" class="tab-pane" id="ubicacion" > 
+              <%= render 'ubicaciones', :f => f, :s => s %>
+            </div>
 
-          <div role="tabpanel" class="tab-pane" id="refugio" > 
-							<%= s.input :fechasalida, 
-								input_html: { 
-								"data-behaviour" => "datepicker",
-								value: s.object.fechasalida || @caso.fecha 
-							},
-								as: :string, label: "Fecha de Salida" 
-							%>
-              <%= s.association :salida,
-                collection: Sivel2Gen::Ubicacion.where(:id_caso => @caso.id),
-                label: "Sitio de Salida",
-                label_method: lambda {|t| Sivel2Gen::Pais.find(t.id_pais).nombre + 
-                  (t.id_departamento.nil? ? "" : " / " + 
-                   Sivel2Gen::Departamento.where(id: t.id_departamento, 
-                     id_pais: t.id_pais).take.nombre) },
-								value_method: :id 
-							%>
-              <%= s.input :fechallegada, 
-                :input_html => { "data-behaviour" => "datepicker" },
-								:as => :string, :label => "Fecha de Llegada" 
-							%>
-              <%= s.association :llegada,
-                collection: Sivel2Gen::Ubicacion.where(:id_caso => @caso.id),
-                label: "Sitio de Llegada",
-                label_method: lambda {|t| Sivel2Gen::Pais.find(t.id_pais).nombre + 
-                  (t.id_departamento.nil? ? "" : " / " + 
-                    Sivel2Gen::Departamento.where(id:t.id_departamento,
-                      id_pais: t.id_pais).take.nombre) },
-								value_method: :id 
-							%>
-							<%= s.association :categoria,
-								collection: Sivel2Gen::Categoria.where(
-									"fechadeshabilitacion IS NULL 
-									 AND id_tviolencia='R'").order(:id_tviolencia, :id),
-								label: "Causa del Refugio",
-								label_method: lambda {|t| t.id_tviolencia + t.id.to_s + ' ' + t.nombre },
-								value_method: :id %>
-              <%= s.input :observacionesref, 
-                label: "Observaciones" 
-              %>
-        </div> <! -- refugio -->
+            <div role="tabpanel" class="tab-pane" id="refugio" > 
+              <%= render 'refugio', :f => f, :s => s %>
+            </div> 
 
-        <% end %>
+          <% end %>
 
           <div role="tabpanel" class="tab-pane" id="desplazamiento" > 
-              <%= f.simple_fields_for :desplazamiento do |desplazamiento| %>
-                <%= render 'desplazamiento_fields', :f => desplazamiento %>
-              <% end %>
-              <div class="links">
-                <%= link_to_add_association 'Añadir Desplazamiento', f, 
-                  :desplazamiento, {:class => 'btn-primary',
-                    "data-ajax" => "/desplazamientos/nuevo", 
-                    "data-ajaxdata" => "caso_id" }
-                %>
-              </div>
-        </div> <! -- desplazamiento -->
+            <%= render 'desplazamientos', :f => f %>
+          </div>
 
           <div role="tabpanel" class="tab-pane" id="presponsable"> 
-              <%= f.simple_fields_for :caso_presponsable do |caso_presponsable| %>
-                <%= render 'caso_presponsable_fields', :f => caso_presponsable %>
-              <% end %>
-              <div class="links">
-                <%= link_to_add_association 'Añadir Presunto Responsable', f, 
-                  :caso_presponsable, {:class => 'btn-primary', 
-                    "data-ajax" => "/presponsables/nuevo", 
-                    "data-ajaxdata" => "caso_id"}
-                %>
-              </div>
-        </div> <! -- presponsable-->
+            <%= render 'presponsables', :f => f %>
+          </div> 
   
           <div role="tabpanel" class="tab-pane" id="antecedentes" > 
-              <%= f.simple_fields_for :acto do |acto| %>
-                <%= render 'acto_fields', :f => acto %>
-              <% end %>
-              <!--%= render 'nuevos_actos_fields', :f => f %-->
-              <div class="links">
-                <%= link_to_add_association 'Añadir Causa/Antecedente', f, :acto, :class => 'btn-primary' %>
-              </div>
-        </div> <! -- antecedentes -->
+            <%= render 'antecedentes', :f => f %>
+          </div>
   
           <div role="tabpanel" class="tab-pane" id="atencion" > 
-              <%= f.simple_fields_for :respuesta do |respuesta| %>
-                <%= render 'respuesta_fields', :f => respuesta%>
-              <% end %>
-              <div class="links">
-                <%= link_to_add_association 'Añadir Respuesta', f, 
-                  :respuesta, {:class => 'btn-primary',
-                    "data-ajax" => "/respuestas/nuevo", 
-                    "data-ajaxdata" => "caso_id" }
-                %>
-              </div>
-        </div> <! -- sesiones de atención-->
+            <%= render 'respuestas', :f => f %>
+          </div> 
 
           <div role="tabpanel" class="tab-pane" id="descripcion" > 
-            <%= f.input :memo, label: 'Memo', input_html: { rows: 10 } %>
-        </div> <! -- Descripción-->
-
+            <%= render 'memo', :f => f  %>
+          </div>
 
           <div role="tabpanel" class="tab-pane" id="anexos"> 
-              <%= f.simple_fields_for :anexo do |a| %>
-                <%= render 'anexo_fields', :f => a %>
-              <% end %>
-              <div class="links">
-                <%= link_to_add_association 'Añadir Anexo', f, :anexo, :class => 'btn-primary' %>
-              </div>
-        </div> <! -- anexos -->
+            <%= render 'anexos', :f => f  %>
+          </div>
 
           <div role="tabpanel" class="tab-pane" id="etiquetas"> 
-              <%= f.simple_fields_for :caso_etiqueta do |cetiqueta| %>
-                <%= render 'caso_etiqueta_fields', :f => cetiqueta %>
-              <% end %>
-              <div class="links">
-                <%= link_to_add_association 'Añadir Etiqueta', f, 
-                  :caso_etiqueta, :class => 'btn-primary' %>
-              </div>
-        </div> <! -- etiquetas -->
+            <%= render 'etiquetas', :f => f  %>
+          </div> 
 
-      <div class="form-actions">
-        <%= f.button :submit, 'Validar y Guardar', :class => 'btn-primary' %>
-        <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-          casos_path, :class => 'btn' %>
-      </div>
-    <% end %>
-    </div> <!-- tab-content -->
-</div> <!-- tabpanel -->
+          <div class="form-actions">
+            <%= f.button :submit, 'Validar y Guardar', 
+              :class => 'btn-primary' 
+            %>
+            <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+              casos_path, :class => 'btn' 
+            %>
+          </div> <!-- form-action -->
+        </div> <!-- tab-content -->
+      </div> <!-- tabpanel -->
+    </div> <!-- form-inputs -->
+  <% end %>
   </article>
-<% end -%>
+<% end %>
 

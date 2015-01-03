@@ -4,6 +4,7 @@
   <article>
   <%= simple_form_for @caso, :html => { :class => 'form-horizontal' } do |f| %>
     <div data-role="content" class="form-inputs">
+
       <div id="errores">
         <% if f.object.errors.any? %>
           <div id="error_explanation">
@@ -19,283 +20,130 @@
           <!--%= f.error_notification %-->
         <% end %>
         <%= f.error_notification %>
-      </div>
+      </div> <!-- errores -->
+
       <div class="accordion" id="accordion2">
 
         <%= f.simple_fields_for :casosjr do |s| %>
           <div class="accordion-group">
             <div class="accordion-heading">
-              <a class="accordion-toggle fichacambia" data-toggle="collapse" href="#basicos">
-                Datos Básicos
-              </a>
+              <a class="accordion-toggle fichacambia" data-toggle="collapse" 
+                href="#basicos">Datos Básicos</a>
             </div>
             <div id="basicos" class="accordion-body collapse in">
               <div class="accordion-inner">
-
-                <%= f.input :id, label: "Código", readonly: true%>
-
-                <%= s.input :fecharec, 
-                  :input_html => { "data-behaviour" => "datepicker" },
-									:as => :string, :label => "Fecha de Recepción" 
-								%>
-								<%= s.association :usuario,
-									collection: Usuario.all.order(:nombre),
-									include_blank: false,
-									label: "Asesor SJR",
-									label_method: :nusuario, 
-									value_method: :id 
-								%>
-                <%= s.association :regionsjr,
-                  collection: Sivel2Gen::Regionsjr.all.order(:nombre),
-									include_blank: false,
-                  label: "Oficina",
-                  label_method: :nombre, 
-									value_method: :id 
-								%>
-                <%= f.input :fecha, :input_html => { 
-                  "data-behaviour" => "datepicker" },
-                  :as => :string, :label => "F. Desplazamiento Emblemático",
-                  wrapper_html: { style: "padding-bottom: 18px;" }
-                %>
-                <%= f.input :hora, :as => :string, 
-                  :label => "Hora del Desplazamiento"
-                %>
-
+                <%= render 'basicos', :f => f, :s => s %>
               </div>
             </div> 
           </div> <! -- accordion-group basicos -->
 
           <div class="accordion-group">
             <div class="accordion-heading">
-              <a class="accordion-toggle fichacambia" data-toggle="collapse" href="#contacto">
-                Contacto
-              </a>
+              <a class="accordion-toggle fichacambia" data-toggle="collapse" 
+                href="#contacto">Contacto</a>
             </div>
             <div id="contacto" class="accordion-body collapse">
               <div class="accordion-inner">
-                <%= f.simple_fields_for :victima do |victima| %>
-                  <% if !victima.object.persona.nil?  && 
-                    victima.object.persona.id == @caso.casosjr.contacto.id 
-                  %>
-                    <%= s.input :direccion, label: "Dirección actual" %>
-										<%= s.input :telefono, label: 'Teléfono' %>
-                    <%= s.association :comosupo,
-                  	  collection: Sivel2Sjr::Comosupo.all.order(:nombre),
-											include_blank: false,
-                      label: "Como supo del SJR",
-                      label_method: :nombre, 
-											value_method: :id 
-										%>
-                    <%= s.input :detcomosupo, 
-                      label: "Detalle como supo"
-										%>
-
-                    <%= render 'contacto_fields', :f => victima %>
-                    <%= s.input :concentimientosjr, 
-                      boolean_style: :nested,
-                      inline_label: "Consentimiento Informado compartir SJR"
-                    %>
-                    <%= s.input :concentimientobd, 
-                      boolean_style: :nested,
-                      inline_label: "Consentimiento Informado compartir BD CINEP"
-                    %>
-                  <% end %>
-                <% end %>
+                <%= render 'contacto', :f => f, :s => s %>
               </div>
             </div>
           </div> <! -- accordion-group contacto -->
 
 
           <div class="accordion-group">
-          <div class="accordion-heading">
-            <a class="accordion-toggle fichacambia" data-toggle="collapse" href="#victima">Núcleo Familiar</a>
-          </div>
-          <div id="victima" class="accordion-body collapse">
-            <div class="accordion-inner">
-              <%= f.simple_fields_for :victima do |victima| %>
-                <% if !victima.object.persona.nil? && victima.object.persona.id != @caso.casosjr.contacto.id %>
-                  <%= render 'victima_fields', :f => victima %>
-                <% end %>
-              <% end %>
-              <div class="links">
-                <%= link_to_add_association 'Añadir Víctima', f, :victima, 
-                  { :class => 'btn-primary',
-                    "data-ajax" => "/victimas/nuevo", 
-                    "data-ajaxdata" => "caso_id" }
-                %>
+            <div class="accordion-heading">
+              <a class="accordion-toggle fichacambia" data-toggle="collapse" 
+                href="#victima">Núcleo Familiar</a>
+            </div>
+            <div id="victima" class="accordion-body collapse">
+              <div class="accordion-inner">
+                <%= render 'victimas', :f => f, :s => s %>
               </div>
             </div>
-          </div>
-        </div> <! -- accordion-group victima -->
+          </div> <! -- accordion-group victima -->
 
-        <div class="accordion-group">
-          <div class="accordion-heading">
-            <a class="accordion-toggle fichacambia" data-toggle="collapse" href="#ubicacion">
-              Ubicación
-            </a>
-          </div>
-          <div id="ubicacion" class="accordion-body collapse">
-            <div class="accordion-inner">
-              <%= f.simple_fields_for :ubicacion do |ubicacion| %>
-                <%= render 'ubicacion_fields', :f => ubicacion %>
-              <% end %>
-              <div class="links">
-                <%= link_to_add_association 'Añadir Ubicación', f, 
-                  :ubicacion, { :class => 'btn-primary',
-                    "data-ajax" => "/ubicaciones/nuevo", 
-                    "data-ajaxdata" => "caso_id" }
-                %>
+          <div class="accordion-group">
+            <div class="accordion-heading">
+              <a class="accordion-toggle fichacambia" data-toggle="collapse" 
+                href="#ubicacion">Ubicación</a>
+            </div>
+            <div id="ubicacion" class="accordion-body collapse">
+              <div class="accordion-inner">
+                <%= render 'ubicaciones', :f => f, :s => s %>
               </div>
             </div>
-          </div>
-        </div> <! -- accordion-group ubicacion -->
+          </div> <! -- accordion-group ubicacion -->
 
-        <div class="accordion-group">
-          <div class="accordion-heading">
-            <a class="accordion-toggle fichacambia" data-toggle="collapse" href="#refugio">
-              Refugio
-            </a>
-          </div>
-          <div id="refugio" class="accordion-body collapse">
-            <div class="accordion-inner">
-							<%= s.input :fechasalida, 
-								input_html: { 
-								"data-behaviour" => "datepicker",
-								value: s.object.fechasalida || @caso.fecha 
-							},
-								as: :string, label: "Fecha de Salida" 
-							%>
-              <%= s.association :salida,
-                collection: Sivel2Gen::Ubicacion.where(:id_caso => @caso.id),
-                label: "Sitio de Salida",
-                label_method: lambda {|t| Sivel2Gen::Pais.find(t.id_pais).nombre + 
-                  (t.id_departamento.nil? ? "" : " / " + 
-                   Sivel2Gen::Departamento.where(id: t.id_departamento, 
-                     id_pais: t.id_pais).take.nombre) },
-								value_method: :id 
-							%>
-              <%= s.input :fechallegada, 
-                :input_html => { "data-behaviour" => "datepicker" },
-								:as => :string, :label => "Fecha de Llegada" 
-							%>
-              <%= s.association :llegada,
-                collection: Sivel2Gen::Ubicacion.where(:id_caso => @caso.id),
-                label: "Sitio de Llegada",
-                label_method: lambda {|t| Sivel2Gen::Pais.find(t.id_pais).nombre + 
-                  (t.id_departamento.nil? ? "" : " / " + 
-                    Sivel2Gen::Departamento.where(id:t.id_departamento,
-                      id_pais: t.id_pais).take.nombre) },
-								value_method: :id 
-							%>
-							<%= s.association :categoria,
-								collection: Sivel2Gen::Categoria.where(
-									"fechadeshabilitacion IS NULL 
-									 AND id_tviolencia='R'").order(:id_tviolencia, :id),
-								label: "Causa del Refugio",
-								label_method: lambda {|t| t.id_tviolencia + t.id.to_s + ' ' + t.nombre },
-								value_method: :id %>
-              <%= s.input :observacionesref, 
-                label: "Observaciones" 
-              %>
+          <div class="accordion-group">
+            <div class="accordion-heading">
+              <a class="accordion-toggle fichacambia" data-toggle="collapse" 
+                href="#refugio">Refugio</a>
             </div>
-          </div>
-        </div> <! -- accordion-group refugio -->
+            <div id="refugio" class="accordion-body collapse">
+              <div class="accordion-inner">
+                <%= render 'refugio', :f => f, :s => s %>
+              </div>
+            </div>
+          </div> <! -- accordion-group refugio -->
 
         <% end %>
 
         <div class="accordion-group">
           <div class="accordion-heading">
-            <a class="accordion-toggle fichacambia" data-toggle="collapse" href="#desplazamiento">
-              Desplazamientos
-            </a>
+            <a class="accordion-toggle fichacambia" data-toggle="collapse" 
+              href="#desplazamiento">Desplazamientos</a>
           </div>
           <div id="desplazamiento" class="accordion-body collapse">
             <div class="accordion-inner">
-              <%= f.simple_fields_for :desplazamiento do |desplazamiento| %>
-                <%= render 'desplazamiento_fields', :f => desplazamiento %>
-              <% end %>
-              <div class="links">
-                <%= link_to_add_association 'Añadir Desplazamiento', f, 
-                  :desplazamiento, {:class => 'btn-primary',
-                    "data-ajax" => "/desplazamientos/nuevo", 
-                    "data-ajaxdata" => "caso_id" }
-                %>
-              </div>
+              <%= render 'desplazamientos', :f => f %>
             </div>
           </div>
         </div> <! -- accordion-group desplazamiento -->
 
         <div class="accordion-group">
           <div class="accordion-heading">
-            <a class="accordion-toggle fichacambia" data-toggle="collapse" href="#presponsable">
-              Presuntos Responsables
-            </a>
+            <a class="accordion-toggle fichacambia" data-toggle="collapse" 
+              href="#presponsable">Presuntos Responsables</a>
           </div>
           <div id="presponsable" class="accordion-body collapse">
             <div class="accordion-inner">
-              <%= f.simple_fields_for :caso_presponsable do |caso_presponsable| %>
-                <%= render 'caso_presponsable_fields', :f => caso_presponsable %>
-              <% end %>
-              <div class="links">
-                <%= link_to_add_association 'Añadir Presunto Responsable', f, 
-                  :caso_presponsable, {:class => 'btn-primary', 
-                    "data-ajax" => "/presponsables/nuevo", 
-                    "data-ajaxdata" => "caso_id"}
-                %>
-              </div>
+              <%= render 'presponsables', :f => f %>
             </div>
           </div>
         </div> <! -- accordion-group  presponsable-->
   
         <div class="accordion-group">
           <div class="accordion-heading">
-            <a class="accordion-toggle fichacambia" data-toggle="collapse" href="#antecedentes">
-              Causas/Antecedentes
-            </a>
+            <a class="accordion-toggle fichacambia" data-toggle="collapse" 
+              href="#antecedentes">Causas/Antecedentes</a>
           </div>
           <div id="antecedentes" class="accordion-body collapse">
             <div class="accordion-inner">
-              <%= f.simple_fields_for :acto do |acto| %>
-                <%= render 'acto_fields', :f => acto %>
-              <% end %>
-              <div class="links">
-                <%= link_to_add_association 'Añadir Causa/Antecedente', f, :acto, :class => 'btn-primary' %>
-              </div>
+              <%= render 'antecedentes', :f => f %>
             </div>
           </div>
         </div> <! -- accordion-group antecedentes -->
   
         <div class="accordion-group">
           <div class="accordion-heading">
-            <a class="accordion-toggle fichacambia" data-toggle="collapse" href="#atencion"> 
-              Respuesta Institucional y Seguimiento
-            </a>
+            <a class="accordion-toggle fichacambia" data-toggle="collapse" 
+              href="#atencion">Respuesta Institucional y Seguimiento</a>
           </div>
           <div id="atencion" class="accordion-body collapse">
             <div class="accordion-inner">
-              <%= f.simple_fields_for :respuesta do |respuesta| %>
-                <%= render 'respuesta_fields', :f => respuesta%>
-              <% end %>
-              <div class="links">
-                <%= link_to_add_association 'Añadir Respuesta', f, 
-                  :respuesta, {:class => 'btn-primary',
-                    "data-ajax" => "/respuestas/nuevo", 
-                    "data-ajaxdata" => "caso_id" }
-                %>
-              </div>
+              <%= render 'respuestas', :f => f %>  
             </div>
           </div>
         </div> <! -- accordion-group sesiones de atención-->
 
         <div class="accordion-group">
           <div class="accordion-heading">
-            <a class="accordion-toggle fichacambia" data-toggle="collapse" href="#descripcion"> 
-              Descripción del Desplazamiento
-            </a>
+            <a class="accordion-toggle fichacambia" data-toggle="collapse" 
+              href="#descripcion">Descripción del Desplazamiento</a>
           </div>
           <div id="descripcion" class="accordion-body collapse">
             <div class="accordion-inner">
-              <%= f.input :memo, label: 'Memo' %>
+              <%= render 'memo', :f => f %>  
             </div>
           </div>
         </div> <! -- accordion-group Descripción-->
@@ -303,49 +151,38 @@
 
         <div class="accordion-group">
           <div class="accordion-heading">
-            <a class="accordion-toggle fichacambia" data-toggle="collapse" href="#anexo"> 
-              Anexos
-            </a>
+            <a class="accordion-toggle fichacambia" data-toggle="collapse" 
+              href="#anexo">Anexos</a>
           </div>
           <div id="anexo" class="accordion-body collapse">
             <div class="accordion-inner">
-              <%= f.simple_fields_for :anexo do |anexo| %>
-                <%= render 'anexo_fields', :f => anexo %>
-              <% end %>
-              <div class="links">
-                <%= link_to_add_association 'Añadir Anexo', f, 
-                  :anexo, :class => 'btn-primary' %>
-              </div>
+              <%= render 'anexos', :f => f %>  
             </div>
           </div>
-        </div> <! -- accordion-group -->
+        </div> <! -- accordion-group anexos -->
 
         <div class="accordion-group">
           <div class="accordion-heading">
-            <a class="accordion-toggle fichacambia" data-toggle="collapse" href="#etiquetas"> 
-              Etiquetas
-            </a>
+            <a class="accordion-toggle fichacambia" data-toggle="collapse"
+              href="#etiquetas">Etiquetas</a>
           </div>
           <div id="etiquetas" class="accordion-body collapse">
             <div class="accordion-inner">
-              <%= f.simple_fields_for :caso_etiqueta do |cetiqueta| %>
-                <%= render 'caso_etiqueta_fields', :f => cetiqueta %>
-              <% end %>
-              <div class="links">
-                <%= link_to_add_association 'Añadir Etiqueta', f, 
-                  :caso_etiqueta, :class => 'btn-primary' %>
-              </div>
+              <%= render 'etiquetas', :f => f %>  
             </div>
           </div>
-        </div> <! -- accordion-group -->
+        </div> <! -- accordion-group etiquetas -->
 
       </div> <!-- accordion -->
     </div> <!-- form-inputs -->
+
     <div class="form-actions">
-      <%= f.button :submit, 'Guardar', :class => 'btn-primary' %>
+      <%= f.button :submit, 'Validar y Guardar', :class => 'btn-primary' %>
       <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-        casos_path, :class => 'btn' %>
-    </div>
+        casos_path, :class => 'btn' 
+      %>
+    </div> <!-- form-action -->
+
   <% end %>
   </article>
 <% end -%>

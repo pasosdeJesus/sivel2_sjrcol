@@ -482,7 +482,7 @@ CREATE VIEW cben1 AS
    FROM sivel2_gen_caso caso,
     sivel2_sjr_casosjr casosjr,
     sivel2_gen_victima victima
-  WHERE (((caso.id = casosjr.id_caso) AND (caso.id = victima.id_caso)) AND (casosjr.id_regionsjr = 5));
+  WHERE ((caso.id = casosjr.id_caso) AND (caso.id = victima.id_caso));
 
 
 --
@@ -1036,6 +1036,60 @@ CREATE VIEW cres1 AS
     sivel2_sjr_respuesta respuesta,
     sivel2_sjr_motivosjr_respuesta motivosjr_respuesta
   WHERE ((((((caso.id = casosjr.id_caso) AND (caso.id = respuesta.id_caso)) AND (respuesta.fechaatencion >= '2013-12-17'::date)) AND (respuesta.fechaatencion <= '2014-12-17'::date)) AND (casosjr.id_regionsjr = 4)) AND (respuesta.id = motivosjr_respuesta.id_respuesta));
+
+
+--
+-- Name: sivel2_sjr_ayudaestado_derecho; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE sivel2_sjr_ayudaestado_derecho (
+    ayudaestado_id integer,
+    derecho_id integer
+);
+
+
+--
+-- Name: sivel2_sjr_ayudaestado_respuesta; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE sivel2_sjr_ayudaestado_respuesta (
+    id_ayudaestado integer DEFAULT 0 NOT NULL,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    id_respuesta integer NOT NULL
+);
+
+
+--
+-- Name: sivel2_sjr_derecho_respuesta; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE sivel2_sjr_derecho_respuesta (
+    id_derecho integer DEFAULT 9 NOT NULL,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    id_respuesta integer NOT NULL
+);
+
+
+--
+-- Name: cvp1; Type: VIEW; Schema: public; Owner: -
+--
+
+CREATE VIEW cvp1 AS
+ SELECT caso.id AS id_caso,
+    respuesta.fechaatencion,
+    derecho_respuesta.id_derecho,
+    casosjr.id_regionsjr,
+    ( SELECT ar.id_ayudaestado
+           FROM sivel2_sjr_ayudaestado_respuesta ar,
+            sivel2_sjr_ayudaestado_derecho ad
+          WHERE (((derecho_respuesta.id_respuesta = ar.id_respuesta) AND (ar.id_ayudaestado = ad.ayudaestado_id)) AND (ad.derecho_id = derecho_respuesta.id_derecho))) AS id_ayudaestado
+   FROM sivel2_gen_caso caso,
+    sivel2_sjr_casosjr casosjr,
+    sivel2_sjr_respuesta respuesta,
+    sivel2_sjr_derecho_respuesta derecho_respuesta
+  WHERE (((caso.id = casosjr.id_caso) AND (caso.id = respuesta.id_caso)) AND (derecho_respuesta.id_respuesta = respuesta.id));
 
 
 --
@@ -2840,28 +2894,6 @@ CREATE TABLE sivel2_sjr_ayudaestado (
 
 
 --
--- Name: sivel2_sjr_ayudaestado_derecho; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE sivel2_sjr_ayudaestado_derecho (
-    ayudaestado_id integer,
-    derecho_id integer
-);
-
-
---
--- Name: sivel2_sjr_ayudaestado_respuesta; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE sivel2_sjr_ayudaestado_respuesta (
-    id_ayudaestado integer DEFAULT 0 NOT NULL,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone,
-    id_respuesta integer NOT NULL
-);
-
-
---
 -- Name: sivel2_sjr_ayudasjr; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2994,18 +3026,6 @@ CREATE TABLE sivel2_sjr_derecho_motivosjr (
 CREATE TABLE sivel2_sjr_derecho_progestado (
     sivel2_sjr_progestado_id integer NOT NULL,
     sivel2_sjr_derecho_id integer NOT NULL
-);
-
-
---
--- Name: sivel2_sjr_derecho_respuesta; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE sivel2_sjr_derecho_respuesta (
-    id_derecho integer DEFAULT 9 NOT NULL,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone,
-    id_respuesta integer NOT NULL
 );
 
 

@@ -114,17 +114,17 @@
             <%= render 'etiquetas', :f => f  %>
           </div> 
 
-          <div class="form-actions">
-            <%= f.button :submit, 'Validar y Guardar', 
-              :class => 'btn-primary' 
-            %>
-            <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-              casos_path, :class => 'btn' 
-            %>
-          </div> <!-- form-action -->
         </div> <!-- tab-content -->
       </div> <!-- tabpanel -->
     </div> <!-- form-inputs -->
+
+    <div class="form-actions">
+      <%= f.button :submit, 'Validar y Guardar', :class => 'btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+        casos_path, :class => 'btn' 
+      %>
+    </div> <!-- form-action -->
+
   <% end %>
   </article>
 <% end %>

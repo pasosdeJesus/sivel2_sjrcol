@@ -89,6 +89,7 @@ class ConteosController < ApplicationController
 
 
     cons1 = 'cvp1'
+    cons2 = 'cvp2'
     # La estrategia es 
     # 1. Agrupar en la vista cons1 respuesta con lo que se contará 
     #    restringiendo por filtros con códigos 
@@ -96,16 +97,15 @@ class ConteosController < ApplicationController
     #    por información por desplegar
 
     # Para la vista cons1 emplear que1, tablas1 y where1
-    que1 = 'caso.id AS id_caso, respuesta.fechaatencion AS fechaatencion, ' +
+    que1 = 'respuesta.id AS id_respuesta, ' +
       'derecho_respuesta.id_derecho AS id_derecho'
-    tablas1 = 'sivel2_gen_caso AS caso, sivel2_sjr_casosjr AS casosjr, ' +
+    tablas1 = 'sivel2_sjr_casosjr AS casosjr, ' +
       'sivel2_sjr_respuesta AS respuesta, ' +
       'sivel2_sjr_derecho_respuesta AS derecho_respuesta'
     where1 = ''
 
     # where1 = consulta_and(where1, 'caso.id', GLOBALS['idbus'], '<>')
-    where1 = consulta_and_sinap(where1, "caso.id", "casosjr.id_caso")
-    where1 = consulta_and_sinap(where1, "caso.id", "respuesta.id_caso")
+    where1 = consulta_and_sinap(where1, "respuesta.id", "casosjr.id_caso")
     where1 = consulta_and_sinap( 
       where1, "derecho_respuesta.id_respuesta", "respuesta.id"
     )
@@ -126,52 +126,34 @@ class ConteosController < ApplicationController
 
     que1 = agrega_tabla(que1, "casosjr.id_regionsjr AS id_regionsjr")
     
-    que1 = agrega_tabla(que1, "(SELECT id_#{pContar}
-                        FROM sivel2_sjr_#{pContar}_respuesta AS ar, 
-                        sivel2_sjr_#{pContar}_derecho AS ad 
-                        WHERE derecho_respuesta.id_respuesta=id_respuesta 
-                        AND ar.id_#{pContar}=ad.#{pContar}_id 
-                        AND ad.derecho_id=id_derecho)")
-
-
-#    tablas1 = agrega_tabla(
-#      tablas1, "sivel2_sjr_#{pContar}_derecho AS #{pContar}_derecho"
-#    )
-    
-#    trel = "#{pContar}_respuesta"
-#    idrel = "id_#{pContar}"
-#    tablas1 = agrega_tabla(tablas1, "sivel2_sjr_#{trel} AS #{trel}")
-#    que1 = agrega_tabla(que1, "#{trel}.#{idrel} AS #{idrel}")
-#    where1 = consulta_and_sinap(
-#      where1, "respuesta.id", "#{trel}.id_respuesta"
-#    )
-#    where1 = consulta_and_sinap(
-#      where1, "#{pContar}_derecho.#{pContar}_id", "#{trel}.#{idrel}"
-#    )
-#    where1 = consulta_and_sinap(
-#      where1, "#{pContar}_derecho.derecho_id", "derecho_respuesta.id_derecho"
-#    )
-
     ActiveRecord::Base.connection.execute "DROP VIEW  IF EXISTS #{cons1}"
+    ActiveRecord::Base.connection.execute "DROP VIEW  IF EXISTS #{cons2}"
 
-    # Filtrar 
+    # Paso 1. Filtrar 
     q1="CREATE VIEW #{cons1} AS 
             SELECT #{que1}
             FROM #{tablas1} WHERE #{where1}"
     puts "q1 es #{q1}"
     ActiveRecord::Base.connection.execute q1
 
+    # Paso 2
+    # Otra consulta
+    q2="CREATE VIEW #{cons2} AS SELECT id_respuesta, derecho_id as id_derecho, id_#{pContar}
+        FROM sivel2_sjr_#{pContar}_respuesta AS ar, 
+          sivel2_sjr_#{pContar}_derecho AS ad 
+        WHERE 
+          ar.id_#{pContar}=ad.#{pContar}_id "
+    puts "q2 es #{q2}"
+    ActiveRecord::Base.connection.execute q2
 
-    #where1 = consulta_and_sinap( where1, "respuesta.fechaatencion", "#{trel}.fechaatencion")
-    # Para la consulta final emplear arreglo que3, que tendrá parejas
-    # (campo, titulo por presentar en tabla)
     que3 = []
     tablas3 = cons1
     where3 = ''
 
-    tablas3 = agrega_tabla(tablas3, "sivel2_sjr_derecho AS derecho")
-    where3 = consulta_and_sinap(where3, "id_derecho", "derecho.id")
-    que3 << ["derecho.nombre as derecho", "Derecho"]
+    tablas3 = "sivel2_sjr_derecho AS derecho, cvp1 LEFT OUTER JOIN cvp2 ON 
+    (cvp1.id_respuesta=cvp2.id_respuesta AND cvp1.id_derecho=cvp2.id_derecho)"
+    where3 = consulta_and_sinap(where3, "cvp1.id_derecho", "derecho.id")
+    que3 << ["derecho.nombre AS derecho", "Derecho"]
     que3 << ["(SELECT nombre FROM sivel2_sjr_#{pContar} WHERE id=id_#{pContar}) AS atendido", 
       @pque[pContar] ]
 
@@ -191,7 +173,7 @@ class ConteosController < ApplicationController
 
     @coltotales = [i-1, i]
     if (gb != "") 
-      gb ="GROUP BY #{gb} ORDER BY 1"
+      gb ="GROUP BY #{gb} ORDER BY 1, 2"
     end
     que3 << ["", "Atendidos"]
     que3 << ["", "Reportados"]
@@ -199,8 +181,7 @@ class ConteosController < ApplicationController
     q3 = "SELECT derecho, atendido, (CASE WHEN atendido IS NULL THEN 0 
             ELSE reportados END) AS atendidos, reportados 
           FROM (SELECT #{qc}
-            COUNT(cast(#{cons1}.id_caso as text) || ' '
-            || cast(#{cons1}.fechaatencion as text)) as reportados
+            COUNT(cvp1.id_respuesta) AS reportados
             FROM #{tablas3}
             #{twhere3}
             #{gb}) AS s

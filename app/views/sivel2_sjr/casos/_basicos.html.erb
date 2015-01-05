@@ -1,0 +1,33 @@
+<%= f.input :id, label: "Código", readonly: true%>
+
+<%= s.input :fecharec, 
+  :input_html => { "data-behaviour" => "datepicker" },
+  :as => :string, :label => "Fecha de Recepción" 
+%>
+
+<%= s.association :usuario,
+  collection: Usuario.all.order(:nombre),
+  include_blank: false,
+  label: "Asesor SJR",
+  label_method: :nusuario, 
+  value_method: :id 
+%>
+
+<%= s.association :regionsjr,
+  collection: Sivel2Gen::Regionsjr.habilitados,
+  include_blank: false,
+  label: "Oficina",
+  label_method: :nombre, 
+  value_method: :id 
+%>
+
+<%= f.input :fecha, :input_html => { 
+  "data-behaviour" => "datepicker" },
+  :as => :string, :label => "F. Desplazamiento Emblemático",
+  wrapper_html: { style: "padding-bottom: 18px;" }
+%>
+
+<%= f.input :hora, :as => :string, 
+  :label => "Hora del Desplazamiento"
+%>
+

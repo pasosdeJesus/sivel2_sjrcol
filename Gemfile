@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Rails (internacionalización)
-gem "rails", '~> 4.2.0.rc2'
+gem "rails", '~> 4.2.0'
 gem "rails-i18n"
 
 # Problemas con arel 6.0.0 al ejecutar rspec
@@ -38,6 +38,8 @@ gem "turbolinks"
 gem "twitter-bootstrap-rails"#, "=2.2.8"
 gem "bootstrap-datepicker-rails"
 gem "bootstrap-sass"
+
+gem "chartkick"
 
 # Formularios simples 
 #gem "simple_form", git: "https://github.com/plataformatec/simple_form"

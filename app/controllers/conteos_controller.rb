@@ -65,7 +65,7 @@ class ConteosController < ApplicationController
 
   # Vacíos de protección
   def vacios
-    @pque = { 'derecho' => 'Derecho vulnerado',
+    @pque = { 
       'ayudaestado' => 'Ayuda del Estado',
       'ayudasjr' => 'Ayuda Humanitaria del SJR',
       'motivosjr' => 'Servicio/Asesoria del SJR',
@@ -75,10 +75,153 @@ class ConteosController < ApplicationController
     pFaini = param_escapa('fechaini')
     pFafin = param_escapa('fechafin')
     pContar = param_escapa('contar')
-    pClase = param_escapa('clase')
-    pMunicipio = param_escapa('municipio')
-    pDepartamento = param_escapa('departamento')
     pOficina = param_escapa('oficina')
+    pDerecho = param_escapa('derecho')
+
+    if (pContar == '') 
+      pContar = 'ayudaestado'
+    end
+
+    if (!@pque.has_key?(pContar)) then
+      puts "opción desconocida #{pContar}"
+      return
+    end
+
+
+    cons1 = 'cvp1'
+    # La estrategia es 
+    # 1. Agrupar en la vista cons1 respuesta con lo que se contará 
+    #    restringiendo por filtros con códigos 
+    # 2. Contar derechos/respuestas cons1, cambiar códigos
+    #    por información por desplegar
+
+    # Para la vista cons1 emplear que1, tablas1 y where1
+    que1 = 'caso.id AS id_caso, respuesta.fechaatencion AS fechaatencion, ' +
+      'derecho_respuesta.id_derecho AS id_derecho'
+    tablas1 = 'sivel2_gen_caso AS caso, sivel2_sjr_casosjr AS casosjr, ' +
+      'sivel2_sjr_respuesta AS respuesta, ' +
+      'sivel2_sjr_derecho_respuesta AS derecho_respuesta'
+    where1 = ''
+
+    # where1 = consulta_and(where1, 'caso.id', GLOBALS['idbus'], '<>')
+    where1 = consulta_and_sinap(where1, "caso.id", "casosjr.id_caso")
+    where1 = consulta_and_sinap(where1, "caso.id", "respuesta.id_caso")
+    where1 = consulta_and_sinap( 
+      where1, "derecho_respuesta.id_respuesta", "respuesta.id"
+    )
+
+    if (pFaini != '') 
+      where1 = consulta_and(where1, "respuesta.fechaatencion", pFaini, ">=") 
+    end
+    if (pFafin != '') 
+      where1 = consulta_and(where1, "respuesta.fechaatencion", pFafin, "<=")
+    end
+    if (pOficina != '') 
+      where1 = consulta_and(where1, "casosjr.id_regionsjr", pOficina)
+    end
+    if (pDerecho != '') 
+      where1 = consulta_and(where1, "derecho_respuesta.id_derecho", pDerecho)
+    end
+
+
+    que1 = agrega_tabla(que1, "casosjr.id_regionsjr AS id_regionsjr")
+    
+    que1 = agrega_tabla(que1, "(SELECT id_#{pContar}
+                        FROM sivel2_sjr_#{pContar}_respuesta AS ar, 
+                        sivel2_sjr_#{pContar}_derecho AS ad 
+                        WHERE derecho_respuesta.id_respuesta=id_respuesta 
+                        AND ar.id_#{pContar}=ad.#{pContar}_id 
+                        AND ad.derecho_id=id_derecho)")
+
+
+#    tablas1 = agrega_tabla(
+#      tablas1, "sivel2_sjr_#{pContar}_derecho AS #{pContar}_derecho"
+#    )
+    
+#    trel = "#{pContar}_respuesta"
+#    idrel = "id_#{pContar}"
+#    tablas1 = agrega_tabla(tablas1, "sivel2_sjr_#{trel} AS #{trel}")
+#    que1 = agrega_tabla(que1, "#{trel}.#{idrel} AS #{idrel}")
+#    where1 = consulta_and_sinap(
+#      where1, "respuesta.id", "#{trel}.id_respuesta"
+#    )
+#    where1 = consulta_and_sinap(
+#      where1, "#{pContar}_derecho.#{pContar}_id", "#{trel}.#{idrel}"
+#    )
+#    where1 = consulta_and_sinap(
+#      where1, "#{pContar}_derecho.derecho_id", "derecho_respuesta.id_derecho"
+#    )
+
+    ActiveRecord::Base.connection.execute "DROP VIEW  IF EXISTS #{cons1}"
+
+    # Filtrar 
+    q1="CREATE VIEW #{cons1} AS 
+            SELECT #{que1}
+            FROM #{tablas1} WHERE #{where1}"
+    puts "q1 es #{q1}"
+    ActiveRecord::Base.connection.execute q1
+
+
+    #where1 = consulta_and_sinap( where1, "respuesta.fechaatencion", "#{trel}.fechaatencion")
+    # Para la consulta final emplear arreglo que3, que tendrá parejas
+    # (campo, titulo por presentar en tabla)
+    que3 = []
+    tablas3 = cons1
+    where3 = ''
+
+    tablas3 = agrega_tabla(tablas3, "sivel2_sjr_derecho AS derecho")
+    where3 = consulta_and_sinap(where3, "id_derecho", "derecho.id")
+    que3 << ["derecho.nombre as derecho", "Derecho"]
+    que3 << ["(SELECT nombre FROM sivel2_sjr_#{pContar} WHERE id=id_#{pContar}) AS atendido", 
+      @pque[pContar] ]
+
+    #puts que3
+    # Generamos 1,2,3 ...n para GROUP BY
+    gb = sep = ""
+    qc = ""
+    i = 1
+    que3.each do |t|
+      if (t[1] != "") 
+        gb += sep + i.to_s
+        qc += t[0] + ", "
+        sep = ", "
+        i += 1
+      end
+    end
+
+    @coltotales = [i-1, i]
+    if (gb != "") 
+      gb ="GROUP BY #{gb} ORDER BY 1"
+    end
+    que3 << ["", "Atendidos"]
+    que3 << ["", "Reportados"]
+    twhere3 = where3 == "" ? "" : "WHERE " + where3
+    q3 = "SELECT derecho, atendido, (CASE WHEN atendido IS NULL THEN 0 
+            ELSE reportados END) AS atendidos, reportados 
+          FROM (SELECT #{qc}
+            COUNT(cast(#{cons1}.id_caso as text) || ' '
+            || cast(#{cons1}.fechaatencion as text)) as reportados
+            FROM #{tablas3}
+            #{twhere3}
+            #{gb}) AS s
+    "
+    puts "q3 es #{q3}"
+    @cuerpotabla = ActiveRecord::Base.connection.select_all(q3)
+
+    puts "que3 es #{que3}"
+    @enctabla = []
+    que3.each do |t|
+      if (t[1] != "") 
+        @enctabla << CGI.escapeHTML(t[1])
+      end
+    end
+
+
+    respond_to do |format|
+      format.html { }
+      format.json { head :no_content }
+      format.js   { render 'vacios' }
+    end
 
   end
 
@@ -93,9 +236,6 @@ class ConteosController < ApplicationController
     pFaini = param_escapa('fechaini')
     pFafin = param_escapa('fechafin')
     pContar = param_escapa('contar')
-    pClase = param_escapa('clase')
-    pMunicipio = param_escapa('municipio')
-    pDepartamento = param_escapa('departamento')
     pOficina = param_escapa('oficina')
 
     if (pContar == '') 
@@ -103,16 +243,11 @@ class ConteosController < ApplicationController
     end
 
     cons1 = 'cres1'
-    cons2 = 'cres1'
     # La estrategia es 
     # 1. Agrupar en la vista cons1 respuesta con lo que se contará 
     #    restringiendo por filtros con códigos 
     # 2. Contar derechos/respuestas cons1, cambiar códigos
     #    por información por desplegar
-
-    # Validaciones todo caso es casosjr y viceversa
-    # Validaciones todo caso tiene victima
-    # Validaciones todo caso tiene ubicacion
 
     # Para la vista cons1 emplear que1, tablas1 y where1
     que1 = 'caso.id AS id_caso, respuesta.fechaatencion AS fechaatencion'
@@ -123,7 +258,7 @@ class ConteosController < ApplicationController
     # Para la consulta final emplear arreglo que3, que tendrá parejas
     # (campo, titulo por presentar en tabla)
     que3 = []
-    tablas3 = cons2
+    tablas3 = cons1
     where3 = ''
 
     # where1 = consulta_and(where1, 'caso.id', GLOBALS['idbus'], '<>')
@@ -162,7 +297,6 @@ class ConteosController < ApplicationController
       puts "opción desconocida #{pContar}"
     end
 
-    ActiveRecord::Base.connection.execute "DROP VIEW  IF EXISTS #{cons2}"
     ActiveRecord::Base.connection.execute "DROP VIEW  IF EXISTS #{cons1}"
 
     # Filtrar 
@@ -190,11 +324,11 @@ class ConteosController < ApplicationController
     if (gb != "") 
       gb ="GROUP BY #{gb} ORDER BY #{i} DESC"
     end
-    que3 << ["", "Cantidad"]
+    que3 << ["", "Cantidad atenciones"]
     twhere3 = where3 == "" ? "" : "WHERE " + where3
     q3 = "SELECT #{qc}
-        COUNT(cast(#{cons2}.id_caso as text) || ' '
-        || cast(#{cons2}.fechaatencion as text))
+        COUNT(cast(#{cons1}.id_caso as text) || ' '
+        || cast(#{cons1}.fechaatencion as text))
         FROM #{tablas3}
         #{twhere3}
         #{gb}
@@ -215,6 +349,8 @@ class ConteosController < ApplicationController
       format.json { head :no_content }
       format.js   { render 'resultado' }
     end
+
+
   end
 
   def personas

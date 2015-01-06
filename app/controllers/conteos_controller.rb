@@ -105,7 +105,7 @@ class ConteosController < ApplicationController
     where1 = ''
 
     # where1 = consulta_and(where1, 'caso.id', GLOBALS['idbus'], '<>')
-    where1 = consulta_and_sinap(where1, "respuesta.id", "casosjr.id_caso")
+    where1 = consulta_and_sinap(where1, "respuesta.id_caso", "casosjr.id_caso")
     where1 = consulta_and_sinap( 
       where1, "derecho_respuesta.id_respuesta", "respuesta.id"
     )

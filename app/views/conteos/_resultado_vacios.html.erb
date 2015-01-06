@@ -1,4 +1,8 @@
-<% @hg = {} %>
+<% 
+  @hg = {}
+  @iderecho = {} 
+  @irespuesta = {} 
+%>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -21,12 +25,27 @@
              end
              if i == 0 && campo[1]
                @nom = campo[1].to_s 
+               @derecho = @nom
              end
              if i == 1 && campo[1]
-               @nom = @nom + ':' + campo[1].to_s
+               @resp = campo[1].to_s
+               @nom = @nom + ':' + @resp
              end
              if i == 3 && campo[1] 
                @hg[@nom] = campo[1].to_i
+               if @iderecho[@derecho] 
+                 @iderecho[@derecho] += campo[1].to_i
+               else
+                 @iderecho[@derecho] = campo[1].to_i
+               end
+               if !@irespuesta[@derecho]
+                 @irespuesta[@derecho] = {}
+               end
+               if @nom == @derecho
+                 @irespuesta[@derecho]["SIN RESPUESTA"] = campo[1].to_i
+               else
+                 @irespuesta[@derecho][@resp] = campo[1].to_i
+               end
              end
              i += 1
           %>
@@ -46,4 +65,77 @@
   </tbody>
 </table>
 
-<%= puts @hg; pie_chart(@hg) %>
+<%= 
+
+  def hex_a_rgb(c)
+    r = []
+    r[0] = c.slice(1,2).to_i
+    r[1] = c.slice(3,2).to_i
+    r[2] = c.slice(5,2).to_i
+    return r
+  end
+
+  def rgb_a_hex(r)
+    return sprintf("#%2x%2x%2x", r[0], r[1], r[2])
+  end
+
+  # Tomada de Highchart
+  def brighten(c, b)
+    r = hex_a_rgb(c)
+    f = b * 255
+    f = f.to_i
+    3.times do |x|
+      r[x] += f
+      r[x] = r[x] > 255 ? 255 : (r[x] < 0 ? 0 : r[x])
+    end
+    return rgb_a_hex(r)
+  end
+
+  puts "iderecho=" ; puts @iderecho
+  puts "irespuesta=" ; puts @irespuesta
+  puts "----"
+  # De Highcharts.getOptions().colors
+  @colors = ["#7cb5ec", "#434348", "#90ed7d", "#f7a35c", "#8085e9", 
+    "#f15c80", "#e4d354", "#8085e8", "#8d4653", "#91e8e1"]
+  @pd = []
+  @pr = []
+  i = 0
+  @iderecho.each do |d, v|
+    @pd.push({
+      name: d,
+      y: v,
+      color: @colors[i % @colors.size]
+    })
+    j = 0
+    @irespuesta[d].each do |r, vr|
+      @pr.push({
+        name: r,
+        y: vr,
+        color: @colors[i % @colors.size]
+        #brighten( @colors[i % @colors.size], 0.2 - (j / irespuesta[d].size) / 5))
+      })
+    end
+    i += 1
+  end
+    @series = [
+    {name: 'Derechos',
+    data: @pd,
+    size: '60%',
+    dataLabels: {
+        color: 'white',
+        distance: -30 }
+    }, 
+    {name: 'Respuestas',
+    data: @pr,
+    size: '80%',
+    innerSize: '60%' }
+    ]
+    puts @hg; 
+    puts @series;
+    #line_chart [
+    #  {name: "Series A", data: [8.0, 10.0]},
+    #  {name: "Series B", data: [2.3, 4.9]}
+    #] 
+    #line_chart(@hg) 
+    pie_chart(@hg) 
+    %>

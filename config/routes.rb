@@ -18,6 +18,9 @@ Rails.application.routes.draw do
   get "/conteos/personas" => 'conteos#personas'
   get "/conteos/respuestas" => 'conteos#respuestas'
   get "/conteos/vacios" => 'conteos#vacios'
+  
+  patch "/actos/agregar" => 'sivel2_gen/actos#agregar'
+  get "/actos/eliminar" => 'sivel2_gen/actos#eliminar'
 
   root 'sivel2_gen/hogar#index'
   mount Sivel2Sjr::Engine => "/", as: 'sivel2_sjr'

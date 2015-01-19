@@ -1,10 +1,10 @@
-              <%= f.simple_fields_for :desplazamiento do |desplazamiento| %>
-                <%= render 'desplazamiento_fields', :f => desplazamiento %>
-              <% end %>
-              <div class="links">
-                <%= link_to_add_association 'Añadir Desplazamiento', f, 
-                  :desplazamiento, {:class => 'btn-primary',
-                    "data-ajax" => "/desplazamientos/nuevo", 
-                    "data-ajaxdata" => "caso_id" }
-                %>
-              </div>
+<%= f.simple_fields_for :desplazamiento do |desplazamiento| %>
+  <%= render 'desplazamiento_fields', :f => desplazamiento %>
+<% end %>
+<div class="links">
+  <%= link_to_add_association 'Añadir Desplazamiento', f, 
+    :desplazamiento, {:class => 'btn-primary',
+      "data-ajax" => "/desplazamientos/nuevo", 
+      "data-ajaxdata" => "caso_id" }
+    %>
+  </div>

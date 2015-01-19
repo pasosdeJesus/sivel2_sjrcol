@@ -1,10 +1,10 @@
-              <%= f.simple_fields_for :respuesta do |respuesta| %>
-                <%= render 'respuesta_fields', :f => respuesta%>
-              <% end %>
-              <div class="links">
-                <%= link_to_add_association 'Añadir Respuesta', f, 
-                  :respuesta, {:class => 'btn-primary',
-                    "data-ajax" => "/respuestas/nuevo", 
-                    "data-ajaxdata" => "caso_id" }
-                %>
-              </div>
+<%= f.simple_fields_for :respuesta do |respuesta| %>
+  <%= render 'respuesta_fields', :f => respuesta%>
+<% end %>
+<div class="links">
+  <%= link_to_add_association 'Añadir Respuesta', f, 
+    :respuesta, {:class => 'btn-primary',
+      "data-ajax" => "/respuestas/nuevo", 
+      "data-ajaxdata" => "caso_id" }
+    %>
+  </div>

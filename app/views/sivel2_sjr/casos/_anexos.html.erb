@@ -1,6 +1,6 @@
-              <%= f.simple_fields_for :anexo do |a| %>
-                <%= render 'anexo_fields', :f => a %>
-              <% end %>
-              <div class="links">
-                <%= link_to_add_association 'Añadir Anexo', f, :anexo, :class => 'btn-primary' %>
-              </div>
+<%= f.simple_fields_for :anexo do |a| %>
+  <%= render 'anexo_fields', :f => a %>
+<% end %>
+<div class="links">
+  <%= link_to_add_association 'Añadir Anexo', f, :anexo, :class => 'btn-primary' %>
+</div>

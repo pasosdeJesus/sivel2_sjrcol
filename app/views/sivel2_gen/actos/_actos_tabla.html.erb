@@ -1,0 +1,38 @@
+<table class="table table-striped" border='1'>
+  <thead>
+    <tr>
+      <th><%= @caso.actosjr.human_attribute_name(:presponsable) %></th>
+      <th><%= @caso.actosjr.human_attribute_name(:categoria) %></th>
+      <th><%= @caso.actosjr.human_attribute_name(:victima) %></th>
+      <th><%= @caso.actosjr.human_attribute_name(:fecha) %></th>
+      <th>Causó <%= @caso.actosjr.human_attribute_name(:desplazamiento) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @caso.actosjr.try(:each) do |actosjr| %>
+      <tr>
+        <td><%= actosjr.acto.presponsable.nombre %></td>
+        <td><%= actosjr.acto.categoria.nombre %></td>
+        <td><%= actosjr.acto.persona.nombres + ' ' + 
+          actosjr.acto.persona.apellidos 
+          %></td>
+        <td><%= actosjr.fecha %></td>
+        <td><%= actosjr.desplazamiento.fechaexpulsion if 
+            actosjr.desplazamiento 
+        %></td>
+        <td>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+            '#',
+            :data => { 
+                :eliminaracto => "#{actosjr.id_acto}",
+            },
+            :class => 'btn btn-xs btn-danger eliminaracto' 
+          %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+

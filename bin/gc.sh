@@ -18,8 +18,12 @@ if (test "$?" = "0") then {
 } fi;
 
 
-NOKOGIRI_USE_SYSTEM_LIBRARIES=1 MAKE=gmake make=gmake QMAKE=qmake4 bundle update
-NOKOGIRI_USE_SYSTEM_LIBRARIES=1 MAKE=gmake make=gmake QMAKE=qmake4 bundle install
+if (test "$SINAC" != "1") then {
+	NOKOGIRI_USE_SYSTEM_LIBRARIES=1 MAKE=gmake make=gmake QMAKE=qmake4 bundle update
+} fi;
+if (test "$SININS" != "1") then {
+	NOKOGIRI_USE_SYSTEM_LIBRARIES=1 MAKE=gmake make=gmake QMAKE=qmake4 bundle install
+} fi;
 
 RAILS_ENV=test rake db:drop db:setup db:migrate sivel2:indices
 if (test "$?" != "0") then {

@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 75d8a471930c2fe6688203a94ac203e02269b311
+  revision: e3feabd5d3a640d1cc9cb96ee1053b41dff4d454
   specs:
     sivel2_gen (2.0.a3)
       devise
@@ -9,7 +9,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: cabed5a442ad85369040948143f047847d5293fc
+  revision: f88f44575475d669b82f136cbecf879458054018
   specs:
     sivel2_sjr (2.0.a3)
       rails
@@ -232,7 +232,7 @@ GEM
       rspec-mocks (~> 3.1.0)
       rspec-support (~> 3.1.0)
     rspec-support (3.1.2)
-    sass (3.4.9)
+    sass (3.4.10)
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)

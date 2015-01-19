@@ -5,7 +5,7 @@ describe "Control de acceso " do
   before { 
     @usuario = FactoryGirl.create(:usuario, 
                                   rol: Ability::ROLANALI, 
-                                  regionsjr_id: 100)
+                                  regionsjr_id: 2)
     visit new_usuario_session_path 
     fill_in "Usuario", with: @usuario.nusuario
     fill_in "Clave", with: @usuario.password

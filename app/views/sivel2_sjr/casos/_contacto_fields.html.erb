@@ -1,6 +1,8 @@
-<%= f.simple_fields_for :persona do |p| %>
-	<%= render 'sivel2_gen/casos/persona_fields', :f => p %>
-<% end %>
+<div class='campos_persona'>
+  <%= f.simple_fields_for :persona do |p| %>
+    <%= render 'sivel2_gen/casos/persona_fields', :f => p %>
+  <% end %>
+</div>
 
 <%= f.association :rangoedad,
 	collection: Sivel2Gen::Rangoedad.habilitados,

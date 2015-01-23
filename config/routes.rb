@@ -21,6 +21,9 @@ Rails.application.routes.draw do
   
   patch "/actos/agregar" => 'sivel2_gen/actos#agregar'
   get "/actos/eliminar" => 'sivel2_gen/actos#eliminar'
+  
+  get "/personas" => 'sivel2_gen/personas#index'
+  get "/personas/remplazar" => 'sivel2_gen/personas#remplazar'
 
   root 'sivel2_gen/hogar#index'
   mount Sivel2Sjr::Engine => "/", as: 'sivel2_sjr'

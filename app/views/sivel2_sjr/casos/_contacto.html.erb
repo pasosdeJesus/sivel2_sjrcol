@@ -2,27 +2,27 @@
   <% if !victima.object.persona.nil?  && 
     victima.object.persona.id == @caso.casosjr.contacto.id 
   %>
-  <%= s.input :direccion, label: "Dirección actual" %>
-  <%= s.input :telefono, label: 'Teléfono' %>
-  <%= s.association :comosupo,
-    collection: Sivel2Sjr::Comosupo.all.order(:nombre),
-    include_blank: false,
-    label: "Como supo del SJR",
-    label_method: :nombre, 
-    value_method: :id 
-  %>
-  <%= s.input :detcomosupo, 
-    label: "Detalle como supo"
-  %>
+    <%= s.input :direccion, label: "Dirección actual" %>
+    <%= s.input :telefono, label: 'Teléfono' %>
+    <%= s.association :comosupo,
+      collection: Sivel2Sjr::Comosupo.all.order(:nombre),
+      include_blank: false,
+      label: "Como supo del SJR",
+      label_method: :nombre, 
+      value_method: :id 
+    %>
+    <%= s.input :detcomosupo, 
+      label: "Detalle como supo"
+    %>
 
-  <%= render 'contacto_fields', :f => victima %>
-  <%= s.input :concentimientosjr, 
-    boolean_style: :nested,
-    inline_label: "Consentimiento Informado compartir SJR"
-  %>
-  <%= s.input :concentimientobd, 
-    boolean_style: :nested,
-    inline_label: "Consentimiento Informado compartir BD CINEP"
-  %>
+    <%= render 'contacto_fields', :f => victima %>
+    <%= s.input :concentimientosjr, 
+      boolean_style: :nested,
+      inline_label: "Consentimiento Informado compartir SJR"
+    %>
+    <%= s.input :concentimientobd, 
+      boolean_style: :nested,
+      inline_label: "Consentimiento Informado compartir BD CINEP"
+    %>
+  <% end %>
 <% end %>
-                <% end %>

@@ -52,7 +52,6 @@ module Sivel2Gen
     
     # Busca y lista persona(s)
     def remplazar
-      byebug
       @persona = Persona.find(params[:id_persona].to_i)
       #@persona.current_usuario = current_usuario
       victima = Victima.find(params[:id_victima].to_i)
@@ -62,7 +61,7 @@ module Sivel2Gen
       victima.persona = @persona
       victima.save!
       if @caso.casosjr.contacto.id == personaant.id
-        @caso.casosjr.contacto.id = @persona.id
+        @caso.casosjr.contacto = @persona
         @caso.casosjr.save
         if @caso.validate
             @caso.save

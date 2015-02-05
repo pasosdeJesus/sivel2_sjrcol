@@ -4,7 +4,6 @@
   <article>
   <%= simple_form_for @caso, :html => { :class => 'form-horizontal' } do |f| %>
     <div data-role="content" class="form-inputs">
-
       <div id="errores">
         <% if f.object.errors.any? %>
           <div id="error_explanation">
@@ -17,12 +16,11 @@
               <% end %>
             </ul>
           </div>
-          <!--%= f.error_notification %-->
         <% end %>
         <%= f.error_notification %>
       </div> <!-- errores -->
 
-      <div class="accordion" id="accordion2">
+      <div class="accordion" id="acordeon">
 
         <%= f.simple_fields_for :casosjr do |s| %>
           <div class="accordion-group">
@@ -86,7 +84,7 @@
             </div>
           </div> <! -- accordion-group refugio -->
 
-        <% end %>
+        <% end %> <!-- simple_fields_for :casosjr -->
 
         <div class="accordion-group">
           <div class="accordion-heading">
@@ -183,7 +181,6 @@
       %>
     </div> <!-- form-action -->
 
-  <% end %>
+  <% end %> <!-- simple_form_for @caso -->
   </article>
-<% end -%>
-
+<% end -%> <!-- else -->

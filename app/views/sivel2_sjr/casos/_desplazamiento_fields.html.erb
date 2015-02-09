@@ -9,7 +9,7 @@
     %>
     <%= f.association :expulsion,
         collection: Sivel2Gen::Ubicacion.where(:id_caso => @caso.id),
-        label_method: lambda {|t| t.muestra(conclase: true) },
+        label_method: lambda {|t| formato_ubicacion(t) },
         value_method: :id 
     %>
     <%= f.input :fechallegada, 
@@ -18,7 +18,7 @@
     %>
     <%= f.association :llegada,
           collection: Sivel2Gen::Ubicacion.where(:id_caso => @caso.id),
-          label_method: lambda {|t| t.muestra(conclase: true) },
+          label_method: lambda {|t| formato_ubicacion(t) },
           value_method: :id 
     %>
     <%= f.association :clasifdesp,

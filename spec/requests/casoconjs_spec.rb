@@ -232,6 +232,7 @@ describe "Llenar caso con javascript", :js => true, type: :feature do
       expect(page).to have_field('Fecha de Salida', with: '2014-08-03')
       within ("div#refugio") do 
         find('#caso_casosjr_attributes_id_salida').click
+        page.save_screenshot('s-ref0.png')
         select('VENEZUELA / ARAGUA', from: 'Sitio de Salida') 
         fill_in "Fecha de Llegada", with: '2014-08-04'
         find('#caso_casosjr_attributes_id_llegada').click

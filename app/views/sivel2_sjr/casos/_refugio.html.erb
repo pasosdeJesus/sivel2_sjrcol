@@ -8,12 +8,8 @@
 <%= s.association :salida,
   collection: Sivel2Gen::Ubicacion.where(:id_caso => @caso.id),
   label: "Sitio de Salida",
-  label_method: lambda {|t| Sivel2Gen::Pais.find(t.id_pais).nombre + 
-    (t.id_departamento.nil? ? "" : " / " + 
-     Sivel2Gen::Departamento.where(id: t.id_departamento, 
-                                   id_pais: t.id_pais).take.nombre
-    )},
-    value_method: :id 
+  label_method: lambda { |t| formato_ubicacion(t) },
+  value_method: :id 
 %>
 <%= s.input :fechallegada, 
   :input_html => { "data-behaviour" => "datepicker" },
@@ -22,12 +18,8 @@
 <%= s.association :llegada,
   collection: Sivel2Gen::Ubicacion.where(:id_caso => @caso.id),
   label: "Sitio de Llegada",
-  label_method: lambda {|t| Sivel2Gen::Pais.find(t.id_pais).nombre + 
-    (t.id_departamento.nil? ? "" : " / " + 
-     Sivel2Gen::Departamento.where(id:t.id_departamento,
-     id_pais: t.id_pais).take.nombre
-    )},
-   value_method: :id 
+  label_method: lambda { |t| formato_ubicacion(t) },
+  value_method: :id 
 %>
 <%= s.association :categoria,
   collection: Sivel2Gen::Categoria.where(

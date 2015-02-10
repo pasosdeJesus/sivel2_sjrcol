@@ -27,9 +27,13 @@
                @nom = campo[1].to_s 
                @derecho = @nom
              end
-             if i == 1 && campo[1]
-               @resp = campo[1].to_s
-               @nom = @nom + ':' + @resp
+             if i == 1
+               if campo[1]
+                 @resp = campo[1].to_s
+                 @nom = @nom + ':' + @resp
+               else
+                 @nom = @nom + ':' + 'SIN RESPUESTA'
+               end
              end
              if i == 3 && campo[1] 
                @hg[@nom] = campo[1].to_i

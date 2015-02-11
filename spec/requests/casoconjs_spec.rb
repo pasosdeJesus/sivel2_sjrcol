@@ -7,12 +7,12 @@ describe "Llenar caso con javascript", :js => true, type: :feature do
     usuario = Usuario.find_by(nusuario: 'sjrven')
     usuario.password = 'sjrven123'
     visit new_usuario_session_path 
-    page.save_screenshot('aut1.png')
+    page.save_screenshot('tmp/aut1.png')
     fill_in "Usuario", with: usuario.nusuario
     fill_in "Clave", with: usuario.password
     click_button "Iniciar Sesión"
     #print page.html
-    #page.save_screenshot('s.png')
+    #page.save_screenshot('tmp/s.png')
     #save_and_open_page
     expect(page).to have_content("Administrar")
   }
@@ -38,7 +38,7 @@ describe "Llenar caso con javascript", :js => true, type: :feature do
         fill_in "Apellidos", with: 'Apellidos Solicitante'
       end
       click_on "Validar y Guardar"
-      page.save_screenshot('s-sol1.png')
+      page.save_screenshot('tmp/s-sol1.png')
       expect(page).to have_content("2014-08-03")
     end
 
@@ -59,15 +59,15 @@ describe "Llenar caso con javascript", :js => true, type: :feature do
         fill_in "Nombres", with: 'Nombres Solicitante'
         fill_in "Apellidos", with: 'Apellidos Solicitante'
       end
-      page.save_screenshot('s-sol1.png')
+      page.save_screenshot('tmp/s-sol1.png')
       click_on "Contacto"
-      page.save_screenshot('s-sol2.png')
+      page.save_screenshot('tmp/s-sol2.png')
 
       # Núcleo familiar
       click_on "Núcleo Familiar"
       click_on "Añadir Víctima"
       wait_for_ajax
-      page.save_screenshot('s-sol3.png')
+      page.save_screenshot('tmp/s-sol3.png')
       within ("div#victima") do 
         fill_in "Nombres", with: 'Nombres Beneficiario'
         fill_in "Apellidos", with: 'Apellidos Beneficiario'
@@ -89,16 +89,16 @@ describe "Llenar caso con javascript", :js => true, type: :feature do
         select('PESCADOR', from: 'Actividad/Oficio actual') 
         select('PRIMARIA', from: 'Nivel Escolar') 
       end
-      page.save_screenshot('s-fam1.png')
+      page.save_screenshot('tmp/s-fam1.png')
       click_on "Validar y Guardar"
-      page.save_screenshot('s-fam2.png')
+      page.save_screenshot('tmp/s-fam2.png')
       expect(page).to have_content("2014-08-03")
     end
 
     it "puede crear caso con familiar mínimo y 1 ubicación" do
       visit '/casos/nuevo'
       # Datos básicos
-      page.save_screenshot('s-sol0.png')
+      page.save_screenshot('tmp/s-sol0.png')
       fill_in "Fecha de Recepción", with: '2014-08-04'
       fill_in "F. Desplazamiento Emblemático", with: '2014-08-03'
       #fill_in "Memo", with: 'descripcion con javascript'
@@ -113,9 +113,9 @@ describe "Llenar caso con javascript", :js => true, type: :feature do
         fill_in "Nombres", with: 'Nombres Solicitante'
         fill_in "Apellidos", with: 'Apellidos Solicitante'
       end
-      page.save_screenshot('s-sol1.png')
+      page.save_screenshot('tmp/s-sol1.png')
       click_on "Contacto"
-      page.save_screenshot('s-sol2.png')
+      page.save_screenshot('tmp/s-sol2.png')
 
       # Núcleo familiar
       click_on "Núcleo Familiar"
@@ -124,9 +124,9 @@ describe "Llenar caso con javascript", :js => true, type: :feature do
         fill_in "Nombres", with: 'Nombres Beneficiario'
         fill_in "Apellidos", with: 'Apellidos Beneficiario'
       end
-      page.save_screenshot('s-fam1.png')
+      page.save_screenshot('tmp/s-fam1.png')
       click_on "Núcleo Familiar"
-      page.save_screenshot('s-fam2.png')
+      page.save_screenshot('tmp/s-fam2.png')
 
       # Sitios Geográficos
       click_link "Ubicación"
@@ -134,7 +134,7 @@ describe "Llenar caso con javascript", :js => true, type: :feature do
         click_link "Ubicación"
       end
       expect(page).to have_content "Añadir Ubicación"
-      page.save_screenshot('s-geo0.png')
+      page.save_screenshot('tmp/s-geo0.png')
       click_on "Añadir Ubicación"
       within ("div#ubicacion") do 
         select('VENEZUELA', from: 'País') 
@@ -147,7 +147,7 @@ describe "Llenar caso con javascript", :js => true, type: :feature do
         fill_in "Longitud", with: '-74.3'
         select('URBANO', from: 'Tipo de Sitio') 
       end
-      page.save_screenshot('s-geo1.png')
+      page.save_screenshot('tmp/s-geo1.png')
       click_on "Validar y Guardar"
       expect(page).to have_content("2014-08-03")
     end
@@ -169,9 +169,9 @@ describe "Llenar caso con javascript", :js => true, type: :feature do
         fill_in "Nombres", with: 'Nombres Solicitante'
         fill_in "Apellidos", with: 'Apellidos Solicitante'
       end
-      page.save_screenshot('s-sol1.png')
+      page.save_screenshot('tmp/s-sol1.png')
       click_on "Contacto"
-      page.save_screenshot('s-sol2.png')
+      page.save_screenshot('tmp/s-sol2.png')
 
       # Núcleo familiar
       click_on "Núcleo Familiar"
@@ -180,9 +180,9 @@ describe "Llenar caso con javascript", :js => true, type: :feature do
         fill_in "Nombres", with: 'Nombres Beneficiario'
         fill_in "Apellidos", with: 'Apellidos Beneficiario'
       end
-      page.save_screenshot('s-fam1.png')
+      page.save_screenshot('tmp/s-fam1.png')
       click_on "Núcleo Familiar"
-      page.save_screenshot('s-fam2.png')
+      page.save_screenshot('tmp/s-fam2.png')
 
       # Sitios Geográficos
       click_link "Ubicación"
@@ -190,7 +190,7 @@ describe "Llenar caso con javascript", :js => true, type: :feature do
         click_link "Ubicación"
       end
       expect(page).to have_content "Añadir Ubicación"
-      page.save_screenshot('s-geo0.png')
+      page.save_screenshot('tmp/s-geo0.png')
       click_on "Añadir Ubicación"
       within ("div#ubicacion") do 
         select('VENEZUELA', from: 'País') 
@@ -203,11 +203,11 @@ describe "Llenar caso con javascript", :js => true, type: :feature do
         fill_in "Longitud", with: '-74.3'
         select('URBANO', from: 'Tipo de Sitio') 
       end
-      page.save_screenshot('s-geo1.png')
+      page.save_screenshot('tmp/s-geo1.png')
       expect(find_link('Añadir Ubicación').visible?).to be true
       click_on "Añadir Ubicación"
       wait_for_ajax
-      page.save_screenshot('s-geo2.png')
+      page.save_screenshot('tmp/s-geo2.png')
       # Si es acordeon su = "//div[@id='ubicacion']/div/div[2]"
       su = "//div[@id='ubicacion']/div[2]"
       within(:xpath, su) do 
@@ -221,7 +221,7 @@ describe "Llenar caso con javascript", :js => true, type: :feature do
         fill_in "Longitud", with: '-74.32'
         select('RURAL', from: 'Tipo de Sitio') 
       end
-      page.save_screenshot('s-geo3.png')
+      page.save_screenshot('tmp/s-geo3.png')
       click_on "Ubicación"
 
       # Refugio
@@ -232,7 +232,7 @@ describe "Llenar caso con javascript", :js => true, type: :feature do
       expect(page).to have_field('Fecha de Salida', with: '2014-08-03')
       within ("div#refugio") do 
         find('#caso_casosjr_attributes_id_salida').click
-        page.save_screenshot('s-ref0.png')
+        page.save_screenshot('tmp/s-ref0.png')
         select('VENEZUELA / ARAGUA', from: 'Sitio de Salida') 
         fill_in "Fecha de Llegada", with: '2014-08-04'
         find('#caso_casosjr_attributes_id_llegada').click
@@ -240,9 +240,9 @@ describe "Llenar caso con javascript", :js => true, type: :feature do
         select('R2000 RAZA', from: 'Causa del Refugio') 
         fill_in "Observaciones", with: 'Observaciones refugio'
       end
-      page.save_screenshot('s-ref1.png')
+      page.save_screenshot('tmp/s-ref1.png')
       click_on "Refugio"
-      page.save_screenshot('s-ref2.png')
+      page.save_screenshot('tmp/s-ref2.png')
 
       #Desplazamiento
       click_on "Desplazamientos"
@@ -250,11 +250,11 @@ describe "Llenar caso con javascript", :js => true, type: :feature do
         click_on "Desplazamientos"
       end
       click_on "Añadir Desplazamiento"
-      page.save_screenshot('s-desp1.png')
+      page.save_screenshot('tmp/s-desp1.png')
       if (!find_field('Fecha de Expulsión').visible?)
         click_on "Añadir Desplazamiento"
       end
-      page.save_screenshot('s-desp1-5.png')
+      page.save_screenshot('tmp/s-desp1-5.png')
       expect(find('#desplazamiento')).to have_field( 'Fecha de Expulsión')
       within ("#desplazamiento") do 
         fill_in "Fecha de Expulsión", with: '2014-08-03'
@@ -265,9 +265,9 @@ describe "Llenar caso con javascript", :js => true, type: :feature do
         select('COLOMBIA / BOYACÁ', from: 'Sitio de Llegada') 
         fill_in "Descripción", with: 'Descripción desplazamiento'
       end
-      page.save_screenshot('s-desp2.png')
+      page.save_screenshot('tmp/s-desp2.png')
       click_on "Desplazamientos"
-      page.save_screenshot('s-desp3.png')
+      page.save_screenshot('tmp/s-desp3.png')
       click_on "Validar y Guardar"
       expect(page).to have_content("2014-08-03")
     end
@@ -290,9 +290,9 @@ describe "Llenar caso con javascript", :js => true, type: :feature do
         fill_in "Nombres", with: 'Nombres Solicitante'
         fill_in "Apellidos", with: 'Apellidos Solicitante'
       end
-      page.save_screenshot('s-sol1.png')
+      page.save_screenshot('tmp/s-sol1.png')
       click_on "Contacto"
-      page.save_screenshot('s-sol2.png')
+      page.save_screenshot('tmp/s-sol2.png')
 
       #Desplazamiento
       click_on "Presuntos Responsables"
@@ -300,7 +300,7 @@ describe "Llenar caso con javascript", :js => true, type: :feature do
         click_on "Presuntos Responsables"
       end
       click_on "Añadir Presunto Responsable"
-      page.save_screenshot('s-pr1.png')
+      page.save_screenshot('tmp/s-pr1.png')
       if (!find_field('Presunto Responsable').visible?)
         click_on "Añadir Presunto Responsable"
       end
@@ -312,19 +312,19 @@ describe "Llenar caso con javascript", :js => true, type: :feature do
         fill_in "Brigada", with: 'b1'
         fill_in "Otro", with: 'o1'
       end
-      page.save_screenshot('s-pr2.png')
+      page.save_screenshot('tmp/s-pr2.png')
       click_on "Presuntos Responsables"
-      page.save_screenshot('s-pr3.png')
+      page.save_screenshot('tmp/s-pr3.png')
 
       #Acto
       sleep 1
       click_on "Causas/Antecedentes"
       sleep 1
-      page.save_screenshot('s-a0.png')
+      page.save_screenshot('tmp/s-a0.png')
       if (!find_link('Añadir Causa/Antecedente').visible?)
         click_on "Causas/Antecedentes"
       end
-      page.save_screenshot('s-a2.png')
+      page.save_screenshot('tmp/s-a2.png')
       expect(find('#antecedentes')).to have_field( 'Categoria')
       within ("#antecedentes") do 
         find_field('caso_acto_id_presponsable').click
@@ -333,14 +333,14 @@ describe "Llenar caso con javascript", :js => true, type: :feature do
         find_field('Víctima').click
         select('Nombres Solicitante Apellidos Solicitante', from: 'Víctima') 
       end
-      page.save_screenshot('s-a3.png')
+      page.save_screenshot('tmp/s-a3.png')
       click_on "Añadir Causa/Antecedente"
-      page.save_screenshot('s-a4.png')
+      page.save_screenshot('tmp/s-a4.png')
       click_on "Causas/Antecedentes"
-      page.save_screenshot('s-a5.png')
+      page.save_screenshot('tmp/s-a5.png')
  
       click_on "Validar y Guardar"
-      page.save_screenshot('s-g.png')
+      page.save_screenshot('tmp/s-g.png')
       # no se entiende porque no funciona:
       # expect(page).to have_content("2014-08-03")
     end

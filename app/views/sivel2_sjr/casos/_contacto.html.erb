@@ -9,7 +9,7 @@
     <%= s.input :direccion, label: "Dirección actual" %>
     <%= s.input :telefono, label: 'Teléfono' %>
     <%= s.association :comosupo,
-      collection: Sivel2Sjr::Comosupo.all.order(:nombre),
+      collection: Sivel2Sjr::Comosupo.habilitados,
       include_blank: false,
       label: "Como supo del SJR",
       label_method: :nombre, 

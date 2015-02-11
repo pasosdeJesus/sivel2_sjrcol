@@ -2,12 +2,10 @@
   <% if !victima.object.persona.nil?  && 
     victima.object.persona.id == @caso.casosjr.contacto.id 
   %>
-    <div class='campos_persona'>
-      <%= victima.simple_fields_for :persona do |p| %>
-        <%= render 'sivel2_gen/casos/persona_fields', :f => p %>
-      <% end %>
-    </div>
-  
+    <%= victima.simple_fields_for :persona do |p| %>
+      <%= render 'sivel2_gen/casos/persona_fields', :f => p %>
+    <% end %>
+
     <%= s.input :direccion, label: "Dirección actual" %>
     <%= s.input :telefono, label: 'Teléfono' %>
     <%= s.association :comosupo,

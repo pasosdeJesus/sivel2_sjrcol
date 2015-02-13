@@ -1012,11 +1012,11 @@ CREATE SEQUENCE contexto_seq
 
 
 --
--- Name: sivel2_sjr_progestado_respuesta; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: sivel2_sjr_derecho_respuesta; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE TABLE sivel2_sjr_progestado_respuesta (
-    id_progestado integer DEFAULT 0 NOT NULL,
+CREATE TABLE sivel2_sjr_derecho_respuesta (
+    id_derecho integer DEFAULT 9 NOT NULL,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     id_respuesta integer NOT NULL
@@ -1031,24 +1031,12 @@ CREATE VIEW cres1 AS
  SELECT caso.id AS id_caso,
     respuesta.fechaatencion,
     casosjr.id_regionsjr,
-    progestado_respuesta.id_progestado
+    derecho_respuesta.id_derecho
    FROM sivel2_gen_caso caso,
     sivel2_sjr_casosjr casosjr,
     sivel2_sjr_respuesta respuesta,
-    sivel2_sjr_progestado_respuesta progestado_respuesta
-  WHERE ((((caso.id = casosjr.id_caso) AND (caso.id = respuesta.id_caso)) AND (casosjr.id_regionsjr = 3)) AND (respuesta.id = progestado_respuesta.id_respuesta));
-
-
---
--- Name: sivel2_sjr_derecho_respuesta; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE sivel2_sjr_derecho_respuesta (
-    id_derecho integer DEFAULT 9 NOT NULL,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone,
-    id_respuesta integer NOT NULL
-);
+    sivel2_sjr_derecho_respuesta derecho_respuesta
+  WHERE ((((caso.id = casosjr.id_caso) AND (caso.id = respuesta.id_caso)) AND (casosjr.id_regionsjr = 1)) AND (respuesta.id = derecho_respuesta.id_respuesta));
 
 
 --
@@ -1062,7 +1050,7 @@ CREATE VIEW cvp1 AS
    FROM sivel2_sjr_casosjr casosjr,
     sivel2_sjr_respuesta respuesta,
     sivel2_sjr_derecho_respuesta derecho_respuesta
-  WHERE ((respuesta.id_caso = casosjr.id_caso) AND (derecho_respuesta.id_respuesta = respuesta.id));
+  WHERE ((((respuesta.id_caso = casosjr.id_caso) AND (derecho_respuesta.id_respuesta = respuesta.id)) AND (casosjr.id_regionsjr = 4)) AND (derecho_respuesta.id_derecho = 1));
 
 
 --
@@ -3218,6 +3206,18 @@ CREATE TABLE sivel2_sjr_progestado (
 CREATE TABLE sivel2_sjr_progestado_derecho (
     progestado_id integer,
     derecho_id integer
+);
+
+
+--
+-- Name: sivel2_sjr_progestado_respuesta; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE sivel2_sjr_progestado_respuesta (
+    id_progestado integer DEFAULT 0 NOT NULL,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    id_respuesta integer NOT NULL
 );
 
 
@@ -6011,7 +6011,7 @@ ALTER TABLE ONLY sivel2_sjr_victimasjr
 --
 
 ALTER TABLE ONLY sivel2_sjr_victimasjr
-    ADD CONSTRAINT victimasjr_id_victima_fkey FOREIGN KEY (id_victima) REFERENCES sivel2_gen_victima(id);
+    ADD CONSTRAINT victimasjr_id_victima_fkey FOREIGN KEY (id_victima) REFERENCES sivel2_gen_victima(id) ON DELETE CASCADE;
 
 
 --
@@ -6151,4 +6151,6 @@ INSERT INTO schema_migrations (version) VALUES ('20141222174257');
 INSERT INTO schema_migrations (version) VALUES ('20141222174267');
 
 INSERT INTO schema_migrations (version) VALUES ('20141225174739');
+
+INSERT INTO schema_migrations (version) VALUES ('20150213114933');
 

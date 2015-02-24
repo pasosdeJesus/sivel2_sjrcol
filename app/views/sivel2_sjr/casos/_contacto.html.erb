@@ -2,16 +2,14 @@
   <% if !victima.object.persona.nil?  && 
     victima.object.persona.id == @caso.casosjr.contacto.id 
   %>
-    <div class='campos_persona'>
-      <%= victima.simple_fields_for :persona do |p| %>
-        <%= render 'sivel2_gen/casos/persona_fields', :f => p %>
-      <% end %>
-    </div>
-  
+    <%= victima.simple_fields_for :persona do |p| %>
+      <%= render 'sivel2_gen/casos/persona_fields', :f => p %>
+    <% end %>
+
     <%= s.input :direccion, label: "Dirección actual" %>
     <%= s.input :telefono, label: 'Teléfono' %>
     <%= s.association :comosupo,
-      collection: Sivel2Sjr::Comosupo.all.order(:nombre),
+      collection: Sivel2Sjr::Comosupo.habilitados,
       include_blank: false,
       label: "Como supo del SJR",
       label_method: :nombre, 
@@ -140,7 +138,7 @@
         boolean_style: :nested
       %>
   
-      <%= vs.input :id_victima, as: :hidden %>
+      <!--%= vs.input :id_victima, as: :hidden %-->
     <% end %> <!-- simple_fields_for :victimasjr -->
   
     <%= s.input :concentimientosjr, 

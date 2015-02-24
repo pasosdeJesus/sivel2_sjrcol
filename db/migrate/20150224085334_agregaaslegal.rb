@@ -17,7 +17,7 @@ INSERT INTO sivel2_sjr_aslegal (id, nombre, fechacreacion, fechadeshabilitacion,
 INSERT INTO sivel2_sjr_aslegal (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at, derecho_id) VALUES (7, 'ASESORÍA DECISIÓN REFUGIO POSITIVA', '2014-02-14', NULL, NULL, '2014-08-04 14:26:47.864887', NULL);
 INSERT INTO sivel2_sjr_aslegal (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at, derecho_id) VALUES (8, 'REDACCIÓN RECURSO DE RECONSIDERACIÓN', '2014-02-14', NULL, NULL, '2014-08-04 14:29:27.012877', NULL);
 INSERT INTO sivel2_sjr_aslegal (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at, derecho_id) VALUES (9, 'GESTIÓN DE OTROS TRÁMITES LEGALES VARIOS', '2014-02-14', NULL, NULL, '2014-08-04 14:28:00.09363', NULL);
-INSERT INTO sivel2_sjr_aslegal (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at, derecho_id) VALUES (3, 'TUTELA ALIMENTACIÓN', '2014-10-08', NULL, '2014-10-08 23:48:22.656315', '2014-10-08 23:48:22.656315', 11);
+INSERT INTO sivel2_sjr_aslegal (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at, derecho_id) VALUES (3, 'TUTELA ALIMENTACIÓN', '2014-10-08', NULL, '2014-10-08 23:48:22.656315', '2014-10-08 23:48:22.656315', NULL);
     SQL
   end
 

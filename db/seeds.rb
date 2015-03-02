@@ -10,10 +10,6 @@ l = File.readlines(
 )
 connection.execute(l.join("\n"))
 
-# Cambios a básicas de SIVel genérico
-l = File.readlines(Gem.loaded_specs['sivel2_sjr'].full_gem_path +
-                   "/db/cambios-basicas.sql")
-
 # De motor SIVeL SJR
 l = File.readlines(Gem.loaded_specs['sivel2_sjr'].full_gem_path +
                    "/db/datos-basicasn.sql")

@@ -4,6 +4,7 @@ class Ability < Sivel2Sjr::Ability
 
   #@@tablasbasicas = @@tablasbasicas 
       
+  @@tablasbasicas << ['Sivel2Sjr', 'declaroante']
   @@tablasbasicas << ['Sivel2Gen', 'filiacion']
   @@tablasbasicas << ['Sivel2Sjr', 'ayudaestado']
   @@tablasbasicas << ['Sivel2Sjr', 'derecho']

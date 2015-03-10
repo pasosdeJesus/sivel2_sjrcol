@@ -16,4 +16,5 @@
 # end
 ActiveSupport::Inflector.inflections do |inflect|
 	inflect.irregular 'progestado', 'progsestado'
+	inflect.irregular 'declaroante', 'declaroante'
 end

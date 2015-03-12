@@ -6,67 +6,71 @@
       <%= render 'sivel2_gen/casos/persona_fields', :f => p %>
     <% end %>
 
-    <%= s.input :direccion, label: "Dirección actual" %>
-    <%= s.input :telefono, label: 'Teléfono' %>
-    <%= s.association :comosupo,
-      collection: Sivel2Sjr::Comosupo.habilitados,
-      include_blank: false,
-      label: "Como supo del SJR",
-      label_method: :nombre, 
-      value_method: :id 
-    %>
-    <%= s.input :detcomosupo, 
-      label: "Detalle como supo"
-    %>
-  
-    <%= victima.association :rangoedad,
-      collection: Sivel2Gen::Rangoedad.habilitados,
-      include_blank: false,
-      label: "Rango de Edad",
-      label_method: :rango, 
-      value_method: :id 
-    %>
-    <%= victima.association :filiacion,
-      collection: Sivel2Gen::Filiacion.habilitados,
-      include_blank: false,
-      label: "Filiación Política",
-      label_method: :nombre, 
-      value_method: :id 
-    %>
-    <%= victima.association :organizacion,
-      collection: Sivel2Gen::Organizacion.habilitados,
-      include_blank: false,
-      label: "Organización",
-      label_method: :nombre, 
-      value_method: :id 
-    %>
-    <%= victima.association :vinculoestado,
-      collection: Sivel2Gen::Vinculoestado.habilitados,
-      include_blank: false,
-      label: "Vínculo con el Estado",
-      label_method: :nombre, 
-      value_method: :id
-    %>
-    <%= victima.association :etnia,
-      collection: Sivel2Gen::Etnia.habilitados,
-      include_blank: false,
-      label: "Etnia",
-      label_method: :nombre, 
-      value_method: :id 
-    %>
-    <%= victima.input(:orientacionsexual, collection: [
-                [:HETEROSEXUAL, :H], [:LESBIANA, :L], [:GAY, :G], 
-                [:BISEXUAL, :B], [:TRANSEXUAL, :T] 
-    ], 
-      label: "Orientación Sexual",
-      include_blank: false ) 
-    %>
-  
-    <%= victima.input :anotaciones %>
-  
-    <%= victima.input :id, as: :hidden %>
-  
     <%= victima.simple_fields_for :victimasjr do |vs| %>
+      <%= vs.input :sindocumento, 
+        boolean_style: :nested, 
+        inline_label: "Sin Doc. Identidad" 
+      %>
+      <%= s.input :direccion, label: "Dirección actual" %>
+      <%= s.input :telefono, label: 'Teléfono' %>
+      <%= s.association :comosupo,
+        collection: Sivel2Sjr::Comosupo.habilitados,
+        include_blank: false,
+        label: "Como supo del SJR",
+        label_method: :nombre, 
+        value_method: :id 
+      %>
+      <%= s.input :detcomosupo, 
+        label: "Detalle como supo"
+      %>
+
+      <%= victima.association :rangoedad,
+        collection: Sivel2Gen::Rangoedad.habilitados,
+        include_blank: false,
+        label: "Rango de Edad",
+        label_method: :rango, 
+        value_method: :id 
+      %>
+      <%= victima.association :filiacion,
+        collection: Sivel2Gen::Filiacion.habilitados,
+        include_blank: false,
+        label: "Filiación Política",
+        label_method: :nombre, 
+        value_method: :id 
+      %>
+      <%= victima.association :organizacion,
+        collection: Sivel2Gen::Organizacion.habilitados,
+        include_blank: false,
+        label: "Organización",
+        label_method: :nombre, 
+        value_method: :id 
+      %>
+      <%= victima.association :vinculoestado,
+        collection: Sivel2Gen::Vinculoestado.habilitados,
+        include_blank: false,
+        label: "Vínculo con el Estado",
+        label_method: :nombre, 
+        value_method: :id
+      %>
+      <%= victima.association :etnia,
+        collection: Sivel2Gen::Etnia.habilitados,
+        include_blank: false,
+        label: "Etnia",
+        label_method: :nombre, 
+        value_method: :id 
+      %>
+      <%= victima.input(:orientacionsexual, collection: [
+                        [:HETEROSEXUAL, :H], [:LESBIANA, :L], [:GAY, :G], 
+                        [:BISEXUAL, :B], [:TRANSEXUAL, :T] 
+      ], 
+        label: "Orientación Sexual",
+        include_blank: false ) 
+      %>
+
+      <%= victima.input :anotaciones %>
+
+      <%= victima.input :id, as: :hidden %>
+
       <%= vs.association :actividadoficio,
         collection: Sivel2Gen::Actividadoficio.habilitados,
         include_blank: false,
@@ -99,10 +103,6 @@
         value_method: :id 
       %>
   
-      <%= vs.input :sindocumento, 
-        boolean_style: :nested, 
-        inline_label: "Sin Doc. Identidad" 
-      %>
       <%= vs.input :cabezafamilia, 
         boolean_style: :nested, 
         inline_label: "Cabeza de Familia"

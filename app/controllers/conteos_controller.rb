@@ -421,11 +421,13 @@ class ConteosController < ApplicationController
       tablas1 = agrega_tabla(tablas1, 'sivel2_gen_persona AS persona')
       where1 = consulta_and_sinap(where1, "persona.id", "victima.id_persona")
       que3 << ["sexo", "Sexo"]
-    when 'SECTOR SOCIAL'
-      que1 = agrega_tabla(que1, 'victima.id_sectorsocial AS id_sectorsocial')
-      tablas3 = agrega_tabla(tablas3, 'sivel2_gen_sectorsocial AS sectorsocial')
-      where3 = consulta_and_sinap(where3, "id_sectorsocial", "sectorsocial.id")
-      que3 << ["sectorsocial.nombre", "Sector Social"]
+    when 'ACTIVIDAD / OFICIO'
+      que1 = agrega_tabla(que1, 'victimasjr.id_actividadoficio AS id_actividadoficio')
+      tablas1 = agrega_tabla(tablas1, 'sivel2_sjr_victimasjr AS victimasjr')
+      where1 = consulta_and_sinap(where1, "victima.id", "victimasjr.id_victima")
+      tablas3 = agrega_tabla(tablas3, 'sivel2_gen_actividadoficio AS actividadoficio ')
+      where3 = consulta_and_sinap(where3, "id_actividadoficio", "actividadoficio.id")
+      que3 << ["actividadoficio.nombre", "Actividad / Oficio"]
     when 'MES RECEPCIÓN'
       que1 = agrega_tabla(que1, "extract(year from fecharec) || '-' " +
                    "|| lpad(cast(extract(month from fecharec) as text), 2, " +

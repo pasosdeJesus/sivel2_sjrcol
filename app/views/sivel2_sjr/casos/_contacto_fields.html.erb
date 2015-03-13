@@ -39,7 +39,7 @@
 %>
 <%= f.input(:orientacionsexual, collection: [
 						[:HETEROSEXUAL, :H], [:LESBIANA, :L], [:GAY, :G], 
-						[:BISEXUAL, :B], [:TRANSEXUAL, :T] 
+						[:BISEXUAL, :B], [:TRANSEXUAL, :T], [:INTERSEXUAL, :I]
 ], 
 	label: "Orientación Sexual",
 	include_blank: false ) 
@@ -81,10 +81,6 @@
 		label_method: :nombre, 
 		value_method: :id 
   %>
-
-  <%= s.input :sindocumento, 
-    boolean_style: :nested, 
-    inline_label: "Sin Doc. Identidad" %>
   <%= s.input :cabezafamilia, 
     boolean_style: :nested, 
     inline_label: "Cabeza de Familia"

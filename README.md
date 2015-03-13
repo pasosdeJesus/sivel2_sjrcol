@@ -4,9 +4,9 @@
 SIVeL 2 para el SJR Colombia.
 
 ### Requerimientos
-* Ruby version >= 1.9
+* Ruby version >= 2.1
 * PostgreSQL >= 9.3 con extension unaccent
-* Recomendado sobre adJ 5.5 (que incluye todos los componentes mencionados). 
+* Recomendado sobre adJ 5.5p2 (que incluye todos los componentes mencionados). 
 * La cuenta desde la cual se ejecute el servidor o las pruebas debe poder abrir 2048 archivos --en adJ se establece en la clase del usuario que ejecuta en /etc/login.conf con :openfiles-cur=2048:
 
 

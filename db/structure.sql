@@ -2887,7 +2887,6 @@ CREATE TABLE sivel2_sjr_aslegal (
     fechadeshabilitacion date,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    derecho_id integer,
     CONSTRAINT aslegal_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
 
@@ -4534,13 +4533,6 @@ CREATE INDEX index_sivel2_gen_anexoactividad_on_actividad_id ON sivel2_gen_anexo
 
 
 --
--- Name: index_sivel2_sjr_aslegal_on_derecho_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_sivel2_sjr_aslegal_on_derecho_id ON sivel2_sjr_aslegal USING btree (derecho_id);
-
-
---
 -- Name: index_sivel2_sjr_casosjr_on_comosupo_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -5487,14 +5479,6 @@ ALTER TABLE ONLY etapa
 
 
 --
--- Name: fk_aslegal_derecho; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY sivel2_sjr_aslegal
-    ADD CONSTRAINT fk_aslegal_derecho FOREIGN KEY (derecho_id) REFERENCES sivel2_sjr_derecho(id);
-
-
---
 -- Name: fk_rails_2403b12f71; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6163,4 +6147,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150225140336');
 INSERT INTO schema_migrations (version) VALUES ('20150225141729');
 
 INSERT INTO schema_migrations (version) VALUES ('20150313153722');
+
+INSERT INTO schema_migrations (version) VALUES ('20150314122808');
 

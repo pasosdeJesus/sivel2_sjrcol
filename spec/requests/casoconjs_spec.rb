@@ -23,7 +23,7 @@ describe "Llenar caso con javascript", :js => true, type: :feature do
       @numcaso=find_field('Código').value
 
       # Datos básicos
-      fill_in "Fecha de Recepción", with: '2014-08-04'
+      fill_in "Fecha Primera Recepción", with: '2014-08-04'
       fill_in "F. Desplazamiento Emblemático", with: '2014-08-03'
       #fill_in "Memo", with: 'datos mínimos'
 
@@ -45,7 +45,7 @@ describe "Llenar caso con javascript", :js => true, type: :feature do
     it "puede crear caso con familiar", type: :feature do
       visit '/casos/nuevo'
       # Datos básicos
-      fill_in "Fecha de Recepción", with: '2014-08-04'
+      fill_in "Fecha Primera Recepción", with: '2014-08-04'
       fill_in "F. Desplazamiento Emblemático", with: '2014-08-03'
       #fill_in "Memo", with: 'con familiar'
 
@@ -99,7 +99,7 @@ describe "Llenar caso con javascript", :js => true, type: :feature do
       visit '/casos/nuevo'
       # Datos básicos
       page.save_screenshot('tmp/s-sol0.png')
-      fill_in "Fecha de Recepción", with: '2014-08-04'
+      fill_in "Fecha Primera Recepción", with: '2014-08-04'
       fill_in "F. Desplazamiento Emblemático", with: '2014-08-03'
       #fill_in "Memo", with: 'descripcion con javascript'
 
@@ -155,7 +155,7 @@ describe "Llenar caso con javascript", :js => true, type: :feature do
     it "puede crear caso con familiar mínimo, 2 ubicaciones, ref y desp", type: :feature do
       visit '/casos/nuevo'
       # Datos básicos
-      fill_in "Fecha de Recepción", with: '2014-08-04'
+      fill_in "Fecha Primera Recepción", with: '2014-08-04'
       fill_in "F. Desplazamiento Emblemático", with: '2014-08-03'
       #fill_in "Memo", with: 'descripcion con javascript'
 
@@ -276,7 +276,7 @@ describe "Llenar caso con javascript", :js => true, type: :feature do
       skip # Por arreglar acto
       visit '/casos/nuevo'
       # Datos básicos
-      fill_in "Fecha de Recepción", with: '2014-08-04'
+      fill_in "Fecha Primera Recepción", with: '2014-08-04'
       fill_in "F. Desplazamiento Emblemático", with: '2014-08-03'
       #fill_in "Memo", with: 'descripcion con javascript'
 

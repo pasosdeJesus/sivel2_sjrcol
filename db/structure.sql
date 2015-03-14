@@ -1080,7 +1080,7 @@ CREATE VIEW cvp1 AS
    FROM sivel2_sjr_casosjr casosjr,
     sivel2_sjr_respuesta respuesta,
     sivel2_sjr_derecho_respuesta derecho_respuesta
-  WHERE ((((respuesta.id_caso = casosjr.id_caso) AND (derecho_respuesta.id_respuesta = respuesta.id)) AND (casosjr.id_regionsjr = 4)) AND (derecho_respuesta.id_derecho = 1));
+  WHERE ((respuesta.id_caso = casosjr.id_caso) AND (derecho_respuesta.id_respuesta = respuesta.id));
 
 
 --
@@ -6161,4 +6161,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150224085334');
 INSERT INTO schema_migrations (version) VALUES ('20150225140336');
 
 INSERT INTO schema_migrations (version) VALUES ('20150225141729');
+
+INSERT INTO schema_migrations (version) VALUES ('20150313153722');
 

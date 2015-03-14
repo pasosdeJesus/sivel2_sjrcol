@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 9bf562223af7fe991c438de4c006383ef10fca82
+  revision: d520cae4e7a8188025cdba706cafa5ca9f099665
   specs:
     sivel2_gen (2.0.a4)
       devise
@@ -9,7 +9,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 21906e54ee1127574ff5b72151a4cf2fad922880
+  revision: c3dc6acd7bd6ea7b75e85c619ab5b59f953a244f
   specs:
     sivel2_sjr (2.0.a3)
       rails
@@ -79,10 +79,9 @@ GEM
       autoprefixer-rails (>= 5.0.0.1)
       sass (>= 3.2.19)
     builder (3.2.2)
-    byebug (3.5.1)
-      columnize (~> 0.8)
-      debugger-linecache (~> 1.2)
-      slop (~> 3.6)
+    byebug (4.0.1)
+      columnize (= 0.9.0)
+      rb-readline (= 0.5.2)
     camertron-eprun (1.1.0)
     cancancan (1.10.1)
     capybara (2.4.4)
@@ -112,7 +111,6 @@ GEM
     coffee-script-source (1.9.1)
     columnize (0.9.0)
     debug_inspector (0.0.2)
-    debugger-linecache (1.2.0)
     devise (3.4.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -214,6 +212,7 @@ GEM
       thor (>= 0.18.1, < 2.0)
     raindrops (0.13.0)
     rake (10.4.2)
+    rb-readline (0.5.2)
     rdoc (4.2.0)
       json (~> 1.4)
     responders (2.1.0)

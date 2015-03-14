@@ -53,7 +53,12 @@
         <td><%= casosjr.expulsion %></td>
         <td><%= casosjr.llegada %></td>
 	      <td><%= casosjr.respuesta_ultimafechaatencion %></td>
-        <td><%= casosjr.caso_memo %></td>
+        <td><%= if (casosjr.caso_memo.size > 200) 
+                  casosjr.caso_memo.slice(0,200) + ' ...'
+                else
+                  casosjr.caso_memo
+                end
+        %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
             edit_caso_path(casosjr.caso_id), :class => 'btn btn-xs' 

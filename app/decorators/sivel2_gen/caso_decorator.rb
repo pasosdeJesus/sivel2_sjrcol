@@ -15,7 +15,7 @@ Sivel2Gen::Caso.class_eval do
         regionsjr.nombre AS regionsjr_nombre,
         usuario.nusuario,
         caso.fecha AS caso_fecha,
-        ARRAY_TO_STRING(ARRAY(SELECT departamento.nombre || '/' || 
+        ARRAY_TO_STRING(ARRAY(SELECT departamento.nombre || ' / ' || 
         municipio.nombre
         FROM sivel2_gen_departamento AS departamento, 
           sivel2_gen_municipio AS municipio, 
@@ -29,7 +29,7 @@ Sivel2Gen::Caso.class_eval do
         AND ubicacion.id_pais = municipio.id_pais
         AND ubicacion.id_departamento=municipio.id_departamento
         AND ubicacion.id_municipio=municipio.id ), ', ') AS expulsion,
-        ARRAY_TO_STRING(ARRAY(SELECT departamento.nombre || '/' || 
+        ARRAY_TO_STRING(ARRAY(SELECT departamento.nombre || ' / ' || 
         municipio.nombre
         FROM sivel2_gen_departamento AS departamento, 
           sivel2_gen_municipio AS municipio, 

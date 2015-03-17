@@ -55,7 +55,8 @@
           label: "Monto Prorrogas" 
         %>
         <%= f.input :fechaultima, 
-          :input_html => { "data-behaviour" => "datepicker" },
+          :input_html => { "data-behaviour" => "datepicker",
+            value: f.object.fechaultima || '' },
           :as => :string, :label => "Fecha última prorroga" 
         %>
         <%= f.input :lugarultima, as: :text, 

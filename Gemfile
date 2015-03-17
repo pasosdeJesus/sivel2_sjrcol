@@ -18,9 +18,6 @@ gem "foreman"
 # API JSON facil. Ver: https://github.com/rails/jbuilder
 gem "jbuilder"
 
-# SCSS para hojas de estilo
-#gem "sass-rails", '~> 4.0.0.rc1'
-
 # Uglifier comprime recursos Javascript
 gem "uglifier", '>= 1.3.0'
 
@@ -39,7 +36,6 @@ gem "turbolinks"
 # Ambiente de CSS
 gem "twitter-bootstrap-rails"#, "=2.2.8"
 gem "bootstrap-datepicker-rails"
-gem "bootstrap-sass"
 
 gem "chartkick"
 

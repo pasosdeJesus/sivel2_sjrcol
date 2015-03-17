@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 0f0818d17f2378ad77eedf7ef95ba0416bd29a0f
+  revision: dc8b5eb3083702965fdf7b26aa44216c6d5c3f9d
   specs:
     sivel2_gen (2.0.a4)
       devise
@@ -9,7 +9,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 6a87a0c8066b94aa95e64c89277342d5137f6def
+  revision: 45e3e4a15abe0905d7941bc6ef416199b7288688
   specs:
     sivel2_sjr (2.0.a3)
       rails
@@ -67,17 +67,11 @@ GEM
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     arel (6.0.0)
-    autoprefixer-rails (5.1.7)
-      execjs
-      json
     bcrypt (3.1.10)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     bootstrap-datepicker-rails (1.4.0)
       railties (>= 3.0)
-    bootstrap-sass (3.3.4)
-      autoprefixer-rails (>= 5.0.0.1)
-      sass (>= 3.2.19)
     builder (3.2.2)
     byebug (4.0.2)
       columnize (= 0.9.0)
@@ -232,7 +226,6 @@ GEM
       rspec-mocks (~> 3.2.0)
       rspec-support (~> 3.2.0)
     rspec-support (3.2.2)
-    sass (3.4.13)
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
@@ -301,7 +294,6 @@ PLATFORMS
 DEPENDENCIES
   bcrypt
   bootstrap-datepicker-rails
-  bootstrap-sass
   byebug
   cancancan
   capybara

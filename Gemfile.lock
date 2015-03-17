@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 41a7c50dfa95acd9894dc416a2e02f67e2377b1b
+  revision: 0f0818d17f2378ad77eedf7ef95ba0416bd29a0f
   specs:
     sivel2_gen (2.0.a4)
       devise
@@ -9,7 +9,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 05d02fa569164398be72fc07663a1117dc879fbe
+  revision: 28a57eeecdc7008d518b9f8b774f9debbddd1c43
   specs:
     sivel2_sjr (2.0.a3)
       rails
@@ -73,15 +73,14 @@ GEM
     bcrypt (3.1.10)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    bootstrap-datepicker-rails (1.3.1.1)
+    bootstrap-datepicker-rails (1.4.0)
       railties (>= 3.0)
-    bootstrap-sass (3.3.3)
+    bootstrap-sass (3.3.4)
       autoprefixer-rails (>= 5.0.0.1)
       sass (>= 3.2.19)
     builder (3.2.2)
-    byebug (4.0.1)
+    byebug (4.0.2)
       columnize (= 0.9.0)
-      rb-readline (= 0.5.2)
     camertron-eprun (1.1.0)
     cancancan (1.10.1)
     capybara (2.4.4)
@@ -212,7 +211,6 @@ GEM
       thor (>= 0.18.1, < 2.0)
     raindrops (0.13.0)
     rake (10.4.2)
-    rb-readline (0.5.2)
     rdoc (4.2.0)
       json (~> 1.4)
     responders (2.1.0)
@@ -288,10 +286,10 @@ GEM
       raindrops (~> 0.7)
     warden (1.2.3)
       rack (>= 1.0)
-    web-console (2.0.0)
-      activemodel (~> 4.0)
+    web-console (2.1.2)
+      activemodel (>= 4.0)
       binding_of_caller (>= 0.7.2)
-      railties (~> 4.0)
+      railties (>= 4.0)
       sprockets-rails (>= 2.0, < 4.0)
     will_paginate (3.0.7)
     xpath (2.0.0)

@@ -104,6 +104,12 @@
       </div>
     </div>
 
+    <%= f.input :id_personadesea, 
+      collection: Sivel2Sjr::Personadesea.habilitados,
+      label: "Persona desea",
+      label_method: :nombre, 
+      value_method: :id 
+    %>
 
     <%= f.input :descamp, as: :text, 
       label: "Descripción o ampliación caso" 
@@ -120,12 +126,6 @@
     %>
     <%= f.input :observaciones, as: :text, 
       label: "Observaciones del caso" 
-    %>
-    <%= f.input :id_personadesea, 
-      collection: Sivel2Sjr::Personadesea.habilitados,
-      label: "Persona desea",
-      label_method: :nombre, 
-      value_method: :id 
     %>
     <%= f.input :verifcsjr, as: :text, 
       label: "Verificación Compromisos SJR" 

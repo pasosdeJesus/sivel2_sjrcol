@@ -24,12 +24,12 @@ connection.execute(l.join("\n"));
 l = File.readlines("db/cambios-basicasp.sql")
 connection.execute(l.join("\n"));
 
-# Usuario inicial: sjrven con clave sjrven123
+# Usuario inicial: sjrcol con clave sjrcol123
 connection.execute("INSERT INTO usuario 
 	(nusuario, email, encrypted_password, password, 
   fechacreacion, created_at, updated_at, rol) 
-	VALUES ('sjrven', 'sjrven@localhost.org', 
-	'$2a$10$uMAciEcJuUXDnpelfSH6He7BxW0yBeq6VMemlWc5xEl6NZRDYVA3G', 
+	VALUES ('sjrcol', 'sjrcol@localhost.org', 
+	'$2a$10$qoo7Sh6ZoxplKPygeF2JDePwnpA1AhhkNUXkqOVy2YXK2jcs/BQU.', 
 	'', '2014-01-12', '2013-12-24', '2013-12-24', 1);")
 
 

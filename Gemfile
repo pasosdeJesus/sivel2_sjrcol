@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby "2.1.5"
+#ruby "2.1.5"
 
 # Rails (internacionalización)
 gem "rails", '~> 4.2.0'
@@ -8,6 +8,8 @@ gem "rails-i18n"
 
 # Problemas con arel 6.0.0 al ejecutar rspec
 #gem "arel", '6.0.0.beta2'
+
+gem 'sass'
 
 # Postgresql
 gem "pg"
@@ -117,7 +119,7 @@ group :test do
   gem "capybara"
   
   # Pruebas de regresión que requieren javascript
-  gem "capybara-webkit"
+  gem "capybara-webkit", '1.4.1'
 
   # Envia resultados de pruebas desde travis a codeclimate
   gem "codeclimate-test-reporter", require: nil

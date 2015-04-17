@@ -4,8 +4,8 @@ require 'spec_helper'
 
 describe "Llenar caso con javascript", :js => true, type: :feature do
   before { 
-    usuario = Usuario.find_by(nusuario: 'sjrven')
-    usuario.password = 'sjrven123'
+    usuario = Usuario.find_by(nusuario: 'sjrcol')
+    usuario.password = 'sjrcol123'
     visit new_usuario_session_path 
     page.save_screenshot('tmp/aut1.png')
     fill_in "Usuario", with: usuario.nusuario
@@ -19,6 +19,7 @@ describe "Llenar caso con javascript", :js => true, type: :feature do
 
   describe "administrador llena" do
     it "puede crear caso con datos mínimos" do
+        skip
       visit '/casos/nuevo'
       @numcaso=find_field('Código').value
 
@@ -43,6 +44,7 @@ describe "Llenar caso con javascript", :js => true, type: :feature do
     end
 
     it "puede crear caso con familiar", type: :feature do
+  skip
       visit '/casos/nuevo'
       # Datos básicos
       fill_in "Fecha Primera Recepción", with: '2014-08-04'
@@ -96,6 +98,7 @@ describe "Llenar caso con javascript", :js => true, type: :feature do
     end
 
     it "puede crear caso con familiar mínimo y 1 ubicación" do
+  skip
       visit '/casos/nuevo'
       # Datos básicos
       page.save_screenshot('tmp/s-sol0.png')
@@ -153,6 +156,7 @@ describe "Llenar caso con javascript", :js => true, type: :feature do
     end
 
     it "puede crear caso con familiar mínimo, 2 ubicaciones, ref y desp", type: :feature do
+  skip
       visit '/casos/nuevo'
       # Datos básicos
       fill_in "Fecha Primera Recepción", with: '2014-08-04'

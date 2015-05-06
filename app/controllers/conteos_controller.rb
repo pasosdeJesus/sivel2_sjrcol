@@ -447,33 +447,40 @@ class ConteosController < ApplicationController
     q1="CREATE VIEW #{cons1} AS 
         SELECT #{que1}
         FROM #{tablas1} #{where1}"
-    #puts "q1 es #{q1}<hr>"
+    #puts "OJO q1 es #{q1}<hr>"
     ActiveRecord::Base.connection.execute q1
 
     # Paso 2
     # Añadimos información geográfica que se pueda
-    q2="CREATE VIEW #{cons2} AS SELECT #{cons1}.*, 
+    q2="CREATE VIEW #{cons2} AS SELECT s.*,
             ubicacion.id_departamento, 
             departamento.nombre AS departamento_nombre, 
             ubicacion.id_municipio, municipio.nombre AS municipio_nombre, 
-            ubicacion.id_clase, clase.nombre AS clase_nombre, 
-            max(sivel2_sjr_desplazamiento.fechaexpulsion) FROM
-            #{cons1} LEFT JOIN sivel2_sjr_desplazamiento ON
-            (#{cons1}.id_caso = sivel2_sjr_desplazamiento.id_caso)
+            ubicacion.id_clase, clase.nombre AS clase_nombre
+            FROM (SELECT cben1.*, MAX(fechaexpulsion) as fmax FROM cben1 
+            LEFT JOIN sivel2_sjr_desplazamiento ON
+            (cben1.id_caso=sivel2_sjr_desplazamiento.id_caso) 
+            GROUP BY 1,2,3,4,5,6) AS s
+            LEFT JOIN sivel2_sjr_desplazamiento ON
+            (s.id_caso = sivel2_sjr_desplazamiento.id_caso 
+             AND sivel2_sjr_desplazamiento.fechaexpulsion=s.fmax)
             LEFT JOIN sivel2_gen_ubicacion AS ubicacion ON 
               (sivel2_sjr_desplazamiento.id_expulsion = ubicacion.id) 
             LEFT JOIN sivel2_gen_departamento AS departamento ON 
-              (ubicacion.id_departamento=departamento.id) 
+              (ubicacion.id_pais=departamento.id_pais 
+                AND ubicacion.id_departamento=departamento.id) 
             LEFT JOIN sivel2_gen_municipio AS municipio ON 
-              (ubicacion.id_municipio=municipio.id 
-                AND ubicacion.id_departamento=municipio.id_departamento) 
+              (ubicacion.id_pais=municipio.id_pais 
+                AND ubicacion.id_departamento=municipio.id_departamento
+                AND ubicacion.id_municipio=municipio.id)
             LEFT JOIN sivel2_gen_clase AS clase ON 
-              (ubicacion.id_clase=clase.id 
+              (ubicacion.id_pais=municipio.id_pais
+                AND ubicacion.id_departamento=clase.id_departamento
                 AND ubicacion.id_municipio=clase.id_municipio 
-                AND ubicacion.id_departamento=clase.id_departamento) 
-            GROUP BY 1,2,3,4,5,6,7,8,9,10,11,12"
+                AND ubicacion.id_clase=clase.id )
+            GROUP BY 1,2,3,4,5,6,7,8,9,10,11,12,13"
 
-    #puts "q2 es #{q2}<hr>"
+    #puts "OJO q2 es #{q2}<hr>"
     ActiveRecord::Base.connection.execute q2
 
     if (pDepartamento == "1") 
@@ -482,7 +489,7 @@ class ConteosController < ApplicationController
     if (pMunicipio== "1") 
       que3 << ["municipio_nombre", "Último Municipio Expulsor"]
     end
-    #puts "que3 es #{que3}"
+    #puts "OJO que3 es #{que3}"
     # Generamos 1,2,3 ...n para GROUP BY
     gb = sep = ""
     qc = ""
@@ -510,7 +517,7 @@ class ConteosController < ApplicationController
             FROM #{tablas3}
             #{twhere3}
             #{gb}"
-    #puts "q3 es #{q3}"
+    #puts "OJO q3 es #{q3}"
     @cuerpotabla = ActiveRecord::Base.connection.select_all(q3)
 
     @enctabla = []

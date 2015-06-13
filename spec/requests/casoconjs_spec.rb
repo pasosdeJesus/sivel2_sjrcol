@@ -4,8 +4,8 @@ require 'spec_helper'
 
 describe "Llenar caso con javascript", :js => true, type: :feature do
   before { 
-    usuario = Usuario.find_by(nusuario: 'sjrven')
-    usuario.password = 'sjrven123'
+    usuario = Usuario.find_by(nusuario: 'sjrcol')
+    usuario.password = 'sjrcol123'
     visit new_usuario_session_path 
     page.save_screenshot('tmp/aut1.png')
     fill_in "Usuario", with: usuario.nusuario
@@ -114,12 +114,17 @@ describe "Llenar caso con javascript", :js => true, type: :feature do
         fill_in "Apellidos", with: 'Apellidos Solicitante'
       end
       page.save_screenshot('tmp/s-sol1.png')
-      click_on "Contacto"
-      page.save_screenshot('tmp/s-sol2.png')
 
       # Núcleo familiar
       click_on "Núcleo Familiar"
+      page.save_screenshot('tmp/s-sol3.png')
       click_on "Añadir Víctima"
+      exit(1)
+      page.save_screenshot('tmp/s-sol4.png')
+      if (!find_field('Nombres').visible?)
+      	click_on "Añadir Víctima"
+      	page.save_screenshot('tmp/s-sol45.png')
+			end
       within ("div#victima") do 
         fill_in "Nombres", with: 'Nombres Beneficiario'
         fill_in "Apellidos", with: 'Apellidos Beneficiario'
@@ -127,7 +132,6 @@ describe "Llenar caso con javascript", :js => true, type: :feature do
       page.save_screenshot('tmp/s-fam1.png')
       click_on "Núcleo Familiar"
       page.save_screenshot('tmp/s-fam2.png')
-
       # Sitios Geográficos
       click_link "Ubicación"
       if (!find_link('Añadir Ubicación').visible?)
@@ -273,7 +277,7 @@ describe "Llenar caso con javascript", :js => true, type: :feature do
     end
 
     it "puede crear caso con solicitante, p. resp y acto" do
-      skip # Por arreglar acto
+      #skip # Por arreglar acto
       visit '/casos/nuevo'
       # Datos básicos
       fill_in "Fecha Primera Recepción", with: '2014-08-04'

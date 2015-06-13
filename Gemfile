@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby "2.1.5"
+#ruby "2.1.5"
 
 # Rails (internacionalización)
 gem "rails", '~> 4.2.0'
@@ -17,6 +17,8 @@ gem "foreman"
 
 # API JSON facil. Ver: https://github.com/rails/jbuilder
 gem "jbuilder"
+
+gem 'sass'
 
 # Uglifier comprime recursos Javascript
 gem "uglifier", '>= 1.3.0'
@@ -65,12 +67,17 @@ gem "paperclip", "~> 4.1"
 gem "tzinfo"
 gem "tzinfo-data"
 
+# Motor SIP
+gem 'sip', github: 'pasosdeJesus/sip'
+#gem 'sivel2_gen', path: '../sivel2_gen'
+
+
 # Motor de SIVeL 2
-gem 'sivel2_gen', github: 'pasosdeJesus/sivel2_gen'
+gem 'sivel2_gen', github: 'pasosdeJesus/sivel2_gen', branch: :consip
 #gem 'sivel2_gen', path: '../sivel2_gen'
 
 # Motor de SIVeL 2 - SJR
-gem 'sivel2_sjr', github: 'pasosdeJesus/sivel2_sjr'
+gem 'sivel2_sjr', github: 'pasosdeJesus/sivel2_sjr', branch: :consip
 #gem 'sivel2_sjr', path: '../sivel2_sjr'
 
 
@@ -117,7 +124,7 @@ group :test do
   gem "capybara"
   
   # Pruebas de regresión que requieren javascript
-  gem "capybara-webkit"
+  gem "capybara-webkit", '1.4.1'  # Ahi hasta que 1.5 se compile bien
 
   # Envia resultados de pruebas desde travis a codeclimate
   gem "codeclimate-test-reporter", require: nil

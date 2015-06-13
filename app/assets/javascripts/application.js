@@ -10,8 +10,8 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require chartkick
 //= require sivel2_sjr/application
+//= require chartkick
 //= require_tree .
 
 /*jQuery.ajaxSetup({

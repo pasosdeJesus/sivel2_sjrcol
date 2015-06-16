@@ -117,14 +117,14 @@ class ConteosController < ApplicationController
       where1 = consulta_and(where1, "respuesta.fechaatencion", pFafin, "<=")
     end
     if (pOficina != '') 
-      where1 = consulta_and(where1, "casosjr.id_oficina", pOficina)
+      where1 = consulta_and(where1, "casosjr.oficina_id", pOficina)
     end
     if (pDerecho != '') 
       where1 = consulta_and(where1, "derecho_respuesta.id_derecho", pDerecho)
     end
 
 
-    que1 = agrega_tabla(que1, "casosjr.id_oficina AS id_oficina")
+    que1 = agrega_tabla(que1, "casosjr.oficina_id AS oficina_id")
     
     ActiveRecord::Base.connection.execute "DROP VIEW  IF EXISTS #{cons1}"
     ActiveRecord::Base.connection.execute "DROP VIEW  IF EXISTS #{cons2}"
@@ -257,10 +257,10 @@ class ConteosController < ApplicationController
     end
 
     if (pOficina != '') 
-      where1 = consulta_and(where1, "casosjr.id_oficina", pOficina)
+      where1 = consulta_and(where1, "casosjr.oficina_id", pOficina)
     end
 
-    que1 = agrega_tabla(que1, "casosjr.id_oficina AS id_oficina")
+    que1 = agrega_tabla(que1, "casosjr.oficina_id AS oficina_id")
     trel = "#{pContar}_respuesta"
     idrel = "id_#{pContar}"
     case (pContar) 
@@ -403,7 +403,7 @@ class ConteosController < ApplicationController
     where1 = consulta_and_sinap(where1, "caso.id", "victima.id_caso")
        
     if (pOficina != '') 
-      where1 = consulta_and(where1, "casosjr.id_oficina", pOficina)
+      where1 = consulta_and(where1, "casosjr.oficina_id", pOficina)
     end
     #byebug
     case pSegun
@@ -465,12 +465,9 @@ class ConteosController < ApplicationController
             LEFT JOIN sip_departamento AS departamento ON 
               (ubicacion.id_departamento=departamento.id) 
             LEFT JOIN sip_municipio AS municipio ON 
-              (ubicacion.id_municipio=municipio.id 
-                AND ubicacion.id_departamento=municipio.id_departamento) 
+              (ubicacion.id_municipio=municipio.id)
             LEFT JOIN sip_clase AS clase ON 
-              (ubicacion.id_clase=clase.id 
-                AND ubicacion.id_municipio=clase.id_municipio 
-                AND ubicacion.id_departamento=clase.id_departamento) 
+              (ubicacion.id_clase=clase.id)
             GROUP BY 1,2,3,4,5,6,7,8,9,10,11,12"
 
     #puts "q2 es #{q2}<hr>"
@@ -601,12 +598,9 @@ class ConteosController < ApplicationController
       $$
         SELECT (SELECT nombre FROM sip_pais WHERE id=ubicacion.id_pais) 
             || COALESCE((SELECT '/' || nombre FROM sip_departamento 
-            WHERE sip_departamento.id_pais=ubicacion.id_pais 
-            AND sip_departamento.id=ubicacion.id_departamento),'') 
+            WHERE sip_departamento.id = ubicacion.id_departamento),'') 
             || COALESCE((SELECT '/' || nombre FROM sip_municipio 
-            WHERE sip_municipio.id_pais=ubicacion.id_pais 
-            AND sip_municipio.id_departamento=ubicacion.id_departamento 
-            AND sip_municipio.id=ubicacion.id_municipio),'') 
+            WHERE sip_municipio.id = ubicacion.id_municipio),'') 
             FROM sip_ubicacion AS ubicacion 
             WHERE ubicacion.id=$1;
       $$ 

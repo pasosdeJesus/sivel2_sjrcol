@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/pasosdeJesus/cor1440_gen.git
-  revision: a0daafca791ea98c89ed728e1bf542b0ff6ab427
+  revision: af7d526edcdf5bdfdd63e3277a3b769b8c06637a
   specs:
     cor1440_gen (1.0.a5)
       devise
@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sip.git
-  revision: 9940e638c8ea8885ebed41aefa874db4ba2a259d
+  revision: bf7a83c3b28130e166f75c16f590233caaae8e71
   specs:
     sip (2.0.a6)
       devise
@@ -18,8 +18,18 @@ GIT
       rails
 
 GIT
+  remote: git://github.com/pasosdeJesus/sivel2_gen.git
+  revision: 70c251e72189572634332ea296b940cdeb4edf40
+  branch: consip
+  specs:
+    sivel2_gen (2.0.a4)
+      devise
+      jquery-rails
+      rails
+
+GIT
   remote: git://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 2f78745c9ee524e3b0450d252adae9ecb38be920
+  revision: a2e2b160bcc1086265ffb588924238bc15cb8464
   branch: consip
   specs:
     sivel2_sjr (2.0.a3)
@@ -37,14 +47,6 @@ GIT
   revision: 944cf4164ea511a2977f91031cc7f69d3e06e6cb
   specs:
     jquery-ui-bootstrap-rails (0.1.1)
-      rails
-
-PATH
-  remote: ../sivel2_gen
-  specs:
-    sivel2_gen (2.0.a4)
-      devise
-      jquery-rails
       rails
 
 GEM
@@ -95,7 +97,7 @@ GEM
     byebug (5.0.0)
       columnize (= 0.9.0)
     camertron-eprun (1.1.0)
-    cancancan (1.10.1)
+    cancancan (1.11.0)
     capybara (2.4.4)
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)

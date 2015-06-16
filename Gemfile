@@ -6,6 +6,9 @@ source 'https://rubygems.org'
 gem "rails", '~> 4.2.0'
 gem "rails-i18n"
 
+# Colores en terminal
+gem 'colorize'
+
 # Problemas con arel 6.0.0 al ejecutar rspec
 #gem "arel", '6.0.0.beta2'
 
@@ -69,17 +72,19 @@ gem "tzinfo-data"
 
 # Motor SIP
 gem 'sip', github: 'pasosdeJesus/sip'
-#gem 'sivel2_gen', path: '../sivel2_gen'
-
+#gem 'sip', path: '../sip'
 
 # Motor de SIVeL 2
-gem 'sivel2_gen', github: 'pasosdeJesus/sivel2_gen', branch: :consip
-#gem 'sivel2_gen', path: '../sivel2_gen'
+#gem 'sivel2_gen', github: 'pasosdeJesus/sivel2_gen', branch: :consip
+gem 'sivel2_gen', path: '../sivel2_gen'
 
 # Motor de SIVeL 2 - SJR
 gem 'sivel2_sjr', github: 'pasosdeJesus/sivel2_sjr', branch: :consip
 #gem 'sivel2_sjr', path: '../sivel2_sjr'
 
+# Motor Cor1440_gen
+gem 'cor1440_gen', github: 'pasosdeJesus/cor1440_gen'
+#gem 'cor1440_gen', path: '../cor1440_gen'
 
 group :doc do
     # Genera documentación en doc/api con bundle exec rake doc:rails

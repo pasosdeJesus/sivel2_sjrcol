@@ -22,7 +22,7 @@
     %>
     Oficina:
     <% o = options_from_collection_for_select(
-         Sivel2Gen::Regionsjr.habilitados, "id", "nombre"
+         Sip::Oficina.habilitados, "id", "nombre"
       )
     %>
     <%= select_tag "oficina", o, 

@@ -1,7 +1,7 @@
 # encoding: UTF-8
 module Sivel2Sjr
   module Admin
-    class MotivossjrController < Sivel2Gen::Admin::BasicasController
+    class MotivossjrController < Sip::Admin::BasicasController
       before_action :set_motivosjr, only: [:show, :edit, :update, :destroy]
       load_and_authorize_resource class: Sivel2Sjr::Motivosjr
 
@@ -12,7 +12,7 @@ module Sivel2Sjr
       def atributos_index
         ["id",  "nombre" ] + 
           [ :derecho_ids =>  [] ] +
-          ["fechacreacion", "fechadeshabilitacion"] 
+          ["observaciones", "fechacreacion", "fechadeshabilitacion"] 
       end
 
       # Use callbacks to share common setup or constraints between actions.

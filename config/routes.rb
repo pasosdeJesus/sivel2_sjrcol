@@ -19,19 +19,20 @@ Rails.application.routes.draw do
   get "/conteos/respuestas" => 'conteos#respuestas'
   get "/conteos/vacios" => 'conteos#vacios'
   
-  patch "/actos/agregar" => 'sivel2_gen/actos#agregar'
-  get "/actos/eliminar" => 'sivel2_gen/actos#eliminar'
+  patch "/actos/agregar" => 'sivel2_sjr/actos#agregar'
+  get "/actos/eliminar" => 'sivel2_sjr/actos#eliminar'
   
-  get "/personas" => 'sivel2_gen/personas#index'
-  get "/personas/remplazar" => 'sivel2_gen/personas#remplazar'
+  get "/personas" => 'sivel2_sjr/personas#index'
+  get "/personas/remplazar" => 'sivel2_sjr/personas#remplazar'
 
-  root 'sivel2_gen/hogar#index'
+  root "sip/hogar#index"
   mount Sivel2Sjr::Engine => "/", as: 'sivel2_sjr'
   mount Sivel2Gen::Engine => "/", as: 'sivel2_gen'
-
+  mount Cor1440Gen::Engine => "/", as: 'cor1440_gen'
+  mount Sip::Engine => "/", as: 'sip'
 
   namespace :admin do
-    Ability.tablasbasicas.each do |t|
+    ::Ability.tablasbasicas.each do |t|
       if (t[0] == "") 
         c = t[1].pluralize
         resources c.to_sym, 

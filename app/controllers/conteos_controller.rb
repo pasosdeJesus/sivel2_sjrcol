@@ -117,14 +117,14 @@ class ConteosController < ApplicationController
       where1 = consulta_and(where1, "respuesta.fechaatencion", pFafin, "<=")
     end
     if (pOficina != '') 
-      where1 = consulta_and(where1, "casosjr.id_regionsjr", pOficina)
+      where1 = consulta_and(where1, "casosjr.id_oficina", pOficina)
     end
     if (pDerecho != '') 
       where1 = consulta_and(where1, "derecho_respuesta.id_derecho", pDerecho)
     end
 
 
-    que1 = agrega_tabla(que1, "casosjr.id_regionsjr AS id_regionsjr")
+    que1 = agrega_tabla(que1, "casosjr.id_oficina AS id_oficina")
     
     ActiveRecord::Base.connection.execute "DROP VIEW  IF EXISTS #{cons1}"
     ActiveRecord::Base.connection.execute "DROP VIEW  IF EXISTS #{cons2}"
@@ -257,10 +257,10 @@ class ConteosController < ApplicationController
     end
 
     if (pOficina != '') 
-      where1 = consulta_and(where1, "casosjr.id_regionsjr", pOficina)
+      where1 = consulta_and(where1, "casosjr.id_oficina", pOficina)
     end
 
-    que1 = agrega_tabla(que1, "casosjr.id_regionsjr AS id_regionsjr")
+    que1 = agrega_tabla(que1, "casosjr.id_oficina AS id_oficina")
     trel = "#{pContar}_respuesta"
     idrel = "id_#{pContar}"
     case (pContar) 
@@ -403,7 +403,7 @@ class ConteosController < ApplicationController
     where1 = consulta_and_sinap(where1, "caso.id", "victima.id_caso")
        
     if (pOficina != '') 
-      where1 = consulta_and(where1, "casosjr.id_regionsjr", pOficina)
+      where1 = consulta_and(where1, "casosjr.id_oficina", pOficina)
     end
     #byebug
     case pSegun
@@ -418,7 +418,7 @@ class ConteosController < ApplicationController
       que3 << ["rangoedad.rango", "Edad"]
     when 'SEXO'
       que1 = agrega_tabla(que1, 'persona.sexo AS sexo')
-      tablas1 = agrega_tabla(tablas1, 'sivel2_gen_persona AS persona')
+      tablas1 = agrega_tabla(tablas1, 'sip_persona AS persona')
       where1 = consulta_and_sinap(where1, "persona.id", "victima.id_persona")
       que3 << ["sexo", "Sexo"]
     when 'ACTIVIDAD / OFICIO'
@@ -460,14 +460,14 @@ class ConteosController < ApplicationController
             max(sivel2_sjr_desplazamiento.fechaexpulsion) FROM
             #{cons1} LEFT JOIN sivel2_sjr_desplazamiento ON
             (#{cons1}.id_caso = sivel2_sjr_desplazamiento.id_caso)
-            LEFT JOIN sivel2_gen_ubicacion AS ubicacion ON 
+            LEFT JOIN sip_ubicacion AS ubicacion ON 
               (sivel2_sjr_desplazamiento.id_expulsion = ubicacion.id) 
-            LEFT JOIN sivel2_gen_departamento AS departamento ON 
+            LEFT JOIN sip_departamento AS departamento ON 
               (ubicacion.id_departamento=departamento.id) 
-            LEFT JOIN sivel2_gen_municipio AS municipio ON 
+            LEFT JOIN sip_municipio AS municipio ON 
               (ubicacion.id_municipio=municipio.id 
                 AND ubicacion.id_departamento=municipio.id_departamento) 
-            LEFT JOIN sivel2_gen_clase AS clase ON 
+            LEFT JOIN sip_clase AS clase ON 
               (ubicacion.id_clase=clase.id 
                 AND ubicacion.id_municipio=clase.id_municipio 
                 AND ubicacion.id_departamento=clase.id_departamento) 
@@ -548,17 +548,17 @@ class ConteosController < ApplicationController
 
     # expulsores
     @expulsores = ActiveRecord::Base.connection.select_all("
-      SELECT (SELECT nombre FROM sivel2_gen_pais WHERE id=id_pais) AS pais, 
-        (SELECT nombre FROM sivel2_gen_departamento
+      SELECT (SELECT nombre FROM sip_pais WHERE id=id_pais) AS pais, 
+        (SELECT nombre FROM sip_departamento
           WHERE id_pais=ubicacion.id_pais 
           AND id=id_departamento) AS departamento, 
-        (SELECT nombre FROM sivel2_gen_municipio
+        (SELECT nombre FROM sip_municipio
           WHERE id_pais=ubicacion.id_pais 
           AND id_departamento=ubicacion.id_departamento 
           AND id=ubicacion.id_municipio) AS municipio, 
         COUNT(victima.id) AS cuenta
       FROM sivel2_sjr_desplazamiento AS desplazamiento, 
-        sivel2_gen_ubicacion AS ubicacion, 
+        sip_ubicacion AS ubicacion, 
         sivel2_gen_victima AS victima
       WHERE 
         #{cfecha} 
@@ -568,17 +568,17 @@ class ConteosController < ApplicationController
     ")
     # receptores
     @receptores = ActiveRecord::Base.connection.select_all("
-      SELECT (SELECT nombre FROM sivel2_gen_pais WHERE id=id_pais) AS pais, 
-        (SELECT nombre FROM sivel2_gen_departamento 
+      SELECT (SELECT nombre FROM sip_pais WHERE id=id_pais) AS pais, 
+        (SELECT nombre FROM sip_departamento 
           WHERE id_pais=ubicacion.id_pais 
           AND id=id_departamento) AS departamento, 
-        (SELECT nombre FROM sivel2_gen_municipio 
+        (SELECT nombre FROM sip_municipio 
         WHERE id_pais=ubicacion.id_pais 
           AND id_departamento=ubicacion.id_departamento 
           AND id=ubicacion.id_municipio) AS municipio, 
         COUNT(victima.id) AS cuenta
       FROM sivel2_sjr_desplazamiento AS desplazamiento, 
-        sivel2_gen_ubicacion AS ubicacion, 
+        sip_ubicacion AS ubicacion, 
         sivel2_gen_victima AS victima
       WHERE 
         #{cfecha} 
@@ -599,15 +599,15 @@ class ConteosController < ApplicationController
     ActiveRecord::Base.connection.select_all("
       CREATE OR REPLACE FUNCTION municipioubicacion(int) RETURNS varchar AS
       $$
-        SELECT (SELECT nombre FROM sivel2_gen_pais WHERE id=ubicacion.id_pais) 
-            || COALESCE((SELECT '/' || nombre FROM sivel2_gen_departamento 
-            WHERE sivel2_gen_departamento.id_pais=ubicacion.id_pais 
-            AND sivel2_gen_departamento.id=ubicacion.id_departamento),'') 
-            || COALESCE((SELECT '/' || nombre FROM sivel2_gen_municipio 
-            WHERE sivel2_gen_municipio.id_pais=ubicacion.id_pais 
-            AND sivel2_gen_municipio.id_departamento=ubicacion.id_departamento 
-            AND sivel2_gen_municipio.id=ubicacion.id_municipio),'') 
-            FROM sivel2_gen_ubicacion AS ubicacion 
+        SELECT (SELECT nombre FROM sip_pais WHERE id=ubicacion.id_pais) 
+            || COALESCE((SELECT '/' || nombre FROM sip_departamento 
+            WHERE sip_departamento.id_pais=ubicacion.id_pais 
+            AND sip_departamento.id=ubicacion.id_departamento),'') 
+            || COALESCE((SELECT '/' || nombre FROM sip_municipio 
+            WHERE sip_municipio.id_pais=ubicacion.id_pais 
+            AND sip_municipio.id_departamento=ubicacion.id_departamento 
+            AND sip_municipio.id=ubicacion.id_municipio),'') 
+            FROM sip_ubicacion AS ubicacion 
             WHERE ubicacion.id=$1;
       $$ 
       LANGUAGE SQL
@@ -624,9 +624,9 @@ class ConteosController < ApplicationController
         || municipioubicacion(d2.id_llegada) AS ruta, 
         count(d1.id_caso) AS cuenta
       FROM sivel2_sjr_desplazamiento AS d1, 
-        sivel2_gen_ubicacion AS l1, 
+        sip_ubicacion AS l1, 
         sivel2_sjr_desplazamiento as d2,
-        sivel2_gen_ubicacion AS e2, sivel2_gen_ubicacion AS l2
+        sip_ubicacion AS e2, sip_ubicacion AS l2
       WHERE 
       d1.id_caso=d2.id_caso
       AND d1.fechaexpulsion < d2.fechaexpulsion
@@ -656,7 +656,7 @@ class ConteosController < ApplicationController
         sectorsocial.nombre as sectorsocial,
         COUNT(desplazamiento.id) as cuenta
       FROM sivel2_gen_victima AS victima, 
-        sivel2_gen_persona AS persona, 
+        sip_persona AS persona, 
         sivel2_sjr_desplazamiento AS desplazamiento, 
         sivel2_gen_rangoedad AS rangoedad, 
         sivel2_gen_sectorsocial AS sectorsocial

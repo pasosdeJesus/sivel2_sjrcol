@@ -1,6 +1,5 @@
 require 'sivel2_gen/version'
-
-Sivel2Gen.setup do |config|
+Sip.setup do |config|
       config.ruta_anexos = "/var/www/resbase/anexos-sjrcol"
       config.ruta_volcados = "/var/www/resbase/sivel2_sjrcol/"
       # En heroku los anexos son super-temporales

@@ -11,5 +11,9 @@ class Ability < Sivel2Sjr::Ability
   @@tablasbasicas << ['Sivel2Sjr', 'motivosjr']
   @@tablasbasicas << ['Sivel2Sjr', 'progestado']
   @@tablasbasicas << ['Sivel2Sjr', 'regimensalud']
+  
+  @@tablasbasicas += Cor1440Gen::Ability::BASICAS_NUEVAS
+
+  @@basicas_seq_con_id += Cor1440Gen::Ability::BASICAS_SID_NUEVAS 
 
 end

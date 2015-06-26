@@ -547,12 +547,9 @@ class ConteosController < ApplicationController
     @expulsores = ActiveRecord::Base.connection.select_all("
       SELECT (SELECT nombre FROM sip_pais WHERE id=id_pais) AS pais, 
         (SELECT nombre FROM sip_departamento
-          WHERE id_pais=ubicacion.id_pais 
-          AND id=id_departamento) AS departamento, 
+          WHERE id=ubicacion.id_departamento) AS departamento, 
         (SELECT nombre FROM sip_municipio
-          WHERE id_pais=ubicacion.id_pais 
-          AND id_departamento=ubicacion.id_departamento 
-          AND id=ubicacion.id_municipio) AS municipio, 
+          WHERE id=ubicacion.id_municipio) AS municipio, 
         COUNT(victima.id) AS cuenta
       FROM sivel2_sjr_desplazamiento AS desplazamiento, 
         sip_ubicacion AS ubicacion, 
@@ -567,12 +564,9 @@ class ConteosController < ApplicationController
     @receptores = ActiveRecord::Base.connection.select_all("
       SELECT (SELECT nombre FROM sip_pais WHERE id=id_pais) AS pais, 
         (SELECT nombre FROM sip_departamento 
-          WHERE id_pais=ubicacion.id_pais 
-          AND id=id_departamento) AS departamento, 
+          WHERE id=id_departamento) AS departamento, 
         (SELECT nombre FROM sip_municipio 
-        WHERE id_pais=ubicacion.id_pais 
-          AND id_departamento=ubicacion.id_departamento 
-          AND id=ubicacion.id_municipio) AS municipio, 
+        WHERE id=ubicacion.id_municipio) AS municipio, 
         COUNT(victima.id) AS cuenta
       FROM sivel2_sjr_desplazamiento AS desplazamiento, 
         sip_ubicacion AS ubicacion, 

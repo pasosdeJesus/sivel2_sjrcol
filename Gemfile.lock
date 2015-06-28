@@ -28,6 +28,15 @@ GIT
       rails
 
 GIT
+  remote: git://github.com/pasosdeJesus/sivel2_sjr.git
+  revision: cf5e8baec7c0179f3d814e838bdf8453bca03dd0
+  branch: consip
+  specs:
+    sivel2_sjr (2.0.a3)
+      rails
+      sivel2_gen
+
+GIT
   remote: git://github.com/vtamara/cocoon.git
   revision: 836a331276ea1452d63325a6662483b9f1cb28be
   specs:
@@ -39,13 +48,6 @@ GIT
   specs:
     jquery-ui-bootstrap-rails (0.1.1)
       rails
-
-PATH
-  remote: ../sivel2_sjr
-  specs:
-    sivel2_sjr (2.0.a3)
-      rails
-      sivel2_gen
 
 GEM
   remote: https://rubygems.org/

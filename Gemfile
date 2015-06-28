@@ -81,8 +81,8 @@ gem 'sivel2_gen', github: 'pasosdeJesus/sivel2_gen', branch: :consip
 #gem 'sivel2_gen', path: '../sivel2_gen'
 
 # Motor de SIVeL 2 - SJR
-#gem 'sivel2_sjr', github: 'pasosdeJesus/sivel2_sjr', branch: :consip
-gem 'sivel2_sjr', path: '../sivel2_sjr'
+gem 'sivel2_sjr', github: 'pasosdeJesus/sivel2_sjr', branch: :consip
+#gem 'sivel2_sjr', path: '../sivel2_sjr'
 
 # Motor Cor1440_gen
 gem 'cor1440_gen', github: 'pasosdeJesus/cor1440_gen'

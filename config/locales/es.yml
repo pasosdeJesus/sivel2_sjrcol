@@ -37,8 +37,8 @@ es:
     inmaterialesperdidos: Bienes Inmateriales Perdidos 
     protegiorupta:  Protegió predio en RUPTA
     documentostierra:  Documentos sobre la tierra
-    actividadarea: Subárea
-    actividadareas: Subáreas
+    actividadarea: Subárea de Actividad
+    actividadareas: Subáreas de Actividades
     proyecto: Financiable
     proyectos: Financiables
   activerecord:
@@ -53,6 +53,6 @@ es:
         Proyecto: Financiable
         Proyectos: Financiables
       "cor1440_gen/actividadarea":
-        Actividadarea: Subárea
-        Actividadareas: Subáreas
+        Actividadarea: Subárea de Actividad
+        Actividadareas: Subáreas de Actividad
 

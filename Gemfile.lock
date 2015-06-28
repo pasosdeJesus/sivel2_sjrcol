@@ -28,15 +28,6 @@ GIT
       rails
 
 GIT
-  remote: git://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 3fec3ed2e7cde5d366d9f3ac2f07dcfb964bb691
-  branch: consip
-  specs:
-    sivel2_sjr (2.0.a3)
-      rails
-      sivel2_gen
-
-GIT
   remote: git://github.com/vtamara/cocoon.git
   revision: 836a331276ea1452d63325a6662483b9f1cb28be
   specs:
@@ -48,6 +39,13 @@ GIT
   specs:
     jquery-ui-bootstrap-rails (0.1.1)
       rails
+
+PATH
+  remote: ../sivel2_sjr
+  specs:
+    sivel2_sjr (2.0.a3)
+      rails
+      sivel2_gen
 
 GEM
   remote: https://rubygems.org/
@@ -180,7 +178,15 @@ GEM
       cocaine (~> 0.5.5)
       mime-types
       mimemagic (= 0.3.0)
+    pdf-core (0.5.1)
     pg (0.18.2)
+    prawn (2.0.1)
+      pdf-core (~> 0.5.1)
+      ttfunk (~> 1.4.0)
+    prawn-table (0.2.1)
+    prawnto_2 (0.2.6)
+      prawn (>= 0.6.0)
+      rails (>= 3.1)
     pry (0.10.1)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -273,6 +279,7 @@ GEM
       sprockets (>= 2.8, < 4.0)
     thor (0.19.1)
     thread_safe (0.3.5)
+    ttfunk (1.4.0)
     turbolinks (2.5.3)
       coffee-rails
     twitter-bootstrap-rails (3.2.0)
@@ -334,6 +341,9 @@ DEPENDENCIES
   newrelic_rpm
   paperclip (~> 4.1)
   pg
+  prawn
+  prawn-table
+  prawnto_2
   pry-rescue
   pry-stack_explorer
   rails (~> 4.2.3.rc1)

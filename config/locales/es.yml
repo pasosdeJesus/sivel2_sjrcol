@@ -37,6 +37,10 @@ es:
     inmaterialesperdidos: Bienes Inmateriales Perdidos 
     protegiorupta:  Protegió predio en RUPTA
     documentostierra:  Documentos sobre la tierra
+    actividadarea: Subárea
+    actividadareas: Subáreas
+    proyecto: Financiable
+    proyectos: Financiables
   activerecord:
     attributes:
       "sivel2_sjr/aslegal": 
@@ -45,3 +49,10 @@ es:
       "sivel2_sjr/declaroante": 
         Declaroante: Declaro Ante
         Declaroantes: Declaro Ante
+      "cor1440_gen/proyecto":
+        Proyecto: Financiable
+        Proyectos: Financiables
+      "cor1440_gen/actividadarea":
+        Actividadarea: Subárea
+        Actividadareas: Subáreas
+

@@ -29,5 +29,5 @@ spec/dummy/tmp/
 spec/dummy/.sass-cache
 tmp/
 herram/
-
-
+public/assets/
+app/views/sivel2_gen/hogar/_local.html.erb

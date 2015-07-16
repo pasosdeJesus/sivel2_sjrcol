@@ -21,6 +21,12 @@ if (test "$?" = "0") then {
 	echo "Gemfile incluye un cor1440_gen cableado al sistema de archivos"
 	exit 1;
 } fi;
+grep "^ *gem *.sal7711_gen. *, *path:" Gemfile > /dev/null 2> /dev/null
+if (test "$?" = "0") then {
+	echo "Gemfile incluye un sal7711_gen cableado al sistema de archivos"
+	exit 1;
+} fi;
+
 
 grep "^ *gem *.debugger*" Gemfile > /dev/null 2> /dev/null
 if (test "$?" = "0") then {

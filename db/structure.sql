@@ -796,6 +796,16 @@ ALTER SEQUENCE cor1440_gen_actividad_proyecto_id_seq OWNED BY cor1440_gen_activi
 
 
 --
+-- Name: cor1440_gen_actividad_proyectofinanciero; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE cor1440_gen_actividad_proyectofinanciero (
+    actividad_id integer NOT NULL,
+    proyectofinanciero_id integer NOT NULL
+);
+
+
+--
 -- Name: cor1440_gen_actividad_rangoedadac; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -996,6 +1006,51 @@ CREATE SEQUENCE cor1440_gen_financiador_id_seq
 --
 
 ALTER SEQUENCE cor1440_gen_financiador_id_seq OWNED BY cor1440_gen_financiador.id;
+
+
+--
+-- Name: cor1440_gen_informe; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE cor1440_gen_informe (
+    id integer NOT NULL,
+    titulo character varying(500) NOT NULL,
+    filtrofechaini date NOT NULL,
+    filtrofechafin date NOT NULL,
+    filtroproyecto integer,
+    filtroactividadarea integer,
+    columnanombre boolean,
+    columnatipo boolean,
+    columnaobjetivo boolean,
+    columnaproyecto boolean,
+    columnapoblacion boolean,
+    recomendaciones character varying(5000),
+    avances character varying(5000),
+    logros character varying(5000),
+    dificultades character varying(5000),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    filtroproyectofinanciero integer
+);
+
+
+--
+-- Name: cor1440_gen_informe_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE cor1440_gen_informe_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: cor1440_gen_informe_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE cor1440_gen_informe_id_seq OWNED BY cor1440_gen_informe.id;
 
 
 --
@@ -1200,7 +1255,7 @@ CREATE VIEW cres1 AS
     sivel2_sjr_casosjr casosjr,
     sivel2_sjr_respuesta respuesta,
     sivel2_sjr_derecho_respuesta derecho_respuesta
-  WHERE ((((caso.id = casosjr.id_caso) AND (caso.id = respuesta.id_caso)) AND (casosjr.oficina_id = 4)) AND (respuesta.id = derecho_respuesta.id_respuesta));
+  WHERE (((caso.id = casosjr.id_caso) AND (caso.id = respuesta.id_caso)) AND (respuesta.id = derecho_respuesta.id_respuesta));
 
 
 --
@@ -1214,25 +1269,25 @@ CREATE VIEW cvp1 AS
    FROM sivel2_sjr_casosjr casosjr,
     sivel2_sjr_respuesta respuesta,
     sivel2_sjr_derecho_respuesta derecho_respuesta
-  WHERE (((respuesta.id_caso = casosjr.id_caso) AND (derecho_respuesta.id_respuesta = respuesta.id)) AND (casosjr.oficina_id = 4));
+  WHERE ((respuesta.id_caso = casosjr.id_caso) AND (derecho_respuesta.id_respuesta = respuesta.id));
 
 
 --
--- Name: sivel2_sjr_motivosjr_derecho; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: sivel2_sjr_ayudaestado_derecho; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE TABLE sivel2_sjr_motivosjr_derecho (
-    motivosjr_id integer,
+CREATE TABLE sivel2_sjr_ayudaestado_derecho (
+    ayudaestado_id integer,
     derecho_id integer
 );
 
 
 --
--- Name: sivel2_sjr_motivosjr_respuesta; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: sivel2_sjr_ayudaestado_respuesta; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE TABLE sivel2_sjr_motivosjr_respuesta (
-    id_motivosjr integer DEFAULT 0 NOT NULL,
+CREATE TABLE sivel2_sjr_ayudaestado_respuesta (
+    id_ayudaestado integer DEFAULT 0 NOT NULL,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     id_respuesta integer NOT NULL
@@ -1246,10 +1301,10 @@ CREATE TABLE sivel2_sjr_motivosjr_respuesta (
 CREATE VIEW cvp2 AS
  SELECT ar.id_respuesta,
     ad.derecho_id AS id_derecho,
-    ar.id_motivosjr
-   FROM sivel2_sjr_motivosjr_respuesta ar,
-    sivel2_sjr_motivosjr_derecho ad
-  WHERE (ar.id_motivosjr = ad.motivosjr_id);
+    ar.id_ayudaestado
+   FROM sivel2_sjr_ayudaestado_respuesta ar,
+    sivel2_sjr_ayudaestado_derecho ad
+  WHERE (ar.id_ayudaestado = ad.ayudaestado_id);
 
 
 --
@@ -1809,6 +1864,120 @@ CREATE SEQUENCE rolfamilia_seq
 
 
 --
+-- Name: sal7711_gen_articulo; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE sal7711_gen_articulo (
+    id integer NOT NULL,
+    departamento_id integer,
+    municipio_id integer,
+    fuenteprensa_id integer NOT NULL,
+    fecha date NOT NULL,
+    pagina character varying(20) NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    anexo_id integer NOT NULL
+);
+
+
+--
+-- Name: sal7711_gen_articulo_categoriaprensa; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE sal7711_gen_articulo_categoriaprensa (
+    articulo_id integer NOT NULL,
+    categoriaprensa_id integer NOT NULL
+);
+
+
+--
+-- Name: sal7711_gen_articulo_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE sal7711_gen_articulo_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: sal7711_gen_articulo_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE sal7711_gen_articulo_id_seq OWNED BY sal7711_gen_articulo.id;
+
+
+--
+-- Name: sal7711_gen_bitacora; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE sal7711_gen_bitacora (
+    id integer NOT NULL,
+    fecha timestamp without time zone,
+    ip character varying(100),
+    usuario_id integer,
+    operacion character varying(50),
+    detalle character varying(5000)
+);
+
+
+--
+-- Name: sal7711_gen_bitacora_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE sal7711_gen_bitacora_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: sal7711_gen_bitacora_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE sal7711_gen_bitacora_id_seq OWNED BY sal7711_gen_bitacora.id;
+
+
+--
+-- Name: sal7711_gen_categoriaprensa; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE sal7711_gen_categoriaprensa (
+    id integer NOT NULL,
+    codigo character varying(15),
+    nombre character varying(500),
+    observaciones character varying(5000),
+    fechacreacion date,
+    fechadeshabilitacion date,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: sal7711_gen_categoriaprensa_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE sal7711_gen_categoriaprensa_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: sal7711_gen_categoriaprensa_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE sal7711_gen_categoriaprensa_id_seq OWNED BY sal7711_gen_categoriaprensa.id;
+
+
+--
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1921,6 +2090,36 @@ CREATE TABLE sip_fuenteprensa (
     observaciones character varying(5000),
     CONSTRAINT sip_fuenteprensa_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
+
+
+--
+-- Name: sip_mundep_sinorden; Type: VIEW; Schema: public; Owner: -
+--
+
+CREATE VIEW sip_mundep_sinorden AS
+ SELECT ((sip_departamento.id_deplocal * 1000) + sip_municipio.id_munlocal) AS idlocal,
+    (((sip_municipio.nombre)::text || ' / '::text) || (sip_departamento.nombre)::text) AS nombre
+   FROM (sip_municipio
+     JOIN sip_departamento ON ((sip_municipio.id_departamento = sip_departamento.id)))
+  WHERE (sip_departamento.id_pais = 170)
+UNION
+ SELECT sip_departamento.id_deplocal AS idlocal,
+    sip_departamento.nombre
+   FROM sip_departamento
+  WHERE (sip_departamento.id_pais = 170);
+
+
+--
+-- Name: sip_mundep; Type: MATERIALIZED VIEW; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE MATERIALIZED VIEW sip_mundep AS
+ SELECT sip_mundep_sinorden.idlocal,
+    sip_mundep_sinorden.nombre,
+    to_tsvector('spanish'::regconfig, unaccent(sip_mundep_sinorden.nombre)) AS mundep
+   FROM sip_mundep_sinorden
+  ORDER BY (sip_mundep_sinorden.nombre COLLATE es_co_utf_8)
+  WITH NO DATA;
 
 
 --
@@ -3059,28 +3258,6 @@ CREATE TABLE sivel2_sjr_ayudaestado (
 
 
 --
--- Name: sivel2_sjr_ayudaestado_derecho; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE sivel2_sjr_ayudaestado_derecho (
-    ayudaestado_id integer,
-    derecho_id integer
-);
-
-
---
--- Name: sivel2_sjr_ayudaestado_respuesta; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE sivel2_sjr_ayudaestado_respuesta (
-    id_ayudaestado integer DEFAULT 0 NOT NULL,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone,
-    id_respuesta integer NOT NULL
-);
-
-
---
 -- Name: sivel2_sjr_ayudasjr; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3342,6 +3519,28 @@ CREATE TABLE sivel2_sjr_motivosjr (
     updated_at timestamp without time zone,
     observaciones character varying(5000),
     CONSTRAINT motivosjr_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
+);
+
+
+--
+-- Name: sivel2_sjr_motivosjr_derecho; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE sivel2_sjr_motivosjr_derecho (
+    motivosjr_id integer,
+    derecho_id integer
+);
+
+
+--
+-- Name: sivel2_sjr_motivosjr_respuesta; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE sivel2_sjr_motivosjr_respuesta (
+    id_motivosjr integer DEFAULT 0 NOT NULL,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    id_respuesta integer NOT NULL
 );
 
 
@@ -3674,6 +3873,13 @@ ALTER TABLE ONLY cor1440_gen_financiador ALTER COLUMN id SET DEFAULT nextval('co
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY cor1440_gen_informe ALTER COLUMN id SET DEFAULT nextval('cor1440_gen_informe_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY cor1440_gen_proyecto ALTER COLUMN id SET DEFAULT nextval('cor1440_gen_proyecto_id_seq'::regclass);
 
 
@@ -3689,6 +3895,27 @@ ALTER TABLE ONLY cor1440_gen_proyectofinanciero ALTER COLUMN id SET DEFAULT next
 --
 
 ALTER TABLE ONLY cor1440_gen_rangoedadac ALTER COLUMN id SET DEFAULT nextval('cor1440_gen_rangoedadac_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY sal7711_gen_articulo ALTER COLUMN id SET DEFAULT nextval('sal7711_gen_articulo_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY sal7711_gen_bitacora ALTER COLUMN id SET DEFAULT nextval('sal7711_gen_bitacora_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY sal7711_gen_categoriaprensa ALTER COLUMN id SET DEFAULT nextval('sal7711_gen_categoriaprensa_id_seq'::regclass);
 
 
 --
@@ -4100,6 +4327,14 @@ ALTER TABLE ONLY cor1440_gen_financiador
 
 
 --
+-- Name: cor1440_gen_informe_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY cor1440_gen_informe
+    ADD CONSTRAINT cor1440_gen_informe_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: cor1440_gen_proyecto_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -4508,6 +4743,30 @@ ALTER TABLE ONLY sivel2_sjr_rolfamilia
 
 
 --
+-- Name: sal7711_gen_articulo_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY sal7711_gen_articulo
+    ADD CONSTRAINT sal7711_gen_articulo_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: sal7711_gen_bitacora_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY sal7711_gen_bitacora
+    ADD CONSTRAINT sal7711_gen_bitacora_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: sal7711_gen_categoriaprensa_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY sal7711_gen_categoriaprensa
+    ADD CONSTRAINT sal7711_gen_categoriaprensa_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: sectorsocial_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -4895,6 +5154,13 @@ CREATE INDEX index_usuario_on_regionsjr_id ON usuario USING btree (oficina_id);
 --
 
 CREATE UNIQUE INDEX index_usuario_on_reset_password_token ON usuario USING btree (reset_password_token);
+
+
+--
+-- Name: sip_busca_mundep; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX sip_busca_mundep ON sip_mundep USING gin (mundep);
 
 
 --
@@ -5776,6 +6042,14 @@ ALTER TABLE ONLY sivel2_sjr_motivosjr_derecho
 
 
 --
+-- Name: fk_rails_294895347e; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY cor1440_gen_informe
+    ADD CONSTRAINT fk_rails_294895347e FOREIGN KEY (filtroproyecto) REFERENCES cor1440_gen_proyecto(id);
+
+
+--
 -- Name: fk_rails_395faa0882; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5789,6 +6063,14 @@ ALTER TABLE ONLY cor1440_gen_actividad_proyecto
 
 ALTER TABLE ONLY sivel2_sjr_motivosjr_derecho
     ADD CONSTRAINT fk_rails_3a735f78d3 FOREIGN KEY (motivosjr_id) REFERENCES sivel2_sjr_motivosjr(id);
+
+
+--
+-- Name: fk_rails_40cb623d50; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY cor1440_gen_informe
+    ADD CONSTRAINT fk_rails_40cb623d50 FOREIGN KEY (filtroproyectofinanciero) REFERENCES cor1440_gen_proyectofinanciero(id);
 
 
 --
@@ -5808,11 +6090,35 @@ ALTER TABLE ONLY cor1440_gen_actividad_sip_anexo
 
 
 --
+-- Name: fk_rails_524486e06b; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY cor1440_gen_actividad_proyectofinanciero
+    ADD CONSTRAINT fk_rails_524486e06b FOREIGN KEY (proyectofinanciero_id) REFERENCES cor1440_gen_proyectofinanciero(id);
+
+
+--
+-- Name: fk_rails_52d9d2f700; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY sal7711_gen_bitacora
+    ADD CONSTRAINT fk_rails_52d9d2f700 FOREIGN KEY (usuario_id) REFERENCES usuario(id);
+
+
+--
 -- Name: fk_rails_5b37b8c7e9; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY sivel2_sjr_progestado_derecho
     ADD CONSTRAINT fk_rails_5b37b8c7e9 FOREIGN KEY (derecho_id) REFERENCES sivel2_sjr_derecho(id);
+
+
+--
+-- Name: fk_rails_65eae7449f; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY sal7711_gen_articulo
+    ADD CONSTRAINT fk_rails_65eae7449f FOREIGN KEY (departamento_id) REFERENCES sip_departamento(id);
 
 
 --
@@ -5824,11 +6130,51 @@ ALTER TABLE ONLY sivel2_sjr_progestado_derecho
 
 
 --
+-- Name: fk_rails_7d1213c35b; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY sal7711_gen_articulo_categoriaprensa
+    ADD CONSTRAINT fk_rails_7d1213c35b FOREIGN KEY (articulo_id) REFERENCES sal7711_gen_articulo(id);
+
+
+--
+-- Name: fk_rails_8e3e0703f9; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY sal7711_gen_articulo
+    ADD CONSTRAINT fk_rails_8e3e0703f9 FOREIGN KEY (municipio_id) REFERENCES sip_municipio(id);
+
+
+--
 -- Name: fk_rails_9102b1afd0; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY sivel2_sjr_ayudasjr_derecho
     ADD CONSTRAINT fk_rails_9102b1afd0 FOREIGN KEY (ayudasjr_id) REFERENCES sivel2_sjr_ayudasjr(id);
+
+
+--
+-- Name: fk_rails_a8489e0d62; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY cor1440_gen_actividad_proyectofinanciero
+    ADD CONSTRAINT fk_rails_a8489e0d62 FOREIGN KEY (actividad_id) REFERENCES cor1440_gen_actividad(id);
+
+
+--
+-- Name: fk_rails_bdb4c828f9; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY sal7711_gen_articulo
+    ADD CONSTRAINT fk_rails_bdb4c828f9 FOREIGN KEY (anexo_id) REFERENCES sip_anexo(id);
+
+
+--
+-- Name: fk_rails_c02831dd89; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY cor1440_gen_informe
+    ADD CONSTRAINT fk_rails_c02831dd89 FOREIGN KEY (filtroactividadarea) REFERENCES cor1440_gen_actividadarea(id);
 
 
 --
@@ -5848,6 +6194,14 @@ ALTER TABLE ONLY cor1440_gen_actividad_proyecto
 
 
 --
+-- Name: fk_rails_d3b628101f; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY sal7711_gen_articulo
+    ADD CONSTRAINT fk_rails_d3b628101f FOREIGN KEY (fuenteprensa_id) REFERENCES sip_fuenteprensa(id);
+
+
+--
 -- Name: fk_rails_d3ef67afc9; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5861,6 +6215,14 @@ ALTER TABLE ONLY sivel2_sjr_ayudasjr_derecho
 
 ALTER TABLE ONLY sivel2_sjr_ayudaestado_derecho
     ADD CONSTRAINT fk_rails_eec7d2ed5d FOREIGN KEY (derecho_id) REFERENCES sivel2_sjr_derecho(id);
+
+
+--
+-- Name: fk_rails_fcf649bab3; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY sal7711_gen_articulo_categoriaprensa
+    ADD CONSTRAINT fk_rails_fcf649bab3 FOREIGN KEY (categoriaprensa_id) REFERENCES sal7711_gen_categoriaprensa(id);
 
 
 --
@@ -6371,7 +6733,7 @@ ALTER TABLE ONLY sivel2_sjr_victimasjr
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO public, pg_catalog;
+SET search_path TO "$user",public;
 
 INSERT INTO schema_migrations (version) VALUES ('20131128151014');
 
@@ -6567,6 +6929,8 @@ INSERT INTO schema_migrations (version) VALUES ('20150503120915');
 
 INSERT INTO schema_migrations (version) VALUES ('20150510125926');
 
+INSERT INTO schema_migrations (version) VALUES ('20150510130031');
+
 INSERT INTO schema_migrations (version) VALUES ('20150513112126');
 
 INSERT INTO schema_migrations (version) VALUES ('20150513130058');
@@ -6583,11 +6947,21 @@ INSERT INTO schema_migrations (version) VALUES ('20150521181918');
 
 INSERT INTO schema_migrations (version) VALUES ('20150521191227');
 
+INSERT INTO schema_migrations (version) VALUES ('20150528100944');
+
 INSERT INTO schema_migrations (version) VALUES ('20150602094513');
 
 INSERT INTO schema_migrations (version) VALUES ('20150602095241');
 
 INSERT INTO schema_migrations (version) VALUES ('20150602104342');
+
+INSERT INTO schema_migrations (version) VALUES ('20150603181900');
+
+INSERT INTO schema_migrations (version) VALUES ('20150604101858');
+
+INSERT INTO schema_migrations (version) VALUES ('20150604102321');
+
+INSERT INTO schema_migrations (version) VALUES ('20150604155923');
 
 INSERT INTO schema_migrations (version) VALUES ('20150609094809');
 
@@ -6610,4 +6984,16 @@ INSERT INTO schema_migrations (version) VALUES ('20150624200701');
 INSERT INTO schema_migrations (version) VALUES ('20150626211501');
 
 INSERT INTO schema_migrations (version) VALUES ('20150628104015');
+
+INSERT INTO schema_migrations (version) VALUES ('20150702224217');
+
+INSERT INTO schema_migrations (version) VALUES ('20150707164448');
+
+INSERT INTO schema_migrations (version) VALUES ('20150709203137');
+
+INSERT INTO schema_migrations (version) VALUES ('20150710012947');
+
+INSERT INTO schema_migrations (version) VALUES ('20150710114451');
+
+INSERT INTO schema_migrations (version) VALUES ('20150716085420');
 

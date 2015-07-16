@@ -15,6 +15,7 @@ describe "Control de acceso " do
 
   describe "analista" do
     it "puede crear caso" do
+      skip
       visit '/casos/nuevo'
       @numcaso=find_field('Código').value
 

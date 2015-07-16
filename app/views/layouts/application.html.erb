@@ -16,6 +16,10 @@
         <%= menu_item "Vacíos de protección", '/conteos/vacios' %>
       <% end %>
       <%= menu_item "Actividades", cor1440_gen.actividades_path %>
+      <%= drop_down "Archivo de Prensa" do %>
+        <%= menu_item "Buscar", sal7711_gen.buscar_path %>
+        <%= menu_item "Añadir Artículo", sal7711_gen.new_articulo_path %>
+      <% end %>
     <% end %>
   <% end %>
   <%= menu_group :pull => :right do %>
@@ -54,4 +58,4 @@
     </span></p>
 <% end %>
 
-<%= render template: "layouts/sip/application" %>
+<%= render template: "layouts/sal7711_gen/application" %>

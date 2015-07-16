@@ -3,11 +3,18 @@ source 'https://rubygems.org'
 #ruby "2.1.5"
 
 # Rails (internacionalización)
-gem "rails", '~> 4.2.3.rc1'
+gem "rails", '~> 4.2.3'
 gem "rails-i18n"
 
 # Colores en terminal
 gem 'colorize'
+
+
+# Cuadros de selección para búsquedas
+gem 'chosen-rails'
+
+# Dialogo modal
+gem 'lazybox'
 
 # Generación de PDF
 gem "prawn"
@@ -24,6 +31,9 @@ gem "foreman"
 gem "jbuilder"
 
 gem 'sass'
+gem 'sass-rails'
+gem 'compass-rails'
+gem 'compass'
 
 # Uglifier comprime recursos Javascript
 gem "uglifier", '>= 1.3.0'
@@ -87,6 +97,10 @@ gem 'sivel2_sjr', github: 'pasosdeJesus/sivel2_sjr', branch: :consip
 # Motor Cor1440_gen
 gem 'cor1440_gen', github: 'pasosdeJesus/cor1440_gen'
 #gem 'cor1440_gen', path: '../cor1440_gen'
+
+# Motor Sal7711_gen
+gem 'sal7711_gen', github: 'pasosdeJesus/sal7711_gen'
+#gem 'sal7711_gen', path: '../sal7711_gen'
 
 group :doc do
     # Genera documentación en doc/api con bundle exec rake doc:rails

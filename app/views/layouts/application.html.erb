@@ -15,7 +15,10 @@
         <%= menu_item "Desplazamientos por persona", '/conteos/desplazamientos' %>
         <%= menu_item "Vacíos de protección", '/conteos/vacios' %>
       <% end %>
-      <%= menu_item "Actividades", cor1440_gen.actividades_path %>
+      <%= drop_down "Actividades" do %>
+        <%= menu_item "Listado", cor1440_gen.actividades_path %>
+        <%= menu_item "Informes", cor1440_gen.informes_path %>
+      <% end %>
       <%= drop_down "Archivo de Prensa" do %>
         <%= menu_item "Buscar", sal7711_gen.buscar_path %>
         <%= menu_item "Añadir Artículo", sal7711_gen.new_articulo_path %>

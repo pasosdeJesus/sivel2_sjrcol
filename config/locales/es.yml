@@ -39,8 +39,8 @@ es:
     documentostierra:  Documentos sobre la tierra
     actividadarea: Subárea de Actividad
     actividadareas: Subáreas de Actividades
-    proyecto: Financiable
-    proyectos: Financiables
+    proyecto: Área de Actividad
+    proyectos: Áreas de Actividad
   activerecord:
     attributes:
       "sivel2_sjr/aslegal": 
@@ -50,8 +50,8 @@ es:
         Declaroante: Declaro Ante
         Declaroantes: Declaro Ante
       "cor1440_gen/proyecto":
-        Proyecto: Financiable
-        Proyectos: Financiables
+        Proyecto: Área de Actividad
+        Proyectos: Áreas de Actividad
       "cor1440_gen/actividadarea":
         Actividadarea: Subárea de Actividad
         Actividadareas: Subáreas de Actividad

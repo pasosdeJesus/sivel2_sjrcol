@@ -2,18 +2,35 @@
 
 class Ability < Sivel2Sjr::Ability
 
-  #@@tablasbasicas = @@tablasbasicas 
-  @@tablasbasicas << ['Sivel2Gen', 'filiacion']
-  @@tablasbasicas << ['Sivel2Gen', 'vinculoestado']
-  @@tablasbasicas << ['Sivel2Sjr', 'ayudaestado']
-  @@tablasbasicas << ['Sivel2Sjr', 'declaroante']
-  @@tablasbasicas << ['Sivel2Sjr', 'derecho']
-  @@tablasbasicas << ['Sivel2Sjr', 'motivosjr']
-  @@tablasbasicas << ['Sivel2Sjr', 'progestado']
-  @@tablasbasicas << ['Sivel2Sjr', 'regimensalud']
+  BASICAS_PROPIAS =  [
+    ['Sivel2Sjr', 'ayudaestado'], 
+    ['Sivel2Sjr', 'declaroante'], 
+    ['Sivel2Sjr', 'derecho'], 
+    ['Sivel2Sjr', 'motivosjr'], 
+    ['Sivel2Sjr', 'progestado'], 
+    ['Sivel2Sjr', 'ayudaestado'], 
+    ['Sivel2Sjr', 'declaroante'], 
+    ['Sivel2Sjr', 'derecho'], 
+    ['Sivel2Sjr', 'motivosjr'], 
+    ['Sivel2Sjr', 'progestado'], 
+    ['Sivel2Sjr', 'regimensalud']
+  ]
   
-  @@tablasbasicas += Cor1440Gen::Ability::BASICAS_NUEVAS
+  @@tablasbasicas = Sip::Ability::BASICAS_PROPIAS + 
+    Cor1440Gen::Ability::BASICAS_PROPIAS +
+    Sal7711Gen::Ability::BASICAS_PROPIAS + 
+    Sivel2Gen::Ability::BASICAS_PROPIAS + 
+    Sivel2Sjr::Ability::BASICAS_PROPIAS + 
+    BASICAS_PROPIAS
 
-  @@basicas_seq_con_id += Cor1440Gen::Ability::BASICAS_SID_NUEVAS 
+  @@basicas_id_noauto = Sip::Ability::BASICAS_ID_NOAUTO +
+    Sivel2Gen::Ability::BASICAS_ID_NOAUTO 
+
+  @@nobasicas_indice_seq_con_id = Sip::Ability::NOBASICAS_INDSEQID +
+    Sivel2Gen::Ability::NOBASICAS_INDSEQID 
+
+  @@tablasbasicas_prio = Sip::Ability::BASICAS_PRIO +
+    Sivel2Gen::Ability::BASICAS_PRIO +
+    Sivel2Sjr::Ability::BASICAS_PRIO
 
 end

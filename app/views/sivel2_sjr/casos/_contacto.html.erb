@@ -3,7 +3,7 @@
     victima.object.persona.id == @caso.casosjr.contacto.id 
   %>
     <%= victima.simple_fields_for :persona do |p| %>
-      <%= render 'sivel2_gen/casos/persona_fields', :f => p %>
+      <%= render 'sip/personas/persona_fields', :f => p %>
     <% end %>
 
     <%= s.input :direccion, label: "Dirección actual" %>

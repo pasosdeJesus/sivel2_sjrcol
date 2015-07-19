@@ -1,16 +1,12 @@
 # encoding: UTF-8
 module Sivel2Sjr
   module Admin
-    class DeclaroanteController < Sivel2Gen::Admin::BasicasController
+    class DeclaroanteController < Sip::Admin::BasicasController
       before_action :set_declaroante, only: [:show, :edit, :update, :destroy]
       load_and_authorize_resource class: Sivel2Sjr::Declaroante
 
       def clase 
         "Sivel2Sjr::Declaroante"
-      end
-
-      def atributos_index
-        ["id",  "nombre", "fechacreacion", "fechadeshabilitacion"] 
       end
 
       # Use callbacks to share common setup or constraints between actions.

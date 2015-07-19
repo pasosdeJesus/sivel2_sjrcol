@@ -1,4 +1,4 @@
-<% content_for :title do %>
+<% content_for :titulo do %>
     <%= Sivel2Gen.titulo %>
 <% end %>
 
@@ -7,7 +7,6 @@
   <%= menu_group do %>
     <% if !current_usuario.nil? %>
       <%= menu_item "Casos", sivel2_sjr.casos_path %>
-      <%= menu_item "Actividades", sivel2_gen.actividades_path %>
       <%= drop_down "Conteos" do %>
         <%= menu_item "Personas Atendidas", '/conteos/personas' %>
         <%= menu_item "Respuestas y Derechos Vulnerados", '/conteos/respuestas' %>
@@ -15,6 +14,14 @@
         <%= menu_item "Rutas de desplazamiento", '/conteos/rutas' %>
         <%= menu_item "Desplazamientos por persona", '/conteos/desplazamientos' %>
         <%= menu_item "Vacíos de protección", '/conteos/vacios' %>
+      <% end %>
+      <%= drop_down "Actividades" do %>
+        <%= menu_item "Listado", cor1440_gen.actividades_path %>
+        <%= menu_item "Informes", cor1440_gen.informes_path %>
+      <% end %>
+      <%= drop_down "Archivo de Prensa" do %>
+        <%= menu_item "Buscar", sal7711_gen.buscar_path %>
+        <%= menu_item "Añadir Artículo", sal7711_gen.new_articulo_path %>
       <% end %>
     <% end %>
   <% end %>
@@ -48,10 +55,10 @@
   <% end %>
 <% end %> 
 
-<% content_for :footer do %>
+<% content_for :piedepagina do %>
     <p><span class='derechos'>Dominio Público de acuerdo a Legislación Colombiana<br/>
       Desarrollado para <a href="http://www.sjrlac.org" target="_blank">SJR LAC</a> por <a href="http://www.pasosdeJesus.org" target="_blank">Pasos de Jesús</a>. 2014. 
     </span></p>
 <% end %>
 
-<%= render template: "layouts/sivel2_gen/application" %>
+<%= render template: "layouts/sal7711_gen/application" %>

@@ -13,8 +13,8 @@
   value_method: :id 
 %>
 
-<%= s.association :regionsjr,
-  collection: Sivel2Gen::Regionsjr.habilitados,
+<%= s.association :oficina,
+  collection: Sip::Oficina.habilitados,
   include_blank: false,
   label: "Oficina",
   label_method: :nombre, 

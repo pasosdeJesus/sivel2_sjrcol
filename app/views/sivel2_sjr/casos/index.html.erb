@@ -31,7 +31,7 @@
       <th><%= Sivel2Gen::Caso.human_attribute_name(:id) %></th>
       <th><%= Sivel2Sjr::Casosjr.human_attribute_name(:contacto) %></th>
       <th><%= Sivel2Sjr::Casosjr.human_attribute_name(:fecharec) %></th>
-      <th><%= Sivel2Sjr::Casosjr.human_attribute_name(:regionsjr) %></th>
+      <th><%= Sivel2Sjr::Casosjr.human_attribute_name(:oficina) %></th>
       <th><%= Sivel2Sjr::Casosjr.human_attribute_name(:asesor) %></th>
       <th><%= "Fecha Desp. Emb." %></th>
       <th><%= "Mun. Expulsor D.E" %></th>
@@ -47,7 +47,7 @@
         <td><%= link_to casosjr.caso_id, caso_path(casosjr.caso_id)  %></td>
         <td><%= casosjr.contacto_nombre %></td>
         <td><%= casosjr.fecharec %></td>
-        <td><%= casosjr.regionsjr_nombre %></td>
+        <td><%= casosjr.oficina_nombre %></td>
         <td><%= casosjr.nusuario %></td>
         <td><%= casosjr.caso_fecha %></td>
         <td><%= casosjr.expulsion %></td>

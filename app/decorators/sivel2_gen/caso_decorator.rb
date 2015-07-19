@@ -8,40 +8,34 @@ Sivel2Gen::Caso.class_eval do
         "CREATE OR REPLACE VIEW sivel2_gen_conscaso1 
         AS SELECT casosjr.id_caso as caso_id, 
         ARRAY_TO_STRING(ARRAY(SELECT nombres || ' ' || apellidos 
-        FROM sivel2_gen_persona AS persona
+        FROM sip_persona AS persona
           WHERE persona.id=casosjr.contacto), ', ')
           AS contacto_nombre, 
         casosjr.fecharec,
-        regionsjr.nombre AS regionsjr_nombre,
+        oficina.nombre AS oficina_nombre,
         usuario.nusuario,
         caso.fecha AS caso_fecha,
         ARRAY_TO_STRING(ARRAY(SELECT departamento.nombre || ' / ' || 
         municipio.nombre
-        FROM sivel2_gen_departamento AS departamento, 
-          sivel2_gen_municipio AS municipio, 
-          sivel2_gen_ubicacion AS ubicacion, 
+        FROM sip_departamento AS departamento, 
+          sip_municipio AS municipio, 
+          sip_ubicacion AS ubicacion, 
           sivel2_sjr_desplazamiento AS desplazamiento
         WHERE desplazamiento.fechaexpulsion=caso.fecha
         AND desplazamiento.id_caso=caso.id
         AND desplazamiento.id_expulsion=ubicacion.id
-        AND ubicacion.id_pais = departamento.id_pais
         AND ubicacion.id_departamento=departamento.id
-        AND ubicacion.id_pais = municipio.id_pais
-        AND ubicacion.id_departamento=municipio.id_departamento
         AND ubicacion.id_municipio=municipio.id ), ', ') AS expulsion,
         ARRAY_TO_STRING(ARRAY(SELECT departamento.nombre || ' / ' || 
         municipio.nombre
-        FROM sivel2_gen_departamento AS departamento, 
-          sivel2_gen_municipio AS municipio, 
-          sivel2_gen_ubicacion AS ubicacion, 
+        FROM sip_departamento AS departamento, 
+          sip_municipio AS municipio, 
+          sip_ubicacion AS ubicacion, 
           sivel2_sjr_desplazamiento AS desplazamiento
         WHERE desplazamiento.fechaexpulsion=caso.fecha
         AND desplazamiento.id_caso=caso.id
         AND desplazamiento.id_llegada=ubicacion.id
-        AND ubicacion.id_pais = departamento.id_pais
         AND ubicacion.id_departamento=departamento.id
-        AND ubicacion.id_departamento=municipio.id_departamento
-        AND ubicacion.id_pais = municipio.id_pais
         AND ubicacion.id_municipio=municipio.id ), ', ') AS llegada,
         ARRAY_TO_STRING(ARRAY(SELECT fechaatencion 
         FROM sivel2_sjr_respuesta AS respuesta
@@ -50,19 +44,19 @@ Sivel2Gen::Caso.class_eval do
           AS respuesta_ultimafechaatencion,
         caso.memo AS caso_memo
         FROM sivel2_sjr_casosjr AS casosjr, sivel2_gen_caso AS caso, 
-        sivel2_gen_regionsjr AS regionsjr, usuario
+        sip_oficina AS oficina, usuario
         WHERE casosjr.id_caso = caso.id
-          AND regionsjr.id=casosjr.id_regionsjr
+          AND oficina.id=casosjr.oficina_id
           AND usuario.id = casosjr.asesor
       ")
       ActiveRecord::Base.connection.execute(
         "CREATE MATERIALIZED VIEW sivel2_gen_conscaso 
-        AS SELECT caso_id, contacto_nombre, fecharec, regionsjr_nombre, 
+        AS SELECT caso_id, contacto_nombre, fecharec, oficina_nombre, 
           nusuario, caso_fecha, expulsion, llegada,
           respuesta_ultimafechaatencion, caso_memo,
           to_tsvector('spanish', unaccent(caso_id || ' ' || contacto_nombre || 
             ' ' || replace(cast(fecharec AS varchar), '-', ' ') || 
-            ' ' || regionsjr_nombre || ' ' || nusuario || ' ' || 
+            ' ' || oficina_nombre || ' ' || nusuario || ' ' || 
             replace(cast(caso_fecha AS varchar), '-', ' ') || ' ' ||
             expulsion  || ' ' || llegada || ' ' || 
             replace(cast(respuesta_ultimafechaatencion AS varchar), '-', ' ')

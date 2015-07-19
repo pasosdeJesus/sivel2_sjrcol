@@ -3,13 +3,23 @@ source 'https://rubygems.org'
 #ruby "2.1.5"
 
 # Rails (internacionalización)
-gem "rails", '~> 4.2.0'
+gem "rails", '~> 4.2.3'
 gem "rails-i18n"
 
-# Problemas con arel 6.0.0 al ejecutar rspec
-#gem "arel", '6.0.0.beta2'
+# Colores en terminal
+gem 'colorize'
 
-gem 'sass'
+
+# Cuadros de selección para búsquedas
+gem 'chosen-rails'
+
+# Dialogo modal
+gem 'lazybox'
+
+# Generación de PDF
+gem "prawn"
+gem "prawnto_2",  :require => "prawnto"
+gem "prawn-table"
 
 # Postgresql
 gem "pg"
@@ -19,6 +29,11 @@ gem "foreman"
 
 # API JSON facil. Ver: https://github.com/rails/jbuilder
 gem "jbuilder"
+
+gem 'sass'
+gem 'sass-rails'
+gem 'compass-rails'
+gem 'compass'
 
 # Uglifier comprime recursos Javascript
 gem "uglifier", '>= 1.3.0'
@@ -67,6 +82,10 @@ gem "paperclip", "~> 4.1"
 gem "tzinfo"
 gem "tzinfo-data"
 
+# Motor SIP
+gem 'sip', github: 'pasosdeJesus/sip'
+#gem 'sip', path: '../sip'
+
 # Motor de SIVeL 2
 gem 'sivel2_gen', github: 'pasosdeJesus/sivel2_gen'
 #gem 'sivel2_gen', path: '../sivel2_gen'
@@ -75,6 +94,13 @@ gem 'sivel2_gen', github: 'pasosdeJesus/sivel2_gen'
 gem 'sivel2_sjr', github: 'pasosdeJesus/sivel2_sjr'
 #gem 'sivel2_sjr', path: '../sivel2_sjr'
 
+# Motor Cor1440_gen
+gem 'cor1440_gen', github: 'pasosdeJesus/cor1440_gen'
+#gem 'cor1440_gen', path: '../cor1440_gen'
+
+# Motor Sal7711_gen
+gem 'sal7711_gen', github: 'pasosdeJesus/sal7711_gen'
+#gem 'sal7711_gen', path: '../sal7711_gen'
 
 group :doc do
     # Genera documentación en doc/api con bundle exec rake doc:rails
@@ -101,7 +127,7 @@ group :development, :test do
   #gem "launchy"
 
   # Depurar
-  gem "byebug"
+  #gem "byebug"
   
   # Consola irb en páginas con excepciones o usando <%= console %> en vistasA
   gem 'web-console'
@@ -119,7 +145,7 @@ group :test do
   gem "capybara"
   
   # Pruebas de regresión que requieren javascript
-  gem "capybara-webkit", '1.4.1'
+  gem "capybara-webkit", '1.4.1'  # Ahi hasta que 1.5 se compile bien
 
   # Envia resultados de pruebas desde travis a codeclimate
   gem "codeclimate-test-reporter", require: nil

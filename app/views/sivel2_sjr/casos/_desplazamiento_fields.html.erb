@@ -7,7 +7,7 @@
       :as => :string
     %>
     <%= f.association :expulsion,
-        collection: Sivel2Gen::Ubicacion.where(:id_caso => @caso.id),
+        collection: Sip::Ubicacion.where(:id_caso => @caso.id),
         label_method: lambda {|t| formato_ubicacion(t) },
         value_method: :id 
     %>
@@ -16,7 +16,7 @@
           :as => :string
     %>
     <%= f.association :llegada,
-          collection: Sivel2Gen::Ubicacion.where(:id_caso => @caso.id),
+          collection: Sip::Ubicacion.where(:id_caso => @caso.id),
           label_method: lambda {|t| formato_ubicacion(t) },
           value_method: :id 
     %>

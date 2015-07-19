@@ -10,9 +10,35 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require sip/motor
+//= require sivel2_gen/motor
+//= require sivel2_sjr/motor
+//= require cor1440_gen/motor
+//= require sal7711_gen/motor
 //= require chartkick
-//= require sivel2_sjr/application
 //= require_tree .
+
+$(document).on('ready page:load', function() {
+	var root;
+	root = typeof exports !== "undefined" && exports !== null ? exports : this;
+	sip_prepara_eventos_comunes(root);
+	sivel2_gen_prepara_eventos_comunes(root,'antecedentes/causas');
+	sivel2_sjr_prepara_eventos_comunes(root);
+	cor1440_gen_prepara_eventos_comunes(root);
+	sal7711_gen_prepara_eventos_comunes(root);
+	sivel2_sjr_prepara_eventos_unicos(root);
+
+	formato_fecha = 'yyyy-mm-dd'
+	if ($('meta[name=formato_fecha]') != []) {
+		formato_fecha = $('meta[name=formato_fecha]').attr('content')
+	}
+	$('[data-behaviour~=datepicker]').datepicker({
+		format: formato_fecha,
+		autoclose: true,
+		todayHighlight: true,
+		language: 'es'	
+	});
+});
 
 /*jQuery.ajaxSetup({
 	beforeSend: function(xhr) {

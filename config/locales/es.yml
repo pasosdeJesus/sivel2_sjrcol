@@ -37,6 +37,10 @@ es:
     inmaterialesperdidos: Bienes Inmateriales Perdidos 
     protegiorupta:  Protegió predio en RUPTA
     documentostierra:  Documentos sobre la tierra
+    actividadarea: Subárea de Actividad
+    actividadareas: Subáreas de Actividades
+    proyecto: Área de Actividad
+    proyectos: Áreas de Actividad
   activerecord:
     attributes:
       "sivel2_sjr/aslegal": 
@@ -48,3 +52,9 @@ es:
       "sivel2_sjr/clasifdesp": 
         Clasifdesp: Clasificación de Desplazamiento
         Clasifdesps: Clasificaciones de Desplazamientos
+      "cor1440_gen/proyecto":
+        Proyecto: Área de Actividad
+        Proyectos: Áreas de Actividad
+      "cor1440_gen/actividadarea":
+        Actividadarea: Subárea de Actividad
+        Actividadareas: Subáreas de Actividad

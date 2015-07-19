@@ -12,5 +12,6 @@
  *
  *= require_self
  *= require sivel2_sjr/application.css
+ *= require sal7711_gen/application.css
  *= require_tree .
  */

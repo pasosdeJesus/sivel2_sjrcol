@@ -4,25 +4,49 @@
 
 connection = ActiveRecord::Base.connection();
 
+# Básicas de motor sip
+l = File.readlines(
+  Gem.loaded_specs['sip'].full_gem_path + "/db/datos-basicas.sql"
+)
+connection.execute(l.join("\n"))
+
+# Básicas de motor SIVeL genérico
+l = File.readlines(
+  Gem.loaded_specs['sivel2_gen'].full_gem_path + "/db/cambios-basicas.sql"
+)
+connection.execute(l.join("\n"))
+
 # Básicas de motor SIVeL genérico
 l = File.readlines(
   Gem.loaded_specs['sivel2_gen'].full_gem_path + "/db/datos-basicas.sql"
 )
 connection.execute(l.join("\n"))
 
-# De motor SIVeL SJR
-l = File.readlines(Gem.loaded_specs['sivel2_sjr'].full_gem_path +
-                   "/db/datos-basicasn.sql")
-connection.execute(l.join("\n"));
+# Básicas de motor SIVeL SJR
+l = File.readlines(
+  Gem.loaded_specs['sivel2_sjr'].full_gem_path + "/db/cambios-basicas.sql"
+)
+connection.execute(l.join("\n"))
 
-# De motor SIVeL SJR
-l = File.readlines(Gem.loaded_specs['sivel2_sjr'].full_gem_path +
-                   "/db/cambios-basicas.sql")
-connection.execute(l.join("\n"));
+# Básicas de motor SIVeL SJR
+l = File.readlines(
+  Gem.loaded_specs['sivel2_sjr'].full_gem_path + "/db/datos-basicas.sql"
+)
+connection.execute(l.join("\n"))
 
-# De este
-l = File.readlines("db/cambios-basicasp.sql")
-connection.execute(l.join("\n"));
+# Básicas de motor cor1440_gen
+l = File.readlines(
+  Gem.loaded_specs['cor1440_gen'].full_gem_path + "/db/datos-basicas.sql"
+)
+connection.execute(l.join("\n"))
+
+# Cambios a básicas anteriores
+l = File.readlines("db/cambios-basicas.sql")
+connection.execute(l.join("\n"))
+
+# Nuevas basicas 
+#l = File.readlines("db/datos-basicas.sql")
+#connection.execute(l.join("\n"));
 
 # Usuario inicial: sjrcol con clave sjrcol123
 connection.execute("INSERT INTO usuario 

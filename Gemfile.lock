@@ -27,7 +27,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sivel2_gen.git
-  revision: ae8fbbcd3d0a99de27f77a5bc0aa2f1ae9e681e9
+  revision: 3fd29c96c1226740ffd63476d9e4373a011d4458
   specs:
     sivel2_gen (2.0.a4)
       devise
@@ -36,7 +36,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 537e40c79d06cfb0999085bb809227f220447ecc
+  revision: b82974dfa46274734a06eeb728be7f51684c8b66
   specs:
     sivel2_sjr (2.0.a6)
       rails

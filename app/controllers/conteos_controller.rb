@@ -624,29 +624,24 @@ class ConteosController < ApplicationController
   def desplazamientos
     authorize! :contar, Sivel2Gen::Caso
     if params[:ordenar] == 'Sexo'
-        cord = "3, 6 DESC, 1"
+        cord = "3, 5 DESC, 1"
     elsif params[:ordenar] == 'Edad'
-        cord = "4, 6 DESC, 1"
-    elsif params[:ordenar] == 'Sector'
-        cord = "5, 6 DESC, 1"
+        cord = "4, 5 DESC, 1"
     else
-        cord = "6 DESC, 1"
+        cord = "5 DESC, 1"
     end
     @desplazamientos = ActiveRecord::Base.connection.select_all(
       "SELECT victima.id_caso, persona.id AS persona, 
         persona.sexo, rangoedad.rango as rangoedad,
-        sectorsocial.nombre as sectorsocial,
         COUNT(desplazamiento.id) as cuenta
       FROM sivel2_gen_victima AS victima, 
         sip_persona AS persona, 
         sivel2_sjr_desplazamiento AS desplazamiento, 
-        sivel2_gen_rangoedad AS rangoedad, 
-        sivel2_gen_sectorsocial AS sectorsocial
+        sivel2_gen_rangoedad AS rangoedad
       WHERE victima.id_caso=desplazamiento.id_caso
         AND victima.id_persona=persona.id
         AND victima.id_rangoedad=rangoedad.id
-        AND victima.id_sectorsocial=sectorsocial.id
-      GROUP BY 1, 2, 3, 4, 5 ORDER BY #{cord};
+      GROUP BY 1, 2, 3, 4 ORDER BY #{cord};
       "
     )
   end

@@ -13,9 +13,6 @@
       <th><%= "Rango de Edad" %>
         <%= link_to "^", conteos_desplazamientos_path(ordenar: "Edad") %>
       </th>
-      <th><%= "Sector Social" %>
-        <%= link_to "^", conteos_desplazamientos_path(ordenar: "Sector") %>
-      </th>
       <th><%= "N. Desplazamientos" %>
         <%= link_to "^", conteos_desplazamientos_path(ordenar: "Desp") %>
         </th>
@@ -28,7 +25,6 @@
         <td><%= ruta['persona'] %></td>
         <td><%= ruta['sexo'] %></td>
         <td><%= ruta['rangoedad'] %></td>
-        <td><%= ruta['sectorsocial'] %></td>
         <td><%= ruta['cuenta'] %></td>
       </tr>
     <% end %>

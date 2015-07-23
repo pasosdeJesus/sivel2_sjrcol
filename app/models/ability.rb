@@ -16,7 +16,18 @@ class Ability < Sivel2Sjr::Ability
     Sal7711Gen::Ability::BASICAS_PROPIAS + 
     Sivel2Gen::Ability::BASICAS_PROPIAS + 
     Sivel2Sjr::Ability::BASICAS_PROPIAS + 
-    BASICAS_PROPIAS
+    BASICAS_PROPIAS - [
+      ['Sivel2Gen', 'filiacion'],
+      ['Sivel2Gen', 'frontera'],
+      ['Sivel2Gen', 'iglesia'],
+      ['Sivel2Gen', 'intervalo'],
+      ['Sivel2Gen', 'organizacion'],
+      ['Sivel2Gen', 'region'],
+      ['Sivel2Gen', 'sectorsocial'],
+      ['Sivel2Gen', 'vinculoestado'],
+      ['Sivel2Sjr', 'idioma']
+  ]
+
 
   @@basicas_id_noauto = Sip::Ability::BASICAS_ID_NOAUTO +
     Sivel2Gen::Ability::BASICAS_ID_NOAUTO 

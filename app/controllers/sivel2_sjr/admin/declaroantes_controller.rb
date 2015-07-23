@@ -1,7 +1,7 @@
 # encoding: UTF-8
 module Sivel2Sjr
   module Admin
-    class DeclaroanteController < Sip::Admin::BasicasController
+    class DeclaroantesController < Sip::Admin::BasicasController
       before_action :set_declaroante, only: [:show, :edit, :update, :destroy]
       load_and_authorize_resource class: Sivel2Sjr::Declaroante
 

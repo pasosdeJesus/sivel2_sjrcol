@@ -8,11 +8,6 @@ class Ability < Sivel2Sjr::Ability
     ['Sivel2Sjr', 'derecho'], 
     ['Sivel2Sjr', 'motivosjr'], 
     ['Sivel2Sjr', 'progestado'], 
-    ['Sivel2Sjr', 'ayudaestado'], 
-    ['Sivel2Sjr', 'declaroante'], 
-    ['Sivel2Sjr', 'derecho'], 
-    ['Sivel2Sjr', 'motivosjr'], 
-    ['Sivel2Sjr', 'progestado'], 
     ['Sivel2Sjr', 'regimensalud']
   ]
   

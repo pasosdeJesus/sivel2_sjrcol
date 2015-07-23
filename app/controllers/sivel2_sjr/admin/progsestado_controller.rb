@@ -15,6 +15,10 @@ module Sivel2Sjr
           ["observaciones", "fechacreacion", "fechadeshabilitacion"] 
       end
 
+      def genclase
+        return 'M'
+      end
+
       # Use callbacks to share common setup or constraints between actions.
       def set_progestado
         @basica = Sivel2Sjr::Progestado.find(params[:id])

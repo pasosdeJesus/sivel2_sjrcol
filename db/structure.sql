@@ -407,7 +407,9 @@ CREATE TABLE sivel2_sjr_casosjr (
     observacionesref character varying(5000),
     concentimientosjr boolean,
     concentimientobd boolean,
-    detcomosupo character varying(5000)
+    detcomosupo character varying(5000),
+    id_proteccion integer,
+    id_statusmigratorio integer
 );
 
 
@@ -2656,6 +2658,7 @@ CREATE TABLE sivel2_gen_intervalo (
     fechadeshabilitacion date,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
+    observaciones character varying(5000),
     CONSTRAINT intervalo_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
 
@@ -2711,6 +2714,7 @@ CREATE TABLE sivel2_gen_organizacion (
     fechadeshabilitacion date,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
+    observaciones character varying(5000),
     CONSTRAINT organizacion_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
 
@@ -2884,6 +2888,7 @@ CREATE TABLE sivel2_gen_sectorsocial (
     fechadeshabilitacion date,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
+    observaciones character varying(5000),
     CONSTRAINT sectorsocial_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
 
@@ -6040,6 +6045,14 @@ ALTER TABLE ONLY cor1440_gen_informe
 
 
 --
+-- Name: fk_rails_2be82bc047; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY sivel2_sjr_casosjr
+    ADD CONSTRAINT fk_rails_2be82bc047 FOREIGN KEY (id_proteccion) REFERENCES sivel2_sjr_proteccion(id);
+
+
+--
 -- Name: fk_rails_395faa0882; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6149,6 +6162,14 @@ ALTER TABLE ONLY sivel2_sjr_ayudasjr_derecho
 
 ALTER TABLE ONLY cor1440_gen_actividad_proyectofinanciero
     ADD CONSTRAINT fk_rails_a8489e0d62 FOREIGN KEY (actividad_id) REFERENCES cor1440_gen_actividad(id);
+
+
+--
+-- Name: fk_rails_b324d125c0; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY sivel2_sjr_casosjr
+    ADD CONSTRAINT fk_rails_b324d125c0 FOREIGN KEY (id_statusmigratorio) REFERENCES sivel2_sjr_statusmigratorio(id);
 
 
 --
@@ -7000,4 +7021,12 @@ INSERT INTO schema_migrations (version) VALUES ('20150718213611');
 INSERT INTO schema_migrations (version) VALUES ('20150720115701');
 
 INSERT INTO schema_migrations (version) VALUES ('20150720120236');
+
+INSERT INTO schema_migrations (version) VALUES ('20150722113654');
+
+INSERT INTO schema_migrations (version) VALUES ('20150722231825');
+
+INSERT INTO schema_migrations (version) VALUES ('20150722233211');
+
+INSERT INTO schema_migrations (version) VALUES ('20150723110322');
 

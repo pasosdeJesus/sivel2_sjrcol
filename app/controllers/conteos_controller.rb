@@ -72,8 +72,6 @@ class ConteosController < ApplicationController
       'progestado' => 'Subsidio/Programa del Estado'
     }
 
-    pFaini = param_escapa('fechaini')
-    pFafin = param_escapa('fechafin')
     pContar = param_escapa('contar')
     pOficina = param_escapa('oficina')
     pDerecho = param_escapa('derecho')
@@ -336,8 +334,6 @@ class ConteosController < ApplicationController
 
   def personas
     authorize! :contar, Sivel2Gen::Caso
-    pFaini = param_escapa('faini')
-    pFafin = param_escapa('fafin') 
     pSegun = param_escapa('segun')
     pOficina = param_escapa('oficina')
     pMunicipio = param_escapa('municipio')
@@ -364,7 +360,6 @@ class ConteosController < ApplicationController
 
     cons1 = 'cben1';
     cons2 = 'cben2';
-    cons3 = 'cben3';
     @fechaini = '';
     where1 = '';
     if (params[:fechaini] && params[:fechaini] != "") 
@@ -408,7 +403,6 @@ class ConteosController < ApplicationController
     #byebug
     case pSegun
     when ''
-      titSegun = 'Total'
       que1 = agrega_tabla(que1, 'cast(\'total\' as text) as total')
       que3 << ["", ""]
     when 'RANGO DE EDAD'

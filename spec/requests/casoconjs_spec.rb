@@ -128,9 +128,9 @@ describe "Llenar caso con javascript", :js => true, type: :feature do
       exit(1)
       page.save_screenshot('tmp/s-sol4.png')
       if (!find_field('Nombres').visible?)
-      	click_on "Añadir Víctima"
-      	page.save_screenshot('tmp/s-sol45.png')
-			end
+        click_on "Añadir Víctima"
+        page.save_screenshot('tmp/s-sol45.png')
+      end
       within ("div#victima") do 
         fill_in "Nombres", with: 'Nombres Beneficiario'
         fill_in "Apellidos", with: 'Apellidos Beneficiario'

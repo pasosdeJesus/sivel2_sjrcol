@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/pasosdeJesus/cor1440_gen.git
-  revision: b5e2c7b7f540abddbf1cb3066b52442b64bb30e3
+  revision: 665acb19a7091da8ce7a57db0c3a79c80417d1a2
   specs:
     cor1440_gen (1.0.a5)
       devise
@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sal7711_gen.git
-  revision: 177aebdc0d6ce30076287aa981dc71fb3a9d24f6
+  revision: 9bcb8b3e6859d28760cd54cf7a5b2624dbceab3a
   specs:
     sal7711_gen (1.0.a2)
       rails
@@ -18,7 +18,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sip.git
-  revision: 27fc78724b2f6683ac3bddefc0bacab478f1b079
+  revision: 315e6b1f94e130fa276670e82e0de0cd8a1ac2c0
   specs:
     sip (2.0.a6)
       devise
@@ -27,7 +27,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 65abe300c4776385e2e6e40c9a6cc5303055fa9b
+  revision: ebfb6925f0e74479575fe95183ea86da9d5dcf66
   specs:
     sivel2_gen (2.0.a6)
       devise
@@ -36,7 +36,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 846d4777307f18fbec3137f4dfa8d173536ddeed
+  revision: 0bc35e3ede6f1644b3f22b168ac4406d67ec55fe
   specs:
     sivel2_sjr (2.0.a6)
       rails

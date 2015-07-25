@@ -53,6 +53,8 @@ if (test "$SININS" != "1") then {
 	} fi;
 } fi;
 
+rake db:migrate sip:indices db:structure:dump
+
 RAILS_ENV=test rake db:drop db:setup db:migrate sip:indices
 if (test "$?" != "0") then {
 	echo "No puede preparse base de prueba";

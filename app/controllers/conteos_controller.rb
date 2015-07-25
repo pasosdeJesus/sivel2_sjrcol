@@ -72,6 +72,8 @@ class ConteosController < ApplicationController
       'progestado' => 'Subsidio/Programa del Estado'
     }
 
+    pFaini = param_escapa('faini')
+    pFafin = param_escapa('fafin')
     pContar = param_escapa('contar')
     pOficina = param_escapa('oficina')
     pDerecho = param_escapa('derecho')
@@ -377,6 +379,7 @@ class ConteosController < ApplicationController
           where1, "casosjr.fecharec", @fechafin, "<="
         )
     end
+    #byebug
     que1 = 'caso.id AS id_caso, victima.id_persona AS id_persona,
             CASE WHEN (casosjr.contacto=victima.id_persona) THEN 1 ELSE 0 END 
             AS contacto, 
@@ -446,7 +449,7 @@ class ConteosController < ApplicationController
 
     # Paso 2
     # Añadimos información geográfica que se pueda
-    q2="CREATE VIEW #{cons2} AS SELECT s.*,
+    q2="CREATE VIEW #{cons2} AS SELECT #{cons1}.*,
             ubicacion.id_departamento, 
             departamento.nombre AS departamento_nombre, 
             ubicacion.id_municipio, municipio.nombre AS municipio_nombre, 

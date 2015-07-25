@@ -22,6 +22,7 @@ class Ability < Sivel2Sjr::Ability
       ['Sivel2Gen', 'iglesia'],
       ['Sivel2Gen', 'intervalo'],
       ['Sivel2Gen', 'organizacion'],
+      ['Sivel2Gen', 'pconsolidado'],
       ['Sivel2Gen', 'region'],
       ['Sivel2Gen', 'sectorsocial'],
       ['Sivel2Gen', 'vinculoestado'],

@@ -52,6 +52,15 @@ es:
       "sivel2_sjr/clasifdesp": 
         Clasifdesp: Clasificación de Desplazamiento
         Clasifdesps: Clasificaciones de Desplazamientos
+      "sivel2_sjr/clasifdesp": 
+        Clasifdesp: Clasificación de Desplazamiento
+        Clasifdesps: Clasificaciones de Desplazamientos
+      "sivel2_sjr/motivosjr": 
+        Motivosjr: Servicio y Asesoria del SJR
+        Motivossjr: Servicios y Asesorias del SJR
+      "sivel2_sjr/personadesea": 
+        Personadesea: Persona desea
+        Personadeseas: Personas desean
       "cor1440_gen/proyecto":
         Proyecto: Área de Actividad
         Proyectos: Áreas de Actividad

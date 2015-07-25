@@ -62,15 +62,12 @@ CREATE FUNCTION cadubicacion(integer) RETURNS character varying
 CREATE FUNCTION municipioubicacion(integer) RETURNS character varying
     LANGUAGE sql
     AS $_$
-        SELECT (SELECT nombre FROM sivel2_gen_pais WHERE id=ubicacion.id_pais) 
-            || COALESCE((SELECT '/' || nombre FROM sivel2_gen_departamento 
-            WHERE sivel2_gen_departamento.id_pais=ubicacion.id_pais 
-            AND sivel2_gen_departamento.id=ubicacion.id_departamento),'') 
-            || COALESCE((SELECT '/' || nombre FROM sivel2_gen_municipio 
-            WHERE sivel2_gen_municipio.id_pais=ubicacion.id_pais 
-            AND sivel2_gen_municipio.id_departamento=ubicacion.id_departamento 
-            AND sivel2_gen_municipio.id=ubicacion.id_municipio),'') 
-            FROM sivel2_gen_ubicacion AS ubicacion 
+        SELECT (SELECT nombre FROM sip_pais WHERE id=ubicacion.id_pais) 
+            || COALESCE((SELECT '/' || nombre FROM sip_departamento 
+            WHERE sip_departamento.id = ubicacion.id_departamento),'') 
+            || COALESCE((SELECT '/' || nombre FROM sip_municipio 
+            WHERE sip_municipio.id = ubicacion.id_municipio),'') 
+            FROM sip_ubicacion AS ubicacion 
             WHERE ubicacion.id=$1;
       $_$;
 
@@ -405,36 +402,6 @@ CREATE TABLE sivel2_sjr_casosjr (
 
 
 --
--- Name: sivel2_sjr_victimasjr; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE sivel2_sjr_victimasjr (
-    sindocumento boolean,
-    id_estadocivil integer DEFAULT 0,
-    id_rolfamilia integer DEFAULT 0 NOT NULL,
-    cabezafamilia boolean,
-    id_maternidad integer DEFAULT 0,
-    discapacitado boolean,
-    id_actividadoficio integer DEFAULT 0,
-    id_escolaridad integer DEFAULT 0,
-    asisteescuela boolean,
-    tienesisben boolean,
-    id_departamento integer,
-    id_municipio integer,
-    nivelsisben integer,
-    id_regimensalud integer DEFAULT 0,
-    eps character varying(1000),
-    libretamilitar boolean,
-    distrito integer,
-    progadultomayor boolean,
-    fechadesagregacion date,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone,
-    id_victima integer NOT NULL
-);
-
-
---
 -- Name: cben1; Type: VIEW; Schema: public; Owner: -
 --
 
@@ -450,12 +417,11 @@ CREATE VIEW cben1 AS
             ELSE 0
         END AS beneficiario,
     1 AS npersona,
-    victimasjr.id_actividadoficio
+    'total'::text AS total
    FROM sivel2_gen_caso caso,
     sivel2_sjr_casosjr casosjr,
-    sivel2_gen_victima victima,
-    sivel2_sjr_victimasjr victimasjr
-  WHERE (((caso.id = casosjr.id_caso) AND (caso.id = victima.id_caso)) AND (victima.id = victimasjr.id_victima));
+    sivel2_gen_victima victima
+  WHERE ((caso.id = casosjr.id_caso) AND (caso.id = victima.id_caso));
 
 
 --
@@ -1013,7 +979,7 @@ CREATE TABLE sivel2_sjr_respuesta (
 CREATE VIEW cres1 AS
  SELECT caso.id AS id_caso,
     respuesta.fechaatencion,
-    casosjr.oficina_id AS id_regionsjr,
+    casosjr.oficina_id,
     derecho_respuesta.id_derecho
    FROM sivel2_gen_caso caso,
     sivel2_sjr_casosjr casosjr,
@@ -1029,7 +995,7 @@ CREATE VIEW cres1 AS
 CREATE VIEW cvp1 AS
  SELECT respuesta.id AS id_respuesta,
     derecho_respuesta.id_derecho,
-    casosjr.oficina_id AS id_regionsjr
+    casosjr.oficina_id
    FROM sivel2_sjr_casosjr casosjr,
     sivel2_sjr_respuesta respuesta,
     sivel2_sjr_derecho_respuesta derecho_respuesta
@@ -1037,21 +1003,21 @@ CREATE VIEW cvp1 AS
 
 
 --
--- Name: sivel2_sjr_ayudaestado_derecho; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: sivel2_sjr_ayudasjr_derecho; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE TABLE sivel2_sjr_ayudaestado_derecho (
-    ayudaestado_id integer,
+CREATE TABLE sivel2_sjr_ayudasjr_derecho (
+    ayudasjr_id integer,
     derecho_id integer
 );
 
 
 --
--- Name: sivel2_sjr_ayudaestado_respuesta; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: sivel2_sjr_ayudasjr_respuesta; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE TABLE sivel2_sjr_ayudaestado_respuesta (
-    id_ayudaestado integer DEFAULT 0 NOT NULL,
+CREATE TABLE sivel2_sjr_ayudasjr_respuesta (
+    id_ayudasjr integer DEFAULT 0 NOT NULL,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     id_respuesta integer NOT NULL
@@ -1065,10 +1031,10 @@ CREATE TABLE sivel2_sjr_ayudaestado_respuesta (
 CREATE VIEW cvp2 AS
  SELECT ar.id_respuesta,
     ad.derecho_id AS id_derecho,
-    ar.id_ayudaestado
-   FROM sivel2_sjr_ayudaestado_respuesta ar,
-    sivel2_sjr_ayudaestado_derecho ad
-  WHERE (ar.id_ayudaestado = ad.ayudaestado_id);
+    ar.id_ayudasjr
+   FROM sivel2_sjr_ayudasjr_respuesta ar,
+    sivel2_sjr_ayudasjr_derecho ad
+  WHERE (ar.id_ayudasjr = ad.ayudasjr_id);
 
 
 --
@@ -3079,6 +3045,28 @@ CREATE TABLE sivel2_sjr_ayudaestado (
 
 
 --
+-- Name: sivel2_sjr_ayudaestado_derecho; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE sivel2_sjr_ayudaestado_derecho (
+    ayudaestado_id integer,
+    derecho_id integer
+);
+
+
+--
+-- Name: sivel2_sjr_ayudaestado_respuesta; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE sivel2_sjr_ayudaestado_respuesta (
+    id_ayudaestado integer DEFAULT 0 NOT NULL,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    id_respuesta integer NOT NULL
+);
+
+
+--
 -- Name: sivel2_sjr_ayudasjr_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -3103,28 +3091,6 @@ CREATE TABLE sivel2_sjr_ayudasjr (
     updated_at timestamp without time zone,
     observaciones character varying(5000),
     CONSTRAINT ayudasjr_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
-);
-
-
---
--- Name: sivel2_sjr_ayudasjr_derecho; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE sivel2_sjr_ayudasjr_derecho (
-    ayudasjr_id integer,
-    derecho_id integer
-);
-
-
---
--- Name: sivel2_sjr_ayudasjr_respuesta; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE sivel2_sjr_ayudasjr_respuesta (
-    id_ayudasjr integer DEFAULT 0 NOT NULL,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone,
-    id_respuesta integer NOT NULL
 );
 
 
@@ -3725,6 +3691,36 @@ CREATE TABLE sivel2_sjr_tipodesp (
     updated_at timestamp without time zone,
     observaciones character varying(5000),
     CONSTRAINT tipodesp_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
+);
+
+
+--
+-- Name: sivel2_sjr_victimasjr; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE sivel2_sjr_victimasjr (
+    sindocumento boolean,
+    id_estadocivil integer DEFAULT 0,
+    id_rolfamilia integer DEFAULT 0 NOT NULL,
+    cabezafamilia boolean,
+    id_maternidad integer DEFAULT 0,
+    discapacitado boolean,
+    id_actividadoficio integer DEFAULT 0,
+    id_escolaridad integer DEFAULT 0,
+    asisteescuela boolean,
+    tienesisben boolean,
+    id_departamento integer,
+    id_municipio integer,
+    nivelsisben integer,
+    id_regimensalud integer DEFAULT 0,
+    eps character varying(1000),
+    libretamilitar boolean,
+    distrito integer,
+    progadultomayor boolean,
+    fechadesagregacion date,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    id_victima integer NOT NULL
 );
 
 

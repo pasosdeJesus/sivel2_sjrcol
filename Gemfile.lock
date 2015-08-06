@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/pasosdeJesus/cor1440_gen.git
-  revision: 4559dddf3c5ac40b523ee6f0cbf5890bbc5487da
+  revision: d3fa78ec09bd713f07ee0e2b9f9d2faa9fdefda3
   specs:
     cor1440_gen (1.0.a5)
       devise
@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sal7711_gen.git
-  revision: ad2b2318cafda0f93bb97414c692f6e3e27d1ac0
+  revision: dd776171e9a66ac70b4b26cc58ef93b4632351fc
   specs:
     sal7711_gen (1.0.a2)
       rails
@@ -18,7 +18,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sip.git
-  revision: 315e6b1f94e130fa276670e82e0de0cd8a1ac2c0
+  revision: a0752596accda2a40cdda909f5be2e65548c8e73
   specs:
     sip (2.0.a6)
       devise
@@ -27,7 +27,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sivel2_gen.git
-  revision: d09192775e0363186abc61402a2be5bc16cef314
+  revision: 12e1dfc3c809c9328aa49701ebc6e8c1550b2bf9
   specs:
     sivel2_gen (2.0.a6)
       devise
@@ -36,7 +36,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 6b5619bfd19dd3a21584b98fd984b7f8de803f5c
+  revision: 90ecf74d5efceb80f22e7dce5a7b1403ff739b1a
   specs:
     sivel2_sjr (2.0.a6)
       rails
@@ -93,7 +93,7 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
-    arel (6.0.2)
+    arel (6.0.3)
     bcrypt (3.1.10)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
@@ -171,7 +171,7 @@ GEM
     ffi (1.9.10)
     foreman (0.78.0)
       thor (~> 0.19.1)
-    globalid (0.3.5)
+    globalid (0.3.6)
       activesupport (>= 4.1.0)
     hike (1.2.3)
     i18n (0.7.0)

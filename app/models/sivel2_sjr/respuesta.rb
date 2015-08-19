@@ -7,7 +7,7 @@ module Sivel2Sjr
 
     has_many :ayudaestado_respuesta, 
       class_name: "Sivel2Sjr::AyudaestadoRespuesta",  
-      foreign_key: "id_respuesta", dependent: :destroy
+      foreign_key: "id_respuesta"#, dependent: :destroy
     has_many :ayudaestado, class_name: "Sivel2Sjr::Ayudaestado", 
       :through => :ayudaestado_respuesta
   end

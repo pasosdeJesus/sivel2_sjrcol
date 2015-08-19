@@ -53,6 +53,7 @@ gem "turbolinks"
 # Ambiente de CSS
 gem "twitter-bootstrap-rails"#, "=2.2.8"
 gem "bootstrap-datepicker-rails"
+gem "font-awesome-rails"
 
 gem "chartkick"
 

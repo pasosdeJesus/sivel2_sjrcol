@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/pasosdeJesus/cor1440_gen.git
-  revision: 4559dddf3c5ac40b523ee6f0cbf5890bbc5487da
+  revision: f25a8938458cc77ad0e99ecea9b8004688ebff44
   specs:
     cor1440_gen (1.0.a5)
       devise
@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sal7711_gen.git
-  revision: ad2b2318cafda0f93bb97414c692f6e3e27d1ac0
+  revision: d6561823cf8400110cab8a7019b4df1a21f4dea1
   specs:
     sal7711_gen (1.0.a2)
       rails
@@ -18,7 +18,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sip.git
-  revision: 315e6b1f94e130fa276670e82e0de0cd8a1ac2c0
+  revision: 07c4a355f3c1a3f356f66a6487803543070069f6
   specs:
     sip (2.0.a6)
       devise
@@ -27,18 +27,18 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sivel2_gen.git
-  revision: d09192775e0363186abc61402a2be5bc16cef314
+  revision: 42126ce02ec2d96dde104e808b457bdaf8784da5
   specs:
-    sivel2_gen (2.0.a6)
+    sivel2_gen (2.0.a7)
       devise
       jquery-rails
       rails
 
 GIT
   remote: git://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 6b5619bfd19dd3a21584b98fd984b7f8de803f5c
+  revision: 0ff235dba779cbc397d1f9e5dd18846d34717822
   specs:
-    sivel2_sjr (2.0.a6)
+    sivel2_sjr (2.0.a7)
       rails
       sivel2_gen
 
@@ -93,7 +93,7 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
-    arel (6.0.2)
+    arel (6.0.3)
     bcrypt (3.1.10)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
@@ -146,12 +146,12 @@ GEM
       sass (>= 3.3.0, < 3.5)
     compass-import-once (1.0.5)
       sass (>= 3.2, < 3.5)
-    compass-rails (2.0.4)
+    compass-rails (2.0.5)
       compass (~> 1.0.0)
-      sass-rails (<= 5.0.1)
+      sass-rails (< 5.1)
       sprockets (< 2.13)
     debug_inspector (0.0.2)
-    devise (3.5.1)
+    devise (3.5.2)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 3.2.6, < 5)
@@ -162,16 +162,18 @@ GEM
     diff-lcs (1.2.5)
     docile (1.1.5)
     erubis (2.7.0)
-    execjs (2.5.2)
+    execjs (2.6.0)
     factory_girl (4.5.0)
       activesupport (>= 3.0.0)
     factory_girl_rails (4.5.0)
       factory_girl (~> 4.5.0)
       railties (>= 3.0.0)
     ffi (1.9.10)
+    font-awesome-rails (4.4.0.0)
+      railties (>= 3.2, < 5.0)
     foreman (0.78.0)
       thor (~> 0.19.1)
-    globalid (0.3.5)
+    globalid (0.3.6)
       activesupport (>= 4.1.0)
     hike (1.2.3)
     i18n (0.7.0)
@@ -188,7 +190,7 @@ GEM
     json (1.8.3)
     kgio (2.9.3)
     lazybox (1.1.5)
-    loofah (2.0.2)
+    loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
@@ -196,9 +198,9 @@ GEM
     mime-types (2.6.1)
     mimemagic (0.3.0)
     mini_portile (0.6.2)
-    minitest (5.7.0)
+    minitest (5.8.0)
     multi_json (1.11.2)
-    newrelic_rpm (3.12.1.298)
+    newrelic_rpm (3.13.0.299)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
     orm_adapter (0.5.0)
@@ -244,7 +246,7 @@ GEM
       sprockets-rails
     rails-deprecated_sanitizer (1.0.3)
       activesupport (>= 4.2.0.alpha)
-    rails-dom-testing (1.0.6)
+    rails-dom-testing (1.0.7)
       activesupport (>= 4.2.0.beta, < 5.0)
       nokogiri (~> 1.6.0)
       rails-deprecated_sanitizer (>= 1.0.1)
@@ -289,7 +291,7 @@ GEM
       rspec-support (~> 3.3.0)
     rspec-support (3.3.0)
     sass (3.4.16)
-    sass-rails (5.0.1)
+    sass-rails (5.0.3)
       railties (>= 4.0.0, < 5.0)
       sass (~> 3.1)
       sprockets (>= 2.8, < 4.0)
@@ -338,7 +340,7 @@ GEM
       tzinfo
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
-    tzinfo-data (1.2015.5)
+    tzinfo-data (1.2015.6)
       tzinfo (>= 1.0.0)
     uglifier (2.7.1)
       execjs (>= 0.3.0)
@@ -379,6 +381,7 @@ DEPENDENCIES
   devise
   devise-i18n
   factory_girl_rails (~> 4.0)
+  font-awesome-rails
   foreman
   jbuilder
   jquery-rails

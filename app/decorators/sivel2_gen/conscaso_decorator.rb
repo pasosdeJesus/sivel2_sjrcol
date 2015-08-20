@@ -1,6 +1,6 @@
 # encoding: UTF-8
 
-Sivel2Gen::Caso.class_eval do
+Sivel2Gen::Conscaso.class_eval do
 
   def self.refresca_conscaso
     if !ActiveRecord::Base.connection.table_exists? 'sivel2_gen_conscaso'
@@ -10,11 +10,11 @@ Sivel2Gen::Caso.class_eval do
         ARRAY_TO_STRING(ARRAY(SELECT nombres || ' ' || apellidos 
         FROM sip_persona AS persona
           WHERE persona.id=casosjr.contacto), ', ')
-          AS contacto_nombre, 
+          AS contacto,
         casosjr.fecharec,
-        oficina.nombre AS oficina_nombre,
+        oficina.nombre AS oficina,
         usuario.nusuario,
-        caso.fecha AS caso_fecha,
+        caso.fecha AS fecha,
         ARRAY_TO_STRING(ARRAY(SELECT departamento.nombre || ' / ' || 
         municipio.nombre
         FROM sip_departamento AS departamento, 
@@ -41,8 +41,8 @@ Sivel2Gen::Caso.class_eval do
         FROM sivel2_sjr_respuesta AS respuesta
           WHERE respuesta.id_caso=casosjr.id_caso 
           ORDER BY fechaatencion DESC LIMIT 1), ', ')
-          AS respuesta_ultimafechaatencion,
-        caso.memo AS caso_memo
+          AS ultimafechaatencion,
+        caso.memo AS memo
         FROM sivel2_sjr_casosjr AS casosjr, sivel2_gen_caso AS caso, 
         sip_oficina AS oficina, usuario
         WHERE casosjr.id_caso = caso.id
@@ -51,16 +51,16 @@ Sivel2Gen::Caso.class_eval do
       ")
       ActiveRecord::Base.connection.execute(
         "CREATE MATERIALIZED VIEW sivel2_gen_conscaso 
-        AS SELECT caso_id, contacto_nombre, fecharec, oficina_nombre, 
-          nusuario, caso_fecha, expulsion, llegada,
-          respuesta_ultimafechaatencion, caso_memo,
-          to_tsvector('spanish', unaccent(caso_id || ' ' || contacto_nombre || 
+        AS SELECT caso_id, contacto, fecharec, oficina, 
+          nusuario, fecha, expulsion, llegada,
+          ultimafechaatencion, memo,
+          to_tsvector('spanish', unaccent(caso_id || ' ' || contacto || 
             ' ' || replace(cast(fecharec AS varchar), '-', ' ') || 
-            ' ' || oficina_nombre || ' ' || nusuario || ' ' || 
-            replace(cast(caso_fecha AS varchar), '-', ' ') || ' ' ||
+            ' ' || oficina || ' ' || nusuario || ' ' || 
+            replace(cast(fecha AS varchar), '-', ' ') || ' ' ||
             expulsion  || ' ' || llegada || ' ' || 
-            replace(cast(respuesta_ultimafechaatencion AS varchar), '-', ' ')
-            || ' ' || caso_memo )) as q
+            replace(cast(ultimafechaatencion AS varchar), '-', ' ')
+            || ' ' || memo )) as q
         FROM sivel2_gen_conscaso1"
       );
       ActiveRecord::Base.connection.execute(

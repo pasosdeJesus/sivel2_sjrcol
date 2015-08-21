@@ -2,6 +2,60 @@
 
 Sivel2Gen::Conscaso.class_eval do
 
+  scope :filtro_expulsion_pais_id, lambda { |id|
+    where('(caso_id, fecha) IN (SELECT sip_ubicacion.id_caso, 
+          sivel2_sjr_desplazamiento.fechaexpulsion FROM
+          sivel2_sjr_desplazamiento JOIN sip_ubicacion 
+          ON sivel2_sjr_desplazamiento.id_expulsion=sip_ubicacion.id
+          AND sivel2_sjr_desplazamiento.id_caso=sip_ubicacion.id_caso
+          WHERE sip_ubicacion.id_pais = ?)', id)
+  }
+
+  scope :filtro_expulsion_departamento_id, lambda { |id|
+    where('(caso_id, fecha) IN (SELECT sip_ubicacion.id_caso,
+          sivel2_sjr_desplazamiento.fechaexpulsion FROM
+          sivel2_sjr_desplazamiento JOIN sip_ubicacion 
+          ON sivel2_sjr_desplazamiento.id_expulsion=sip_ubicacion.id
+          AND sivel2_sjr_desplazamiento.id_caso=sip_ubicacion.id_caso
+          WHERE sip_ubicacion.id_departamento = ?)', id)
+  }
+
+  scope :filtro_expulsion_municipio_id, lambda { |id|
+    where('(caso_id, fecha) IN (SELECT sip_ubicacion.id_caso,
+          sivel2_sjr_desplazamiento.fechaexpulsion FROM
+          sivel2_sjr_desplazamiento JOIN sip_ubicacion 
+          ON sivel2_sjr_desplazamiento.id_expulsion=sip_ubicacion.id
+          AND sivel2_sjr_desplazamiento.id_caso=sip_ubicacion.id_caso
+          WHERE sip_ubicacion.id_municipio = ?)', id)
+  }
+
+  scope :filtro_llegada_pais_id, lambda { |id|
+    where('(caso_id, fecha) IN (SELECT sip_ubicacion.id_caso,
+          sivel2_sjr_desplazamiento.fechaexpulsion FROM
+          sivel2_sjr_desplazamiento JOIN sip_ubicacion 
+          ON sivel2_sjr_desplazamiento.id_llegada=sip_ubicacion.id
+          AND sivel2_sjr_desplazamiento.id_caso=sip_ubicacion.id_caso
+          WHERE sip_ubicacion.id_pais = ?)', id)
+  }
+
+  scope :filtro_llegada_departamento_id, lambda { |id|
+    where('(caso_id, fecha) IN (SELECT sip_ubicacion.id_caso,
+          sivel2_sjr_desplazamiento.fechaexpulsion FROM
+          sivel2_sjr_desplazamiento JOIN sip_ubicacion 
+          ON sivel2_sjr_desplazamiento.id_llegada=sip_ubicacion.id
+          AND sivel2_sjr_desplazamiento.id_caso=sip_ubicacion.id_caso
+          WHERE sip_ubicacion.id_departamento = ?)', id)
+  }
+
+  scope :filtro_llegada_municipio_id, lambda { |id|
+    where('(caso_id, fecha) IN (SELECT sip_ubicacion.id_caso,
+          sivel2_sjr_desplazamiento.fechaexpulsion FROM
+          sivel2_sjr_desplazamiento JOIN sip_ubicacion 
+          ON sivel2_sjr_desplazamiento.id_llegada=sip_ubicacion.id
+          AND sivel2_sjr_desplazamiento.id_caso=sip_ubicacion.id_caso
+          WHERE sip_ubicacion.id_municipio = ?)', id)
+  }
+
   def self.refresca_conscaso
     if !ActiveRecord::Base.connection.table_exists? 'sivel2_gen_conscaso'
       ActiveRecord::Base.connection.execute(

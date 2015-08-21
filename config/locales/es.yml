@@ -61,6 +61,10 @@ es:
       "sivel2_sjr/personadesea": 
         Personadesea: Persona desea
         Personadeseas: Personas desean
+      "sivel2_gen/caso": 
+        fecha: F. Desp. Emblemático
+        expulsion: Sitio Expulsión Emb.
+        llegada: Sitio Llegada Emb.
       "cor1440_gen/proyecto":
         Proyecto: Área de Actividad
         Proyectos: Áreas de Actividad

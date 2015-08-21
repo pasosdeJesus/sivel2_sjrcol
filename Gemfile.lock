@@ -36,7 +36,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 5e9848f56ea3b0485bb509f21d54fa83130ff2de
+  revision: eb5c86c2be24ae3d830790719f3fbdd90e6d022b
   specs:
     sivel2_sjr (2.0.a7)
       rails
@@ -259,7 +259,7 @@ GEM
       rails_serve_static_assets
       rails_stdout_logging
     rails_serve_static_assets (0.0.4)
-    rails_stdout_logging (0.0.3)
+    rails_stdout_logging (0.0.4)
     railties (4.2.3)
       actionpack (= 4.2.3)
       activesupport (= 4.2.3)

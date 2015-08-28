@@ -53,7 +53,7 @@ if (test "$SININS" != "1") then {
 	} fi;
 } fi;
 if (test "$SINMIG" != "1") then {
-	(cd spec/dummy; rake db:migrate sip:indices db:structure:dump)
+	(rake db:migrate sip:indices db:structure:dump)
 	if (test "$?" != "0") then {
 		exit 1;
 	} fi;

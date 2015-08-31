@@ -18,6 +18,7 @@ module Sivel2Sjr
               :llegada_pais_id, :llegada_departamento_id, :llegada_municipio_id,
               :nombressp, :apellidossp,
               :nombres, :apellidos, :sexo, :rangoedad_id, 
+              :categoria_id,
               :descripcion
             ]
           end

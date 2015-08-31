@@ -2307,21 +2307,6 @@ CREATE TABLE sivel2_sjr_desplazamiento (
 
 
 --
--- Name: sivel2_sjr_statusmigratorio; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE sivel2_sjr_statusmigratorio (
-    id integer NOT NULL,
-    nombre character varying(100),
-    fechacreacion date,
-    fechadeshabilitacion date,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone,
-    observaciones character varying(5000)
-);
-
-
---
 -- Name: usuario_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -2381,35 +2366,29 @@ CREATE VIEW sivel2_gen_conscaso1 AS
     oficina.nombre AS oficina,
     usuario.nusuario,
     caso.fecha,
-    statusmigratorio.nombre AS statusmigratorio,
+    array_to_string(ARRAY( SELECT (((departamento.nombre)::text || ' / '::text) || (municipio.nombre)::text)
+           FROM sip_departamento departamento,
+            sip_municipio municipio,
+            sip_ubicacion ubicacion,
+            sivel2_sjr_desplazamiento desplazamiento
+          WHERE (((((desplazamiento.fechaexpulsion = caso.fecha) AND (desplazamiento.id_caso = caso.id)) AND (desplazamiento.id_expulsion = ubicacion.id)) AND (ubicacion.id_departamento = departamento.id)) AND (ubicacion.id_municipio = municipio.id))), ', '::text) AS expulsion,
+    array_to_string(ARRAY( SELECT (((departamento.nombre)::text || ' / '::text) || (municipio.nombre)::text)
+           FROM sip_departamento departamento,
+            sip_municipio municipio,
+            sip_ubicacion ubicacion,
+            sivel2_sjr_desplazamiento desplazamiento
+          WHERE (((((desplazamiento.fechaexpulsion = caso.fecha) AND (desplazamiento.id_caso = caso.id)) AND (desplazamiento.id_llegada = ubicacion.id)) AND (ubicacion.id_departamento = departamento.id)) AND (ubicacion.id_municipio = municipio.id))), ', '::text) AS llegada,
     array_to_string(ARRAY( SELECT respuesta.fechaatencion
            FROM sivel2_sjr_respuesta respuesta
           WHERE (respuesta.id_caso = casosjr.id_caso)
           ORDER BY respuesta.fechaatencion DESC
          LIMIT 1), ', '::text) AS ultimafechaatencion,
-    caso.memo,
-    array_to_string(ARRAY( SELECT (((persona.nombres)::text || ' '::text) || (persona.apellidos)::text)
-           FROM sip_persona persona,
-            sivel2_gen_victima victima
-          WHERE ((persona.id = victima.id_persona) AND (victima.id_caso = caso.id))), ', '::text) AS victimas,
-    array_to_string(ARRAY( SELECT sip_departamento.nombre
-           FROM sip_departamento,
-            sip_ubicacion,
-            sivel2_sjr_desplazamiento
-          WHERE ((((sip_departamento.id = sip_ubicacion.id_departamento) AND (sip_ubicacion.id = sivel2_sjr_desplazamiento.id_expulsion)) AND (sivel2_sjr_desplazamiento.fechaexpulsion = caso.fecha)) AND (sivel2_sjr_desplazamiento.id_caso = caso.id))
-         LIMIT 1), ''::text) AS expulsion,
-    array_to_string(ARRAY( SELECT sip_departamento.nombre
-           FROM sip_departamento,
-            sip_ubicacion,
-            sivel2_sjr_desplazamiento
-          WHERE ((((sip_departamento.id = sip_ubicacion.id_departamento) AND (sip_ubicacion.id = sivel2_sjr_desplazamiento.id_llegada)) AND (sivel2_sjr_desplazamiento.fechaexpulsion = caso.fecha)) AND (sivel2_sjr_desplazamiento.id_caso = caso.id))
-         LIMIT 1), ''::text) AS llegada
+    caso.memo
    FROM sivel2_sjr_casosjr casosjr,
     sivel2_gen_caso caso,
     sip_oficina oficina,
-    usuario,
-    sivel2_sjr_statusmigratorio statusmigratorio
-  WHERE ((((casosjr.id_caso = caso.id) AND (oficina.id = casosjr.oficina_id)) AND (usuario.id = casosjr.asesor)) AND (statusmigratorio.id = casosjr.id_statusmigratorio));
+    usuario
+  WHERE (((casosjr.id_caso = caso.id) AND (oficina.id = casosjr.oficina_id)) AND (usuario.id = casosjr.asesor));
 
 
 --
@@ -2423,11 +2402,11 @@ CREATE MATERIALIZED VIEW sivel2_gen_conscaso AS
     sivel2_gen_conscaso1.oficina,
     sivel2_gen_conscaso1.nusuario,
     sivel2_gen_conscaso1.fecha,
-    sivel2_gen_conscaso1.statusmigratorio,
+    sivel2_gen_conscaso1.expulsion,
+    sivel2_gen_conscaso1.llegada,
     sivel2_gen_conscaso1.ultimafechaatencion,
     sivel2_gen_conscaso1.memo,
-    sivel2_gen_conscaso1.victimas,
-    to_tsvector('spanish'::regconfig, unaccent(((((((((((((((((((sivel2_gen_conscaso1.caso_id || ' '::text) || sivel2_gen_conscaso1.contacto) || ' '::text) || replace(((sivel2_gen_conscaso1.fecharec)::character varying)::text, '-'::text, ' '::text)) || ' '::text) || (sivel2_gen_conscaso1.oficina)::text) || ' '::text) || (sivel2_gen_conscaso1.nusuario)::text) || ' '::text) || replace(((sivel2_gen_conscaso1.fecha)::character varying)::text, '-'::text, ' '::text)) || ' '::text) || (sivel2_gen_conscaso1.statusmigratorio)::text) || ' '::text) || replace(((sivel2_gen_conscaso1.ultimafechaatencion)::character varying)::text, '-'::text, ' '::text)) || ' '::text) || sivel2_gen_conscaso1.memo) || ' '::text) || sivel2_gen_conscaso1.victimas))) AS q
+    to_tsvector('spanish'::regconfig, unaccent(((((((((((((((((((sivel2_gen_conscaso1.caso_id || ' '::text) || sivel2_gen_conscaso1.contacto) || ' '::text) || replace(((sivel2_gen_conscaso1.fecharec)::character varying)::text, '-'::text, ' '::text)) || ' '::text) || (sivel2_gen_conscaso1.oficina)::text) || ' '::text) || (sivel2_gen_conscaso1.nusuario)::text) || ' '::text) || replace(((sivel2_gen_conscaso1.fecha)::character varying)::text, '-'::text, ' '::text)) || ' '::text) || sivel2_gen_conscaso1.expulsion) || ' '::text) || sivel2_gen_conscaso1.llegada) || ' '::text) || replace(((sivel2_gen_conscaso1.ultimafechaatencion)::character varying)::text, '-'::text, ' '::text)) || ' '::text) || sivel2_gen_conscaso1.memo))) AS q
    FROM sivel2_gen_conscaso1
   WITH NO DATA;
 
@@ -3697,6 +3676,21 @@ CREATE TABLE sivel2_sjr_rolfamilia (
     updated_at timestamp without time zone,
     observaciones character varying(5000),
     CONSTRAINT rolfamilia_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
+);
+
+
+--
+-- Name: sivel2_sjr_statusmigratorio; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE sivel2_sjr_statusmigratorio (
+    id integer NOT NULL,
+    nombre character varying(100),
+    fechacreacion date,
+    fechadeshabilitacion date,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    observaciones character varying(5000)
 );
 
 

@@ -374,6 +374,28 @@
 
     <div class="row filtro-fila">
       <div class="col-sm-offset-0 col-sm-2 col-md-offset-1 col-md-1">
+       Tipificación
+      </div>
+      <div class="col-sm-offset-0 col-sm-10 col-md-offset-0 col-md-7">
+        <%= f.input :categoria_id,
+          collection: Sivel2Gen::Categoria.habilitados.joins(:supracategoria).
+            reorder('sivel2_gen_supracategoria.id_tviolencia', :id),
+          label_method: lambda {|t| 
+            t.supracategoria.id_tviolencia + 
+                                t.id.to_s + ' ' + t.nombre},
+          value_method: :id,
+          label: false,
+          include_blank: true
+        %>
+      </div>
+      <div class="col-sm-offset-0 col-sm-1 text-center">
+      </div>
+      <div class="col-sm-offset-0 col-sm-1 text-center">
+      </div>
+    </div>
+
+    <div class="row filtro-fila">
+      <div class="col-sm-offset-0 col-sm-2 col-md-offset-1 col-md-1">
         Etiqueta
       </div>
       <div class="col-sm-offset-0 col-sm-1">

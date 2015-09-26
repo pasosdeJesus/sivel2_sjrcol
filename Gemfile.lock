@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sal7711_gen.git
-  revision: fef9468ac0c96e7fca9fcbb2f731166f75d07a0b
+  revision: 2947f4fd8a5a71abc08600b5353b45ac28efbc64
   specs:
     sal7711_gen (1.0.a2)
       rails
@@ -18,7 +18,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sip.git
-  revision: c834709b5bca821bcf740c97a58a5e27a53242d5
+  revision: 1bbe8cb1af360c2e083c4a1f7adeb76d31546a07
   specs:
     sip (2.0.a6)
       devise
@@ -27,7 +27,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sivel2_gen.git
-  revision: cf3983a0edaa4982b5178fdc9660e151c1ba54ae
+  revision: 13d750d7968930cd4ca838906d9f969e19d93ecc
   specs:
     sivel2_gen (2.0.a7)
       devise
@@ -36,7 +36,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: a10636af661721b039feb0382f0247f1f8860dd4
+  revision: f5b27a936dd2b147278a8609e1ade0810f5fe79f
   specs:
     sivel2_sjr (2.0.a7)
       rails
@@ -108,7 +108,7 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
-    capybara-webkit (1.7.0)
+    capybara-webkit (1.7.1)
       capybara (>= 2.3.0, < 2.6.0)
       json
     chartkick (1.4.1)
@@ -198,9 +198,9 @@ GEM
     mime-types (2.6.2)
     mimemagic (0.3.0)
     mini_portile (0.6.2)
-    minitest (5.8.0)
+    minitest (5.8.1)
     multi_json (1.11.2)
-    newrelic_rpm (3.13.0.299)
+    newrelic_rpm (3.13.1.300)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
     orm_adapter (0.5.0)
@@ -220,7 +220,7 @@ GEM
     prawnto_2 (0.2.6)
       prawn (>= 0.6.0)
       rails (>= 3.1)
-    pry (0.10.1)
+    pry (0.10.2)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)

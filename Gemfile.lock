@@ -189,7 +189,6 @@ GEM
       railties (>= 3.2.16)
     json (1.8.3)
     kgio (2.10.0)
-    lazybox (1.1.5)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.3)
@@ -387,7 +386,6 @@ DEPENDENCIES
   jquery-rails
   jquery-ui-bootstrap-rails!
   jquery-ui-rails
-  lazybox
   newrelic_rpm
   paperclip (~> 4.1)
   pg

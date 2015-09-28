@@ -29,7 +29,6 @@ class Ability < Sivel2Sjr::Ability
       ['Sivel2Sjr', 'idioma']
   ]
 
-
   @@basicas_id_noauto = Sip::Ability::BASICAS_ID_NOAUTO +
     Sivel2Gen::Ability::BASICAS_ID_NOAUTO 
 

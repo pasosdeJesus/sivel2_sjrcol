@@ -13,9 +13,6 @@ gem 'colorize'
 # Cuadros de selección para búsquedas
 gem 'chosen-rails'
 
-# Dialogo modal
-gem 'lazybox'
-
 # Generación de PDF
 gem "prawn"
 gem "prawnto_2",  :require => "prawnto"

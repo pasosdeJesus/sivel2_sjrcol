@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/pasosdeJesus/cor1440_gen.git
-  revision: 69788b9ea999bfb85178f9585d54f726d388e1ff
+  revision: 4b0b69bd660ca85f905bd024efdbc741bd7d4d28
   specs:
     cor1440_gen (1.0.a5)
       devise
@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sal7711_gen.git
-  revision: 2947f4fd8a5a71abc08600b5353b45ac28efbc64
+  revision: 6df4a57cf9bbb456224e7fc7d08273f777357efd
   specs:
     sal7711_gen (1.0.a2)
       rails
@@ -18,7 +18,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sip.git
-  revision: 1bbe8cb1af360c2e083c4a1f7adeb76d31546a07
+  revision: 799d302dfc8086ac4888e9691dc20289c3e064e9
   specs:
     sip (2.0.a6)
       devise
@@ -27,7 +27,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 66379ef7185442422d57ad468754ac75242f4dff
+  revision: ab30a7e8312791bc8950467fbaf46ea57b0f2c94
   specs:
     sivel2_gen (2.0.a7)
       devise
@@ -36,7 +36,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 2f1071f711847be699d2c5e642677581932faa0c
+  revision: 42e61248ce6d4216625c614b6ce84c57059223ab
   specs:
     sivel2_sjr (2.0.a7)
       rails
@@ -178,7 +178,7 @@ GEM
     hike (1.2.3)
     i18n (0.7.0)
     interception (0.5)
-    jbuilder (2.3.1)
+    jbuilder (2.3.2)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
     jquery-rails (4.0.5)
@@ -339,7 +339,7 @@ GEM
       tzinfo
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
-    tzinfo-data (1.2015.6)
+    tzinfo-data (1.2015.7)
       tzinfo (>= 1.0.0)
     uglifier (2.7.2)
       execjs (>= 0.3.0)

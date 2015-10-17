@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/pasosdeJesus/cor1440_gen.git
-  revision: 4b0b69bd660ca85f905bd024efdbc741bd7d4d28
+  revision: f50519a545c77409402596a33007be9164e64e7c
   specs:
     cor1440_gen (1.0.a5)
       devise
@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sal7711_gen.git
-  revision: 6df4a57cf9bbb456224e7fc7d08273f777357efd
+  revision: 21f6506c9582ecacb408107156ca708cd542ac60
   specs:
     sal7711_gen (1.0.a2)
       rails
@@ -219,7 +219,7 @@ GEM
     prawnto_2 (0.2.6)
       prawn (>= 0.6.0)
       rails (>= 3.1)
-    pry (0.10.2)
+    pry (0.10.3)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)

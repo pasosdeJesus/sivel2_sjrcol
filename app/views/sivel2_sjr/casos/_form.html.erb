@@ -82,7 +82,6 @@
             <div role="tabpanel" class="tab-pane" id="refugio" > 
               <%= render 'refugio', :f => f, :s => s %>
             </div> 
-          <% end %>
 
           <div role="tabpanel" class="tab-pane" id="desplazamiento" > 
             <%= render 'desplazamientos', :f => f %>
@@ -101,7 +100,7 @@
           </div> 
 
           <div role="tabpanel" class="tab-pane" id="descripcion" > 
-            <%= render 'memo', :f => f  %>
+            <%= render 'memo', :f => f, :s => s %>
           </div>
 
           <div role="tabpanel" class="tab-pane" id="anexos"> 
@@ -112,6 +111,7 @@
             <%= render 'etiquetas', :f => f  %>
           </div> 
 
+        <% end %> <!-- form s -->
         </div> <!-- tab-content -->
       </div> <!-- tabpanel -->
     </div> <!-- form-inputs -->

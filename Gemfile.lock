@@ -36,7 +36,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 73b4e5a1bbb5615e97832f0c164b24b4c77d5c67
+  revision: 1e2673e3800cf301bf5b23c67a866a231ab09e5d
   specs:
     sivel2_sjr (2.0.a7)
       rails
@@ -418,6 +418,3 @@ DEPENDENCIES
   unicorn
   web-console
   will_paginate
-
-BUNDLED WITH
-   1.10.6

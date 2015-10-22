@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/pasosdeJesus/cor1440_gen.git
-  revision: 4b0b69bd660ca85f905bd024efdbc741bd7d4d28
+  revision: f50519a545c77409402596a33007be9164e64e7c
   specs:
     cor1440_gen (1.0.a5)
       devise
@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sal7711_gen.git
-  revision: 6df4a57cf9bbb456224e7fc7d08273f777357efd
+  revision: 369545904fbc2f6b22a28a717f7007e0791a1745
   specs:
     sal7711_gen (1.0.a2)
       rails
@@ -18,16 +18,16 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sip.git
-  revision: 50e093fa2c962898cc1f47042a293e599fb30a79
+  revision: a13a875b1ba74a526ac3dc353b2a2f4dca513605
   specs:
-    sip (2.0.a6)
+    sip (2.0.a7)
       devise
       jquery-rails
       rails
 
 GIT
   remote: git://github.com/pasosdeJesus/sivel2_gen.git
-  revision: d9aad30f0eda20964ae40a02728431ed29f2e6c6
+  revision: 63cdb226e2ca45ea465f24df01e48225062d101b
   specs:
     sivel2_gen (2.0.a7)
       devise
@@ -36,7 +36,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 2adb947b4052bf7a47945691c99686f3907bad4e
+  revision: 73b4e5a1bbb5615e97832f0c164b24b4c77d5c67
   specs:
     sivel2_sjr (2.0.a7)
       rails
@@ -199,7 +199,7 @@ GEM
     mini_portile (0.6.2)
     minitest (5.8.1)
     multi_json (1.11.2)
-    newrelic_rpm (3.13.2.302)
+    newrelic_rpm (3.14.0.305)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
     orm_adapter (0.5.0)
@@ -219,7 +219,7 @@ GEM
     prawnto_2 (0.2.6)
       prawn (>= 0.6.0)
       rails (>= 3.1)
-    pry (0.10.2)
+    pry (0.10.3)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)

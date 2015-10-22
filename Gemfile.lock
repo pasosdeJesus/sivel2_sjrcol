@@ -418,3 +418,6 @@ DEPENDENCIES
   unicorn
   web-console
   will_paginate
+
+BUNDLED WITH
+   1.10.6

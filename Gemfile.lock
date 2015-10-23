@@ -9,14 +9,6 @@ GIT
       rails
 
 GIT
-  remote: git://github.com/pasosdeJesus/sal7711_gen.git
-  revision: e7671a69d7d19f84750cbb824327158b44f0c2ae
-  specs:
-    sal7711_gen (1.0.a2)
-      rails
-      sip
-
-GIT
   remote: git://github.com/pasosdeJesus/sip.git
   revision: a13a875b1ba74a526ac3dc353b2a2f4dca513605
   specs:
@@ -54,6 +46,13 @@ GIT
   specs:
     jquery-ui-bootstrap-rails (0.1.1)
       rails
+
+PATH
+  remote: ../sal7711_gen
+  specs:
+    sal7711_gen (1.0.a2)
+      rails
+      sip
 
 GEM
   remote: https://rubygems.org/

@@ -39,4 +39,11 @@ class Ability < Sivel2Sjr::Ability
     Sivel2Gen::Ability::BASICAS_PRIO +
     Sivel2Sjr::Ability::BASICAS_PRIO
 
+  def initialize(usuario)
+    super(usuario)
+    if usuario && usuario.rol then
+        can :read, Sal7711Gen::Articulo
+    end
+  end
+
 end

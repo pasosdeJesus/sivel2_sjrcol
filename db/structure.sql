@@ -1469,7 +1469,7 @@ CREATE TABLE sal7711_gen_articulo (
     municipio_id integer,
     fuenteprensa_id integer NOT NULL,
     fecha date NOT NULL,
-    pagina character varying(20) NOT NULL,
+    pagina character varying(20),
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     anexo_id integer NOT NULL,
@@ -7116,4 +7116,6 @@ INSERT INTO schema_migrations (version) VALUES ('20151030094611');
 INSERT INTO schema_migrations (version) VALUES ('20151030154449');
 
 INSERT INTO schema_migrations (version) VALUES ('20151030154458');
+
+INSERT INTO schema_migrations (version) VALUES ('20151030181131');
 

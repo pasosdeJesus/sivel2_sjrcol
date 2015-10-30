@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sal7711_gen.git
-  revision: f4548499b144ef47e51202422a2f16998138b9f8
+  revision: 39c13932d1a72751931afeda8d41012201f0e320
   specs:
     sal7711_gen (1.0.a2)
       rails
@@ -418,3 +418,6 @@ DEPENDENCIES
   unicorn
   web-console
   will_paginate
+
+BUNDLED WITH
+   1.10.6

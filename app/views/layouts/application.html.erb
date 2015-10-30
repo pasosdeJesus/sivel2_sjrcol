@@ -21,7 +21,9 @@
       <% end %>
       <%= drop_down "Archivo de Prensa" do %>
         <%= menu_item "Buscar", sal7711_gen.buscar_path %>
-        <%= menu_item "Añadir Artículo", sal7711_gen.new_articulo_path %>
+        <% if can? :manage, Sal7711Gen::Articulo then %>
+          <%= menu_item "Añadir Artículo", sal7711_gen.new_articulo_path %>
+        <% end %>
       <% end %>
     <% end %>
   <% end %>

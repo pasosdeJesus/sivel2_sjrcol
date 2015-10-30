@@ -2,6 +2,24 @@
 
 class Ability < Sivel2Sjr::Ability
 
+    ROLADMIN  = 1
+    ROLINV    = 2
+    ROLDIR    = 3
+    ROLCOOR   = 4
+    ROLANALI  = 5
+    ROLSIST   = 6
+    ROLANALIPRENSA  = 7
+
+    ROLES = [
+      ["Administrador", ROLADMIN], 
+      ["Invitado Nacional", ROLINV], 
+      ["Director Nacional", ROLDIR], 
+      ["Coordinador oficina", ROLCOOR], 
+      ["Analista", ROLANALI], 
+      ["Analista de Prensa", ROLANALIPRENSA], 
+      ["Sistematizador", ROLSIST]
+    ]
+
   BASICAS_PROPIAS =  [
     ['Sivel2Sjr', 'ayudaestado'], 
     ['Sivel2Sjr', 'declaroante'], 
@@ -43,6 +61,10 @@ class Ability < Sivel2Sjr::Ability
     super(usuario)
     if usuario && usuario.rol then
         can :read, Sal7711Gen::Articulo
+        case usuario.rol
+        when Ability::ROLANALIPRENSA, Ability::ROLADMIN, Ability::ROLDIR
+          can :manage, Sal7711Gen::Articulo
+        end
     end
   end
 

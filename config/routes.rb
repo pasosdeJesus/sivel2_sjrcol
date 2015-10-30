@@ -24,7 +24,7 @@ Rails.application.routes.draw do
   
   get "/personas" => 'sivel2_sjr/personas#index'
   get "/personas/remplazar" => 'sivel2_sjr/personas#remplazar'
-
+  
   root "sip/hogar#index"
   mount Sivel2Sjr::Engine => "/", as: 'sivel2_sjr'
   mount Sivel2Gen::Engine => "/", as: 'sivel2_gen'

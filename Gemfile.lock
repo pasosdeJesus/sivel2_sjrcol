@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sal7711_gen.git
-  revision: 446d8bb6ea8cd482175113a51918127c385001fa
+  revision: 098a72628dc4dc7350171ddf94a2aa8544182c42
   specs:
     sal7711_gen (1.0.a2)
       rails
@@ -18,7 +18,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sip.git
-  revision: f45cdd50716f49b962543cd3c6295473ec1634d3
+  revision: 934170ff9c78b702f04171ccc0dde9b085848325
   specs:
     sip (2.0.a7)
       devise
@@ -344,7 +344,7 @@ GEM
     uglifier (2.7.2)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
-    unicorn (4.9.0)
+    unicorn (5.0.0)
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)

@@ -84,93 +84,93 @@
             </div>
           </div> <! -- accordion-group refugio -->
 
-        <% end %> <!-- simple_fields_for :casosjr -->
-
-        <div class="accordion-group">
-          <div class="accordion-heading">
-            <a class="accordion-toggle fichacambia" data-toggle="collapse" 
-              href="#desplazamiento">Desplazamientos</a>
-          </div>
-          <div id="desplazamiento" class="accordion-body collapse">
-            <div class="accordion-inner">
-              <%= render 'desplazamientos', :f => f %>
-            </div>
-          </div>
-        </div> <! -- accordion-group desplazamiento -->
-
-        <div class="accordion-group">
-          <div class="accordion-heading">
-            <a class="accordion-toggle fichacambia" data-toggle="collapse" 
-              href="#presponsable">Presuntos Responsables</a>
-          </div>
-          <div id="presponsable" class="accordion-body collapse">
-            <div class="accordion-inner">
-              <%= render 'presponsables', :f => f %>
-            </div>
-          </div>
-        </div> <! -- accordion-group  presponsable-->
   
-        <div class="accordion-group">
-          <div class="accordion-heading">
-            <a class="accordion-toggle fichacambia" data-toggle="collapse" 
-              href="#antecedentes">Causas/Antecedentes</a>
-          </div>
-          <div id="antecedentes" class="accordion-body collapse">
-            <div class="accordion-inner">
-              <%= render 'antecedentes', :f => f %>
+          <div class="accordion-group">
+            <div class="accordion-heading">
+              <a class="accordion-toggle fichacambia" data-toggle="collapse" 
+                href="#desplazamiento">Desplazamientos</a>
             </div>
-          </div>
-        </div> <! -- accordion-group antecedentes -->
+            <div id="desplazamiento" class="accordion-body collapse">
+              <div class="accordion-inner">
+                <%= render 'desplazamientos', :f => f %>
+              </div>
+            </div>
+          </div> <! -- accordion-group desplazamiento -->
   
-        <div class="accordion-group">
-          <div class="accordion-heading">
-            <a class="accordion-toggle fichacambia" data-toggle="collapse" 
-              href="#atencion">Respuesta Institucional y Seguimiento</a>
-          </div>
-          <div id="atencion" class="accordion-body collapse">
-            <div class="accordion-inner">
-              <%= render 'respuestas', :f => f %>  
+          <div class="accordion-group">
+            <div class="accordion-heading">
+              <a class="accordion-toggle fichacambia" data-toggle="collapse" 
+                href="#presponsable">Presuntos Responsables</a>
             </div>
-          </div>
-        </div> <! -- accordion-group sesiones de atención-->
-
-        <div class="accordion-group">
-          <div class="accordion-heading">
-            <a class="accordion-toggle fichacambia" data-toggle="collapse" 
-              href="#descripcion">Descripción del Desplazamiento</a>
-          </div>
-          <div id="descripcion" class="accordion-body collapse">
-            <div class="accordion-inner">
-              <%= render 'memo', :f => f %>  
+            <div id="presponsable" class="accordion-body collapse">
+              <div class="accordion-inner">
+                <%= render 'presponsables', :f => f %>
+              </div>
             </div>
-          </div>
-        </div> <! -- accordion-group Descripción-->
-
-
-        <div class="accordion-group">
-          <div class="accordion-heading">
-            <a class="accordion-toggle fichacambia" data-toggle="collapse" 
-              href="#anexo">Anexos</a>
-          </div>
-          <div id="anexo" class="accordion-body collapse">
-            <div class="accordion-inner">
-              <%= render 'sivel2_gen/casos/anexos', :f => f %>  
+          </div> <! -- accordion-group  presponsable-->
+    
+          <div class="accordion-group">
+            <div class="accordion-heading">
+              <a class="accordion-toggle fichacambia" data-toggle="collapse" 
+                href="#antecedentes">Causas/Antecedentes</a>
             </div>
-          </div>
-        </div> <! -- accordion-group anexos -->
-
-        <div class="accordion-group">
-          <div class="accordion-heading">
-            <a class="accordion-toggle fichacambia" data-toggle="collapse"
-              href="#etiquetas">Etiquetas</a>
-          </div>
-          <div id="etiquetas" class="accordion-body collapse">
-            <div class="accordion-inner">
-              <%= render 'etiquetas', :f => f %>  
+            <div id="antecedentes" class="accordion-body collapse">
+              <div class="accordion-inner">
+                <%= render 'antecedentes', :f => f %>
+              </div>
             </div>
-          </div>
-        </div> <! -- accordion-group etiquetas -->
-
+          </div> <! -- accordion-group antecedentes -->
+    
+          <div class="accordion-group">
+            <div class="accordion-heading">
+              <a class="accordion-toggle fichacambia" data-toggle="collapse" 
+                href="#atencion">Respuesta Institucional y Seguimiento</a>
+            </div>
+            <div id="atencion" class="accordion-body collapse">
+              <div class="accordion-inner">
+                <%= render 'respuestas', :f => f %>  
+              </div>
+            </div>
+          </div> <! -- accordion-group sesiones de atención-->
+  
+          <div class="accordion-group">
+            <div class="accordion-heading">
+              <a class="accordion-toggle fichacambia" data-toggle="collapse" 
+                href="#descripcion">Descripción del Desplazamiento</a>
+            </div>
+            <div id="descripcion" class="accordion-body collapse">
+              <div class="accordion-inner">
+                <%= render 'memo', :f => f, :s => s %>
+              </div>
+            </div>
+          </div> <! -- accordion-group Descripción-->
+  
+  
+          <div class="accordion-group">
+            <div class="accordion-heading">
+              <a class="accordion-toggle fichacambia" data-toggle="collapse" 
+                href="#anexo">Anexos</a>
+            </div>
+            <div id="anexo" class="accordion-body collapse">
+              <div class="accordion-inner">
+                <%= render 'sivel2_gen/casos/anexos', :f => f %>  
+              </div>
+            </div>
+          </div> <! -- accordion-group anexos -->
+  
+          <div class="accordion-group">
+            <div class="accordion-heading">
+              <a class="accordion-toggle fichacambia" data-toggle="collapse"
+                href="#etiquetas">Etiquetas</a>
+            </div>
+            <div id="etiquetas" class="accordion-body collapse">
+              <div class="accordion-inner">
+                <%= render 'etiquetas', :f => f %>  
+              </div>
+            </div>
+          </div> <! -- accordion-group etiquetas -->
+        
+      <% end %> <!-- simple_fields_for :casosjr -->
       </div> <!-- accordion -->
     </div> <!-- form-inputs -->
 

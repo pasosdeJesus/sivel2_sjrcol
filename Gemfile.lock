@@ -18,7 +18,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sip.git
-  revision: 934170ff9c78b702f04171ccc0dde9b085848325
+  revision: 650e0f9686fbe5159683126fc01a212b4088b8c6
   specs:
     sip (2.0.a7)
       devise
@@ -27,7 +27,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 51b3bd49b693f35d9cae56a0d44ba0c7d8e8ce78
+  revision: 24268cd72d3e857533ab07238d6b1c1cb6edcee4
   specs:
     sivel2_gen (2.0.a7)
       devise
@@ -418,3 +418,6 @@ DEPENDENCIES
   unicorn
   web-console
   will_paginate
+
+BUNDLED WITH
+   1.10.6

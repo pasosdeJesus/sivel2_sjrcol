@@ -18,7 +18,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sip.git
-  revision: 650e0f9686fbe5159683126fc01a212b4088b8c6
+  revision: ae512b7ce4701623c5ff378080bcb6c49f13e548
   specs:
     sip (2.0.a7)
       devise
@@ -27,7 +27,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 24268cd72d3e857533ab07238d6b1c1cb6edcee4
+  revision: 3c4345ad1728a5365fbd7ffc9b846c9a71d9787b
   specs:
     sivel2_gen (2.0.a7)
       devise
@@ -97,7 +97,7 @@ GEM
     bcrypt (3.1.10)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    bootstrap-datepicker-rails (1.4.0)
+    bootstrap-datepicker-rails (1.5.0)
       railties (>= 3.0)
     builder (3.2.2)
     camertron-eprun (1.1.0)
@@ -309,7 +309,7 @@ GEM
     simplecov-html (0.10.0)
     slop (3.6.0)
     spork (1.0.0rc4)
-    spring (1.4.0)
+    spring (1.4.1)
     spring-commands-rspec (1.0.4)
       spring (>= 0.9.1)
     sprockets (2.12.4)

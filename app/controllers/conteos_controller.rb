@@ -408,16 +408,6 @@ class ConteosController < ApplicationController
     when ''
       que1 = agrega_tabla(que1, 'cast(\'total\' as text) as total')
       que3 << ["", ""]
-    when 'RANGO DE EDAD'
-      que1 = agrega_tabla(que1, 'victima.id_rangoedad AS id_rangoedad')
-      tablas3 = agrega_tabla(tablas3, 'sivel2_gen_rangoedad AS rangoedad')
-      where3 = consulta_and_sinap(where3, "id_rangoedad", "rangoedad.id")
-      que3 << ["rangoedad.rango", "Edad"]
-    when 'SEXO'
-      que1 = agrega_tabla(que1, 'persona.sexo AS sexo')
-      tablas1 = agrega_tabla(tablas1, 'sip_persona AS persona')
-      where1 = consulta_and_sinap(where1, "persona.id", "victima.id_persona")
-      que3 << ["sexo", "Sexo"]
     when 'ACTIVIDAD / OFICIO'
       que1 = agrega_tabla(que1, 'victimasjr.id_actividadoficio AS id_actividadoficio')
       tablas1 = agrega_tabla(tablas1, 'sivel2_sjr_victimasjr AS victimasjr')
@@ -425,11 +415,67 @@ class ConteosController < ApplicationController
       tablas3 = agrega_tabla(tablas3, 'sivel2_gen_actividadoficio AS actividadoficio ')
       where3 = consulta_and_sinap(where3, "id_actividadoficio", "actividadoficio.id")
       que3 << ["actividadoficio.nombre", "Actividad / Oficio"]
+
+    when 'CABEZA DE HOGAR'
+      que1 = agrega_tabla(que1, 
+                          "CASE WHEN victimasjr.cabezafamilia THEN 
+                              'SI'
+                           ELSE
+                              'NO'
+                           END AS cabezafamilia")
+      tablas1 = agrega_tabla(tablas1, 'sivel2_sjr_victimasjr AS victimasjr')
+      where1 = consulta_and_sinap(where1, "victima.id", "victimasjr.id_victima")
+      que3 << ["cabezafamilia", "Cabeza de Hogar"]
+
+    when 'ESTADO CIVIL'
+      que1 = agrega_tabla(que1, 'victimasjr.id_estadocivil AS id_estadocivil')
+      tablas1 = agrega_tabla(tablas1, 'sivel2_sjr_victimasjr AS victimasjr')
+      where1 = consulta_and_sinap(where1, "victima.id", "victimasjr.id_victima")
+      tablas3 = agrega_tabla(tablas3, 'sivel2_gen_estadocivil AS estadocivil ')
+      where3 = consulta_and_sinap(where3, "id_estadocivil", "estadocivil.id")
+      que3 << ["estadocivil.nombre", "Estado Civil"]
+
+    when 'ETNIA'
+      que1 = agrega_tabla(que1, 'victima.id_etnia AS id_etnia')
+      tablas3 = agrega_tabla(tablas3, 'sivel2_gen_etnia AS etnia')
+      where3 = consulta_and_sinap(where3, "id_etnia", "etnia.id")
+      que3 << ["etnia.nombre", "Etnia"]
+
     when 'MES RECEPCIÓN'
       que1 = agrega_tabla(que1, "extract(year from fecharec) || '-' " +
                    "|| lpad(cast(extract(month from fecharec) as text), 2, " +
                    "cast('0' as text)) as mes")
       que3 << ["mes", "Mes"]
+
+    when 'NIVEL ESCOLAR'
+      que1 = agrega_tabla(que1, 'victimasjr.id_escolaridad AS id_escolaridad')
+      tablas1 = agrega_tabla(tablas1, 'sivel2_sjr_victimasjr AS victimasjr')
+      where1 = consulta_and_sinap(where1, "victima.id", "victimasjr.id_victima")
+      tablas3 = agrega_tabla(tablas3, 'sivel2_gen_escolaridad AS escolaridad')
+      where3 = consulta_and_sinap(where3, "id_escolaridad", "escolaridad.id")
+      que3 << ["escolaridad.nombre", "Nivel Escolar"]
+
+    when 'RANGO DE EDAD'
+      que1 = agrega_tabla(que1, 'victima.id_rangoedad AS id_rangoedad')
+      tablas3 = agrega_tabla(tablas3, 'sivel2_gen_rangoedad AS rangoedad')
+      where3 = consulta_and_sinap(where3, "id_rangoedad", "rangoedad.id")
+      que3 << ["rangoedad.rango", "Edad"]
+
+    when 'RÉGIMEN DE SALUD'
+      que1 = agrega_tabla(que1, 'victimasjr.id_regimensalud AS id_regimensalud')
+      tablas1 = agrega_tabla(tablas1, 'sivel2_sjr_victimasjr AS victimasjr')
+      where1 = consulta_and_sinap(where1, "victima.id", "victimasjr.id_victima")
+      tablas3 = agrega_tabla(tablas3, 'sivel2_sjr_regimensalud AS regimensalud')
+      where3 = consulta_and_sinap(where3, "id_regimensalud", 
+                                  "regimensalud.id")
+      que3 << ["regimensalud.nombre", "Régimen de Salud"]
+
+    when 'SEXO'
+      que1 = agrega_tabla(que1, 'persona.sexo AS sexo')
+      tablas1 = agrega_tabla(tablas1, 'sip_persona AS persona')
+      where1 = consulta_and_sinap(where1, "persona.id", "victima.id_persona")
+      que3 << ["sexo", "Sexo"]
+
     else
       puts "opción desconocida pSegun=#{pSegun}"
     end

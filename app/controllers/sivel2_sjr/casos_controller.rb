@@ -22,12 +22,12 @@ module Sivel2Sjr
               :descripcion
             ]
           end
-
+           
           # Campos por presentar en listado index
           def incluir_inicial
             ['casoid', 'contacto', 'fecharec', 'oficina', 
-              'nusuario', 'fecha', 'expulsion',
-              'llegada', 'ultimafechaatencion', 'memo'
+             'nusuario', 'fecha', 'expulsion',
+             'llegada', 'ultimafechaatencion', 'memo'
             ]
           end
 
@@ -36,5 +36,18 @@ module Sivel2Sjr
             'fecharec'
           end
 
+          # Tipo de reporte Resolución 1612
+          def filtro_particular(conscaso, params_filtro)
+            if (params_filtro['dispresenta'] == 'tabla1612') 
+              @incluir =  [
+                'casoid', 'tipificacion', 'victimas', 'fecha', 
+                'ubicaciones', 'presponsables', 'memo', 'memo1612'
+              ]
+              conscaso = conscaso.where('caso_id in (SELECT id_caso 
+                                        FROM sivel2_gen_acto
+                                        WHERE id_categoria = 75)')
+            end
+            return conscaso
+          end
   end
 end

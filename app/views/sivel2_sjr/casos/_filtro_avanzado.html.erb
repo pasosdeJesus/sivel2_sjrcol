@@ -459,20 +459,21 @@
     <div class="row filtro-fila">
       <div class="col-sm-offset-0 col-sm-2 col-md-offset-1 col-md-1">
         Presentación  
+        <%= f.hidden_field :dispresenta %>
       </div>
-      <div class="col-sm-offset-1 col-sm-1">
+      <div class="col-sm-offset-1 col-sm-2">
         <%= f.radio_button :dispresenta, :tabla, checked: true %>
         <%= label :dispresenta_tabla, 'Tabla' %>
       </div>
       <div class="col-sm-2">
-        <!--%= f.radio_button :dispresenta, :revista %-->
-        <!--%= label :dispresenta_revista, 'Rep. Revista' %-->
+        <%= f.radio_button :dispresenta, :tabla1612 %>
+        <%= label :dispresenta_tabla1612, 'Tabla Resolución 1612' %>
       </div>
       <div class="col-sm-2">
         <!--%= f.radio_button :dispresenta, :general %-->
         <!--%= label :dispresenta_general, 'Rep. General' %-->
       </div>
-      <div class="col-sm-2">
+      <div class="col-sm-1">
         <!--%= f.radio_button :dispresenta, :xrlat %-->
         <!--%= label :dispresenta_xrlat, 'Relato XML' %-->
       </div>

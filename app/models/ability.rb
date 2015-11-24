@@ -59,10 +59,11 @@ class Ability < Sivel2Sjr::Ability
 
   def initialize(usuario)
     super(usuario)
+    can :read, Sal7711Gen::Categoriaprensa      
     if usuario && usuario.rol then
         can :read, Sal7711Gen::Articulo
         case usuario.rol
-        when Ability::ROLANALIPRENSA, Ability::ROLADMIN, Ability::ROLDIR
+        when Ability::ROLANALIPRENSA, Ability::ROLADMIN, Ability::ROLDIR, Ability::ROLANALI
           can :manage, Sal7711Gen::Articulo
         end
     end

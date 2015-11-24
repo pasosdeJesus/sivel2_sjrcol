@@ -18,16 +18,28 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sip.git
-  revision: 51f6ab9ff0ce9dd9dad9a47f344975f79c05709d
+  revision: cf49f141d8efd38ebf268eaf52ca4ffbe8753a6a
   specs:
     sip (2.0.a7)
+      bootstrap-datepicker-rails
+      cancancan
+      colorize
       devise
+      devise-i18n
       jquery-rails
+      jquery-ui-bootstrap-rails
+      jquery-ui-rails
+      paperclip
       rails
+      rails-i18n
+      simple_form
+      twitter-bootstrap-rails
+      twitter_cldr
+      will_paginate
 
 GIT
   remote: git://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 983af4592b61ab9fa67ee0c8aeef3cb15a8f62f3
+  revision: c5f5646518894104f8d15a98ad30c0923e3677a7
   specs:
     sivel2_gen (2.0.a7)
       devise
@@ -121,7 +133,7 @@ GEM
     cldr-plurals-runtime-rb (1.0.1)
     climate_control (0.0.3)
       activesupport (>= 3.0)
-    cocaine (0.5.7)
+    cocaine (0.5.8)
       climate_control (>= 0.0.3, < 1.0)
     codeclimate-test-reporter (0.4.8)
       simplecov (>= 0.7.1, < 1.0.0)
@@ -169,7 +181,7 @@ GEM
       factory_girl (~> 4.5.0)
       railties (>= 3.0.0)
     ffi (1.9.10)
-    font-awesome-rails (4.4.0.0)
+    font-awesome-rails (4.5.0.0)
       railties (>= 3.2, < 5.0)
     foreman (0.78.0)
       thor (~> 0.19.1)
@@ -194,7 +206,7 @@ GEM
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
     method_source (0.8.2)
-    mime-types (2.6.2)
+    mime-types (2.99)
     mimemagic (0.3.0)
     mini_portile (0.6.2)
     minitest (5.8.3)
@@ -288,7 +300,7 @@ GEM
       rspec-expectations (~> 3.4.0)
       rspec-mocks (~> 3.4.0)
       rspec-support (~> 3.4.0)
-    rspec-support (3.4.0)
+    rspec-support (3.4.1)
     sass (3.4.19)
     sass-rails (5.0.4)
       railties (>= 4.0.0, < 5.0)

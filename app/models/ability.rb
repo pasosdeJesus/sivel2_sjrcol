@@ -16,8 +16,8 @@ class Ability < Sivel2Sjr::Ability
       ["Director Nacional", ROLDIR], 
       ["Coordinador oficina", ROLCOOR], 
       ["Analista", ROLANALI], 
-      ["Analista de Prensa", ROLANALIPRENSA], 
-      ["Sistematizador", ROLSIST]
+      ["Sistematizador", ROLSIST],
+      ["Analista de Prensa", ROLANALIPRENSA]
     ]
 
   BASICAS_PROPIAS =  [

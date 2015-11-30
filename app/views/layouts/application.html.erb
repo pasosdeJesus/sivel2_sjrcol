@@ -22,7 +22,7 @@
       <% if can? :read, Cor1440Gen::Actividad then %>
         <%= drop_down "Actividades" do %>
           <%= menu_item "Listado", cor1440_gen.actividades_path %>
-          <%= menu_item "Convenios Financieros", cor1440_gen.admin_proyectosfinancieros_path %>
+          <%= menu_item "Convenios Financiados", cor1440_gen.admin_proyectosfinancieros_path %>
           <%= menu_item "Informes", cor1440_gen.informes_path %>
         <% end %>
       <% end %>

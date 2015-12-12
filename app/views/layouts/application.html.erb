@@ -6,7 +6,10 @@
 <% content_for :menu do %>
   <%= menu_group do %>
     <% if !current_usuario.nil? %>
-      <%= menu_item "Casos", sivel2_sjr.casos_path %>
+
+      <% if can? :read, Sivel2Gen::Caso then %>
+        <%= menu_item "Casos", sivel2_sjr.casos_path %>
+      <% end %>
       <%= drop_down "Conteos" do %>
         <%= menu_item "Personas Atendidas", '/conteos/personas' %>
         <%= menu_item "Respuestas y Derechos Vulnerados", '/conteos/respuestas' %>
@@ -15,9 +18,13 @@
         <%= menu_item "Desplazamientos por persona", '/conteos/desplazamientos' %>
         <%= menu_item "Vacíos de protección", '/conteos/vacios' %>
       <% end %>
-      <%= drop_down "Actividades" do %>
-        <%= menu_item "Listado", cor1440_gen.actividades_path %>
-        <%= menu_item "Informes", cor1440_gen.informes_path %>
+
+      <% if can? :read, Cor1440Gen::Actividad then %>
+        <%= drop_down "Actividades" do %>
+          <%= menu_item "Listado", cor1440_gen.actividades_path %>
+          <%= menu_item "Convenios Financiados", cor1440_gen.admin_proyectosfinancieros_path %>
+          <%= menu_item "Informes", cor1440_gen.informes_path %>
+        <% end %>
       <% end %>
       <%= drop_down "Archivo de Prensa" do %>
         <%= menu_item "Buscar", sal7711_gen.buscar_path %>

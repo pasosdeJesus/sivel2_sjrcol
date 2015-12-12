@@ -46,6 +46,8 @@ es:
       "sivel2_sjr/aslegal": 
         Aslegal: Seguimiento Judicial
         Aslegales: Seguimientos Judiciales
+      "sivel2_sjr/ayudaestado": 
+        "{:derechos_ids=>[]}": Derechos relacionados
       "sivel2_sjr/declaroante": 
         Declaroante: Declaro Ante
         Declaroantes: Declaro Ante
@@ -69,5 +71,5 @@ es:
         Proyecto: Área de Actividad
         Proyectos: Áreas de Actividad
       "cor1440_gen/actividadarea":
-        Actividadarea: Subárea de Actividad
+        actividadarea: Subárea de Actividad
         Actividadareas: Subáreas de Actividad

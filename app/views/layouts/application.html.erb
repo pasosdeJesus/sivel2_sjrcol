@@ -8,7 +8,10 @@
     <% if !current_usuario.nil? %>
 
       <% if can? :read, Sivel2Gen::Caso then %>
-        <%= menu_item "Casos", sivel2_sjr.casos_path %>
+        <%= drop_down "Casos" do %>
+          <%= menu_item "Listado", sivel2_gen.casos_path %>
+          <%= menu_item "Nuevo", sivel2_gen.new_caso_path %>
+        <% end %>
       <% end %>
       <%= drop_down "Conteos" do %>
         <%= menu_item "Personas Atendidas", '/conteos/personas' %>
@@ -22,10 +25,12 @@
       <% if can? :read, Cor1440Gen::Actividad then %>
         <%= drop_down "Actividades" do %>
           <%= menu_item "Listado", cor1440_gen.actividades_path %>
+          <%= menu_item "Nueva", cor1440_gen.new_actividad_path %>
           <%= menu_item "Convenios Financiados", cor1440_gen.admin_proyectosfinancieros_path %>
           <%= menu_item "Informes", cor1440_gen.informes_path %>
         <% end %>
       <% end %>
+
       <%= drop_down "Archivo de Prensa" do %>
         <%= menu_item "Buscar", sal7711_gen.buscar_path %>
         <% if can? :manage, Sal7711Gen::Articulo then %>

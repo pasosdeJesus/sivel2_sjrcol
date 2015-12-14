@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   get "/conteos/municipios" => 'conteos#municipios'
   get "/conteos/rutas" => 'conteos#rutas'
   get "/conteos/desplazamientos" => 'conteos#desplazamientos'
-  get "/conteos/respuestas" => 'conteos#respuestas'
+  #get "/conteos/respuestas" => 'conteos#respuestas'
   get "/conteos/vacios" => 'conteos#vacios'
   
   patch "/actos/agregar" => 'sivel2_sjr/actos#agregar'

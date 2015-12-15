@@ -56,7 +56,7 @@ gem "chartkick"
 
 # Formularios simples 
 #gem "simple_form", git: "https://github.com/plataformatec/simple_form"
-gem "simple_form", "~> 3.1.0.rc2"
+gem "simple_form"
 
 # Formularios anidados (algunos con ajax)
 gem "cocoon", github: "vtamara/cocoon"

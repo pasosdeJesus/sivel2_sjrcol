@@ -153,12 +153,14 @@ class Sivel2Sjr::ConteosController < ApplicationController
   end
 
   def respuestas_que
-    return [{ 'derecho' => 'Derecho vulnerado',
+    return [{ 
       'ayudaestado' => 'Ayuda del Estado',
       'ayudasjr' => 'Ayuda Humanitaria del SJR',
+      'derecho' => 'Derecho vulnerado',
       'motivosjr' => 'Servicio/Asesoria del SJR',
-      'progestado' => 'Subsidio/Programa del Estado'
-    }, 'derecho', 'Respuestas y Derechos vulnerados']
+      'progestado' => 'Subsidio/Programa del Estado',
+      'remision' => 'Remisión a otras organizaciones'
+    }, 'ayudaestado', 'Respuestas y Derechos vulnerados']
 
   end
 

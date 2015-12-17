@@ -18,7 +18,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sip.git
-  revision: 21ead3f24eaad52e476917cd1a687ba69664f26b
+  revision: c6f08f31704641708839b3dcb58d916e20e61c32
   specs:
     sip (2.0.a7)
       bootstrap-datepicker-rails
@@ -39,7 +39,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sivel2_gen.git
-  revision: f86c27f57917f60ed532b647449ed50763933f1d
+  revision: 32dea6f2a5102438c87e9a203f1b53a80aa929c0
   specs:
     sivel2_gen (2.0.a8)
       devise
@@ -48,7 +48,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: b541b763855d2ea03d7e776584ff4c7e211ab321
+  revision: 774cd595120eb638337bb346fc0d9816c8e8f6ce
   specs:
     sivel2_sjr (2.0.a8)
       rails
@@ -220,7 +220,7 @@ GEM
     minitest (5.8.3)
     multi_json (1.11.2)
     newrelic_rpm (3.14.1.311)
-    nokogiri (1.6.7)
+    nokogiri (1.6.7.1)
       mini_portile2 (~> 2.0.0.rc2)
     orm_adapter (0.5.0)
     paperclip (4.3.2)

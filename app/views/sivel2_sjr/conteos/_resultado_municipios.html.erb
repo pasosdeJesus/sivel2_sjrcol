@@ -5,7 +5,9 @@
       <th><%= Sip::Ubicacion.human_attribute_name(:id_pais) %></th>
       <th><%= Sip::Ubicacion.human_attribute_name(:id_departamento) %></th>
       <th><%= Sip::Ubicacion.human_attribute_name(:id_municipio) %></th>
-      <th><%= "Desp. Individuales" %></th>
+      <th>Contactos</th>
+      <th>Beneficiarios</th>
+      <th>Total</th>
     </tr>
   </thead>
   <tbody>
@@ -14,7 +16,9 @@
         <td><%= cmun['pais'] %></td>
         <td><%= cmun['departamento'] %></td>
         <td><%= cmun['municipio'] %></td>
-        <td><%= cmun['cuenta'] %></td>
+        <td><%= cmun['contacto'] %></td>
+        <td><%= cmun['beneficiario'] %></td>
+        <td><%= cmun['npersona'] %></td>
       </tr>
     <% end %>
   </tbody>
@@ -28,7 +32,9 @@
       <th><%= Sip::Ubicacion.human_attribute_name(:id_pais) %></th>
       <th><%= Sip::Ubicacion.human_attribute_name(:id_departamento) %></th>
       <th><%= Sip::Ubicacion.human_attribute_name(:id_municipio) %></th>
-      <th><%= "Desp. Individuales" %></th>
+      <th>Contactos</th>
+      <th>Beneficiarios</th>
+      <th>Total</th>
     </tr>
   </thead>
   <tbody>
@@ -37,7 +43,9 @@
         <td><%= cmun['pais'] %></td>
         <td><%= cmun['departamento'] %></td>
         <td><%= cmun['municipio'] %></td>
-        <td><%= cmun['cuenta'] %></td>
+        <td><%= cmun['contacto'] %></td>
+        <td><%= cmun['beneficiario'] %></td>
+        <td><%= cmun['npersona'] %></td>
       </tr>
     <% end %>
   </tbody>

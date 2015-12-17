@@ -2,21 +2,66 @@
   <h1><%=t '.title', :default => "Rutas de desplazamiento (longitudes 1 y 2)" %></h1>
 </div>
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th><%= "Ruta" %></th>
-      <th><%= "Desplazamientos de Grupos Familiares" %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @rutas.try(:each) do |ruta| %>
-      <tr>
-        <td><%= ruta['ruta'] %></td>
-        <td><%= ruta['cuenta'] %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<%= simple_form_for :filtro, 
+  { remote: true, 
+    url: File.join(Rails.configuration.relative_url_root, 
+                   '/conteos/rutas'),
+    method: "get" } do |f| 
+%>
+  <div class="container">
+    <div class="row filtro-fila">
+      <div class="col-sm-offset-0 col-sm-2 col-md-offset-1 col-md-1">
+        <%= Sivel2Sjr::Casosjr.human_attribute_name(:fecharec) %>
+      </div>
+      <div class="col-sm-offset-0 col-sm-4">
+        <%= f.input :fechaini,
+          maxlength: 10, 
+          size: 10,
+          label: false,
+          placeholder: 'Inicial',
+          input_html: {
+            "data-behaviour" => "datepicker",
+            "data-contarautomatico" => "" 
+          }
+        %>
+      </div>
+      <div class="col-sm-offset-1 col-sm-4">
+        <%= f.input :fechafin,
+          maxlength: 10, 
+          size: 10,
+          label: false,
+          placeholder: 'Final',
+          input_html: {
+            "data-behaviour" => "datepicker",
+            "data-contarautomatico" => "" 
+          }
+        %>
+      </div>
+    </div>
+    <div class="row filtro-fila">
+      <div class="col-sm-1">
+        <%= Sivel2Sjr::Casosjr.human_attribute_name(:oficina) %>
+      </div>
+      <div class="col-sm-4">
+        <%= f.input :oficina_id,
+          collection: Sip::Oficina.habilitados,
+          label_method: :nombre,
+          value_method: :id,
+          label: false,
+          input_html: { "data-contarautomatico" => "" }
+        %>
+      </div>
+    </div>
+    <div class="row filtro-fila">
+      <div class="col-md-offset-5 col-md-2">
+        <%= f.button :submit, 'Filtrar', class: 'btn btn-default' %>
+      </div>
+    </div>
+  </div>
+<% end %>
 
+
+<div id="resultado">
+  <%= render 'sivel2_gen/conteos/resultado_tabla' %>
+</div> <!-- id: resultado -->
 

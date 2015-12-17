@@ -1,7 +1,7 @@
 require 'sivel2_sjr/version'
 Sip.setup do |config|
       config.ruta_anexos = "/var/www/resbase/anexos-sjrcol"
-      config.ruta_volcados = "/var/www/resbase/sivel2_sjrcol/"
+      config.ruta_volcados = "/var/www/resbase/anexos-sjrcol/bd/"
       # En heroku los anexos son super-temporales
       if !ENV["HEROKU_POSTGRESQL_GREEN_URL"].nil?
         config.ruta_anexos = "#{Rails.root}/tmp/"

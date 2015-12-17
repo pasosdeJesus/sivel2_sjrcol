@@ -38,23 +38,6 @@ GIT
       will_paginate
 
 GIT
-  remote: git://github.com/pasosdeJesus/sivel2_gen.git
-  revision: f86c27f57917f60ed532b647449ed50763933f1d
-  specs:
-    sivel2_gen (2.0.a8)
-      devise
-      jquery-rails
-      rails
-
-GIT
-  remote: git://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: dd5f68e4b614c601f2eb79e4c850eecff14eadf8
-  specs:
-    sivel2_sjr (2.0.a8)
-      rails
-      sivel2_gen
-
-GIT
   remote: git://github.com/vtamara/cocoon.git
   revision: 20f8f3bab2fee21309c57b586f5fab9921ac0894
   specs:
@@ -66,6 +49,21 @@ GIT
   specs:
     jquery-ui-bootstrap-rails (0.1.1)
       rails
+
+PATH
+  remote: ../sivel2_gen
+  specs:
+    sivel2_gen (2.0.a8)
+      devise
+      jquery-rails
+      rails
+
+PATH
+  remote: ../sivel2_sjr
+  specs:
+    sivel2_sjr (2.0.a8)
+      rails
+      sivel2_gen
 
 GEM
   remote: https://rubygems.org/
@@ -112,6 +110,7 @@ GEM
     bootstrap-datepicker-rails (1.5.0)
       railties (>= 3.0)
     builder (3.2.2)
+    byebug (8.2.1)
     camertron-eprun (1.1.0)
     cancancan (1.13.1)
     capybara (2.5.0)
@@ -384,6 +383,7 @@ PLATFORMS
 DEPENDENCIES
   bcrypt
   bootstrap-datepicker-rails
+  byebug
   cancancan
   capybara
   capybara-webkit

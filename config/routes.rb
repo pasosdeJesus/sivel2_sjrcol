@@ -12,14 +12,19 @@ Rails.application.routes.draw do
   end
   resources :usuarios, path_names: { new: 'nuevo', edit: 'edita' } 
 
-  get "/conteos/municipios" => 'conteos#municipios'
-  get "/conteos/rutas" => 'conteos#rutas'
-  get "/conteos/desplazamientos" => 'conteos#desplazamientos'
-  #get "/conteos/respuestas" => 'conteos#respuestas'
-  get "/conteos/vacios" => 'conteos#vacios'
+  get "/conteos/municipios" => 'sivel2_sjr/conteos#municipios', 
+    as: :conteos_municipios
+  get "/conteos/rutas" => 'sivel2_sjr/conteos#rutas', 
+    as: :contes_rutas
+  get "/conteos/desplazamientos" => 'sivel2_sjr/conteos#desplazamientos', 
+    as: :conteos_desplazamientos
+  get "/conteos/vacios" => 'sivel2_sjr/conteos#vacios',
+    as: :conteos_vacios
   
-  patch "/actos/agregar" => 'sivel2_sjr/actos#agregar'
-  get "/actos/eliminar" => 'sivel2_sjr/actos#eliminar'
+  patch "/actos/agregar" => 'sivel2_sjr/actos#agregar',
+    as: :actos_agregar
+  get "/actos/eliminar" => 'sivel2_sjr/actos#eliminar',
+    as: :actos_eliminar
   
   get "/personas" => 'sivel2_sjr/personas#index'
   get "/personas/remplazar" => 'sivel2_sjr/personas#remplazar'

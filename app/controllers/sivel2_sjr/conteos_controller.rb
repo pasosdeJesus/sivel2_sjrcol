@@ -15,11 +15,11 @@ class Sivel2Sjr::ConteosController < ApplicationController
       'progestado' => 'Subsidio/Programa del Estado'
     }
 
-    pFaini = param_escapa('faini')
-    pFafin = param_escapa('fafin')
-    pContar = param_escapa('contar')
-    pOficina = param_escapa('oficina')
-    pDerecho = param_escapa('derecho')
+    pFaini = param_escapa([:filtro, 'fechaini'])
+    pFafin = param_escapa([:filtro, 'fechafin'])
+    pOficina = param_escapa([:filtro, 'oficina_id'])
+    pContar = param_escapa([:filtro, 'contar'])
+    pDerecho = param_escapa([:filtro, 'derecho'])
 
     if (pContar == '') 
       pContar = 'ayudaestado'
@@ -29,7 +29,6 @@ class Sivel2Sjr::ConteosController < ApplicationController
       puts "opción desconocida #{pContar}"
       return
     end
-
 
     cons1 = 'cvp1'
     cons2 = 'cvp2'
@@ -54,10 +53,14 @@ class Sivel2Sjr::ConteosController < ApplicationController
     )
 
     if (pFaini != '') 
-      where1 = consulta_and(where1, "respuesta.fechaatencion", pFaini, ">=") 
+      pfechaini = DateTime.strptime(pFaini, '%Y-%m-%d')
+      @fechaini = pfechaini.strftime('%Y-%m-%d')
+      where1 = consulta_and(where1, "respuesta.fechaatencion", @fechaini, ">=") 
     end
     if (pFafin != '') 
-      where1 = consulta_and(where1, "respuesta.fechaatencion", pFafin, "<=")
+      pfechafin = DateTime.strptime(pFafin, '%Y-%m-%d')
+      @fechafin = pfechafin.strftime('%Y-%m-%d')
+      where1 = consulta_and(where1, "respuesta.fechaatencion", @fechafin, "<=")
     end
     if (pOficina != '') 
       where1 = consulta_and(where1, "casosjr.oficina_id", pOficina)
@@ -172,55 +175,103 @@ class Sivel2Sjr::ConteosController < ApplicationController
 
   def municipios
     authorize! :contar, Sivel2Gen::Caso
-    #byebug
-    @fechaini = '';
-    cfecha = '';
-    if (params[:fechaini] && params[:fechaini] != "") 
-        pfechaini = DateTime.strptime(params[:fechaini], '%Y-%m-%d')
-        @fechaini = pfechaini.strftime('%Y-%m-%d')
-        cfecha += "fechaexpulsion >= '#{@fechaini}' AND "
-    end
-    @fechafin = '';
-    if (params[:fechafin] && params[:fechafin] != "") 
-        pfechafin = DateTime.strptime(params[:fechafin], '%Y-%m-%d')
-        @fechafin = pfechafin.strftime('%Y-%m-%d')
-        cfecha += "fechaexpulsion <= '#{@fechafin}' AND "
-    end
- 
 
+    pFaini = param_escapa([:filtro, 'fechaini'])
+    pFafin = param_escapa([:filtro, 'fechafin'])
+    pOficina = param_escapa([:filtro, 'oficina_id'])
+
+    where = ''
+    where = consulta_and_sinap(
+      where, 'casosjr.id_caso', 'desplazamiento.id_caso'
+    )
+    where = consulta_and_sinap(
+      where, 'id_expulsion', 'ubicacion.id'
+    )
+    where = consulta_and_sinap(
+      where, 'desplazamiento.id_caso', 'victima.id_caso'
+    )
+
+    if (pFaini != '') 
+      pfechaini = DateTime.strptime(pFaini, '%Y-%m-%d')
+      @fechaini = pfechaini.strftime('%Y-%m-%d')
+      where = consulta_and(where, "fechaexpulsion", @fechaini, ">=")
+    end
+
+    if (pFafin != '') 
+      pfechafin = DateTime.strptime(pFafin, '%Y-%m-%d')
+      @fechafin = pfechafin.strftime('%Y-%m-%d')
+      where = consulta_and(where, "fechaexpulsion", @fechafin, "<=")
+    end
+
+    if (pOficina != '')
+      where = consulta_and(where, 'casosjr.oficina_id', pOficina)
+    end
+
+    cons1 = 'cmunex'
     # expulsores
-    @expulsores = ActiveRecord::Base.connection.select_all("
-      SELECT (SELECT nombre FROM sip_pais WHERE id=id_pais) AS pais, 
+    q1="CREATE OR REPLACE VIEW #{cons1} AS (
+        SELECT (SELECT nombre FROM sip_pais WHERE id=id_pais) AS pais, 
         (SELECT nombre FROM sip_departamento
           WHERE id=ubicacion.id_departamento) AS departamento, 
         (SELECT nombre FROM sip_municipio
           WHERE id=ubicacion.id_municipio) AS municipio, 
-        COUNT(victima.id) AS cuenta
-      FROM sivel2_sjr_desplazamiento AS desplazamiento, 
-        sip_ubicacion AS ubicacion, 
-        sivel2_gen_victima AS victima
-      WHERE 
-        #{cfecha} 
-        id_expulsion=ubicacion.id 
-        AND desplazamiento.id_caso=victima.id_caso
-      GROUP BY 1,2,3 ORDER BY 4 desc;
+        CASE WHEN (casosjr.contacto = victima.id_persona) THEN 1 ELSE 0 END
+          AS contacto,
+        CASE WHEN (casosjr.contacto<>victima.id_persona) THEN 1 ELSE 0 END
+          AS beneficiario, 
+        1 as npersona
+        FROM sivel2_sjr_desplazamiento AS desplazamiento, 
+          sip_ubicacion AS ubicacion, 
+          sivel2_gen_victima AS victima,
+          sivel2_sjr_casosjr AS casosjr
+        WHERE #{where} 
+        )
+      "
+    puts "q1 es #{q1}"
+    ActiveRecord::Base.connection.execute q1
+
+ 
+    @expulsores = ActiveRecord::Base.connection.select_all("
+      SELECT pais, departamento, municipio, 
+        SUM(contacto) AS contacto,
+        SUM(beneficiario) AS beneficiario,
+        SUM(npersona) AS npersona
+      FROM #{cons1}
+      GROUP BY 1,2,3 ORDER BY 6 desc;
     ")
+
+
     # receptores
-    @receptores = ActiveRecord::Base.connection.select_all("
+    cons2 = 'cmunrec'
+    q2="CREATE OR REPLACE VIEW #{cons2} AS (
       SELECT (SELECT nombre FROM sip_pais WHERE id=id_pais) AS pais, 
         (SELECT nombre FROM sip_departamento 
           WHERE id=id_departamento) AS departamento, 
         (SELECT nombre FROM sip_municipio 
         WHERE id=ubicacion.id_municipio) AS municipio, 
-        COUNT(victima.id) AS cuenta
+        CASE WHEN (casosjr.contacto = victima.id_persona) THEN 1 ELSE 0 END
+          AS contacto,
+        CASE WHEN (casosjr.contacto<>victima.id_persona) THEN 1 ELSE 0 END
+          AS beneficiario, 
+        1 as npersona
       FROM sivel2_sjr_desplazamiento AS desplazamiento, 
         sip_ubicacion AS ubicacion, 
-        sivel2_gen_victima AS victima
+        sivel2_gen_victima AS victima,
+        sivel2_sjr_casosjr AS casosjr
       WHERE 
-        #{cfecha} 
-        id_llegada=ubicacion.id 
-        AND desplazamiento.id_caso=victima.id_caso
-      GROUP BY 1,2,3 ORDER BY 4 desc;
+        #{where} 
+    )
+    "
+    puts "q2 es #{q2}"
+    ActiveRecord::Base.connection.execute q2
+
+    @receptores = ActiveRecord::Base.connection.select_all("
+      SELECT pais, departamento, municipio, 
+        SUM(contacto) AS contacto,
+        SUM(beneficiario) AS beneficiario,
+        SUM(npersona) AS npersona
+      FROM #{cons2}
+      GROUP BY 1,2,3 ORDER BY 6 desc;
     ")
     respond_to do |format|
       format.html { }
@@ -229,8 +280,34 @@ class Sivel2Sjr::ConteosController < ApplicationController
     end
   end
 
+
   def rutas
     authorize! :contar, Sivel2Gen::Caso
+
+    pFaini = param_escapa([:filtro, 'fechaini'])
+    pFafin = param_escapa([:filtro, 'fechafin'])
+    pOficina = param_escapa([:filtro, 'oficina_id'])
+
+    where = ''
+    where = consulta_and_sinap(where, 'casosjr.id_caso', 'd1.id_caso')
+
+    if (pFaini != '') 
+      pfechaini = DateTime.strptime(pFaini, '%Y-%m-%d')
+      @fechaini = pfechaini.strftime('%Y-%m-%d')
+      where = consulta_and(where, "casosjr.fecharec", @fechaini, ">=")
+    end
+
+    if (pFafin != '') 
+      pfechafin = DateTime.strptime(pFafin, '%Y-%m-%d')
+      @fechafin = pfechafin.strftime('%Y-%m-%d')
+      where = consulta_and(where, "casosjr.fecharec", @fechafin, "<=")
+    end
+
+    if (pOficina != '')
+      where = consulta_and(where, 'casosjr.oficina_id', pOficina)
+    end
+
+
     # Retorna cadena correspondiente al municipio de una ubicación
     ActiveRecord::Base.connection.select_all("
       CREATE OR REPLACE FUNCTION municipioubicacion(int) RETURNS varchar AS
@@ -245,23 +322,28 @@ class Sivel2Sjr::ConteosController < ApplicationController
       $$ 
       LANGUAGE SQL
     ");
-    @rutas = ActiveRecord::Base.connection.select_all(
+
+    @enctabla = ['Ruta', 'Desplazamientos de Grupos Familiares']
+    @coltotales = []
+    @cuerpotabla = ActiveRecord::Base.connection.select_all(
       "SELECT ruta, cuenta FROM ((SELECT municipioubicacion(d1.id_expulsion) || ' - ' 
         || municipioubicacion(d1.id_llegada) AS ruta, 
         count(id) AS cuenta
-      FROM sivel2_sjr_desplazamiento AS d1
+      FROM sivel2_sjr_desplazamiento AS d1, sivel2_sjr_casosjr AS casosjr
+      WHERE #{where}
       GROUP BY 1)
       UNION  
       (SELECT municipioubicacion(d1.id_expulsion) || ' - ' 
         || municipioubicacion(d1.id_llegada) || ' - '
         || municipioubicacion(d2.id_llegada) AS ruta, 
         count(d1.id_caso) AS cuenta
-      FROM sivel2_sjr_desplazamiento AS d1, 
+      FROM sivel2_sjr_casosjr AS casosjr,
+        sivel2_sjr_desplazamiento AS d1, 
         sip_ubicacion AS l1, 
         sivel2_sjr_desplazamiento as d2,
         sip_ubicacion AS e2, sip_ubicacion AS l2
-      WHERE 
-      d1.id_caso=d2.id_caso
+      WHERE #{where}
+      AND d1.id_caso=d2.id_caso
       AND d1.fechaexpulsion < d2.fechaexpulsion
       AND d1.id_llegada = l1.id
       AND d2.id_llegada = l2.id
@@ -270,30 +352,74 @@ class Sivel2Sjr::ConteosController < ApplicationController
       ORDER BY 2 DESC
       "
     )
+
+    respond_to do |format|
+      format.html { }
+      format.json { head :no_content }
+      format.js   { render 'sivel2_gen/conteos/resultado' }
+    end
+
   end
 
   def desplazamientos
     authorize! :contar, Sivel2Gen::Caso
-    if params[:ordenar] == 'Sexo'
+
+    @opOrdenar = ['N. DESPLAZAMIENTOS', 'EDAD', 'SEXO']
+    pFaini = param_escapa([:filtro, 'fechaini'])
+    pFafin = param_escapa([:filtro, 'fechafin'])
+    pOficina = param_escapa([:filtro, 'oficina_id'])
+    pOrdenar = param_escapa([:filtro, 'ordenar'])
+
+    if pOrdenar == 'SEXO'
         cord = "3, 5 DESC, 1"
-    elsif params[:ordenar] == 'Edad'
+    elsif pOrdenar == 'EDAD'
         cord = "4, 5 DESC, 1"
     else
         cord = "5 DESC, 1"
     end
-    @desplazamientos = ActiveRecord::Base.connection.select_all(
+    where = consulta_and_sinap(
+      '', 'victima.id_caso', 'desplazamiento.id_caso'
+    )
+    where = consulta_and_sinap(where, 'victima.id_persona', 'persona.id')
+    where = consulta_and_sinap(where, 'victima.id_rangoedad', 'rangoedad.id')
+    where = consulta_and_sinap(where, 'casosjr.id_caso', 'desplazamiento.id_caso')
+
+    if (pFaini != '') 
+      pfechaini = DateTime.strptime(pFaini, '%Y-%m-%d')
+      @fechaini = pfechaini.strftime('%Y-%m-%d')
+      where = consulta_and(where, "casosjr.fecharec", @fechaini, ">=")
+    end
+
+    if (pFafin != '') 
+      pfechafin = DateTime.strptime(pFafin, '%Y-%m-%d')
+      @fechafin = pfechafin.strftime('%Y-%m-%d')
+      where = consulta_and(where, "casosjr.fecharec", @fechafin, "<=")
+    end
+
+    if (pOficina != '')
+      where = consulta_and(where, 'casosjr.oficina_id', pOficina)
+    end
+
+    @cuerpotabla = ActiveRecord::Base.connection.select_all(
       "SELECT victima.id_caso, persona.id AS persona, 
         persona.sexo, rangoedad.rango as rangoedad,
         COUNT(desplazamiento.id) as cuenta
       FROM sivel2_gen_victima AS victima, 
         sip_persona AS persona, 
         sivel2_sjr_desplazamiento AS desplazamiento, 
-        sivel2_gen_rangoedad AS rangoedad
-      WHERE victima.id_caso=desplazamiento.id_caso
-        AND victima.id_persona=persona.id
-        AND victima.id_rangoedad=rangoedad.id
+        sivel2_gen_rangoedad AS rangoedad,
+        sivel2_sjr_casosjr AS casosjr
+      WHERE #{where}
       GROUP BY 1, 2, 3, 4 ORDER BY #{cord};
       "
     )
+    @enctabla = ['Caso', 'Cod. Persona', 'Sexo', 'Rango de Edad', 'N. Desplazamientos']
+    @coltotales = []
+
+    respond_to do |format|
+      format.html { }
+      format.json { head :no_content }
+      format.js   { render 'sivel2_gen/conteos/resultado' }
+    end
   end
 end

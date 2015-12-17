@@ -4,43 +4,88 @@
   <h1><%=t '.title', :default => "Vacíos de protección" %></h1>
 </div>
 
-<div sytle="text-align: right">
-  <%= form_tag(conteos_vacios_path, method: "get", remote: true) do %>
-    Atendido entre:
-    <%= text_field_tag 'fechaini', @fechaini, maxlength: 10, size: 12, 
-    "data-behaviour" => "datepicker", "data-contarautomatico" => "" 
-    %> 
-    -
-    <%= text_field_tag 'fechafin', @fechafin, maxlength: 10, size: 12, 
-    "data-behaviour" => "datepicker", "data-contarautomatico" => "" 
-    %>
-    <br>
-    Contar:
-    <%= select_tag "contar", 
-      options_for_select(@pque.invert),
-      "data-contarautomatico" => ""
-    %>
-    Oficina:
-    <% o = options_from_collection_for_select(
-         Sip::Oficina.habilitados, "id", "nombre"
-      )
-    %>
-    <%= select_tag "oficina", o, 
-      {include_blank: true, "data-contarautomatico" => ""} 
-    %>
-    <br>
-    Derecho:
-    <% d = options_from_collection_for_select(
-         Sivel2Sjr::Derecho.habilitados, "id", "nombre"
-      )
-    %>
-    <%= select_tag "derecho", d, 
-      {include_blank: true, "data-contarautomatico" => ""} 
-    %>
-    <br>
-    <%= submit_tag("Contar") %>
-  <% end %>
-</div>
+<%= simple_form_for :filtro, 
+  { remote: true, 
+    url: File.join(Rails.configuration.relative_url_root, 
+                   '/conteos/vacios'),
+    method: "get" } do |f| 
+%>
+  <div class="container">
+    <div class="row filtro-fila">
+      <div class="col-sm-offset-0 col-sm-2 col-md-offset-1 col-md-1">
+        Atendido entre
+      </div>
+      <div class="col-sm-offset-0 col-sm-4">
+        <%= f.input :fechaini,
+          maxlength: 10, 
+          size: 10,
+          label: false,
+          placeholder: 'Inicial',
+          input_html: {
+            "data-behaviour" => "datepicker",
+            "data-contarautomatico" => "" 
+          }
+        %>
+      </div>
+      <div class="col-sm-offset-1 col-sm-4">
+        <%= f.input :fechafin,
+          maxlength: 10, 
+          size: 10,
+          label: false,
+          placeholder: 'Final',
+          input_html: {
+            "data-behaviour" => "datepicker",
+            "data-contarautomatico" => "" 
+          }
+        %>
+      </div>
+    </div>
+    <div class="row filtro-fila">
+      <div class="col-sm-1">
+        Contar:
+      </div>
+      <div class="col-sm-4">
+        <%= f.input :contar,
+          collection: @pque.invert,
+          label: false,
+          include_blank: false,
+          input_html: { "data-contarautomatico" => "" }
+        %>
+      </div>
+      <div class="col-sm-1">
+        <%= Sivel2Sjr::Casosjr.human_attribute_name(:oficina) %>
+      </div>
+      <div class="col-sm-4">
+        <%= f.input :oficina_id,
+          collection: Sip::Oficina.habilitados,
+          label_method: :nombre,
+          value_method: :id,
+          label: false,
+          input_html: { "data-contarautomatico" => "" }
+        %>
+      </div>
+    </div>
+    <div class="row filtro-fila">
+       <div class="col-sm-1">
+        Derecho:
+      </div>
+      <div class="col-sm-4">
+        <%= f.input :derecho,
+          collection: Sivel2Sjr::Derecho.habilitados,
+          label_method: :nombre,
+          value_method: :id,
+          label: false,
+          input_html: { "data-contarautomatico" => "" }
+        %>
+      </div>
+    </div>
+    <div class="row filtro-fila">
+      <div class="col-md-offset-5 col-md-2">
+        <%= f.button :submit, 'Filtrar', class: 'btn btn-default' %>
+      </div>
+    </div>
+  </div>
+<% end %>
 
 <div id="resultado">
   <%= render 'resultado_vacios' %>

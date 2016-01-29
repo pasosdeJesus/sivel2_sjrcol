@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/pasosdeJesus/cor1440_gen.git
-  revision: 9e190726c66d482bf9fc3962db8311deb5c93a17
+  revision: ce68e7901968fde360888441a8e11f071425f625
   specs:
     cor1440_gen (1.0.a5)
       devise
@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sal7711_gen.git
-  revision: 138a0ad8acb0919e121031f0ec01b98e076c660a
+  revision: 0f81c6bb39b8a16e6ff9e8032ee966cfa9e9e6a0
   specs:
     sal7711_gen (1.0.a2)
       rails
@@ -18,7 +18,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sip.git
-  revision: 702472312947443d329e970e35de89bef151797b
+  revision: 85efdffed450f6b5baeacfe977590e837a164ce5
   specs:
     sip (2.0.a7)
       bootstrap-datepicker-rails
@@ -39,7 +39,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sivel2_gen.git
-  revision: c50b421f4a2541baaa53538fc1f8a8fc79f61107
+  revision: b7284d68bda39a494a30a2e0e26db5f3b677f125
   specs:
     sivel2_gen (2.0.a8)
       devise
@@ -48,7 +48,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 78c5f0947700cfe07420c0ca35d42bf44af99b27
+  revision: cf9c85f8de32f2d2036726a7b514e3e2cab20b39
   specs:
     sivel2_sjr (2.0.a8)
       rails
@@ -115,7 +115,7 @@ GEM
     builder (3.2.2)
     camertron-eprun (1.1.0)
     cancancan (1.13.1)
-    capybara (2.6.0)
+    capybara (2.6.2)
       addressable
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
@@ -362,7 +362,7 @@ GEM
       tzinfo
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
-    tzinfo-data (1.2015.7)
+    tzinfo-data (1.2016.1)
       tzinfo (>= 1.0.0)
     uglifier (2.7.2)
       execjs (>= 0.3.0)
@@ -371,9 +371,9 @@ GEM
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
-    warden (1.2.4)
+    warden (1.2.5)
       rack (>= 1.0)
-    web-console (3.0.0)
+    web-console (3.1.1)
       activemodel (>= 4.2)
       debug_inspector
       railties (>= 4.2)

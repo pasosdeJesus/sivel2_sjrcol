@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/pasosdeJesus/cor1440_gen.git
-  revision: ce68e7901968fde360888441a8e11f071425f625
+  revision: 9ada582a85ae6aaff581357c0ed2633d1ba78783
   specs:
     cor1440_gen (1.0.a5)
       devise
@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sal7711_gen.git
-  revision: 0f81c6bb39b8a16e6ff9e8032ee966cfa9e9e6a0
+  revision: b77c495e45206fd4e360927f0775df67c595c212
   specs:
     sal7711_gen (1.0.a2)
       rails
@@ -18,7 +18,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sip.git
-  revision: 85efdffed450f6b5baeacfe977590e837a164ce5
+  revision: e940c5ea9e8743f5b61cb1b872fe04ead46bd015
   specs:
     sip (2.0.a7)
       bootstrap-datepicker-rails
@@ -48,7 +48,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: cf9c85f8de32f2d2036726a7b514e3e2cab20b39
+  revision: 615cf6d5e0b49479307c4df9c9219792699899da
   specs:
     sivel2_sjr (2.0.a8)
       rails
@@ -225,7 +225,7 @@ GEM
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
     orm_adapter (0.5.0)
-    paperclip (4.3.2)
+    paperclip (4.3.3)
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
       cocaine (~> 0.5.5)

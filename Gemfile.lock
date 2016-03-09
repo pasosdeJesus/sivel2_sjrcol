@@ -224,6 +224,9 @@ GEM
     newrelic_rpm (3.15.0.314)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
+    odf-report (0.5.1)
+      nokogiri (>= 1.5.0)
+      rubyzip (~> 1.1.0)
     orm_adapter (0.5.0)
     paperclip (4.3.5)
       activemodel (>= 3.2.0)
@@ -312,6 +315,7 @@ GEM
       rspec-mocks (~> 3.4.0)
       rspec-support (~> 3.4.0)
     rspec-support (3.4.1)
+    rubyzip (1.1.7)
     sass (3.4.21)
     sass-rails (5.0.4)
       railties (>= 4.0.0, < 5.0)
@@ -407,6 +411,7 @@ DEPENDENCIES
   jquery-ui-bootstrap-rails!
   jquery-ui-rails
   newrelic_rpm
+  odf-report
   paperclip (~> 4.1)
   pg
   prawn

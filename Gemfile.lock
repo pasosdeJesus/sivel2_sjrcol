@@ -48,7 +48,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: efde6b22bd20fb505f4ca1741e53f51779f3eee2
+  revision: 8eda570a6752bc9ea583fb90195f15dbb37d714c
   specs:
     sivel2_sjr (2.0.a8)
       rails

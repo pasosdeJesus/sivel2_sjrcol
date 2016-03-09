@@ -29,7 +29,7 @@ gem "jbuilder"
 
 gem 'sass'
 gem 'sass-rails'
-gem 'compass-rails'
+gem 'compass-rails'#, '~> 2.0.5'
 gem 'compass'
 
 # Uglifier comprime recursos Javascript

@@ -43,33 +43,32 @@ es:
     proyectos: Áreas de Actividad
   activerecord:
     attributes:
+      "cor1440_gen/actividad":
+        fecha: Fecha inicial
+      "cor1440_gen/actividadarea":
+        actividadarea: Subárea de Actividad
+        Actividadareas: Subáreas de Actividad
+      "cor1440_gen/proyecto":
+        Proyecto: Área de Actividad
+        Proyectos: Áreas de Actividad
+      "sivel2_gen/caso": 
+        fecha: F. Desp. Emblemático
+        expulsion: Sitio Expulsión Emb.
+        llegada: Sitio Llegada Emb.
       "sivel2_sjr/aslegal": 
         Aslegal: Seguimiento Judicial
         Aslegales: Seguimientos Judiciales
       "sivel2_sjr/ayudaestado": 
         "{:derechos_ids=>[]}": Derechos relacionados
+      "sivel2_sjr/clasifdesp": 
+        Clasifdesp: Clasificación de Desplazamiento
+        Clasifdesps: Clasificaciones de Desplazamientos
       "sivel2_sjr/declaroante": 
         Declaroante: Declaro Ante
         Declaroantes: Declaro Ante
-      "sivel2_sjr/clasifdesp": 
-        Clasifdesp: Clasificación de Desplazamiento
-        Clasifdesps: Clasificaciones de Desplazamientos
-      "sivel2_sjr/clasifdesp": 
-        Clasifdesp: Clasificación de Desplazamiento
-        Clasifdesps: Clasificaciones de Desplazamientos
       "sivel2_sjr/motivosjr": 
         Motivosjr: Servicio y Asesoria del SJR
         Motivossjr: Servicios y Asesorias del SJR
       "sivel2_sjr/personadesea": 
         Personadesea: Persona desea
         Personadeseas: Personas desean
-      "sivel2_gen/caso": 
-        fecha: F. Desp. Emblemático
-        expulsion: Sitio Expulsión Emb.
-        llegada: Sitio Llegada Emb.
-      "cor1440_gen/proyecto":
-        Proyecto: Área de Actividad
-        Proyectos: Áreas de Actividad
-      "cor1440_gen/actividadarea":
-        actividadarea: Subárea de Actividad
-        Actividadareas: Subáreas de Actividad

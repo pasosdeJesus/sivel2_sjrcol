@@ -7,7 +7,7 @@ if (test "${SECRET_KEY_BASE}" = "") then {
 DOAS=`which doas 2> /dev/null`
 if (test "$?" != "0") then {
 	        DOAS="sudo"
-	} fi;
+} fi;
 $DOAS su vtamara -c "cd /var/www/htdocs/sivel2_sjrcol; bundle exec rake assets:precompile; echo \"Iniciando unicorn...\"; RACK_MULTIPART_LIMIT=2048 SECRET_KEY_BASE=${SECRET_KEY_BASE} bundle exec unicorn_rails -c ../sivel2_sjrcol/config/unicorn.conf.minimal.rb  -E production -D"
 
 

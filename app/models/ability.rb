@@ -63,8 +63,15 @@ class Ability < Sivel2Sjr::Ability
     if usuario && usuario.rol then
         can :read, Sal7711Gen::Articulo
         case usuario.rol
+        when Ability::ROLADMIN, Ability::ROLDIR, Ability::ROLANALI
+          can :manage, Sal7711Gen::Articulo
         when Ability::ROLANALIPRENSA, Ability::ROLADMIN, Ability::ROLDIR, Ability::ROLANALI
           can :manage, Sal7711Gen::Articulo
+          can :read, Cor1440Gen::Informe
+          can :read, Cor1440Gen::Actividad
+          can :new, Cor1440Gen::Actividad
+          can [:update, :create, :destroy], Cor1440Gen::Actividad, 
+            oficina: { id: usuario.oficina_id}
         end
     end
   end

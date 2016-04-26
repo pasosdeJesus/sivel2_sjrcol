@@ -300,6 +300,45 @@ CREATE TABLE causaref (
 
 
 --
+-- Name: sip_persona_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE sip_persona_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: sip_persona; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE sip_persona (
+    id integer DEFAULT nextval('sip_persona_id_seq'::regclass) NOT NULL,
+    nombres character varying(100) COLLATE public.es_co_utf_8 NOT NULL,
+    apellidos character varying(100) COLLATE public.es_co_utf_8 NOT NULL,
+    anionac integer,
+    mesnac integer,
+    dianac integer,
+    sexo character(1) NOT NULL,
+    numerodocumento character varying(100),
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    id_pais integer,
+    nacionalde integer,
+    tdocumento_id integer,
+    id_departamento integer,
+    id_municipio integer,
+    id_clase integer,
+    CONSTRAINT persona_check CHECK (((dianac IS NULL) OR ((((dianac >= 1) AND ((((((((mesnac = 1) OR (mesnac = 3)) OR (mesnac = 5)) OR (mesnac = 7)) OR (mesnac = 8)) OR (mesnac = 10)) OR (mesnac = 12)) AND (dianac <= 31))) OR (((((mesnac = 4) OR (mesnac = 6)) OR (mesnac = 9)) OR (mesnac = 11)) AND (dianac <= 30))) OR ((mesnac = 2) AND (dianac <= 29))))),
+    CONSTRAINT persona_mesnac_check CHECK (((mesnac IS NULL) OR ((mesnac >= 1) AND (mesnac <= 12)))),
+    CONSTRAINT persona_sexo_check CHECK ((((sexo = 'S'::bpchar) OR (sexo = 'F'::bpchar)) OR (sexo = 'M'::bpchar)))
+);
+
+
+--
 -- Name: sivel2_gen_caso_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -418,11 +457,12 @@ CREATE VIEW cben1 AS
             ELSE 0
         END AS beneficiario,
     1 AS npersona,
-    'total'::text AS total
+    persona.sexo
    FROM sivel2_gen_caso caso,
     sivel2_sjr_casosjr casosjr,
-    sivel2_gen_victima victima
-  WHERE (((caso.id = victima.id_caso) AND (caso.id = casosjr.id_caso)) AND (caso.id = victima.id_caso));
+    sivel2_gen_victima victima,
+    sip_persona persona
+  WHERE ((((caso.id = victima.id_caso) AND (caso.id = casosjr.id_caso)) AND (caso.id = victima.id_caso)) AND (persona.id = victima.id_persona));
 
 
 --
@@ -608,6 +648,23 @@ CREATE TABLE sivel2_sjr_desplazamiento (
 
 
 --
+-- Name: ultimodesplazamiento; Type: VIEW; Schema: public; Owner: -
+--
+
+CREATE VIEW ultimodesplazamiento AS
+ SELECT sivel2_sjr_desplazamiento.id,
+    s.id_caso,
+    s.fechaexpulsion,
+    sivel2_sjr_desplazamiento.id_expulsion
+   FROM sivel2_sjr_desplazamiento,
+    ( SELECT sivel2_sjr_desplazamiento_1.id_caso,
+            max(sivel2_sjr_desplazamiento_1.fechaexpulsion) AS fechaexpulsion
+           FROM sivel2_sjr_desplazamiento sivel2_sjr_desplazamiento_1
+          GROUP BY sivel2_sjr_desplazamiento_1.id_caso) s
+  WHERE ((sivel2_sjr_desplazamiento.id_caso = s.id_caso) AND (sivel2_sjr_desplazamiento.fechaexpulsion = s.fechaexpulsion));
+
+
+--
 -- Name: cben2; Type: VIEW; Schema: public; Owner: -
 --
 
@@ -617,21 +674,20 @@ CREATE VIEW cben2 AS
     cben1.contacto,
     cben1.beneficiario,
     cben1.npersona,
-    cben1.total,
+    cben1.sexo,
     ubicacion.id_departamento,
     departamento.nombre AS departamento_nombre,
     ubicacion.id_municipio,
     municipio.nombre AS municipio_nombre,
     ubicacion.id_clase,
     clase.nombre AS clase_nombre,
-    max(sivel2_sjr_desplazamiento.fechaexpulsion) AS max
+    ultimodesplazamiento.fechaexpulsion
    FROM (((((cben1
-     LEFT JOIN sivel2_sjr_desplazamiento ON ((cben1.id_caso = sivel2_sjr_desplazamiento.id_caso)))
-     LEFT JOIN sip_ubicacion ubicacion ON ((sivel2_sjr_desplazamiento.id_expulsion = ubicacion.id)))
+     LEFT JOIN ultimodesplazamiento ON ((cben1.id_caso = ultimodesplazamiento.id_caso)))
+     LEFT JOIN sip_ubicacion ubicacion ON ((ultimodesplazamiento.id_expulsion = ubicacion.id)))
      LEFT JOIN sip_departamento departamento ON ((ubicacion.id_departamento = departamento.id)))
      LEFT JOIN sip_municipio municipio ON ((ubicacion.id_municipio = municipio.id)))
-     LEFT JOIN sip_clase clase ON ((ubicacion.id_clase = clase.id)))
-  GROUP BY cben1.id_caso, cben1.id_persona, cben1.contacto, cben1.beneficiario, cben1.npersona, cben1.total, ubicacion.id_departamento, departamento.nombre, ubicacion.id_municipio, municipio.nombre, ubicacion.id_clase, clase.nombre;
+     LEFT JOIN sip_clase clase ON ((ubicacion.id_clase = clase.id)));
 
 
 --
@@ -1829,45 +1885,6 @@ CREATE SEQUENCE sip_pais_id_seq
 --
 
 ALTER SEQUENCE sip_pais_id_seq OWNED BY sip_pais.id;
-
-
---
--- Name: sip_persona_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE sip_persona_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: sip_persona; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE sip_persona (
-    id integer DEFAULT nextval('sip_persona_id_seq'::regclass) NOT NULL,
-    nombres character varying(100) COLLATE public.es_co_utf_8 NOT NULL,
-    apellidos character varying(100) COLLATE public.es_co_utf_8 NOT NULL,
-    anionac integer,
-    mesnac integer,
-    dianac integer,
-    sexo character(1) NOT NULL,
-    numerodocumento character varying(100),
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone,
-    id_pais integer,
-    nacionalde integer,
-    tdocumento_id integer,
-    id_departamento integer,
-    id_municipio integer,
-    id_clase integer,
-    CONSTRAINT persona_check CHECK (((dianac IS NULL) OR ((((dianac >= 1) AND ((((((((mesnac = 1) OR (mesnac = 3)) OR (mesnac = 5)) OR (mesnac = 7)) OR (mesnac = 8)) OR (mesnac = 10)) OR (mesnac = 12)) AND (dianac <= 31))) OR (((((mesnac = 4) OR (mesnac = 6)) OR (mesnac = 9)) OR (mesnac = 11)) AND (dianac <= 30))) OR ((mesnac = 2) AND (dianac <= 29))))),
-    CONSTRAINT persona_mesnac_check CHECK (((mesnac IS NULL) OR ((mesnac >= 1) AND (mesnac <= 12)))),
-    CONSTRAINT persona_sexo_check CHECK ((((sexo = 'S'::bpchar) OR (sexo = 'F'::bpchar)) OR (sexo = 'M'::bpchar)))
-);
 
 
 --

@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/pasosdeJesus/cor1440_gen.git
-  revision: 2a6b567c0cdebcbc9c6901e2553ffc7f8bc76e38
+  revision: a39897ee78d358b3fae2ff3d9860345b4ba24639
   specs:
     cor1440_gen (1.0.a6)
       devise
@@ -48,7 +48,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 10316a6d642d0e3d73813200144c3aed74c663de
+  revision: 60a06b162fbe8d3d4d57ca4ac81a00a512b824cb
   specs:
     sivel2_sjr (2.0.a8)
       rails
@@ -220,7 +220,7 @@ GEM
     mimemagic (0.3.0)
     mini_portile2 (2.0.0)
     minitest (5.8.4)
-    multi_json (1.11.3)
+    multi_json (1.12.0)
     newrelic_rpm (3.15.2.317)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)

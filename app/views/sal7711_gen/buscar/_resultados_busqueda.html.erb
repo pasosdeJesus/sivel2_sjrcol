@@ -1,0 +1,50 @@
+<div class="panel panel-default">
+  <div class="panel-heading">Artículos: <%= @numregistros %> </div>
+  <div class="panel-body">
+
+    <table class="table table-striped">
+      <tbody>
+      <% @entradas.try(:each) do |fila| %>
+        <tr>
+          <td>
+            <%= link_to CGI.escapeHTML(truncate(
+              fila[@coltexto].to_s, length: 85, separator: /[ -|]/)), 
+            "/buscar/#{CGI.escapeHTML(fila[@colid].to_s)}", 
+              class: 'muestra-imagen', remote: true,
+              "data-siguiente": fila["siguiente"],
+              "data-anterior": fila["anterior"]
+            %>
+            <%= truncate(
+              fila[@coldesc].to_s, 
+              length: 85,  separator: /[ -]/
+            ) %>
+          </td>
+          <% if can? :manage, Sal7711Gen::Articulo %>
+            <td>
+              <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                sal7711_gen.edit_articulo_path(fila[@colid]), 
+                :class => 'btn btn-xs' 
+              %>
+            </td>
+            <td>
+              <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                sal7711_gen.articulo_path(fila[@colid]),
+                :method => :delete,
+                :data => { 
+                  :confirm => t('.confirm', :default => 
+                                t("helpers.links.confirm", 
+                                  :default => 'Está seguro(a)?')) 
+                },
+                :class => 'btn btn-xs btn-danger' 
+              %>
+            </td>
+          <% end %> 
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+    <div id="enlaces_paginacion">
+      <%= pagina @entradas, { param_name: :pag } %>
+    </div>
+  </div>
+</div>

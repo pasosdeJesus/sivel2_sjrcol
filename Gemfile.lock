@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sal7711_gen.git
-  revision: 514394a476f07d992b17888137987a7695b678e2
+  revision: c18de5ae833d43fca0bbd209ae817789f696e9c3
   specs:
     sal7711_gen (1.0.a2)
       rails
@@ -18,7 +18,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sip.git
-  revision: f9943d10a2e3967c48504320a002e3ef5bf98e6d
+  revision: d12068285d2fca2c6735ed192136c0dfd9a76727
   specs:
     sip (2.0.a7)
       bootstrap-datepicker-rails
@@ -39,7 +39,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sivel2_gen.git
-  revision: bb70dd33ca29c440064f6cbc2179822507f4aa58
+  revision: fe08a6dd45827314438ba6f216afeac388651d65
   specs:
     sivel2_gen (2.0.a9)
       devise
@@ -166,7 +166,7 @@ GEM
       sprockets (< 4.0)
     concurrent-ruby (1.0.2)
     debug_inspector (0.0.2)
-    devise (4.0.1)
+    devise (4.1.0)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 4.1.0, < 5.1)

@@ -65,7 +65,7 @@ if (test "$?" != "0") then {
 	exit 1;
 } fi;
 
-RACK_MULTIPART_LIMIT=2048 rspec
+RACK_MULTIPART_LIMIT=2048 bundle exec rspec
 if (test "$?" != "0") then {
 	echo "No pasaron pruebas";
 	exit 1;

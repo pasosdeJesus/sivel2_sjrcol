@@ -1,0 +1,71 @@
+  <div class="panel panel-default">
+    <div class="panel-heading"><%= Sal7711Gen::Articulo.human_attribute_name(:filtro) %></div>
+    <div class="panel-body">
+      <div class="rango-fechas">
+        <div class="col-md-6">
+          <%= f.input :fechaini,
+            maxlength: 10,
+            size: 12,
+            label: false,
+            placeholder: 'Desde',
+            value: @fechaini, 
+            input_html: {
+              "data-behaviour": "datepicker",
+              "data-contarautomatic": ""
+            }
+          %>
+        </div>
+        <div class="col-md-6">
+          <%= f.input :fechafin,
+            maxlength: 10,
+            size: 12,
+            label: false,
+            placeholder: 'Hasta',
+            required: false,
+            value: @fechafin,
+            input_html: {
+              "data-behaviour": "datepicker",
+              "data-contarautomatic": ""
+            }
+          %>
+        </div>
+        <%= f.input :meses_rapido, 
+          collection: @meses,
+          label: 'Meses',
+          input_html: { class: 'multiselectuser', multiple: true},
+          size: 7,
+          required: false
+        %>
+      </div>
+
+      <%= f.input :mundep,
+        label: 'Municipio / Departamento',
+        required: false,
+        maxlength: 150
+      %>
+      <%= hidden_field_tag 'mundep_id' %>
+
+      <%= render partial: 'index_categoria', locals: {f: f} %>
+
+      <%= f.input :fuente,
+        collection: Sip::Fuenteprensa.habilitados,
+        label: 'Fuente',
+        label_method: :nombre,
+        value_method: :id,
+        include_blank: '',
+        input_html: { class: 'chosen-select'},
+        required: false
+      %>
+
+      <%= f.button :button, {class: 'btn btn-primary'} do %>
+        <%= fa_icon 'fa search', text: 'Buscar' %> 
+      <% end %>
+      <%= f.button :button, type: :reset, id: :limpiarfiltro do %>
+        <%= fa_icon 'fa undo', text: 'Limpiar' %> 
+      <% end %>
+      <%= f.button :button, id: 'buscar_historial' do %>
+        <%= fa_icon 'fa history', text: 'Historial' %> 
+      <% end %>
+      <br>
+    </div>
+  </div>

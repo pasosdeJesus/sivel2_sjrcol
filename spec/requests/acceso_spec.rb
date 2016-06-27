@@ -3,6 +3,7 @@ require 'spec_helper'
 
 describe "Control de acceso " do
   before { 
+    skip
     @usuario = FactoryGirl.create(:usuario, 
                                   rol: Ability::ROLANALI, 
                                   oficina_id: 2)

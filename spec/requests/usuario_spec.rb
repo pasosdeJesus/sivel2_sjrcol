@@ -17,6 +17,7 @@ describe "Usuarios" do
 
     it "autentica con usuario creado en prueba" do
 		  usuario = FactoryGirl.create(:usuario)
+      skip
       visit new_usuario_session_path 
 			fill_in "Usuario", with: usuario.nusuario
 			fill_in "Clave", with: usuario.password
@@ -27,6 +28,7 @@ describe "Usuarios" do
 
     it "autentica con usuario existente en base inicial" do
 		  usuario = Usuario.find_by(nusuario: 'sjrcol')
+      skip
 			usuario.password = 'sjrcol123'
       visit new_usuario_session_path 
 			fill_in "Usuario", with: usuario.nusuario

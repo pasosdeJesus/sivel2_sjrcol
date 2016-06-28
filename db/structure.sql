@@ -2085,7 +2085,8 @@ CREATE TABLE sivel2_gen_acto (
     id_caso integer NOT NULL,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    id integer DEFAULT nextval('acto_seq'::regclass) NOT NULL
+    id integer DEFAULT nextval('acto_seq'::regclass) NOT NULL,
+    categoriaant_id integer
 );
 
 
@@ -7175,4 +7176,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160518025044');
 INSERT INTO schema_migrations (version) VALUES ('20160519195544');
 
 INSERT INTO schema_migrations (version) VALUES ('20160627113500');
+
+INSERT INTO schema_migrations (version) VALUES ('20160627130141');
 

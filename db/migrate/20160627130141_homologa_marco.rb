@@ -49,7 +49,6 @@ class HomologaMarco < ActiveRecord::Migration
     execute <<-SQL
       SELECT id, nombre from sivel2_gen_categoria WHERE id NOT IN (#{cub.join(", ")}) AND (id<2000 OR id>4000) ORDER BY id;
     SQL
-    exit 1;
     hom.each do |l,v|
       execute <<-SQL
         UPDATE sivel2_gen_acto SET id_categoria='#{l}'  

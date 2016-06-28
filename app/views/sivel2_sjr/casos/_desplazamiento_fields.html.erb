@@ -31,6 +31,13 @@
           value_method: :id 
     %>
     <%= f.input :descripcion, as: :text %>
+
+    <%= f.association :categoria, 
+      collection: Sivel2Gen::Categoria.habilitados.
+        where("tipocat <> 'I'"),
+      label_method: :nombre, 
+      value_method: :id 
+    %>
     <%= f.input :otrosdatos, as: :text %>
     <%= f.input :declaro, collection: [["SI", :S], 
       ["NO", :N], ["NO SABE / NO RESPONDE", :R]], 

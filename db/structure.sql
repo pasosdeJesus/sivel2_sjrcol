@@ -3314,6 +3314,16 @@ CREATE TABLE sivel2_sjr_ayudasjr_respuesta (
 
 
 --
+-- Name: sivel2_sjr_categoria_desplazamiento; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE sivel2_sjr_categoria_desplazamiento (
+    categoria_id integer NOT NULL,
+    desplazamiento_id integer NOT NULL
+);
+
+
+--
 -- Name: sivel2_sjr_clasifdesp_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -6066,6 +6076,14 @@ ALTER TABLE ONLY sivel2_sjr_casosjr
 
 
 --
+-- Name: fk_rails_357e09aa50; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY sivel2_sjr_categoria_desplazamiento
+    ADD CONSTRAINT fk_rails_357e09aa50 FOREIGN KEY (desplazamiento_id) REFERENCES sivel2_sjr_desplazamiento(id);
+
+
+--
 -- Name: fk_rails_395faa0882; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6231,6 +6249,14 @@ ALTER TABLE ONLY sal7711_gen_articulo
 
 ALTER TABLE ONLY sivel2_sjr_ayudasjr_derecho
     ADD CONSTRAINT fk_rails_d3ef67afc9 FOREIGN KEY (derecho_id) REFERENCES sivel2_sjr_derecho(id);
+
+
+--
+-- Name: fk_rails_d6d414f139; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY sivel2_sjr_categoria_desplazamiento
+    ADD CONSTRAINT fk_rails_d6d414f139 FOREIGN KEY (categoria_id) REFERENCES sivel2_gen_categoria(id);
 
 
 --
@@ -7178,4 +7204,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160519195544');
 INSERT INTO schema_migrations (version) VALUES ('20160627113500');
 
 INSERT INTO schema_migrations (version) VALUES ('20160627130141');
+
+INSERT INTO schema_migrations (version) VALUES ('20160628110301');
 

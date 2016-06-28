@@ -63,7 +63,7 @@ es:
         Aslegales: Seguimientos Judiciales
       "sivel2_sjr/ayudaestado": 
         "{:derechos_ids=>[]}": Derechos relacionados
-        "sivel2_sjr/caso":
+      "sivel2_sjr/desplazamiento":
         categoria: Antecedentes no individuales
       "sivel2_sjr/clasifdesp": 
         Clasifdesp: Clasificación de Desplazamiento

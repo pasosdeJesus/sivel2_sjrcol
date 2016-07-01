@@ -41,9 +41,16 @@
     <%= f.input :otrosdatos, as: :text %>
     <%= f.input :declaro, collection: [["SI", :S], 
       ["NO", :N], ["NO SABE / NO RESPONDE", :R]], 
-      include_blank: false 
-    %>
-    <%= f.input :hechosdeclarados, as: :text %>
+      include_blank: false,
+    input_html: {
+    "data-toggle" => 'tooltip',
+    "title" => 'Registre si el solicitante ha declarado ante alguna entidad'}
+     %>
+    <%= f.input :hechosdeclarados, as: :text,
+    input_html: {
+    "data-toggle" => 'tooltip',
+    "title" => 'Descripción de los hechos declarados'}
+ %>
     <%= f.input :fechadeclaracion, 
         :input_html => { "data-behaviour" => "datepicker",
           value: f.object.fechadeclaracion || '' },
@@ -52,18 +59,27 @@
     <%= f.association :declaroante,
           collection: Sivel2Sjr::Declaroante.where(fechadeshabilitacion: nil),
           label_method: :nombre,
-          value_method: :id 
-    %>
+          value_method: :id,
+    input_html: {
+    "data-toggle" => 'tooltip',
+    "title" => 'Entidad ante la cual rindió su declaración'}
+     %>
     <%= f.association :inclusion,
           collection: Sivel2Sjr::Inclusion.where(fechadeshabilitacion: nil),
           label_method: :nombre,
-          value_method: :id 
-    %>
+          value_method: :id,
+    input_html: {
+    "data-toggle" => 'tooltip',
+    "title" => 'Inscripción del solicitante en el Registro Único de Víctimas'}
+     %>
     <%= f.association :acreditacion,
           collection: Sivel2Sjr::Acreditacion.where(fechadeshabilitacion: nil),
           label_method: :nombre,
-          value_method: :id 
-    %>
+          value_method: :id,
+    input_html: {
+    "data-toggle" => 'tooltip',
+    "title" => 'Medio que tiene el solicitante para certificar su situación'}
+     %>
     <%= f.input :retornado, 
         boolean_style: :nested,
         inline_label: Sivel2Sjr::Desplazamiento.human_attribute_name(:retornado)
@@ -85,7 +101,10 @@
         inline_label: Sivel2Sjr::Desplazamiento.human_attribute_name(:connacionaldeportado)
     %>
     <%= f.input :oficioantes,
-      input_html: { value: f.object.oficioantes || '' }
+      input_html: { value: f.object.oficioantes || '' },
+    input_html: {
+    "data-toggle" => 'tooltip',
+    "title" => 'Ocupación antes del desplazamiento'}
     %>
     <%= f.association :modalidadtierra,
       collection: Sivel2Sjr::Modalidadtierra .where(fechadeshabilitacion: nil),

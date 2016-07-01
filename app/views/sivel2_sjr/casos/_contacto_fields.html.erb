@@ -14,21 +14,30 @@
 	include_blank: false,
 	label: "Filiación Política",
 	label_method: :nombre, 
-	value_method: :id 
-%>
+	value_method: :id,
+    input_html: {
+    "data-toggle" => 'tooltip',
+    "title" => 'Partido o filiación política en el momento del desplazamiento emblemático'}
+ %>
 <%= f.association :organizacion,
 	collection: Sivel2Gen::Organizacion.habilitados,
 	include_blank: false,
 	label: "Organización",
 	label_method: :nombre, 
-	value_method: :id 
+	value_method: :id,
+    input_html: {
+    "data-toggle" => 'tooltip',
+    "title" => 'Organización a la que pertenecía en el momento del desplazamiento emblemático'}
 %>
 <%= f.association :vinculoestado,
 	collection: Sivel2Gen::Vinculoestado.habilitados,
 	include_blank: false,
 	label: "Vínculo con el Estado",
 	label_method: :nombre, 
-	value_method: :id
+	value_method: :id,
+    input_html: {
+    "data-toggle" => 'tooltip',
+    "title" => 'Registre si la persona era funcionaria pública en el momento del desplazamiento'}
 %>
 <%= f.association :etnia,
 	collection: Sivel2Gen::Etnia.habilitados,
@@ -79,8 +88,11 @@
 		include_blank: false,
 		label: "Rol en Familia",
 		label_method: :nombre, 
-		value_method: :id 
-  %>
+		value_method: :id,
+    input_html: {
+    "data-toggle" => 'tooltip',
+    "title" => 'Solicite a la persona identificar su rol en la familia, con ello podremos analizar el tipo de ayuda que requiere'}
+   %>
   <%= s.input :cabezafamilia, 
     boolean_style: :nested, 
     inline_label: "Cabeza de Familia"

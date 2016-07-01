@@ -1,8 +1,9 @@
 <%= f.input :id, label: "Código", readonly: true%>
 
 <%= s.input :fecharec, 
-  :input_html => { "data-behaviour" => "datepicker" },
-  :as => :string, :label => "Fecha Primera Recepción" 
+  input_html: { "data-behaviour" => "datepicker" },
+  as: :string, 
+  label: "Fecha Primera Recepción" 
 %>
 
 <%= s.association :usuario,
@@ -21,13 +22,14 @@
   value_method: :id 
 %>
 
-<%= f.input :fecha, :input_html => { 
-  "data-behaviour" => "datepicker" },
-  :as => :string, :label => "F. Desplazamiento Emblemático",
+<%= f.input :fecha, 
+  input_html: { "data-behaviour" => "datepicker" },
+  as: :string, 
+  label: "F. Desplazamiento Emblemático",
   wrapper_html: { style: "padding-bottom: 18px;" }
 %>
 
 <%= f.input :hora, :as => :string, 
-  :label => "Hora del Desplazamiento"
+  label: "Hora del Desplazamiento"
 %>
 

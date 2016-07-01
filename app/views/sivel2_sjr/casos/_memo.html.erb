@@ -1,10 +1,17 @@
-<%= f.input :memo, label: 'Memo', input_html: { rows: 10 },
-    input_html: {
+<%= f.input :memo, 
+  label: 'Memo', 
+  input_html: { 
+    rows: 10,
     "data-toggle" => 'tooltip',
-    "title" => 'Resumen de los antecedentes y causas del desplazamiento emblemático. Incluya nombre de la víctima, los sucesos, los presuntos responsables, circunstancias de modo, tiempo, lugar y otros lugares. (Diligenciar en mayúsculas y minúsculas)'}
- %>
-<%= s.input :memo1612, label: 'Descripción para Resolución 1612', as: :text, input_html: { rows: 10 },
-    input_html: {
+    "title" => 'Resumen de los antecedentes y causas del desplazamiento emblemático. Incluya nombre de la víctima, los sucesos, los presuntos responsables, circunstancias de modo, tiempo, lugar y otros lugares. (Diligenciar en mayúsculas y minúsculas)'
+  }
+%>
+<%= s.input :memo1612, 
+  label: 'Descripción para Resolución 1612', 
+  as: :text, 
+  input_html: { 
+    rows: 10,
     "data-toggle" => 'tooltip',
-    "title" => 'Diligenciar en caso de que hayan niños, niñas o adolescentes que hubieran sido reclutados o amenazados con ser reclutados. Incluya una breve descripción del suceso.'}
- %>
+    "title" => 'Diligenciar en caso de que hayan niños, niñas o adolescentes que hubieran sido reclutados o amenazados con ser reclutados. Incluya una breve descripción del suceso.'
+  }
+%>

@@ -2,7 +2,7 @@
   <li><a href="usuarios/sign_in">Iniciar Sesión</a>
 <%- else  %>
   <article>
-  <%= simple_form_for @caso, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= simple_form_for @caso, html: { class: 'form-horizontal' } do |f| %>
     <div data-role="content" class="form-inputs">
       <div id="errores">
         <% if f.object.errors.any? %>
@@ -30,7 +30,7 @@
             </div>
             <div id="basicos" class="accordion-body collapse in">
               <div class="accordion-inner">
-                <%= render 'basicos', :f => f, :s => s %>
+                <%= render 'basicos', f: f, s: s %>
               </div>
             </div> 
           </div> <! -- accordion-group basicos -->
@@ -42,7 +42,7 @@
             </div>
             <div id="contacto" class="accordion-body collapse">
               <div class="accordion-inner">
-                <%= render 'contacto', :f => f, :s => s %>
+                <%= render 'contacto', f: f, s: s %>
               </div>
             </div>
           </div> <! -- accordion-group contacto -->
@@ -55,7 +55,7 @@
             </div>
             <div id="victima" class="accordion-body collapse">
               <div class="accordion-inner">
-                <%= render 'victimas', :f => f, :s => s %>
+                <%= render 'victimas', f: f, s: s %>
               </div>
             </div>
           </div> <! -- accordion-group victima -->
@@ -67,7 +67,7 @@
             </div>
             <div id="ubicacion" class="accordion-body collapse">
               <div class="accordion-inner">
-                <%= render 'ubicaciones', :f => f, :s => s %>
+                <%= render 'ubicaciones', f: f, s: s %>
               </div>
             </div>
           </div> <! -- accordion-group ubicacion -->
@@ -79,7 +79,7 @@
             </div>
             <div id="refugio" class="accordion-body collapse">
               <div class="accordion-inner">
-                <%= render 'refugio', :f => f, :s => s %>
+                <%= render 'refugio', f: f, s: s %>
               </div>
             </div>
           </div> <! -- accordion-group refugio -->
@@ -92,7 +92,7 @@
             </div>
             <div id="desplazamiento" class="accordion-body collapse">
               <div class="accordion-inner">
-                <%= render 'desplazamientos', :f => f %>
+                <%= render 'desplazamientos', f: f %>
               </div>
             </div>
           </div> <! -- accordion-group desplazamiento -->
@@ -104,7 +104,7 @@
             </div>
             <div id="presponsable" class="accordion-body collapse">
               <div class="accordion-inner">
-                <%= render 'presponsables', :f => f %>
+                <%= render 'presponsables', f: f %>
               </div>
             </div>
           </div> <! -- accordion-group  presponsable-->
@@ -116,7 +116,7 @@
             </div>
             <div id="antecedentes" class="accordion-body collapse">
               <div class="accordion-inner">
-                <%= render 'antecedentes', :f => f %>
+                <%= render 'antecedentes', f: f %>
               </div>
             </div>
           </div> <! -- accordion-group antecedentes -->
@@ -128,7 +128,7 @@
             </div>
             <div id="atencion" class="accordion-body collapse">
               <div class="accordion-inner">
-                <%= render 'respuestas', :f => f %>  
+                <%= render 'respuestas', f: f %>  
               </div>
             </div>
           </div> <! -- accordion-group sesiones de atención-->
@@ -140,7 +140,7 @@
             </div>
             <div id="descripcion" class="accordion-body collapse">
               <div class="accordion-inner">
-                <%= render 'memo', :f => f, :s => s %>
+                <%= render 'memo', f: f, s: s %>
               </div>
             </div>
           </div> <! -- accordion-group Descripción-->
@@ -153,7 +153,7 @@
             </div>
             <div id="anexo" class="accordion-body collapse">
               <div class="accordion-inner">
-                <%= render 'sivel2_gen/casos/anexos', :f => f %>  
+                <%= render 'sivel2_gen/casos/anexos', f: f %>  
               </div>
             </div>
           </div> <! -- accordion-group anexos -->
@@ -165,7 +165,7 @@
             </div>
             <div id="etiquetas" class="accordion-body collapse">
               <div class="accordion-inner">
-                <%= render 'etiquetas', :f => f %>  
+                <%= render 'etiquetas', f: f %>  
               </div>
             </div>
           </div> <! -- accordion-group etiquetas -->
@@ -175,9 +175,9 @@
     </div> <!-- form-inputs -->
 
     <div class="form-actions">
-      <%= f.button :submit, 'Validar y Guardar', :class => 'btn-primary' %>
-      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-        casos_path, :class => 'btn' 
+      <%= f.button :submit, 'Validar y Guardar', class: 'btn-primary' %>
+      <%= link_to t('.cancel', default: t("helpers.links.cancel")),
+        casos_path, class: 'btn' 
       %>
     </div> <!-- form-action -->
 

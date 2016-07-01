@@ -1,46 +1,50 @@
 <div class='control-group nested-fields'>
   <div class="controls">
-    <%= render 'actoin_fields', :f => f %>
+    <%= render 'actoin_fields', f: f %>
 
-<%= f.association :presponsable,
-  collection: Sivel2Gen::Presponsable.from('sivel2_gen_caso_presponsable, sivel2_gen_presponsable').where(
-    'sivel2_gen_caso_presponsable.id_presponsable=sivel2_gen_presponsable.id 
+    <%= f.association :presponsable,
+      collection: Sivel2Gen::Presponsable.
+      from('sivel2_gen_caso_presponsable, sivel2_gen_presponsable').
+      where('sivel2_gen_caso_presponsable.id_presponsable=sivel2_gen_presponsable.id 
       AND sivel2_gen_caso_presponsable.id_caso=?', @caso.id),
-  wrapper_html: { style: "padding-bottom: 18px;" },
-  label_method: :nombre,
-  value_method: :id 
-%>
+      wrapper_html: { style: "padding-bottom: 18px;" },
+      label_method: :nombre,
+      value_method: :id 
+    %>
 
-<%= f.association :categoria,
-  collection: Sivel2Gen::Categoria.habilitados.where(
-    "id_tviolencia<>'R'").reorder(:id_tviolencia, :id),
-  label: "Categoria",
-  label_method: lambda {|t| t.id_tviolencia + t.id.to_s + ' ' + t.nombre },
-  value_method: :id 
-%>
+    <%= f.association :categoria,
+      collection: Sivel2Gen::Categoria.habilitados.where(
+      "id_tviolencia<>'R'").reorder(:id_tviolencia, :id),
+      label: "Categoria",
+      label_method: lambda {|t| t.id_tviolencia + t.id.to_s + ' ' + t.nombre },
+      value_method: :id 
+    %>
 
-<%= f.association :persona,
-  collection: Sip::Persona.from('sivel2_gen_victima, sip_persona').where(
-    'sivel2_gen_victima.id_persona=sip_persona.id AND sivel2_gen_victima.id_caso=?', @caso.id),
-  label: "Víctima",
-  label_method: lambda {|t| t.nombres + ' ' + t.apellidos},
-  value_method: :id 
-%>
+    <%= f.association :persona,
+      collection: Sip::Persona.from('sivel2_gen_victima, sip_persona').where(
+        'sivel2_gen_victima.id_persona=sip_persona.id AND sivel2_gen_victima.id_caso=?', @caso.id),
+      label: "Víctima",
+      label_method: lambda {|t| t.nombres + ' ' + t.apellidos},
+      value_method: :id 
+    %>
 
     <%= f.simple_fields_for :actosjr do |s| %>
       <%= s.input :fecha, 
-        :input_html => { "data-behaviour" => "datepicker" },
-        :as => :string, :label => "Fecha" 
+        input_html: { "data-behaviour" => "datepicker" },
+        as: :string, 
+        label: "Fecha" 
       %>
 
       <%= s.association :desplazamiento,
-        collection: ([] + Sivel2Sjr::Desplazamiento.where(:id_caso => @caso.id)),
+        collection: ([] + Sivel2Sjr::Desplazamiento.where(id_caso: @caso.id)),
         label: "Causó desplazamiento",
         label_method: :fechaexpulsion,
         value_method: :id
       %>
     <% end %>
 
-    <%= link_to_remove_association "Eliminar Causa/Antecedente", f, :class => 'btn-danger' %> 
+    <%= link_to_remove_association "Eliminar Causa/Antecedente", f,
+      class: 'btn-danger' 
+    %> 
   </div>
 </div>

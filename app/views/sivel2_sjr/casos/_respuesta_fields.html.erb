@@ -2,8 +2,9 @@
   <div class="controls">
     <%= f.input :id, as: :hidden %>
     <%= f.input :fechaatencion, 
-      :input_html => { "data-behaviour" => "datepicker"},
-      :as => :string, :label => "Fecha de Atención" 
+      input_html: { "data-behaviour" => "datepicker"},
+      as: :string, 
+      label: "Fecha de Atención" 
     %>
     <div class="panel panel-default">
       <div class="panel-heading">Derechos Vulnerados</div>
@@ -13,21 +14,25 @@
           label: "Derechos Vulnerados",
           label_method: :nombre, 
           value_method: :id,
-    input_html: {
-    "data-toggle" => 'tooltip',
-    "title" => 'Elija uno o varios derechos vulnerados que reporte la persona en la atención. Para elegir varios pulse Control y seleccione los derechos que sean necesarios'}
+          input_html: {
+            "data-toggle" => 'tooltip',
+            "title" => 'Elija uno o varios derechos vulnerados que reporte la persona en la atención. Para elegir varios pulse Control y seleccione los derechos que sean necesarios'
+          }
          %>
         <%= f.input :informacionder, 
           boolean_style: :nested,
           inline_label: "Se brindó información",
-    input_html: {
-    "data-toggle" => 'tooltip',
-    "title" => 'Seleccione si el SJR brindó información frente a los derechos vulnerados)'}
+          input_html: {
+            "data-toggle" => 'tooltip',
+            "title" => 'Seleccione si el SJR brindó información frente a los derechos vulnerados)'
+          }
         %>
-        <%= f.input :accionesder, label: "Acciones de la persona frente a Derechos Vulnerados",
-    input_html: {
-    "data-toggle" => 'tooltip',
-    "title" => 'Describa las medidas ha tomado el solicitante para restituir sus derechos'}
+        <%= f.input :accionesder, 
+          label: "Acciones de la persona frente a Derechos Vulnerados",
+          input_html: {
+            "data-toggle" => 'tooltip',
+            "title" => 'Describa las medidas ha tomado el solicitante para restituir sus derechos'
+          }
        %>
       </div>
     </div>
@@ -39,48 +44,59 @@
           label: "Ayuda del Estado",
           label_method: :nombre, 
           value_method: :id,
-    input_html: {
-    "data-toggle" => 'tooltip',
-    "title" => 'Seleccione las ayudas otorgadas por instituciones públicas'}
-         %>
-        <%= f.input :cantidadayes, label: "Cantidad Ayuda Estado",
-    input_html: {
-    "data-toggle" => 'tooltip',
-    "title" => 'Cantidad de dinero otorgada por el Estado'}
- %>
+          input_html: {
+            "data-toggle" => 'tooltip',
+            "title" => 'Seleccione las ayudas otorgadas por instituciones públicas'
+          }
+        %>
+        <%= f.input :cantidadayes, 
+          label: "Cantidad Ayuda Estado",
+          input_html: {
+            "data-toggle" => 'tooltip',
+            "title" => 'Cantidad de dinero otorgada por el Estado'
+          }
+        %>
         <%= f.input :institucionayes, 
           label: "Instituciones que ayudaron",
           wrapper_html: { style: "padding-bottom: 18px;" },
-    input_html: {
-    "data-toggle" => 'tooltip',
-    "title" => 'Organizaciones o entidades que han brindado ayuda al solicitante'}
+          input_html: {
+            "data-toggle" => 'tooltip',
+            "title" => 'Organizaciones o entidades que han brindado ayuda al solicitante'
+          }
         %>
         <%= f.association :progestado, 
           collection: Sivel2Sjr::Progestado.habilitados,
           label: "Programas y Respuesta del Estado",
           label_method: :nombre, 
           value_method: :id,
-    input_html: {
-    "data-toggle" => 'tooltip',
-    "title" => 'Marque el programa o respuesta que corresponda'}
-         %>
+          input_html: {
+            "data-toggle" => 'tooltip',
+            "title" => 'Marque el programa o respuesta que corresponda'
+          }
+        %>
         <%= f.input :difobsprog, 
           label: "Dificultades y Observaciones respecto a Respuesta del Estado",
           wrapper_html: { style: "padding-bottom: 18px;" },
-    input_html: {
-    "data-toggle" => 'tooltip',
-    "title" => 'Comentarios adicionales frente a la respuesta del Estado'}
+          input_html: {
+            "data-toggle" => 'tooltip',
+            "title" => 'Comentarios adicionales frente a la respuesta del Estado'
+          }
         %>
-        <%= f.input :numprorrogas, as: :integer, 
+        <%= f.input :numprorrogas, 
+          as: :integer, 
           label: "Número de Prorrogas" 
         %>
-        <%= f.input :montoprorrogas, as: :integer, 
+        <%= f.input :montoprorrogas, 
+          as: :integer, 
           label: "Monto Prorrogas" 
         %>
         <%= f.input :fechaultima, 
-          :input_html => { "data-behaviour" => "datepicker",
-            value: f.object.fechaultima || '' },
-          :as => :string, :label => "Fecha última prorroga" 
+          input_html: { 
+            "data-behaviour" => "datepicker",
+            value: f.object.fechaultima || '' 
+          },
+          as: :string, 
+          label: "Fecha última prorroga" 
         %>
         <%= f.input :lugarultima, as: :text, 
           label: "Lugar última prorroga" 
@@ -144,7 +160,9 @@
     <%= f.input :remision, as: :text, 
       label: "Remisión a otra Org." 
     %>
-    <%= f.input :orientaciones, as: :text, label: "Recomendaciones" %>
+    <%= f.input :orientaciones, as: :text, 
+      label: "Recomendaciones" 
+    %>
     <%= f.input :gestionessjr, as: :text, 
       label: "Gestiones del SJR" 
     %>
@@ -162,7 +180,7 @@
     %>
 
     <%= link_to_remove_association "Eliminar Respuesta", f, 
-      {:class => 'btn-danger', :'data-existing' => 'true'} 
+      {class: 'btn-danger', :'data-existing' => 'true'} 
     %>
   </div>
 </div>

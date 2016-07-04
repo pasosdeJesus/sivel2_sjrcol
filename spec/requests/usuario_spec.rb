@@ -1,6 +1,7 @@
 # encoding: UTF-8
 
 require 'spec_helper'
+#require 'byebug'
 
 describe "Usuarios" do
 
@@ -8,7 +9,7 @@ describe "Usuarios" do
     it "no autentica con clave errada a usuario existente" do
 		  #usuario = FactoryGirl.create(:usuario)
 		  usuario = Usuario.find_by(nusuario: 'sjrcol')
-      visit new_usuario_session_path 
+      visit main_app.new_usuario_session_path 
 			fill_in "Usuario", with: usuario.nusuario
 			fill_in "Clave", with: 'ERRADA'
 			click_button "Iniciar Sesión"

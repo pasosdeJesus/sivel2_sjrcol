@@ -58,22 +58,60 @@ es:
         fecha: F. Desp. Emblemático
         expulsion: Sitio Expulsión Emb.
         llegada: Sitio Llegada Emb.
+      "sivel2_gen/caso_presponsable": 
+        presponsable: Presunto responsable
+      "sivel2_gen/presponsable": 
+        presponsable: presunto responsable
       "sivel2_sjr/aslegal": 
         Aslegal: Seguimiento Judicial
         Aslegales: Seguimientos Judiciales
       "sivel2_sjr/ayudaestado": 
         "{:derechos_ids=>[]}": Derechos relacionados
-      "sivel2_sjr/desplazamiento":
-        categoria: Antecedentes no individuales
+      "sivel2_sjr/casosjr": 
+        memo1612: Descripción para Resolución 1612
       "sivel2_sjr/clasifdesp": 
         Clasifdesp: Clasificación de Desplazamiento
         Clasifdesps: Clasificaciones de Desplazamientos
       "sivel2_sjr/declaroante": 
         Declaroante: Declaro Ante
         Declaroantes: Declaro Ante
+      "sivel2_sjr/desplazamiento":
+        categoria: Antecedentes no individuales
       "sivel2_sjr/motivosjr": 
         Motivosjr: Servicio y Asesoria del SJR
         Motivossjr: Servicios y Asesorias del SJR
       "sivel2_sjr/personadesea": 
         Personadesea: Persona desea
         Personadeseas: Personas desean
+      "sivel2_sjr/respuesta": 
+        accionesder: Acciones de la persona frente a derechos vulnerados
+        aslegal: Seguimiento judicial
+        ayudaestado: Ayuda el Estado
+        cantidadayes: Cantidad ayuda del Estado
+        derecho: Derechos vulnerados
+        descamp: Descripción o ampliación del caso
+        detalleal: Detalle S. judicial
+        detallemotivo: Detalle servicios y asesorias del SJR
+        difobsprog: Dificultades y Observaciones respecto a Respuesta del Estado
+        efectividad: Efectividad en la acción
+        fechaultima: Fecha última prorroga
+        gestionessjr: Gestiones del SJR
+        informacionder: Se brindó información
+        institucionayes: Instituciones que ayudaron
+        lugar: Lugar solicitud turno
+        lugarultima: Lugar última prorroga
+        montoprorrogas: Monto prorrogas
+        montoal: Monto S. judicial
+        motivosjr: Servicios y asesorias del SJR
+        numprorrogas: Número de prorrogas
+        observaciones: Observaciones del caso
+        orientaciones: Recomendaciones
+        progestado: Programas y respuesta del Estado
+        remision: Remisión a otra Org.
+        Sesionesatencion: "Respuestas"
+        sesionatencion: "respuesta"
+        turno: Turno próxima prorroga
+        verifcper: Verificación compromisos persona
+        verifcsjr: Verificación compromisos SJR
+      "sip/ubicacion":
+        Ubicacion: Ubicación

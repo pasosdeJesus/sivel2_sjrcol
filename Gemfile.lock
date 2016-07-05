@@ -39,7 +39,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 960ab8d25d3324a2bff45c3f863b2b6b7a58fc2d
+  revision: b78588661e83eca44d378fd80d34fea3581ac7b5
   specs:
     sivel2_gen (2.0.a9)
       devise
@@ -48,7 +48,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 6dd769eb7fc36a27735b84f0e6e2336b20303cb7
+  revision: a455e948d3846b291b10fe54937159b14166fd61
   specs:
     sivel2_sjr (2.0.a8)
       rails
@@ -278,7 +278,7 @@ GEM
       rails-deprecated_sanitizer (>= 1.0.1)
     rails-html-sanitizer (1.0.3)
       loofah (~> 2.0)
-    rails-i18n (4.0.8)
+    rails-i18n (4.0.9)
       i18n (~> 0.7)
       railties (~> 4.0)
     rails_12factor (0.0.3)

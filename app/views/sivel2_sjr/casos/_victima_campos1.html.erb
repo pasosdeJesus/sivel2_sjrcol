@@ -1,0 +1,23 @@
+<%= victima.association :filiacion,
+  collection: Sivel2Gen::Filiacion.habilitados,
+  include_blank: false,
+  label: "Filiación Política",
+  label_method: :nombre, 
+  value_method: :id 
+%>
+
+<%= victima.association :organizacion,
+  collection: Sivel2Gen::Organizacion.habilitados,
+  include_blank: false,
+  label: "Organización",
+  label_method: :nombre, 
+  value_method: :id 
+%>
+
+<%= victima.association :vinculoestado,
+  collection: Sivel2Gen::Vinculoestado.habilitados,
+  include_blank: false,
+  label: "Vínculo con el Estado",
+  label_method: :nombre, 
+  value_method: :id
+%>

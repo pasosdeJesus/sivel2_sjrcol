@@ -1,0 +1,15 @@
+<%= victimasjr.association :regimensalud,
+  collection: Sivel2Sjr::Regimensalud.all.order(:nombre),
+  include_blank: false,
+  label: "Régimen de Salud",
+  label_method: :nombre, 
+  value_method: :id
+%>
+
+<%= victimasjr.input :eps, label: 'EPS o ARS' %>
+
+<%= victimasjr.input :tienesisben, 
+  inline_label: "Tiene SISBEN",
+  boolean_style: :nested
+%>
+

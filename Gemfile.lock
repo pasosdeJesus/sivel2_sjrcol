@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/pasosdeJesus/cor1440_gen.git
-  revision: 8053bad41c9f0b7bb748f9ebfb9cff552c269e1c
+  revision: 7535c92341dea88c6ee2c4972f984fa4ca8c3ec4
   specs:
     cor1440_gen (1.0.a6)
       devise
@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sal7711_gen.git
-  revision: 19d5f2cd5e8404b790327e97476762e70cb60abe
+  revision: d4eb3f5058094182623283060dcefb59ea3df464
   specs:
     sal7711_gen (1.0.a2)
       rails
@@ -18,7 +18,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sip.git
-  revision: ac741047e14c9fb02b241a9a63e60e404157bf40
+  revision: 4c8f104f9ca428c897b61f0ee216efd7b238cf27
   specs:
     sip (2.0.a7)
       bootstrap-datepicker-rails
@@ -39,7 +39,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sivel2_gen.git
-  revision: b78588661e83eca44d378fd80d34fea3581ac7b5
+  revision: bab0e85cc4bcf4688837794093a15c8256249f1d
   specs:
     sivel2_gen (2.0.a9)
       devise
@@ -48,7 +48,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: a455e948d3846b291b10fe54937159b14166fd61
+  revision: 4a52deecefcc74b47b78f35868d5098827d180b3
   specs:
     sivel2_sjr (2.0.a8)
       rails
@@ -182,7 +182,7 @@ GEM
     factory_girl_rails (4.7.0)
       factory_girl (~> 4.7.0)
       railties (>= 3.0.0)
-    ffi (1.9.10)
+    ffi (1.9.13)
     font-awesome-rails (4.6.3.1)
       railties (>= 3.2, < 5.1)
     foreman (0.82.0)
@@ -366,7 +366,7 @@ GEM
       tzinfo
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
-    tzinfo-data (1.2016.5)
+    tzinfo-data (1.2016.6)
       tzinfo (>= 1.0.0)
     uglifier (3.0.0)
       execjs (>= 0.3.0, < 3)

@@ -85,10 +85,7 @@ if (test "$?" != "0") then {
 	exit 1;
 } fi;
 
-git push heroku master
-if (test "$?" != "0") then {
-	echo "No pudo publicarse en heroku";
-	exit 1;
+if (test "$CONH" != "") then {
+	git push heroku master
+	heroku run rake db:migrate sip:indices
 } fi;
-
-heroku run rake db:migrate sip:indices

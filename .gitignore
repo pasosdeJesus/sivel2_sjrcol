@@ -18,4 +18,5 @@ config/database.yml
 *~
 public/assets/
 public/colchon-articulos/
+archivos/
 config/initializers/sip.rb

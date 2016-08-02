@@ -59,6 +59,13 @@ GIT
   specs:
     cocoon (1.2.6)
 
+PATH
+  remote: ../sal7711_web
+  specs:
+    sal7711_web (1.0.a3)
+      rails
+      sal7711_gen
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -427,6 +434,7 @@ DEPENDENCIES
   rails_12factor
   rspec-rails
   sal7711_gen!
+  sal7711_web!
   sass
   sass-rails
   sdoc

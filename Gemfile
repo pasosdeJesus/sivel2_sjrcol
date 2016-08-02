@@ -104,8 +104,8 @@ gem 'sal7711_gen', github: 'pasosdeJesus/sal7711_gen'
 #gem 'sal7711_gen', path: '../sal7711_gen'
 
 # Motor Sal7711_web
-#gem 'sal7711_web', github: 'pasosdeJesus/sal7711_web'
-gem 'sal7711_web', path: '../sal7711_web'
+gem 'sal7711_web', github: 'pasosdeJesus/sal7711_web'
+#gem 'sal7711_web', path: '../sal7711_web'
 
 
 group :doc do

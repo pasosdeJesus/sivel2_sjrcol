@@ -30,7 +30,11 @@ if (test "$?" = "0") then {
 	echo "Gemfile incluye un sal7711_gen cableado al sistema de archivos"
 	exit 1;
 } fi;
-
+grep "^ *gem.*.sal7711_web.*,.*path:" Gemfile > /dev/null 2> /dev/null
+if (test "$?" = "0") then {
+	echo "Gemfile incluye un sal7711_web cableado al sistema de archivos"
+	exit 1;
+} fi;
 
 grep "^ *gem.*debugger" Gemfile > /dev/null 2> /dev/null
 if (test "$?" = "0") then {
@@ -88,8 +92,12 @@ if (test "$?" != "0") then {
 	exit 1;
 } fi;
 
+<<<<<<< HEAD
 
 if (test "$CONH" == "1") then {
+=======
+if (test "$CONH" != "") then {
+>>>>>>> 825c1098a2518a7802e867008019dd69faf1f89c
 	git push heroku master
 	heroku run rake db:migrate sip:indices
 } fi;

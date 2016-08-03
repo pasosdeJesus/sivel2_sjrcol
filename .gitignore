@@ -19,3 +19,5 @@ config/initializers/sip.rb
 *~
 public/assets/
 public/colchon-articulos/
+archivos/
+config/initializers/sip.rb

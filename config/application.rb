@@ -1,4 +1,6 @@
-require File.expand_path('../boot', __FILE__)
+# encoding: UTF-8
+
+require_relative 'boot'
 
 # Pick the frameworks you want:
 require "active_model/railtie"
@@ -28,7 +30,6 @@ module Sivel2Sjrcol
     config.time_zone = 'Bogota'
     config.i18n.default_locale = :es
     config.active_record.schema_format = :sql
-    config.active_record.raise_in_transactional_callbacks = true
 
     config.formato_fecha = 'yyyy-mm-dd'
   end

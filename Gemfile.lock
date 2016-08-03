@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/pasosdeJesus/cor1440_gen.git
-  revision: f3e91af5615039f44a53e574f055c94c0723b7de
+  revision: 2d7fefb70811a289c921fbce9a3eaf18939fb7ad
   specs:
     cor1440_gen (1.0.b1)
       devise
@@ -10,15 +10,23 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sal7711_gen.git
-  revision: 1349d03cb63285dfc13e2a738e38276e20c438e7
+  revision: cd7ae522dd5a1db2c9650ff5104b0b4dcdbd0a6b
   specs:
     sal7711_gen (1.0.b1)
       rails
       sip
 
 GIT
+  remote: git://github.com/pasosdeJesus/sal7711_web.git
+  revision: 6f54912f412e04d939f1bccb326791967154043d
+  specs:
+    sal7711_web (1.0.a3)
+      rails
+      sal7711_gen
+
+GIT
   remote: git://github.com/pasosdeJesus/sip.git
-  revision: 47327a894db7de992b1b251eb2d23b510d08e176
+  revision: 8b0469d60b41a1177e183ba42a44192a10564218
   specs:
     sip (2.0.b1)
       bootstrap-datepicker-rails
@@ -38,7 +46,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 26bc17b9b802b3e314aca83ca113deb3caab5f4c
+  revision: b786228ae0b96e0f3d93909fe313d45f1f3e6be3
   specs:
     sivel2_gen (2.0b1)
       devise
@@ -47,7 +55,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 50018637efea95711b258082b70f6cf5da972368
+  revision: f70581aea25d060109913984cd1c64c17691d860
   specs:
     sivel2_sjr (2.0.b1)
       rails
@@ -211,7 +219,7 @@ GEM
     mime-types (3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
-    mimemagic (0.3.1)
+    mimemagic (0.3.2)
     mini_portile2 (2.1.0)
     minitest (5.9.0)
     multi_json (1.12.1)
@@ -427,6 +435,7 @@ DEPENDENCIES
   rails_12factor
   rspec-rails
   sal7711_gen!
+  sal7711_web!
   sass
   sass-rails
   sdoc

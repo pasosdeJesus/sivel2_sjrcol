@@ -1,6 +1,10 @@
 #!/bin/sh
 # Hace pruebas, pruebas de regresión, envia a github y sube a heroku
 
+if (test -f ".env") then {
+	. ./.env
+} fi;
+
 grep "^ *gem.*sip.*,.*path:" Gemfile > /dev/null 2> /dev/null
 if (test "$?" = "0") then {
 	echo "Gemfile incluye un sip cableado al sistema de archivos"
@@ -75,20 +79,17 @@ RAILS_ENV=test bundle exec rake db:structure:dump
 b=`git branch | grep "^*" | sed -e  "s/^* //g"`
 git status -s
 if (test "$MENSCONS" = "") then {
-	git commit -a
-} else {
-	git commit -m $MENSCONS -a
+	MENSCONS="Actualiza"
 } fi;
+git commit -m "$MENSCONS" -a
 git push origin ${b}
 if (test "$?" != "0") then {
 	echo "No pudo subirse el cambio a github";
 	exit 1;
 } fi;
 
-git push heroku master
-if (test "$?" != "0") then {
-	echo "No pudo publicarse en heroku";
-	exit 1;
-} fi;
 
-heroku run rake db:migrate sip:indices
+if (test "$CONH" == "1") then {
+	git push heroku master
+	heroku run rake db:migrate sip:indices
+} fi;

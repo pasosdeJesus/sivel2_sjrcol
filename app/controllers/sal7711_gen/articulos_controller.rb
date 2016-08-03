@@ -17,10 +17,10 @@ module Sal7711Gen
         :pagina,
         :url,
         :texto,
-        {:categoriaprensa_ids => []},
-        {:anexo_attributes => [
-          :id, :fecha, :descripcion, :archivo, :adjunto, :_destroy
-        ]}
+        :adjunto_descripcion,
+        :adjunto,
+        :archivo,
+        {:categoriaprensa_ids => []}
       )
     end
 

@@ -92,12 +92,7 @@ if (test "$?" != "0") then {
 	exit 1;
 } fi;
 
-<<<<<<< HEAD
-
 if (test "$CONH" == "1") then {
-=======
-if (test "$CONH" != "") then {
->>>>>>> 825c1098a2518a7802e867008019dd69faf1f89c
 	git push heroku master
 	heroku run rake db:migrate sip:indices
 } fi;

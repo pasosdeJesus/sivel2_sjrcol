@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/pasosdeJesus/cor1440_gen.git
-  revision: 2d7fefb70811a289c921fbce9a3eaf18939fb7ad
+  revision: 0a31032eda4f0e5a375076a70c04a83458d6fca1
   specs:
     cor1440_gen (1.0.b1)
       devise
@@ -26,7 +26,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sip.git
-  revision: dd3929fe75904441a351e4f026da01118883deea
+  revision: 0025cc7fdbcfa4f13f3274cad2ea666c918b4c09
   specs:
     sip (2.0.b1)
       bootstrap-datepicker-rails
@@ -46,7 +46,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sivel2_gen.git
-  revision: b786228ae0b96e0f3d93909fe313d45f1f3e6be3
+  revision: 023f314f2c3011f0745587d8aa146c75b7597d61
   specs:
     sivel2_gen (2.0b1)
       devise
@@ -55,7 +55,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: f70581aea25d060109913984cd1c64c17691d860
+  revision: 1018168bbf179de1153f3c2222294ccd9a59f642
   specs:
     sivel2_sjr (2.0.b1)
       rails
@@ -127,7 +127,7 @@ GEM
     capybara-webkit (1.11.1)
       capybara (>= 2.3.0, < 2.8.0)
       json
-    chartkick (2.0.1)
+    chartkick (2.0.2)
     chosen-rails (1.5.2)
       coffee-rails (>= 3.2)
       railties (>= 3.0)

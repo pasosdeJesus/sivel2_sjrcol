@@ -21,3 +21,8 @@ public/assets/
 public/colchon-articulos/
 archivos/
 config/initializers/sip.rb
+app/views/sip/hogar/_local.html.erb
+bin/actu.sh
+db/base.sql
+db/datos-basicas.sql
+app/views/sivel2_gen/hogar/_local.html.erb

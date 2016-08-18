@@ -26,3 +26,4 @@ bin/actu.sh
 db/base.sql
 db/datos-basicas.sql
 app/views/sivel2_gen/hogar/_local.html.erb
+herram/

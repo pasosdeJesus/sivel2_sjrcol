@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sal7711_gen.git
-  revision: 50f2b7b6de4362534f70c9868936db55d50df55e
+  revision: 79b901fdb1cf958c74d94587e9b2838e9e26d4d6
   specs:
     sal7711_gen (1.0.b1)
       rails
@@ -26,7 +26,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sip.git
-  revision: c21e60ec72322eeef0edf99d6a7420994f944fdf
+  revision: 838d79c5dd182210ac0ae1c045c48d6b270367c9
   specs:
     sip (2.0.b1)
       bootstrap-datepicker-rails
@@ -55,7 +55,7 @@ GIT
 
 GIT
   remote: git://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: c2d2d302f967871ce330b663dcddf65c01bcaf84
+  revision: 86ee7aaf16ab5ed871ccd679084da7aa0dd1fe03
   specs:
     sivel2_sjr (2.0.b1)
       rails
@@ -307,7 +307,7 @@ GEM
       json (~> 1.4)
     responders (2.3.0)
       railties (>= 4.2.0, < 5.1)
-    rspec-core (3.5.2)
+    rspec-core (3.5.3)
       rspec-support (~> 3.5.0)
     rspec-expectations (3.5.0)
       diff-lcs (>= 1.2.0, < 2.0)
@@ -351,7 +351,7 @@ GEM
     sprockets (3.7.0)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
-    sprockets-rails (3.1.1)
+    sprockets-rails (3.2.0)
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)

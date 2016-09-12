@@ -1,5 +1,5 @@
 GIT
-  remote: git://github.com/pasosdeJesus/cor1440_gen.git
+  remote: https://github.com/pasosdeJesus/cor1440_gen.git
   revision: 0b188484cbcde615d99baaa9c7bcac3fc0508ba4
   specs:
     cor1440_gen (1.0.b1)
@@ -9,15 +9,15 @@ GIT
       rails
 
 GIT
-  remote: git://github.com/pasosdeJesus/sal7711_gen.git
-  revision: 79b901fdb1cf958c74d94587e9b2838e9e26d4d6
+  remote: https://github.com/pasosdeJesus/sal7711_gen.git
+  revision: b2f457b99cbe2705b80d15bd08ff8d7944724928
   specs:
     sal7711_gen (1.0.b1)
       rails
       sip
 
 GIT
-  remote: git://github.com/pasosdeJesus/sal7711_web.git
+  remote: https://github.com/pasosdeJesus/sal7711_web.git
   revision: ef29929c9fc36974016404368bee2066d1fc4b6f
   specs:
     sal7711_web (1.0.a3)
@@ -25,8 +25,8 @@ GIT
       sal7711_gen
 
 GIT
-  remote: git://github.com/pasosdeJesus/sip.git
-  revision: 838d79c5dd182210ac0ae1c045c48d6b270367c9
+  remote: https://github.com/pasosdeJesus/sip.git
+  revision: c52e5ece2d3b37f5e53407eeaf76317c7d02d42a
   specs:
     sip (2.0.b1)
       bootstrap-datepicker-rails
@@ -45,8 +45,8 @@ GIT
       will_paginate
 
 GIT
-  remote: git://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 2fcb75c1386bc2ad99f099846da7493e3f669c06
+  remote: https://github.com/pasosdeJesus/sivel2_gen.git
+  revision: aabd23e0019d177b7ac36fdcf08a14699514b29d
   specs:
     sivel2_gen (2.0b1)
       devise
@@ -54,7 +54,7 @@ GIT
       rails
 
 GIT
-  remote: git://github.com/pasosdeJesus/sivel2_sjr.git
+  remote: https://github.com/pasosdeJesus/sivel2_sjr.git
   revision: 3ed733ce6f8e3951789ea21f8f8f944e79af6a7a
   specs:
     sivel2_sjr (2.0.b1)
@@ -62,7 +62,7 @@ GIT
       sivel2_gen
 
 GIT
-  remote: git://github.com/vtamara/cocoon.git
+  remote: https://github.com/vtamara/cocoon.git
   revision: 20f8f3bab2fee21309c57b586f5fab9921ac0894
   specs:
     cocoon (1.2.6)
@@ -127,7 +127,7 @@ GEM
     capybara-webkit (1.11.1)
       capybara (>= 2.3.0, < 2.8.0)
       json
-    chartkick (2.0.2)
+    chartkick (2.1.1)
     chosen-rails (1.5.2)
       coffee-rails (>= 3.2)
       railties (>= 3.0)
@@ -457,4 +457,4 @@ DEPENDENCIES
   will_paginate
 
 BUNDLED WITH
-   1.12.5
+   1.13.0

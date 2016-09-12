@@ -30,7 +30,8 @@ module Sivel2Sjrcol
     config.time_zone = 'Bogota'
     config.i18n.default_locale = :es
     config.active_record.schema_format = :sql
+    config.x.url_colchon = 'colchon-articulos'
 
-    config.formato_fecha = 'yyyy-mm-dd'
+    config.x.formato_fecha = 'yyyy-mm-dd'
   end
 end

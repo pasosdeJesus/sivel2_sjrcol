@@ -426,7 +426,7 @@ CREATE VIEW cben1 AS
    FROM sivel2_gen_caso caso,
     sivel2_sjr_casosjr casosjr,
     sivel2_gen_victima victima
-  WHERE ((caso.id = victima.id_caso) AND (caso.id = casosjr.id_caso) AND (caso.id = victima.id_caso) AND (casosjr.oficina_id = 1));
+  WHERE ((caso.id = victima.id_caso) AND (caso.id = casosjr.id_caso) AND (caso.id = victima.id_caso));
 
 
 --
@@ -705,7 +705,7 @@ CREATE VIEW cmunex AS
     sip_ubicacion ubicacion,
     sivel2_gen_victima victima,
     sivel2_sjr_casosjr casosjr
-  WHERE ((casosjr.id_caso = desplazamiento.id_caso) AND (desplazamiento.id_expulsion = ubicacion.id) AND (desplazamiento.id_caso = victima.id_caso) AND (desplazamiento.fechaexpulsion >= '2010-01-01'::date) AND (casosjr.oficina_id = 1));
+  WHERE ((casosjr.id_caso = desplazamiento.id_caso) AND (desplazamiento.id_expulsion = ubicacion.id) AND (desplazamiento.id_caso = victima.id_caso));
 
 
 --
@@ -735,7 +735,7 @@ CREATE VIEW cmunrec AS
     sip_ubicacion ubicacion,
     sivel2_gen_victima victima,
     sivel2_sjr_casosjr casosjr
-  WHERE ((casosjr.id_caso = desplazamiento.id_caso) AND (desplazamiento.id_expulsion = ubicacion.id) AND (desplazamiento.id_caso = victima.id_caso) AND (desplazamiento.fechaexpulsion >= '2010-01-01'::date) AND (casosjr.oficina_id = 1));
+  WHERE ((casosjr.id_caso = desplazamiento.id_caso) AND (desplazamiento.id_expulsion = ubicacion.id) AND (desplazamiento.id_caso = victima.id_caso));
 
 
 --
@@ -1237,18 +1237,6 @@ CREATE SEQUENCE respuesta_seq
 
 
 --
--- Name: sivel2_sjr_derecho_respuesta; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE sivel2_sjr_derecho_respuesta (
-    id_derecho integer DEFAULT 9 NOT NULL,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone,
-    id_respuesta integer NOT NULL
-);
-
-
---
 -- Name: sivel2_sjr_respuesta; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1298,12 +1286,26 @@ CREATE VIEW cres1 AS
  SELECT caso.id AS id_caso,
     respuesta.fechaatencion,
     casosjr.oficina_id,
-    derecho_respuesta.id_derecho
+        CASE
+            WHEN ((respuesta.remision IS NOT NULL) AND (btrim((respuesta.remision)::text) <> ''::text)) THEN 'SI'::text
+            ELSE 'NO'::text
+        END AS remitido
    FROM sivel2_gen_caso caso,
     sivel2_sjr_casosjr casosjr,
-    sivel2_sjr_respuesta respuesta,
-    sivel2_sjr_derecho_respuesta derecho_respuesta
-  WHERE ((caso.id = casosjr.id_caso) AND (caso.id = respuesta.id_caso) AND (respuesta.id = derecho_respuesta.id_respuesta));
+    sivel2_sjr_respuesta respuesta
+  WHERE ((caso.id = casosjr.id_caso) AND (caso.id = respuesta.id_caso));
+
+
+--
+-- Name: sivel2_sjr_derecho_respuesta; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE sivel2_sjr_derecho_respuesta (
+    id_derecho integer DEFAULT 9 NOT NULL,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    id_respuesta integer NOT NULL
+);
 
 
 --
@@ -1317,25 +1319,25 @@ CREATE VIEW cvp1 AS
    FROM sivel2_sjr_casosjr casosjr,
     sivel2_sjr_respuesta respuesta,
     sivel2_sjr_derecho_respuesta derecho_respuesta
-  WHERE ((respuesta.id_caso = casosjr.id_caso) AND (derecho_respuesta.id_respuesta = respuesta.id) AND (respuesta.fechaatencion >= '2009-01-01'::date) AND (casosjr.oficina_id = 1));
+  WHERE ((respuesta.id_caso = casosjr.id_caso) AND (derecho_respuesta.id_respuesta = respuesta.id));
 
 
 --
--- Name: sivel2_sjr_progestado_derecho; Type: TABLE; Schema: public; Owner: -
+-- Name: sivel2_sjr_ayudaestado_derecho; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE sivel2_sjr_progestado_derecho (
-    progestado_id integer,
+CREATE TABLE sivel2_sjr_ayudaestado_derecho (
+    ayudaestado_id integer,
     derecho_id integer
 );
 
 
 --
--- Name: sivel2_sjr_progestado_respuesta; Type: TABLE; Schema: public; Owner: -
+-- Name: sivel2_sjr_ayudaestado_respuesta; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE sivel2_sjr_progestado_respuesta (
-    id_progestado integer DEFAULT 0 NOT NULL,
+CREATE TABLE sivel2_sjr_ayudaestado_respuesta (
+    id_ayudaestado integer DEFAULT 0 NOT NULL,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     id_respuesta integer NOT NULL
@@ -1349,10 +1351,10 @@ CREATE TABLE sivel2_sjr_progestado_respuesta (
 CREATE VIEW cvp2 AS
  SELECT ar.id_respuesta,
     ad.derecho_id AS id_derecho,
-    ar.id_progestado
-   FROM sivel2_sjr_progestado_respuesta ar,
-    sivel2_sjr_progestado_derecho ad
-  WHERE (ar.id_progestado = ad.progestado_id);
+    ar.id_ayudaestado
+   FROM sivel2_sjr_ayudaestado_respuesta ar,
+    sivel2_sjr_ayudaestado_derecho ad
+  WHERE (ar.id_ayudaestado = ad.ayudaestado_id);
 
 
 --
@@ -2820,6 +2822,30 @@ CREATE TABLE sivel2_gen_iglesia (
 
 
 --
+-- Name: sivel2_gen_iniciador; Type: VIEW; Schema: public; Owner: -
+--
+
+CREATE VIEW sivel2_gen_iniciador AS
+ SELECT s3.id_caso,
+    s3.fechainicio,
+    s3.id_usuario,
+    usuario.nusuario
+   FROM usuario,
+    ( SELECT s2.id_caso,
+            s2.fechainicio,
+            min(s2.id_usuario) AS id_usuario
+           FROM sivel2_gen_caso_usuario s2,
+            ( SELECT f1.id_caso,
+                    min(f1.fechainicio) AS m
+                   FROM sivel2_gen_caso_usuario f1
+                  GROUP BY f1.id_caso) c
+          WHERE ((s2.id_caso = c.id_caso) AND (s2.fechainicio = c.m))
+          GROUP BY s2.id_caso, s2.fechainicio
+          ORDER BY s2.id_caso, s2.fechainicio) s3
+  WHERE (usuario.id = s3.id_usuario);
+
+
+--
 -- Name: sivel2_gen_intervalo_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -3338,28 +3364,6 @@ CREATE TABLE sivel2_sjr_ayudaestado (
 
 
 --
--- Name: sivel2_sjr_ayudaestado_derecho; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE sivel2_sjr_ayudaestado_derecho (
-    ayudaestado_id integer,
-    derecho_id integer
-);
-
-
---
--- Name: sivel2_sjr_ayudaestado_respuesta; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE sivel2_sjr_ayudaestado_respuesta (
-    id_ayudaestado integer DEFAULT 0 NOT NULL,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone,
-    id_respuesta integer NOT NULL
-);
-
-
---
 -- Name: sivel2_sjr_ayudasjr_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -3827,6 +3831,28 @@ CREATE TABLE sivel2_sjr_progestado (
     updated_at timestamp without time zone,
     observaciones character varying(5000),
     CONSTRAINT progestado_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
+);
+
+
+--
+-- Name: sivel2_sjr_progestado_derecho; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE sivel2_sjr_progestado_derecho (
+    progestado_id integer,
+    derecho_id integer
+);
+
+
+--
+-- Name: sivel2_sjr_progestado_respuesta; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE sivel2_sjr_progestado_respuesta (
+    id_progestado integer DEFAULT 0 NOT NULL,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    id_respuesta integer NOT NULL
 );
 
 
@@ -7101,6 +7127,6 @@ ALTER TABLE ONLY sivel2_sjr_victimasjr
 
 SET search_path TO "$user", public;
 
-INSERT INTO schema_migrations (version) VALUES ('20131128151014'), ('20131204135932'), ('20131204140000'), ('20131204143718'), ('20131204183530'), ('20131206081531'), ('20131210221541'), ('20131220103409'), ('20131223175141'), ('20140117212555'), ('20140129151136'), ('20140207102709'), ('20140207102739'), ('20140211162355'), ('20140211164659'), ('20140211172443'), ('20140313012209'), ('20140514142421'), ('20140518120059'), ('20140527110223'), ('20140528043115'), ('20140613044320'), ('20140704035033'), ('20140804194616'), ('20140804200235'), ('20140804202100'), ('20140804202101'), ('20140804202958'), ('20140804210000'), ('20140815111351'), ('20140815111352'), ('20140815121224'), ('20140815123542'), ('20140815124157'), ('20140815124606'), ('20140827142659'), ('20140901105741'), ('20140901106000'), ('20140902101425'), ('20140904033941'), ('20140904211823'), ('20140904213327'), ('20140909141336'), ('20140909165233'), ('20140912141913'), ('20140918115412'), ('20140922102737'), ('20140922110956'), ('20140923143242'), ('20141002140242'), ('20141008105803'), ('20141008112530'), ('20141009002211'), ('20141009131427'), ('20141111102451'), ('20141111120430'), ('20141111120431'), ('20141111120432'), ('20141111203313'), ('20141112111129'), ('20141126085907'), ('20141222174237'), ('20141222174247'), ('20141222174257'), ('20141222174267'), ('20141225174739'), ('20150213114933'), ('20150217185859'), ('20150224083945'), ('20150224085334'), ('20150225140336'), ('20150225141729'), ('20150313153722'), ('20150314122808'), ('20150317084149'), ('20150317084737'), ('20150317090631'), ('20150413000000'), ('20150413160156'), ('20150413160157'), ('20150413160158'), ('20150413160159'), ('20150416074423'), ('20150416090140'), ('20150416095646'), ('20150416101228'), ('20150417071153'), ('20150417180000'), ('20150417180314'), ('20150419000000'), ('20150420104520'), ('20150420110000'), ('20150420125522'), ('20150420153835'), ('20150420200255'), ('20150503120915'), ('20150510125926'), ('20150510130031'), ('20150513112126'), ('20150513130058'), ('20150513130510'), ('20150513160835'), ('20150520115257'), ('20150521092657'), ('20150521181918'), ('20150521191227'), ('20150528100944'), ('20150602094513'), ('20150602095241'), ('20150602104342'), ('20150603181900'), ('20150604101858'), ('20150604102321'), ('20150604155923'), ('20150609094809'), ('20150609094820'), ('20150612203808'), ('20150615024318'), ('20150615030659'), ('20150616095023'), ('20150616100351'), ('20150616100551'), ('20150624200701'), ('20150626211501'), ('20150628104015'), ('20150702224217'), ('20150707164448'), ('20150709203137'), ('20150710012947'), ('20150710114451'), ('20150716085420'), ('20150716171420'), ('20150716192356'), ('20150717101243'), ('20150717161539'), ('20150718213611'), ('20150720115701'), ('20150720120236'), ('20150722113654'), ('20150722231825'), ('20150722233211'), ('20150723110322'), ('20150724003736'), ('20150724024110'), ('20150803082520'), ('20150809032138'), ('20150819122835'), ('20150826000000'), ('20150929112313'), ('20151006105402'), ('20151020203420'), ('20151020203421'), ('20151022103115'), ('20151030094611'), ('20151030154449'), ('20151030154458'), ('20151030181131'), ('20151124110943'), ('20151127102425'), ('20151130101417'), ('20160308213334'), ('20160316093659'), ('20160316094627'), ('20160316100620'), ('20160316100621'), ('20160316100622'), ('20160316100623'), ('20160316100624'), ('20160316100625'), ('20160316100626'), ('20160518025044'), ('20160519195544'), ('20160627113500'), ('20160627130141'), ('20160628110301'), ('20160719195853'), ('20160719214520'), ('20160724160049'), ('20160724164110'), ('20160725123242'), ('20160725125929'), ('20160725131347'), ('20160802134021'), ('20160805103310');
+INSERT INTO schema_migrations (version) VALUES ('20131128151014'), ('20131204135932'), ('20131204140000'), ('20131204143718'), ('20131204183530'), ('20131206081531'), ('20131210221541'), ('20131220103409'), ('20131223175141'), ('20140117212555'), ('20140129151136'), ('20140207102709'), ('20140207102739'), ('20140211162355'), ('20140211164659'), ('20140211172443'), ('20140313012209'), ('20140514142421'), ('20140518120059'), ('20140527110223'), ('20140528043115'), ('20140613044320'), ('20140704035033'), ('20140804194616'), ('20140804200235'), ('20140804202100'), ('20140804202101'), ('20140804202958'), ('20140804210000'), ('20140815111351'), ('20140815111352'), ('20140815121224'), ('20140815123542'), ('20140815124157'), ('20140815124606'), ('20140827142659'), ('20140901105741'), ('20140901106000'), ('20140902101425'), ('20140904033941'), ('20140904211823'), ('20140904213327'), ('20140909141336'), ('20140909165233'), ('20140912141913'), ('20140918115412'), ('20140922102737'), ('20140922110956'), ('20140923143242'), ('20141002140242'), ('20141008105803'), ('20141008112530'), ('20141009002211'), ('20141009131427'), ('20141111102451'), ('20141111120430'), ('20141111120431'), ('20141111120432'), ('20141111203313'), ('20141112111129'), ('20141126085907'), ('20141222174237'), ('20141222174247'), ('20141222174257'), ('20141222174267'), ('20141225174739'), ('20150213114933'), ('20150217185859'), ('20150224083945'), ('20150224085334'), ('20150225140336'), ('20150225141729'), ('20150313153722'), ('20150314122808'), ('20150317084149'), ('20150317084737'), ('20150317090631'), ('20150413000000'), ('20150413160156'), ('20150413160157'), ('20150413160158'), ('20150413160159'), ('20150416074423'), ('20150416090140'), ('20150416095646'), ('20150416101228'), ('20150417071153'), ('20150417180000'), ('20150417180314'), ('20150419000000'), ('20150420104520'), ('20150420110000'), ('20150420125522'), ('20150420153835'), ('20150420200255'), ('20150503120915'), ('20150510125926'), ('20150510130031'), ('20150513112126'), ('20150513130058'), ('20150513130510'), ('20150513160835'), ('20150520115257'), ('20150521092657'), ('20150521181918'), ('20150521191227'), ('20150528100944'), ('20150602094513'), ('20150602095241'), ('20150602104342'), ('20150603181900'), ('20150604101858'), ('20150604102321'), ('20150604155923'), ('20150609094809'), ('20150609094820'), ('20150612203808'), ('20150615024318'), ('20150615030659'), ('20150616095023'), ('20150616100351'), ('20150616100551'), ('20150624200701'), ('20150626211501'), ('20150628104015'), ('20150702224217'), ('20150707164448'), ('20150709203137'), ('20150710012947'), ('20150710114451'), ('20150716085420'), ('20150716171420'), ('20150716192356'), ('20150717101243'), ('20150717161539'), ('20150718213611'), ('20150720115701'), ('20150720120236'), ('20150722113654'), ('20150722231825'), ('20150722233211'), ('20150723110322'), ('20150724003736'), ('20150724024110'), ('20150803082520'), ('20150809032138'), ('20150819122835'), ('20150826000000'), ('20150929112313'), ('20151006105402'), ('20151020203420'), ('20151020203421'), ('20151022103115'), ('20151030094611'), ('20151030154449'), ('20151030154458'), ('20151030181131'), ('20151124110943'), ('20151127102425'), ('20151130101417'), ('20160308213334'), ('20160316093659'), ('20160316094627'), ('20160316100620'), ('20160316100621'), ('20160316100622'), ('20160316100623'), ('20160316100624'), ('20160316100625'), ('20160316100626'), ('20160518025044'), ('20160519195544'), ('20160627113500'), ('20160627130141'), ('20160628110301'), ('20160719195853'), ('20160719214520'), ('20160724160049'), ('20160724164110'), ('20160725123242'), ('20160725125929'), ('20160725131347'), ('20160802134021'), ('20160805103310'), ('20160921112808');
 
 

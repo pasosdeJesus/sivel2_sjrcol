@@ -3,7 +3,11 @@
   include_blank: false,
   label: "Filiación Política",
   label_method: :nombre, 
-  value_method: :id 
+  value_method: :id,
+  input_html: {
+    "data-toggle" => 'tooltip',
+    "title" => 'Partido o filiación política en el momento del desplazamiento emblemático'
+  }
 %>
 
 <%= victima.association :organizacion,
@@ -11,7 +15,11 @@
   include_blank: false,
   label: "Organización",
   label_method: :nombre, 
-  value_method: :id 
+  value_method: :id ,
+  input_html: {
+    "data-toggle" => 'tooltip',
+    "title" => 'Organización a la que pertenecía en el momento del desplazamiento emblemático'
+  }
 %>
 
 <%= victima.association :vinculoestado,
@@ -19,5 +27,10 @@
   include_blank: false,
   label: "Vínculo con el Estado",
   label_method: :nombre, 
-  value_method: :id
+  value_method: :id,
+  input_html: {
+    "data-toggle" => 'tooltip',
+    "title" => 'Registre si la persona era funcionaria pública en el momento del desplazamiento'
+  }
+
 %>

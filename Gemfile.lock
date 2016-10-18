@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: 196d8871cd5f385ee71c302b0ac4c277829dd77f
+  revision: 6412ca362186637a7f1cfcb6ba0168148d9422d1
   specs:
     sal7711_gen (1.0.b1)
       rails
@@ -18,7 +18,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: 266a73dd72f70b45ad19cfaf08075f30d42c2e34
+  revision: 11a04af250057f1374cbcd663b1b14be61a418ff
   specs:
     sal7711_web (1.0.a3)
       rails
@@ -26,7 +26,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: cfe05667d523cdf548f2f0d269c45c08d69010a3
+  revision: 1f27ad93c696e957eeb30918523fab01c75bd4eb
   specs:
     sip (2.0.b1)
       bootstrap-datepicker-rails
@@ -46,7 +46,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 8367a7334be609da1e1b28ba6301dbaba50a792b
+  revision: c82e267f0fa1ebd23ac3b211e4bcd22077ff9542
   specs:
     sivel2_gen (2.0b1)
       devise
@@ -55,7 +55,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 43442ad2ed4a0dbfca39700a7843b82700e709cd
+  revision: f2fc93d8bb0d464f8ab029d9e18dfeddbbd423b1
   specs:
     sivel2_sjr (2.0.b1)
       rails
@@ -108,7 +108,7 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
     addressable (2.4.0)
-    arel (7.1.2)
+    arel (7.1.4)
     bcrypt (3.1.11)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
@@ -206,7 +206,7 @@ GEM
     kgio (2.10.0)
     less (2.6.0)
       commonjs (~> 0.2.7)
-    less-rails (2.7.1)
+    less-rails (2.8.0)
       actionpack (>= 4.0)
       less (~> 2.6.0)
       sprockets (> 2, < 4)
@@ -225,9 +225,8 @@ GEM
     multi_json (1.12.1)
     newrelic_rpm (3.16.3.323)
     nio4r (1.2.1)
-    nokogiri (1.6.8)
+    nokogiri (1.6.8.1)
       mini_portile2 (~> 2.1.0)
-      pkg-config (~> 1.1.7)
     odf-report (0.5.1)
       nokogiri (>= 1.5.0)
       rubyzip (~> 1.1.0)
@@ -240,7 +239,6 @@ GEM
       mimemagic (~> 0.3.0)
     pdf-core (0.6.1)
     pg (0.19.0)
-    pkg-config (1.1.7)
     prawn (2.1.0)
       pdf-core (~> 0.6.1)
       ttfunk (~> 1.4.0)
@@ -332,7 +330,7 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
-    sdoc (0.4.1)
+    sdoc (0.4.2)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
     simple_form (3.3.1)
@@ -345,7 +343,8 @@ GEM
     simplecov-html (0.10.0)
     slop (3.6.0)
     spork (0.9.2)
-    spring (1.7.2)
+    spring (2.0.0)
+      activesupport (>= 4.2)
     spring-commands-rspec (1.0.4)
       spring (>= 0.9.1)
     sprockets (3.7.0)
@@ -389,7 +388,7 @@ GEM
     websocket-driver (0.6.4)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
-    will_paginate (3.1.3)
+    will_paginate (3.1.5)
     xpath (2.0.0)
       nokogiri (~> 1.3)
 

@@ -26,7 +26,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 1f27ad93c696e957eeb30918523fab01c75bd4eb
+  revision: 966848fbfc2253ed5e8bdebf567bd21ac9a5183f
   specs:
     sip (2.0.b1)
       bootstrap-datepicker-rails
@@ -46,7 +46,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: c82e267f0fa1ebd23ac3b211e4bcd22077ff9542
+  revision: 8306088dba77cf73b4aa9dece25e105dd9c289d3
   specs:
     sivel2_gen (2.0b1)
       devise
@@ -55,7 +55,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: f2fc93d8bb0d464f8ab029d9e18dfeddbbd423b1
+  revision: c8550694f7e65c5b430299127b0c94e6887a7d87
   specs:
     sivel2_sjr (2.0.b1)
       rails
@@ -223,7 +223,7 @@ GEM
     mini_portile2 (2.1.0)
     minitest (5.9.1)
     multi_json (1.12.1)
-    newrelic_rpm (3.16.3.323)
+    newrelic_rpm (3.17.0.325)
     nio4r (1.2.1)
     nokogiri (1.6.8.1)
       mini_portile2 (~> 2.1.0)
@@ -365,9 +365,9 @@ GEM
       execjs (>= 2.2.2, >= 2.2)
       less-rails (>= 2.5.0)
       railties (>= 3.1)
-    twitter_cldr (3.5.0)
+    twitter_cldr (3.6.0)
       camertron-eprun
-      cldr-plurals-runtime-rb (~> 1.0.0)
+      cldr-plurals-runtime-rb (~> 1.0)
       tzinfo
     tzinfo (1.2.2)
       thread_safe (~> 0.1)

@@ -1,3 +1,14 @@
+<div class="row">
+  <div class="col-xs-6">
+    <label>Clasificación:</label>
+    <input type="text" name="clasificacion" readonly>
+  </div>
+  <div class="col-xs-6">
+    <label>Subclasificación:</label>
+    <input type="text" name="subclasificacion" readonly>
+  </div>
+</div>
+
 <%= f.association :tipodesp,
   collection: Sivel2Sjr::Tipodesp.where(fechadeshabilitacion: nil),
   label_method: :nombre,

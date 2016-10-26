@@ -1,0 +1,30 @@
+<%= f.association :ayudasjr, 
+  collection: Sivel2Sjr::Ayudasjr.habilitados,
+  label_method: :nombre, 
+  value_method: :id,
+  input_html: {
+    "data-toggle" => 'tooltip',
+    "title" => 'Seleccione el(los) tipo(s) de ayuda brindada por el SJR'
+  }
+%>
+<%= f.input :detallear,
+    input_html: {
+      "data-toggle" => 'tooltip',
+      "title" => 'Describir la ayuda humanitaria del SJR (campo opcional)'
+    }
+%>
+<%= f.association :aslegal, 
+  collection: Sivel2Sjr::Aslegal.habilitados,
+  label_method: :nombre, 
+  value_method: :id,
+  input_html: {
+    "data-toggle" => 'tooltip',
+    "title" => 'Seleccione el (los) tipo (s) de asesoría judicial brindada por el SJR'
+  }
+%>
+<%= f.input :detalleal, 
+  input_html: {
+    "data-toggle" => 'tooltip',
+    "title" => 'Describir la asistencia judicial del SJR (campo opcional)'
+  }
+%>

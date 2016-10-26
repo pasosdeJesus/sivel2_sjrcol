@@ -67,18 +67,6 @@
         "title" => 'Comentarios adicionales frente a la respuesta del Estado'
       }
     %>
-    <%= f.input :numprorrogas, as: :integer %>
-    <%= f.input :montoprorrogas, as: :integer %>
-    <%= f.input :fechaultima, 
-      input_html: { 
-        "data-behaviour" => "datepicker",
-        value: f.object.fechaultima || '' 
-      },
-      as: :string
-    %>
-    <%= f.input :lugarultima, as: :text %>
-    <%= f.input :turno, as: :text %>
-    <%= f.input :lugar, as: :text %>
   </div>
 </div>
 

@@ -253,10 +253,10 @@
 
     <div class="row filtro-fila">
       <div class="col-sm-offset-0 col-sm-2 col-md-offset-1 col-md-1">
-        <%= Sivel2Gen::Caso.human_attribute_name(:ultimafechaatencion) %>
+        <%= Sivel2Gen::Caso.human_attribute_name(:ultimaatencion_fecha) %>
       </div>
       <div class="col-sm-offset-0 col-sm-4 col-md-offset-0 col-md-3">
-        <%= f.input :ultimafechaatencionini,
+        <%= f.input :ultimaatencion_fechaini,
           maxlength: 10, 
           size: 10,
           label: false,
@@ -267,7 +267,7 @@
         %>
       </div>
       <div class="col-sm-offset-0 col-sm-4 col-md-offset-1 col-md-3">
-        <%= f.input :ultimafechaatencionfin,
+        <%= f.input :ultimaatencion_fechafin,
           maxlength: 10, 
           size: 10,
           label: false,
@@ -278,14 +278,14 @@
         %>
     </div>
       <div class="col-sm-offset-0 col-sm-1 text-center">
-        <%= f.input :inc_ultimafechaatencion,
+        <%= f.input :inc_ultimaatencion_fecha,
           as: :boolean, 
           label: false,
           input_html: { checked: "checked" }
         %>
       </div>
       <div class="col-sm-offset-0 col-sm-1 text-center">
-        <%= f.radio_button(:orden, :ultimafechaatencion) %>
+        <%= f.radio_button(:orden, :ultimaatencion_fecha) %>
       </div>
     </div>
 
@@ -459,23 +459,23 @@
     <div class="row filtro-fila">
       <div class="col-sm-offset-0 col-sm-2 col-md-offset-1 col-md-1">
         Presentación  
-        <%= f.hidden_field :dispresenta %>
       </div>
-      <div class="col-sm-offset-1 col-sm-2">
-        <%= f.radio_button :dispresenta, :tabla, checked: true %>
-        <%= label :dispresenta_tabla, 'Tabla' %>
+      <div class="col-sm-offset-1 col-sm-4">
+        <% oppres = [['Tabla', 'tabla'], 
+          ['Tabla Resolución 1612', 'tabla1612']] 
+          if @plantillas
+            oppres += @plantillas
+          end 
+        %>
+        <%= f.input :dispresenta,
+          collection: oppres,
+          label: false,
+          include_blank: false
+        %>
       </div>
       <div class="col-sm-2">
-        <%= f.radio_button :dispresenta, :tabla1612 %>
-        <%= label :dispresenta_tabla1612, 'Tabla Resolución 1612' %>
-      </div>
-      <div class="col-sm-2">
-        <!--%= f.radio_button :dispresenta, :general %-->
-        <!--%= label :dispresenta_general, 'Rep. General' %-->
       </div>
       <div class="col-sm-1">
-        <!--%= f.radio_button :dispresenta, :xrlat %-->
-        <!--%= label :dispresenta_xrlat, 'Relato XML' %-->
       </div>
       <div class="col-sm-offset-1 col-sm-1">
         <%= f.input :paginar, 

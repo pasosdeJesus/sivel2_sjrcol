@@ -23,6 +23,9 @@ gem "prawn-table"
 # Plantilla ODT
 gem "odf-report"
 
+# Plantilla ODS
+gem "rspreadsheet"
+
 # Postgresql
 gem "pg"
 
@@ -34,8 +37,8 @@ gem "jbuilder"
 
 gem 'sass'
 gem 'sass-rails'
-gem 'compass-rails'
-gem 'compass'
+#gem 'compass-rails'
+#gem 'compass'
 
 # Uglifier comprime recursos Javascript
 gem "uglifier"
@@ -87,12 +90,12 @@ gem 'sip', git: "https://github.com/pasosdeJesus/sip.git"
 #gem 'sip', path: '../sip'
 
 # Motor de SIVeL 2
-gem 'sivel2_gen', git: "https://github.com/pasosdeJesus/sivel2_gen.git"
-#gem 'sivel2_gen', path: '../sivel2_gen'
+#gem 'sivel2_gen', git: "https://github.com/pasosdeJesus/sivel2_gen.git"
+gem 'sivel2_gen', path: '../sivel2_gen'
 
 # Motor de SIVeL 2 - SJR
-gem 'sivel2_sjr', git: "https://github.com/pasosdeJesus/sivel2_sjr.git"
-#gem 'sivel2_sjr', path: '../sivel2_sjr'
+#gem 'sivel2_sjr', git: "https://github.com/pasosdeJesus/sivel2_sjr.git"
+gem 'sivel2_sjr', path: '../sivel2_sjr'
 
 # Motor Cor1440_gen
 gem 'cor1440_gen', git: "https://github.com/pasosdeJesus/cor1440_gen.git"
@@ -106,6 +109,11 @@ gem 'sal7711_gen', git: "https://github.com/pasosdeJesus/sal7711_gen.git"
 gem 'sal7711_web', git: "https://github.com/pasosdeJesus/sal7711_web.git"
 #gem 'sal7711_web', path: '../sal7711_web'
 
+# Motor Heb412_gen
+#gem 'heb412_gen', git: "https://github.com/pasosdeJesus/heb412_gen.git"
+gem 'heb412_gen', path: '../heb412_gen'
+
+
 
 group :doc do
     # Genera documentación en doc/api con bundle exec rake doc:rails
@@ -115,7 +123,7 @@ end
 # Los siguientes son para desarrollo o para pruebas con generadores
 group :development do
   # Depurar
-  #gem "byebug"
+  gem "byebug"
   
   # Consola irb en páginas con excepciones o usando <%= console %> en vistasA
   gem 'web-console'

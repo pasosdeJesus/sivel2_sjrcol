@@ -43,6 +43,7 @@ Rails.application.routes.draw do
   mount Sivel2Gen::Engine => "/", as: 'sivel2_gen'
   mount Cor1440Gen::Engine => "/", as: 'cor1440_gen'
   mount Sal7711Gen::Engine => "/", as: 'sal7711_gen'
+  mount Heb412Gen::Engine => "/", as: 'heb412_gen'
   mount Sip::Engine => "/", as: 'sip'
 
   namespace :admin do

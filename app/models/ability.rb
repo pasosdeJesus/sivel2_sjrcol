@@ -63,12 +63,37 @@ class Ability < Sivel2Sjr::Ability
     Sivel2Gen::Ability::BASICAS_PRIO +
     Sivel2Sjr::Ability::BASICAS_PRIO
 
+  @@acciones_plantillas = {'Listado de casos' => { campos:
+     ['ultimaatencion_mes', 'ultimaatencion_fecha', 
+      'contacto_nombres', 'contacto_apellidos', 'contacto_identificacion', 
+      'contacto_sexo', 'contacto_edad', 'contacto_etnia',
+      'beneficiarios_0_5', 'beneficiarios_6_12',
+      'beneficiarios_13_17', 'beneficiarios_18_26',
+      'beneficiarios_27_59', 'beneficiarios_60_',
+      'beneficiarias_0_5', 'beneficiarias_6_12',
+      'beneficiarias_13_17', 'beneficiarias_18_26',
+      'beneficiarias_27_59', 'beneficiarias_60_',
+      'ultimaatencion_derechosvul', 'ultimaatencion_as_humanitaria',
+      'ultimaatencion_as_juridica', 'ultimaatencion_otros_ser_as', 
+      'ultimaatencion_descripcion_at',
+      'oficina' ],
+      controlador: 'Sivel2Sjr::CasosController#index',
+      unregistro: false # Son muchos registros debe iterarse
+  }
+  }
+
+  def self.acciones_plantillas
+    @@acciones_plantillas
+  end
+
   def initialize(usuario)
     super(usuario)
     can :read, Sal7711Gen::Categoriaprensa      
     if usuario && usuario.rol then
         can :read, Sal7711Gen::Articulo
         case usuario.rol
+        when Ability::ROLADMIN, Ability::ROLDIR
+          can :manage, Heb412Gen::Doc
         when Ability::ROLADMIN, Ability::ROLDIR, Ability::ROLANALI
           can :manage, Sal7711Gen::Articulo
         when Ability::ROLANALIPRENSA, Ability::ROLADMIN, Ability::ROLDIR, Ability::ROLANALI

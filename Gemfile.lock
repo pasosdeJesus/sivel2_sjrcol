@@ -9,6 +9,14 @@ GIT
       rails
 
 GIT
+  remote: https://github.com/pasosdeJesus/heb412_gen.git
+  revision: c9251795667fa76079dedbe288c7e07373120953
+  specs:
+    heb412_gen (1.0.a1)
+      rails
+      sip
+
+GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
   revision: 6412ca362186637a7f1cfcb6ba0168148d9422d1
   specs:
@@ -46,7 +54,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 8306088dba77cf73b4aa9dece25e105dd9c289d3
+  revision: 2769410da6e87e52b4ffce0c9441395c4e0f6d2a
   specs:
     sivel2_gen (2.0b1)
       devise
@@ -55,7 +63,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: c8550694f7e65c5b430299127b0c94e6887a7d87
+  revision: 2546ed9e95d06cd0db484f65d12d8d61d4e57fb4
   specs:
     sivel2_sjr (2.0.b1)
       rails
@@ -108,6 +116,7 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
     addressable (2.4.0)
+    andand (1.3.3)
     arel (7.1.4)
     bcrypt (3.1.11)
     binding_of_caller (0.7.2)
@@ -132,7 +141,6 @@ GEM
       coffee-rails (>= 3.2)
       railties (>= 3.0)
       sass-rails (>= 3.2)
-    chunky_png (1.3.7)
     cldr-plurals-runtime-rb (1.0.1)
     climate_control (0.0.3)
       activesupport (>= 3.0)
@@ -150,22 +158,6 @@ GEM
     coffee-script-source (1.10.0)
     colorize (0.8.1)
     commonjs (0.2.7)
-    compass (1.0.3)
-      chunky_png (~> 1.2)
-      compass-core (~> 1.0.2)
-      compass-import-once (~> 1.0.5)
-      rb-fsevent (>= 0.9.3)
-      rb-inotify (>= 0.9)
-      sass (>= 3.3.13, < 3.5)
-    compass-core (1.0.3)
-      multi_json (~> 1.0)
-      sass (>= 3.3.0, < 3.5)
-    compass-import-once (1.0.5)
-      sass (>= 3.2, < 3.5)
-    compass-rails (3.0.2)
-      compass (~> 1.0.0)
-      sass-rails (< 5.1)
-      sprockets (< 4.0)
     concurrent-ruby (1.0.2)
     debug_inspector (0.0.2)
     devise (4.2.0)
@@ -174,7 +166,7 @@ GEM
       railties (>= 4.1.0, < 5.1)
       responders
       warden (~> 1.2.3)
-    devise-i18n (1.1.0)
+    devise-i18n (1.1.1)
     diff-lcs (1.2.5)
     docile (1.1.5)
     erubis (2.7.0)
@@ -184,8 +176,7 @@ GEM
     factory_girl_rails (4.7.0)
       factory_girl (~> 4.7.0)
       railties (>= 3.0.0)
-    ffi (1.9.14)
-    font-awesome-rails (4.6.3.1)
+    font-awesome-rails (4.7.0.0)
       railties (>= 3.2, < 5.1)
     foreman (0.82.0)
       thor (~> 0.19.1)
@@ -211,6 +202,7 @@ GEM
       less (~> 2.6.0)
       sprockets (> 2, < 4)
       tilt
+    libxml-ruby (2.9.0)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.4)
@@ -298,9 +290,6 @@ GEM
       thor (>= 0.18.1, < 2.0)
     raindrops (0.17.0)
     rake (11.3.0)
-    rb-fsevent (0.9.7)
-    rb-inotify (0.9.7)
-      ffi (>= 0.5.0)
     rdoc (4.2.2)
       json (~> 1.4)
     responders (2.3.0)
@@ -322,6 +311,10 @@ GEM
       rspec-mocks (~> 3.5.0)
       rspec-support (~> 3.5.0)
     rspec-support (3.5.0)
+    rspreadsheet (0.2.15)
+      andand (~> 1.3)
+      libxml-ruby (~> 2.7)
+      rubyzip (~> 1.1)
     rubyzip (1.1.7)
     sass (3.4.22)
     sass-rails (5.0.6)
@@ -371,16 +364,16 @@ GEM
       tzinfo
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
-    tzinfo-data (1.2016.7)
+    tzinfo-data (1.2016.8)
       tzinfo (>= 1.0.0)
-    uglifier (3.0.2)
+    uglifier (3.0.3)
       execjs (>= 0.3.0, < 3)
     unicorn (5.1.0)
       kgio (~> 2.6)
       raindrops (~> 0.7)
     warden (1.2.6)
       rack (>= 1.0)
-    web-console (3.3.1)
+    web-console (3.4.0)
       actionview (>= 5.0)
       activemodel (>= 5.0)
       debug_inspector
@@ -407,14 +400,13 @@ DEPENDENCIES
   codeclimate-test-reporter
   coffee-rails
   colorize
-  compass
-  compass-rails
   cor1440_gen!
   devise
   devise-i18n
   factory_girl_rails
   font-awesome-rails
   foreman
+  heb412_gen!
   jbuilder
   jquery-rails
   jquery-ui-rails
@@ -433,6 +425,7 @@ DEPENDENCIES
   rails-i18n
   rails_12factor
   rspec-rails
+  rspreadsheet
   sal7711_gen!
   sal7711_web!
   sass

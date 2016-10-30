@@ -23,6 +23,9 @@ gem "prawn-table"
 # Plantilla ODT
 gem "odf-report"
 
+# Plantilla ODS
+gem "rspreadsheet"
+
 # Postgresql
 gem "pg"
 
@@ -34,8 +37,8 @@ gem "jbuilder"
 
 gem 'sass'
 gem 'sass-rails'
-gem 'compass-rails'
-gem 'compass'
+#gem 'compass-rails'
+#gem 'compass'
 
 # Uglifier comprime recursos Javascript
 gem "uglifier"
@@ -105,6 +108,11 @@ gem 'sal7711_gen', git: "https://github.com/pasosdeJesus/sal7711_gen.git"
 # Motor Sal7711_web
 gem 'sal7711_web', git: "https://github.com/pasosdeJesus/sal7711_web.git"
 #gem 'sal7711_web', path: '../sal7711_web'
+
+# Motor Heb412_gen
+gem 'heb412_gen', git: "https://github.com/pasosdeJesus/heb412_gen.git"
+#gem 'heb412_gen', path: '../heb412_gen'
+
 
 
 group :doc do

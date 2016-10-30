@@ -18,18 +18,22 @@ module Sivel2Sjr
       # Presentación
       respond_to do |format|
         format.html { 
-            render layout: 'application' 
-        }
-        format.js { 
           if params[:filtro] && params[:filtro]['dispresenta'].to_i > 0 &&
             params[:filtro]['dispresenta'].to_i > 0 &&
             !Heb412Gen::Doc.find(params[:filtro]['dispresenta']).nil?
             pl = Heb412Gen::Doc.find(params[:filtro]['dispresenta'])
-            byebug
-            ::Heb412Gen::DocsController.llena_plantilla_multiple_fd(pl, @conscaso)
+            n = ::Heb412Gen::DocsController.llena_plantilla_multiple_fd(pl, @conscaso)
+            send_file n, x_sendfile: true
+              #type: 'application/vnd.oasis.opendocument.text',
+              #disposition: 'attachment',
+              #filename: 'elnombre.ods'
+
           else
-            render 'sivel2_gen/casos/filtro' 
+            render layout: 'application' 
           end
+        }
+        format.js { 
+          render 'sivel2_gen/casos/filtro' 
         }
       end
     end

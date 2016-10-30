@@ -2685,6 +2685,46 @@ CREATE TABLE sivel2_sjr_derecho (
 
 
 --
+-- Name: sivel2_sjr_motivosjr_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE sivel2_sjr_motivosjr_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: sivel2_sjr_motivosjr; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE sivel2_sjr_motivosjr (
+    id integer DEFAULT nextval('sivel2_sjr_motivosjr_id_seq'::regclass) NOT NULL,
+    nombre character varying(100) NOT NULL,
+    fechacreacion date DEFAULT '2013-06-16'::date NOT NULL,
+    fechadeshabilitacion date,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    observaciones character varying(5000),
+    CONSTRAINT motivosjr_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
+);
+
+
+--
+-- Name: sivel2_sjr_motivosjr_respuesta; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE sivel2_sjr_motivosjr_respuesta (
+    id_motivosjr integer DEFAULT 0 NOT NULL,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    id_respuesta integer NOT NULL
+);
+
+
+--
 -- Name: usuario_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -2741,7 +2781,7 @@ CREATE VIEW sivel2_gen_conscaso1 AS
     contacto.nombres AS contacto_nombres,
     contacto.apellidos AS contacto_apellidos,
     (((COALESCE(tdocumento.sigla, ''::character varying))::text || ' '::text) || (contacto.numerodocumento)::text) AS contacto_identificacion,
-    contacto.sexo AS contacto_genero,
+    contacto.sexo AS contacto_sexo,
     COALESCE(etnia.nombre, ''::character varying) AS contacto_etnia,
         CASE
             WHEN (contacto.anionac IS NULL) THEN NULL::double precision
@@ -2751,6 +2791,7 @@ CREATE VIEW sivel2_gen_conscaso1 AS
             WHEN ((contacto.dianac)::double precision > date_part('day'::text, ultimaatencion.fechaatencion)) THEN ((date_part('year'::text, ultimaatencion.fechaatencion) - (contacto.anionac)::double precision) - (1)::double precision)
             ELSE (date_part('year'::text, ultimaatencion.fechaatencion) - (contacto.anionac)::double precision)
         END AS contacto_edad_ultimaatencion,
+    date_part('month'::text, ultimaatencion.fechaatencion) AS ultimaatencion_mes,
     ultimaatencion.fechaatencion AS ultimaatencion_fecha,
     ( SELECT count(*) AS count
            FROM (sivel2_gen_victima victima
@@ -2803,15 +2844,20 @@ CREATE VIEW sivel2_gen_conscaso1 AS
     array_to_string(ARRAY( SELECT sivel2_sjr_derecho.nombre
            FROM (sivel2_sjr_derecho
              JOIN sivel2_sjr_derecho_respuesta ON ((sivel2_sjr_derecho_respuesta.id_derecho = sivel2_sjr_derecho.id)))
-          WHERE (sivel2_sjr_derecho_respuesta.id_respuesta = ultimaatencion.id)), ', '::text) AS ultimaatencio_derechosvul,
+          WHERE (sivel2_sjr_derecho_respuesta.id_respuesta = ultimaatencion.id)), ', '::text) AS ultimaatencion_derechosvul,
     ((array_to_string(ARRAY( SELECT sivel2_sjr_ayudasjr.nombre
            FROM (sivel2_sjr_ayudasjr
              JOIN sivel2_sjr_ayudasjr_respuesta ON ((sivel2_sjr_ayudasjr_respuesta.id_ayudasjr = sivel2_sjr_ayudasjr.id)))
-          WHERE (sivel2_sjr_ayudasjr_respuesta.id_respuesta = ultimaatencion.id)), ', '::text) || ' '::text) || (ultimaatencion.detallear)::text) AS ultimaatencio_as_humanitaria,
+          WHERE (sivel2_sjr_ayudasjr_respuesta.id_respuesta = ultimaatencion.id)), ', '::text) || ' '::text) || (ultimaatencion.detallear)::text) AS ultimaatencion_as_humanitaria,
     ((array_to_string(ARRAY( SELECT sivel2_sjr_aslegal.nombre
            FROM (sivel2_sjr_aslegal
              JOIN sivel2_sjr_aslegal_respuesta ON ((sivel2_sjr_aslegal_respuesta.id_aslegal = sivel2_sjr_aslegal.id)))
-          WHERE (sivel2_sjr_aslegal_respuesta.id_respuesta = ultimaatencion.id)), ', '::text) || ' '::text) || (ultimaatencion.detalleal)::text) AS ultimaatencio_as_juridica,
+          WHERE (sivel2_sjr_aslegal_respuesta.id_respuesta = ultimaatencion.id)), ', '::text) || ' '::text) || (ultimaatencion.detalleal)::text) AS ultimaatencion_as_juridica,
+    ((array_to_string(ARRAY( SELECT sivel2_sjr_motivosjr.nombre
+           FROM (sivel2_sjr_motivosjr
+             JOIN sivel2_sjr_motivosjr_respuesta ON ((sivel2_sjr_motivosjr_respuesta.id_motivosjr = sivel2_sjr_motivosjr.id)))
+          WHERE (sivel2_sjr_motivosjr_respuesta.id_respuesta = ultimaatencion.id)), ', '::text) || ' '::text) || (ultimaatencion.detallemotivo)::text) AS ultimaatencion_otros_ser_as,
+    ultimaatencion.descatencion AS ultimaatencion_descripcion_at,
     casosjr.fecharec,
     oficina.nombre AS oficina,
     usuario.nusuario,
@@ -2872,12 +2918,34 @@ CREATE MATERIALIZED VIEW sivel2_gen_conscaso AS
     sivel2_gen_conscaso1.contacto,
     sivel2_gen_conscaso1.contacto_nombres,
     sivel2_gen_conscaso1.contacto_apellidos,
+    sivel2_gen_conscaso1.contacto_identificacion,
+    sivel2_gen_conscaso1.contacto_sexo,
+    sivel2_gen_conscaso1.contacto_edad_ultimaatencion,
+    sivel2_gen_conscaso1.contacto_etnia,
+    sivel2_gen_conscaso1.beneficiarios_0_5,
+    sivel2_gen_conscaso1.beneficiarios_6_12,
+    sivel2_gen_conscaso1.beneficiarios_13_17,
+    sivel2_gen_conscaso1.beneficiarios_18_26,
+    sivel2_gen_conscaso1.beneficiarios_27_59,
+    sivel2_gen_conscaso1.beneficiarios_60_,
+    sivel2_gen_conscaso1.beneficiarias_0_5,
+    sivel2_gen_conscaso1.beneficiarias_6_12,
+    sivel2_gen_conscaso1.beneficiarias_13_17,
+    sivel2_gen_conscaso1.beneficiarias_18_26,
+    sivel2_gen_conscaso1.beneficiarias_27_59,
+    sivel2_gen_conscaso1.beneficiarias_60_,
+    sivel2_gen_conscaso1.ultimaatencion_derechosvul,
+    sivel2_gen_conscaso1.ultimaatencion_as_humanitaria,
+    sivel2_gen_conscaso1.ultimaatencion_as_juridica,
+    sivel2_gen_conscaso1.ultimaatencion_otros_ser_as,
+    sivel2_gen_conscaso1.ultimaatencion_descripcion_at,
     sivel2_gen_conscaso1.fecharec,
     sivel2_gen_conscaso1.oficina,
     sivel2_gen_conscaso1.nusuario,
     sivel2_gen_conscaso1.fecha,
     sivel2_gen_conscaso1.expulsion,
     sivel2_gen_conscaso1.llegada,
+    sivel2_gen_conscaso1.ultimaatencion_mes,
     sivel2_gen_conscaso1.ultimaatencion_fecha,
     sivel2_gen_conscaso1.tipificacion,
     sivel2_gen_conscaso1.victimas,
@@ -3895,52 +3963,12 @@ CREATE TABLE sivel2_sjr_motivoconsulta (
 
 
 --
--- Name: sivel2_sjr_motivosjr_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE sivel2_sjr_motivosjr_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: sivel2_sjr_motivosjr; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE sivel2_sjr_motivosjr (
-    id integer DEFAULT nextval('sivel2_sjr_motivosjr_id_seq'::regclass) NOT NULL,
-    nombre character varying(100) NOT NULL,
-    fechacreacion date DEFAULT '2013-06-16'::date NOT NULL,
-    fechadeshabilitacion date,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone,
-    observaciones character varying(5000),
-    CONSTRAINT motivosjr_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
-);
-
-
---
 -- Name: sivel2_sjr_motivosjr_derecho; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE sivel2_sjr_motivosjr_derecho (
     motivosjr_id integer,
     derecho_id integer
-);
-
-
---
--- Name: sivel2_sjr_motivosjr_respuesta; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE sivel2_sjr_motivosjr_respuesta (
-    id_motivosjr integer DEFAULT 0 NOT NULL,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone,
-    id_respuesta integer NOT NULL
 );
 
 

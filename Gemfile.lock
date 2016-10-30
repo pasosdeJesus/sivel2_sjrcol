@@ -9,6 +9,14 @@ GIT
       rails
 
 GIT
+  remote: https://github.com/pasosdeJesus/heb412_gen.git
+  revision: c9251795667fa76079dedbe288c7e07373120953
+  specs:
+    heb412_gen (1.0.a1)
+      rails
+      sip
+
+GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
   revision: 6412ca362186637a7f1cfcb6ba0168148d9422d1
   specs:
@@ -45,32 +53,27 @@ GIT
       will_paginate
 
 GIT
-  remote: https://github.com/vtamara/cocoon.git
-  revision: 20f8f3bab2fee21309c57b586f5fab9921ac0894
-  specs:
-    cocoon (1.2.6)
-
-PATH
-  remote: ../heb412_gen
-  specs:
-    heb412_gen (1.0.a1)
-      rails
-      sip
-
-PATH
-  remote: ../sivel2_gen
+  remote: https://github.com/pasosdeJesus/sivel2_gen.git
+  revision: 2769410da6e87e52b4ffce0c9441395c4e0f6d2a
   specs:
     sivel2_gen (2.0b1)
       devise
       jquery-rails
       rails
 
-PATH
-  remote: ../sivel2_sjr
+GIT
+  remote: https://github.com/pasosdeJesus/sivel2_sjr.git
+  revision: 2546ed9e95d06cd0db484f65d12d8d61d4e57fb4
   specs:
     sivel2_sjr (2.0.b1)
       rails
       sivel2_gen
+
+GIT
+  remote: https://github.com/vtamara/cocoon.git
+  revision: 20f8f3bab2fee21309c57b586f5fab9921ac0894
+  specs:
+    cocoon (1.2.6)
 
 GEM
   remote: https://rubygems.org/
@@ -121,7 +124,6 @@ GEM
     bootstrap-datepicker-rails (1.6.4.1)
       railties (>= 3.0)
     builder (3.2.2)
-    byebug (9.0.6)
     camertron-eprun (1.1.1)
     cancancan (1.15.0)
     capybara (2.7.1)
@@ -164,7 +166,7 @@ GEM
       railties (>= 4.1.0, < 5.1)
       responders
       warden (~> 1.2.3)
-    devise-i18n (1.1.0)
+    devise-i18n (1.1.1)
     diff-lcs (1.2.5)
     docile (1.1.5)
     erubis (2.7.0)
@@ -174,7 +176,7 @@ GEM
     factory_girl_rails (4.7.0)
       factory_girl (~> 4.7.0)
       railties (>= 3.0.0)
-    font-awesome-rails (4.6.3.1)
+    font-awesome-rails (4.7.0.0)
       railties (>= 3.2, < 5.1)
     foreman (0.82.0)
       thor (~> 0.19.1)
@@ -362,16 +364,16 @@ GEM
       tzinfo
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
-    tzinfo-data (1.2016.7)
+    tzinfo-data (1.2016.8)
       tzinfo (>= 1.0.0)
-    uglifier (3.0.2)
+    uglifier (3.0.3)
       execjs (>= 0.3.0, < 3)
     unicorn (5.1.0)
       kgio (~> 2.6)
       raindrops (~> 0.7)
     warden (1.2.6)
       rack (>= 1.0)
-    web-console (3.3.1)
+    web-console (3.4.0)
       actionview (>= 5.0)
       activemodel (>= 5.0)
       debug_inspector
@@ -389,7 +391,6 @@ PLATFORMS
 DEPENDENCIES
   bcrypt
   bootstrap-datepicker-rails
-  byebug
   cancancan
   capybara
   capybara-webkit

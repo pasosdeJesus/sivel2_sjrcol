@@ -1,0 +1,63 @@
+<%- model_class = Sivel2Gen::Caso -%>
+<div class="page-header">
+  <h1>
+    <%=t '.title', 
+      default: model_class.model_name.human.pluralize.titleize 
+    %>
+  </h1>
+</div>
+
+<%= simple_form_for :filtro, 
+  { #remote: true, 
+    url: sivel2_sjr.envia_casos_filtro_path, 
+    method: "get" } do |f| 
+%>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-offset-0 col-md-1"> 
+        <% if @conscaso.size > 0 %>
+          <%= link_to t('.new', 
+            default: t("helpers.links.new")),
+            sivel2_sjr.new_caso_path,
+            class: 'btn btn-primary' 
+          %>
+        <% end %>
+      </div>
+      <div class="col-md-offset-3 col-md-1"> 
+        Casos: <span id="numconscaso"><%= @numconscaso %></span>
+      </div>
+      <div class="col-md-offset-2 col-md-2"> 
+        <%= f.input :q,
+          label: false,
+          placeholder: 'Palabra completa por buscar'
+        %>
+      </div>
+      <div class="col-md-offset-0 col-md-1"> 
+        <%= f.button :submit, 
+          'Filtrar', 
+          'data-enviarautomatico' => "true",
+          class: 'btn btn-default' %>
+      </div>
+      <div class="col-md-offset-0 col-md-1">
+        <a class="btn btn-default btn-xs" role="button" data-toggle="collapse" 
+          href="#filtro_avanzado" aria-expanded="false" 
+          aria-controls="filtro_avanzado" id="boton_filtro_avanzado"> 
+          Búsqueda Avanzada
+        </a>
+        <button class="btn btn-default btn-xs" type="reset">
+          Limpiar Filtro
+        </button>
+
+      </div>
+    </div>
+  </div>
+  <div class="collapse" id="filtro_avanzado">
+    <%= render partial: 'sivel2_sjr/casos/filtro_avanzado', locals: {f: f} %>
+  </div>
+<% end %>
+
+<div id="casos">
+  <%= render 'sivel2_gen/casos/index_tabla' %>
+</div>
+
+<%= render 'index_controles_fin' %>

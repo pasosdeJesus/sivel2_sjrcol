@@ -2,23 +2,23 @@
 
 class Ability < Sivel2Sjr::Ability
 
-    ROLADMIN  = 1
-    ROLINV    = 2
-    ROLDIR    = 3
-    ROLCOOR   = 4
-    ROLANALI  = 5
-    ROLSIST   = 6
-    ROLANALIPRENSA  = 7
+  ROLADMIN  = 1
+  ROLINV    = 2
+  ROLDIR    = 3
+  ROLCOOR   = 4
+  ROLANALI  = 5
+  ROLSIST   = 6
+  ROLANALIPRENSA  = 7
 
-    ROLES = [
-      ["Administrador", ROLADMIN], 
-      ["Invitado Nacional", ROLINV], 
-      ["Director Nacional", ROLDIR], 
-      ["Coordinador oficina", ROLCOOR], 
-      ["Analista", ROLANALI], 
-      ["Sistematizador", ROLSIST],
-      ["Analista de Prensa", ROLANALIPRENSA]
-    ]
+  ROLES = [
+    ["Administrador", ROLADMIN], 
+    ["Invitado Nacional", ROLINV], 
+    ["Director Nacional", ROLDIR], 
+    ["Coordinador oficina", ROLCOOR], 
+    ["Analista", ROLANALI], 
+    ["Sistematizador", ROLSIST],
+    ["Analista de Prensa", ROLANALIPRENSA]
+  ]
 
   BASICAS_PROPIAS =  [
     ['Sivel2Sjr', 'acreditacion'], 

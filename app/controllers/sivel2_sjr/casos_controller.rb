@@ -8,35 +8,35 @@ module Sivel2Sjr
 
     include Sivel2Sjr::Concerns::Controllers::CasosController
 
-    def inicializa_index
-      @plantillas = Heb412Gen::Doc.where(
-        vista: 'Listado de casos').select('nombremenu, id').map { 
-          |c| [c.nombremenu, c.id] } 
-    end
+#    def inicializa_index
+#      @plantillas = Heb412Gen::Doc.where(
+#        vista: 'Listado de casos').select('nombremenu, id').map { 
+#          |c| [c.nombremenu, c.id] } 
+#    end
 
-    def presenta_index
+#    def presenta_index
       # Presentación
-      respond_to do |format|
-        format.html { 
-          if params[:filtro] && params[:filtro]['dispresenta'].to_i > 0 &&
-            params[:filtro]['dispresenta'].to_i > 0 &&
-            !Heb412Gen::Doc.find(params[:filtro]['dispresenta']).nil?
-            pl = Heb412Gen::Doc.find(params[:filtro]['dispresenta'])
-            n = ::Heb412Gen::DocsController.llena_plantilla_multiple_fd(pl, @conscaso)
-            send_file n, x_sendfile: true
-              #type: 'application/vnd.oasis.opendocument.text',
-              #disposition: 'attachment',
-              #filename: 'elnombre.ods'
-
-          else
-            render layout: 'application' 
-          end
-        }
-        format.js { 
-          render 'sivel2_gen/casos/filtro' 
-        }
-      end
-    end
+#      respond_to do |format|
+#        format.html { 
+#          if params[:filtro] && params[:filtro]['dispresenta'].to_i > 0 &&
+#            params[:filtro]['dispresenta'].to_i > 0 &&
+#            !Heb412Gen::Doc.find(params[:filtro]['dispresenta']).nil?
+#            pl = Heb412Gen::Doc.find(params[:filtro]['dispresenta'])
+#            n = ::Heb412Gen::DocsController.llena_plantilla_multiple_fd(pl, @conscaso)
+#            send_file n, x_sendfile: true
+#              #type: 'application/vnd.oasis.opendocument.text',
+#              #disposition: 'attachment',
+#              #filename: 'elnombre.ods'
+#
+#          else
+#            render layout: 'application' 
+#          end
+#        }
+#        format.js { 
+#          render 'sivel2_gen/casos/filtro' 
+#        }
+#      end
+#    end
 
     # Campos en filtro
     def campos_filtro1

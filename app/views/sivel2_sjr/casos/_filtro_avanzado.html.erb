@@ -474,11 +474,11 @@
         %>
       </div>
       <div class="col-sm-2">
-        <%= f.button :submit, 
-          name: 'plantilla', 
-          value: 'Generar', 
-          class: 'btn-primary'
-        %>
+        <%= link_to t('Generar'), 
+          '#',
+          class: 'btn', 
+          target: '_blank', 
+          onclick: 'sivel2_gen_completa_generarp(this)' %>
       </div>
       <div class="col-sm-1">
       </div>

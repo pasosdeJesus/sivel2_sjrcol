@@ -31,7 +31,7 @@ module Sivel2Sjrcol
     config.i18n.default_locale = :es
     config.active_record.schema_format = :sql
     config.x.url_colchon = 'colchon-articulos'
-
     config.x.formato_fecha = 'yyyy-mm-dd'
+    config.x.heb412_ruta = Rails.root.join('public', 'heb412') 
   end
 end

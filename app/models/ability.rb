@@ -166,7 +166,6 @@ class Ability < Sivel2Sjr::Ability
         can :manage, Usuario
         can :manage, Heb412Gen::Doc
         can :manage, :tablasbasicas
-        byebug
         tablasbasicas.each do |t|
           c = Ability.tb_clase(t)
           can :manage, c

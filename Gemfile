@@ -110,8 +110,8 @@ gem 'sal7711_web', git: "https://github.com/pasosdeJesus/sal7711_web.git"
 #gem 'sal7711_web', path: '../sal7711_web'
 
 # Motor Heb412_gen
-#gem 'heb412_gen', git: "https://github.com/pasosdeJesus/heb412_gen.git"
-gem 'heb412_gen', path: '../heb412_gen'
+gem 'heb412_gen', git: "https://github.com/pasosdeJesus/heb412_gen.git"
+#gem 'heb412_gen', path: '../heb412_gen'
 
 
 
@@ -123,7 +123,7 @@ end
 # Los siguientes son para desarrollo o para pruebas con generadores
 group :development do
   # Depurar
-  gem "byebug"
+  #gem "byebug"
   
   # Consola irb en páginas con excepciones o usando <%= console %> en vistasA
   gem 'web-console'

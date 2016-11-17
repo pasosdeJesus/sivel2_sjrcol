@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: dfbe131569b8bf3c89c28d5b11c859258e5e884b
+  revision: 85ed6d25216cd8dba7c692f6dcac8203f9cfef1d
   specs:
     cor1440_gen (1.0.b1)
       devise
@@ -9,8 +9,14 @@ GIT
       rails
 
 GIT
+  remote: https://github.com/pasosdeJesus/heb412_gen.git
+  revision: 6c77bee361899058bbb66b5e27e5bece1b41104a
+  specs:
+    heb412_gen (1.0.a1)
+
+GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: 0d1edc4ca5f57ba9927d12a64f0710492e9fa78b
+  revision: d53dac7d0555b0a1208209cdc174de4f8918d3f1
   specs:
     sal7711_gen (1.0.b1)
       rails
@@ -18,7 +24,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: 9acc2974459e86fe941e6739e9883df1f4fa103d
+  revision: 0176b1f710c86eb17a2551e9e51fd673ec2e0c9e
   specs:
     sal7711_web (1.0.a3)
       rails
@@ -26,7 +32,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: fac0b2283399ebb343e08539304bedc3e3321362
+  revision: 891aeadcfccf1eb3069c3493cc5fa48fde33d490
   specs:
     sip (2.0.b1)
       bootstrap-datepicker-rails
@@ -46,7 +52,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: fd030be1d9f9cbf4ed63bfdbeec576eb6a7eac86
+  revision: a9fc4aa69219f8c6d33cf6f2e342c279cc25409f
   specs:
     sivel2_gen (2.0b1)
       devise
@@ -55,7 +61,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: a248439c275b715cdfebbaacf2a3214b57a62847
+  revision: 2cf9dc5269690a179e111538f53d66c318166d79
   specs:
     sivel2_sjr (2.0.b1)
       rails
@@ -66,11 +72,6 @@ GIT
   revision: 20f8f3bab2fee21309c57b586f5fab9921ac0894
   specs:
     cocoon (1.2.6)
-
-PATH
-  remote: ../heb412_gen
-  specs:
-    heb412_gen (1.0.a1)
 
 GEM
   remote: https://rubygems.org/
@@ -122,7 +123,6 @@ GEM
     bootstrap-datepicker-rails (1.6.4.1)
       railties (>= 3.0)
     builder (3.2.2)
-    byebug (9.0.6)
     camertron-eprun (1.1.1)
     cancancan (1.15.0)
     capybara (2.7.1)
@@ -382,7 +382,6 @@ PLATFORMS
 DEPENDENCIES
   bcrypt
   bootstrap-datepicker-rails
-  byebug
   cancancan
   capybara
   capybara-webkit

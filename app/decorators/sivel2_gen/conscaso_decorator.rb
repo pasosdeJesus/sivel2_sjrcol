@@ -55,7 +55,15 @@ Sivel2Gen::Conscaso.class_eval do
           AND sivel2_sjr_desplazamiento.id_caso=sip_ubicacion.id_caso
           WHERE sip_ubicacion.id_municipio = ?)', id)
   }
-def self.refresca_conscaso
+
+  def self.refresca_conscaso
+    if !ActiveRecord::Base.connection.data_source_exists? 'sivel2_sjr_ultimaatencion'
+      ActiveRecord::Base.connection.execute(
+        "CREATE OR REPLACE VIEW sivel2_sjr_ultimaatencion AS 
+        (SELECT id_caso, id, MIN(fechaatencion) AS fechaatencion, 
+            descatencion, detallemotivo, detalleal, detallear 
+            FROM sivel2_sjr_respuesta GROUP by 1,2);")
+    end
     if !ActiveRecord::Base.connection.data_source_exists? 'sivel2_gen_conscaso'
       ActiveRecord::Base.connection.execute(
         "CREATE OR REPLACE VIEW sivel2_gen_conscaso1 
@@ -228,11 +236,8 @@ def self.refresca_conscaso
           vcontacto.id_persona = contacto.id AND vcontacto.id_caso = caso.id
           LEFT JOIN sivel2_gen_etnia AS etnia ON
             vcontacto.id_etnia=etnia.id
-          LEFT JOIN sivel2_sjr_respuesta AS ultimaatencion ON
-            ultimaatencion.id IN (SELECT id FROM sivel2_sjr_respuesta 
-              WHERE sivel2_sjr_respuesta.id_caso=casosjr.id_caso 
-              ORDER BY fechaatencion DESC LIMIT 1)
-
+          LEFT JOIN sivel2_sjr_ultimaatencion AS ultimaatencion ON
+            ultimaatencion.id_caso = caso.id
       ")
       ActiveRecord::Base.connection.execute(
         "CREATE MATERIALIZED VIEW sivel2_gen_conscaso 

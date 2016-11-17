@@ -47,7 +47,8 @@ Rails.application.routes.draw do
   mount Sip::Engine => "/", as: 'sip'
 
   namespace :admin do
-    ::Ability.tablasbasicas.each do |t|
+    ab = ::Ability.new
+    ab.tablasbasicas.each do |t|
       if (t[0] == "") 
         c = t[1].pluralize
         resources c.to_sym, 

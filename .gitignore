@@ -28,3 +28,4 @@ db/datos-basicas.sql
 app/views/sivel2_gen/hogar/_local.html.erb
 herram/
 public/heb412/
+config/initializers/punto_montaje.rb

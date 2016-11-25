@@ -1,0 +1,60 @@
+<%- model_class = Sivel2Gen::Caso -%>
+<div class="page-header">
+  <h1><%=t '.title', default: model_class.model_name.human.titleize %></h1>
+</div>
+<dl class="dl-horizontal">
+  <dt><strong><%= Sivel2Gen::Caso.human_attribute_name(:id) %>:</strong></dt>
+  <dd><%= @caso.id %></dd>
+  <dt><strong><%= Sivel2Sjr::Casosjr.human_attribute_name(:fecharec) %>:</strong></dt>
+  <dd><%= @caso.casosjr.fecharec if @caso.casosjr %></dd>
+  <dt><strong><%= Sivel2Sjr::Casosjr.human_attribute_name(:oficina) %>:</strong></dt>
+  <dd><%= @caso.casosjr.oficina.nombre if @caso.casosjr && @caso.casosjr.oficina %></dd>
+  <dt><strong><%= Sivel2Gen::Caso.human_attribute_name(:fecha) %>:</strong></dt>
+  <dd><%= @caso.fecha %></dd>
+  <% if @caso.memo && @caso.memo != '' %>
+    <dt><strong><%= Sivel2Gen::Caso.human_attribute_name(:memo) %>:</strong></dt>
+    <dd><%= @caso.memo %></dd>
+  <% end %>
+  <dt><strong><%= Sivel2Gen::Caso.human_attribute_name(:created_at) %>:</strong></dt>
+  <dd><%= @caso.created_at %></dd>
+  <dt><strong><%= Sivel2Sjr::Casosjr.human_attribute_name(:asesor) %>:</strong></dt>
+  <dd><%= @caso.casosjr.usuario.nusuario if @caso.casosjr %></dd>
+  <% if @caso.casosjr && @caso.casosjr.contacto %>
+    <dt><strong><%= Sivel2Sjr::Casosjr.human_attribute_name(:contacto) %>:</strong></dt>
+    <dd><%= (@caso.casosjr.contacto.nombres + " " + @caso.casosjr.contacto.apellidos) %></dd>
+  <% end %>
+  <% if @caso.casosjr && @caso.casosjr.direccion != '' %>
+    <dt><strong><%= Sivel2Sjr::Casosjr.human_attribute_name(:direccion) %>:</strong></dt>
+    <dd><%= @caso.casosjr.direccion %></dd>
+  <% end %>
+  <% if @caso.casosjr && @caso.casosjr.telefono != '' %>
+    <dt><strong><%= Sivel2Sjr::Casosjr.human_attribute_name(:telefono) %>:</strong></dt>
+    <dd><%= @caso.casosjr.telefono %></dd>
+  <% end %>
+  <% #byebug %>
+  <% if @caso.casosjr && @caso.casosjr.respuesta && @caso.casosjr.respuesta.count > 0 %>
+    <dt><strong>Atenciones:</strong></dt>
+    <dd>
+      <% @caso.casosjr.respuesta.each do |r| %>
+        <strong><%= r.fechaatencion %></strong>: <%= r.descatencion %><br/>
+      <% end %>
+    </dd>
+  <% end %>
+
+
+</dl>
+
+<div class="form-actions">
+  <%= link_to t('.back', default: t("helpers.links.back")),
+    casos_path, class: 'btn'  
+  %>
+  <%= link_to t('.edit', default: t("helpers.links.edit")),
+    edit_caso_path(@caso), class: 'btn' 
+  %>
+  <%= link_to t('.destroy', default: t("helpers.links.destroy")),
+    caso_path(@caso),
+    method: 'delete',
+    data: { confirm: t('.confirm', default: t("helpers.links.confirm", default: '¿Está seguro(a)?')) },
+    class: 'btn btn-danger' 
+  %>
+</div>

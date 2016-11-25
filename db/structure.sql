@@ -439,7 +439,7 @@ CREATE VIEW cben1 AS
    FROM sivel2_gen_caso caso,
     sivel2_sjr_casosjr casosjr,
     sivel2_gen_victima victima
-  WHERE ((caso.id = victima.id_caso) AND (caso.id = casosjr.id_caso) AND (caso.id = victima.id_caso) AND (casosjr.oficina_id = 1));
+  WHERE ((caso.id = victima.id_caso) AND (caso.id = casosjr.id_caso) AND (caso.id = victima.id_caso));
 
 
 --
@@ -2795,6 +2795,23 @@ CREATE TABLE sivel2_sjr_motivosjr_respuesta (
 
 
 --
+-- Name: sivel2_sjr_ultimaatencion; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE sivel2_sjr_ultimaatencion (
+    id_caso integer,
+    id integer,
+    fechaatencion date,
+    descatencion character varying(5000),
+    detallemotivo character varying(5000),
+    detalleal character varying(5000),
+    detallear character varying(5000)
+);
+
+ALTER TABLE ONLY sivel2_sjr_ultimaatencion REPLICA IDENTITY NOTHING;
+
+
+--
 -- Name: usuario_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -2972,11 +2989,7 @@ CREATE VIEW sivel2_gen_conscaso1 AS
      LEFT JOIN sip_tdocumento tdocumento ON ((tdocumento.id = contacto.tdocumento_id)))
      JOIN sivel2_gen_victima vcontacto ON (((vcontacto.id_persona = contacto.id) AND (vcontacto.id_caso = caso.id))))
      LEFT JOIN sivel2_gen_etnia etnia ON ((vcontacto.id_etnia = etnia.id)))
-     LEFT JOIN sivel2_sjr_respuesta ultimaatencion ON ((ultimaatencion.id IN ( SELECT sivel2_sjr_respuesta.id
-           FROM sivel2_sjr_respuesta
-          WHERE (sivel2_sjr_respuesta.id_caso = casosjr.id_caso)
-          ORDER BY sivel2_sjr_respuesta.fechaatencion DESC
-         LIMIT 1))));
+     LEFT JOIN sivel2_sjr_ultimaatencion ultimaatencion ON ((ultimaatencion.id_caso = caso.id)));
 
 
 --
@@ -3231,6 +3244,30 @@ CREATE TABLE sivel2_gen_iglesia (
     observaciones character varying(5000),
     CONSTRAINT iglesia_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
+
+
+--
+-- Name: sivel2_gen_iniciador; Type: VIEW; Schema: public; Owner: -
+--
+
+CREATE VIEW sivel2_gen_iniciador AS
+ SELECT s3.id_caso,
+    s3.fechainicio,
+    s3.id_usuario,
+    usuario.nusuario
+   FROM usuario,
+    ( SELECT s2.id_caso,
+            s2.fechainicio,
+            min(s2.id_usuario) AS id_usuario
+           FROM sivel2_gen_caso_usuario s2,
+            ( SELECT f1.id_caso,
+                    min(f1.fechainicio) AS m
+                   FROM sivel2_gen_caso_usuario f1
+                  GROUP BY f1.id_caso) c
+          WHERE ((s2.id_caso = c.id_caso) AND (s2.fechainicio = c.m))
+          GROUP BY s2.id_caso, s2.fechainicio
+          ORDER BY s2.id_caso, s2.fechainicio) s3
+  WHERE (usuario.id = s3.id_usuario);
 
 
 --
@@ -4261,23 +4298,6 @@ CREATE TABLE sivel2_sjr_tipodesp (
     observaciones character varying(5000),
     CONSTRAINT tipodesp_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
-
-
---
--- Name: sivel2_sjr_ultimaatencion; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE sivel2_sjr_ultimaatencion (
-    id_caso integer,
-    id integer,
-    fechaatencion date,
-    descatencion character varying(5000),
-    detallemotivo character varying(5000),
-    detalleal character varying(5000),
-    detallear character varying(5000)
-);
-
-ALTER TABLE ONLY sivel2_sjr_ultimaatencion REPLICA IDENTITY NOTHING;
 
 
 --

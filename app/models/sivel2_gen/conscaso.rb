@@ -1,7 +1,10 @@
 # encoding: UTF-8
 
-Sivel2Gen::Conscaso.class_eval do
+require 'sivel2_sjr/concerns/models/conscaso'
 
+class Sivel2Gen::Conscaso < ActiveRecord::Base
+  include Sivel2Sjr::Concerns::Models::Conscaso
+  
   scope :filtro_expulsion_pais_id, lambda { |id|
     where('(caso_id, fecha) IN (SELECT sip_ubicacion.id_caso, 
           sivel2_sjr_desplazamiento.fechaexpulsion FROM
@@ -280,3 +283,4 @@ Sivel2Gen::Conscaso.class_eval do
   end
 
 end
+

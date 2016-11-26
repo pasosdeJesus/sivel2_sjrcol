@@ -21,7 +21,7 @@ class AgrupaCamposRespuesta < ActiveRecord::Migration[5.0]
         campointro('Verificación compromisos SJR', verifcsjr) || 
         campointro('Verificación compromisos persona', verifcper) || 
         campointro('Efectividad en la acción', efectividad)
-      ) 
+      ) WHERE descatencion IS NULL OR TRIM(descatencion)='';
     SQL
   end
   def down

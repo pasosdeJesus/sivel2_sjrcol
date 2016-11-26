@@ -25,6 +25,7 @@ gem "odf-report"
 
 # Plantilla ODS
 gem "rspreadsheet"
+gem 'libxml-ruby', '2.8.0'
 
 # Postgresql
 gem "pg"

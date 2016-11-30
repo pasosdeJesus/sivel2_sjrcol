@@ -2,6 +2,7 @@ jQuery ->
   $("a[rel~=popover], .has-popover").popover()
   $("a[rel~=tooltip], .has-tooltip").tooltip()
 
+# Llena campos clasificacion y subclasificacion de desplazamiento
 @llena_clasifdesp = (ide, idl, jqthis) ->
   ee = $("#" + ide)
   ve = ee.val()
@@ -46,6 +47,21 @@ $(document).on('change', 'select[id^=caso_desplazamiento_attributes_][id$=id_lle
   idl=$(this).attr('id')
   ide=idl.replace('llegada', 'expulsion') 
   llena_clasifdesp(ide, idl, $(this))
+)
+
+
+# Al pasar a pestaña desplazamientos se recalculan clasificaciones
+$(document).on('click', 'a.fichacambia[href^="#desplazamiento"]', (e) ->
+  # e.preventDefault() No prevenir para que opere normal el cambio de
+  # pestaña que implementa sivel2_sjr
+  $('select[id^=caso_desplazamiento_attributes_][id$=id_expulsion]').
+    each((i, e) -> 
+      ide=$(e).attr('id')
+      idl=ide.replace('expulsion', 'llegada') 
+      llena_clasifdesp(ide, idl, $(e))
+      return
+   )
+  return
 )
 
 $(document).on 'ready page:load',  -> 

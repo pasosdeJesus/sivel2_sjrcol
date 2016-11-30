@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: 2cd85f861d9194f08abec4b0d4badbfdfb893c39
+  revision: d0b8a746c6313d79f5ddd46f01cfe660379d1625
   specs:
     cor1440_gen (1.0.b1)
       devise
@@ -10,13 +10,13 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 4e3c878510919900c3402a1f0e05fe7ce3f4aeee
+  revision: a9c2864ec3b8edb4981a819a90c4ace2e288f200
   specs:
     heb412_gen (1.0.a1)
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: 3da715312ffcaf258bc2119e2bcfd0b5ec778d0c
+  revision: aad87a282ad6997b1a6c120b4734dc2ea0ca85b2
   specs:
     sal7711_gen (1.0.b1)
       rails
@@ -24,7 +24,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: 26629770bde39e9aac6a9c7db77a83930b4f71ca
+  revision: 259af6a6b83493f5944f17a23a13a2a0dd39c020
   specs:
     sal7711_web (1.0.a3)
       rails
@@ -32,7 +32,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 795d491dbf70f50cc35c3a9be4e6d39aa904fa30
+  revision: 81b4502f7bed9edbb316381391e6d5f426e4af17
   specs:
     sip (2.0.b1)
       bootstrap-datepicker-rails
@@ -52,7 +52,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 6f3bb308a7eb5d712117c4bc3b692e73408920df
+  revision: 213c86f969eda0436ea02e7add146f1d2f9daa17
   specs:
     sivel2_gen (2.0b1)
       devise
@@ -61,7 +61,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 8eba5028b41ffc80f42b7c3fa84fa66d4ee185a3
+  revision: 74abc9b7b44a629a4ea7765b87423d4c3a3106e2
   specs:
     sivel2_sjr (2.0.b1)
       rails
@@ -135,7 +135,7 @@ GEM
     capybara-webkit (1.11.1)
       capybara (>= 2.3.0, < 2.8.0)
       json
-    chartkick (2.1.1)
+    chartkick (2.1.3)
     chosen-rails (1.5.2)
       coffee-rails (>= 3.2)
       railties (>= 3.0)
@@ -180,14 +180,14 @@ GEM
       activesupport (>= 4.1.0)
     i18n (0.7.0)
     interception (0.5)
-    jbuilder (2.6.0)
+    jbuilder (2.6.1)
       activesupport (>= 3.0.0, < 5.1)
       multi_json (~> 1.2)
     jquery-rails (4.2.1)
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
-    jquery-ui-rails (5.0.5)
+    jquery-ui-rails (6.0.0)
       railties (>= 3.2.16)
     json (1.8.3)
     kgio (2.10.0)
@@ -338,7 +338,7 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    thor (0.19.1)
+    thor (0.19.4)
     thread_safe (0.3.5)
     tilt (2.0.5)
     ttfunk (1.4.0)

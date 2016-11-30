@@ -63,9 +63,10 @@ class Sivel2Gen::Conscaso < ActiveRecord::Base
     if !ActiveRecord::Base.connection.data_source_exists? 'sivel2_sjr_ultimaatencion'
       ActiveRecord::Base.connection.execute(
         "CREATE OR REPLACE VIEW sivel2_sjr_ultimaatencion AS 
-        (SELECT id_caso, id, MIN(fechaatencion) AS fechaatencion, 
-            descatencion, detallemotivo, detalleal, detallear 
-            FROM sivel2_sjr_respuesta GROUP by 1,2);")
+        (SELECT id_caso, id, fechaatencion, descatencion, detallemotivo, 
+         detalleal, detallear FROM sivel2_sjr_respuesta 
+         WHERE (id_caso, fechaatencion) in (SELECT id_caso, MIN(fechaatencion)
+         FROM sivel2_sjr_respuesta GROUP BY 1));")
     end
     if !ActiveRecord::Base.connection.data_source_exists? 'sivel2_gen_conscaso'
       ActiveRecord::Base.connection.execute(
@@ -236,7 +237,7 @@ class Sivel2Gen::Conscaso < ActiveRecord::Base
           LEFT JOIN sip_tdocumento AS tdocumento ON 
             tdocumento.id=contacto.tdocumento_id
           JOIN sivel2_gen_victima AS vcontacto ON 
-          vcontacto.id_persona = contacto.id AND vcontacto.id_caso = caso.id
+            vcontacto.id_persona = contacto.id AND vcontacto.id_caso = caso.id
           LEFT JOIN sivel2_gen_etnia AS etnia ON
             vcontacto.id_etnia=etnia.id
           LEFT JOIN sivel2_sjr_ultimaatencion AS ultimaatencion ON

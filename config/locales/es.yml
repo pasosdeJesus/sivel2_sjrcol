@@ -45,6 +45,8 @@ es:
     attributes:
       "cor1440_gen/actividad":
         fecha: Fecha inicial
+        poblacionmujeres: 'Población Mujeres'
+        poblacionhombres: 'Población Hombres'
       "cor1440_gen/actividadarea":
         actividadarea: Subárea de Actividad
         Actividadareas: Subáreas de Actividad
@@ -63,8 +65,8 @@ es:
       "sivel2_gen/presponsable": 
         presponsable: presunto responsable
       "sivel2_sjr/aslegal": 
-        Aslegal: Seguimiento Judicial
-        Aslegales: Seguimientos Judiciales
+        Aslegal: Asesoría Jurídica
+        Aslegales: Asesorías Jurídicas
       "sivel2_sjr/ayudaestado": 
         "{:derechos_ids=>[]}": Derechos relacionados
       "sivel2_sjr/casosjr": 

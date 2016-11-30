@@ -38,5 +38,9 @@ module Sivel2Sjr
     has_many :progestado, class_name: "Sivel2Sjr::Progestado", 
             :through => :progestado_respuesta
 
+    validates :fechaatencion, uniqueness: {
+      scope: :id_caso,
+      message: 'En un caso no puede repetirse fecha de atención'
+    }
   end
 end

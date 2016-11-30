@@ -11,6 +11,7 @@
 
 <%= f.association :tipodesp,
   collection: Sivel2Sjr::Tipodesp.where(fechadeshabilitacion: nil),
+  include_blank: false,
   label_method: :nombre,
   value_method: :id 
 %>

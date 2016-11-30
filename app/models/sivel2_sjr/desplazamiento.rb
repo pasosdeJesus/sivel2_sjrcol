@@ -12,5 +12,6 @@ class Sivel2Sjr::Desplazamiento < ActiveRecord::Base
     through: :categoria_desplazamiento,
     class_name: "Sivel2Gen::Categoria"
 
+  validates :tipodesp, presence: true
 end
 

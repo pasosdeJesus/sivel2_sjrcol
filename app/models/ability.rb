@@ -77,7 +77,7 @@ class Ability < Sivel2Sjr::Ability
        campos: [
          'ultimaatencion_mes', 'ultimaatencion_fecha', 
          'contacto_nombres', 'contacto_apellidos', 'contacto_identificacion', 
-         'contacto_sexo', 'contacto_edad', 'contacto_etnia',
+         'contacto_sexo', 'contacto_edad_ultimaatencion', 'contacto_etnia',
          'beneficiarios_0_5', 'beneficiarios_6_12',
          'beneficiarios_13_17', 'beneficiarios_18_26',
          'beneficiarios_27_59', 'beneficiarios_60_',

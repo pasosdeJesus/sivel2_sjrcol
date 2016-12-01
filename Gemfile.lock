@@ -61,7 +61,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 74abc9b7b44a629a4ea7765b87423d4c3a3106e2
+  revision: 3772fccf6c28d612645c551652fd31e2e198376b
   specs:
     sivel2_sjr (2.0.b1)
       rails
@@ -209,7 +209,7 @@ GEM
     mime-types-data (3.2016.0521)
     mimemagic (0.3.2)
     mini_portile2 (2.1.0)
-    minitest (5.9.1)
+    minitest (5.10.0)
     multi_json (1.12.1)
     newrelic_rpm (3.17.1.326)
     nio4r (1.2.1)
@@ -349,7 +349,7 @@ GEM
       execjs (>= 2.2.2, >= 2.2)
       less-rails (>= 2.5.0)
       railties (>= 3.1)
-    twitter_cldr (4.1.0)
+    twitter_cldr (4.2.0)
       camertron-eprun
       cldr-plurals-runtime-rb (~> 1.0)
       tzinfo
@@ -357,7 +357,7 @@ GEM
       thread_safe (~> 0.1)
     tzinfo-data (1.2016.10)
       tzinfo (>= 1.0.0)
-    uglifier (3.0.3)
+    uglifier (3.0.4)
       execjs (>= 0.3.0, < 3)
     unicorn (5.2.0)
       kgio (~> 2.6)

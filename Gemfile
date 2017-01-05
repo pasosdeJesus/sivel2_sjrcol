@@ -9,9 +9,6 @@ gem "rails-i18n"
 # Colores en terminal
 gem 'colorize'
 
-# Mientras solucionan https://github.com/sparklemotion/nokogiri/issues/1569
-gem 'nokogiri', '1.6.8.1' 
-
 # Servidor web
 gem 'puma'
 

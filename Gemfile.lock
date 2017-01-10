@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: 8ad69b48ec7de91ea827fcf635c642236de33f83
+  revision: e6437503f97b514b59bb5ed2e23a793c97eb9fba
   specs:
     cor1440_gen (1.0.b1)
       devise
@@ -10,13 +10,13 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: aeb1e70bf1f8280e6f975858e728720182f2c085
+  revision: 7548803fbf69e9f60399ef28f80d22990f468e26
   specs:
     heb412_gen (1.0.a1)
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: 21188e6bb26ae4801278dcc4732f19486078d339
+  revision: c497de2e66e23e425cf41ca60ebe88720e5f9b2d
   specs:
     sal7711_gen (1.0.b1)
       rails
@@ -24,7 +24,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: 7a8950951bfa14f57780672f7f26bc6afae3b4af
+  revision: 03d5f6ceae74fdecf0c4f47023f267b05e663037
   specs:
     sal7711_web (1.0.a3)
       rails
@@ -32,9 +32,9 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 667db057ee07ad374b81a848a8c650af941d14de
+  revision: 8993b084f7b0a72cb15a9b6f276fb49f60b8dcb4
   specs:
-    sip (2.0.b1)
+    sip (2.0.b2)
       bootstrap-datepicker-rails
       cancancan
       colorize
@@ -52,7 +52,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 6e512f07ce23ace3621fac83b342a16fae59b115
+  revision: 7c437a383ffe2cb58a19566b0c84f6bc0393f533
   specs:
     sivel2_gen (2.0b1)
       devise
@@ -61,7 +61,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: a982553af94682ce93bceb64de196afd51743622
+  revision: 1010e7a41f104a6cf1040122918884835cd8ccec
   specs:
     sivel2_sjr (2.0.b1)
       rails
@@ -135,14 +135,13 @@ GEM
     capybara-webkit (1.11.1)
       capybara (>= 2.3.0, < 2.8.0)
       json
-    chartkick (2.2.1)
+    chartkick (2.2.2)
     chosen-rails (1.5.2)
       coffee-rails (>= 3.2)
       railties (>= 3.0)
       sass-rails (>= 3.2)
     cldr-plurals-runtime-rb (1.0.1)
-    climate_control (0.0.3)
-      activesupport (>= 3.0)
+    climate_control (0.1.0)
     cocaine (0.5.8)
       climate_control (>= 0.0.3, < 1.0)
     coderay (1.1.1)
@@ -318,7 +317,7 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
-    simple_form (3.3.1)
+    simple_form (3.4.0)
       actionpack (> 4, < 5.1)
       activemodel (> 4, < 5.1)
     slop (3.6.0)

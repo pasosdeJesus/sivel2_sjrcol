@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: e6437503f97b514b59bb5ed2e23a793c97eb9fba
+  revision: 51c7a4a111914ee73d59e27b43415104c99254c5
   specs:
     cor1440_gen (1.0.b1)
       devise
@@ -10,13 +10,13 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 7548803fbf69e9f60399ef28f80d22990f468e26
+  revision: e5a5288b4646ec430bf5270ec2e8ff9b348bffcb
   specs:
     heb412_gen (1.0.a1)
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: c497de2e66e23e425cf41ca60ebe88720e5f9b2d
+  revision: 2c72da9ebfa4c4b94df21cf17ea0f9aea2c9e089
   specs:
     sal7711_gen (1.0.b1)
       rails
@@ -24,7 +24,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: 03d5f6ceae74fdecf0c4f47023f267b05e663037
+  revision: dd66c4b2dc5decbe9faa083342c036f6432fb473
   specs:
     sal7711_web (1.0.a3)
       rails
@@ -32,7 +32,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 8993b084f7b0a72cb15a9b6f276fb49f60b8dcb4
+  revision: d66d974d3e1ad0dec46f936559b0cb9370807441
   specs:
     sip (2.0.b2)
       bootstrap-datepicker-rails
@@ -52,16 +52,16 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 7c437a383ffe2cb58a19566b0c84f6bc0393f533
+  revision: 16393ac02879c1e5a107e2297385129c9b4bb8b3
   specs:
-    sivel2_gen (2.0b1)
+    sivel2_gen (2.0b2)
       devise
       jquery-rails
       rails
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 1010e7a41f104a6cf1040122918884835cd8ccec
+  revision: fb655494b8f8cbe44fc6c044cc9efb415e3f3663
   specs:
     sivel2_sjr (2.0.b1)
       rails
@@ -122,18 +122,18 @@ GEM
       debug_inspector (>= 0.0.1)
     bootstrap-datepicker-rails (1.6.4.1)
       railties (>= 3.0)
-    builder (3.2.2)
+    builder (3.2.3)
     camertron-eprun (1.1.1)
     cancancan (1.15.0)
-    capybara (2.7.1)
+    capybara (2.11.0)
       addressable
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
-    capybara-webkit (1.11.1)
-      capybara (>= 2.3.0, < 2.8.0)
+    capybara-webkit (1.12.0)
+      capybara (>= 2.3.0, < 2.13.0)
       json
     chartkick (2.2.2)
     chosen-rails (1.5.2)
@@ -188,7 +188,7 @@ GEM
       thor (>= 0.14, < 2.0)
     jquery-ui-rails (6.0.1)
       railties (>= 3.2.16)
-    json (2.0.2)
+    json (2.0.3)
     kgio (2.11.0)
     less (2.6.0)
       commonjs (~> 0.2.7)

@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: 51c7a4a111914ee73d59e27b43415104c99254c5
+  revision: f988539935e535d93f26ecc4e53bf40525b5abc3
   specs:
     cor1440_gen (1.0.b1)
       devise
@@ -10,13 +10,13 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: e5a5288b4646ec430bf5270ec2e8ff9b348bffcb
+  revision: 4eb9f1b11db220d71b8bc6b83e18737700a1be14
   specs:
     heb412_gen (1.0.a1)
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: 2c72da9ebfa4c4b94df21cf17ea0f9aea2c9e089
+  revision: a536a3da8b7b1f3406677e819f7330d34ad4b69f
   specs:
     sal7711_gen (1.0.b1)
       rails
@@ -24,7 +24,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: dd66c4b2dc5decbe9faa083342c036f6432fb473
+  revision: 204066eeeafdc7e42c5077f50167feb85075cf0a
   specs:
     sal7711_web (1.0.a3)
       rails
@@ -32,7 +32,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: d66d974d3e1ad0dec46f936559b0cb9370807441
+  revision: ee7f74f4024e9621949af3519bc381fe83fa6141
   specs:
     sip (2.0.b2)
       bootstrap-datepicker-rails
@@ -52,7 +52,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 16393ac02879c1e5a107e2297385129c9b4bb8b3
+  revision: 97d0e7db1590b9e97b1496903bd42c05e0bb621a
   specs:
     sivel2_gen (2.0b2)
       devise
@@ -61,7 +61,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: fb655494b8f8cbe44fc6c044cc9efb415e3f3663
+  revision: 7168d3b86b2cc6e4a2ba3e48d7ca85963039e571
   specs:
     sivel2_sjr (2.0.b1)
       rails
@@ -125,7 +125,7 @@ GEM
     builder (3.2.3)
     camertron-eprun (1.1.1)
     cancancan (1.15.0)
-    capybara (2.11.0)
+    capybara (2.12.0)
       addressable
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
@@ -163,7 +163,7 @@ GEM
       responders
       warden (~> 1.2.3)
     devise-i18n (1.1.1)
-    diff-lcs (1.2.5)
+    diff-lcs (1.3)
     erubis (2.7.0)
     execjs (2.7.0)
     factory_girl (4.8.0)
@@ -173,7 +173,7 @@ GEM
       railties (>= 3.0.0)
     font-awesome-rails (4.7.0.1)
       railties (>= 3.2, < 5.1)
-    foreman (0.82.0)
+    foreman (0.83.0)
       thor (~> 0.19.1)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
@@ -210,7 +210,7 @@ GEM
     mini_portile2 (2.1.0)
     minitest (5.10.1)
     multi_json (1.12.1)
-    newrelic_rpm (3.17.2.327)
+    newrelic_rpm (3.18.0.329)
     nio4r (1.2.1)
     nokogiri (1.7.0.1)
       mini_portile2 (~> 2.1.0)
@@ -305,9 +305,8 @@ GEM
       rspec-mocks (~> 3.5.0)
       rspec-support (~> 3.5.0)
     rspec-support (3.5.0)
-    rspreadsheet (0.2.15)
+    rspreadsheet (0.4.1)
       andand (~> 1.3)
-      libxml-ruby (~> 2.7)
       rubyzip (~> 1.1)
     rubyzip (1.1.7)
     sass (3.4.23)
@@ -322,7 +321,7 @@ GEM
       activemodel (> 4, < 5.1)
     slop (3.6.0)
     spork (0.9.2)
-    spring (2.0.0)
+    spring (2.0.1)
       activesupport (>= 4.2)
     spring-commands-rspec (1.0.4)
       spring (>= 0.9.1)
@@ -357,14 +356,14 @@ GEM
     unicorn (5.2.0)
       kgio (~> 2.6)
       raindrops (~> 0.7)
-    warden (1.2.6)
+    warden (1.2.7)
       rack (>= 1.0)
     web-console (3.4.0)
       actionview (>= 5.0)
       activemodel (>= 5.0)
       debug_inspector
       railties (>= 5.0)
-    websocket-driver (0.6.4)
+    websocket-driver (0.6.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
     will_paginate (3.1.5)

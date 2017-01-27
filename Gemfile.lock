@@ -132,9 +132,6 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
-    capybara-webkit (1.12.0)
-      capybara (>= 2.3.0, < 2.13.0)
-      json
     chartkick (2.2.2)
     chosen-rails (1.5.2)
       coffee-rails (>= 3.2)
@@ -188,7 +185,6 @@ GEM
       thor (>= 0.14, < 2.0)
     jquery-ui-rails (6.0.1)
       railties (>= 3.2.16)
-    json (2.0.3)
     kgio (2.11.0)
     less (2.6.0)
       commonjs (~> 0.2.7)
@@ -378,7 +374,6 @@ DEPENDENCIES
   bootstrap-datepicker-rails
   cancancan
   capybara
-  capybara-webkit
   chartkick
   chosen-rails
   cocoon!
@@ -433,4 +428,4 @@ DEPENDENCIES
   will_paginate
 
 BUNDLED WITH
-   1.13.7
+   1.14.3

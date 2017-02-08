@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: f988539935e535d93f26ecc4e53bf40525b5abc3
+  revision: 3f35cfdda3dc42c5c963510120d0f58c8753f599
   specs:
     cor1440_gen (1.0.b1)
       devise
@@ -10,13 +10,13 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 4eb9f1b11db220d71b8bc6b83e18737700a1be14
+  revision: cea29f02146b9df1cc26eec15d03355c559f7801
   specs:
     heb412_gen (1.0.a1)
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: a536a3da8b7b1f3406677e819f7330d34ad4b69f
+  revision: bd89c875a649aa2aea488618ca3b787c42dd036f
   specs:
     sal7711_gen (1.0.b1)
       rails
@@ -24,7 +24,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: 204066eeeafdc7e42c5077f50167feb85075cf0a
+  revision: 0bc1cb259e7cbfafe8eed4dcd0bad140f483b380
   specs:
     sal7711_web (1.0.a3)
       rails
@@ -32,7 +32,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: ee7f74f4024e9621949af3519bc381fe83fa6141
+  revision: aae06ec868409aa2a9debe0594b77e4bbcb861bb
   specs:
     sip (2.0.b2)
       bootstrap-datepicker-rails
@@ -52,7 +52,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: f73e79864ec5e79f1b82820f023fde75dd5bc584
+  revision: 32ffe2d633492c9eab891f0ce891a6dc3467a769
   specs:
     sivel2_gen (2.0b2)
       devise
@@ -61,7 +61,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 5fa075a4b45c58c0747fe48e827713741081d22b
+  revision: 8b4b89e7d0956fa69bcf674e1cc46bf74ee12724
   specs:
     sivel2_sjr (2.0.b1)
       rails
@@ -174,7 +174,7 @@ GEM
       thor (~> 0.19.1)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
-    i18n (0.7.0)
+    i18n (0.8.0)
     interception (0.5)
     jbuilder (2.6.1)
       activesupport (>= 3.0.0, < 5.1)
@@ -241,7 +241,7 @@ GEM
       binding_of_caller (>= 0.7)
       pry (>= 0.9.11)
     public_suffix (2.0.5)
-    puma (3.6.2)
+    puma (3.7.0)
     rack (2.0.1)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -334,11 +334,11 @@ GEM
     ttfunk (1.4.0)
     turbolinks (2.5.3)
       coffee-rails
-    twitter-bootstrap-rails (3.2.2)
-      actionpack (>= 3.1)
-      execjs (>= 2.2.2, >= 2.2)
-      less-rails (>= 2.5.0)
-      railties (>= 3.1)
+    twitter-bootstrap-rails (4.0.0)
+      actionpack (~> 5.0, >= 5.0.1)
+      execjs (~> 2.7)
+      less-rails (~> 2.8, >= 2.8.0)
+      railties (~> 5.0, >= 5.0.1)
     twitter_cldr (4.2.0)
       camertron-eprun
       cldr-plurals-runtime-rb (~> 1.0)

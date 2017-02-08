@@ -20,6 +20,38 @@ class Ability < Sivel2Sjr::Ability
     ["Analista de Prensa", ROLANALIPRENSA]
   ]
 
+  ROLES_CA = [
+    'Realizar conteos de casos. ' +
+    'Buscar casos y ver casos con etiqueta de compartidos. ',
+    
+    'Realizar conteos de casos. ' +
+    'Ver actividades e informes de actividades de todas las oficinas y editar los de su oficina. ' +
+    'Administrar artículos de prensa. ',
+
+    'Realizar conteos de casos. ' +
+    'Ver casos de todas las oficinas, crear casos y editar sólo sus casos. ' +
+    'Ver actividades e informes de actividades de todas las oficinas y editar los de su oficina. ',
+
+    'Realizar conteos de casos. ' +
+    'Ver casos de todas las oficinas, crear casos y editar los de su oficina. ' +
+    'Ver actividades e informes de actividades de todas las oficinas y editar los de su oficina. ' +
+    'Administrar artículos de prensa. ',
+
+    'Realizar conteos de casos. ' +
+    'Ver casos de todas las oficinas, crear casos, editar los de su oficina y poner etiquetas de compartir. ' +
+    'Ver actividades e informes de actividades de todas las oficinas y editar los de su oficina. ' +
+    'Administrar artículos de prensa. ' +
+    'Administrar usuarios de su oficina. ', 
+
+    'Realizar conteos de casos. ' +
+    'Admministrar casos de todas las oficinas. ' +
+    'Administrar actividades de todas las oficinas. ' +
+    'Administrar artículos de prensa. ' +
+    'Administrar usuarios. ' + 
+    'Administrar documentos en nube. ' +
+    'Administrar tablas básicas. '
+  ]
+
   BASICAS_PROPIAS =  [
     ['Sivel2Sjr', 'acreditacion'], 
     ['Sivel2Sjr', 'ayudaestado'], 
@@ -118,21 +150,29 @@ class Ability < Sivel2Sjr::Ability
         cannot :buscar, Sivel2Gen::Caso
         can :read, Sivel2Gen::Caso 
       when Ability::ROLANALIPRENSA
+        can :read, Cor1440Gen::Informe
+        can :read, Cor1440Gen::Actividad
+        can :new, Cor1440Gen::Actividad
+        can [:update, :create, :destroy], Cor1440Gen::Actividad, 
+          oficina: { id: usuario.oficina_id}
         can :manage, Sal7711Gen::Articulo
+
       when Ability::ROLSIST
         can :read, Sivel2Gen::Caso, casosjr: { oficina_id: usuario.oficina_id }
         can [:update, :create, :destroy], Sivel2Gen::Caso, 
           casosjr: { asesor: usuario.id, oficina_id:usuario.oficina_id }
-        can [:read, :new], Cor1440Gen::Actividad
         can :new, Sivel2Gen::Caso 
-        can [:update, :create, :destroy], Cor1440Gen::Actividad, 
-          oficina: { id: usuario.oficina_id}
         can :manage, Sivel2Gen::Acto
         can :manage, Sip::Persona
+        can [:read, :new], Cor1440Gen::Actividad
+        can [:update, :create, :destroy], Cor1440Gen::Actividad, 
+          oficina: { id: usuario.oficina_id}
+
       when Ability::ROLANALI
         can :read, Sivel2Gen::Caso
-        can :manage, Sal7711Gen::Articulo
         can :new, Sivel2Gen::Caso
+        can :manage, Sivel2Gen::Acto
+        can :manage, Sip::Persona
         can [:update, :create, :destroy], Sivel2Gen::Caso, 
           casosjr: { oficina_id: usuario.oficina_id }
         can :read, Cor1440Gen::Informe
@@ -140,11 +180,13 @@ class Ability < Sivel2Sjr::Ability
         can :new, Cor1440Gen::Actividad
         can [:update, :create, :destroy], Cor1440Gen::Actividad, 
           oficina: { id: usuario.oficina_id}
-        can :manage, Sivel2Gen::Acto
-        can :manage, Sip::Persona
+        can :manage, Sal7711Gen::Articulo
+
       when Ability::ROLCOOR
         can :read, Sivel2Gen::Caso
         can :new, Sivel2Gen::Caso
+        can :manage, Sivel2Gen::Acto
+        can :manage, Sip::Persona
         can [:update, :create, :destroy, :poneretcomp], Sivel2Gen::Caso, 
           casosjr: { oficina_id: usuario.oficina_id }
         can :manage, Cor1440Gen::Informe
@@ -152,17 +194,16 @@ class Ability < Sivel2Sjr::Ability
         can :new, Cor1440Gen::Actividad
         can [:update, :create, :destroy], Cor1440Gen::Actividad, 
           oficina: { id: usuario.oficina_id}
-        can :manage, Sivel2Gen::Acto
-        can :manage, Sip::Persona
         can :new, Usuario
         can [:read, :manage], Usuario, oficina: { id: usuario.oficina_id}
+
       when Ability::ROLADMIN, Ability::ROLDIR
         can :manage, Sivel2Gen::Caso
-        can :manage, Sal7711Gen::Articulo
-        can :manage, Cor1440Gen::Actividad
-        can :manage, Cor1440Gen::Informe
         can :manage, Sivel2Gen::Acto
         can :manage, Sip::Persona
+        can :manage, Cor1440Gen::Actividad
+        can :manage, Cor1440Gen::Informe
+        can :manage, Sal7711Gen::Articulo
         can :manage, Usuario
         can :manage, Heb412Gen::Doc
         can :manage, :tablasbasicas
@@ -173,5 +214,6 @@ class Ability < Sivel2Sjr::Ability
       end
     end
   end
+
 
 end

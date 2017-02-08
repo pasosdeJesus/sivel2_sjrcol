@@ -70,6 +70,7 @@
         <% if current_usuario.rol == Ability::ROLADMIN || 
           current_usuario.rol == Ability::ROLDIR %>
           <%= menu_item "Tablas Básicas", sivel2_gen.tablasbasicas_path %>
+          <%= menu_item "Ver Control de Acceso", sip.ayuda_controldeacceso_path %>
           <!-- %= #menu_item "Casos", admin_casos_path % -->
         <% end %>
       <% end %>

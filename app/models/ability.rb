@@ -22,34 +22,44 @@ class Ability < Sivel2Sjr::Ability
 
   ROLES_CA = [
     'Realizar conteos de casos. ' +
-    'Buscar casos y ver casos con etiqueta de compartidos. ',
-    
-    'Realizar conteos de casos. ' +
-    'Ver actividades e informes de actividades de todas las oficinas y editar los de su oficina. ' +
-    'Administrar artículos de prensa. ',
-
-    'Realizar conteos de casos. ' +
-    'Ver casos de todas las oficinas, crear casos y editar sólo sus casos. ' +
-    'Ver actividades e informes de actividades de todas las oficinas y editar los de su oficina. ',
-
-    'Realizar conteos de casos. ' +
-    'Ver casos de todas las oficinas, crear casos y editar los de su oficina. ' +
-    'Ver actividades e informes de actividades de todas las oficinas y editar los de su oficina. ' +
-    'Administrar artículos de prensa. ',
-
-    'Realizar conteos de casos. ' +
-    'Ver casos de todas las oficinas, crear casos, editar los de su oficina y poner etiquetas de compartir. ' +
-    'Ver actividades e informes de actividades de todas las oficinas y editar los de su oficina. ' +
+    'Admministrar casos de todas las oficinas. ' +
+    'Administrar actividades de todas las oficinas. ' +
     'Administrar artículos de prensa. ' +
-    'Administrar usuarios de su oficina. ', 
+    'Administrar usuarios. ' + 
+    'Administrar documentos en nube. ' +
+    'Administrar tablas básicas. ', #ROLADMIN
 
+    'Realizar conteos de casos. ' +
+    'Buscar casos y ver casos con etiqueta de compartidos. ', #ROLINV
+ 
     'Realizar conteos de casos. ' +
     'Admministrar casos de todas las oficinas. ' +
     'Administrar actividades de todas las oficinas. ' +
     'Administrar artículos de prensa. ' +
     'Administrar usuarios. ' + 
     'Administrar documentos en nube. ' +
-    'Administrar tablas básicas. '
+    'Administrar tablas básicas. ', #ROLDIR
+ 
+    'Realizar conteos de casos. ' +
+    'Ver casos de todas las oficinas, crear casos, editar los de su oficina y poner etiquetas de compartir. ' +
+    'Ver actividades e informes de actividades de todas las oficinas y editar los de su oficina. ' +
+    'Administrar artículos de prensa. ' +
+    'Administrar usuarios de su oficina. ', # ROLCOOR
+
+    'Realizar conteos de casos. ' +
+    'Ver casos de todas las oficinas, crear casos y editar los de su oficina. ' +
+    'Ver actividades e informes de actividades de todas las oficinas y editar los de su oficina. ' +
+    'Administrar artículos de prensa. ', # ROLANALI
+
+    'Realizar conteos de casos. ' +
+    'Ver casos de todas las oficinas, crear casos y editar sólo sus casos. ' +
+    'Ver actividades e informes de actividades de todas las oficinas y editar los de su oficina. ', # ROLSIST
+
+    'Realizar conteos de casos. ' +
+    'Ver actividades e informes de actividades de todas las oficinas y editar los de su oficina. ' +
+    'Administrar artículos de prensa. ' #ROLANALIPRENSA
+
+
   ]
 
   BASICAS_PROPIAS =  [

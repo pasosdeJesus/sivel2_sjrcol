@@ -32,7 +32,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: aae06ec868409aa2a9debe0594b77e4bbcb861bb
+  revision: 4054daf4921abb61d2ac546fd9c271dbfb60e2e1
   specs:
     sip (2.0.b2)
       bootstrap-datepicker-rails
@@ -124,7 +124,7 @@ GEM
       railties (>= 3.0)
     builder (3.2.3)
     camertron-eprun (1.1.1)
-    cancancan (1.15.0)
+    cancancan (1.16.0)
     capybara (2.12.0)
       addressable
       mime-types (>= 1.16)
@@ -206,7 +206,7 @@ GEM
     mini_portile2 (2.1.0)
     minitest (5.10.1)
     multi_json (1.12.1)
-    newrelic_rpm (3.18.0.329)
+    newrelic_rpm (3.18.1.330)
     nio4r (1.2.1)
     nokogiri (1.7.0.1)
       mini_portile2 (~> 2.1.0)
@@ -266,7 +266,7 @@ GEM
       nokogiri (~> 1.6)
     rails-html-sanitizer (1.0.3)
       loofah (~> 2.0)
-    rails-i18n (5.0.2)
+    rails-i18n (5.0.3)
       i18n (~> 0.7)
       railties (~> 5.0)
     rails_12factor (0.0.3)

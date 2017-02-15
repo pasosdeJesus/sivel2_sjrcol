@@ -719,7 +719,7 @@ CREATE VIEW cmunex AS
     sip_ubicacion ubicacion,
     sivel2_gen_victima victima,
     sivel2_sjr_casosjr casosjr
-  WHERE ((casosjr.id_caso = desplazamiento.id_caso) AND (desplazamiento.id_expulsion = ubicacion.id) AND (desplazamiento.id_caso = victima.id_caso) AND (casosjr.oficina_id = 4));
+  WHERE ((casosjr.id_caso = desplazamiento.id_caso) AND (desplazamiento.id_expulsion = ubicacion.id) AND (desplazamiento.id_caso = victima.id_caso));
 
 
 --
@@ -749,7 +749,7 @@ CREATE VIEW cmunrec AS
     sip_ubicacion ubicacion,
     sivel2_gen_victima victima,
     sivel2_sjr_casosjr casosjr
-  WHERE ((casosjr.id_caso = desplazamiento.id_caso) AND (desplazamiento.id_expulsion = ubicacion.id) AND (desplazamiento.id_caso = victima.id_caso) AND (casosjr.oficina_id = 4));
+  WHERE ((casosjr.id_caso = desplazamiento.id_caso) AND (desplazamiento.id_expulsion = ubicacion.id) AND (desplazamiento.id_caso = victima.id_caso));
 
 
 --
@@ -3247,6 +3247,30 @@ CREATE TABLE sivel2_gen_iglesia (
     observaciones character varying(5000),
     CONSTRAINT iglesia_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
+
+
+--
+-- Name: sivel2_gen_iniciador; Type: VIEW; Schema: public; Owner: -
+--
+
+CREATE VIEW sivel2_gen_iniciador AS
+ SELECT s3.id_caso,
+    s3.fechainicio,
+    s3.id_usuario,
+    usuario.nusuario
+   FROM usuario,
+    ( SELECT s2.id_caso,
+            s2.fechainicio,
+            min(s2.id_usuario) AS id_usuario
+           FROM sivel2_gen_caso_usuario s2,
+            ( SELECT f1.id_caso,
+                    min(f1.fechainicio) AS m
+                   FROM sivel2_gen_caso_usuario f1
+                  GROUP BY f1.id_caso) c
+          WHERE ((s2.id_caso = c.id_caso) AND (s2.fechainicio = c.m))
+          GROUP BY s2.id_caso, s2.fechainicio
+          ORDER BY s2.id_caso, s2.fechainicio) s3
+  WHERE (usuario.id = s3.id_usuario);
 
 
 --

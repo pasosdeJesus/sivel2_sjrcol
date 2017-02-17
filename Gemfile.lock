@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: db9c56dacaa615873b02cd7c593efff058eed1aa
+  revision: 17363b109746a82e28543be1f66d7dc2f10bedbf
   specs:
     cor1440_gen (1.0.b1)
       devise
@@ -10,13 +10,13 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: cea29f02146b9df1cc26eec15d03355c559f7801
+  revision: befef9a840ba7146bacaf0c77f40dca2da17c7a0
   specs:
     heb412_gen (1.0.a1)
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: bd89c875a649aa2aea488618ca3b787c42dd036f
+  revision: 5c14e3ea88ac692b284793042212619d2bd92cb7
   specs:
     sal7711_gen (1.0.b1)
       rails
@@ -24,7 +24,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: 0bc1cb259e7cbfafe8eed4dcd0bad140f483b380
+  revision: 460429b4408b66a9c139fccb1aeb83020157ff58
   specs:
     sal7711_web (1.0.a3)
       rails
@@ -32,7 +32,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 4054daf4921abb61d2ac546fd9c271dbfb60e2e1
+  revision: b1c358ad5b29e7ef15c05af5f994bbc558e642b6
   specs:
     sip (2.0.b2)
       bootstrap-datepicker-rails
@@ -52,7 +52,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 32ffe2d633492c9eab891f0ce891a6dc3467a769
+  revision: cb0269c9f339493667846e555bf2fc621642877b
   specs:
     sivel2_gen (2.0b2)
       devise
@@ -61,7 +61,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 8b4b89e7d0956fa69bcf674e1cc46bf74ee12724
+  revision: 497fbb5a9cfad3c8756cda367bfd3ac8a998e292
   specs:
     sivel2_sjr (2.0.b1)
       rails
@@ -125,7 +125,7 @@ GEM
     builder (3.2.3)
     camertron-eprun (1.1.1)
     cancancan (1.16.0)
-    capybara (2.12.0)
+    capybara (2.12.1)
       addressable
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
@@ -234,7 +234,7 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
-    pry-rescue (1.4.4)
+    pry-rescue (1.4.5)
       interception (>= 0.5)
       pry
     pry-stack_explorer (0.4.9.2)

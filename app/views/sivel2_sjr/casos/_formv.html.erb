@@ -2,6 +2,11 @@
   <li><a href="usuarios/sign_in">Iniciar Sesión</a>
 <%- else  %>
   <article>
+  <script>
+    $(document).ready(function() {
+      window.sivel2_enviarFichaCasoCada60()  ;
+    });
+  </script>
   <%= simple_form_for @caso, html: { class: 'form-horizontal' } do |f| %>
     <div data-role="content" class="form-inputs">
 
@@ -164,7 +169,10 @@
     </div> <!-- form-inputs -->
 
     <div class="form-actions">
-      <%= f.button :submit, 'Validar y Guardar', class: 'btn-primary' %>
+      <%= f.button :submit, 'Validar y Guardar', {
+        class: 'btn-primary',
+        onclick: 'window.sivel2_detenerEnviarCada60()'
+      } %>
       <%= link_to t('.cancel', default: t("helpers.links.cancel")),
         casos_path, class: 'btn' 
       %>

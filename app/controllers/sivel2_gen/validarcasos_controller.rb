@@ -8,7 +8,7 @@ module Sivel2Gen
 
     include Sivel2Sjr::Concerns::Controllers::ValidarcasosController
 
-    def valida_sinderechovulnerado
+    def validar_sinderechovulnerado
       casos = ini_filtro
       casos = casos.joins('JOIN sivel2_sjr_respuesta ON
               sivel2_sjr_respuesta.id_caso=sivel2_sjr_casosjr.id_caso')
@@ -23,7 +23,7 @@ module Sivel2Gen
     def validar_interno
       @rango_fechas = 'Fecha de recepción'
       validar_sivel2_sjr
-      valida_sinderechovulnerado
+      validar_sinderechovulnerado
       validar_sivel2_gen
     end # def validar_interno
          

@@ -27,7 +27,7 @@ module Sivel2Gen
               sivel2_sjr_respuesta.id_caso=sivel2_sjr_casosjr.id_caso')
       validacion_estandar(
         casos, 
-        'Casos con respuesta pero sin respuesta del SJR',
+        'Casos con respuesta/seguimiento pero sin respuesta del SJR',
         'sivel2_sjr_respuesta.id NOT IN 
            (SELECT id_respuesta FROM sivel2_sjr_ayudasjr_respuesta)
          AND sivel2_sjr_respuesta.id NOT IN 

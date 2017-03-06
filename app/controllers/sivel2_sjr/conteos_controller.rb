@@ -187,9 +187,6 @@ class Sivel2Sjr::ConteosController < ApplicationController
       where, 'casosjr.id_caso', 'desplazamiento.id_caso'
     )
     where = consulta_and_sinap(
-      where, 'id_expulsion', 'ubicacion.id'
-    )
-    where = consulta_and_sinap(
       where, 'desplazamiento.id_caso', 'victima.id_caso'
     )
 
@@ -209,6 +206,9 @@ class Sivel2Sjr::ConteosController < ApplicationController
       where = consulta_and(where, 'casosjr.oficina_id', pOficina)
     end
 
+    whereex = consulta_and_sinap(
+      where, 'id_expulsion', 'ubicacion.id'
+    )
     cons1 = 'cmunex'
     # expulsores
     q1="CREATE OR REPLACE VIEW #{cons1} AS (
@@ -226,7 +226,7 @@ class Sivel2Sjr::ConteosController < ApplicationController
           sip_ubicacion AS ubicacion, 
           sivel2_gen_victima AS victima,
           sivel2_sjr_casosjr AS casosjr
-        WHERE #{where} 
+        WHERE #{whereex} 
         )
       "
     puts "q1 es #{q1}"
@@ -244,6 +244,9 @@ class Sivel2Sjr::ConteosController < ApplicationController
 
 
     # receptores
+    wherel = consulta_and_sinap(
+      where, 'desplazamiento.id_llegada', 'ubicacion.id'
+    )
     cons2 = 'cmunrec'
     q2="CREATE OR REPLACE VIEW #{cons2} AS (
       SELECT (SELECT nombre FROM sip_pais WHERE id=id_pais) AS pais, 
@@ -261,7 +264,7 @@ class Sivel2Sjr::ConteosController < ApplicationController
         sivel2_gen_victima AS victima,
         sivel2_sjr_casosjr AS casosjr
       WHERE 
-        #{where} 
+        #{wherel} 
     )
     "
     puts "q2 es #{q2}"

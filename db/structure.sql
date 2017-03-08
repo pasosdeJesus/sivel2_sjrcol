@@ -719,7 +719,7 @@ CREATE VIEW cmunex AS
     sip_ubicacion ubicacion,
     sivel2_gen_victima victima,
     sivel2_sjr_casosjr casosjr
-  WHERE ((casosjr.id_caso = desplazamiento.id_caso) AND (desplazamiento.id_expulsion = ubicacion.id) AND (desplazamiento.id_caso = victima.id_caso));
+  WHERE ((casosjr.id_caso = desplazamiento.id_caso) AND (desplazamiento.id_caso = victima.id_caso) AND (desplazamiento.id_expulsion = ubicacion.id));
 
 
 --
@@ -749,7 +749,7 @@ CREATE VIEW cmunrec AS
     sip_ubicacion ubicacion,
     sivel2_gen_victima victima,
     sivel2_sjr_casosjr casosjr
-  WHERE ((casosjr.id_caso = desplazamiento.id_caso) AND (desplazamiento.id_expulsion = ubicacion.id) AND (desplazamiento.id_caso = victima.id_caso));
+  WHERE ((casosjr.id_caso = desplazamiento.id_caso) AND (desplazamiento.id_caso = victima.id_caso) AND (desplazamiento.id_llegada = ubicacion.id));
 
 
 --
@@ -7533,7 +7533,7 @@ ALTER TABLE ONLY sivel2_sjr_victimasjr
 
 SET search_path TO "$user", public;
 
-INSERT INTO schema_migrations (version) VALUES
+INSERT INTO "schema_migrations" (version) VALUES
 ('20131128151014'),
 ('20131204135932'),
 ('20131204140000'),

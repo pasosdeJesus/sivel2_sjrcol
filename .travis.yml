@@ -1,23 +1,24 @@
 language: ruby
 rvm:
-        - 2.1.5
+        - 2.4.0
 notifications:
         email: false
-script: CODECLIMATE_REPO_TOKEN=3060021dfb597aeb61e254a2e49db4e7f1fb245f39b1322c23dd1dc95803de6e xvfb-run rspec
+script: bundle exec rails test
+after_success:
+        - CODECLIMATE_REPO_TOKEN=3060021dfb597aeb61e254a2e49db4e7f1fb245f39b1322c23dd1dc95803de6e bundle exec codeclimate-test-reporter
 env:
         global:
                 - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
-                - JRUBY_OPTS=-Xcext.enabled=true
 before_install: 
-        - sudo apt-add-repository -y ppa:ubuntu-sdk-team/ppa
-        - sudo apt-get update
-        - sudo apt-get install libqt5webkit5-dev qtdeclarative5-dev qtlocation5-dev qtsensors5-dev libgstreamer0.10-dev libgstreamer-plugins-base0.10-dev qt4-default
         - sudo locale-gen --no-archive es_CO.UTF-8
+        - sudo /etc/init.d/postgresql stop
+        - sudo /etc/init.d/postgresql start 9.3
         - psql -c 'CREATE DATABASE sivel2sjrcol_pru;' -U postgres
         - bundle install
         - cp db/structure.sql db/structure.sql.conlock
         - sed -e "s/SET lock_timeout = 0;//g" db/structure.sql.conlock >db/structure.sql
         - cp config/database.travis.yml config/database.yml
+        - cp config/initializers/sip.rb.plantilla config/initializers/sip.rb
         - rake db:setup
         - rake sivel2:indices
 

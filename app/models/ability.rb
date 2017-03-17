@@ -162,6 +162,7 @@ class Ability < Sivel2Sjr::Ability
       when Ability::ROLANALIPRENSA
         can :read, Cor1440Gen::Informe
         can :read, Cor1440Gen::Actividad
+        can :read, Cor1440Gen::Proyectofinanciero
         can :new, Cor1440Gen::Actividad
         can [:update, :create, :destroy], Cor1440Gen::Actividad, 
           oficina: { id: usuario.oficina_id}
@@ -175,6 +176,7 @@ class Ability < Sivel2Sjr::Ability
         can :manage, Sivel2Gen::Acto
         can :manage, Sip::Persona
         can [:read, :new], Cor1440Gen::Actividad
+        can :read, Cor1440Gen::Proyectofinanciero
         can [:update, :create, :destroy], Cor1440Gen::Actividad, 
           oficina: { id: usuario.oficina_id}
 
@@ -187,6 +189,7 @@ class Ability < Sivel2Sjr::Ability
           casosjr: { oficina_id: usuario.oficina_id }
         can :read, Cor1440Gen::Informe
         can :read, Cor1440Gen::Actividad
+        can :read, Cor1440Gen::Proyectofinanciero
         can :new, Cor1440Gen::Actividad
         can [:update, :create, :destroy], Cor1440Gen::Actividad, 
           oficina: { id: usuario.oficina_id}
@@ -201,6 +204,7 @@ class Ability < Sivel2Sjr::Ability
           casosjr: { oficina_id: usuario.oficina_id }
         can :manage, Cor1440Gen::Informe
         can :read, Cor1440Gen::Actividad
+        can :read, Cor1440Gen::Proyectofinanciero
         can :new, Cor1440Gen::Actividad
         can [:update, :create, :destroy], Cor1440Gen::Actividad, 
           oficina: { id: usuario.oficina_id}
@@ -212,6 +216,7 @@ class Ability < Sivel2Sjr::Ability
         can :manage, Sivel2Gen::Acto
         can :manage, Sip::Persona
         can :manage, Cor1440Gen::Actividad
+        can :manage, Cor1440Gen::Proyectofinanciero
         can :manage, Cor1440Gen::Informe
         can :manage, Sal7711Gen::Articulo
         can :manage, Usuario

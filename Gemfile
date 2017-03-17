@@ -134,6 +134,10 @@ group :test do
   # Envia resultados de pruebas desde travis a codeclimate
   gem "codeclimate-test-reporter"
 
+  gem 'poltergeist'
+
+  gem 'connection_pool'
+  gem 'minitest-rails-capybara'
   # Un proceso para cada prueba -- acelera
   gem 'spork'
 

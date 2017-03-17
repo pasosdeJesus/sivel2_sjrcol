@@ -20,5 +20,5 @@ before_install:
         - cp config/database.travis.yml config/database.yml
         - cp config/initializers/sip.rb.plantilla config/initializers/sip.rb
         - rake db:setup
-        - rake sivel2:indices
+        - rake sip:indices
 

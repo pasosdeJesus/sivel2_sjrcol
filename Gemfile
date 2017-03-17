@@ -24,7 +24,7 @@ gem "prawn-table"
 gem "odf-report"
 
 # Plantilla ODS
-gem "rspreadsheet"
+gem "rspreadsheet", '0.2.14'
 gem 'libxml-ruby', '2.8.0' #https://github.com/xml4r/libxml-ruby/issues/127
 
 # Postgresql
@@ -130,17 +130,14 @@ group :test do
   # Acelera desarrollo ejecutando en fondo.  https://github.com/jonleighton/spring
   gem "spring"
 
-  # Pruebas con rspec
-  gem 'spring-commands-rspec'
-  gem 'rspec-rails'
+  gem 'simplecov'
+  # Envia resultados de pruebas desde travis a codeclimate
+  gem "codeclimate-test-reporter"
 
   # Un proceso para cada prueba -- acelera
   gem 'spork'
 
   gem 'rails-controller-testing'
-
-  # Maneja datos de prueba
-  gem "factory_girl_rails", group: [:development, :test]
 
   # https://www.relishapp.com/womply/rails-style-guide/docs/developing-rails-applications/bundler
   # Lanza programas para examinar resultados

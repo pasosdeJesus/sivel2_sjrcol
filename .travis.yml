@@ -5,7 +5,7 @@ notifications:
         email: false
 script: bundle exec rails test
 after_success:
-        - CODECLIMATE_REPO_TOKEN=3060021dfb597aeb61e254a2e49db4e7f1fb245f39b1322c23dd1dc95803de6e bundle exec codeclimate-test-reporter
+        - CODECLIMATE_REPO_TOKEN=09993c70831fe6712b6be6aba56140d742bd5524988c91ca78d549388cb66188 bundle exec codeclimate-test-reporter
 env:
         global:
                 - NOKOGIRI_USE_SYSTEM_LIBRARIES=true

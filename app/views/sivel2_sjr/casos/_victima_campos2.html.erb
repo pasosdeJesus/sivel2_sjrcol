@@ -1,0 +1,41 @@
+<%= victima.input :id, as: :hidden %>
+
+<%= victimasjr.input :id_victima, as: :hidden %>
+
+<div class="row">
+  <div class="col-sm-6">
+    <%= victima.association :rangoedad,
+      collection: Sivel2Gen::Rangoedad.habilitados,
+      include_blank: false,
+      label: "Rango de Edad en desp. emblemático",
+      label_method: :rango, 
+      value_method: :id
+    %>
+  </div>
+  <div class="col-sm-6">
+    <%= victima.association :rangoedadactual,
+      collection: Sivel2Gen::Rangoedad.habilitados,
+      include_blank: false,
+      label: "Rango de Edad actual",
+      label_method: :rango, 
+      value_method: :id
+    %>
+  </div>
+</div>
+
+<%= victima.association :etnia,
+	collection: Sivel2Gen::Etnia.habilitados,
+	include_blank: false,
+	label: "Etnia",
+	label_method: :nombre, 
+	value_method: :id 
+%>
+
+<%= victima.input(:orientacionsexual, collection: [
+						[:HETEROSEXUAL, :H], [:LESBIANA, :L], [:GAY, :G], 
+						[:BISEXUAL, :B], [:TRANSEXUAL, :T], [:INTERSEXUAL, :I]
+], 
+	label: "Orientación Sexual",
+	include_blank: false ) 
+%>
+

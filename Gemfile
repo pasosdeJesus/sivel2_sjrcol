@@ -24,7 +24,8 @@ gem "prawn-table"
 gem "odf-report"
 
 # Plantilla ODS
-gem "rspreadsheet", '0.2.14'
+#gem "rspreadsheet", '0.2.14'
+gem "rspreadsheet", git: "https://github.com/gorn/rspreadsheet"
 gem 'libxml-ruby', '2.8.0' #https://github.com/xml4r/libxml-ruby/issues/127
 
 # Postgresql
@@ -91,8 +92,8 @@ gem 'sip', git: "https://github.com/pasosdeJesus/sip.git"
 #gem 'sip', path: '../sip'
 
 # Motor de SIVeL 2
-gem 'sivel2_gen', git: "https://github.com/pasosdeJesus/sivel2_gen.git"
-#gem 'sivel2_gen', path: '../sivel2_gen'
+#gem 'sivel2_gen', git: "https://github.com/pasosdeJesus/sivel2_gen.git"
+gem 'sivel2_gen', path: '../sivel2_gen'
 
 # Motor de SIVeL 2 - SJR
 gem 'sivel2_sjr', git: "https://github.com/pasosdeJesus/sivel2_sjr.git"
@@ -135,9 +136,9 @@ group :test do
   gem "codeclimate-test-reporter"
 
   gem 'poltergeist'
-
   gem 'connection_pool'
   gem 'minitest-rails-capybara'
+
   # Un proceso para cada prueba -- acelera
   gem 'spork'
 
@@ -157,7 +158,6 @@ group :test do
   # Envia resultados de pruebas desde travis a codeclimate
   #gem "codeclimate-test-reporter", require: nil
 
-  # Para examinar errores, usar "rescue rspec" en lugar de "rspec"
   gem 'pry-rescue'
   gem 'pry-stack_explorer'
 end

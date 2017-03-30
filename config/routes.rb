@@ -42,12 +42,12 @@ Rails.application.routes.draw do
     as: :casos_genera
 
   root "sip/hogar#index"
-  mount Sivel2Sjr::Engine => "/", as: 'sivel2_sjr'
-  mount Sivel2Gen::Engine => "/", as: 'sivel2_gen'
-  mount Cor1440Gen::Engine => "/", as: 'cor1440_gen'
-  mount Sal7711Gen::Engine => "/", as: 'sal7711_gen'
-  mount Heb412Gen::Engine => "/", as: 'heb412_gen'
-  mount Sip::Engine => "/", as: 'sip'
+  mount Sivel2Sjr::Engine, at: "/", as: 'sivel2_sjr'
+  mount Sivel2Gen::Engine, at: "/", as: 'sivel2_gen'
+  mount Cor1440Gen::Engine, at: "/", as: 'cor1440_gen'
+  mount Sal7711Gen::Engine, at: "/", as: 'sal7711_gen'
+  mount Heb412Gen::Engine, at: "/", as: 'heb412_gen'
+  mount Sip::Engine, at: "/", as: 'sip'
 
   namespace :admin do
     ab = ::Ability.new

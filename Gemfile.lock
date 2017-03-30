@@ -1,8 +1,8 @@
 GIT
   remote: https://github.com/gorn/rspreadsheet
-  revision: e8170574e8bd8e1fb15e53b1bece2161f415fdb7
+  revision: 6ba86d069f3a3171b50790bc4fe1322ee102fe20
   specs:
-    rspreadsheet (0.4.2)
+    rspreadsheet (0.4.3)
       andand (~> 1.3)
       libxml-ruby (= 2.8)
       rubyzip (~> 1.1)
@@ -60,8 +60,17 @@ GIT
       will_paginate
 
 GIT
+  remote: https://github.com/pasosdeJesus/sivel2_gen.git
+  revision: a4caf5c9717559bf9f54257b3cbedf5b9bc3fa58
+  specs:
+    sivel2_gen (2.0b2)
+      devise
+      jquery-rails
+      rails
+
+GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: ea1f716d5dfa98889fa5a7f66efc5fdf3f584098
+  revision: 8d9e399d693b9b06d7a34a1bc557195c32b96846
   specs:
     sivel2_sjr (2.0.b1)
       rails
@@ -72,14 +81,6 @@ GIT
   revision: 20f8f3bab2fee21309c57b586f5fab9921ac0894
   specs:
     cocoon (1.2.6)
-
-PATH
-  remote: ../sivel2_gen
-  specs:
-    sivel2_gen (2.0b2)
-      devise
-      jquery-rails
-      rails
 
 GEM
   remote: https://rubygems.org/

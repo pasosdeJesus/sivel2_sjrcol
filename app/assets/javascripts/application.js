@@ -27,7 +27,6 @@ $(document).on('turbolinks:load ready page:load', function() {
 	// Antes de iniciar motor sivel2_gen ponemos este, para que se ejecute antes del incluido en ese motor
 	$(document).on('change', 
 			'[id^=caso_victima_attributes][id$=persona_attributes_anionac]', function(event) {
-				debugger;
 
 		root = typeof exports !== "undefined" && exports !== null ? 
 			exports : window;
@@ -44,6 +43,8 @@ $(document).on('turbolinks:load ready page:load', function() {
 				rid = buscarRangoEdad(+edadActual); 
 				r.val(rid)
 			}
+		} else {
+				r.val(6)
 		}
 		r.prop('disabled', true)
 	});

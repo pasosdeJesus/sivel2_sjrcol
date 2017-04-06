@@ -7531,7 +7531,7 @@ ALTER TABLE ONLY sivel2_sjr_victimasjr
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO "$user", public;
+SET search_path TO public, pg_catalog;
 
 INSERT INTO "schema_migrations" (version) VALUES
 ('20131128151014'),
@@ -7733,6 +7733,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20161129142319'),
 ('20161130230358'),
 ('20161130233916'),
-('20161212175928');
+('20161212175928'),
+('20170406213334');
 
 

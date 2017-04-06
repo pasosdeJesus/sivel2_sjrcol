@@ -11,6 +11,7 @@
 // about supported directives.
 //
 //= require sip/motor
+//= require heb412_gen/motor
 //= require sivel2_gen/motor
 //= require sivel2_sjr/motor
 //= require cor1440_gen/motor
@@ -49,6 +50,7 @@ $(document).on('turbolinks:load ready page:load', function() {
 	});
 
 
+	heb412_gen_prepara_eventos_comunes(root);
 	sivel2_gen_prepara_eventos_comunes(root,'antecedentes/causas');
 	sivel2_sjr_prepara_eventos_comunes(root);
 	cor1440_gen_prepara_eventos_comunes(root);

@@ -113,31 +113,33 @@ class Ability < Sivel2Sjr::Ability
       Sivel2Sjr::Ability::BASICAS_PRIO
   end
 
-  def acciones_plantillas 
-    {'Listado de casos' => 
-     { 
-       campos: [
-         'ultimaatencion_mes', 'ultimaatencion_fecha', 
-         'contacto_nombres', 'contacto_apellidos', 'contacto_identificacion', 
-         'contacto_sexo', 'contacto_edad_ultimaatencion', 'contacto_etnia',
-         'beneficiarios_0_5', 'beneficiarios_6_12',
-         'beneficiarios_13_17', 'beneficiarios_18_26',
-         'beneficiarios_27_59', 'beneficiarios_60_',
-         'beneficiarias_0_5', 'beneficiarias_6_12',
-         'beneficiarias_13_17', 'beneficiarias_18_26',
-         'beneficiarias_27_59', 'beneficiarias_60_',
-         'ultimaatencion_derechosvul', 'ultimaatencion_as_humanitaria',
-         'ultimaatencion_as_juridica', 'ultimaatencion_otros_ser_as', 
-         'ultimaatencion_descripcion_at',
-         'oficina' ],
-         controlador: 'Sivel2Sjr::CasosController#index',
-         unregistro: false # Son muchos registros debe iterarse
-     }
+  CAMPOS_PLANTILLAS_PROPIAS = { 
+    'Caso' => { 
+      campos: [
+        'ultimaatencion_mes', 'ultimaatencion_fecha', 
+        'contacto_nombres', 'contacto_apellidos', 'contacto_identificacion', 
+        'contacto_sexo', 'contacto_edad_ultimaatencion', 'contacto_etnia',
+        'beneficiarios_0_5', 'beneficiarios_6_12',
+        'beneficiarios_13_17', 'beneficiarios_18_26',
+        'beneficiarios_27_59', 'beneficiarios_60_',
+        'beneficiarias_0_5', 'beneficiarias_6_12',
+        'beneficiarias_13_17', 'beneficiarias_18_26',
+        'beneficiarias_27_59', 'beneficiarias_60_',
+        'ultimaatencion_derechosvul', 'ultimaatencion_as_humanitaria',
+        'ultimaatencion_as_juridica', 'ultimaatencion_otros_ser_as', 
+        'ultimaatencion_descripcion_at',
+        'oficina' ],
+        controlador: 'Sivel2Sjr::CasosController'
     }
+  }
+
+  def campos_plantillas
+      Heb412Gen::Ability::CAMPOS_PLANTILLAS_PROPIAS.clone.
+        merge(Cor1440Gen::Ability::CAMPOS_PLANTILLAS_PROPIAS.clone).
+        merge(CAMPOS_PLANTILLAS_PROPIAS)
   end
 
   def initialize(usuario = nil)
-
     can :read, [Sip::Pais, Sip::Departamento, Sip::Municipio, Sip::Clase]
     if !usuario || usuario.fechadeshabilitacion
       return

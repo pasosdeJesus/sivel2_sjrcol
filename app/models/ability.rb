@@ -130,7 +130,19 @@ class Ability < Sivel2Sjr::Ability
         'ultimaatencion_descripcion_at',
         'oficina' ],
         controlador: 'Sivel2Sjr::CasosController'
+    },
+    'Actividad' => { 
+      campos: [
+        'id', 'nombre', 'fecha', 'lugar', 'oficina', 
+        'tipos_de_actividad', 'convenios_financieros', 'areas', 'subareas', 
+        'responsable', 'corresponsables', 'objetivo', 
+        'resultado', 'poblacionmujeres', 'poblacionhombres', 'poblacion',
+        'observaciones', 
+        'creacion', 'actualizacion'
+      ],
+      controlador: 'Cor1440Gen::ActividadesController'
     }
+
   }
 
   def campos_plantillas

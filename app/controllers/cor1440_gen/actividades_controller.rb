@@ -58,5 +58,35 @@ module Cor1440Gen
       ]
     end
 
+    def vector_a_registro(a, ac)
+
+      pob = ac.actividad_rangoedadac.map { |i| 
+        (i.ml ? i.ml : 0) + (i.mr ? i.mr : 0) +
+          (i.fl ? i.fl : 0) + (i.fr ? i.fr : 0)
+      } 
+      return {
+        id: a[0],
+        fecha: a[1],
+        oficina: a[2],
+        responsable: a[3],
+        nombre: a[4],
+        tipos_de_actividad: a[5],
+        areas: a[6],
+        subareas: a[7],
+        convenios_financieros: a[8],
+        objetivo: a[9],
+        lugar: a[10],
+        poblacionmujeres: a[11],
+        poblacionhombres: a[12],
+        poblacion: pob.reduce(:+),
+        observaciones: ac.observaciones,
+        resultado: ac.resultado,
+        creacion: ac.created_at,
+        actualizacion: ac.updated_at,
+        corresponsables: ac.usuario.inject("") { |memo, i| 
+          (memo == "" ? "" : memo + "; ") + i.nusuario },
+      }
+    end
+
   end
 end

@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: e70d24557c2e9506f0453536e9e4a1492104073e
+  revision: c23499f1bd1dc62a4a71e4e03e480e79e68733c0
   specs:
     cor1440_gen (1.0.b1)
       devise
@@ -12,7 +12,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: c5e196f34aa719a3f1f67bd2141b1685d7918deb
+  revision: 6e71d00860e13f94f5eca82fb2b02c4e901b90d8
   specs:
     heb412_gen (1.0.a1)
       chosen-rails
@@ -22,7 +22,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: cfe3d26c2c985ce6ac74d221eea70a68d0677910
+  revision: 7ca6f6e3729282d900f16e695d0d54c34ff6f6fc
   specs:
     sal7711_gen (1.0.b1)
       rails
@@ -30,7 +30,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: e7c6ce2c511416be332c18c7d2c44d90bb7170b8
+  revision: 8d50d2d1854bcf061bb99fa9716ed8c7f98c25c2
   specs:
     sal7711_web (1.0.a3)
       rails
@@ -38,7 +38,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: e7edd7abdb1be0ed7ae2e715e72deb83de09b908
+  revision: 0c513925e6872c57543fd27ed66856064026d0a6
   specs:
     sip (2.0.b2)
       bootstrap-datepicker-rails
@@ -58,7 +58,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 80c602a77348a84a85dc0b656c6b6591a7229d1b
+  revision: 2ec16e140377cf273140ac4e7e6799b26fff8444
   specs:
     sivel2_gen (2.0b2)
       devise
@@ -67,7 +67,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 58a107271b325e2d04e5e574c85c6a43f8935bea
+  revision: b60c1ccab818df86863d54b1faf6d47515e2e02a
   specs:
     sivel2_sjr (2.0.b1)
       rails
@@ -191,7 +191,7 @@ GEM
       thor (>= 0.14, < 2.0)
     jquery-ui-rails (6.0.1)
       railties (>= 3.2.16)
-    json (2.0.3)
+    json (2.0.4)
     kgio (2.11.0)
     less (2.6.0)
       commonjs (~> 0.2.7)
@@ -343,7 +343,7 @@ GEM
     thor (0.19.4)
     thread_safe (0.3.6)
     tilt (2.0.7)
-    ttfunk (1.5.0)
+    ttfunk (1.5.1)
     turbolinks (2.5.3)
       coffee-rails
     twitter-bootstrap-rails (4.0.0)

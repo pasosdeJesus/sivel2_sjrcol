@@ -24,9 +24,9 @@ gem "prawn-table"
 gem "odf-report"
 
 # Plantilla ODS
-gem "rspreadsheet"
+gem "rspreadsheet", path: '../rspreadsheet'
 #gem "rspreadsheet", git: "https://github.com/gorn/rspreadsheet"
-gem 'libxml-ruby', '2.8.0' #https://github.com/xml4r/libxml-ruby/issues/127
+gem 'libxml-ruby', '3.0.0' #https://github.com/xml4r/libxml-ruby/issues/127
 
 # Postgresql
 gem "pg"

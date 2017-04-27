@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: b00ac1301c38f356dd59df0a35ca1613fc07fb83
+  revision: ed5101160a9e8aac15f849b31b692cf8a637a6ee
   specs:
     cor1440_gen (1.0.b1)
       devise
@@ -12,7 +12,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 65b52a9471fdbbcb189e984b684652cac6e95286
+  revision: e46c1474adfe400159c2be522792ae27c04f9920
   specs:
     heb412_gen (1.0.a1)
       chosen-rails
@@ -22,7 +22,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: 6bd092995d524ee9aac446850ecece3068e3fa95
+  revision: 5f42024b4c4eef23c891777829505d8bd8e0b0df
   specs:
     sal7711_gen (1.0.b1)
       rails
@@ -30,7 +30,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: 811da40d524d455f71a952f2e14ae6633c44f867
+  revision: 7343548332330eca2068f8ee1b97b6840419fe47
   specs:
     sal7711_web (1.0.a3)
       rails
@@ -38,7 +38,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 769a3b51aa2c72e8dc59afaa39c8ffef88071425
+  revision: 9f6834d8bf46ac1e75daa05da186d4e7c0bc1f64
   specs:
     sip (2.0.b3)
       bootstrap-datepicker-rails
@@ -59,7 +59,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 75d32fc803534a9e1a63ba9dd7274f8db6a1416b
+  revision: 480d72b7ddec3627e91a0f2c9ad41b9c8f222d42
   specs:
     sivel2_gen (2.0b2)
       devise
@@ -68,7 +68,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: a98afc4c2777f01c74f65f022a74ae4587f605d1
+  revision: 5a5c8ad5ab836d7ae579530fc7a1c5b56a066698
   specs:
     sivel2_sjr (2.0.b1)
       rails
@@ -212,7 +212,7 @@ GEM
     libxml-ruby (3.0.0)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
-    mail (2.6.4)
+    mail (2.6.5)
       mime-types (>= 1.16, < 4)
     method_source (0.8.2)
     mime-types (3.1)

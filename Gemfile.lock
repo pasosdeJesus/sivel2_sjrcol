@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: ed5101160a9e8aac15f849b31b692cf8a637a6ee
+  revision: 794a01986c782e35d3b7bae5b8f06c132fb18a09
   specs:
     cor1440_gen (1.0.b1)
       devise
@@ -12,7 +12,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: e46c1474adfe400159c2be522792ae27c04f9920
+  revision: e84ced0579827b3e8db3b44fbe00ff7d04595a05
   specs:
     heb412_gen (1.0.a1)
       chosen-rails
@@ -22,7 +22,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: 5f42024b4c4eef23c891777829505d8bd8e0b0df
+  revision: 3924a9e5e76bc2fade3c2d49a0d13605d52cf3e8
   specs:
     sal7711_gen (1.0.b1)
       rails
@@ -30,7 +30,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: 7343548332330eca2068f8ee1b97b6840419fe47
+  revision: aead6936274440331af660ac9c00453df1801d60
   specs:
     sal7711_web (1.0.a3)
       rails
@@ -38,7 +38,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 9f6834d8bf46ac1e75daa05da186d4e7c0bc1f64
+  revision: 84da85e89fb2a346edd26df9e44a2184f5c927bf
   specs:
     sip (2.0.b3)
       bootstrap-datepicker-rails
@@ -59,7 +59,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 480d72b7ddec3627e91a0f2c9ad41b9c8f222d42
+  revision: fea76f08105c0a244429e9c5cf7955acd1ddf97e
   specs:
     sivel2_gen (2.0b2)
       devise
@@ -68,7 +68,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 5a5c8ad5ab836d7ae579530fc7a1c5b56a066698
+  revision: a3661889d10a84ef0a2fa91ffa9b464d54ad7241
   specs:
     sivel2_sjr (2.0.b1)
       rails
@@ -183,8 +183,8 @@ GEM
     docile (1.1.5)
     erubis (2.7.0)
     execjs (2.7.0)
-    font-awesome-rails (4.7.0.1)
-      railties (>= 3.2, < 5.1)
+    font-awesome-rails (4.7.0.2)
+      railties (>= 3.2, < 5.2)
     foreman (0.84.0)
       thor (~> 0.19.1)
     globalid (0.4.0)
@@ -316,8 +316,9 @@ GEM
       thor (>= 0.18.1, < 2.0)
     raindrops (0.18.0)
     rake (12.0.0)
-    responders (2.3.0)
-      railties (>= 4.2.0, < 5.1)
+    responders (2.4.0)
+      actionpack (>= 4.2.0, < 5.3)
+      railties (>= 4.2.0, < 5.3)
     rubyzip (1.1.7)
     sass (3.4.23)
     sass-rails (5.0.6)
@@ -356,7 +357,7 @@ GEM
       execjs (~> 2.7)
       less-rails (~> 2.8, >= 2.8.0)
       railties (~> 5.0, >= 5.0.1)
-    twitter_cldr (4.3.1)
+    twitter_cldr (4.4.0)
       camertron-eprun
       cldr-plurals-runtime-rb (~> 1.0)
       tzinfo

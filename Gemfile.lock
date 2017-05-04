@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: 794a01986c782e35d3b7bae5b8f06c132fb18a09
+  revision: b850d95168b949d0b9f681c005cce4990016125a
   specs:
     cor1440_gen (1.0.b1)
       devise
@@ -12,7 +12,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: e84ced0579827b3e8db3b44fbe00ff7d04595a05
+  revision: 57baedae3ca869115ef3c0968b03cf03b6c4ee1e
   specs:
     heb412_gen (1.0.a1)
       chosen-rails
@@ -22,7 +22,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: 3924a9e5e76bc2fade3c2d49a0d13605d52cf3e8
+  revision: 46f8ed11b33c2ff71fff455316a5c59e404fc15c
   specs:
     sal7711_gen (1.0.b1)
       rails
@@ -30,7 +30,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: aead6936274440331af660ac9c00453df1801d60
+  revision: 62a69f9b61c22f79372687cf0e2b6499e3a3af93
   specs:
     sal7711_web (1.0.a3)
       rails
@@ -38,7 +38,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 84da85e89fb2a346edd26df9e44a2184f5c927bf
+  revision: ea79ff2bbe5ca48c71ddca38b063f4559ace950f
   specs:
     sip (2.0.b3)
       bootstrap-datepicker-rails
@@ -59,7 +59,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: fea76f08105c0a244429e9c5cf7955acd1ddf97e
+  revision: e680fa717f2d0c4a309c981cf0435292d0e1a979
   specs:
     sivel2_gen (2.0b2)
       devise
@@ -68,7 +68,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: a3661889d10a84ef0a2fa91ffa9b464d54ad7241
+  revision: e0af96c08d56ec3b672535e8c16d3851e3335e6a
   specs:
     sivel2_sjr (2.0.b1)
       rails
@@ -83,7 +83,7 @@ GIT
 PATH
   remote: ../rspreadsheet
   specs:
-    rspreadsheet (0.4.3)
+    rspreadsheet (0.4.5)
       andand (~> 1.3)
       libxml-ruby (= 3.0)
       rubyzip (~> 1.1)
@@ -141,7 +141,7 @@ GEM
     builder (3.2.3)
     camertron-eprun (1.1.1)
     cancancan (1.16.0)
-    capybara (2.13.0)
+    capybara (2.14.0)
       addressable
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
@@ -252,7 +252,7 @@ GEM
       mimemagic (~> 0.3.0)
     pdf-core (0.7.0)
     pg (0.20.0)
-    poltergeist (1.14.0)
+    poltergeist (1.15.0)
       capybara (~> 2.1)
       cliver (~> 0.3.1)
       websocket-driver (>= 0.2.0)

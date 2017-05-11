@@ -24,8 +24,8 @@ gem "prawn-table"
 gem "odf-report"
 
 # Plantilla ODS
-gem "rspreadsheet", path: '../rspreadsheet'
-#gem "rspreadsheet", git: "https://github.com/gorn/rspreadsheet"
+#gem "rspreadsheet", path: '../rspreadsheet'
+gem "rspreadsheet"#, git: "https://github.com/gorn/rspreadsheet"
 gem 'libxml-ruby', '3.0.0' #https://github.com/xml4r/libxml-ruby/issues/127
 
 # Postgresql
@@ -168,8 +168,4 @@ group :production do
 
   # Requerido por heroku para usar stdout como bitacora
   gem "rails_12factor"
-end
-
-group :staging do
-    gem "newrelic_rpm"
 end

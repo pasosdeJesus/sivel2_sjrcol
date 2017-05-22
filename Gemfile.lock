@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: bfd1d0ac1f9828c34810a79fa94f829dc2fa4b53
+  revision: 32c6e8143e7e455a2c5702a135f5700c7300fc09
   specs:
     cor1440_gen (1.0.b1)
       devise
@@ -12,7 +12,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 3239bfc47287521e856d4fb89a7c68b65b06516b
+  revision: 391466eee6257bcdc96a78b1130e10a886e1b8fa
   specs:
     heb412_gen (1.0.a1)
       chosen-rails
@@ -22,7 +22,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: 46f8ed11b33c2ff71fff455316a5c59e404fc15c
+  revision: 102208dd4244a15c07a4bfb4bccb2454bc3202e6
   specs:
     sal7711_gen (1.0.b1)
       rails
@@ -30,7 +30,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: 62a69f9b61c22f79372687cf0e2b6499e3a3af93
+  revision: 15d22fdce88f73ca3a0b649d42695ed805475664
   specs:
     sal7711_web (1.0.a3)
       rails
@@ -38,7 +38,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: d14071581aadaa8c0565d818512ded96b2e2b894
+  revision: d3d4809bd30cd356351ac957b4482a40f1185123
   specs:
     sip (2.0.b3)
       bootstrap-datepicker-rails
@@ -60,7 +60,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: e680fa717f2d0c4a309c981cf0435292d0e1a979
+  revision: 83fb357d406a40c5c0a2a7e9df5ba164d77b17b9
   specs:
     sivel2_gen (2.0b2)
       devise
@@ -69,7 +69,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: e8b16c31ac5904102fffc6f9e99882056fc31c3e
+  revision: 6adca6530b500aae18ffb2aefa2cdb411935fb27
   specs:
     sivel2_sjr (2.0.b1)
       rails
@@ -84,39 +84,39 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
-    actioncable (5.0.2)
-      actionpack (= 5.0.2)
+    actioncable (5.0.3)
+      actionpack (= 5.0.3)
       nio4r (>= 1.2, < 3.0)
       websocket-driver (~> 0.6.1)
-    actionmailer (5.0.2)
-      actionpack (= 5.0.2)
-      actionview (= 5.0.2)
-      activejob (= 5.0.2)
+    actionmailer (5.0.3)
+      actionpack (= 5.0.3)
+      actionview (= 5.0.3)
+      activejob (= 5.0.3)
       mail (~> 2.5, >= 2.5.4)
       rails-dom-testing (~> 2.0)
-    actionpack (5.0.2)
-      actionview (= 5.0.2)
-      activesupport (= 5.0.2)
+    actionpack (5.0.3)
+      actionview (= 5.0.3)
+      activesupport (= 5.0.3)
       rack (~> 2.0)
       rack-test (~> 0.6.3)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.0, >= 1.0.2)
-    actionview (5.0.2)
-      activesupport (= 5.0.2)
+    actionview (5.0.3)
+      activesupport (= 5.0.3)
       builder (~> 3.1)
       erubis (~> 2.7.0)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.0, >= 1.0.3)
-    activejob (5.0.2)
-      activesupport (= 5.0.2)
+    activejob (5.0.3)
+      activesupport (= 5.0.3)
       globalid (>= 0.3.6)
-    activemodel (5.0.2)
-      activesupport (= 5.0.2)
-    activerecord (5.0.2)
-      activemodel (= 5.0.2)
-      activesupport (= 5.0.2)
+    activemodel (5.0.3)
+      activesupport (= 5.0.3)
+    activerecord (5.0.3)
+      activemodel (= 5.0.3)
+      activesupport (= 5.0.3)
       arel (~> 7.0)
-    activesupport (5.0.2)
+    activesupport (5.0.3)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (~> 0.7)
       minitest (~> 5.1)
@@ -133,7 +133,7 @@ GEM
       railties (>= 3.0)
     builder (3.2.3)
     camertron-eprun (1.1.1)
-    cancancan (1.16.0)
+    cancancan (2.0.0)
     capybara (2.14.0)
       addressable
       mime-types (>= 1.16)
@@ -141,13 +141,13 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
-    chartkick (2.2.3)
+    chartkick (2.2.4)
     chosen-rails (1.5.2)
       coffee-rails (>= 3.2)
       railties (>= 3.0)
       sass-rails (>= 3.2)
     cldr-plurals-runtime-rb (1.0.1)
-    climate_control (0.1.0)
+    climate_control (0.2.0)
     cliver (0.3.2)
     cocaine (0.5.8)
       climate_control (>= 0.0.3, < 1.0)
@@ -166,10 +166,10 @@ GEM
     concurrent-ruby (1.0.5)
     connection_pool (2.2.1)
     debug_inspector (0.0.3)
-    devise (4.2.1)
+    devise (4.3.0)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
-      railties (>= 4.1.0, < 5.1)
+      railties (>= 4.1.0, < 5.2)
       responders
       warden (~> 1.2.3)
     devise-i18n (1.1.2)
@@ -268,24 +268,24 @@ GEM
       pry (>= 0.9.11)
     public_suffix (2.0.5)
     puma (3.8.2)
-    rack (2.0.2)
+    rack (2.0.3)
     rack-test (0.6.3)
       rack (>= 1.0)
-    rails (5.0.2)
-      actioncable (= 5.0.2)
-      actionmailer (= 5.0.2)
-      actionpack (= 5.0.2)
-      actionview (= 5.0.2)
-      activejob (= 5.0.2)
-      activemodel (= 5.0.2)
-      activerecord (= 5.0.2)
-      activesupport (= 5.0.2)
+    rails (5.0.3)
+      actioncable (= 5.0.3)
+      actionmailer (= 5.0.3)
+      actionpack (= 5.0.3)
+      actionview (= 5.0.3)
+      activejob (= 5.0.3)
+      activemodel (= 5.0.3)
+      activerecord (= 5.0.3)
+      activesupport (= 5.0.3)
       bundler (>= 1.3.0, < 2.0)
-      railties (= 5.0.2)
+      railties (= 5.0.3)
       sprockets-rails (>= 2.0.0)
-    rails-controller-testing (1.0.1)
-      actionpack (~> 5.x)
-      actionview (~> 5.x)
+    rails-controller-testing (1.0.2)
+      actionpack (~> 5.x, >= 5.0.1)
+      actionview (~> 5.x, >= 5.0.1)
       activesupport (~> 5.x)
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
@@ -300,9 +300,9 @@ GEM
       rails_stdout_logging
     rails_serve_static_assets (0.0.5)
     rails_stdout_logging (0.0.5)
-    railties (5.0.2)
-      actionpack (= 5.0.2)
-      activesupport (= 5.0.2)
+    railties (5.0.3)
+      actionpack (= 5.0.3)
+      activesupport (= 5.0.3)
       method_source
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
@@ -315,24 +315,24 @@ GEM
       andand (~> 1.3)
       rubyzip (~> 1.1)
     rubyzip (1.1.7)
-    sass (3.4.23)
+    sass (3.4.24)
     sass-rails (5.0.6)
       railties (>= 4.0.0, < 6)
       sass (~> 3.1)
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
-    simple_form (3.4.0)
-      actionpack (> 4, < 5.1)
-      activemodel (> 4, < 5.1)
+    simple_form (3.5.0)
+      actionpack (> 4, < 5.2)
+      activemodel (> 4, < 5.2)
     simplecov (0.13.0)
       docile (~> 1.1.0)
       json (>= 1.8, < 3)
       simplecov-html (~> 0.10.0)
-    simplecov-html (0.10.0)
+    simplecov-html (0.10.1)
     slop (3.6.0)
     spork (0.9.2)
-    spring (2.0.1)
+    spring (2.0.2)
       activesupport (>= 4.2)
     sprockets (3.7.1)
       concurrent-ruby (~> 1.0)
@@ -367,7 +367,7 @@ GEM
       raindrops (~> 0.7)
     warden (1.2.7)
       rack (>= 1.0)
-    web-console (3.5.0)
+    web-console (3.5.1)
       actionview (>= 5.0)
       activemodel (>= 5.0)
       bindex (>= 0.4.0)

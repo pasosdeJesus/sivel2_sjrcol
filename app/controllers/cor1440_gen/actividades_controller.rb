@@ -8,7 +8,7 @@ module Cor1440Gen
     Cor1440Gen.actividadg1 = "Funcionarias del SJR"
     Cor1440Gen.actividadg3 = "Funcionarios del SJR"
 
-    def self.filtramas(par, ac)
+    def self.filtramas(par, ac, current_usuario)
         return ac
     end
 

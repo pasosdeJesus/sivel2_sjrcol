@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: 24c228533c27b97d8d94f850e4bf726d2ef74a57
+  revision: 781a6c63c2efff474a4d5a9bc5707d087bffac88
   specs:
     cor1440_gen (1.0.b1)
       devise
@@ -12,7 +12,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: d8451fbe1234851ae7092c1082acb3cf8c7bd50e
+  revision: af9188d4f70c6e62d632ceb8c12c60c33821268d
   specs:
     heb412_gen (1.0.a1)
       chosen-rails
@@ -22,7 +22,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: 6c5a5eaf8fc9ab94c9781726963457af2e62e45f
+  revision: 8648f033e309241a8b28e66fa980e2ead1b2900f
   specs:
     sal7711_gen (1.0.b1)
       rails
@@ -30,7 +30,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: 62f3ed5e326754b005cb33a43ad317886631c03a
+  revision: 8905d3f286923463eb4dc212c5f5011fca3a2100
   specs:
     sal7711_web (1.0.a3)
       rails
@@ -60,7 +60,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: d47a37d1d59918f592f7e1bfd429b627739abd19
+  revision: 0dbd32fe4012c3c1d4b7f07f1d7eba7455f71d27
   specs:
     sivel2_gen (2.0b2)
       devise
@@ -69,7 +69,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 4b3425831c01b07e06ae17d8490fbe9ad49fd0b7
+  revision: a86f8bc0acf5789de988419285ff90296a87bf95
   specs:
     sivel2_sjr (2.0.b1)
       rails
@@ -134,7 +134,7 @@ GEM
     builder (3.2.3)
     camertron-eprun (1.1.1)
     cancancan (2.0.0)
-    capybara (2.14.3)
+    capybara (2.14.4)
       addressable
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)

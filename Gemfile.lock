@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: c03c404db213af944e5cda79349f5a758ab575d7
+  revision: 95df7bdd772fafdc6fde04c8a6f94fb92a8358fa
   specs:
     cor1440_gen (1.0.b1)
       devise
@@ -12,7 +12,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 4fa77beb1cbee9ba7ef9d5bc82b45499217b24b0
+  revision: 8df2b183f3d8afd3fd864b7acedf5fb700bdbc4d
   specs:
     heb412_gen (1.0.a1)
       chosen-rails
@@ -22,7 +22,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: d584b91d351869c26130adfb84b58f1da6f5704a
+  revision: ba6ad10b9ac909a110e27f8472bb9463abd05444
   specs:
     sal7711_gen (1.0.b1)
       rails
@@ -30,7 +30,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: c40488b4b43bb1bb7804f6eca10c8cd0cba2efad
+  revision: 53edb578a3de52390df8a81653207b1caf434825
   specs:
     sal7711_web (1.0.a3)
       rails
@@ -38,7 +38,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: ff0d1dc1153096fff2a331f99cf1f72a66c7d58c
+  revision: d1f6332e94765ceb13e058b147f7ca037dd7817f
   specs:
     sip (2.0.b3)
       bootstrap-datepicker-rails
@@ -49,7 +49,7 @@ GIT
       devise-i18n
       jquery-rails
       jquery-ui-rails
-      minitest (= 5.10.1)
+      minitest
       paperclip
       rails
       rails-i18n
@@ -60,7 +60,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: cbc153c2d823a207c10518e6306e6a29f254ae30
+  revision: 6000828d47e374c38a714e949a926a41b731d5be
   specs:
     sivel2_gen (2.0b2)
       devise
@@ -69,7 +69,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 00cc01d53f1317761be45b66cb54c9b2621edd65
+  revision: 29bf08eadd682a28c6e55c6fc952d6ec733f201b
   specs:
     sivel2_sjr (2.0.b1)
       rails
@@ -213,7 +213,7 @@ GEM
     mime-types-data (3.2016.0521)
     mimemagic (0.3.2)
     mini_portile2 (2.2.0)
-    minitest (5.10.1)
+    minitest (5.10.2)
     minitest-capybara (0.8.2)
       capybara (~> 2.2)
       minitest (~> 5.0)

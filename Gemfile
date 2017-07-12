@@ -1,9 +1,7 @@
 source 'https://rubygems.org'
 
-#ruby "2.1.5"
-
 # Rails (internacionalización)
-gem "rails", '~> 5.0.0'
+gem "rails", '~> 5.1.0'
 gem "rails-i18n"
 
 # Colores en terminal
@@ -26,7 +24,7 @@ gem "odf-report"
 # Plantilla ODS
 #gem "rspreadsheet", path: '../rspreadsheet'
 gem "rspreadsheet"#, git: "https://github.com/gorn/rspreadsheet"
-gem 'libxml-ruby', '3.0.0' #https://github.com/xml4r/libxml-ruby/issues/127
+gem 'libxml-ruby'
 
 # Postgresql
 gem "pg"
@@ -53,7 +51,7 @@ gem "jquery-rails"
 gem "jquery-ui-rails"
 
 # Seguir enlaces más rápido. Ver: https://github.com/rails/turbolinks
-gem "turbolinks", '2.5.3'
+gem "turbolinks"
 
 # Ambiente de CSS
 gem "twitter-bootstrap-rails"
@@ -132,8 +130,6 @@ group :test do
   gem "spring"
 
   gem 'simplecov'
-  # Envia resultados de pruebas desde travis a codeclimate
-  gem "codeclimate-test-reporter"
 
   gem 'poltergeist'
   gem 'connection_pool'

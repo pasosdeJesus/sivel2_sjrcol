@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: 3bb2a56fa2c92af993cd91cdfe97feaa20bb3bc7
+  revision: 29b7e33f1302ba51468870e4510c10967c03e83b
   specs:
     cor1440_gen (1.0.b1)
       devise
@@ -12,7 +12,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 3272546a8af0a6795ebbea3787f6678ad1134611
+  revision: a8bb132eac0d105330436b198a47a543f9c96be5
   specs:
     heb412_gen (1.0.a1)
       chosen-rails
@@ -22,7 +22,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: f824f5594f779447e8e83e11f5416a4ffb7969f0
+  revision: eb3407ffa270b863264f86a818371d43e2e690af
   specs:
     sal7711_gen (1.0.b1)
       rails
@@ -30,7 +30,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: 08b02dd79d6340a62ef1433a13e6a8e9fdc17611
+  revision: cd37558539973d2c93bd55eebb75ec33e7f5d9e4
   specs:
     sal7711_web (1.0.a3)
       rails
@@ -38,7 +38,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: dbc88fca5099d4ba091d8ddd95477a348a4179e7
+  revision: 18271e3723e724458c726ddbdcdb1968be9f4654
   specs:
     sip (2.0.b4)
       bootstrap-datepicker-rails
@@ -60,7 +60,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: f6a195c4b706b83514f7564e2575f7b7b935b1b9
+  revision: 77dd6e4db8559fe2ee0814adaf9325804a0926fa
   specs:
     sivel2_gen (2.0b2)
       devise
@@ -69,7 +69,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 63838234a63eba5f6eeab1b20fa31acd16ee6c22
+  revision: f19b93cc254492525b59f4a3314e19610e33ef0e
   specs:
     sivel2_sjr (2.0.b1)
       rails
@@ -317,11 +317,11 @@ GEM
       andand (~> 1.3)
       rubyzip (~> 1.1)
     rubyzip (1.1.7)
-    sass (3.5.0)
-      sass-listen (~> 3.0.7)
-    sass-listen (3.0.7)
-      rb-fsevent (>= 0.9.3)
-      rb-inotify (>= 0.9.7)
+    sass (3.5.1)
+      sass-listen (~> 4.0.0)
+    sass-listen (4.0.0)
+      rb-fsevent (~> 0.9, >= 0.9.4)
+      rb-inotify (~> 0.9, >= 0.9.7)
     sass-rails (5.0.6)
       railties (>= 4.0.0, < 6)
       sass (~> 3.1)

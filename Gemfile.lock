@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: 29b7e33f1302ba51468870e4510c10967c03e83b
+  revision: a5263cedbb3d571b48b7be5291f2e1afaad811b7
   specs:
     cor1440_gen (1.0.b1)
       devise
@@ -60,7 +60,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 77dd6e4db8559fe2ee0814adaf9325804a0926fa
+  revision: 210551f36682e5b05f1d31f1badcf086b33bb54a
   specs:
     sivel2_gen (2.0b2)
       devise
@@ -69,7 +69,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: f19b93cc254492525b59f4a3314e19610e33ef0e
+  revision: 8b097835bb05c5f6fdd47da72d45a04113950f94
   specs:
     sivel2_sjr (2.0.b1)
       rails
@@ -448,4 +448,4 @@ DEPENDENCIES
   will_paginate
 
 BUNDLED WITH
-   1.15.1
+   1.15.2

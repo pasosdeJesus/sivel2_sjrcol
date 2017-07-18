@@ -21,6 +21,15 @@ SERVIDOR SJR-55r42:
 * Cortafuegos con adJ 5.5 
 * Conexión a Internet en Bogotá por Claro 12MB fibra óptica. 6M de subida.
 
+SERVIDOR SJR-60:
+* AMD FX-6100 3315MHz, 6 núcleos
+* RAM: 32G
+* Disco: 2 discos de 250G (SSD) y 4T
+* Plataforma: adJ 6.0, PostgreSQL 9.6.1, ruby 2.4.0p0, RoR 5.1.2, unicorn 5.3.0
+* Cortafuegos con adJ 6.0 
+* Conexión a Internet en Bogotá por Claro 12MB fibra óptica. 6M de subida.
+
+
 ## ESPECIFICACION DE CLIENTES
 
 CLIENTE V-1:
@@ -64,4 +73,17 @@ CLIENTE V-2:
 * Editar un caso: 3,5
 * Agregar etiqueta y guardar: 4,5
 * Editar de nuevo: 2,8
+
+### Fecha: 17.Jul.2017. Servidor: SJR-60r. Cliente: C-1
+* Autenticar: 0,5
+* Lista de actividades: 
+* Editar una actividad: 
+* Lista de casos: 11
+* Editar un caso: 6
+* Agregar etiqueta y guardar: 4,5
+* Sin modificar presionar validar y guardar: 11
+* Botón regresar: 13
+* Generar plantilla EMHA para 23 casos (recibidos en 1.Ene.2017 y 31.Ene.2017): (no se pudo medir con inspector), con cronometro: 11s
+* Editar de nuevo: 2,8
+
 

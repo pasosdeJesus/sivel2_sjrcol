@@ -3074,9 +3074,7 @@ CREATE MATERIALIZED VIEW sivel2_gen_consexpcaso AS
      JOIN sivel2_gen_victima vcontacto ON (((vcontacto.id_persona = contacto.id) AND (vcontacto.id_caso = caso.id))))
      LEFT JOIN sivel2_gen_etnia etnia ON ((vcontacto.id_etnia = etnia.id)))
      LEFT JOIN sivel2_sjr_ultimaatencion ultimaatencion ON ((ultimaatencion.id_caso = caso.id)))
-  WHERE (conscaso.caso_id IN ( SELECT sivel2_gen_conscaso.caso_id
-           FROM sivel2_gen_conscaso
-          ORDER BY sivel2_gen_conscaso.fecharec DESC))
+  WHERE (true = false)
   WITH NO DATA;
 
 
@@ -7621,7 +7619,7 @@ ALTER TABLE ONLY sivel2_sjr_victimasjr
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO "$user", public;
+SET search_path TO public, pg_catalog;
 
 INSERT INTO "schema_migrations" (version) VALUES
 ('20131128151014'),

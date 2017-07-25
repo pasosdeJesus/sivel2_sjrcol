@@ -433,7 +433,7 @@ CREATE VIEW cben1 AS
    FROM sivel2_gen_caso caso,
     sivel2_sjr_casosjr casosjr,
     sivel2_gen_victima victima
-  WHERE ((caso.id = victima.id_caso) AND (caso.id = casosjr.id_caso) AND (caso.id = victima.id_caso));
+  WHERE ((caso.id = victima.id_caso) AND (caso.id = casosjr.id_caso) AND (caso.id = victima.id_caso) AND (casosjr.oficina_id = 7));
 
 
 --
@@ -1325,7 +1325,7 @@ CREATE VIEW cvp1 AS
    FROM sivel2_sjr_casosjr casosjr,
     sivel2_sjr_respuesta respuesta,
     sivel2_sjr_derecho_respuesta derecho_respuesta
-  WHERE ((respuesta.id_caso = casosjr.id_caso) AND (derecho_respuesta.id_respuesta = respuesta.id));
+  WHERE ((respuesta.id_caso = casosjr.id_caso) AND (derecho_respuesta.id_respuesta = respuesta.id) AND (derecho_respuesta.id_derecho = 12));
 
 
 --

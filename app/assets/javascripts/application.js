@@ -60,7 +60,7 @@ $(document).on('turbolinks:load ready page:load', function() {
 
 	$(document).on('click', 'input[data-enviarautomatico]', function(e) {
 		e.preventDefault();
-		enviarautomatico_formulario(root, $(e.target.form));
+		sip_enviarautomatico_formulario($(e.target.form));
 	});
 
 

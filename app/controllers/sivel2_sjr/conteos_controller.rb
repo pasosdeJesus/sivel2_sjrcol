@@ -66,7 +66,8 @@ class Sivel2Sjr::ConteosController < ApplicationController
       where1 = consulta_and(where1, "casosjr.oficina_id", pOficina)
     end
     if (pDerecho != '') 
-      where1 = consulta_and(where1, "derecho_respuesta.id_derecho", pDerecho)
+      where1 = consulta_and(where1, "derecho_respuesta.id_derecho", 
+                            pDerecho)
     end
 
 

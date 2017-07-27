@@ -3005,6 +3005,7 @@ CREATE MATERIALIZED VIEW sivel2_gen_consexpcaso AS
     conscaso.expulsion,
     conscaso.llegada,
     conscaso.memo AS descripcion,
+    (date_part('month'::text, ultimaatencion.fechaatencion))::integer AS ultimaatencion_mes,
     conscaso.ultimaatencion_fecha,
     conscaso.contacto,
     contacto.nombres AS contacto_nombres,

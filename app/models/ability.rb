@@ -114,22 +114,15 @@ class Ability < Sivel2Sjr::Ability
       Sivel2Sjr::Ability::BASICAS_PRIO
   end
 
+  if ActiveRecord::Base.connection.data_source_exists?('sivel2_gen_caso')
+    Sivel2Gen::Consexpcaso.crea_consexpcaso(nil)
+  end
+
   CAMPOS_PLANTILLAS_PROPIAS = { 
     'Caso' => { 
-      campos: [
-        'ultimaatencion_mes', 'ultimaatencion_fecha', 
-        'contacto_nombres', 'contacto_apellidos', 'contacto_identificacion', 
-        'contacto_sexo', 'contacto_edad_ultimaatencion', 'contacto_etnia',
-        'beneficiarios_0_5', 'beneficiarios_6_12',
-        'beneficiarios_13_17', 'beneficiarios_18_26',
-        'beneficiarios_27_59', 'beneficiarios_60_',
-        'beneficiarias_0_5', 'beneficiarias_6_12',
-        'beneficiarias_13_17', 'beneficiarias_18_26',
-        'beneficiarias_27_59', 'beneficiarias_60_',
-        'ultimaatencion_derechosvul', 'ultimaatencion_as_humanitaria',
-        'ultimaatencion_as_juridica', 'ultimaatencion_otros_ser_as', 
-        'ultimaatencion_descripcion_at',
-        'oficina' ],
+      campos: ActiveRecord::Base.connection.data_source_exists?(
+        'sivel2_gen_consexpcaso') ?
+        Sivel2Gen::Consexpcaso.column_names : [],
         controlador: 'Sivel2Sjr::CasosController'
     },
     'Actividad' => { 

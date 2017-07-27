@@ -6,25 +6,28 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
   include Sivel2Sjr::Concerns::Models::Consexpcaso
   
   def self.consulta_consexpcaso
-        "SELECT conscaso.*,
+        "SELECT conscaso.caso_id,
+        conscaso.fecharec AS fecharecepcion,
+        conscaso.nusuario AS asesor,
+        conscaso.oficina,
+        conscaso.fecha AS fechadespemb,
+        conscaso.expulsion,
+        conscaso.llegada,
+        conscaso.memo AS descripcion,
+        conscaso.ultimaatencion_fecha,
+        conscaso.contacto,
         contacto.nombres AS contacto_nombres,
         contacto.apellidos AS contacto_apellidos,
         (COALESCE(tdocumento.sigla, '') || ' ' || contacto.numerodocumento) 
           AS contacto_identificacion,
         contacto.sexo AS contacto_sexo,
         COALESCE(etnia.nombre, '') AS contacto_etnia,
-        CASE WHEN contacto.anionac IS NULL THEN NULL
-          WHEN contacto.mesnac IS NULL OR contacto.dianac IS NULL THEN 
-            EXTRACT(YEAR FROM ultimaatencion.fechaatencion)-contacto.anionac
-          WHEN contacto.mesnac < EXTRACT(MONTH FROM ultimaatencion.fechaatencion) THEN
-            EXTRACT(YEAR FROM ultimaatencion.fechaatencion)-contacto.anionac
-          WHEN contacto.mesnac > EXTRACT(MONTH FROM ultimaatencion.fechaatencion) THEN
-            EXTRACT(YEAR FROM ultimaatencion.fechaatencion)-contacto.anionac-1
-          WHEN contacto.dianac > EXTRACT(DAY FROM ultimaatencion.fechaatencion) THEN
-            EXTRACT(YEAR FROM ultimaatencion.fechaatencion)-contacto.anionac-1
-          ELSE 
-            EXTRACT(YEAR FROM ultimaatencion.fechaatencion)-contacto.anionac
-        END AS contacto_edad_ultimaatencion,
+        ultimaatencion.contacto_edad AS contacto_edad_ultimaatencion,
+        (SELECT rango FROM sivel2_gen_rangoedad 
+          WHERE fechadeshabilitacion IS NULL 
+          AND limiteinferior<=ultimaatencion.contacto_edad AND 
+          ultimaatencion.contacto_edad<=limitesuperior LIMIT 1) 
+        AS contacto_rangoedad_ultimaatencion,
         (SELECT COUNT(*) FROM 
           sivel2_gen_victima AS victima JOIN sip_persona ON
             sip_persona.id=victima.id_persona

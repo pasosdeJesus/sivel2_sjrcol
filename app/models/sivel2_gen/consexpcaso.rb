@@ -14,6 +14,7 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
         conscaso.expulsion,
         conscaso.llegada,
         conscaso.memo AS descripcion,
+        CAST(EXTRACT(MONTH FROM ultimaatencion.fechaatencion) AS INTEGER) AS ultimaatencion_mes,
         conscaso.ultimaatencion_fecha,
         conscaso.contacto,
         contacto.nombres AS contacto_nombres,

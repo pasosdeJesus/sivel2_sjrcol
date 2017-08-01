@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: beff519447193307ff627df11e75e776f374b8a3
+  revision: 29a6568557139d9b790397ed0c1a0829b5c4a141
   specs:
     cor1440_gen (1.0.b1)
       devise
@@ -38,7 +38,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 456fc3d392e0d6b1d72fb64900ae6bf8ecae6231
+  revision: 26fb095546f3896fd2fc1aabce6e9205f05211d4
   specs:
     sip (2.0.b4)
       bootstrap-datepicker-rails
@@ -60,7 +60,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 269cd5b5b6aaaaf9d1ba0b231eeae086c926b5ce
+  revision: 819ab00ff7273bf3c3570072ae2c9b0ddd56332f
   specs:
     sivel2_gen (2.0b2)
       devise
@@ -69,7 +69,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 309c0c5970d8d323e66034fd65fbdefc8da855a7
+  revision: 4ee1db291928375762392f347ed9d196d8e1a1e2
   specs:
     sivel2_sjr (2.0.b1)
       rails
@@ -359,7 +359,7 @@ GEM
       execjs (~> 2.7)
       less-rails (~> 2.8, >= 2.8.0)
       railties (~> 5.0, >= 5.0.1)
-    twitter_cldr (4.4.1)
+    twitter_cldr (4.4.2)
       camertron-eprun
       cldr-plurals-runtime-rb (~> 1.0)
       tzinfo

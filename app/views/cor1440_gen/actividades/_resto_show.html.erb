@@ -1,0 +1,48 @@
+<dt><strong><%= Cor1440Gen::Actividad.human_attribute_name(:poblacion) %>:</strong></dt>
+<dd>
+  <table border=1>
+    <thead>
+      <tr><th>Rango de Edad</th>
+        <th><%= Cor1440Gen.actividadg1 %></th>
+        <th><%= Cor1440Gen.actividadg2 %></th>
+        <th><%= Cor1440Gen.actividadg3 %></th>
+        <th><%= Cor1440Gen.actividadg4 %></th>
+        <th></th></tr>
+    </thead>
+    <tbody id="actividad_rangoedadac">
+      <% tfl = 0 %>
+      <% tfr = 0 %>
+      <% tml = 0 %>
+      <% tmr = 0 %>
+      <% @actividad.actividad_rangoedadac.order(:rangoedadac_id).each do |re| %> 
+        <tr>
+          <td><%= re.rangoedadac.nombre %></td>
+          <td><%= re.fl ? re.fl : 0 %></td>
+          <td><%= re.fr ? re.fr : 0 %></td>
+          <td><%= re.ml ? re.ml : 0 %></td>
+          <td><%= re.mr ? re.mr : 0 %></td>
+        </tr>
+        <% tfl += re.fl ? re.fl : 0 %>
+        <% tfr += re.fr ? re.fr : 0 %>
+        <% tml += re.ml ? re.ml : 0 %>
+        <% tmr += re.mr ? re.mr : 0 %>
+      <% end %>
+      <tr>
+        <td>Total:</td>
+        <td><%= tfl %></td>
+        <td><%= tfr %></td>
+        <td><%= tml %></td>
+        <td><%= tmr %></td>
+      </tr>
+    </tbody>
+  </table>
+</dd>
+<dt><strong><%= Cor1440Gen::Actividad.human_attribute_name(:lugar) %>:</strong></dt>
+<dd><%= @actividad.lugar %></dd>
+<dt><strong><%= Cor1440Gen::Actividad.human_attribute_name(:resultado) %>:</strong></dt>
+<dd><%= @actividad.resultado %></dd>
+<dt>
+<strong><%= Cor1440Gen::Actividad.human_attribute_name(:observaciones) %>:</strong>
+</dt>
+<dd><%= @actividad.observaciones %></dd>
+

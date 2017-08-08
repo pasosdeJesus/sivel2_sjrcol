@@ -175,6 +175,8 @@ class Ability < Sivel2Sjr::Ability
         can [:update, :create, :destroy], Cor1440Gen::Actividad, 
           oficina: { id: usuario.oficina_id}
         can :manage, Sal7711Gen::Articulo
+        can :read, Heb412Gen::Doc
+        can :read, Heb412Gen::Plantillahcm
 
       when Ability::ROLSIST
         can :read, Sivel2Gen::Caso, casosjr: { oficina_id: usuario.oficina_id }
@@ -187,6 +189,8 @@ class Ability < Sivel2Sjr::Ability
         can :read, Cor1440Gen::Proyectofinanciero
         can [:update, :create, :destroy], Cor1440Gen::Actividad, 
           oficina: { id: usuario.oficina_id}
+        can :read, Heb412Gen::Doc
+        can :read, Heb412Gen::Plantillahcm
 
       when Ability::ROLANALI
         can :read, Sivel2Gen::Caso
@@ -201,6 +205,8 @@ class Ability < Sivel2Sjr::Ability
         can :new, Cor1440Gen::Actividad
         can [:update, :create, :destroy], Cor1440Gen::Actividad, 
           oficina: { id: usuario.oficina_id}
+        can :read, Heb412Gen::Doc
+        can :read, Heb412Gen::Plantillahcm
         can :manage, Sal7711Gen::Articulo
 
       when Ability::ROLCOOR
@@ -216,6 +222,8 @@ class Ability < Sivel2Sjr::Ability
         can :new, Cor1440Gen::Actividad
         can [:update, :create, :destroy], Cor1440Gen::Actividad, 
           oficina: { id: usuario.oficina_id}
+        can :read, Heb412Gen::Doc
+        can :read, Heb412Gen::Plantillahcm
         can :new, Usuario
         can [:read, :manage], Usuario, oficina: { id: usuario.oficina_id}
 
@@ -229,6 +237,7 @@ class Ability < Sivel2Sjr::Ability
         can :manage, Sal7711Gen::Articulo
         can :manage, Usuario
         can :manage, Heb412Gen::Doc
+        can :manage, Heb412Gen::Plantillahcm
         can :manage, :tablasbasicas
         tablasbasicas.each do |t|
           c = Ability.tb_clase(t)

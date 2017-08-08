@@ -48,11 +48,6 @@
     <% if !current_usuario.nil? %>
       <%= drop_down "Documentos" do %>
         <%= menu_item "Documentos de consulta sobre SIVeL", heb412_gen.sisini_path%>
-        <% if current_usuario.rol == Ability::ROLADMIN || 
-             current_usuario.rol == Ability::ROLDIR %>
-           <%= menu_item "Definir plantilla hoja de calculo m.", 
-             heb412_gen.new_plantillahcm_path %>
-        <% end %>
       <% end %>
       <%= drop_down "Administrar" do %>
         <%= menu_item "Clave", main_app.editar_registro_usuario_path %>
@@ -73,6 +68,10 @@
           <%= menu_item "Ver Control de Acceso", sip.ayuda_controldeacceso_path %>
           <!-- %= #menu_item "Casos", admin_casos_path % -->
         <% end %>
+        <% if can? :manage, ::Heb412Gen::Doc %>
+           <%= menu_item "Definir plantilla listado en hoja de calculo", 
+             heb412_gen.new_plantillahcm_path %>
+         <% end %>
       <% end %>
       <%= menu_item "Salir #{current_usuario.nusuario}", main_app.sign_out_path %>
     <% else %>

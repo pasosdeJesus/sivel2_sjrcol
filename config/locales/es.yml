@@ -47,6 +47,8 @@ es:
         fecha: Fecha inicial
         poblacionmujeres: 'Población Mujeres'
         poblacionhombres: 'Población Hombres'
+        proyectofinanciero: 'Convenio financiado'
+        proyectosfinancieros: 'Convenios financiados'
       "cor1440_gen/actividadarea":
         actividadarea: Subárea de Actividad
         Actividadareas: Subáreas de Actividad

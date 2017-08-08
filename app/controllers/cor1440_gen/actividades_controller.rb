@@ -25,10 +25,19 @@ module Cor1440Gen
                @actividades.human_attribute_name(:proyectosfinancieros),
                @actividades.human_attribute_name(:objetivo),
                @actividades.human_attribute_name(:lugar),
-               @actividades.human_attribute_name(:poblacionmujeres),
+              @actividades.human_attribute_name(:poblacionmujeres),
                @actividades.human_attribute_name(:poblacionhombres)
       ]
     end
+
+    # Elementos de la presentacion de una actividad
+    def atributos_presenta
+      return [ :id, :fecha, :oficina, :responsable,
+               :nombre, :actividadtipos, :proyectos,
+               :actividadareas, :proyectosfinancieros, :objetivo
+      ]
+    end
+
 
     def fila_comun(actividad)
       pobf = actividad.actividad_rangoedadac.map { |i| 

@@ -12,7 +12,8 @@ module Cor1440Gen
     # de acuerdo al control de acceso del usuario o a 
     # otros parametros recibidos
     def filtra_acceso(current_usuario, pf, params = nil)
-      if params && params[:filtro] && params[:filtro][:busoficina]
+      if params && params[:filtro] && params[:filtro][:busoficina] &&
+        params[:filtro][:busoficina] != ''
         pf = pf.joins(:oficina_proyectofinanciero).
           where('sivel2_sjr_oficina_proyectofinanciero.oficina_id = ?',
                 params[:filtro][:busoficina])

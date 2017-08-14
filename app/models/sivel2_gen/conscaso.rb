@@ -79,7 +79,8 @@ class Sivel2Gen::Conscaso < ActiveRecord::Base
         END AS contacto_edad
   FROM sivel2_sjr_respuesta AS respuesta JOIN sivel2_sjr_casosjr AS casosjr ON respuesta.id_caso=casosjr.id_caso
   JOIN sip_persona as contacto ON contacto.id=casosjr.contacto
-         WHERE (respuesta.id_caso, fechaatencion) in (SELECT id_caso, MIN(fechaatencion)
+         WHERE (respuesta.id_caso, fechaatencion) in 
+        (SELECT id_caso, MAX(fechaatencion)
          FROM sivel2_sjr_respuesta GROUP BY 1));")
     end
     if !ActiveRecord::Base.connection.data_source_exists? 'sivel2_gen_conscaso'

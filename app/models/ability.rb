@@ -123,7 +123,8 @@ class Ability < Sivel2Sjr::Ability
       campos: ActiveRecord::Base.connection.data_source_exists?(
         'sivel2_gen_consexpcaso') ?
         Sivel2Gen::Consexpcaso.column_names : [],
-        controlador: 'Sivel2Sjr::CasosController'
+        controlador: 'Sivel2Sjr::CasosController',
+        ruta: '/casos'
     },
     'Actividad' => { 
       campos: [
@@ -134,7 +135,8 @@ class Ability < Sivel2Sjr::Ability
         'observaciones', 
         'creacion', 'actualizacion'
       ],
-      controlador: 'Cor1440Gen::ActividadesController'
+      controlador: 'Cor1440Gen::ActividadesController',
+      ruta: '/actividades'
     }
 
   }

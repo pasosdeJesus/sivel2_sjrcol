@@ -66,11 +66,14 @@ class LlenaAccionjuridica < ActiveRecord::Migration[5.1]
 
       INSERT INTO sivel2_sjr_accionjuridica (id, nombre, fechacreacion, created_at, updated_at)
         VALUES (21, 'RECURSO DE REPOSICION Y EN SUBSIDIO DE APELACION', '2017-08-29', '2017-08-29', '2017-08-29');
+
+      INSERT INTO sivel2_sjr_accionjuridica (id, nombre, fechacreacion, created_at, updated_at)
+        VALUES (22, 'REVOCATORIA DIRECTA', '2017-08-29', '2017-08-29', '2017-08-29');
     SQL
   end
   def down
     execute <<-SQL
-      DELETE FROM sivel2_sjr_accionjuridica WHERE id<='13';
+      DELETE FROM sivel2_sjr_accionjuridica WHERE id<'100';
     SQL
   end
 end

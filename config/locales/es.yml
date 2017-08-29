@@ -66,6 +66,9 @@ es:
         presponsable: Presunto responsable
       "sivel2_gen/presponsable": 
         presponsable: presunto responsable
+      "sivel2_sjr/accionjuridica": 
+        Accionjuridica: Acción jurídica
+        Accionesjuridicas: Acciones jurídicas
       "sivel2_sjr/aslegal": 
         Aslegal: Asesoría Jurídica
         Aslegales: Asesorías Jurídicas

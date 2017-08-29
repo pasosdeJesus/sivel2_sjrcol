@@ -63,6 +63,7 @@ class Ability < Sivel2Sjr::Ability
   ]
 
   BASICAS_PROPIAS =  [
+    ['Sivel2Sjr', 'accionjuridica'],
     ['Sivel2Sjr', 'acreditacion'], 
     ['Sivel2Sjr', 'ayudaestado'], 
     ['Sivel2Sjr', 'clasifdesp'], 

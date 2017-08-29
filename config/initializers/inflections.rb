@@ -18,4 +18,5 @@ ActiveSupport::Inflector.inflections do |inflect|
 	inflect.irregular 'progestado', 'progsestado'
 	inflect.irregular 'motivosjr', 'motivossjr'
 	inflect.irregular 'categoria', 'categorias'
+	inflect.irregular 'accionjuridica', 'accionesjuridicas'
 end

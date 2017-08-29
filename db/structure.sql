@@ -3724,6 +3724,40 @@ CREATE TABLE sivel2_gen_vinculoestado (
 
 
 --
+-- Name: sivel2_sjr_accionjuridica; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE sivel2_sjr_accionjuridica (
+    id bigint NOT NULL,
+    nombre character varying(500) NOT NULL,
+    observaciones character varying(5000),
+    fechacreacion date NOT NULL,
+    fechadeshabilitacion date,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: sivel2_sjr_accionjuridica_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE sivel2_sjr_accionjuridica_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: sivel2_sjr_accionjuridica_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE sivel2_sjr_accionjuridica_id_seq OWNED BY sivel2_sjr_accionjuridica.id;
+
+
+--
 -- Name: sivel2_sjr_acreditacion_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -4646,6 +4680,13 @@ ALTER TABLE ONLY sivel2_gen_combatiente ALTER COLUMN id SET DEFAULT nextval('siv
 --
 
 ALTER TABLE ONLY sivel2_gen_resagresion ALTER COLUMN id SET DEFAULT nextval('sivel2_gen_resagresion_id_seq'::regclass);
+
+
+--
+-- Name: sivel2_sjr_accionjuridica id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY sivel2_sjr_accionjuridica ALTER COLUMN id SET DEFAULT nextval('sivel2_sjr_accionjuridica_id_seq'::regclass);
 
 
 --
@@ -5721,6 +5762,14 @@ ALTER TABLE ONLY sivel2_gen_victimacolectiva
 
 ALTER TABLE ONLY sivel2_gen_victimacolectiva
     ADD CONSTRAINT sivel2_gen_victimacolectiva_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: sivel2_sjr_accionjuridica sivel2_sjr_accionjuridica_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY sivel2_sjr_accionjuridica
+    ADD CONSTRAINT sivel2_sjr_accionjuridica_pkey PRIMARY KEY (id);
 
 
 --
@@ -7843,6 +7892,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20170712205819'),
 ('20170718011726'),
 ('20170725042806'),
-('20170814110031');
+('20170814110031'),
+('20170829132710'),
+('20170829135450');
 
 

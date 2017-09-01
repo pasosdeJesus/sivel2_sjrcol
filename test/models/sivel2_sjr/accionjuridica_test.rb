@@ -25,6 +25,7 @@ module Sivel2Sjr
       end
   
       test "existente" do
+        skip
         accionjuridica = Sivel2Sjr::Accionjuridica.where(id: 0).take
         assert_equal accionjuridica.nombre, "SIN INFORMACIÓN"
       end

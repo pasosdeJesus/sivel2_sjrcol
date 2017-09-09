@@ -12,7 +12,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: cf6f54265cae1f4b9c6f1a443c5dcc712b98e503
+  revision: 8cf444bd697eb07d2ff381228f3cb91b314bd25b
   specs:
     heb412_gen (1.0.a1)
       chosen-rails
@@ -38,7 +38,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 0717c44d4a339bb64a8f3324d3aa71e03ac13295
+  revision: 0bd956439a32936bcefa7a2275834c04f9408a21
   specs:
     sip (2.0.b4)
       bootstrap-datepicker-rails
@@ -60,9 +60,9 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 90eccc6551e6e01c276e749c2cc75b9a44cb34b1
+  revision: 7fcf952eccb4561570d52227aa9d85bc59a4d3aa
   specs:
-    sivel2_gen (2.0b2)
+    sivel2_gen (2.0b3)
       devise
       jquery-rails
       rails
@@ -84,39 +84,39 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
-    actioncable (5.1.3)
-      actionpack (= 5.1.3)
+    actioncable (5.1.4)
+      actionpack (= 5.1.4)
       nio4r (~> 2.0)
       websocket-driver (~> 0.6.1)
-    actionmailer (5.1.3)
-      actionpack (= 5.1.3)
-      actionview (= 5.1.3)
-      activejob (= 5.1.3)
+    actionmailer (5.1.4)
+      actionpack (= 5.1.4)
+      actionview (= 5.1.4)
+      activejob (= 5.1.4)
       mail (~> 2.5, >= 2.5.4)
       rails-dom-testing (~> 2.0)
-    actionpack (5.1.3)
-      actionview (= 5.1.3)
-      activesupport (= 5.1.3)
+    actionpack (5.1.4)
+      actionview (= 5.1.4)
+      activesupport (= 5.1.4)
       rack (~> 2.0)
-      rack-test (~> 0.6.3)
+      rack-test (>= 0.6.3)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.0, >= 1.0.2)
-    actionview (5.1.3)
-      activesupport (= 5.1.3)
+    actionview (5.1.4)
+      activesupport (= 5.1.4)
       builder (~> 3.1)
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.0, >= 1.0.3)
-    activejob (5.1.3)
-      activesupport (= 5.1.3)
+    activejob (5.1.4)
+      activesupport (= 5.1.4)
       globalid (>= 0.3.6)
-    activemodel (5.1.3)
-      activesupport (= 5.1.3)
-    activerecord (5.1.3)
-      activemodel (= 5.1.3)
-      activesupport (= 5.1.3)
+    activemodel (5.1.4)
+      activesupport (= 5.1.4)
+    activerecord (5.1.4)
+      activemodel (= 5.1.4)
+      activesupport (= 5.1.4)
       arel (~> 8.0)
-    activesupport (5.1.3)
+    activesupport (5.1.4)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (~> 0.7)
       minitest (~> 5.1)
@@ -151,7 +151,7 @@ GEM
     cliver (0.3.2)
     cocaine (0.5.8)
       climate_control (>= 0.0.3, < 1.0)
-    coderay (1.1.1)
+    coderay (1.1.2)
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0)
@@ -228,7 +228,7 @@ GEM
       minitest-capybara (~> 0.8)
       minitest-metadata (~> 0.6)
       minitest-rails (~> 3.0)
-    multi_json (1.12.1)
+    multi_json (1.12.2)
     nio4r (2.1.0)
     nokogiri (1.8.0)
       mini_portile2 (~> 2.2.0)
@@ -269,19 +269,19 @@ GEM
     public_suffix (3.0.0)
     puma (3.10.0)
     rack (2.0.3)
-    rack-test (0.6.3)
-      rack (>= 1.0)
-    rails (5.1.3)
-      actioncable (= 5.1.3)
-      actionmailer (= 5.1.3)
-      actionpack (= 5.1.3)
-      actionview (= 5.1.3)
-      activejob (= 5.1.3)
-      activemodel (= 5.1.3)
-      activerecord (= 5.1.3)
-      activesupport (= 5.1.3)
+    rack-test (0.7.0)
+      rack (>= 1.0, < 3)
+    rails (5.1.4)
+      actioncable (= 5.1.4)
+      actionmailer (= 5.1.4)
+      actionpack (= 5.1.4)
+      actionview (= 5.1.4)
+      activejob (= 5.1.4)
+      activemodel (= 5.1.4)
+      activerecord (= 5.1.4)
+      activesupport (= 5.1.4)
       bundler (>= 1.3.0)
-      railties (= 5.1.3)
+      railties (= 5.1.4)
       sprockets-rails (>= 2.0.0)
     rails-controller-testing (1.0.2)
       actionpack (~> 5.x, >= 5.0.1)
@@ -300,9 +300,9 @@ GEM
       rails_stdout_logging
     rails_serve_static_assets (0.0.5)
     rails_stdout_logging (0.0.5)
-    railties (5.1.3)
-      actionpack (= 5.1.3)
-      activesupport (= 5.1.3)
+    railties (5.1.4)
+      actionpack (= 5.1.4)
+      activesupport (= 5.1.4)
       method_source
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)

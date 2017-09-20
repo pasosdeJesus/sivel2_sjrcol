@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: ecb090325b17c373ccb52d755e97c8d779505163
+  revision: aa03af288bffadbf5e796ec3fcee3000edcbb08d
   specs:
     cor1440_gen (1.0.b1)
       devise
@@ -12,7 +12,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 568d94b66b87348b2c67a6f1db4fdbd175978304
+  revision: 51e50a7c516da3b611d4faabf01c4f4ff0ef6a41
   specs:
     heb412_gen (1.0.a1)
       chosen-rails
@@ -22,7 +22,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: ae4cf63a39dba3c80a1e3f50b739d47bc7ef4470
+  revision: 984f01eca6689e736ba3e28e5b3644ca6a742cc4
   specs:
     sal7711_gen (1.0.b1)
       rails
@@ -30,7 +30,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: 240410194a6fbce5d9ad441e60576ca6c28e025e
+  revision: 45dada58ffe1734cb016c1f329222286ea78c48f
   specs:
     sal7711_web (1.0.a3)
       rails
@@ -38,7 +38,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: d7b0ffc7f840e72f82fd7c995efb974196463446
+  revision: 3d4e13a44e5fadee503895d387ebe63bb01f3868
   specs:
     sip (2.0.b4)
       bootstrap-datepicker-rails
@@ -60,7 +60,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: c2548dfb6997c1b0fe274cc90ac87e5a22a52d86
+  revision: 00318088a1b70688b4d84c0f069d2dedeb5d40ad
   specs:
     sivel2_gen (2.0b3)
       devise
@@ -69,7 +69,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 9b385c8d5a710ca92aec5cf9380d82771c4f5ba3
+  revision: c05d85a9f2f97dbd8ac229198df764026aac90ad
   specs:
     sivel2_sjr (2.0.b1)
       rails
@@ -212,7 +212,7 @@ GEM
     mime-types-data (3.2016.0521)
     mimemagic (0.3.2)
     mini_mime (0.1.4)
-    mini_portile2 (2.2.0)
+    mini_portile2 (2.3.0)
     minitest (5.10.3)
     minitest-capybara (0.8.2)
       capybara (~> 2.2)
@@ -230,8 +230,8 @@ GEM
       minitest-rails (~> 3.0)
     multi_json (1.12.2)
     nio4r (2.1.0)
-    nokogiri (1.8.0)
-      mini_portile2 (~> 2.2.0)
+    nokogiri (1.8.1)
+      mini_portile2 (~> 2.3.0)
     odf-report (0.5.1)
       nokogiri (>= 1.5.0)
       rubyzip (~> 1.1.0)

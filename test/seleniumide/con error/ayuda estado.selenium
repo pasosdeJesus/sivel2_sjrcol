@@ -4,12 +4,12 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="http://colombia.sjrlac.info/" />
-<title>etnia</title>
+<title>ayuda estado</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">etnia</td></tr>
+<tr><td rowspan="1" colspan="3">ayuda estado</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
@@ -17,13 +17,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>link=Administrar</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAt</td>
-	<td>link=Administrar</td>
+	<td>clickAndWait</td>
+	<td>//ul[2]/li[2]/a/b</td>
 	<td></td>
 </tr>
 <tr>
@@ -32,34 +27,24 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>link=Etnias</td>
+	<td>clickAndWait</td>
+	<td>link=Ayudas del Estado</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Etnias</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>css=a.btn.btn-primary</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>css=a.btn.btn-primary</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>id=etnia_nombre</td>
+	<td>link=Nueva</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=etnia_nombre</td>
-	<td>machupchu</td>
+	<td>id=ayudaestado_nombre</td>
+	<td>proteccion</td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>id=ayudaestado_derecho_ids</td>
+	<td>label=DERECHO A LA INTEGRIDAD PERSONAL</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -78,7 +63,12 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=SIVeL - SJR Colombia 2.0.a6</td>
+	<td>link=Eliminar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>¿Está seguro(a)?</td>
 	<td></td>
 </tr>
 </tbody></table>

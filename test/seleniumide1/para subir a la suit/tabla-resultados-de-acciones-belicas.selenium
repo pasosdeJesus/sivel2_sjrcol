@@ -4,12 +4,12 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="http://colombia.sjrlac.info/" />
-<title>etnia</title>
+<title>tabla-resultados-de-acciones-belicas</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">etnia</td></tr>
+<tr><td rowspan="1" colspan="3">tabla-resultados-de-acciones-belicas</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
@@ -17,28 +17,23 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>click</td>
 	<td>link=Administrar</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAt</td>
-	<td>link=Administrar</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
+	<td>click</td>
 	<td>link=Tablas Básicas</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Etnias</td>
+	<td>link=Resultados de acciones bélicas</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>link=Etnias</td>
+	<td>click</td>
+	<td>link=Resultados de acciones bélicas</td>
 	<td></td>
 </tr>
 <tr>
@@ -47,19 +42,19 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
+	<td>click</td>
 	<td>css=a.btn.btn-primary</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>id=etnia_nombre</td>
+	<td>id=resagresion_nombre</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=etnia_nombre</td>
-	<td>machupchu</td>
+	<td>id=resagresion_nombre</td>
+	<td>aaa</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -67,7 +62,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
+	<td>click</td>
 	<td>link=Eliminar</td>
 	<td></td>
 </tr>
@@ -76,11 +71,7 @@
 	<td>¿Está seguro(a)?</td>
 	<td></td>
 </tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=SIVeL - SJR Colombia 2.0.a6</td>
-	<td></td>
-</tr>
+
 </tbody></table>
 </body>
 </html>

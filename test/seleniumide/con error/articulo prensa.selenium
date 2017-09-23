@@ -4,12 +4,12 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="http://colombia.sjrlac.info/" />
-<title>etiqueta prensa</title>
+<title>articulo prensa</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">etiqueta prensa</td></tr>
+<tr><td rowspan="1" colspan="3">articulo prensa</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
@@ -17,63 +17,38 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>link=Administrar</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAt</td>
-	<td>link=Administrar</td>
+	<td>clickAndWait</td>
+	<td>link=Archivo de Prensa</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Tablas Básicas</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Etiquetas</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAt</td>
-	<td>link=Etiquetas</td>
+	<td>link=Añadir Artículo</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Nueva</td>
+	<td>//div[@id='sizzle1439234676287']/div/table/tbody/tr/td[6]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>id=etiqueta_nombre</td>
-	<td></td>
+	<td>select</td>
+	<td>id=articulo_departamento_id</td>
+	<td>label=AMAZONAS</td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>id=etiqueta_nombre</td>
-	<td>prioritaria</td>
+	<td>select</td>
+	<td>id=articulo_municipio_id</td>
+	<td>label=EL ENCANTO</td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>id=articulo_categoriaprensa_ids</td>
+	<td>label=11 AAAAA</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>name=commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Eliminar</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>¿Está seguro(a)?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=SIVeL - SJR Colombia 2.0.a6</td>
 	<td></td>
 </tr>
 </tbody></table>

@@ -1,0 +1,31 @@
+<tr class='campos-favorableaccionjuridicarespuesta'>
+  <td>
+    <%= f.association :accionjuridica, 
+      collection: Sivel2Sjr::Accionjuridica.habilitados.order(:nombre),
+      include_blank: false,
+      label: false,
+      label_method: :nombre,
+      value_method: :id,
+      input_html: { class: 'chosen-select' }
+    %>
+  </td>
+  <td>
+    <%= f.input :favorable, 
+      boolean_style: :nested,
+      inline_label: false,
+      label: false,
+      input_html: {
+        "data-toggle" => 'tooltip',
+        "title" => ''
+      }
+    %>
+  </td>
+  <td>
+    <%= f.input :id, as: :hidden %>
+    <%= link_to_remove_association "Eliminar", f, 
+        wrapper_class: 'campos-favorableaccionjuridicarespuesta',
+        :class => 'btn-danger' 
+    %>
+    <div><%= f.error_notification %></div>
+  </td>
+</tr>

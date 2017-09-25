@@ -1,0 +1,24 @@
+<table border=1 width="100%">
+  <thead>
+    <tr>
+      <th>Acción jurídica</th>
+      <th>Favorable</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="accionesjuridicasprespuesta">
+    <%= f.simple_fields_for :accionjuridica_respuesta do |ar| %>
+      <%= render 'accionjuridica_respuesta_campos', :f => ar %>
+    <% end %>
+  </tbody>
+</table>
+<div class="links">
+  <%= link_to_add_association 'Añadir acción jurídica', f, 
+    :accionjuridica_respuesta,
+    :"data-association-insertion-node" => "tbody#accionesjuridicasprespuesta", 
+    :"data-association-insertion-method" => "append", 
+    partial: 'accionjuridica_respuesta_campos',
+    :class => 'btn-primary'
+  %>
+</div>
+

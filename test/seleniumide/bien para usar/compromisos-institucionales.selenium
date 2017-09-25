@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://archivoprensa.cinep.org.co:4000/" />
+<title>compromisos-institucionales</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">compromisos-institucionales</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/act/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Compromisos Institucionales</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Listado de Convenios Financiados</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=filtro_busfinanciador_ids</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=filtro_busfinanciador_ids</td>
+	<td>label=AECID</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=filtro_busfinanciador_ids</td>
+	<td>label=ALBOAN</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=filtro_busfinanciador_ids</td>
+	<td>label=AMNISTÍA INTERNACIONAL SECCIÓN SUIZA</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=filtro_busfinanciador_ids</td>
+	<td>label=COLCIENCIAS</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=filtro_busfinanciador_ids</td>
+	<td>label=DIAKONIA SUECIA</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=filtro_busfinanciador_ids</td>
+	<td>label=ECONOMETRíA</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=filtro_busfinanciador_ids</td>
+	<td>label=GOBIERNO VASCO</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=filtro_busfinanciador_ids</td>
+	<td>label=HUMANISMO Y DEMOCRACIA H+D</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=filtro_busfinanciador_ids</td>
+	<td>label=INSTITUCIONAL</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=filtro_busfinanciador_ids</td>
+	<td>label=MISEREOR</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=filtro_busfinanciador_ids</td>
+	<td>label=NIMD</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=filtro_busfinanciador_ids</td>
+	<td>label=OFICINA DEL ALTO COMISIONADO PARA LA PAZ-OACP</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=filtro_busfinanciador_ids</td>
+	<td>label=OXFAM INTERMON</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=filtro_busfinanciador_ids</td>
+	<td>label=PORTICUS</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=filtro_busfinanciador_ids</td>
+	<td>label=SEMBRANDO PAZ</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=filtro_busfinanciador_ids</td>
+	<td>label=UNIDAD DE RESTITUCIóN DE TIERRAS</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=filtro_busfinanciador_ids</td>
+	<td>label=UNION EUROPEA - EIDHR</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=filtro_busfinanciador_ids</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=filtro_busid</td>
+	<td>-1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=filtro_busid</td>
+	<td>-2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=filtro_busid</td>
+	<td>-3</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=filtro_busid</td>
+	<td>-4</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=filtro_busid</td>
+	<td>-5</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=filtro_busid</td>
+	<td>-6</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=filtro_busid</td>
+	<td>-7</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=filtro_busid</td>
+	<td>-8</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=filtro_busid</td>
+	<td>-9</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=filtro_busid</td>
+	<td>-10</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=filtro_busid</td>
+	<td>-11</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=filtro_busid</td>
+	<td>-12</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=filtro_busid</td>
+	<td>-13</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=filtro_busid</td>
+	<td>-1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=filtro_busid</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=filtro_busfinanciador_ids</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=filtro_busgrupo_ids</td>
+	<td>label=Comunicaciones</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=filtro_busgrupo_ids</td>
+	<td>label=Dirección</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=filtro_busgrupo_ids</td>
+	<td>label=Equipo Ciudadanía y Paz</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=filtro_busgrupo_ids</td>
+	<td>label=Equipo Conflicto, Estado y Desarrollo</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=filtro_busgrupo_ids</td>
+	<td>label=Equipo Derechos Humanos</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=filtro_busgrupo_ids</td>
+	<td>label=Equipo Movilización, Territorio e Interculturalidad</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=filtro_busgrupo_ids</td>
+	<td>label=Gerencia Administrativa y Financiera</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=filtro_busgrupo_ids</td>
+	<td>label=Gerencia de Proyectos</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=filtro_busgrupo_ids</td>
+	<td>label=TI</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=filtro_busgrupo_ids</td>
+	<td>label=defensoria</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=filtro_busgrupo_ids</td>
+	<td>label=sjrcolombia</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=filtro_busgrupo_ids</td>
+	<td>label=usuario</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=filtro_busgrupo_ids</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=filtro_busrespgp_id</td>
+	<td>label=Ariadne Jaimes</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=filtro_busrespgp_id</td>
+	<td>label=Estefania Bedoya</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=filtro_busrespgp_id</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=filtro_busestado</td>
+	<td>label=EN CIERRE</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=filtro_busestado</td>
+	<td>label=EN TRAMITE</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=filtro_busestado</td>
+	<td>label=EN EJECUCIÓN</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=filtro_busestado</td>
+	<td>label=TERMINADO</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=filtrar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=filtro_busestado</td>
+	<td>label=TERMINADO</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=filtro_busestado</td>
+	<td>label=DESCARTADO</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=filtro_busestado</td>
+	<td>label=RECHAZADO</td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

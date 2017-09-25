@@ -4,12 +4,12 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="http://colombia.sjrlac.info/" />
-<title>etnia</title>
+<title>maternidad</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">etnia</td></tr>
+<tr><td rowspan="1" colspan="3">maternidad</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
@@ -33,33 +33,28 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Etnias</td>
+	<td>link=Maternidades</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Etnias</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>css=a.btn.btn-primary</td>
+	<td>link=Maternidades</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>css=a.btn.btn-primary</td>
+	<td>link=Nueva</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>id=etnia_nombre</td>
+	<td>id=maternidad_nombre</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=etnia_nombre</td>
-	<td>machupchu</td>
+	<td>id=maternidad_nombre</td>
+	<td>de mucha quietud</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>

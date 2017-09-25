@@ -17,7 +17,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
+	<td>waitForElementPresent</td>
+	<td>link=Administrar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAt</td>
 	<td>link=Administrar</td>
 	<td></td>
 </tr>
@@ -27,13 +32,23 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
+	<td>waitForElementPresent</td>
+	<td>link=Categorias</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAt</td>
 	<td>link=Categorias</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Nueva</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=categoria_nombre</td>
 	<td></td>
 </tr>
 <tr>
@@ -76,7 +91,6 @@
 	<td>name=commit</td>
 	<td></td>
 </tr>
-
 </tbody></table>
 </body>
 </html>

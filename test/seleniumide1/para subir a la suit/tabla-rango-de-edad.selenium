@@ -4,12 +4,12 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="http://colombia.sjrlac.info/" />
-<title>etnia</title>
+<title>tabla-rango-de-edad</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">etnia</td></tr>
+<tr><td rowspan="1" colspan="3">tabla-rango-de-edad</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
@@ -17,28 +17,23 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>link=Administrar</td>
+	<td>click</td>
+	<td>//ul[2]/li[2]/a/b</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAt</td>
-	<td>link=Administrar</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
+	<td>click</td>
 	<td>link=Tablas Básicas</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Etnias</td>
+	<td>link=Rangos de Edad</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>link=Etnias</td>
+	<td>click</td>
+	<td>link=Rangos de Edad</td>
 	<td></td>
 </tr>
 <tr>
@@ -47,19 +42,49 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
+	<td>click</td>
 	<td>css=a.btn.btn-primary</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>id=etnia_nombre</td>
+	<td>id=rangoedad_nombre</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=etnia_nombre</td>
-	<td>machupchu</td>
+	<td>id=rangoedad_nombre</td>
+	<td>b1</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=rangoedad_rango</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rangoedad_rango</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=rangoedad_rango</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rangoedad_rango</td>
+	<td>0-2</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=rangoedad_limitesuperior</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rangoedad_limitesuperior</td>
+	<td>2</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -67,7 +92,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
+	<td>click</td>
 	<td>link=Eliminar</td>
 	<td></td>
 </tr>
@@ -76,11 +101,7 @@
 	<td>¿Está seguro(a)?</td>
 	<td></td>
 </tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=SIVeL - SJR Colombia 2.0.a6</td>
-	<td></td>
-</tr>
+
 </tbody></table>
 </body>
 </html>

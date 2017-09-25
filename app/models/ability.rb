@@ -30,7 +30,8 @@ class Ability < Sivel2Sjr::Ability
     'Administrar tablas básicas. ', #ROLADMIN
 
     'Realizar conteos de casos. ' +
-    'Buscar casos y ver casos con etiqueta de compartidos. ', #ROLINV
+    'Buscar casos y ver casos con etiqueta de compartidos. ' +
+    'Buscar y ver artículos de prensa.' , # ROLINV
  
     'Realizar conteos de casos. ' +
     'Admministrar casos de todas las oficinas. ' +
@@ -53,7 +54,8 @@ class Ability < Sivel2Sjr::Ability
 
     'Realizar conteos de casos. ' +
     'Ver casos de todas las oficinas, crear casos y editar sólo sus casos. ' +
-    'Ver actividades e informes de actividades de todas las oficinas y editar los de su oficina. ', # ROLSIST
+    'Ver actividades e informes de actividades de todas las oficinas y editar los de su oficina. ' +
+    'Buscar y ver artículos de prensa' , # ROLSIST
 
     'Realizar conteos de casos. ' +
     'Ver actividades e informes de actividades de todas las oficinas y editar los de su oficina. ' +

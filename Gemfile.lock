@@ -68,17 +68,18 @@ GIT
       rails
 
 GIT
-  remote: https://github.com/vtamara/cocoon.git
-  revision: 20f8f3bab2fee21309c57b586f5fab9921ac0894
-  specs:
-    cocoon (1.2.6)
-
-PATH
-  remote: ../sivel2_sjr
+  remote: https://github.com/pasosdeJesus/sivel2_sjr.git
+  revision: e2684a03550476747537c77578d6af64d16732b9
   specs:
     sivel2_sjr (2.0.b1)
       rails
       sivel2_gen
+
+GIT
+  remote: https://github.com/vtamara/cocoon.git
+  revision: 20f8f3bab2fee21309c57b586f5fab9921ac0894
+  specs:
+    cocoon (1.2.6)
 
 GEM
   remote: https://rubygems.org/
@@ -131,7 +132,6 @@ GEM
     bootstrap-datepicker-rails (1.7.1.1)
       railties (>= 3.0)
     builder (3.2.3)
-    byebug (9.1.0)
     camertron-eprun (1.1.1)
     cancancan (2.0.0)
     capybara (2.15.1)
@@ -393,7 +393,6 @@ PLATFORMS
 DEPENDENCIES
   bcrypt
   bootstrap-datepicker-rails
-  byebug
   cancancan
   capybara
   chartkick

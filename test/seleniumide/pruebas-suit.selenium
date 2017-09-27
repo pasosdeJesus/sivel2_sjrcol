@@ -8,7 +8,36 @@
 <body>
 <table id="suiteTable" cellpadding="1" cellspacing="1" border="1" class="selenium"><tbody>
 <tr><td><b>Test Suite</b></td></tr>
-<tr><td><a href="actividad_oficio.selenium">actividad_oficio</a></td></tr>
+<tr><td><a href="pruebas-suit.selenium">pruebas-suit</a></td></tr>
+<tr><td><a href="tabla-acreditaciones.selenium">tabla-acreditaciones</a></td></tr>
+<tr><td><a href="tabla-actividad-oficio.selenium">tabla-actividad-oficio</a></td></tr>
+<tr><td><a href="tabla-antecedentes.selenium">tabla-antecedentes</a></td></tr>
+<tr><td><a href="tabla-areas-de-actividad.selenium">tabla-areas-de-actividad</a></td></tr>
+<tr><td><a href="tabla-asesoria-juridica.selenium">tabla-asesoria-juridica</a></td></tr>
+<tr><td><a href="tabla-ayudas-del-estado.selenium">tabla-ayudas-del-estado</a></td></tr>
+<tr><td><a href="tabla-ayudas-del-sjr.selenium">tabla-ayudas-del-sjr</a></td></tr>
+<tr><td><a href="tabla-categoria-de-prensa.selenium">tabla-categoria-de-prensa</a></td></tr>
+<tr><td><a href="tabla-clasificacion-de-desplazamientos.selenium">tabla-clasificacion-de-desplazamientos</a></td></tr>
+<tr><td><a href="tabla-como-supo-del-sjr.selenium">tabla-como-supo-del-sjr</a></td></tr>
+<tr><td><a href="tabla-contexto.selenium">tabla-contexto</a></td></tr>
+<tr><td><a href="tabla-declaro-ante.selenium">tabla-declaro-ante</a></td></tr>
+<tr><td><a href="tabla-derecho.selenium">tabla-derecho</a></td></tr>
+<tr><td><a href="tabla-estado-civil.selenium">tabla-estado-civil</a></td></tr>
+<tr><td><a href="tabla-estatus-migratorio.selenium">tabla-estatus-migratorio</a></td></tr>
+<tr><td><a href="tabla-etiqueta.selenium">tabla-etiqueta</a></td></tr>
+<tr><td><a href="tabla-etnia.selenium">tabla-etnia</a></td></tr>
+<tr><td><a href="tabla-financiador.selenium">tabla-financiador</a></td></tr>
+<tr><td><a href="tabla-fuente-de-prensa.selenium">tabla-fuente-de-prensa</a></td></tr>
+<tr><td><a href="tabla-inclusion.selenium">tabla-inclusion</a></td></tr>
+<tr><td><a href="tabla-maternidad.selenium">tabla-maternidad</a></td></tr>
+<tr><td><a href="tabla-modalidad-tenencia tierra.selenium">tabla-modalidad-tenencia tierra</a></td></tr>
+<tr><td><a href="tabla-necesida-de-proteccion-internacional.selenium">tabla-necesida-de-proteccion-internacional</a></td></tr>
+<tr><td><a href="tabla-nivel-escolaridad.selenium">tabla-nivel-escolaridad</a></td></tr>
+<tr><td><a href="tabla-oficina.selenium">tabla-oficina</a></td></tr>
+<tr><td><a href="tabla-pais.selenium">tabla-pais</a></td></tr>
+<tr><td><a href="tabla-personas-desean.selenium">tabla-personas-desean</a></td></tr>
+<tr><td><a href="tabla-presunto-responsable.selenium">tabla-presunto-responsable</a></td></tr>
+<tr><td><a href="tabla-profesion.selenium">tabla-profesion</a></td></tr>
 </tbody></table>
 </body>
 </html>

@@ -3758,6 +3758,37 @@ ALTER SEQUENCE sivel2_sjr_accionjuridica_id_seq OWNED BY sivel2_sjr_accionjuridi
 
 
 --
+-- Name: sivel2_sjr_accionjuridica_respuesta; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE sivel2_sjr_accionjuridica_respuesta (
+    id bigint NOT NULL,
+    accionjuridica_id integer NOT NULL,
+    respuesta_id integer NOT NULL,
+    favorable boolean
+);
+
+
+--
+-- Name: sivel2_sjr_accionjuridica_respuesta_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE sivel2_sjr_accionjuridica_respuesta_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: sivel2_sjr_accionjuridica_respuesta_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE sivel2_sjr_accionjuridica_respuesta_id_seq OWNED BY sivel2_sjr_accionjuridica_respuesta.id;
+
+
+--
 -- Name: sivel2_sjr_acreditacion_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -4687,6 +4718,13 @@ ALTER TABLE ONLY sivel2_gen_resagresion ALTER COLUMN id SET DEFAULT nextval('siv
 --
 
 ALTER TABLE ONLY sivel2_sjr_accionjuridica ALTER COLUMN id SET DEFAULT nextval('sivel2_sjr_accionjuridica_id_seq'::regclass);
+
+
+--
+-- Name: sivel2_sjr_accionjuridica_respuesta id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY sivel2_sjr_accionjuridica_respuesta ALTER COLUMN id SET DEFAULT nextval('sivel2_sjr_accionjuridica_respuesta_id_seq'::regclass);
 
 
 --
@@ -5773,6 +5811,14 @@ ALTER TABLE ONLY sivel2_sjr_accionjuridica
 
 
 --
+-- Name: sivel2_sjr_accionjuridica_respuesta sivel2_sjr_accionjuridica_respuesta_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY sivel2_sjr_accionjuridica_respuesta
+    ADD CONSTRAINT sivel2_sjr_accionjuridica_respuesta_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: sivel2_sjr_comosupo sivel2_sjr_comosupo_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6792,6 +6838,14 @@ ALTER TABLE ONLY sivel2_sjr_categoria_desplazamiento
 
 
 --
+-- Name: sivel2_sjr_accionjuridica_respuesta fk_rails_362600bcf3; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY sivel2_sjr_accionjuridica_respuesta
+    ADD CONSTRAINT fk_rails_362600bcf3 FOREIGN KEY (accionjuridica_id) REFERENCES sivel2_sjr_accionjuridica(id);
+
+
+--
 -- Name: cor1440_gen_actividad_proyecto fk_rails_395faa0882; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -7077,6 +7131,14 @@ ALTER TABLE ONLY sivel2_gen_combatiente
 
 ALTER TABLE ONLY sivel2_gen_antecedente_combatiente
     ADD CONSTRAINT fk_rails_f305297325 FOREIGN KEY (id_combatiente) REFERENCES sivel2_gen_combatiente(id);
+
+
+--
+-- Name: sivel2_sjr_accionjuridica_respuesta fk_rails_f583703acd; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY sivel2_sjr_accionjuridica_respuesta
+    ADD CONSTRAINT fk_rails_f583703acd FOREIGN KEY (respuesta_id) REFERENCES sivel2_sjr_respuesta(id);
 
 
 --
@@ -7894,6 +7956,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20170725042806'),
 ('20170814110031'),
 ('20170829132710'),
-('20170829135450');
+('20170829135450'),
+('20170925113912');
 
 

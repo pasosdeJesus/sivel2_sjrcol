@@ -4,12 +4,12 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="http://colombia.sjrlac.info/" />
-<title>ayudas-del-estado</title>
+<title>tabla-tipos-de-volencias</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">ayudas-del-estado</td></tr>
+<tr><td rowspan="1" colspan="3">tabla-tipos-de-volencias</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
@@ -28,12 +28,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Ayudas del Estado</td>
+	<td>link=Tipos de Violencia</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Ayudas del Estado</td>
+	<td>link=Tipos de Violencia</td>
 	<td></td>
 </tr>
 <tr>
@@ -42,28 +42,43 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAt</td>
+	<td>click</td>
 	<td>css=a.btn.btn-primary</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>id=ayudaestado_nombre</td>
+	<td>id=tviolencia_id</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=ayudaestado_nombre</td>
+	<td>id=tviolencia_id</td>
+	<td>7</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=tviolencia_nombre</td>
 	<td>aaa</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>id=ayudaestado_observaciones</td>
+	<td>id=tviolencia_nomcorto</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=ayudaestado_observaciones</td>
+	<td>id=tviolencia_nomcorto</td>
+	<td>aa</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=tviolencia_observaciones</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=tviolencia_observaciones</td>
 	<td>bbb</td>
 </tr>
 <tr>

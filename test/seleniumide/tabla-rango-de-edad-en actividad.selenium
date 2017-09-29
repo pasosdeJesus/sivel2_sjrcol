@@ -4,12 +4,12 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="http://colombia.sjrlac.info/" />
-<title>ayudas-del-estado</title>
+<title>tabla-rango-de-edad-en actividad</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">ayudas-del-estado</td></tr>
+<tr><td rowspan="1" colspan="3">tabla-rango-de-edad-en actividad</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
@@ -18,7 +18,7 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Administrar</td>
+	<td>//ul[2]/li[2]/a/b</td>
 	<td></td>
 </tr>
 <tr>
@@ -28,42 +28,62 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Ayudas del Estado</td>
+	<td>link=Rangos de edad en Actividades</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Ayudas del Estado</td>
+	<td>link=Rangos de edad en Actividades</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>css=a.btn.btn-primary</td>
+	<td>xpath=(//a[contains(text(),'Nuevo')])[3]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAt</td>
-	<td>css=a.btn.btn-primary</td>
+	<td>click</td>
+	<td>xpath=(//a[contains(text(),'Nuevo')])[3]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>id=ayudaestado_nombre</td>
+	<td>id=rangoedadac_nombre</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=ayudaestado_nombre</td>
-	<td>aaa</td>
+	<td>id=rangoedadac_nombre</td>
+	<td>De 26 a 35</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>id=ayudaestado_observaciones</td>
+	<td>id=rangoedadac_limiteinferior</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=ayudaestado_observaciones</td>
+	<td>id=rangoedadac_limiteinferior</td>
+	<td>26</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=rangoedadac_limitesuperior</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rangoedadac_limitesuperior</td>
+	<td>35</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=rangoedadac_observaciones</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rangoedadac_observaciones</td>
 	<td>bbb</td>
 </tr>
 <tr>

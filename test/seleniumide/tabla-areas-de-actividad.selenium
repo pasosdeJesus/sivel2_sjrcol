@@ -82,18 +82,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAt</td>
-	<td>css=th.next</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//tr[5]/td[6]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAt</td>
-	<td>//tr[5]/td[6]</td>
+	<td>click</td>
+	<td>css=td.today.day</td>
 	<td></td>
 </tr>
 <tr>

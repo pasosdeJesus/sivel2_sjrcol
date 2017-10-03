@@ -170,8 +170,9 @@ class Ability < Sivel2Sjr::Ability
       can :read, Sal7711Gen::Articulo
       case usuario.rol 
       when Ability::ROLINV
-        cannot :buscar, Sivel2Gen::Caso
-        can :read, Sivel2Gen::Caso 
+        #cannot :buscar, Sivel2Gen::Caso
+        can :read, Sivel2Gen::Caso, 
+          etiqueta: { id: usuario.etiqueta.map(&:id) }
       when Ability::ROLANALIPRENSA
         can :read, Cor1440Gen::Informe
         can :read, Cor1440Gen::Actividad

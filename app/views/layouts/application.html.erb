@@ -48,8 +48,11 @@
   <% end %>
   <%= menu_group :pull => :right do %>
     <% if !current_usuario.nil? %>
-      <%= drop_down "Documentos" do %>
-        <%= menu_item "Documentos de consulta sobre SIVeL", heb412_gen.sisini_path%>
+      <% if can? :read, ::Heb412Gen::Doc %>
+        <%= drop_down "Documentos" do %>
+          <%= menu_item "Documentos de consulta sobre SIVeL", 
+            heb412_gen.sisini_path%>
+        <% end %>
       <% end %>
       <%= drop_down "Administrar" do %>
         <%= menu_item "Clave", main_app.editar_registro_usuario_path %>

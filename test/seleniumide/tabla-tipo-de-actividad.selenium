@@ -57,6 +57,16 @@
 	<td>aaa</td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>id=actividadtipo_observaciones</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=actividadtipo_observaciones</td>
+	<td>bbb</td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>name=commit</td>
 	<td></td>
@@ -71,7 +81,6 @@
 	<td>¿Está seguro(a)?</td>
 	<td></td>
 </tr>
-
 </tbody></table>
 </body>
 </html>

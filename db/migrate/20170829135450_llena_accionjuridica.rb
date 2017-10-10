@@ -38,7 +38,7 @@ class LlenaAccionjuridica < ActiveRecord::Migration[5.1]
         VALUES (11, 'RENUNCIA AL PROCEDIMIENTO DE SOLICITUD DE REFUGIO: TIPO Y MOTIVOS ', '2017-08-29', '2017-08-29', '2017-08-29');
         
       INSERT INTO sivel2_sjr_accionjuridica (id, nombre, fechacreacion, created_at, updated_at)
-        VALUES (12, 'TRATA Y TRÁFICO ', '2017-08-29', '2017-08-29', '2017-08-29');
+        VALUES (12, 'TRATA Y TRÁFICO', '2017-08-29', '2017-08-29', '2017-08-29');
         
       INSERT INTO sivel2_sjr_accionjuridica (id, nombre, fechacreacion, created_at, updated_at)
         VALUES (13, 'TUTELA ALIMENTACIÓN', '2017-08-29', '2017-08-29', '2017-08-29');

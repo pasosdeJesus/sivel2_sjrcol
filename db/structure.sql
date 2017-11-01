@@ -429,11 +429,11 @@ CREATE VIEW cben1 AS
             ELSE 0
         END AS beneficiario,
     1 AS npersona,
-    'total'::text AS total
+    ((date_part('year'::text, casosjr.fecharec) || '-'::text) || lpad((date_part('month'::text, casosjr.fecharec))::text, 2, '0'::text)) AS mes
    FROM sivel2_gen_caso caso,
     sivel2_sjr_casosjr casosjr,
     sivel2_gen_victima victima
-  WHERE ((caso.id = victima.id_caso) AND (caso.id = casosjr.id_caso) AND (caso.id = victima.id_caso) AND (casosjr.oficina_id = 7));
+  WHERE ((caso.id = victima.id_caso) AND (caso.id = casosjr.id_caso) AND (caso.id = victima.id_caso));
 
 
 --
@@ -645,7 +645,7 @@ CREATE VIEW cben2 AS
     cben1.contacto,
     cben1.beneficiario,
     cben1.npersona,
-    cben1.total,
+    cben1.mes,
     ubicacion.id_departamento,
     departamento.nombre AS departamento_nombre,
     ubicacion.id_municipio,
@@ -1325,7 +1325,7 @@ CREATE VIEW cvp1 AS
    FROM sivel2_sjr_casosjr casosjr,
     sivel2_sjr_respuesta respuesta,
     sivel2_sjr_derecho_respuesta derecho_respuesta
-  WHERE ((respuesta.id_caso = casosjr.id_caso) AND (derecho_respuesta.id_respuesta = respuesta.id) AND (derecho_respuesta.id_derecho = 12));
+  WHERE ((respuesta.id_caso = casosjr.id_caso) AND (derecho_respuesta.id_respuesta = respuesta.id));
 
 
 --
@@ -1544,7 +1544,6 @@ ALTER SEQUENCE heb412_gen_doc_id_seq OWNED BY heb412_gen_doc.id;
 CREATE TABLE heb412_gen_plantillahcm (
     id integer NOT NULL,
     ruta character varying(2047) NOT NULL,
-    descripcion character varying(2047),
     fuente character varying(1023),
     licencia character varying(1023),
     vista character varying(127) NOT NULL,
@@ -7959,6 +7958,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20170829135450'),
 ('20170925113912'),
 ('20171003110007'),
-('20171010104604');
+('20171010104604'),
+('20171019133203');
 
 

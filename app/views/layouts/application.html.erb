@@ -73,8 +73,10 @@
           <!-- %= #menu_item "Casos", admin_casos_path % -->
         <% end %>
         <%= menu_item "Ver Control de Acceso", sip.ayuda_controldeacceso_path %>
-        <% if can? :manage, ::Heb412Gen::Doc %>
-           <%= menu_item "Definir plantilla listado en hoja de calculo", 
+        <% if can? :manage, ::Heb412Gen::Plantillahcm %>
+           <%= menu_item "Plantillas para listados en hojas de calculo",
+             heb412_gen.plantillashcm_path %>
+           <%= menu_item "Nueva plantilla para listado en hoja de calculo", 
              heb412_gen.new_plantillahcm_path %>
          <% end %>
       <% end %>

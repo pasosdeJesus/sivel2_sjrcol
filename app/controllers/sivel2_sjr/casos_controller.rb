@@ -52,5 +52,16 @@ module Sivel2Sjr
       end
       return conscaso
     end
+
+    def otros_params_respuesta
+      [
+        :accionjuridica_respuesta_attributes => [
+          :accionjuridica_id,
+          :favorable,
+          :id,
+          :_destroy
+        ]
+      ]
+    end
   end
 end

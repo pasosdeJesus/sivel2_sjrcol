@@ -14,8 +14,10 @@
       <% if can? :read, Sivel2Gen::Caso then %>
         <%= drop_down "Casos" do %>
           <%= menu_item "Listado", sivel2_gen.casos_path %>
-          <%= menu_item "Nuevo", sivel2_gen.new_caso_path %>
-          <%= menu_item "Validaciones", sivel2_gen.validarcasos_path %>
+          <% if can? :edit, Sivel2Gen::Caso then %>
+            <%= menu_item "Nuevo", sivel2_gen.new_caso_path %>
+            <%= menu_item "Validaciones", sivel2_gen.validarcasos_path %>
+          <% end %>
         <% end %>
       <% end %>
       <%= drop_down "Conteos" do %>
@@ -46,8 +48,11 @@
   <% end %>
   <%= menu_group :pull => :right do %>
     <% if !current_usuario.nil? %>
-      <%= drop_down "Documentos" do %>
-        <%= menu_item "Documentos de consulta sobre SIVeL", heb412_gen.sisini_path%>
+      <% if can? :read, ::Heb412Gen::Doc %>
+        <%= drop_down "Documentos" do %>
+          <%= menu_item "Documentos de consulta sobre SIVeL", 
+            heb412_gen.sisini_path%>
+        <% end %>
       <% end %>
       <%= drop_down "Administrar" do %>
         <%= menu_item "Clave", main_app.editar_registro_usuario_path %>

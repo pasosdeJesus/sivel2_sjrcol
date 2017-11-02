@@ -89,6 +89,10 @@ gem "tzinfo-data"
 gem 'sip', git: "https://github.com/pasosdeJesus/sip.git"
 #gem 'sip', path: '../sip'
 
+# Motor Heb412_gen
+gem 'heb412_gen', git: "https://github.com/pasosdeJesus/heb412_gen.git"
+#gem 'heb412_gen', path: '../heb412_gen'
+
 # Motor de SIVeL 2
 gem 'sivel2_gen', git: "https://github.com/pasosdeJesus/sivel2_gen.git"
 #gem 'sivel2_gen', path: '../sivel2_gen'
@@ -109,9 +113,6 @@ gem 'sal7711_gen', git: "https://github.com/pasosdeJesus/sal7711_gen.git"
 gem 'sal7711_web', git: "https://github.com/pasosdeJesus/sal7711_web.git"
 #gem 'sal7711_web', path: '../sal7711_web'
 
-# Motor Heb412_gen
-gem 'heb412_gen', git: "https://github.com/pasosdeJesus/heb412_gen.git"
-#gem 'heb412_gen', path: '../heb412_gen'
 
 
 # Los siguientes son para desarrollo o para pruebas con generadores

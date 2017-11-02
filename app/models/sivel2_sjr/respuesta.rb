@@ -15,6 +15,14 @@ module Sivel2Sjr
     has_many :ayudaestado, class_name: "Sivel2Sjr::Ayudaestado", 
             :through => :ayudaestado_respuesta
 
+    has_many :accionjuridica_respuesta, 
+            class_name: "Sivel2Sjr::AccionjuridicaRespuesta",  
+            foreign_key: "respuesta_id", validate: true,
+            dependent: :delete_all
+    accepts_nested_attributes_for :accionjuridica_respuesta, 
+            reject_if: :all_blank, allow_destroy: true
+    has_many :accionjuridica, class_name: "Sivel2Sjr::Accionjuridica", 
+            :through => :accionjuridica_respuesta
 
     has_many :derecho_respuesta, class_name: "Sivel2Sjr::DerechoRespuesta",  
             foreign_key: "id_respuesta", dependent: :delete_all, validate: true

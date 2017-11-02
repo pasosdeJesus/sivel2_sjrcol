@@ -1,6 +1,8 @@
 # encoding: UTF-8
 
-class Usuario < Sivel2Sjr::Usuario
+require 'sivel2_sjr/concerns/models/usuario'
 
+class Usuario < ActiveRecord::Base
+  include Sivel2Sjr::Concerns::Models::Usuario
 end
 

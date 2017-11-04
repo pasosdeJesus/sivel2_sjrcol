@@ -1,11 +1,11 @@
 <div class="page-header">
-  <h1><%=t '.title', :default => "Municipios expulsores / receptores" %></h1>
+  <h1><%=t '.title', :default => "Acción jurídicas interpuestas" %></h1>
 </div>
 
 <%= simple_form_for :filtro, 
   { remote: true, 
     url: File.join(Rails.configuration.relative_url_root, 
-                   '/conteos/municipios'),
+                   '/conteos/accionesjuridicas'),
     method: "get" } do |f| 
 %>
   <div class="container">
@@ -18,7 +18,7 @@
           maxlength: 10, 
           size: 10,
           label: false,
-          placeholder: 'Fec. Exp. Inicial',
+          placeholder: 'Fec. Atención Inicial',
           input_html: {
             "data-behaviour" => "datepicker",
             "data-contarautomatico" => "" 
@@ -30,7 +30,7 @@
           maxlength: 10, 
           size: 10,
           label: false,
-          placeholder: 'Fec. Exp. Final',
+          placeholder: 'Fec. Atención Final',
           input_html: {
             "data-behaviour" => "datepicker",
             "data-contarautomatico" => "" 
@@ -57,5 +57,5 @@
 <% end %>
 
 <div id="resultado">
-  <%= render 'resultado_municipios' %>
+  <%= render 'resultado_accionesjuridicas' %>
 </div> <!-- id: resultado -->

@@ -69,6 +69,9 @@ es:
       "sivel2_sjr/accionjuridica": 
         Accionjuridica: Acción jurídica
         Accionesjuridicas: Acciones jurídicas
+        respuestapositiva: Respuestas positivas
+        respuestanegativa: Respuestas negativas
+        sinrespuesta: Sin Respuesta
       "sivel2_sjr/aslegal": 
         Aslegal: Asesoría Jurídica
         Aslegales: Asesorías Jurídicas

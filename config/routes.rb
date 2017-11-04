@@ -21,12 +21,14 @@ Rails.application.routes.draw do
   end
   resources :usuarios, path_names: { new: 'nuevo', edit: 'edita' } 
 
+  get "/conteos/accionesjuridicas" => 'sivel2_sjr/conteos#accionesjuridicas', 
+    as: :conteos_accionesjuridicas
+  get "/conteos/desplazamientos" => 'sivel2_sjr/conteos#desplazamientos', 
+    as: :conteos_desplazamientos
   get "/conteos/municipios" => 'sivel2_sjr/conteos#municipios', 
     as: :conteos_municipios
   get "/conteos/rutas" => 'sivel2_sjr/conteos#rutas', 
     as: :contes_rutas
-  get "/conteos/desplazamientos" => 'sivel2_sjr/conteos#desplazamientos', 
-    as: :conteos_desplazamientos
   get "/conteos/vacios" => 'sivel2_sjr/conteos#vacios',
     as: :conteos_vacios
   

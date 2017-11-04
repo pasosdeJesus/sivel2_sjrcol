@@ -10,39 +10,49 @@
 %>
   <div class="container">
     <div class="row filtro-fila">
-      <div class="col-sm-offset-0 col-sm-2 col-md-offset-1 col-md-1">
-        <%= Sivel2Sjr::Casosjr.human_attribute_name(:fecharec) %>
+      <div class="col-sm-4 col-md-3">
+        Filtrar
       </div>
-      <div class="col-sm-offset-0 col-sm-4">
+      <div class="col-sm-4 col-md-3">
         <%= f.input :fechaini,
           maxlength: 10, 
           size: 10,
           label: false,
-          placeholder: 'Inicial',
+          placeholder: 'Fec. Rec. Inicial',
           input_html: {
             "data-behaviour" => "datepicker",
             "data-contarautomatico" => "" 
           }
         %>
       </div>
-      <div class="col-sm-offset-1 col-sm-4">
+      <div class="col-sm-4 col-md-3">
         <%= f.input :fechafin,
           maxlength: 10, 
           size: 10,
           label: false,
-          placeholder: 'Final',
+          placeholder: 'Fec. Rec. Final',
           input_html: {
             "data-behaviour" => "datepicker",
             "data-contarautomatico" => "" 
           }
         %>
       </div>
+      <div class="col-sm-4 col-md-3">
+        <%= f.input :oficina_id,
+          collection: Sip::Oficina.habilitados,
+          label_method: :nombre,
+          value_method: :id,
+          label: false,
+          include_blank: '-- Oficina',
+          input_html: { "data-contarautomatico" => "" }
+        %>
+      </div>
     </div>
     <div class="row filtro-fila">
-      <div class="col-sm-offset-0 col-sm-2 col-md-offset-1 col-md-1">
-        Ordenar:
+      <div class="col-sm-4 col-md-3">
+        Ordenar por:
       </div>
-      <div class="col-sm-4">
+      <div class="col-sm-4 col-md-3">
         <%= f.input :ordenar,
           collection: @opOrdenar,
           label: false,
@@ -50,22 +60,10 @@
           input_html: { "data-contarautomatico" => "" }
         %>
       </div>
-      <div class="col-sm-1">
-        <%= Sivel2Sjr::Casosjr.human_attribute_name(:oficina) %>
-      </div>
-      <div class="col-sm-4">
-        <%= f.input :oficina_id,
-          collection: Sip::Oficina.habilitados,
-          label_method: :nombre,
-          value_method: :id,
-          label: false,
-          input_html: { "data-contarautomatico" => "" }
-        %>
-      </div>
     </div>
     <div class="row filtro-fila">
       <div class="col-md-offset-5 col-md-2">
-        <%= f.button :submit, 'Filtrar', class: 'btn btn-default' %>
+        <%= f.button :submit, 'Contar', class: 'btn btn-default' %>
       </div>
     </div>
   </div>

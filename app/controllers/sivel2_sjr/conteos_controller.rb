@@ -428,4 +428,78 @@ class Sivel2Sjr::ConteosController < ApplicationController
       format.js   { render 'sivel2_gen/conteos/resultado' }
     end
   end
+
+  def accionesjuridicas
+    authorize! :contar, Sivel2Gen::Caso
+
+    pFaini = param_escapa([:filtro, 'fechaini'])
+    pFafin = param_escapa([:filtro, 'fechafin'])
+    pOficina = param_escapa([:filtro, 'oficina_id'])
+
+    where = 'TRUE '
+    if (pFaini != '') 
+      pfechaini = DateTime.strptime(pFaini, '%Y-%m-%d')
+      @fechaini = pfechaini.strftime('%Y-%m-%d')
+      where = consulta_and(where, "casosjr.fecharec", @fechaini, ">=")
+    end
+
+    if (pFafin != '') 
+      pfechafin = DateTime.strptime(pFafin, '%Y-%m-%d')
+      @fechafin = pfechafin.strftime('%Y-%m-%d')
+      where = consulta_and(where, "casosjr.fecharec", @fechafin, "<=")
+    end
+
+    if (pOficina != '')
+      where = consulta_and(where, 'casosjr.oficina_id', pOficina)
+    end
+
+    c = ActiveRecord::Base.connection.select_all(
+      "SELECT a.nombre, ar.favorable, count(r.id) as cuenta
+        FROM sivel2_sjr_accionjuridica AS a 
+        JOIN sivel2_sjr_accionjuridica_respuesta AS ar ON a.id=ar.accionjuridica_id 
+        JOIN sivel2_sjr_respuesta AS r ON ar.respuesta_id=r.id 
+        JOIN sivel2_sjr_casosjr AS casosjr ON r.id_caso=casosjr.id_caso
+      WHERE #{where}
+      GROUP BY 1, 2 ORDER BY 1,2;
+      "
+    )
+
+    @enctabla = ['Acción jurídica', 'Respuesta Positiva', 'Respuesta Negativ', 'Sin respuesta']
+    c2 = {}
+    c.try(:each) do |f|
+      if c2[f['nombre']] 
+         c2[f['nombre']][f['favorable']] = f['cuenta']
+      else
+         c2[f['nombre']] = {}
+         c2[f['nombre']][f['favorable']] = f['cuenta']
+      end
+    end
+    @accionesjuridicas = []
+    tt = 0
+    tf = 0
+    ts = 0
+    c2.try(:each) do |i,v|
+      t = v[true] ? v[true] : 0
+      f = v[false] ? v[false] : 0
+      s = v[nil] ? v[nil] : 0
+      @accionesjuridicas << {'accionjuridica' => i,
+                             'positivas' => t, 
+                             'negativas' => f, 
+                             'sinrespuesta' => s}
+      tt += t
+      tf += f
+      ts += s
+    end
+    @coltotales = { 'positivas' => tt, 
+                    'negativas' => tf, 
+                    'sinrespuesta' => ts}
+
+    respond_to do |format|
+      format.html { }
+      format.json { head :no_content }
+      format.js   { render 'accionesjuridicas' }
+    end
+     
+  end
+
 end

@@ -1,0 +1,31 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= Sivel2Sjr::Accionjuridica.human_attribute_name(:Accionjuridica) %></th>
+      <th><%= Sivel2Sjr::Accionjuridica.human_attribute_name(:respuestapositiva) %></th>
+      <th><%= Sivel2Sjr::Accionjuridica.human_attribute_name(:respuestanegativa) %></th>
+      <th><%= Sivel2Sjr::Accionjuridica.human_attribute_name(:sinrespuesta) %></th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @accionesjuridicas.try(:each) do |aj| %>
+      <tr>
+        <td><%= aj['accionjuridica'] %></td>
+        <td><%= aj['positivas'] %></td>
+        <td><%= aj['negativas'] %></td>
+        <td><%= aj['sinrespuesta'] %></td>
+        <th><%= aj['positivas'] + aj['negativas'] + aj['sinrespuesta'] %></th>
+      </tr>
+    <% end %>
+    <tr>
+      <th>Total</td>
+      <th><%= @coltotales['positivas'] %></td>
+      <th><%= @coltotales['negativas'] %></td>
+      <th><%= @coltotales['sinrespuesta'] %></td>
+      <th><%= @coltotales['positivas'] + @coltotales['negativas'] +
+        @coltotales['sinrespuesta'] %></td>
+    </tr>
+  </tbody>
+</table>
+

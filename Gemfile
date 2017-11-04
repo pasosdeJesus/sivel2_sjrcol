@@ -10,6 +10,8 @@ gem 'colorize'
 # Servidor web
 gem 'puma'
 
+gem 'redcarpet'
+
 # Cuadros de selección para búsquedas
 gem 'chosen-rails'
 

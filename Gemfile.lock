@@ -430,6 +430,7 @@ DEPENDENCIES
   rails-controller-testing
   rails-i18n
   rails_12factor
+  redcarpet
   rspreadsheet
   sal7711_gen!
   sal7711_web!

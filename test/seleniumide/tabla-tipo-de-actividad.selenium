@@ -18,11 +18,6 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>//ul[2]/li[2]/a/b</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
 	<td>link=Tablas Básicas</td>
 	<td></td>
 </tr>

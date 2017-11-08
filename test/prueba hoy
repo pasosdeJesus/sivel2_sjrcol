@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://colombia.sjrlac.info:5100/" />
+<title>prueba hoy</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">prueba hoy</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=b.caret</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Nuevo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Contacto</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Contacto</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=caso_victima_attributes_0_persona_attributes_nombres</td>
+	<td>bbb</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=caso_victima_attributes_0_persona_attributes_apellidos</td>
+	<td>bbb</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=caso_victima_attributes_0_persona_attributes_anionac</td>
+	<td>label=2000</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Datos Básicos</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=th.prev</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=th.prev</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=th.datepicker-switch</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[2]/table/thead/tr[2]/th[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[3]/table/tbody/tr/td/span[8]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=span.month.focused</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='sizzle1506439107166']/div/table/tbody/tr[2]/td</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Contacto</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=caso_victima_attributes_0_persona_attributes_mesnac</td>
+	<td>label=MAYO</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=caso_victima_attributes_0_persona_attributes_dianac</td>
+	<td>label=2</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=caso_victima_attributes_0_persona_attributes_sexo</td>
+	<td>label=MASCULINO</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=caso_victima_attributes_0_victimasjr_attributes_id_estadocivil</td>
+	<td>label=SOLTERO/A</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Ubicación</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Añadir Ubicación</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=caso_ubicacion_attributes_1055_id_pais</td>
+	<td>label=VENEZUELA</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=caso_ubicacion_attributes_1055_id_departamento</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=caso_ubicacion_attributes_1055_id_departamento</td>
+	<td>label=MÉRIDA</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=caso_ubicacion_attributes_1055_id_municipio</td>
+	<td>label=SUCRE</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=caso_ubicacion_attributes_1055_id_clase</td>
+	<td>label=CHIGUARÁ</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Añadir Ubicación</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=caso_ubicacion_attributes_1056_id_pais</td>
+	<td>label=COLOMBIA</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=caso_ubicacion_attributes_1056_id_departamento</td>
+	<td>label=BOGOTÁ, D.C.</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=caso_ubicacion_attributes_1056_id_municipio</td>
+	<td>label=BOGOTÁ, D.C.</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#caso_ubicacion_attributes_1056_id_municipio &gt; option[value=&quot;24&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Desplazamientos</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Añadir Desplazamiento</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=caso_desplazamiento_attributes_429_id_llegada</td>
+	<td>label=COLOMBIA / BOGOTÁ, D.C. / BOGOTÁ, D.C.</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Presuntos Responsables</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Añadir presunto responsable</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=caso_caso_presponsable_attributes_8814_id_presponsable</td>
+	<td>label=OTROS</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#caso_caso_presponsable_attributes_8814_id_presponsable &gt; option[value=&quot;36&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Causas/Antecedentes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>id=caso_acto_id_presponsable</td>
+	<td>label=OTROS</td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>id=caso_acto_id_categoria</td>
+	<td>label=S3003 TORTURA Y TRATOS INHUMANOS, CRUELES Y DEGRADANTES</td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>id=caso_acto_id_persona</td>
+	<td>label=bbb bbb</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#caso_acto_id_persona &gt; option[value=&quot;1945&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>id=caso_acto_id_presponsable</td>
+	<td>label=OTROS</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#caso_acto_id_presponsable &gt; option[value=&quot;36&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Añadir Causa/Antecedente</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Eliminar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>¿Está seguro(a)?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//ul[2]/li[2]/a/b</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=h1</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

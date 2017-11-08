@@ -4,12 +4,12 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="http://colombia.sjrlac.info/" />
-<title>tabla-tipo-de-documento</title>
+<title>tabla-tipos-de-volencia</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">tabla-tipo-de-documento</td></tr>
+<tr><td rowspan="1" colspan="3">tabla-tipos-de-volencia</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
@@ -28,12 +28,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Tipos de Documentos</td>
+	<td>link=Tipos de Violencia</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Tipos de Documentos</td>
+	<td>link=Tipos de Violencia</td>
 	<td></td>
 </tr>
 <tr>
@@ -48,13 +48,23 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>id=tdocumento_nombre</td>
+	<td>id=tviolencia_id</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=tdocumento_nombre</td>
+	<td>id=tviolencia_id</td>
+	<td>55</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=tviolencia_nombre</td>
 	<td>aaa</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=tviolencia_nomcorto</td>
+	<td>aa</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -62,15 +72,16 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>link=Eliminar</td>
-	<td></td>
+	<td>type</td>
+	<td>id=tviolencia_id</td>
+	<td>5</td>
 </tr>
 <tr>
-	<td>assertConfirmation</td>
-	<td>¿Está seguro(a)?</td>
+	<td>clickAndWait</td>
+	<td>name=commit</td>
 	<td></td>
 </tr>
+
 </tbody></table>
 </body>
 </html>

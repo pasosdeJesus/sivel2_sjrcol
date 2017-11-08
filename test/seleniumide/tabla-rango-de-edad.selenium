@@ -54,7 +54,7 @@
 <tr>
 	<td>type</td>
 	<td>id=rangoedad_nombre</td>
-	<td>b1</td>
+	<td>aaa</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>

@@ -4,21 +4,16 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="http://colombia.sjrlac.info/" />
-<title>tabla-tipo-de-documento</title>
+<title>tabla-departamento</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">tabla-tipo-de-documento</td></tr>
+<tr><td rowspan="1" colspan="3">tabla-departamento</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
-	<td>/</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Administrar</td>
+	<td>/admin/declaroantes</td>
 	<td></td>
 </tr>
 <tr>
@@ -28,17 +23,22 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Tipos de Documentos</td>
+	<td>link=Departamentos/Estados</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Tipos de Documentos</td>
+	<td>link=Departamentos/Estados</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>clickAt</td>
 	<td>css=a.btn.btn-primary</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>seleccionar pais</td>
 	<td></td>
 </tr>
 <tr>
@@ -48,13 +48,23 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>id=tdocumento_nombre</td>
+	<td>id=departamento_nombre</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=tdocumento_nombre</td>
+	<td>id=departamento_nombre</td>
 	<td>aaa</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>css=a.chosen-single.chosen-default &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=departamento_id_pais</td>
+	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -71,6 +81,7 @@
 	<td>¿Está seguro(a)?</td>
 	<td></td>
 </tr>
+
 </tbody></table>
 </body>
 </html>

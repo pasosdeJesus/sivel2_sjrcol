@@ -9,6 +9,7 @@
 <table id="suiteTable" cellpadding="1" cellspacing="1" border="1" class="selenium"><tbody>
 <tr><td><b>Test Suite</b></td></tr>
 <tr><td><a href="pruebas-suit.selenium">pruebas-suit</a></td></tr>
+<tr><td><a href="tabla-acciones-juridicas.selenium">tabla-acciones-juridicas</a></td></tr>
 <tr><td><a href="tabla-acreditaciones.selenium">tabla-acreditaciones</a></td></tr>
 <tr><td><a href="tabla-actividad-oficio.selenium">tabla-actividad-oficio</a></td></tr>
 <tr><td><a href="tabla-antecedentes.selenium">tabla-antecedentes</a></td></tr>

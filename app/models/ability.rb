@@ -45,21 +45,24 @@ class Ability < Sivel2Sjr::Ability
     'Ver casos de todas las oficinas, crear casos, editar los de su oficina y poner etiquetas de compartir. ' +
     'Ver actividades e informes de actividades de todas las oficinas y editar los de su oficina. ' +
     'Administrar artículos de prensa. ' +
-    'Administrar usuarios de su oficina. ', # ROLCOOR
+    'Ver documentos en nube. ', # ROLCOOR
 
     'Realizar conteos de casos. ' +
     'Ver casos de todas las oficinas, crear casos y editar los de su oficina. ' +
     'Ver actividades e informes de actividades de todas las oficinas y editar los de su oficina. ' +
-    'Administrar artículos de prensa. ', # ROLANALI
+    'Administrar artículos de prensa. ' +
+    'Ver documentos en nube. ', # ROLANALI
 
     'Realizar conteos de casos. ' +
     'Ver casos de todas las oficinas, crear casos y editar sólo sus casos. ' +
     'Ver actividades e informes de actividades de todas las oficinas y editar los de su oficina. ' +
-    'Buscar y ver artículos de prensa' , # ROLSIST
+    'Buscar y ver artículos de prensa' +
+    'Ver documentos en nube. ', # ROLSIST
 
     'Realizar conteos de casos. ' +
     'Ver actividades e informes de actividades de todas las oficinas y editar los de su oficina. ' +
-    'Administrar artículos de prensa. ' #ROLANALIPRENSA
+    'Administrar artículos de prensa. ' +
+    'Ver documentos en nube. '#ROLANALIPRENSA
 
 
   ]
@@ -230,8 +233,8 @@ class Ability < Sivel2Sjr::Ability
           oficina: { id: usuario.oficina_id}
         can :read, Heb412Gen::Doc
         can :read, Heb412Gen::Plantillahcm
-        can :new, Usuario
-        can [:read, :manage], Usuario, oficina: { id: usuario.oficina_id}
+    #    can :new, Usuario
+    #    can [:read, :manage], Usuario, oficina: { id: usuario.oficina_id}
 
       when Ability::ROLADMIN, Ability::ROLDIR
         can :manage, Sivel2Gen::Caso

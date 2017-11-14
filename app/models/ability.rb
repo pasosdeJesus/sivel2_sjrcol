@@ -233,8 +233,6 @@ class Ability < Sivel2Sjr::Ability
           oficina: { id: usuario.oficina_id}
         can :read, Heb412Gen::Doc
         can :read, Heb412Gen::Plantillahcm
-    #    can :new, Usuario
-    #    can [:read, :manage], Usuario, oficina: { id: usuario.oficina_id}
 
       when Ability::ROLADMIN, Ability::ROLDIR
         can :manage, Sivel2Gen::Caso

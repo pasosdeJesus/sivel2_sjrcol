@@ -11,14 +11,10 @@
   </td>
   <td>
     <%= f.input :favorable, 
-      boolean_style: :nested,
-      inline_label: false,
+      collection: [ ['SIN RESPUESTA', nil], 
+                    ['SI', true], [:NO, false] ],
       label: false,
-      input_html: {
-        "data-toggle" => 'tooltip',
-        "title" => ''
-      }
-    %>
+      include_blank: false %>
   </td>
   <td>
     <%= f.input :id, as: :hidden %>

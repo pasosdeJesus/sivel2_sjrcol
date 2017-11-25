@@ -22,22 +22,6 @@ GIT
       sip
 
 GIT
-  remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: fd62603f76dd29ebd63c32a77d061a03d8685df2
-  specs:
-    sal7711_gen (1.0.b1)
-      rails
-      sip
-
-GIT
-  remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: 9fc990dfa3cc3788cb3e030a68052a9aae106343
-  specs:
-    sal7711_web (1.0.a3)
-      rails
-      sal7711_gen
-
-GIT
   remote: https://github.com/pasosdeJesus/sip.git
   revision: b40a8edc45da1aa7da13e08aaabbfa2b97b713a8
   specs:
@@ -90,6 +74,20 @@ GIT
     odf-report (0.5.2)
       nokogiri (>= 1.5.0)
       rubyzip (~> 1.2.0)
+
+PATH
+  remote: ../sal7711_gen
+  specs:
+    sal7711_gen (1.0.b1)
+      rails
+      sip
+
+PATH
+  remote: ../sal7711_web
+  specs:
+    sal7711_web (1.0.a3)
+      rails
+      sal7711_gen
 
 GEM
   remote: https://rubygems.org/

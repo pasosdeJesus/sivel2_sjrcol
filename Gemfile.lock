@@ -60,6 +60,15 @@ GIT
       will_paginate
 
 GIT
+  remote: https://github.com/pasosdeJesus/sivel2_gen.git
+  revision: cbe33cfd98e99b7903dfc9e0d9223e0a2c574bd3
+  specs:
+    sivel2_gen (2.0b3)
+      devise
+      jquery-rails
+      rails
+
+GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
   revision: 0a427c2c02be1eb8a5c03698ca56980b1d5716f5
   specs:
@@ -81,14 +90,6 @@ GIT
     odf-report (0.5.2)
       nokogiri (>= 1.5.0)
       rubyzip (~> 1.2.0)
-
-PATH
-  remote: ../sivel2_gen
-  specs:
-    sivel2_gen (2.0b3)
-      devise
-      jquery-rails
-      rails
 
 GEM
   remote: https://rubygems.org/

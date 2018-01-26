@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: 30770fd663c8c3b45adbe7d0bf2b8e196ad2bdf2
+  revision: b3c9076d31919a5165b0b8380d431ad3a70a9255
   specs:
     cor1440_gen (1.0b2)
       devise
@@ -12,7 +12,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: f689d810923d85e0ee451cd3cfe780ded6cd2502
+  revision: 4acc07a0f61a6210cd56ccd53d9b2c128f304228
   specs:
     heb412_gen (1.0.a1)
       chosen-rails
@@ -23,7 +23,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: 39cae8bdf7ef591190bf70261ccae72c3c9e1664
+  revision: 7532c591359d5750b147865b7ee9fef12f617db4
   specs:
     sal7711_gen (1.0.b1)
       rails
@@ -31,7 +31,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: 900f02246e8f721ece73c9f885577eb93885c0a0
+  revision: 4d61ad25dbd7aaaed022d8d07bbb73385aefc416
   specs:
     sal7711_web (1.0.a3)
       rails
@@ -39,7 +39,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 5bfcd031b58d312844fd43b4baeffb26ac686440
+  revision: 2fdab5e0423451ceefab347f996f3365b30d8f0e
   specs:
     sip (2.0.b4)
       bootstrap-datepicker-rails
@@ -61,7 +61,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 48f5982cbd8afb33d9c24858789a4e15fc022ca5
+  revision: f002cbfb137b026477ef93a20cae1cb6821db54a
   specs:
     sivel2_gen (2.0b3)
       devise
@@ -70,7 +70,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 93f4dacefcae3e51be0b464b52bf55ced555dac0
+  revision: 58b293392ac38defc87bca9178df5963b81b25b4
   specs:
     sivel2_sjr (2.0.b1)
       rails
@@ -137,22 +137,22 @@ GEM
     arel (8.0.0)
     bcrypt (3.1.11)
     bindex (0.5.0)
-    binding_of_caller (0.7.3)
+    binding_of_caller (0.8.0)
       debug_inspector (>= 0.0.1)
     bootstrap-datepicker-rails (1.7.1.1)
       railties (>= 3.0)
     builder (3.2.3)
     camertron-eprun (1.1.1)
-    cancancan (2.1.2)
-    capybara (2.16.1)
+    cancancan (2.1.3)
+    capybara (2.17.0)
       addressable
       mini_mime (>= 0.1.3)
       nokogiri (>= 1.3.3)
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
-      xpath (~> 2.0)
+      xpath (>= 2.0, < 4.0)
     chartkick (2.2.5)
-    chosen-rails (1.5.2)
+    chosen-rails (1.8.2)
       coffee-rails (>= 3.2)
       railties (>= 3.0)
       sass-rails (>= 3.2)
@@ -175,7 +175,7 @@ GEM
     connection_pool (2.2.1)
     crass (1.0.3)
     debug_inspector (0.0.3)
-    devise (4.3.0)
+    devise (4.4.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 4.1.0, < 5.2)
@@ -187,13 +187,13 @@ GEM
     erubi (1.7.0)
     execjs (2.7.0)
     ffi (1.9.18)
-    font-awesome-rails (4.7.0.2)
+    font-awesome-rails (4.7.0.3)
       railties (>= 3.2, < 5.2)
     foreman (0.84.0)
       thor (~> 0.19.1)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
-    i18n (0.9.1)
+    i18n (0.9.3)
       concurrent-ruby (~> 1.0)
     interception (0.5)
     jbuilder (2.7.0)
@@ -206,7 +206,7 @@ GEM
     jquery-ui-rails (6.0.1)
       railties (>= 3.2.16)
     json (2.1.0)
-    kgio (2.11.0)
+    kgio (2.11.1)
     less (2.6.0)
       commonjs (~> 0.2.7)
     less-rails (2.8.0)
@@ -227,7 +227,7 @@ GEM
     mimemagic (0.3.2)
     mini_mime (1.0.0)
     mini_portile2 (2.3.0)
-    minitest (5.10.3)
+    minitest (5.11.2)
     minitest-capybara (0.8.2)
       capybara (~> 2.2)
       minitest (~> 5.0)
@@ -242,12 +242,12 @@ GEM
       minitest-capybara (~> 0.8)
       minitest-metadata (~> 0.6)
       minitest-rails (~> 3.0)
-    multi_json (1.12.2)
-    nio4r (2.1.0)
+    multi_json (1.13.1)
+    nio4r (2.2.0)
     nokogiri (1.8.1)
       mini_portile2 (~> 2.3.0)
     orm_adapter (0.5.0)
-    paperclip (5.1.0)
+    paperclip (5.2.1)
       activemodel (>= 4.2.0)
       activesupport (>= 4.2.0)
       cocaine (~> 0.5.5)
@@ -277,7 +277,7 @@ GEM
       binding_of_caller (>= 0.7)
       pry (>= 0.9.11)
     public_suffix (3.0.1)
-    puma (3.11.0)
+    puma (3.11.2)
     rack (2.0.3)
     rack-test (0.8.2)
       rack (>= 1.0, < 3)
@@ -329,7 +329,7 @@ GEM
       andand (~> 1.3)
       rubyzip (~> 1.1)
     rubyzip (1.2.1)
-    sass (3.5.3)
+    sass (3.5.5)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
       rb-fsevent (~> 0.9, >= 0.9.4)
@@ -362,9 +362,9 @@ GEM
     thread_safe (0.3.6)
     tilt (2.0.8)
     ttfunk (1.5.1)
-    turbolinks (5.0.1)
-      turbolinks-source (~> 5)
-    turbolinks-source (5.0.3)
+    turbolinks (5.1.0)
+      turbolinks-source (~> 5.1)
+    turbolinks-source (5.1.0)
     twitter-bootstrap-rails (4.0.0)
       actionpack (~> 5.0, >= 5.0.1)
       execjs (~> 2.7)
@@ -376,11 +376,11 @@ GEM
       tzinfo
     tzinfo (1.2.4)
       thread_safe (~> 0.1)
-    tzinfo-data (1.2017.3)
+    tzinfo-data (1.2018.3)
       tzinfo (>= 1.0.0)
-    uglifier (4.0.2)
+    uglifier (4.1.4)
       execjs (>= 0.3.0, < 3)
-    unicorn (5.3.1)
+    unicorn (5.4.0)
       kgio (~> 2.6)
       raindrops (~> 0.7)
     warden (1.2.7)
@@ -394,8 +394,8 @@ GEM
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.3)
     will_paginate (3.1.6)
-    xpath (2.1.0)
-      nokogiri (~> 1.3)
+    xpath (3.0.0)
+      nokogiri (~> 1.8)
 
 PLATFORMS
   ruby
@@ -424,7 +424,7 @@ DEPENDENCIES
   minitest-rails-capybara
   odf-report!
   paperclip
-  pg
+  pg (~> 0.21)
   poltergeist
   prawn
   prawn-table
@@ -460,4 +460,4 @@ DEPENDENCIES
   will_paginate
 
 BUNDLED WITH
-   1.16.0
+   1.16.1

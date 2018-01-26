@@ -27,7 +27,7 @@ SET search_path = public, pg_catalog;
 -- Name: es_co_utf_8; Type: COLLATION; Schema: public; Owner: -
 --
 
-CREATE COLLATION es_co_utf_8 (lc_collate = 'es_CO.UTF-8', lc_ctype = 'es_CO.UTF-8');
+CREATE COLLATION es_co_utf_8 (provider = libc, locale = 'es_CO.UTF-8');
 
 
 --
@@ -1462,6 +1462,36 @@ CREATE SEQUENCE cor1440_gen_tipoindicador_id_seq
 --
 
 ALTER SEQUENCE cor1440_gen_tipoindicador_id_seq OWNED BY cor1440_gen_tipoindicador.id;
+
+
+--
+-- Name: cor1440_gen_valorcampotind; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE cor1440_gen_valorcampotind (
+    id bigint NOT NULL,
+    campotind_id integer,
+    valor character varying(5000)
+);
+
+
+--
+-- Name: cor1440_gen_valorcampotind_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE cor1440_gen_valorcampotind_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: cor1440_gen_valorcampotind_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE cor1440_gen_valorcampotind_id_seq OWNED BY cor1440_gen_valorcampotind.id;
 
 
 --
@@ -4870,6 +4900,13 @@ ALTER TABLE ONLY cor1440_gen_tipoindicador ALTER COLUMN id SET DEFAULT nextval('
 
 
 --
+-- Name: cor1440_gen_valorcampotind id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY cor1440_gen_valorcampotind ALTER COLUMN id SET DEFAULT nextval('cor1440_gen_valorcampotind_id_seq'::regclass);
+
+
+--
 -- Name: heb412_gen_campohc id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -5359,6 +5396,14 @@ ALTER TABLE ONLY cor1440_gen_resultadopf
 
 ALTER TABLE ONLY cor1440_gen_tipoindicador
     ADD CONSTRAINT cor1440_gen_tipoindicador_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: cor1440_gen_valorcampotind cor1440_gen_valorcampotind_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY cor1440_gen_valorcampotind
+    ADD CONSTRAINT cor1440_gen_valorcampotind_pkey PRIMARY KEY (id);
 
 
 --
@@ -7213,6 +7258,14 @@ ALTER TABLE ONLY cor1440_gen_actividad_sip_anexo
 
 
 --
+-- Name: cor1440_gen_valorcampotind fk_rails_4f2fc96457; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY cor1440_gen_valorcampotind
+    ADD CONSTRAINT fk_rails_4f2fc96457 FOREIGN KEY (campotind_id) REFERENCES cor1440_gen_campotind(id);
+
+
+--
 -- Name: cor1440_gen_actividad_proyectofinanciero fk_rails_524486e06b; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8352,6 +8405,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20171128234148'),
 ('20171130125044'),
 ('20171130133741'),
-('20171212001011');
+('20171212001011'),
+('20171217135318');
 
 

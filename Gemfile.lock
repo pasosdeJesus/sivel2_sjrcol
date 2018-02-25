@@ -70,7 +70,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: deacd8db83d710e9eecacc012ec20e577edda1e8
+  revision: b4d3a742c1d9c1d4e5e3d126390672bb21d127a1
   specs:
     sivel2_sjr (2.0.b1)
       rails
@@ -186,7 +186,7 @@ GEM
     docile (1.1.5)
     erubi (1.7.0)
     execjs (2.7.0)
-    ffi (1.9.22)
+    ffi (1.9.23)
     font-awesome-rails (4.7.0.3)
       railties (>= 3.2, < 5.2)
     foreman (0.84.0)

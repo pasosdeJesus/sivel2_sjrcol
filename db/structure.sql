@@ -448,7 +448,10 @@ CREATE TABLE sivel2_sjr_casosjr (
     detcomosupo character varying(5000),
     id_proteccion integer,
     id_statusmigratorio integer DEFAULT 0,
-    memo1612 character varying(5000)
+    memo1612 character varying(5000),
+    estatus_refugio character varying(5000),
+    fechadecrefugio date,
+    docrefugiado character varying(128)
 );
 
 
@@ -8608,6 +8611,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20180220103644'),
 ('20180220104234'),
 ('20180223091622'),
-('20180225152848');
+('20180225152848'),
+('20180312183214');
 
 

@@ -79,6 +79,9 @@ es:
         "{:derechos_ids=>[]}": Derechos relacionados
       "sivel2_sjr/casosjr": 
         memo1612: Descripción para Resolución 1612
+        estatus_refugio: Estatús del refugio
+        fechadecrefugio: Fecha de declaración
+        docrefugiado: Número de salvoconducto
       "sivel2_sjr/clasifdesp": 
         Clasifdesp: Clasificación de Desplazamiento
         Clasifdesps: Clasificaciones de Desplazamientos

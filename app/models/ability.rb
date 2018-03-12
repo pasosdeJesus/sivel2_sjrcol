@@ -185,6 +185,7 @@ class Ability < Sivel2Sjr::Ability
           oficina: { id: usuario.oficina_id}
         can :manage, Sal7711Gen::Articulo
         can :read, Heb412Gen::Doc
+        can :create, Heb412Gen::Doc
         can :read, Heb412Gen::Plantillahcm
 
       when Ability::ROLSIST
@@ -199,6 +200,7 @@ class Ability < Sivel2Sjr::Ability
         can [:update, :create, :destroy], Cor1440Gen::Actividad, 
           oficina: { id: usuario.oficina_id}
         can :read, Heb412Gen::Doc
+        can :create, Heb412Gen::Doc
         can :read, Heb412Gen::Plantillahcm
 
       when Ability::ROLANALI
@@ -215,6 +217,7 @@ class Ability < Sivel2Sjr::Ability
         can [:update, :create, :destroy], Cor1440Gen::Actividad, 
           oficina: { id: usuario.oficina_id}
         can :read, Heb412Gen::Doc
+        can :create, Heb412Gen::Doc
         can :read, Heb412Gen::Plantillahcm
         can :manage, Sal7711Gen::Articulo
 
@@ -232,6 +235,7 @@ class Ability < Sivel2Sjr::Ability
         can [:update, :create, :destroy], Cor1440Gen::Actividad, 
           oficina: { id: usuario.oficina_id}
         can :read, Heb412Gen::Doc
+        can :create, Heb412Gen::Doc
         can :read, Heb412Gen::Plantillahcm
 
       when Ability::ROLADMIN, Ability::ROLDIR

@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: 399b337562e836b23583f799af99fd9f2d1a250e
+  revision: 0d8b6ae94938b91c229c936f9a5eb5997d0bb47b
   specs:
     cor1440_gen (1.0b2)
       devise
@@ -12,7 +12,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 12edade88ea51a54b63664aa8a2290c989dd85b1
+  revision: 66c1d03024c6eff485aa66bc868bbd1832d7136d
   specs:
     heb412_gen (1.0.a1)
       chosen-rails
@@ -23,7 +23,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: 2f6e08eeba7346fa100d940ca828e51e50b63f4f
+  revision: abb199e95016127054ecfe2f06044f900a87c70f
   specs:
     sal7711_gen (1.0.b1)
       rails
@@ -39,7 +39,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 5432b58fe9f665faacf0fea4413b77a679f01e75
+  revision: 5f5307b04fb780a0d0967174847f741ee12e80a7
   specs:
     sip (2.0.b4)
       bootstrap-datepicker-rails
@@ -61,16 +61,16 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: ef41e14905a981cbd9eed4d92b8496d52a68048c
+  revision: 940e448db130ced4befd0d3e7e14df8b82627679
   specs:
-    sivel2_gen (2.0b3)
+    sivel2_gen (2.0b6)
       devise
       jquery-rails
       rails
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: b4d3a742c1d9c1d4e5e3d126390672bb21d127a1
+  revision: 70fbce07043fbc01043e840e2f0664780e5296bf
   specs:
     sivel2_sjr (2.0.b1)
       rails
@@ -151,7 +151,7 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (>= 2.0, < 4.0)
-    chartkick (2.3.1)
+    chartkick (2.3.2)
     chosen-rails (1.8.3)
       coffee-rails (>= 3.2)
       railties (>= 3.0)
@@ -159,8 +159,6 @@ GEM
     cldr-plurals-runtime-rb (1.0.1)
     climate_control (0.2.0)
     cliver (0.3.2)
-    cocaine (0.5.8)
-      climate_control (>= 0.0.3, < 1.0)
     coderay (1.1.2)
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
@@ -181,10 +179,10 @@ GEM
       railties (>= 4.1.0, < 5.2)
       responders
       warden (~> 1.2.3)
-    devise-i18n (1.6.0)
+    devise-i18n (1.6.1)
       devise (>= 4.4)
     docile (1.1.5)
-    erubi (1.7.0)
+    erubi (1.7.1)
     execjs (2.7.0)
     ffi (1.9.23)
     font-awesome-rails (4.7.0.3)
@@ -247,14 +245,14 @@ GEM
     nokogiri (1.8.2)
       mini_portile2 (~> 2.3.0)
     orm_adapter (0.5.0)
-    paperclip (5.2.1)
+    paperclip (6.0.0)
       activemodel (>= 4.2.0)
       activesupport (>= 4.2.0)
-      cocaine (~> 0.5.5)
       mime-types
       mimemagic (~> 0.3.0)
+      terrapin (~> 0.6.0)
     pdf-core (0.7.0)
-    pg (0.21.0)
+    pg (1.0.0)
     poltergeist (1.17.0)
       capybara (~> 2.1)
       cliver (~> 0.3.1)
@@ -277,9 +275,9 @@ GEM
       binding_of_caller (>= 0.7)
       pry (>= 0.9.11)
     public_suffix (3.0.2)
-    puma (3.11.2)
+    puma (3.11.3)
     rack (2.0.4)
-    rack-test (0.8.2)
+    rack-test (0.8.3)
       rack (>= 1.0, < 3)
     rails (5.1.5)
       actioncable (= 5.1.5)
@@ -302,7 +300,7 @@ GEM
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.0.3)
       loofah (~> 2.0)
-    rails-i18n (5.1.0)
+    rails-i18n (5.1.1)
       i18n (>= 0.7, < 2)
       railties (>= 5.0, < 6)
     rails_12factor (0.0.3)
@@ -318,7 +316,7 @@ GEM
       thor (>= 0.18.1, < 2.0)
     raindrops (0.19.0)
     rake (12.3.0)
-    rb-fsevent (0.10.2)
+    rb-fsevent (0.10.3)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
     redcarpet (3.4.0)
@@ -358,6 +356,8 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    terrapin (0.6.0)
+      climate_control (>= 0.0.3, < 1.0)
     thor (0.19.4)
     thread_safe (0.3.6)
     tilt (2.0.8)
@@ -378,7 +378,7 @@ GEM
       thread_safe (~> 0.1)
     tzinfo-data (1.2018.3)
       tzinfo (>= 1.0.0)
-    uglifier (4.1.6)
+    uglifier (4.1.7)
       execjs (>= 0.3.0, < 3)
     unicorn (5.4.0)
       kgio (~> 2.6)
@@ -424,7 +424,7 @@ DEPENDENCIES
   minitest-rails-capybara
   odf-report!
   paperclip
-  pg (~> 0.21)
+  pg
   poltergeist
   prawn
   prawn-table

@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: fa401f0a3038fe568504cf8d88687af278336031
+  revision: e05a5709ddf2647fa0c10193ab6dd82851e488ee
   specs:
     cor1440_gen (1.0b2)
       devise
@@ -12,7 +12,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: e9ff7a0e026be95ff4228323c4a73b14a4acf21b
+  revision: 1ab49813d58d3f9963968dd25dcf4431dce10e1d
   specs:
     heb412_gen (1.0.a1)
       chosen-rails
@@ -23,7 +23,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: 8a79409805aa2a05686c90037423cc808962378d
+  revision: 3e263bf731d9a286a0f493c46dabbf86f5b4b838
   specs:
     sal7711_gen (1.0.b1)
       rails
@@ -31,7 +31,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: b9891f8e333b2e018b9f4e4ed477c25e1c05e44a
+  revision: bdf1b4d5f04cc3e11f26989e785dc5cd276fd4b0
   specs:
     sal7711_web (1.0.a3)
       rails
@@ -39,7 +39,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 236294194fd49d3d4bbd97b7c5d4bd5f5fdbdd94
+  revision: 5251feede4dcd9cb206c90ea3ccc35c181fb52d1
   specs:
     sip (2.0.b4)
       bootstrap-datepicker-rails
@@ -61,7 +61,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 940e448db130ced4befd0d3e7e14df8b82627679
+  revision: 0972e117139715e68926bab4daa33bac93c6fc0d
   specs:
     sivel2_gen (2.0b6)
       devise
@@ -70,7 +70,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 13b0a64d89e8f903afcbe5c74ba3b5c0926321f9
+  revision: c87efbac98f11471789de93c68c466fa57f09d1a
   specs:
     sivel2_sjr (2.0.b1)
       rails
@@ -173,15 +173,15 @@ GEM
     connection_pool (2.2.1)
     crass (1.0.3)
     debug_inspector (0.0.3)
-    devise (4.4.1)
+    devise (4.4.3)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
-      railties (>= 4.1.0, < 5.2)
+      railties (>= 4.1.0, < 6.0)
       responders
       warden (~> 1.2.3)
     devise-i18n (1.6.1)
       devise (>= 4.4)
-    docile (1.1.5)
+    docile (1.3.0)
     erubi (1.7.1)
     execjs (2.7.0)
     ffi (1.9.23)
@@ -241,7 +241,7 @@ GEM
       minitest-metadata (~> 0.6)
       minitest-rails (~> 3.0)
     multi_json (1.13.1)
-    nio4r (2.2.0)
+    nio4r (2.3.0)
     nokogiri (1.8.2)
       mini_portile2 (~> 2.3.0)
     orm_adapter (0.5.0)
@@ -341,8 +341,8 @@ GEM
     simple_form (3.5.1)
       actionpack (> 4, < 5.2)
       activemodel (> 4, < 5.2)
-    simplecov (0.15.1)
-      docile (~> 1.1.0)
+    simplecov (0.16.1)
+      docile (~> 1.1)
       json (>= 1.8, < 3)
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.2)
@@ -378,7 +378,7 @@ GEM
       thread_safe (~> 0.1)
     tzinfo-data (1.2018.3)
       tzinfo (>= 1.0.0)
-    uglifier (4.1.7)
+    uglifier (4.1.8)
       execjs (>= 0.3.0, < 3)
     unicorn (5.4.0)
       kgio (~> 2.6)

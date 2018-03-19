@@ -451,7 +451,12 @@ CREATE TABLE sivel2_sjr_casosjr (
     memo1612 character varying(5000),
     estatus_refugio character varying(5000),
     fechadecrefugio date,
-    docrefugiado character varying(128)
+    docrefugiado character varying(128),
+    fechasalidam date,
+    id_salidam integer,
+    fechallegadam date,
+    id_llegadam integer,
+    motivom character varying(5000)
 );
 
 
@@ -7328,6 +7333,14 @@ ALTER TABLE ONLY cor1440_gen_informe
 
 
 --
+-- Name: sivel2_sjr_casosjr fk_rails_2a8ac48225; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY sivel2_sjr_casosjr
+    ADD CONSTRAINT fk_rails_2a8ac48225 FOREIGN KEY (id_llegadam) REFERENCES sip_ubicacion(id);
+
+
+--
 -- Name: cor1440_gen_informe fk_rails_2bd685d2b3; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -7501,6 +7514,14 @@ ALTER TABLE ONLY sip_grupo_usuario
 
 ALTER TABLE ONLY sivel2_sjr_progestado_derecho
     ADD CONSTRAINT fk_rails_7598f6bf76 FOREIGN KEY (progestado_id) REFERENCES sivel2_sjr_progestado(id);
+
+
+--
+-- Name: sivel2_sjr_casosjr fk_rails_77cbc429a5; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY sivel2_sjr_casosjr
+    ADD CONSTRAINT fk_rails_77cbc429a5 FOREIGN KEY (id_salidam) REFERENCES sip_ubicacion(id);
 
 
 --
@@ -8613,6 +8634,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20180223091622'),
 ('20180225152848'),
 ('20180307125759'),
-('20180312183214');
+('20180312183214'),
+('20180319015743');
 
 

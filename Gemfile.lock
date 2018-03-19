@@ -69,14 +69,6 @@ GIT
       rails
 
 GIT
-  remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 5c89deed31b1480a423322d15f86568c3910310f
-  specs:
-    sivel2_sjr (2.0.b1)
-      rails
-      sivel2_gen
-
-GIT
   remote: https://github.com/vtamara/cocoon.git
   revision: 20f8f3bab2fee21309c57b586f5fab9921ac0894
   specs:
@@ -90,6 +82,13 @@ GIT
     odf-report (0.5.2)
       nokogiri (>= 1.5.0)
       rubyzip (~> 1.2.0)
+
+PATH
+  remote: ../sivel2_sjr
+  specs:
+    sivel2_sjr (2.0.b1)
+      rails
+      sivel2_gen
 
 GEM
   remote: https://rubygems.org/

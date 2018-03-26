@@ -64,9 +64,7 @@
           <li><a id="fichacasovertical" href="/fichacasovertical">Ficha caso vertical</a></li>
         <% end %>
 
-        <% if current_usuario.rol == Ability::ROLADMIN || 
-          current_usuario.rol == Ability::ROLCOOR ||
-          current_usuario.rol == Ability::ROLDIR %>
+        <% if can? :manage, ::Usuario %>
           <%= menu_item "Usuarios", main_app.usuarios_path %>
         <% end %>
         <% if current_usuario.rol == Ability::ROLADMIN || 

@@ -178,11 +178,12 @@ class Ability < Sivel2Sjr::Ability
           etiqueta: { id: usuario.etiqueta.map(&:id) }
       when Ability::ROLANALIPRENSA
         can :read, Cor1440Gen::Informe
-        can :read, Cor1440Gen::Actividad
         can :read, Cor1440Gen::Proyectofinanciero
-        can :new, Cor1440Gen::Actividad
-        can [:update, :create, :destroy], Cor1440Gen::Actividad, 
-          oficina: { id: usuario.oficina_id}
+        can [:read, :new], Cor1440Gen::Actividad
+        can :manage, Cor1440Gen::Actividad do |actividad|
+          actividad.oficina_id == 1 ||
+            actividad.oficina_id == usuario.oficina_id
+        end
         can :manage, Sal7711Gen::Articulo
         can :read, Heb412Gen::Doc
         can :create, Heb412Gen::Doc
@@ -195,10 +196,13 @@ class Ability < Sivel2Sjr::Ability
         can :new, Sivel2Gen::Caso 
         can :manage, Sivel2Gen::Acto
         can :manage, Sip::Persona
-        can [:read, :new], Cor1440Gen::Actividad
+        can [:new, :read], Cor1440Gen::Actividad
+        can :manage,
+          Cor1440Gen::Actividad do |actividad|
+          actividad.oficina_id == 1 ||
+            actividad.oficina_id == usuario.oficina_id
+        end
         can :read, Cor1440Gen::Proyectofinanciero
-        can [:update, :create, :destroy], Cor1440Gen::Actividad, 
-          oficina: { id: usuario.oficina_id}
         can :read, Heb412Gen::Doc
         can :create, Heb412Gen::Doc
         can :read, Heb412Gen::Plantillahcm
@@ -208,14 +212,16 @@ class Ability < Sivel2Sjr::Ability
         can :new, Sivel2Gen::Caso
         can :manage, Sivel2Gen::Acto
         can :manage, Sip::Persona
-        can [:update, :create, :destroy], Sivel2Gen::Caso, 
+        can [:update, :create, :destroy, :edit], Sivel2Gen::Caso, 
           casosjr: { oficina_id: usuario.oficina_id }
         can :read, Cor1440Gen::Informe
-        can :read, Cor1440Gen::Actividad
         can :read, Cor1440Gen::Proyectofinanciero
-        can :new, Cor1440Gen::Actividad
-        can [:update, :create, :destroy], Cor1440Gen::Actividad, 
-          oficina: { id: usuario.oficina_id}
+        can :manage, 
+          Cor1440Gen::Actividad do |actividad|
+          actividad.oficina_id == 1 || # SIN OFICINA
+            actividad.oficina_id == usuario.oficina_id
+        end
+        can [:read, :new], Cor1440Gen::Actividad
         can :read, Heb412Gen::Doc
         can :create, Heb412Gen::Doc
         can :read, Heb412Gen::Plantillahcm
@@ -229,11 +235,13 @@ class Ability < Sivel2Sjr::Ability
         can [:update, :create, :destroy, :poneretcomp], Sivel2Gen::Caso, 
           casosjr: { oficina_id: usuario.oficina_id }
         can :manage, Cor1440Gen::Informe
-        can :read, Cor1440Gen::Actividad
+        can [:read, :new], Cor1440Gen::Actividad
+        can :manage, 
+          Cor1440Gen::Actividad do |actividad|
+          actividad.oficina_id == 1 ||
+            actividad.oficina_id == usuario.oficina_id
+        end
         can :read, Cor1440Gen::Proyectofinanciero
-        can :new, Cor1440Gen::Actividad
-        can [:update, :create, :destroy], Cor1440Gen::Actividad, 
-          oficina: { id: usuario.oficina_id}
         can :read, Heb412Gen::Doc
         can :create, Heb412Gen::Doc
         can :read, Heb412Gen::Plantillahcm

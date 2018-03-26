@@ -178,9 +178,8 @@ class Ability < Sivel2Sjr::Ability
           etiqueta: { id: usuario.etiqueta.map(&:id) }
       when Ability::ROLANALIPRENSA
         can :read, Cor1440Gen::Informe
-        can :read, Cor1440Gen::Actividad
         can :read, Cor1440Gen::Proyectofinanciero
-        can :new, Cor1440Gen::Actividad
+        can [:read, :new, :edit], Cor1440Gen::Actividad
         can [:update, :create, :destroy], Cor1440Gen::Actividad, 
           oficina: { id: usuario.oficina_id}
         can :manage, Sal7711Gen::Articulo
@@ -195,7 +194,7 @@ class Ability < Sivel2Sjr::Ability
         can :new, Sivel2Gen::Caso 
         can :manage, Sivel2Gen::Acto
         can :manage, Sip::Persona
-        can [:read, :new], Cor1440Gen::Actividad
+        can [:read, :new, :edit], Cor1440Gen::Actividad
         can :read, Cor1440Gen::Proyectofinanciero
         can [:update, :create, :destroy], Cor1440Gen::Actividad, 
           oficina: { id: usuario.oficina_id}
@@ -208,13 +207,12 @@ class Ability < Sivel2Sjr::Ability
         can :new, Sivel2Gen::Caso
         can :manage, Sivel2Gen::Acto
         can :manage, Sip::Persona
-        can [:update, :create, :destroy], Sivel2Gen::Caso, 
+        can [:update, :create, :destroy, :edit], Sivel2Gen::Caso, 
           casosjr: { oficina_id: usuario.oficina_id }
         can :read, Cor1440Gen::Informe
-        can :read, Cor1440Gen::Actividad
         can :read, Cor1440Gen::Proyectofinanciero
-        can :new, Cor1440Gen::Actividad
-        can [:update, :create, :destroy], Cor1440Gen::Actividad, 
+        can [:read, :new, :edit], Cor1440Gen::Actividad
+        can [:update, :create, :destroy, :edit], Cor1440Gen::Actividad, 
           oficina: { id: usuario.oficina_id}
         can :read, Heb412Gen::Doc
         can :create, Heb412Gen::Doc
@@ -229,10 +227,11 @@ class Ability < Sivel2Sjr::Ability
         can [:update, :create, :destroy, :poneretcomp], Sivel2Gen::Caso, 
           casosjr: { oficina_id: usuario.oficina_id }
         can :manage, Cor1440Gen::Informe
-        can :read, Cor1440Gen::Actividad
+        can [:read, :new, :edit], Cor1440Gen::Actividad
         can :read, Cor1440Gen::Proyectofinanciero
-        can :new, Cor1440Gen::Actividad
-        can [:update, :create, :destroy], Cor1440Gen::Actividad, 
+        puts "OJO depura.  usuario.oficina_id=#{usuario.oficina_id}"
+        puts "OJO depura.  oficina.id=#{oficina.id}"
+        can [:update, :create, :destroy, :edit], Cor1440Gen::Actividad, 
           oficina: { id: usuario.oficina_id}
         can :read, Heb412Gen::Doc
         can :create, Heb412Gen::Doc

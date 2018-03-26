@@ -64,9 +64,7 @@
           <li><a id="fichacasovertical" href="/fichacasovertical">Ficha caso vertical</a></li>
         <% end %>
 
-        <% if current_usuario.rol == Ability::ROLADMIN || 
-          current_usuario.rol == Ability::ROLCOOR ||
-          current_usuario.rol == Ability::ROLDIR %>
+        <% if can? :manage, ::Usuario %>
           <%= menu_item "Usuarios", main_app.usuarios_path %>
         <% end %>
         <% if current_usuario.rol == Ability::ROLADMIN || 
@@ -92,7 +90,7 @@
 
 <% content_for :piedepagina do %>
     <p><span class='derechos'>Dominio Público de acuerdo a Legislación Colombiana<br/>
-      Desarrollado para <a href="http://www.sjrcolombia.org/" target="_blank">SJR Colombia</a> por <a href="http://www.pasosdeJesus.org" target="_blank">Pasos de Jesús</a>. 2014-2017. 
+      Desarrollado para <a href="http://www.sjrcolombia.org/" target="_blank">SJR Colombia</a> por <a href="http://www.pasosdeJesus.org" target="_blank">Pasos de Jesús</a>. 2014-2018. 
     </span></p>
 <% end %>
 

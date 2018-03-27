@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: 44d3bb19aa88c774f41fbe7c2c53c79f88547aae
+  revision: 7786b8c3f25d84540638c1683f560be0489be1ff
   specs:
     cor1440_gen (1.0b2)
       devise
@@ -12,7 +12,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 97b69e06cf090d6199d5ef371005f4d8c9c0fb7b
+  revision: bb734be8d78e59fb0417c0166f2861393c646b7c
   specs:
     heb412_gen (1.0.a1)
       chosen-rails
@@ -23,7 +23,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: 3035f15e35a050c23bccad22b2adc2d6fe75171e
+  revision: b860c831c1bb7f4d5a4a87150ff874594e1fb41b
   specs:
     sal7711_gen (1.0.b1)
       rails
@@ -31,7 +31,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: f1f68f82b7fe1ac536b4404ffc4acf96a4e45ebd
+  revision: 05363a8c63d075459bad59ceceb838b5ed88531b
   specs:
     sal7711_web (1.0.a3)
       rails
@@ -61,7 +61,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 7941f72042fe2724e52a63624d458044f502e0ca
+  revision: e38b0fa4e614a2e43e770bb53badb9976182e045
   specs:
     sivel2_gen (2.0b6)
       devise
@@ -70,7 +70,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: b3333cbe7f4ea90668711e7c7f9dd4947100df4a
+  revision: 38d19371551b10d2b5f19fb255fedd2022600858
   specs:
     sivel2_sjr (2.0.b1)
       rails
@@ -277,7 +277,7 @@ GEM
     public_suffix (3.0.2)
     puma (3.11.3)
     rack (2.0.4)
-    rack-test (0.8.3)
+    rack-test (1.0.0)
       rack (>= 1.0, < 3)
     rails (5.1.5)
       actioncable (= 5.1.5)

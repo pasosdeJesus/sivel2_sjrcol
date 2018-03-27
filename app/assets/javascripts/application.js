@@ -62,7 +62,18 @@ $(document).on('turbolinks:load ready page:load', function() {
 		e.preventDefault();
 		sip_enviarautomatico_formulario($(e.target.form));
 	});
-
+        //En migracion, lista de sitios de salida se cálcula
+        $(document).on('focusin', 
+            'select[id^=caso_casosjr_attributes_][id$=id_salidam]', 
+            function (e) {
+              actualiza_ubicaciones($(this))
+            })
+        // En migracion, lista de sitios de llegada se cálcula
+        $(document).on('focusin', 
+            'select[id^=caso_casosjr_attributes_][id$=id_llegadam]', 
+            function (e) {
+              actualiza_ubicaciones($(this))
+            }) 
 
 });
 

@@ -30,7 +30,7 @@ gem "rspreadsheet"#, git: "https://github.com/gorn/rspreadsheet"
 gem 'libxml-ruby'
 
 # Postgresql
-gem "pg"
+gem "pg"#, '~> 0.21'
 
 # Maneja variables de ambiente (como claves y secretos) en .env
 gem "foreman"

@@ -1,0 +1,19 @@
+<%= s.input :estatus_refugio,
+    input_html: {
+  "data-toggle" => 'tooltip',
+  "title" => 'Describir estatus del refugiola (campo opcional)' }
+%>
+<%= s.input :fechadecrefugio,
+  input_html: { 
+    "data-behaviour" => "datepicker",
+    value: s.object.fechadecrefugio || @caso.fecha,
+    "data-toggle" => 'tooltip',
+    "title" => 'Fecha de declaración (campo opcional)'
+  },
+  as: :string, label: "Fecha de Declaración"
+%>
+<%= s.input :docrefugiado,
+  input_html: {
+  "data-toggle" => 'tooltip',
+  "title" => 'Número de salvoconducto o documento de refugiado (campo opcional)' }
+%>

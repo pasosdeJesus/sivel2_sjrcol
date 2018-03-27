@@ -59,7 +59,7 @@ es:
         texto: Resumen
         fuenteprensa: Fuente de prensa
       "sivel2_gen/caso": 
-        fecha: F. Desp. Emblemático
+        fecha: F. Desp. Emblemático o Migración
         expulsion: Sitio Expulsión Emb.
         llegada: Sitio Llegada Emb.
       "sivel2_gen/caso_presponsable": 
@@ -79,6 +79,9 @@ es:
         "{:derechos_ids=>[]}": Derechos relacionados
       "sivel2_sjr/casosjr": 
         memo1612: Descripción para Resolución 1612
+        estatus_refugio: Estatús del refugio
+        fechadecrefugio: Fecha de declaración
+        docrefugiado: Número de salvoconducto
       "sivel2_sjr/clasifdesp": 
         Clasifdesp: Clasificación de Desplazamiento
         Clasifdesps: Clasificaciones de Desplazamientos

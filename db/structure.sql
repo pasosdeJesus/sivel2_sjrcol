@@ -2304,7 +2304,7 @@ CREATE TABLE sip_fuenteprensa (
 
 CREATE TABLE sip_grupo (
     id integer NOT NULL,
-    nombre character varying(500) NOT NULL,
+    nombre character varying(500) COLLATE public.es_co_utf_8 NOT NULL,
     observaciones character varying(5000),
     fechacreacion date NOT NULL,
     fechadeshabilitacion date,
@@ -8635,6 +8635,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20180225152848'),
 ('20180307125759'),
 ('20180312183214'),
-('20180319015743');
+('20180319015743'),
+('20180320230847');
 
 

@@ -52,7 +52,9 @@
     <% if !current_usuario.nil? %>
       <% if can? :read, ::Heb412Gen::Doc %>
         <%= drop_down "Documentos" do %>
-          <%= menu_item "Documentos de consulta sobre SIVeL", 
+          <%= menu_item "Manual del sistema de información de SJR-COL", 
+            'https://docs.google.com/document/d/1qxJOBzbG_lQPN0nfhlJ1QyeRO4a9hrYlK8Z_bRO3UJU/edit?usp=sharing' %>
+          <%= menu_item "Nube", 
             heb412_gen.sisini_path%>
         <% end %>
       <% end %>

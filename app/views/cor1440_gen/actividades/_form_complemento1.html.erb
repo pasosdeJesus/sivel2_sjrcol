@@ -2,7 +2,7 @@
   collection: Cor1440Gen::Actividadtipo.habilitados,   
   label_method: :nombre,     
   value_method: :id,   
-  input_html: { class: 'chosen-select' }   %>
+  input_html: { class: 'chosen-select' }   
 %>
 <%= f.association :actividadpf, 
   collection: ::Cor1440Gen::Actividadpf.where(proyectofinanciero_id: 

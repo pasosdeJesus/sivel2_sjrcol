@@ -1,0 +1,13 @@
+<%= f.association :actividadtipo,     
+  collection: Cor1440Gen::Actividadtipo.habilitados,   
+  label_method: :nombre,     
+  value_method: :id,   
+  input_html: { class: 'chosen-select' }   %>
+%>
+<%= f.association :actividadpf, 
+  collection: ::Cor1440Gen::Actividadpf.where(proyectofinanciero_id: 
+                                  f.object.proyectofinanciero.map(&:id)),
+  label_method: lambda { |t| t.nombrecorto + ':' + t.titulo},
+  value_method: :id,
+  input_html: { class: 'chosen-select' }
+%>

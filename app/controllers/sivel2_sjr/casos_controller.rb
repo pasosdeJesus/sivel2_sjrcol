@@ -42,13 +42,17 @@ module Sivel2Sjr
     def filtro_particular(conscaso, params_filtro)
       if (params_filtro['dispresenta'] == 'tabla1612') 
         @incluir =  [
-          'casoid', 'tipificacion', 'victimas', 'fecha', 
-          'ubicaciones', 'presponsables', 'memo', 'memo1612'
+          'casoid', 'tipificacion', 'victimas', 'fechadespemb', 
+          'ubicaciones', 'presponsables', 'descripcion', 'memo1612'
         ]
         conscaso = conscaso.where('caso_id in (SELECT id_caso 
                                         FROM sivel2_gen_acto
                                         WHERE id_categoria = 3020
                                         OR id_categoria=3021)')
+        @usa_consexpcaso = true
+        Sivel2Gen::Consexpcaso.crea_consexpcaso(conscaso)
+
+        @consexpcaso = Sivel2Gen::Consexpcaso.all
       end
       return conscaso
     end

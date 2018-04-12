@@ -9,7 +9,14 @@ module Cor1440Gen
     Cor1440Gen.actividadg3 = "Funcionarios del SJR"
 
     def self.filtramas(par, ac, current_usuario)
-        return ac
+      @busactividadtipo = param_escapa(par, 'busactividadtipo')
+      if @busactividadtipo != '' then
+        ac = ac.joins(:actividad_actividadtipo).where(
+          "cor1440_gen_actividad_actividadtipo.actividadtipo_id = ?",
+          @busactividadtipo.to_i
+        ) 
+      end
+      return ac
     end
 
     # Encabezado comun para HTML y PDF (primeras filas)

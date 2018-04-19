@@ -58,10 +58,10 @@ $(document).on('turbolinks:load ready page:load', function() {
 	sal7711_gen_prepara_eventos_comunes(root);
 	sivel2_sjr_prepara_eventos_unicos(root);
 
-	$(document).on('click', 'input[data-enviarautomatico]', function(e) {
-		e.preventDefault();
-		sip_enviarautomatico_formulario($(e.target.form));
-	});
+//	$(document).on('click', 'input[data-enviarautomatico]', function(e) {
+//		e.preventDefault();
+//		sip_enviarautomatico_formulario($(e.target.form));
+//	});
         //En migracion, lista de sitios de salida se cálcula
         $(document).on('focusin', 
             'select[id^=caso_casosjr_attributes_][id$=id_salidam]', 

@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: 4a3e0a23df5410c79e67b06829be776733b5807c
+  revision: f37d01b018fe48c61785d0669f60b58d2f093b2c
   specs:
     cor1440_gen (1.0b2)
       devise
@@ -12,7 +12,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 530b13e7efe204d11115577cb33698f9bf092a59
+  revision: b803c0915e1b9d8589167d0b097400476bfebe9c
   specs:
     heb412_gen (1.0.a1)
       chosen-rails
@@ -23,7 +23,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: 6bf011e35bfeb8679c574c91e4e7b18cb67955d6
+  revision: a2e942e3690175c7c283d21f76d233cd6761b713
   specs:
     sal7711_gen (1.0.b1)
       rails
@@ -31,7 +31,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: bd78cdebdbceba19b667d08a2308ea54ff07784e
+  revision: 71861cf90333655d86fcaf885df230c9f2553f82
   specs:
     sal7711_web (1.0.a3)
       rails
@@ -39,7 +39,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: c1d8e68e68c134f6a81bfb8ed25b5a454390f037
+  revision: 26e52c7deeaf703bcabbeed8fc2baac5c9142ffb
   specs:
     sip (2.0.b4)
       bootstrap-datepicker-rails
@@ -61,7 +61,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: ce98228739bf8ec744d0a240d0c04be7c15851c9
+  revision: 316ec3d140300ea0a9f24a79ff5039e35f11d7f0
   specs:
     sivel2_gen (2.0b6)
       devise
@@ -144,7 +144,7 @@ GIT
 
 GIT
   remote: https://github.com/vtamara/cocoon.git
-  revision: f8fbad8d9d6bb087223221d70733b58a3d2efd8a
+  revision: f710fc1759612895846adeb7a7753e4191ddeb10
   branch: new_id_with_ajax
   specs:
     cocoon (1.2.11)
@@ -167,13 +167,13 @@ GEM
     builder (3.2.3)
     camertron-eprun (1.1.1)
     cancancan (2.2.0)
-    capybara (2.18.0)
+    capybara (3.0.3)
       addressable
       mini_mime (>= 0.1.3)
-      nokogiri (>= 1.3.3)
-      rack (>= 1.0.0)
-      rack-test (>= 0.5.4)
-      xpath (>= 2.0, < 4.0)
+      nokogiri (~> 1.8)
+      rack (>= 1.6.0)
+      rack-test (>= 0.6.3)
+      xpath (~> 3.0)
     chartkick (2.3.4)
     chosen-rails (1.8.3)
       coffee-rails (>= 3.2)
@@ -251,23 +251,15 @@ GEM
     mini_mime (1.0.0)
     mini_portile2 (2.3.0)
     minitest (5.11.3)
-    minitest-capybara (0.8.2)
-      capybara (~> 2.2)
-      minitest (~> 5.0)
-      rake
-    minitest-metadata (0.6.0)
-      minitest (>= 4.7, < 6.0)
     minitest-rails (3.0.0)
       minitest (~> 5.8)
       railties (~> 5.0)
-    minitest-rails-capybara (3.0.1)
-      capybara (~> 2.7)
-      minitest-capybara (~> 0.8)
-      minitest-metadata (~> 0.6)
-      minitest-rails (~> 3.0)
+    minitest-rails-capybara (0.0.2)
+      capybara
+      minitest-rails
     msgpack (1.2.4)
     multi_json (1.13.1)
-    nio4r (2.3.0)
+    nio4r (2.3.1)
     nokogiri (1.8.2)
       mini_portile2 (~> 2.3.0)
     odf-report (0.5.2)
@@ -282,8 +274,8 @@ GEM
       terrapin (~> 0.6.0)
     pdf-core (0.7.0)
     pg (1.0.0)
-    poltergeist (1.17.0)
-      capybara (~> 2.1)
+    poltergeist (1.18.0)
+      capybara (>= 2.1, < 4)
       cliver (~> 0.3.1)
       websocket-driver (>= 0.2.0)
     prawn (2.2.2)
@@ -305,7 +297,7 @@ GEM
       pry (>= 0.9.11)
     public_suffix (3.0.2)
     puma (3.11.4)
-    rack (2.0.4)
+    rack (2.0.5)
     rack-test (1.0.0)
       rack (>= 1.0, < 3)
     rails-controller-testing (1.0.2)
@@ -387,14 +379,14 @@ GEM
       tzinfo
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
-    uglifier (4.1.9)
+    uglifier (4.1.10)
       execjs (>= 0.3.0, < 3)
     unicorn (5.4.0)
       kgio (~> 2.6)
       raindrops (~> 0.7)
     warden (1.2.7)
       rack (>= 1.0)
-    web-console (3.6.1)
+    web-console (3.6.2)
       actionview (>= 5.0)
       activemodel (>= 5.0)
       bindex (>= 0.4.0)

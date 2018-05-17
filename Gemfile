@@ -110,7 +110,7 @@ gem 'sivel2_sjr', git: "https://github.com/pasosdeJesus/sivel2_sjr.git"
 #gem 'sivel2_sjr', path: '../sivel2_sjr'
 
 # Motor Cor1440_gen
-gem 'cor1440_gen', git: "https://github.com/pasosdeJesus/cor1440_gen.git"
+gem 'cor1440_gen', git: "https://github.com/pasosdeJesus/cor1440_gen.git", branch: 'vista_actividad_sipmodelo'
 #gem 'cor1440_gen', path: '../cor1440_gen'
 
 # Motor Sal7711_gen

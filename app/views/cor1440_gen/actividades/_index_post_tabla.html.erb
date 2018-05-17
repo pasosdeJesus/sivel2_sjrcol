@@ -2,7 +2,7 @@
 <% oppres += @plantillas if @plantillas %>
 <div class="row">
   <div class="col-sm-4">
-    <%= will_paginate @actividades, { param_name: :pagina }  %>
+    <%= will_paginate @registros, { param_name: :pagina }  %>
   </div>
   <div class="col-sm-2">
     <%= link_to t('.new', :default => 'Nueva'),

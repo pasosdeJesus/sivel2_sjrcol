@@ -2,7 +2,7 @@
 require_dependency "cor1440_gen/concerns/controllers/actividades_controller"
 
 module Cor1440Gen
-  class ActividadesController < ApplicationController
+  class ActividadesController < Sip::ModelosController
     include Cor1440Gen::Concerns::Controllers::ActividadesController
 
     Cor1440Gen.actividadg1 = "Funcionarias del SJR"
@@ -17,6 +17,31 @@ module Cor1440Gen
         ) 
       end
       return ac
+    end
+
+
+    def atributos_show
+      [ :id, 
+        :nombre, 
+        :fecha_localizada, 
+        :lugar, 
+        :oficina, 
+        :proyectosfinancieros, 
+        :actividadpf, 
+        :proyectos,
+        :actividadareas, 
+        :responsable,
+        :corresponsables,
+        :valorcampoact,
+        :objetivo,
+        :resultado, 
+        :poblacion,
+        :anexos
+      ]
+    end
+
+    def atributos_form
+      atributos_show - [:id]
     end
 
     # Encabezado comun para HTML y PDF (primeras filas)
@@ -39,9 +64,17 @@ module Cor1440Gen
 
     # Elementos de la presentacion de una actividad
     def atributos_presenta
-      return [ :id, :fecha, :oficina, :responsable,
-               :nombre, :actividadtipos, :proyectos,
-               :actividadareas, :proyectosfinancieros, :objetivo
+      return [ 
+        :id, 
+        :fecha, 
+        :oficina, 
+        :responsable,
+        :nombre, 
+        :actividadtipos, 
+        :proyectos,
+        :actividadareas, 
+        :proyectosfinancieros, 
+        :objetivo
       ]
     end
 

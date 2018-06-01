@@ -106,7 +106,7 @@ gem 'sivel2_gen', git: "https://github.com/pasosdeJesus/sivel2_gen.git"
 #gem 'sivel2_gen', path: '../sivel2_gen'
 
 # Motor de SIVeL 2 - SJR
-gem 'sivel2_sjr', git: "https://github.com/pasosdeJesus/sivel2_sjr.git"
+gem 'sivel2_sjr', git: "https://github.com/pasosdeJesus/sivel2_sjr.git", branch: 'vista_actividad_sipmodelo'
 #gem 'sivel2_sjr', path: '../sivel2_sjr'
 
 # Motor Cor1440_gen
@@ -136,33 +136,31 @@ end
 # Los siguientes son para pruebas y no tiene generadores requeridos en desarrollo
 group :test do
   # Acelera desarrollo ejecutando en fondo.  https://github.com/jonleighton/spring
-  gem "spring"
+  gem "minitest"
+  gem "minitest-reporters"
 
   gem 'simplecov'
 
   gem 'poltergeist'
   gem 'connection_pool'
-  gem 'minitest-rails-capybara'
+  gem 'rails-controller-testing'
+
+  # Pruebas de regresión que no requieren javascript
+  gem 'capybara'
+  gem 'selenium-webdriver'
+  gem 'chromedriver-helper'
+  #gem 'minitest-rails-capybara'
 
   # Un proceso para cada prueba -- acelera
   gem 'spork'
 
-  gem 'rails-controller-testing'
 
   # https://www.relishapp.com/womply/rails-style-guide/docs/developing-rails-applications/bundler
   # Lanza programas para examinar resultados
   #gem "launchy"
 
 
-  # Pruebas de regresión que no requieren javascript
-  gem "capybara"
   
-  # Pruebas de regresión que requieren javascript
-  #gem "capybara-webkit"
-
-  # Envia resultados de pruebas desde travis a codeclimate
-  #gem "codeclimate-test-reporter", require: nil
-
   gem 'pry-rescue'
   gem 'pry-stack_explorer'
 end

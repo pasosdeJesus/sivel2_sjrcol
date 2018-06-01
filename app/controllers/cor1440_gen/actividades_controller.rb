@@ -19,6 +19,31 @@ module Cor1440Gen
       return ac
     end
 
+
+    def atributos_show
+      [ :id, 
+        :nombre, 
+        :fecha_localizada, 
+        :lugar, 
+        :oficina, 
+        :proyectosfinancieros, 
+        :actividadpf, 
+        :proyectos,
+        :actividadareas, 
+        :responsable,
+        :corresponsables,
+        :valorcampoact,
+        :objetivo,
+        :resultado, 
+        :poblacion,
+        :anexos
+      ]
+    end
+
+    def atributos_form
+      atributos_show - [:id]
+    end
+
     # Encabezado comun para HTML y PDF (primeras filas)
     def encabezado_comun
       return [ Cor1440Gen::Actividad.human_attribute_name(:id), 
@@ -39,9 +64,17 @@ module Cor1440Gen
 
     # Elementos de la presentacion de una actividad
     def atributos_presenta
-      return [ :id, :fecha, :oficina, :responsable,
-               :nombre, :actividadtipos, :proyectos,
-               :actividadareas, :proyectosfinancieros, :objetivo
+      return [ 
+        :id, 
+        :fecha, 
+        :oficina, 
+        :responsable,
+        :nombre, 
+        :actividadtipos, 
+        :proyectos,
+        :actividadareas, 
+        :proyectosfinancieros, 
+        :objetivo
       ]
     end
 

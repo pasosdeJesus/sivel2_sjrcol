@@ -1094,7 +1094,8 @@ CREATE TABLE cor1440_gen_campoact (
     id bigint NOT NULL,
     actividadtipo_id integer,
     nombrecampo character varying(128),
-    ayudauso character varying(1024)
+    ayudauso character varying(1024),
+    tipo integer DEFAULT 1
 );
 
 
@@ -1125,7 +1126,8 @@ CREATE TABLE cor1440_gen_campotind (
     id bigint NOT NULL,
     tipoindicador_id integer NOT NULL,
     nombrecampo character varying(128) NOT NULL,
-    ayudauso character varying(1024)
+    ayudauso character varying(1024),
+    tipo integer DEFAULT 1
 );
 
 
@@ -8699,6 +8701,9 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20180509111948'),
 ('20180519102415'),
 ('20180601093421'),
-('20180601104012');
+('20180601104012'),
+('20180611222635'),
+('20180612024009'),
+('20180612030340');
 
 

@@ -180,10 +180,9 @@ class Ability < Sivel2Sjr::Ability
         can :read, Cor1440Gen::Informe
         can :read, Cor1440Gen::Proyectofinanciero
         can [:read, :new], Cor1440Gen::Actividad
-        can :manage, Cor1440Gen::Actividad do |actividad|
-          actividad.oficina_id == 1 ||
-            actividad.oficina_id == usuario.oficina_id
-        end
+        can :manage, Cor1440Gen::Actividad.where(
+          'oficina_id = 1 OR ' +
+          'oficina_id = ?', usuario.oficina_id)
         can :manage, Sal7711Gen::Articulo
         can :read, Heb412Gen::Doc
         can :create, Heb412Gen::Doc
@@ -197,11 +196,9 @@ class Ability < Sivel2Sjr::Ability
         can :manage, Sivel2Gen::Acto
         can :manage, Sip::Persona
         can [:new, :read], Cor1440Gen::Actividad
-        can :manage,
-          Cor1440Gen::Actividad do |actividad|
-          actividad.oficina_id == 1 ||
-            actividad.oficina_id == usuario.oficina_id
-        end
+        can :manage, Cor1440Gen::Actividad.where(
+          'oficina_id = 1 OR ' +
+          'oficina_id = ?', usuario.oficina_id)
         can :read, Cor1440Gen::Proyectofinanciero
         can :read, Heb412Gen::Doc
         can :create, Heb412Gen::Doc
@@ -216,11 +213,9 @@ class Ability < Sivel2Sjr::Ability
           casosjr: { oficina_id: usuario.oficina_id }
         can :read, Cor1440Gen::Informe
         can :read, Cor1440Gen::Proyectofinanciero
-        can :manage, 
-          Cor1440Gen::Actividad do |actividad|
-          actividad.oficina_id == 1 || # SIN OFICINA
-            actividad.oficina_id == usuario.oficina_id
-        end
+        can :manage, Cor1440Gen::Actividad.where(
+          'oficina_id = 1 OR ' +
+          'oficina_id = ?', usuario.oficina_id)
         can [:read, :new], Cor1440Gen::Actividad
         can :read, Heb412Gen::Doc
         can :create, Heb412Gen::Doc
@@ -236,11 +231,9 @@ class Ability < Sivel2Sjr::Ability
           casosjr: { oficina_id: usuario.oficina_id }
         can :manage, Cor1440Gen::Informe
         can [:read, :new], Cor1440Gen::Actividad
-        can :manage, 
-          Cor1440Gen::Actividad do |actividad|
-          actividad.oficina_id == 1 ||
-            actividad.oficina_id == usuario.oficina_id
-        end
+        can :manage, Cor1440Gen::Actividad.where(
+          'oficina_id = 1 OR ' +
+          'oficina_id = ?', usuario.oficina_id)
         can :read, Cor1440Gen::Proyectofinanciero
         can :read, Heb412Gen::Doc
         can :create, Heb412Gen::Doc

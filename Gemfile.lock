@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: f8d25caa15ce6999e5c1fe5b6fe8ad46a8d610ec
+  revision: 03a51f925c6116637712821fe66e45e66d26d55f
   branch: vista_actividad_sipmodelo
   specs:
     cor1440_gen (1.0b2)
@@ -24,7 +24,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: 7b80e3715ca6f4a57cd1b0792d55b5ff263b320a
+  revision: 42b2ff8b16d2ab8f1a0eea9fe13c30de2425a27e
   specs:
     sal7711_gen (1.0.b1)
       rails
@@ -32,7 +32,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: 71861cf90333655d86fcaf885df230c9f2553f82
+  revision: a5a3f54a3fc9bb67210a680c609243f4161e5ce1
   specs:
     sal7711_web (1.0.a3)
       rails
@@ -40,7 +40,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: dffd15dc6fd68fb50bc7c958b120f8fcc1210c55
+  revision: c892e6b191484a89c47d60d0ccca3f5643014390
   specs:
     sip (2.0.b5)
       bootstrap-datepicker-rails
@@ -172,13 +172,13 @@ GEM
     builder (3.2.3)
     camertron-eprun (1.1.1)
     cancancan (2.2.0)
-    capybara (3.1.1)
+    capybara (3.2.1)
       addressable
       mini_mime (>= 0.1.3)
       nokogiri (~> 1.8)
       rack (>= 1.6.0)
       rack-test (>= 0.6.3)
-      xpath (~> 3.0)
+      xpath (~> 3.1)
     chartkick (2.3.4)
     childprocess (0.9.0)
       ffi (~> 1.0, >= 1.0.11)
@@ -217,7 +217,7 @@ GEM
     docile (1.3.1)
     erubi (1.7.1)
     execjs (2.7.0)
-    ffi (1.9.23)
+    ffi (1.9.25)
     font-awesome-rails (4.7.0.4)
       railties (>= 3.2, < 6.0)
     foreman (0.84.0)
@@ -262,7 +262,7 @@ GEM
     mini_mime (1.0.0)
     mini_portile2 (2.3.0)
     minitest (5.11.3)
-    minitest-reporters (1.2.0)
+    minitest-reporters (1.3.0)
       ansi
       builder
       minitest (>= 5.0)
@@ -391,7 +391,7 @@ GEM
       tzinfo
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
-    uglifier (4.1.10)
+    uglifier (4.1.11)
       execjs (>= 0.3.0, < 3)
     unicorn (5.4.0)
       kgio (~> 2.6)

@@ -40,6 +40,8 @@ module Sivel2Sjrcol
     config.x.sal7711_presencia_fecha = true
     config.x.sal7711_presencia_pagina = false
 
+    config.x.cor1440_permisos_por_oficina = true
+
     #config.web_console.whitelisted_ips = ['73.175.20.127']
   end
 end

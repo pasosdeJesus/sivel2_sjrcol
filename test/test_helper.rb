@@ -7,9 +7,9 @@ SimpleCov.start
 require_relative '../config/environment'
 require 'rails/test_help'
 
+require "minitest/rails"
+require "minitest/reporters"
 require "minitest/rails/capybara"
-require "capybara/rails"
-require "capybara/poltergeist"
 Capybara.javascript_driver = :poltergeist
 
 

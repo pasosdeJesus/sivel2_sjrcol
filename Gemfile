@@ -136,20 +136,17 @@ end
 # Los siguientes son para pruebas y no tiene generadores requeridos en desarrollo
 group :test do
   # Acelera desarrollo ejecutando en fondo.  https://github.com/jonleighton/spring
-  gem "minitest"
-  gem "minitest-reporters"
 
   gem 'simplecov'
 
-  gem 'poltergeist'
   gem 'connection_pool'
-  gem 'rails-controller-testing'
+  gem "minitest-reporters"
+  gem 'minitest-rails-capybara'
+  gem 'poltergeist'
 
   # Pruebas de regresión que no requieren javascript
-  gem 'capybara'
   gem 'selenium-webdriver'
   gem 'chromedriver-helper'
-  gem 'minitest-rails-capybara'
 
   # Un proceso para cada prueba -- acelera
   gem 'spork'

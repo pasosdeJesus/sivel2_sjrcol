@@ -1,14 +1,19 @@
 language: ruby
+
 rvm:
-        - 2.4.0
+        - 2.4.1
+
 addons:
         postgresql: '9.6'
+
 notifications:
         email: false
-script: bundle exec rails test
+
 env:
         global:
                 - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
+                - CC_TEST_REPORTER_ID=
+
 before_install: 
         - sudo locale-gen --no-archive es_CO.UTF-8
         - sudo /etc/init.d/postgresql stop
@@ -22,3 +27,5 @@ before_install:
         - bundle exec rake db:setup
         - bundle exec rake sip:indices
 
+script: 
+        - bundle exec rails test

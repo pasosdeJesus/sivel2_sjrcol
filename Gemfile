@@ -149,7 +149,7 @@ group :test do
   gem 'capybara'
   gem 'selenium-webdriver'
   gem 'chromedriver-helper'
-  #gem 'minitest-rails-capybara'
+  gem 'minitest-rails-capybara'
 
   # Un proceso para cada prueba -- acelera
   gem 'spork'

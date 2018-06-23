@@ -1,7 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: 6ae3330439fc55f65a51402c4d9eb722750a0445
-  branch: vista_actividad_sipmodelo
+  revision: 6b8d8631d38950f976249b8f43ba2d9ad07a75fc
   specs:
     cor1440_gen (1.0b2)
       devise
@@ -24,7 +23,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: 5efd5c70df0c424f9258f50e4cd0f9cd964d82bb
+  revision: 1d93d64bfc524fc2e06cd16d9ee4733b02c616de
   specs:
     sal7711_gen (1.0.b1)
       rails
@@ -32,7 +31,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: 69d5c91a21a89ee09ce12f0bceb27296d2872f99
+  revision: 1e780416547d8ee3f143e5c2367c45ff7df936b4
   specs:
     sal7711_web (1.0.a3)
       rails
@@ -62,7 +61,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 94f647641b9eaec09af91cc80a54d1cb3b93757d
+  revision: bc51f0220eefd4ed94968806d14e063235b47311
   specs:
     sivel2_gen (2.0b6)
       devise
@@ -71,8 +70,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 2261754dada09519bbb2718cb9940247e2fea62a
-  branch: vista_actividad_sipmodelo
+  revision: b8645435041ae432e9451726ec51cdfe1e898f70
   specs:
     sivel2_sjr (2.0.b1)
       rails

@@ -23,7 +23,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: fbbd574e46d0e6de38283a90ef79549aeaad5fd8
+  revision: 2b9d2094f31eacec76f7af389905e268a1cf821c
   specs:
     sal7711_gen (1.0.b1)
       rails
@@ -31,7 +31,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: fddfd0b986715f8e88281fcd2be0fa28a4ba9238
+  revision: 2c9804da768593065bd6e5fff2a05a5cb76031da
   specs:
     sal7711_web (1.0.a3)
       rails
@@ -61,7 +61,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: bc51f0220eefd4ed94968806d14e063235b47311
+  revision: 09f60fcddefdb4b7a2888f418be5eca51394f180
   specs:
     sivel2_gen (2.0b6)
       devise
@@ -70,7 +70,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 539c52e915979dd6d7e6b7d017103214b0a58ca8
+  revision: 9a6452da2a52b526e4f76144aba6f6c4f8c8a1ea
   specs:
     sivel2_sjr (2.0.b1)
       rails

@@ -236,8 +236,10 @@ class Ability < Sivel2Sjr::Ability
         can :manage, Sivel2Gen::Acto
         can :manage, Sip::Persona
         can :manage, Cor1440Gen::Actividad
-        can :manage, Cor1440Gen::Proyectofinanciero
+        can :manage, Cor1440Gen::Actorsocial
         can :manage, Cor1440Gen::Informe
+        can :manage, Cor1440Gen::Proyectofinanciero
+        can :manage, Cor1440Gen::Sectoractor
         can :manage, Sal7711Gen::Articulo
         can :manage, Usuario
         can :manage, Heb412Gen::Doc

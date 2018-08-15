@@ -107,7 +107,7 @@
       </div>
       <div class="col-sm-offset-0 col-sm-7">
         <%= f.input :usuario_id,
-          collection: ::Usuario.habilitados,
+          collection: ::Usuario.order(:nombre).all,
           label_method: :nombre,
           value_method: :id,
           label: false,

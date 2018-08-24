@@ -94,7 +94,7 @@ gem "paperclip"
 gem "tzinfo"
 
 # Motor SIP
-gem 'sip', git: "https://github.com/pasosdeJesus/sip.git"
+gem 'sip', git: "https://github.com/pasosdeJesus/sip.git", branch: 'sip_grupoper'
 #gem 'sip', path: '../sip'
 
 # Motor Heb412_gen
@@ -102,11 +102,11 @@ gem 'heb412_gen', git: "https://github.com/pasosdeJesus/heb412_gen.git"
 #gem 'heb412_gen', path: '../heb412_gen'
 
 # Motor de SIVeL 2
-gem 'sivel2_gen', git: "https://github.com/pasosdeJesus/sivel2_gen.git"
+gem 'sivel2_gen', git: "https://github.com/pasosdeJesus/sivel2_gen.git", branch: 'sip_grupoper'
 #gem 'sivel2_gen', path: '../sivel2_gen'
 
 # Motor de SIVeL 2 - SJR
-gem 'sivel2_sjr', git: "https://github.com/pasosdeJesus/sivel2_sjr.git"
+gem 'sivel2_sjr', git: "https://github.com/pasosdeJesus/sivel2_sjr.git", branch: 'sip_grupoper'
 #gem 'sivel2_sjr', path: '../sivel2_sjr'
 
 # Motor Cor1440_gen

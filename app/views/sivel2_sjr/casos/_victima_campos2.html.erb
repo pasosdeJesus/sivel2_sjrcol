@@ -23,19 +23,23 @@
   </div>
 </div>
 
-<%= victima.association :etnia,
-	collection: Sivel2Gen::Etnia.habilitados,
-	include_blank: false,
-	label: "Etnia",
-	label_method: :nombre, 
-	value_method: :id 
-%>
+<div class="row">
+  <div class="col-sm-6">
+    <%= victima.association :etnia,
+      collection: Sivel2Gen::Etnia.habilitados,
+      include_blank: false,
+      label: "Etnia",
+      label_method: :nombre, 
+      value_method: :id 
+    %>
+  </div>
+  <div class="col-sm-6">
+    <%= victima.input(:orientacionsexual, collection: [
+      [:HETEROSEXUAL, :H], [:LESBIANA, :L], [:GAY, :G], 
+      [:BISEXUAL, :B], [:TRANSEXUAL, :T], [:INTERSEXUAL, :I]
+    ], 
+    label: "Orientación Sexual",
+    include_blank: false ) %>
 
-<%= victima.input(:orientacionsexual, collection: [
-						[:HETEROSEXUAL, :H], [:LESBIANA, :L], [:GAY, :G], 
-						[:BISEXUAL, :B], [:TRANSEXUAL, :T], [:INTERSEXUAL, :I]
-], 
-	label: "Orientación Sexual",
-	include_blank: false ) 
-%>
-
+  </div>
+</div>

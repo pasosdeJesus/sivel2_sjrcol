@@ -1,36 +1,38 @@
-<%= victima.association :filiacion,
-  collection: Sivel2Gen::Filiacion.habilitados,
-  include_blank: false,
-  label: "Filiación Política",
-  label_method: :nombre, 
-  value_method: :id,
-  input_html: {
-    "data-toggle" => 'tooltip',
-    "title" => 'Partido o filiación política en el momento del desplazamiento emblemático'
-  }
-%>
-
-<%= victima.association :organizacion,
-  collection: Sivel2Gen::Organizacion.habilitados,
-  include_blank: false,
-  label: "Organización",
-  label_method: :nombre, 
-  value_method: :id ,
-  input_html: {
-    "data-toggle" => 'tooltip',
-    "title" => 'Organización a la que pertenecía en el momento del desplazamiento emblemático'
-  }
-%>
-
-<%= victima.association :vinculoestado,
-  collection: Sivel2Gen::Vinculoestado.habilitados,
-  include_blank: false,
-  label: "Vínculo con el Estado",
-  label_method: :nombre, 
-  value_method: :id,
-  input_html: {
-    "data-toggle" => 'tooltip',
-    "title" => 'Registre si la persona era funcionaria pública en el momento del desplazamiento'
-  }
-
-%>
+<div class="row">
+  <div class="col-md-4">
+    <%= victima.association :filiacion,
+      collection: Sivel2Gen::Filiacion.habilitados,
+      include_blank: false,
+      label: "Filiación Política",
+      label_method: :nombre, 
+      value_method: :id,
+      input_html: {
+        "data-toggle" => 'tooltip',
+        "title" => 'Partido o filiación política en el momento del desplazamiento emblemático'
+      } %>
+  </div>
+  <div class="col-md-4">
+    <%= victima.association :organizacion,
+      collection: Sivel2Gen::Organizacion.habilitados,
+      include_blank: false,
+      label: "Organización",
+      label_method: :nombre, 
+      value_method: :id ,
+      input_html: {
+        "data-toggle" => 'tooltip',
+        "title" => 'Organización a la que pertenecía en el momento del desplazamiento emblemático'
+      } %>
+  </div>
+  <div class="col-md-4">
+    <%= victima.association :vinculoestado,
+      collection: Sivel2Gen::Vinculoestado.habilitados,
+      include_blank: false,
+      label: "Vínculo con el Estado",
+      label_method: :nombre, 
+      value_method: :id,
+      input_html: {
+        "data-toggle" => 'tooltip',
+        "title" => 'Registre si la persona era funcionaria pública en el momento del desplazamiento'
+      } %>
+  </div>
+</div>

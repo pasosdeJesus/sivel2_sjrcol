@@ -1,9 +1,7 @@
 source 'https://rubygems.org'
 
 # Rails (internacionalización)
-#gem "rails", '~> 5.2.0'
-# Resuelve problema con minitest y rails 5.2.0
-gem "rails", '~> 5.2.0', git: 'https://github.com/rails/rails.git', ref: '4887f97bd8a8859294ad02ccea20d83a94ec0812'
+gem "rails", '~> 5.2.1'
 
 gem "rails-i18n"
 
@@ -106,11 +104,11 @@ gem 'sivel2_gen', git: "https://github.com/pasosdeJesus/sivel2_gen.git"
 #gem 'sivel2_gen', path: '../sivel2_gen'
 
 # Motor de SIVeL 2 - SJR
-gem 'sivel2_sjr', git: "https://github.com/pasosdeJesus/sivel2_sjr.git", branch: 'vista_actividad_sipmodelo'
+gem 'sivel2_sjr', git: "https://github.com/pasosdeJesus/sivel2_sjr.git"
 #gem 'sivel2_sjr', path: '../sivel2_sjr'
 
 # Motor Cor1440_gen
-gem 'cor1440_gen', git: "https://github.com/pasosdeJesus/cor1440_gen.git", branch: 'vista_actividad_sipmodelo'
+gem 'cor1440_gen', git: "https://github.com/pasosdeJesus/cor1440_gen.git"
 #gem 'cor1440_gen', path: '../cor1440_gen'
 
 # Motor Sal7711_gen
@@ -136,20 +134,17 @@ end
 # Los siguientes son para pruebas y no tiene generadores requeridos en desarrollo
 group :test do
   # Acelera desarrollo ejecutando en fondo.  https://github.com/jonleighton/spring
-  gem "minitest"
-  gem "minitest-reporters"
 
   gem 'simplecov'
 
-  gem 'poltergeist'
   gem 'connection_pool'
-  gem 'rails-controller-testing'
+  gem "minitest-reporters"
+  gem 'minitest-rails-capybara'
+  gem 'poltergeist'
 
   # Pruebas de regresión que no requieren javascript
-  gem 'capybara'
   gem 'selenium-webdriver'
   gem 'chromedriver-helper'
-  #gem 'minitest-rails-capybara'
 
   # Un proceso para cada prueba -- acelera
   gem 'spork'

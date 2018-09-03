@@ -176,72 +176,97 @@ class Ability < Sivel2Sjr::Ability
         #cannot :buscar, Sivel2Gen::Caso
         can :read, Sivel2Gen::Caso, 
           etiqueta: { id: usuario.etiqueta.map(&:id) }
+
       when Ability::ROLANALIPRENSA
-        can :read, Cor1440Gen::Informe
-        can :read, Cor1440Gen::Proyectofinanciero
-        can [:read, :new], Cor1440Gen::Actividad
-        can :manage, Cor1440Gen::Actividad, oficina_id: [1, usuario.oficina_id]
-        can :manage, Sal7711Gen::Articulo
+
         can :read, Heb412Gen::Doc
         can :create, Heb412Gen::Doc
         can :read, Heb412Gen::Plantillahcm
 
+        can :manage, Cor1440Gen::Actividad, oficina_id: [1, usuario.oficina_id]
+        can [:read, :new], Cor1440Gen::Actividad
+        can :read, Cor1440Gen::Informe
+        can :read, Cor1440Gen::Proyectofinanciero
+        
+        can :manage, Sal7711Gen::Articulo
+
       when Ability::ROLSIST
+
+        can [:new, :read], Cor1440Gen::Actividad
+        can :manage, Cor1440Gen::Actividad, oficina_id: [1, usuario.oficina_id]
+        can :read, Cor1440Gen::Proyectofinanciero
+
+        can :read, Heb412Gen::Doc
+        can :create, Heb412Gen::Doc
+        can :read, Heb412Gen::Plantillahcm
+
+        can :manage, Sip::Persona
+
+        can :manage, Sivel2Gen::Acto
         can :read, Sivel2Gen::Caso, casosjr: { oficina_id: usuario.oficina_id }
         can [:update, :create, :destroy], Sivel2Gen::Caso, 
           casosjr: { asesor: usuario.id, oficina_id:usuario.oficina_id }
         can :new, Sivel2Gen::Caso 
-        can :manage, Sivel2Gen::Acto
-        can :manage, Sip::Persona
-        can [:new, :read], Cor1440Gen::Actividad
-        can :manage, Cor1440Gen::Actividad, oficina_id: [1, usuario.oficina_id]
-        can :read, Cor1440Gen::Proyectofinanciero
-        can :read, Heb412Gen::Doc
-        can :create, Heb412Gen::Doc
-        can :read, Heb412Gen::Plantillahcm
-
+        
       when Ability::ROLANALI
-        can :read, Sivel2Gen::Caso
-        can :new, Sivel2Gen::Caso
-        can :manage, Sivel2Gen::Acto
-        can :manage, Sip::Persona
-        can [:update, :create, :destroy, :edit], Sivel2Gen::Caso, 
-          casosjr: { oficina_id: usuario.oficina_id }
+
+        can :manage, Cor1440Gen::Actividad, oficina_id: [1, usuario.oficina_id]
+        can [:read, :new], Cor1440Gen::Actividad
         can :read, Cor1440Gen::Informe
         can :read, Cor1440Gen::Proyectofinanciero
-        can :manage, Cor1440Gen::Actividad, oficina_id: [1, usuario.oficina_id]
-        can [:read, :new], Cor1440Gen::Actividad
+
         can :read, Heb412Gen::Doc
         can :create, Heb412Gen::Doc
         can :read, Heb412Gen::Plantillahcm
+
         can :manage, Sal7711Gen::Articulo
 
-      when Ability::ROLCOOR
+        can :manage, Sip::Persona
+
+        can :manage, Sivel2Gen::Acto
         can :read, Sivel2Gen::Caso
         can :new, Sivel2Gen::Caso
-        can :manage, Sivel2Gen::Acto
-        can :manage, Sip::Persona
-        can [:update, :create, :destroy, :poneretcomp], Sivel2Gen::Caso, 
+        can [:update, :create, :destroy, :edit], Sivel2Gen::Caso, 
           casosjr: { oficina_id: usuario.oficina_id }
+
+      when Ability::ROLCOOR
         can :manage, Cor1440Gen::Informe
         can [:read, :new], Cor1440Gen::Actividad
         can :manage, Cor1440Gen::Actividad, oficina_id: [1, usuario.oficina_id]
         can :read, Cor1440Gen::Proyectofinanciero
+
         can :read, Heb412Gen::Doc
         can :create, Heb412Gen::Doc
         can :read, Heb412Gen::Plantillahcm
 
-      when Ability::ROLADMIN, Ability::ROLDIR
-        can :manage, Sivel2Gen::Caso
-        can :manage, Sivel2Gen::Acto
+        can [:new, :create, :read, :index, :edit, :update], Sip::Actorsocial
         can :manage, Sip::Persona
+
+        can :manage, Sivel2Gen::Acto
+        can :read, Sivel2Gen::Caso
+        can :new, Sivel2Gen::Caso
+        can [:update, :create, :destroy, :poneretcomp], Sivel2Gen::Caso, 
+          casosjr: { oficina_id: usuario.oficina_id }
+
+      when Ability::ROLADMIN, Ability::ROLDIR
         can :manage, Cor1440Gen::Actividad
-        can :manage, Cor1440Gen::Proyectofinanciero
         can :manage, Cor1440Gen::Informe
-        can :manage, Sal7711Gen::Articulo
-        can :manage, Usuario
+        can :manage, Cor1440Gen::Proyectofinanciero
+        can :manage, Cor1440Gen::Sectoractor
+
         can :manage, Heb412Gen::Doc
         can :manage, Heb412Gen::Plantillahcm
+
+        can :manage, Sal7711Gen::Articulo
+
+        can :manage, Sip::Actorsocial
+        can :manage, Sip::Sectoractor
+        can :manage, Sip::Persona
+
+        can :manage, Sivel2Gen::Caso
+        can :manage, Sivel2Gen::Acto
+
+        can :manage, Usuario
         can :manage, :tablasbasicas
         tablasbasicas.each do |t|
           c = Ability.tb_clase(t)

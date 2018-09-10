@@ -57,6 +57,20 @@ module Sivel2Sjr
       return conscaso
     end
 
+
+    def destroy
+
+      if @caso.casosjr.respuesta
+        # No se logró hacer ni con dependente:destroy en
+        # las relaciones ni borrando con delete 
+        @caso.casosjr.respuesta.each do |r|
+          Sivel2Sjr::AccionjuridicaRespuesta.where(respuesta_id: r.id).
+            delete_all
+        end
+      end
+      sivel2_sjr_destroy
+    end
+
     def otros_params_respuesta
       [
         :accionjuridica_respuesta_attributes => [

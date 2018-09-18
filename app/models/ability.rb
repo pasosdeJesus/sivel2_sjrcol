@@ -132,22 +132,22 @@ class Ability < Sivel2Sjr::Ability
         controlador: 'Sivel2Sjr::CasosController',
         ruta: '/casos'
     },
-    'Actividad' => { 
-      campos: [
-        'id', 'nombre', 'fecha', 'lugar', 'oficina', 
-        'tipos_de_actividad', 'convenios_financieros', 'areas', 'subareas', 
-        'responsable', 'corresponsables', 'objetivo', 
-        'resultado', 'poblacionmujeres', 'poblacionhombres', 'poblacion',
-        'observaciones', 
-        'creacion', 'actualizacion'
-      ],
-      controlador: 'Cor1440Gen::ActividadesController',
-      ruta: '/actividades'
-    }
+#    'Actividad' => { 
+#      campos: [
+#        'id', 'nombre', 'fecha', 'lugar', 'oficina', 
+#        'tipos_de_actividad', 'convenios_financieros', 'areas', 'subareas', 
+#        'responsable', 'corresponsables', 'objetivo', 
+#        'resultado', 'poblacionmujeres', 'poblacionhombres', 'poblacion',
+#        'observaciones', 
+#        'creacion', 'actualizacion'
+#      ],
+#      controlador: 'Cor1440Gen::ActividadesController',
+#      ruta: '/actividades'
+#    }
 
   }
 
-  def campos_plantillas
+    def campos_plantillas
       Heb412Gen::Ability::CAMPOS_PLANTILLAS_PROPIAS.clone.
         merge(Cor1440Gen::Ability::CAMPOS_PLANTILLAS_PROPIAS.clone).
         merge(CAMPOS_PLANTILLAS_PROPIAS)

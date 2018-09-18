@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: 5dcebf5a59bf21deb5edd106dcf4ed5b766918e4
+  revision: dd94ebb25449a3b409d18c1276409ae60d49a6c5
   specs:
     cor1440_gen (1.0b2)
       devise
@@ -23,7 +23,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: 42f9e2681cd929ae85ad01d6627962d3a9606910
+  revision: 7b4ab0e91177d6a75822ac413c39ba40e647398b
   specs:
     sal7711_gen (1.0.b1)
       rails
@@ -31,7 +31,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: 224fef36c8b3bb6ef6f1473c0ca1f85e20a797a9
+  revision: e6cadbef1aa35e4811b96aaf096b16bb046d6be8
   specs:
     sal7711_web (1.0.a3)
       rails
@@ -39,7 +39,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: fa025664ab912c1f500d07d8ca10ab3a5c5bbad5
+  revision: 5ca2bc7ed557a640c703fe56d6b53943472859f8
   specs:
     sip (2.0.b5)
       bootstrap-datepicker-rails
@@ -61,7 +61,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 76120fae17120c8666c6a4e705a997b1d7cc02f4
+  revision: 4048add961db1318a362ae1f33728abff3857c6f
   specs:
     sivel2_gen (2.0b7)
       devise
@@ -70,7 +70,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: d806875b9eefad56dedf5586a7cda648f2dd8347
+  revision: 61b4e25c4fcbfb134211e86f6689f5b7a96ea6aa
   specs:
     sivel2_sjr (2.0.b1)
       rails
@@ -138,13 +138,13 @@ GEM
     bindex (0.5.0)
     binding_of_caller (0.8.0)
       debug_inspector (>= 0.0.1)
-    bootsnap (1.3.1)
+    bootsnap (1.3.2)
       msgpack (~> 1.0)
     bootstrap-datepicker-rails (1.8.0.1)
       railties (>= 3.0)
     builder (3.2.3)
     camertron-eprun (1.1.1)
-    cancancan (2.2.0)
+    cancancan (2.3.0)
     capybara (2.18.0)
       addressable
       mini_mime (>= 0.1.3)
@@ -159,7 +159,7 @@ GEM
       coffee-rails (>= 3.2)
       railties (>= 3.0)
       sass-rails (>= 3.2)
-    chromedriver-helper (1.2.0)
+    chromedriver-helper (2.0.1)
       archive-zip (~> 0.10)
       nokogiri (~> 1.8)
     cldr-plurals-runtime-rb (1.0.1)
@@ -225,7 +225,7 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.7.0)
       mini_mime (>= 0.1.1)
-    marcel (0.3.2)
+    marcel (0.3.3)
       mimemagic (~> 0.3.2)
     method_source (0.9.0)
     mime-types (3.2.2)
@@ -393,7 +393,7 @@ GEM
       tzinfo
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
-    uglifier (4.1.18)
+    uglifier (4.1.19)
       execjs (>= 0.3.0, < 3)
     unicorn (5.4.1)
       kgio (~> 2.6)

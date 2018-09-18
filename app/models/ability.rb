@@ -171,6 +171,12 @@ class Ability < Sivel2Sjr::Ability
     can :read, Sal7711Gen::Categoriaprensa      
     if !usuario.nil? && !usuario.rol.nil? then
       can :read, Sal7711Gen::Articulo
+      
+      can :read, Heb412Gen::Plantilladoc
+      can :read, Heb412Gen::Plantillahcm
+      can :read, Heb412Gen::Plantillahcr
+
+
       case usuario.rol 
       when Ability::ROLINV
         #cannot :buscar, Sivel2Gen::Caso
@@ -181,7 +187,6 @@ class Ability < Sivel2Sjr::Ability
 
         can :read, Heb412Gen::Doc
         can :create, Heb412Gen::Doc
-        can :read, Heb412Gen::Plantillahcm
 
         can :manage, Cor1440Gen::Actividad, oficina_id: [1, usuario.oficina_id]
         can [:read, :new], Cor1440Gen::Actividad
@@ -198,7 +203,6 @@ class Ability < Sivel2Sjr::Ability
 
         can :read, Heb412Gen::Doc
         can :create, Heb412Gen::Doc
-        can :read, Heb412Gen::Plantillahcm
 
         can :manage, Sip::Persona
 
@@ -217,7 +221,6 @@ class Ability < Sivel2Sjr::Ability
 
         can :read, Heb412Gen::Doc
         can :create, Heb412Gen::Doc
-        can :read, Heb412Gen::Plantillahcm
 
         can :manage, Sal7711Gen::Articulo
 
@@ -237,7 +240,6 @@ class Ability < Sivel2Sjr::Ability
 
         can :read, Heb412Gen::Doc
         can :create, Heb412Gen::Doc
-        can :read, Heb412Gen::Plantillahcm
 
         can [:new, :create, :read, :index, :edit, :update], Sip::Actorsocial
         can :manage, Sip::Persona
@@ -255,7 +257,9 @@ class Ability < Sivel2Sjr::Ability
         can :manage, Cor1440Gen::Sectoractor
 
         can :manage, Heb412Gen::Doc
+        can :manage, Heb412Gen::Plantilladoc
         can :manage, Heb412Gen::Plantillahcm
+        can :manage, Heb412Gen::Plantillahcr
 
         can :manage, Sal7711Gen::Articulo
 

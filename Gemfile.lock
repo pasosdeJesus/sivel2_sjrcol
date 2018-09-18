@@ -12,7 +12,8 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: d26bec4f7626b8a27d48d183bde80913dcbbc29e
+  revision: 6f1f90a67c96e9964290931723b26a9dff617e2c
+  branch: hojacalculo_registro
   specs:
     heb412_gen (1.0.a1)
       chosen-rails
@@ -70,7 +71,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 61b4e25c4fcbfb134211e86f6689f5b7a96ea6aa
+  revision: 172b59867700db5f5ee42880d9537d5c40933f50
   specs:
     sivel2_sjr (2.0.b1)
       rails

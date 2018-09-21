@@ -167,7 +167,8 @@ class Sivel2Sjr::ConteosController < ApplicationController
 
   def personas_filtros_especializados
     @opsegun =  [
-      "", "ACTIVIDAD / OFICIO", "CABEZA DE HOGAR", "ESTADO CIVIL", 
+      "", "ACTIVIDAD / OFICIO", "AÑO DE NACIMIENTO", 
+      "CABEZA DE HOGAR", "ESTADO CIVIL", 
       "ETNIA", "MES RECEPCIÓN", "NIVEL ESCOLAR", "RANGO DE EDAD", 
       "RÉGIMEN DE SALUD", "SEXO"
     ]

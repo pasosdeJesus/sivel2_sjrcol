@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: c6cda3353bfe283b1ec8a5b89ffd98ab57dc219c
+  revision: 1e10c896d5e916ee3829775043e36c0471216a7f
   specs:
     cor1440_gen (1.0b2)
       devise
@@ -12,7 +12,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 6f1f90a67c96e9964290931723b26a9dff617e2c
+  revision: 97c1c4499c410bbecdaf73e5914e24ba13420abc
   branch: hojacalculo_registro
   specs:
     heb412_gen (1.0.a1)
@@ -40,7 +40,8 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 5ca2bc7ed557a640c703fe56d6b53943472859f8
+  revision: e1d1ee04005f7c07c786b6d8c43e9456f447a787
+  branch: persona_sipmodelo
   specs:
     sip (2.0.b5)
       bootstrap-datepicker-rails
@@ -62,7 +63,8 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 4048add961db1318a362ae1f33728abff3857c6f
+  revision: e9e4dfb5d35d5170fb8508338c187e0ff177dd74
+  branch: persona_sipmodelo
   specs:
     sivel2_gen (2.0b7)
       devise
@@ -71,7 +73,8 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 172b59867700db5f5ee42880d9537d5c40933f50
+  revision: f6e7e9e7b7a5ae1bf54a934892a5d7b20fed396a
+  branch: persona_sipmodelo
   specs:
     sivel2_sjr (2.0.b1)
       rails
@@ -160,7 +163,7 @@ GEM
       coffee-rails (>= 3.2)
       railties (>= 3.0)
       sass-rails (>= 3.2)
-    chromedriver-helper (2.0.1)
+    chromedriver-helper (2.1.0)
       archive-zip (~> 0.10)
       nokogiri (~> 1.8)
     cldr-plurals-runtime-rb (1.0.1)
@@ -186,7 +189,7 @@ GEM
       railties (>= 4.1.0, < 6.0)
       responders
       warden (~> 1.2.3)
-    devise-i18n (1.6.4)
+    devise-i18n (1.6.5)
       devise (>= 4.4)
     docile (1.3.1)
     erubi (1.7.1)
@@ -344,7 +347,7 @@ GEM
       rubyzip (~> 1.1)
     ruby-progressbar (1.10.0)
     rubyzip (1.2.2)
-    sass (3.5.7)
+    sass (3.6.0)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
       rb-fsevent (~> 0.9, >= 0.9.4)

@@ -158,24 +158,29 @@ class Ability < Sivel2Sjr::Ability
     if !usuario || usuario.fechadeshabilitacion
       return
     end
-    can :contar, Sivel2Gen::Caso
+    can :read, Sal7711Gen::Categoriaprensa      
+
+    can :descarga_anexo, Sip::Anexo
     can :contar, Sip::Ubicacion
+    can :nuevo, Sip::Ubicacion
+
+    can :contar, Sivel2Gen::Caso
     can :buscar, Sivel2Gen::Caso
     can :lista, Sivel2Gen::Caso
-    can :descarga_anexo, Sip::Anexo
-    can :nuevo, Sivel2Sjr::Desplazamiento
-    can :nuevo, Sivel2Sjr::Respuesta
-    can :nuevo, Sip::Ubicacion
     can :nuevo, Sivel2Gen::Presponsable
     can :nuevo, Sivel2Gen::Victima
-    can :read, Sal7711Gen::Categoriaprensa      
+
+    can :nuevo, Sivel2Sjr::Desplazamiento
+    can :nuevo, Sivel2Sjr::Respuesta
+
     if !usuario.nil? && !usuario.rol.nil? then
       can :read, Sal7711Gen::Articulo
+      
+      can :read, Sip::Persona
       
       can :read, Heb412Gen::Plantilladoc
       can :read, Heb412Gen::Plantillahcm
       can :read, Heb412Gen::Plantillahcr
-
 
       case usuario.rol 
       when Ability::ROLINV
@@ -184,15 +189,14 @@ class Ability < Sivel2Sjr::Ability
           etiqueta: { id: usuario.etiqueta.map(&:id) }
 
       when Ability::ROLANALIPRENSA
-
-        can :read, Heb412Gen::Doc
-        can :create, Heb412Gen::Doc
-
         can :manage, Cor1440Gen::Actividad, oficina_id: [1, usuario.oficina_id]
         can [:read, :new], Cor1440Gen::Actividad
         can :read, Cor1440Gen::Informe
         can :read, Cor1440Gen::Proyectofinanciero
         
+        can :read, Heb412Gen::Doc
+        can :create, Heb412Gen::Doc
+
         can :manage, Sal7711Gen::Articulo
 
       when Ability::ROLSIST

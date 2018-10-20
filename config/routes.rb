@@ -37,8 +37,8 @@ Rails.application.routes.draw do
   get "/actos/eliminar" => 'sivel2_sjr/actos#eliminar',
     as: :actos_eliminar
   
-  get "/personas" => 'sivel2_sjr/personas#index'
-  get "/personas/remplazar" => 'sivel2_sjr/personas#remplazar'
+  #get "/personas" => 'sip/personas#index'
+  #get "/personas/remplazar" => 'sip/personas#remplazar'
  
   root "sip/hogar#index"
   mount Sivel2Sjr::Engine, at: "/", as: 'sivel2_sjr'

@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: c6cda3353bfe283b1ec8a5b89ffd98ab57dc219c
+  revision: bb83d9e2a9a519ddb7835f4714df943acf71249d
   specs:
     cor1440_gen (1.0b2)
       devise
@@ -12,8 +12,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 6f1f90a67c96e9964290931723b26a9dff617e2c
-  branch: hojacalculo_registro
+  revision: e861b2760411010515bb07757d5dfc50b9886b3f
   specs:
     heb412_gen (1.0.a1)
       chosen-rails
@@ -24,7 +23,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: 7b4ab0e91177d6a75822ac413c39ba40e647398b
+  revision: f27e6dc04c960663705e84f02361a3e5b6d4940f
   specs:
     sal7711_gen (1.0.b1)
       rails
@@ -32,7 +31,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: e6cadbef1aa35e4811b96aaf096b16bb046d6be8
+  revision: dcdb3ebf826ab3d2a1bf101206f9aa0e1ae94772
   specs:
     sal7711_web (1.0.a3)
       rails
@@ -40,7 +39,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 5ca2bc7ed557a640c703fe56d6b53943472859f8
+  revision: 6599928fbb29d17956b059e91b8059d129a5fb10
   specs:
     sip (2.0.b5)
       bootstrap-datepicker-rails
@@ -62,7 +61,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 4048add961db1318a362ae1f33728abff3857c6f
+  revision: 087011534a37699b349ded0bb6cbbc66b8b2ee8d
   specs:
     sivel2_gen (2.0b7)
       devise
@@ -71,7 +70,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 172b59867700db5f5ee42880d9537d5c40933f50
+  revision: 8f543772a04ad26dbfe03d541f2472c2649f1315
   specs:
     sivel2_sjr (2.0.b1)
       rails
@@ -160,7 +159,7 @@ GEM
       coffee-rails (>= 3.2)
       railties (>= 3.0)
       sass-rails (>= 3.2)
-    chromedriver-helper (2.0.1)
+    chromedriver-helper (2.1.0)
       archive-zip (~> 0.10)
       nokogiri (~> 1.8)
     cldr-plurals-runtime-rb (1.0.1)
@@ -186,7 +185,7 @@ GEM
       railties (>= 4.1.0, < 6.0)
       responders
       warden (~> 1.2.3)
-    devise-i18n (1.6.4)
+    devise-i18n (1.6.5)
       devise (>= 4.4)
     docile (1.3.1)
     erubi (1.7.1)
@@ -198,7 +197,7 @@ GEM
       thor (~> 0.19.1)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
-    i18n (1.1.0)
+    i18n (1.1.1)
       concurrent-ruby (~> 1.0)
     interception (0.5)
     io-like (0.3.0)
@@ -224,7 +223,7 @@ GEM
     loofah (2.2.2)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
-    mail (2.7.0)
+    mail (2.7.1)
       mini_mime (>= 0.1.1)
     marcel (0.3.3)
       mimemagic (~> 0.3.2)
@@ -236,8 +235,8 @@ GEM
     mini_mime (1.0.1)
     mini_portile2 (2.3.0)
     minitest (5.11.3)
-    minitest-capybara (0.8.2)
-      capybara (~> 2.2)
+    minitest-capybara (0.9.0)
+      capybara
       minitest (~> 5.0)
       rake
     minitest-metadata (0.6.0)
@@ -250,7 +249,7 @@ GEM
       minitest-capybara (~> 0.8)
       minitest-metadata (~> 0.6)
       minitest-rails (~> 3.0)
-    minitest-reporters (1.3.4)
+    minitest-reporters (1.3.5)
       ansi
       builder
       minitest (>= 5.0)
@@ -258,7 +257,7 @@ GEM
     msgpack (1.2.4)
     multi_json (1.13.1)
     nio4r (2.3.1)
-    nokogiri (1.8.4)
+    nokogiri (1.8.5)
       mini_portile2 (~> 2.3.0)
     odf-report (0.5.2)
       nokogiri (>= 1.5.0)
@@ -281,9 +280,9 @@ GEM
       ttfunk (~> 1.5)
     prawn-table (0.2.2)
       prawn (>= 1.3.0, < 3.0.0)
-    prawnto_2 (0.2.6)
-      prawn (>= 0.6.0)
-      rails (>= 3.1)
+    prawnto_2 (0.3.0)
+      prawn (>= 1.0.0)
+      rails (>= 3.2)
     pry (0.11.3)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
@@ -344,7 +343,7 @@ GEM
       rubyzip (~> 1.1)
     ruby-progressbar (1.10.0)
     rubyzip (1.2.2)
-    sass (3.5.7)
+    sass (3.6.0)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
       rb-fsevent (~> 0.9, >= 0.9.4)
@@ -355,9 +354,9 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
-    selenium-webdriver (3.14.0)
+    selenium-webdriver (3.14.1)
       childprocess (~> 0.5)
-      rubyzip (~> 1.2)
+      rubyzip (~> 1.2, >= 1.2.2)
     simple_form (4.0.1)
       actionpack (>= 5.0)
       activemodel (>= 5.0)
@@ -410,7 +409,7 @@ GEM
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.3)
     will_paginate (3.1.6)
-    xpath (3.1.0)
+    xpath (3.2.0)
       nokogiri (~> 1.8)
 
 PLATFORMS
@@ -476,4 +475,4 @@ DEPENDENCIES
   will_paginate
 
 BUNDLED WITH
-   1.16.4
+   1.16.6

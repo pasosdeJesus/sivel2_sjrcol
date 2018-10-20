@@ -2456,58 +2456,6 @@ ALTER SEQUENCE public.sip_anexo_id_seq OWNED BY public.sip_anexo.id;
 
 
 --
--- Name: sip_datosbio; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.sip_datosbio (
-    id bigint NOT NULL,
-    persona_id integer,
-    fecharecoleccion date NOT NULL,
-    departamento_res_id integer,
-    municipio_res_id integer,
-    vereda_res character varying(1000),
-    direccion_res character varying(1000),
-    telefono character varying(100),
-    correo character varying(100),
-    discapacidad character varying(1000),
-    cvulnerabilidad_id integer,
-    escolaridad_id integer,
-    anio_aprobacion integer,
-    nivelsisben integer,
-    eps character varying(1000),
-    tipocotizante character varying(1),
-    sistemapensional boolean,
-    afiliadoarl boolean,
-    subsidioestado character varying,
-    personashogar integer,
-    menores12acargo integer,
-    mayores60acargo integer,
-    espaciopp boolean,
-    nombreespaciopp character varying(1000),
-    fechaingespaciopp date
-);
-
-
---
--- Name: sip_datosbio_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE public.sip_datosbio_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: sip_datosbio_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE public.sip_datosbio_id_seq OWNED BY public.sip_datosbio.id;
-
-
---
 -- Name: sip_etiqueta_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -5470,13 +5418,6 @@ ALTER TABLE ONLY public.sip_anexo ALTER COLUMN id SET DEFAULT nextval('public.si
 
 
 --
--- Name: sip_datosbio id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.sip_datosbio ALTER COLUMN id SET DEFAULT nextval('public.sip_datosbio_id_seq'::regclass);
-
-
---
 -- Name: sip_grupo id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -6436,14 +6377,6 @@ ALTER TABLE ONLY public.sip_clase
 
 ALTER TABLE ONLY public.sip_clase
     ADD CONSTRAINT sip_clase_pkey PRIMARY KEY (id);
-
-
---
--- Name: sip_datosbio sip_datosbio_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.sip_datosbio
-    ADD CONSTRAINT sip_datosbio_pkey PRIMARY KEY (id);
 
 
 --
@@ -7816,14 +7749,6 @@ ALTER TABLE ONLY public.heb412_gen_doc
 
 
 --
--- Name: sip_datosbio fk_rails_2e6e7eebbe; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.sip_datosbio
-    ADD CONSTRAINT fk_rails_2e6e7eebbe FOREIGN KEY (persona_id) REFERENCES public.sip_persona(id);
-
-
---
 -- Name: cor1440_gen_valorcampoact fk_rails_3060a94455; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8112,14 +8037,6 @@ ALTER TABLE ONLY public.sivel2_sjr_casosjr
 
 
 --
--- Name: sip_datosbio fk_rails_b4903b3da7; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.sip_datosbio
-    ADD CONSTRAINT fk_rails_b4903b3da7 FOREIGN KEY (municipio_res_id) REFERENCES public.sip_municipio(id);
-
-
---
 -- Name: cor1440_gen_indicadorpf fk_rails_b5b70fb7f7; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8197,14 +8114,6 @@ ALTER TABLE ONLY public.cor1440_gen_actividad_proyecto
 
 ALTER TABLE ONLY public.cor1440_gen_indicadorpf
     ADD CONSTRAINT fk_rails_cf888d1b56 FOREIGN KEY (tipoindicador_id) REFERENCES public.cor1440_gen_tipoindicador(id);
-
-
---
--- Name: sip_datosbio fk_rails_d18580755b; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.sip_datosbio
-    ADD CONSTRAINT fk_rails_d18580755b FOREIGN KEY (departamento_res_id) REFERENCES public.sip_departamento(id);
 
 
 --

@@ -80,7 +80,8 @@ class Ability < Sivel2Sjr::Ability
     ['Sivel2Sjr', 'personadesea'], 
     ['Sivel2Sjr', 'progestado'], 
     ['Sivel2Sjr', 'regimensalud'],
-    ['Sivel2Sjr', 'tipodesp']
+    ['Sivel2Sjr', 'tipodesp'],
+    ['Sip', 'tipoactorsocial'],
   ]
   
   def tablasbasicas 

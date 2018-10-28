@@ -1,0 +1,31 @@
+<% if f.object.datosbio.nil? %>
+  <% #f.object.datosbio = Sip::Datosbio.new %>
+<% end %>
+
+<%= f.simple_fields_for :datosbio do |d| %>
+  <%= a.input :id, as: :hidden %> 
+  <%= a.input :fecharecoleccion %>
+  <%= a.input :departamento_res_id %>
+  <%= a.input :municipio_res_id %>
+  <%= a.input :vereda_res_id %>
+  <%= a.input :direccion_res_id %>
+  <%= a.input :telefono %>
+  <%= a.input :correo %>
+  <%= a.input :discapacidad %>
+  <%= a.input :cvulnerabilidad_id %>
+  <%= a.input :escolaridad_id %>
+  <%= a.input :anio_aprobacion %>
+  <%= a.input :nivelsisben%>
+  <%= a.input :eps %>
+  <%= a.input :tipocotizante %>
+  <%= a.input :sistemapensional %>
+  <%= a.input :afiliadoarl %>
+  <%= a.input :subsidioestado %>
+  <%= a.input :personashogar %>
+  <%= a.input :menores12acargo %>
+  <%= a.input :mayores60acargo %>
+  <%= a.input :espaciopp %>
+  <%= a.input :nombreespaciopp %>
+  <%= a.input :fechaingespaciopp %>
+
+<% end %>

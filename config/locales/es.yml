@@ -129,3 +129,6 @@ es:
         verifcsjr: Verificación compromisos SJR
       "sip/ubicacion":
         Ubicacion: Ubicación
+      "sip/tipoactorsocial":
+        Tipoactorsocial: Tipo de actor social
+        Tiposactorsocial: Tipo de actor social

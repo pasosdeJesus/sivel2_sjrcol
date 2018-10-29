@@ -5,7 +5,7 @@ require 'test_helper'
 module Sip
   class LineaactorsocialTest < ActiveSupport::TestCase
   
-      PRUEBA_TIPOACTORSOCIAL = {
+      PRUEBA_LINEAACTORSOCIAL = {
         nombre: "Lineaactorsocial",
         fechacreacion: "2018-10-25",
         created_at: "2018-10-25",
@@ -13,14 +13,14 @@ module Sip
   
       test "valido" do
         lineaactorsocial = Sip::Lineaactorsocial.create(
-          PRUEBA_TIPOACTORSOCIAL)
+          PRUEBA_LINEAACTORSOCIAL)
         assert(lineaactorsocial.valid?)
         lineaactorsocial.destroy
       end
   
       test "no valido" do
         lineaactorsocial = Sip::Lineaactorsocial.new(
-          PRUEBA_TIPOACTORSOCIAL)
+          PRUEBA_LINEAACTORSOCIAL)
         lineaactorsocial.nombre = ''
         assert_not(lineaactorsocial.valid?)
         lineaactorsocial.destroy

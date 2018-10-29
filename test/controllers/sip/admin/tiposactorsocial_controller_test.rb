@@ -1,4 +1,4 @@
-require 'byebug'
+#require 'byebug'
 require 'test_helper'
 require_relative '../../../models/sip/tipoactorsocial_test'
 

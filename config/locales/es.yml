@@ -60,11 +60,17 @@ es:
         fuenteprensa: Fuente de prensa
       "sip/actorsocial":
         tipoactorsocial: Tipo
-      "sip/ubicacion":
-        Ubicacion: Ubicación
+        tipoactorsocial_id: Tipo
+        lineaactorsocial: Línea de trabajo
+        lineaactorsocial_id: Línea de trabajo
+      "sip/lineaactorsocial":
+        Lineaactorsocial: Línea de trabajo del actor social
+        Lineasactorsocial: Línea de trabajo del actor social
       "sip/tipoactorsocial":
         Tipoactorsocial: Tipo de actor social
         Tiposactorsocial: Tipo de actor social
+      "sip/ubicacion":
+        Ubicacion: Ubicación
       "sivel2_gen/caso": 
         fecha: F. Desp. Emblemático o Migración
         expulsion: Sitio Expulsión Emb.

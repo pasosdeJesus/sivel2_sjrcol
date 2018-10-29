@@ -10,12 +10,30 @@ module Sip
         :grupoper_id,
         :tipoactorsocial_id,
         { :sectoractor_ids => [] },
+        :lineaactorsocial_id,
+        :email,
         :web,
         :telefono, 
         :fax,
         :pais,
-        :direccion
+        :departamento,
+        :municipio,
+        :direccion,
+        :nit
       ]
+    end
+
+    def actorsocial_params
+      params.require(:actorsocial).permit(
+        atributos_form - [:grupoper] +
+        [ :departamento_id,
+          :municipio_id,
+          :pais_id,
+          :grupoper_attributes => [
+            :id,
+            :nombre,
+            :anotaciones ]
+      ]) 
     end
 
   end

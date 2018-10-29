@@ -8,11 +8,11 @@ module Sip
       load_and_authorize_resource  class: Sip::Tipoactorsocial
 
       def clase 
-        "::Tipoactorsocial"
+        "Sip::Tipoactorsocial"
       end
 
       def set_tipoactorsocial
-        @basica = Tipoactorsocial.find(params[:id])
+        @basica = Sip::Tipoactorsocial.find(params[:id])
       end
 
       def atributos_index
@@ -21,7 +21,7 @@ module Sip
           "nombre", 
           "observaciones", 
           "fechacreacion_localizada", 
-          "fechadeshabilitacion_localizada"
+          "habilitado"
         ]
       end
 

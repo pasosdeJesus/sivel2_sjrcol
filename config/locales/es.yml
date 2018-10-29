@@ -58,6 +58,13 @@ es:
       "sal7711_gen/articulo": 
         texto: Resumen
         fuenteprensa: Fuente de prensa
+      "sip/actorsocial":
+        tipoactorsocial: Tipo
+      "sip/ubicacion":
+        Ubicacion: Ubicación
+      "sip/tipoactorsocial":
+        Tipoactorsocial: Tipo de actor social
+        Tiposactorsocial: Tipo de actor social
       "sivel2_gen/caso": 
         fecha: F. Desp. Emblemático o Migración
         expulsion: Sitio Expulsión Emb.
@@ -127,8 +134,4 @@ es:
         turno: Turno próxima prorroga
         verifcper: Verificación compromisos persona
         verifcsjr: Verificación compromisos SJR
-      "sip/ubicacion":
-        Ubicacion: Ubicación
-      "sip/tipoactorsocial":
-        Tipoactorsocial: Tipo de actor social
-        Tiposactorsocial: Tipo de actor social
+

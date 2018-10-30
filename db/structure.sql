@@ -4087,6 +4087,30 @@ CREATE TABLE public.sivel2_gen_iglesia (
 
 
 --
+-- Name: sivel2_gen_iniciador; Type: VIEW; Schema: public; Owner: -
+--
+
+CREATE VIEW public.sivel2_gen_iniciador AS
+ SELECT s3.id_caso,
+    s3.fechainicio,
+    s3.id_usuario,
+    usuario.nusuario
+   FROM public.usuario,
+    ( SELECT s2.id_caso,
+            s2.fechainicio,
+            min(s2.id_usuario) AS id_usuario
+           FROM public.sivel2_gen_caso_usuario s2,
+            ( SELECT f1.id_caso,
+                    min(f1.fechainicio) AS m
+                   FROM public.sivel2_gen_caso_usuario f1
+                  GROUP BY f1.id_caso) c
+          WHERE ((s2.id_caso = c.id_caso) AND (s2.fechainicio = c.m))
+          GROUP BY s2.id_caso, s2.fechainicio
+          ORDER BY s2.id_caso, s2.fechainicio) s3
+  WHERE (usuario.id = s3.id_usuario);
+
+
+--
 -- Name: sivel2_gen_intervalo_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 

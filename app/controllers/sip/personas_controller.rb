@@ -3,7 +3,7 @@
 require 'sip/concerns/controllers/personas_controller'
 
 module Sip
-  class PersonasController < Sip::ModelosController
+  class PersonasController < Heb412Gen::ModelosController
 
     include Sip::Concerns::Controllers::PersonasController
 

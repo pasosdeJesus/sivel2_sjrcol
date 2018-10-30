@@ -58,6 +58,18 @@
             'https://docs.google.com/document/d/1qxJOBzbG_lQPN0nfhlJ1QyeRO4a9hrYlK8Z_bRO3UJU/edit?usp=sharing', target: '_blank' %>
           <%= menu_item "Nube", 
             heb412_gen.sisini_path%>
+            <% if can? :manage, ::Heb412Gen::Plantillahcm %>
+              <%= menu_item "Plantillas para listados en hojas de calculo",
+                heb412_gen.plantillashcm_path %>
+            <% end %>
+            <% if can? :manage, ::Heb412Gen::Plantillahcr %>
+              <%= menu_item "Plantillas para un registro en hoja de calculo",
+                heb412_gen.plantillashcr_path %>
+            <% end %>
+            <% if can? :manage, ::Heb412Gen::Plantilladoc %>
+              <%= menu_item "Plantillas para un registro en documento",
+                heb412_gen.plantillasdoc_path %>
+            <% end %>
         <% end %>
       <% end %>
       <%= drop_down "Administrar" do %>
@@ -77,19 +89,6 @@
           <!-- %= #menu_item "Casos", admin_casos_path % -->
         <% end %>
         <%= menu_item "Ver Control de Acceso", sip.ayuda_controldeacceso_path %>
-        <% if can? :manage, ::Heb412Gen::Plantillahcm %>
-           <%= menu_item "Plantillas para listados en hojas de calculo",
-             heb412_gen.plantillashcm_path %>
-         <% end %>
-         <% if can? :manage, ::Heb412Gen::Plantillahcr %>
-           <%= menu_item "Plantillas para un registro en hoja de calculo",
-             heb412_gen.plantillashcr_path %>
-         <% end %>
-         <% if can? :manage, ::Heb412Gen::Plantilladoc %>
-           <%= menu_item "Plantillas para un registro en documento",
-             heb412_gen.plantillasdoc_path %>
-         <% end %>
-
 
       <% end %>
       <%= menu_item "Salir #{current_usuario.nusuario}", main_app.sign_out_path %>

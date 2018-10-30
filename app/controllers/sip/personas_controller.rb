@@ -49,6 +49,14 @@ module Sip
       return a
     end
 
+    def vistas_manejadas
+      ['Persona']
+    end
+
+    def index(c = nil)
+      super(c)
+    end
+
     def listaparams
       atributos_form + [
         :id_pais,

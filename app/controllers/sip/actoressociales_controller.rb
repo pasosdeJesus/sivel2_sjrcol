@@ -36,5 +36,9 @@ module Sip
       ]) 
     end
 
+    def vistas_manejadas
+      ['Actorsocial']
+    end
+
   end
 end

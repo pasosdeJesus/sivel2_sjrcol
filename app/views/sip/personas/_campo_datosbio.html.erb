@@ -3,29 +3,29 @@
 <% end %>
 
 <%= f.simple_fields_for :datosbio do |d| %>
-  <%= a.input :id, as: :hidden %> 
-  <%= a.input :fecharecoleccion %>
-  <%= a.input :departamento_res_id %>
-  <%= a.input :municipio_res_id %>
-  <%= a.input :vereda_res_id %>
-  <%= a.input :direccion_res_id %>
-  <%= a.input :telefono %>
-  <%= a.input :correo %>
-  <%= a.input :discapacidad %>
-  <%= a.input :cvulnerabilidad_id %>
-  <%= a.input :escolaridad_id %>
-  <%= a.input :anio_aprobacion %>
-  <%= a.input :nivelsisben%>
-  <%= a.input :eps %>
-  <%= a.input :tipocotizante %>
-  <%= a.input :sistemapensional %>
-  <%= a.input :afiliadoarl %>
-  <%= a.input :subsidioestado %>
-  <%= a.input :personashogar %>
-  <%= a.input :menores12acargo %>
-  <%= a.input :mayores60acargo %>
-  <%= a.input :espaciopp %>
-  <%= a.input :nombreespaciopp %>
-  <%= a.input :fechaingespaciopp %>
+  <%= d.input :id, as: :hidden %> 
+  <%= render partial: 'campo_departamentores', locals: {d: d, f: f} %>
+  <%= render partial: 'campo_municipiores', locals: {d: d, f: f} %>
+  <%= d.input :veredares%>
+  <%= d.input :direccionres %>
+  <%= d.input :telefono %>
+  <%= d.input :correo %>
+  <%= d.input :discapacidad %>
+  <%= d.input :cvulnerabilidad_id %>
+  <%= render partial: 'campo_escolaridad', locals: {d: d, f: f} %>
+  <%= d.input :anioaprobacion %>
+  <%= d.input :nivelsisben%>
+  <%= d.input :eps %>
+  <%= d.input :tipocotizante %>
+  <%= d.input :sistemapensional %>
+  <%= d.input :afiliadoarl %>
+  <%= d.input :subsidioestado %>
+  <%= d.input :personashogar %>
+  <%= d.input :menores12acargo %>
+  <%= d.input :mayores60acargo %>
+  <%= d.input :nombreespaciopp %>
+  <%= d.input :fechaingespaciopp,
+    :input_html => { "data-behaviour" => "datepicker"},
+    :as => :string %>
 
 <% end %>

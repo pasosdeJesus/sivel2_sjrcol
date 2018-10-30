@@ -13,7 +13,7 @@ module Sip
         :apellidos,
         :tdocumento,
         :numerodocumento,
-        :presenta_fechanac,
+        :fechanac,
         :sexo,
         :municipio
       ]
@@ -23,9 +23,7 @@ module Sip
       [ :id, 
         :nombres,
         :apellidos,
-        :anionac,
-        :mesnac,
-        :dianac,
+        :fechanac,
         :sexo,
         :pais,
         :departamento,
@@ -39,6 +37,13 @@ module Sip
 
 
     def atributos_form
+      if @registro && @registro.datosbio.nil?
+        @datosbio = Sip::Datosbio.new()
+        @datosbio.tipocotizante = 'B'
+        @datosbio.fecharecoleccion = Date.today()
+        @datosbio.save!
+        @registro.datosbio =  @datosbio
+      end
       a = atributos_show - [:id] +
         [:datosbio]
       return a
@@ -50,7 +55,31 @@ module Sip
         :id_departamento,
         :id_municipio,
         :id_clase,
-        :tdocumento_id
+        :tdocumento_id,
+        :datosbio_attributes => [
+          :afiliadoarl,
+          :anioaprobacion,
+          :correo,
+          :cvulnerabilidad_id,
+          :departamentores_id,
+          :direccionres,
+          :discapacidad,
+          :eps,
+          :escolaridad_id,
+          :fechaingespaciopp,
+          :mayores60acargo,
+          :menores12acargo,
+          :municipiores_id,
+          :nivelsisben,
+          :nombreespaciopp,
+          :personashogar,
+          :telefono,
+          :veredares,
+          :sistemapensional,
+          :subsidioestado,
+          :telefono,
+          :tipocotizante
+        ]
       ]
     end
 

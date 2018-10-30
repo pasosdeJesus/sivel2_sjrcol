@@ -61,14 +61,35 @@ es:
       "sip/actorsocial":
         tipoactorsocial: Tipo
         tipoactorsocial_id: Tipo
+        sectoractor: Población relacionada
+        sectoractor_ids: Población relacionada
         lineaactorsocial: Línea de trabajo
         lineaactorsocial_id: Línea de trabajo
+      "sip/datosbio":
+        afiliadoarl: Afiliado a ARL
+        anioaprobacion: Año de aprobacioń
+        correo: Correo electrónico
+        cvulnerabilidad_id: Condición de vulnerabilidad
+        eps: EPS
+        escolaridad_id: Nivel de escolaridad
+        fechaingespaciopp: Fecha de ingreso al espacio de participación política (si participa)
+        nombreespaciopp: Nombre del espacio de participación política o instancia decisoria de políticas públicas, gremiales y/o sociales (si participa)
+        direccionres: Dirección de residencia
+        menores12acargo: Num. de menores de 12 a cargo
+        mayores60acargo: Num. de mayores de 60 a cargo
+        nivelsisben: Nivel del SIBEN
+        personashogar: Num. personas en el hogar
+        sistemapensional: Sistema pensional
+        subsidioestado: Subsidio del Estado
+        telefono: Teléfono
+        tipocotizante: Tipo de afiliacioń
+        veredares: Vereda de residencia
       "sip/lineaactorsocial":
         Lineaactorsocial: Línea de trabajo del actor social
         Lineasactorsocial: Línea de trabajo del actor social
       "sip/tipoactorsocial":
         Tipoactorsocial: Tipo de actor social
-        Tiposactorsocial: Tipo de actor social
+        Tiposactorsocial: Tipos de actor social
       "sip/ubicacion":
         Ubicacion: Ubicación
       "sivel2_gen/caso": 

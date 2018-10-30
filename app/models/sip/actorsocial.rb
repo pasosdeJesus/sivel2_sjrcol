@@ -16,5 +16,6 @@ module Sip
       
 
       validates :tipoactorsocial_id, presence: true
+      validates :nit, uniqueness: true
   end
 end

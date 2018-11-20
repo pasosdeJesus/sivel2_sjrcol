@@ -11,7 +11,7 @@ module Sip
     has_one :datosbio, class_name: 'Sip::Datosbio', 
       foreign_key: 'persona_id'
     accepts_nested_attributes_for :datosbio, reject_if: :all_blank
-    validates :numerodocumento, presence: true
+    #validates :numerodocumento, presence: true
 
     attr_accessor :fechanac
     def fechanac

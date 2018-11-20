@@ -4,10 +4,10 @@ class Sip::Datosbio < ActiveRecord::Base
 
   belongs_to :persona, class_name: 'Sip::Persona', foreign_key: 'persona_id',
     validate: true
-  belongs_to :departamentores, class_name: 'Sip::Departamento', 
-    foreign_key: 'departamentores_id', validate: true
-  belongs_to :municipiores, class_name: 'Sip::Municipio', 
-    foreign_key: 'municipiores_id', validate: true
+  belongs_to :res_departamento, class_name: 'Sip::Departamento', 
+    foreign_key: 'res_departamento_id', validate: true
+  belongs_to :res_municipio, class_name: 'Sip::Municipio', 
+    foreign_key: 'res_municipio_id', validate: true
   belongs_to :escolaridad, class_name: 'Sivel2Gen::Escolaridad', 
     foreign_key: 'escolaridad_id', validate: true
 
@@ -20,10 +20,10 @@ class Sip::Datosbio < ActiveRecord::Base
   validates :discapacidad, length: {maximum: 1000}
   validates :eps, length: {maximum: 1000}
   validates :mayores60acargo, numericality: { 
-    only_integer: true,  greater_than: 0, allow_nil: true
+    only_integer: true,  greater_than: 0, less_than: 13, allow_nil: true
   }
   validates :menores12acargo, numericality: { 
-    only_integer: true,  greater_than: 0, allow_nil: true
+    only_integer: true,  greater_than: 0, less_than: 13, allow_nil: true
   }
   validates :nombreespaciopp, length: {maximum: 1000}
   validates :personashogar, numericality: { 
@@ -31,7 +31,7 @@ class Sip::Datosbio < ActiveRecord::Base
   }
   validates :telefono, length: {maximum: 100}
   validates :tipocotizante, inclusion: { 
-    in: %w(C, B), 
+    in: ['C', 'B'], 
     message: 'Los valores válidos son C (Cotizante) y B (Beneficiario)'
   }
   validates :veredares, length: {maximum: 1000}

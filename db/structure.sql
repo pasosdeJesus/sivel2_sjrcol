@@ -2429,8 +2429,8 @@ CREATE TABLE public.sip_datosbio (
     id bigint NOT NULL,
     persona_id integer,
     fecharecoleccion date,
-    departamentores_id integer,
-    municipiores_id integer,
+    res_departamento_id integer,
+    res_municipio_id integer,
     veredares character varying(1000),
     direccionres character varying(1000),
     telefono character varying(100),
@@ -4595,6 +4595,50 @@ CREATE TABLE public.sivel2_sjr_actualizacionbase (
 
 
 --
+-- Name: sivel2_sjr_aspsicosocial; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.sivel2_sjr_aspsicosocial (
+    id bigint NOT NULL,
+    nombre character varying(100) NOT NULL,
+    observaciones character varying(5000),
+    fechacreacion date NOT NULL,
+    fechadeshabilitacion date,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: sivel2_sjr_aspsicosocial_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.sivel2_sjr_aspsicosocial_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: sivel2_sjr_aspsicosocial_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.sivel2_sjr_aspsicosocial_id_seq OWNED BY public.sivel2_sjr_aspsicosocial.id;
+
+
+--
+-- Name: sivel2_sjr_aspsicosocial_respuesta; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.sivel2_sjr_aspsicosocial_respuesta (
+    id_aspsicosocial bigint NOT NULL,
+    id_respuesta bigint NOT NULL
+);
+
+
+--
 -- Name: sivel2_sjr_ayudaestado_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -5624,6 +5668,13 @@ ALTER TABLE ONLY public.sivel2_sjr_accionjuridica ALTER COLUMN id SET DEFAULT ne
 --
 
 ALTER TABLE ONLY public.sivel2_sjr_accionjuridica_respuesta ALTER COLUMN id SET DEFAULT nextval('public.sivel2_sjr_accionjuridica_respuesta_id_seq'::regclass);
+
+
+--
+-- Name: sivel2_sjr_aspsicosocial id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sivel2_sjr_aspsicosocial ALTER COLUMN id SET DEFAULT nextval('public.sivel2_sjr_aspsicosocial_id_seq'::regclass);
 
 
 --
@@ -6878,6 +6929,14 @@ ALTER TABLE ONLY public.sivel2_sjr_accionjuridica_respuesta
 
 
 --
+-- Name: sivel2_sjr_aspsicosocial sivel2_sjr_aspsicosocial_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sivel2_sjr_aspsicosocial
+    ADD CONSTRAINT sivel2_sjr_aspsicosocial_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: sivel2_sjr_comosupo sivel2_sjr_comosupo_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -7967,6 +8026,14 @@ ALTER TABLE ONLY public.sivel2_sjr_accionjuridica_respuesta
 
 
 --
+-- Name: sivel2_sjr_aspsicosocial_respuesta fk_rails_389ca79c21; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sivel2_sjr_aspsicosocial_respuesta
+    ADD CONSTRAINT fk_rails_389ca79c21 FOREIGN KEY (id_respuesta) REFERENCES public.sivel2_sjr_respuesta(id);
+
+
+--
 -- Name: cor1440_gen_actividad_proyecto fk_rails_395faa0882; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8243,7 +8310,7 @@ ALTER TABLE ONLY public.sivel2_sjr_casosjr
 --
 
 ALTER TABLE ONLY public.sip_datosbio
-    ADD CONSTRAINT fk_rails_b4903b3da7 FOREIGN KEY (municipiores_id) REFERENCES public.sip_municipio(id);
+    ADD CONSTRAINT fk_rails_b4903b3da7 FOREIGN KEY (res_municipio_id) REFERENCES public.sip_municipio(id);
 
 
 --
@@ -8331,7 +8398,7 @@ ALTER TABLE ONLY public.cor1440_gen_indicadorpf
 --
 
 ALTER TABLE ONLY public.sip_datosbio
-    ADD CONSTRAINT fk_rails_d18580755b FOREIGN KEY (departamentores_id) REFERENCES public.sip_departamento(id);
+    ADD CONSTRAINT fk_rails_d18580755b FOREIGN KEY (res_departamento_id) REFERENCES public.sip_departamento(id);
 
 
 --
@@ -8396,6 +8463,14 @@ ALTER TABLE ONLY public.sivel2_gen_combatiente
 
 ALTER TABLE ONLY public.cor1440_gen_valorcampoact
     ADD CONSTRAINT fk_rails_e36cf046d1 FOREIGN KEY (actividad_id) REFERENCES public.cor1440_gen_actividad(id);
+
+
+--
+-- Name: sivel2_sjr_aspsicosocial_respuesta fk_rails_e8410c8faa; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sivel2_sjr_aspsicosocial_respuesta
+    ADD CONSTRAINT fk_rails_e8410c8faa FOREIGN KEY (id_aspsicosocial) REFERENCES public.sivel2_sjr_aspsicosocial(id);
 
 
 --
@@ -9355,6 +9430,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20181029100626'),
 ('20181030103838'),
 ('20181030130433'),
-('20181030135202');
+('20181030135202'),
+('20181111181411'),
+('20181119172200');
 
 

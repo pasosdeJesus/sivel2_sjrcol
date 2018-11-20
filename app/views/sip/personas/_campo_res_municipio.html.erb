@@ -1,6 +1,6 @@
-<%= d.association :municipiores,
+<%= d.association :res_municipio,
   collection: ( Sip::Municipio.habilitados.where(
-    id_departamento: d.object.departamentores_id)),
+    id_departamento: d.object.res_departamento_id)),
     label_method: :nombre,
     value_method: :id 
 %>

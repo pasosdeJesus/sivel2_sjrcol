@@ -73,11 +73,13 @@ es:
         eps: EPS
         escolaridad_id: Nivel de escolaridad
         fechaingespaciopp: Fecha de ingreso al espacio de participación política (si participa)
-        nombreespaciopp: Nombre del espacio de participación política o instancia decisoria de políticas públicas, gremiales y/o sociales (si participa)
+        res_departamento: Departamento de residencia
         direccionres: Dirección de residencia
         menores12acargo: Num. de menores de 12 a cargo
         mayores60acargo: Num. de mayores de 60 a cargo
+        res_municipio: Municipio de residencia
         nivelsisben: Nivel del SIBEN
+        nombreespaciopp: Nombre del espacio de participación política o instancia decisoria de políticas públicas, gremiales y/o sociales (si participa)
         personashogar: Num. personas en el hogar
         sistemapensional: Sistema pensional
         subsidioestado: Subsidio del Estado

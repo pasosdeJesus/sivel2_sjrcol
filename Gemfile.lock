@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: 3545f22d1b2ece90e7c399fc6bb3cf14d0a7a62d
+  revision: 1680d7c48ff3f68ddeb2e1e250d17e7999cc98be
   specs:
     cor1440_gen (1.0b2)
       devise
@@ -12,7 +12,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 07a73fad8be08cf52409ee1e13b8e8b55c68f984
+  revision: 7a394ccafb43c69ae2bbabca36de4e4576349e61
   specs:
     heb412_gen (1.0.a1)
       chosen-rails
@@ -23,7 +23,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: f909781d02689cf10015e230b126893dae6720b4
+  revision: af829e86d192f26d2eefb195b1eb4e9f7e85a17a
   specs:
     sal7711_gen (1.0.b1)
       rails
@@ -31,7 +31,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: 1295cf559957493682bb60f72b464c285c75ff19
+  revision: d2dd7a21dc671dae5c07ad3d5bfed655e639dbe6
   specs:
     sal7711_web (1.0.a3)
       rails
@@ -39,7 +39,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: ea56b39c7c4a95186595693eeffaf4524f2446ef
+  revision: 0ac17e344bbdc2b090fef0c9b10983e652a9ea55
   specs:
     sip (2.0.b5)
       bootstrap-datepicker-rails
@@ -61,16 +61,16 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: d3d2de5704b6ed95cb6437dc2f14e89867bfbe33
+  revision: 6d4144a2e3d9bb8b8f2389e11a31d69cf4d76ac5
   specs:
-    sivel2_gen (2.0b7)
+    sivel2_gen (2.0b8)
       devise
       jquery-rails
       rails
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 73e6c6f7b5afb24576e0b844d04cbad3def6ae80
+  revision: 016c19bdfed19cb3c7a706223ded64ddb7a16c49
   specs:
     sivel2_sjr (2.0.b1)
       rails
@@ -175,7 +175,7 @@ GEM
     coffee-script-source (1.12.2)
     colorize (0.8.1)
     commonjs (0.2.7)
-    concurrent-ruby (1.0.5)
+    concurrent-ruby (1.1.3)
     connection_pool (2.2.2)
     crass (1.0.4)
     debug_inspector (0.0.3)
@@ -185,8 +185,8 @@ GEM
       railties (>= 4.1.0, < 6.0)
       responders
       warden (~> 1.2.3)
-    devise-i18n (1.6.5)
-      devise (>= 4.4)
+    devise-i18n (1.7.0)
+      devise (>= 4.5)
     docile (1.3.1)
     erubi (1.7.1)
     execjs (2.7.0)
@@ -201,7 +201,7 @@ GEM
       concurrent-ruby (~> 1.0)
     interception (0.5)
     io-like (0.3.0)
-    jbuilder (2.7.0)
+    jbuilder (2.8.0)
       activesupport (>= 4.2.0)
       multi_json (>= 1.2)
     jquery-rails (4.3.3)
@@ -227,7 +227,7 @@ GEM
       mini_mime (>= 0.1.1)
     marcel (0.3.3)
       mimemagic (~> 0.3.2)
-    method_source (0.9.0)
+    method_source (0.9.2)
     mime-types (3.2.2)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2018.0812)
@@ -283,18 +283,18 @@ GEM
     prawnto_2 (0.3.0)
       prawn (>= 1.0.0)
       rails (>= 3.2)
-    pry (0.11.3)
+    pry (0.12.2)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
-    pry-rescue (1.4.5)
+    pry-rescue (1.5.0)
       interception (>= 0.5)
-      pry
-    pry-stack_explorer (0.4.9.2)
+      pry (>= 0.12.0)
+    pry-stack_explorer (0.4.9.3)
       binding_of_caller (>= 0.7)
       pry (>= 0.9.11)
     public_suffix (3.0.3)
     puma (3.12.0)
-    rack (2.0.5)
+    rack (2.0.6)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (5.2.1)
@@ -343,7 +343,7 @@ GEM
       rubyzip (~> 1.1)
     ruby-progressbar (1.10.0)
     rubyzip (1.2.2)
-    sass (3.6.0)
+    sass (3.7.2)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
       rb-fsevent (~> 0.9, >= 0.9.4)
@@ -354,7 +354,7 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
-    selenium-webdriver (3.14.1)
+    selenium-webdriver (3.141.0)
       childprocess (~> 0.5)
       rubyzip (~> 1.2, >= 1.2.2)
     simple_form (4.0.1)
@@ -393,13 +393,13 @@ GEM
       tzinfo
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
-    uglifier (4.1.19)
+    uglifier (4.1.20)
       execjs (>= 0.3.0, < 3)
     unicorn (5.4.1)
       kgio (~> 2.6)
       raindrops (~> 0.7)
-    warden (1.2.7)
-      rack (>= 1.0)
+    warden (1.2.8)
+      rack (>= 2.0.6)
     web-console (3.7.0)
       actionview (>= 5.0)
       activemodel (>= 5.0)

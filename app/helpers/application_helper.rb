@@ -1,4 +1,9 @@
 module ApplicationHelper
+  TIPOAFILIACION = [
+    ['BENEFICIARIO', :B],
+    ['COTIZANTE', :C]
+  ]
+
   def self.included klass
     klass.class_eval do
       include Sal7711Gen::ApplicationHelper

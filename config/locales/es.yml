@@ -55,9 +55,54 @@ es:
       "cor1440_gen/proyecto":
         Proyecto: Área de Actividad
         Proyectos: Áreas de Actividad
+      "discapacidad":
+        Discapacidad: Discapacidad
+        Discapacidades: Discapacidades
+      "espaciopart":
+        Espaciopart: Espacio de participación o red
+        Espaciospart: Espacios de participación o redes
       "sal7711_gen/articulo": 
         texto: Resumen
         fuenteprensa: Fuente de prensa
+      "sip/actorsocial":
+        tipoactorsocial: Tipo
+        tipoactorsocial_id: Tipo
+        sectoractor: Población relacionada
+        sectoractor_ids: Población relacionada
+        lineaactorsocial: Línea de trabajo
+        lineaactorsocial_id: Línea de trabajo
+      "sip/datosbio":
+        afiliadoarl: Afiliado a ARL
+        anioaprobacion: Año de aprobacioń
+        correo: Correo electrónico
+        cvulnerabilidad_id: Condición de vulnerabilidad
+        eps: EPS
+        escolaridad_id: Nivel de escolaridad
+        espaciopart_id: Espacio de participación o red
+        espaciopart: Espacio de participación o red
+        fechaingespaciopp: Fecha de ingreso al espacio de participación política (si participa)
+        res_departamento: Departamento de residencia
+        direccionres: Dirección de residencia
+        menores12acargo: Num. de menores de 12 a cargo
+        mayores60acargo: Num. de mayores de 60 a cargo
+        res_municipio: Municipio de residencia
+        nivelsisben: Nivel del SIBEN
+        nombreespaciopp: Otro espacio de participación o red
+        otradiscapacidad: Otra discapacidad
+        personashogar: Num. personas en el hogar
+        sistemapensional: Sistema pensional
+        subsidioestado: Subsidio del Estado
+        telefono: Teléfono
+        tipocotizante: Tipo de afiliacioń
+        veredares: Vereda de residencia
+      "sip/lineaactorsocial":
+        Lineaactorsocial: Línea de trabajo del actor social
+        Lineasactorsocial: Línea de trabajo del actor social
+      "sip/tipoactorsocial":
+        Tipoactorsocial: Tipo de actor social
+        Tiposactorsocial: Tipos de actor social
+      "sip/ubicacion":
+        Ubicacion: Ubicación
       "sivel2_gen/caso": 
         fecha: F. Desp. Emblemático o Migración
         expulsion: Sitio Expulsión Emb.
@@ -127,5 +172,4 @@ es:
         turno: Turno próxima prorroga
         verifcper: Verificación compromisos persona
         verifcsjr: Verificación compromisos SJR
-      "sip/ubicacion":
-        Ubicacion: Ubicación
+

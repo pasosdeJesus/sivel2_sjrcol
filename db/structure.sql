@@ -310,45 +310,6 @@ CREATE TABLE public.causaref (
 
 
 --
--- Name: sip_persona_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE public.sip_persona_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: sip_persona; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.sip_persona (
-    id integer DEFAULT nextval('public.sip_persona_id_seq'::regclass) NOT NULL,
-    nombres character varying(100) COLLATE public.es_co_utf_8 NOT NULL,
-    apellidos character varying(100) COLLATE public.es_co_utf_8 NOT NULL,
-    anionac integer,
-    mesnac integer,
-    dianac integer,
-    sexo character(1) NOT NULL,
-    numerodocumento character varying(100),
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone,
-    id_pais integer,
-    nacionalde integer,
-    tdocumento_id integer,
-    id_departamento integer,
-    id_municipio integer,
-    id_clase integer,
-    CONSTRAINT persona_check CHECK (((dianac IS NULL) OR (((dianac >= 1) AND (((mesnac = 1) OR (mesnac = 3) OR (mesnac = 5) OR (mesnac = 7) OR (mesnac = 8) OR (mesnac = 10) OR (mesnac = 12)) AND (dianac <= 31))) OR (((mesnac = 4) OR (mesnac = 6) OR (mesnac = 9) OR (mesnac = 11)) AND (dianac <= 30)) OR ((mesnac = 2) AND (dianac <= 29))))),
-    CONSTRAINT persona_mesnac_check CHECK (((mesnac IS NULL) OR ((mesnac >= 1) AND (mesnac <= 12)))),
-    CONSTRAINT persona_sexo_check CHECK (((sexo = 'S'::bpchar) OR (sexo = 'F'::bpchar) OR (sexo = 'M'::bpchar)))
-);
-
-
---
 -- Name: sivel2_gen_caso_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -475,12 +436,11 @@ CREATE VIEW public.cben1 AS
             ELSE 0
         END AS beneficiario,
     1 AS npersona,
-    persona.anionac
+    'total'::text AS total
    FROM public.sivel2_gen_caso caso,
     public.sivel2_sjr_casosjr casosjr,
-    public.sivel2_gen_victima victima,
-    public.sip_persona persona
-  WHERE ((caso.id = victima.id_caso) AND (caso.id = casosjr.id_caso) AND (caso.id = victima.id_caso) AND (persona.id = victima.id_persona));
+    public.sivel2_gen_victima victima
+  WHERE ((caso.id = victima.id_caso) AND (caso.id = casosjr.id_caso) AND (caso.id = victima.id_caso));
 
 
 --
@@ -692,7 +652,7 @@ CREATE VIEW public.cben2 AS
     cben1.contacto,
     cben1.beneficiario,
     cben1.npersona,
-    cben1.anionac,
+    cben1.total,
     ubicacion.id_departamento,
     departamento.nombre AS departamento_nombre,
     ubicacion.id_municipio,
@@ -1802,6 +1762,74 @@ CREATE TABLE public.despacho (
 
 
 --
+-- Name: discapacidad; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.discapacidad (
+    id bigint NOT NULL,
+    nombre character varying(500) NOT NULL,
+    observaciones character varying(5000),
+    fechacreacion date NOT NULL,
+    fechadeshabilitacion date,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: discapacidad_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.discapacidad_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: discapacidad_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.discapacidad_id_seq OWNED BY public.discapacidad.id;
+
+
+--
+-- Name: espaciopart; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.espaciopart (
+    id bigint NOT NULL,
+    nombre character varying(500) NOT NULL,
+    observaciones character varying(5000),
+    fechacreacion date NOT NULL,
+    fechadeshabilitacion date,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: espaciopart_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.espaciopart_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: espaciopart_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.espaciopart_id_seq OWNED BY public.espaciopart.id;
+
+
+--
 -- Name: etapa_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -2353,9 +2381,14 @@ CREATE TABLE public.sip_actorsocial (
     direccion character varying(500),
     pais_id integer,
     web character varying(500),
-    observaciones character varying(5000),
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    tipoactorsocial_id integer,
+    lineaactorsocial_id integer,
+    departamento_id integer,
+    municipio_id integer,
+    email character varying(128),
+    nit character varying(128)
 );
 
 
@@ -2454,6 +2487,60 @@ CREATE SEQUENCE public.sip_anexo_id_seq
 --
 
 ALTER SEQUENCE public.sip_anexo_id_seq OWNED BY public.sip_anexo.id;
+
+
+--
+-- Name: sip_datosbio; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.sip_datosbio (
+    id bigint NOT NULL,
+    persona_id integer,
+    fecharecoleccion date,
+    res_departamento_id integer,
+    res_municipio_id integer,
+    veredares character varying(1000),
+    direccionres character varying(1000),
+    telefono character varying(100),
+    correo character varying(100),
+    otradiscapacidad character varying(1000),
+    cvulnerabilidad_id integer,
+    escolaridad_id integer,
+    anioaprobacion integer,
+    nivelsisben integer,
+    eps character varying(1000),
+    tipocotizante character varying(1),
+    sistemapensional boolean,
+    afiliadoarl boolean,
+    subsidioestado character varying,
+    personashogar integer,
+    menores12acargo integer,
+    mayores60acargo integer,
+    espaciopp boolean,
+    nombreespaciopp character varying(1000),
+    fechaingespaciopp date,
+    espaciopart_id integer,
+    discapacidad_id integer
+);
+
+
+--
+-- Name: sip_datosbio_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.sip_datosbio_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: sip_datosbio_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.sip_datosbio_id_seq OWNED BY public.sip_datosbio.id;
 
 
 --
@@ -2583,6 +2670,40 @@ CREATE TABLE public.sip_grupoper (
 
 
 --
+-- Name: sip_lineaactorsocial; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.sip_lineaactorsocial (
+    id bigint NOT NULL,
+    nombre character varying(500) NOT NULL,
+    observaciones character varying(5000),
+    fechacreacion date NOT NULL,
+    fechadeshabilitacion date,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: sip_lineaactorsocial_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.sip_lineaactorsocial_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: sip_lineaactorsocial_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.sip_lineaactorsocial_id_seq OWNED BY public.sip_lineaactorsocial.id;
+
+
+--
 -- Name: sip_mundep_sinorden; Type: VIEW; Schema: public; Owner: -
 --
 
@@ -2691,6 +2812,45 @@ CREATE SEQUENCE public.sip_perfilactorsocial_id_seq
 --
 
 ALTER SEQUENCE public.sip_perfilactorsocial_id_seq OWNED BY public.sip_perfilactorsocial.id;
+
+
+--
+-- Name: sip_persona_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.sip_persona_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: sip_persona; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.sip_persona (
+    id integer DEFAULT nextval('public.sip_persona_id_seq'::regclass) NOT NULL,
+    nombres character varying(100) COLLATE public.es_co_utf_8 NOT NULL,
+    apellidos character varying(100) COLLATE public.es_co_utf_8 NOT NULL,
+    anionac integer,
+    mesnac integer,
+    dianac integer,
+    sexo character(1) NOT NULL,
+    numerodocumento character varying(100),
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    id_pais integer,
+    nacionalde integer,
+    tdocumento_id integer,
+    id_departamento integer,
+    id_municipio integer,
+    id_clase integer,
+    CONSTRAINT persona_check CHECK (((dianac IS NULL) OR (((dianac >= 1) AND (((mesnac = 1) OR (mesnac = 3) OR (mesnac = 5) OR (mesnac = 7) OR (mesnac = 8) OR (mesnac = 10) OR (mesnac = 12)) AND (dianac <= 31))) OR (((mesnac = 4) OR (mesnac = 6) OR (mesnac = 9) OR (mesnac = 11)) AND (dianac <= 30)) OR ((mesnac = 2) AND (dianac <= 29))))),
+    CONSTRAINT persona_mesnac_check CHECK (((mesnac IS NULL) OR ((mesnac >= 1) AND (mesnac <= 12)))),
+    CONSTRAINT persona_sexo_check CHECK (((sexo = 'S'::bpchar) OR (sexo = 'F'::bpchar) OR (sexo = 'M'::bpchar)))
+);
 
 
 --
@@ -2804,6 +2964,40 @@ CREATE SEQUENCE public.sip_tdocumento_id_seq
 --
 
 ALTER SEQUENCE public.sip_tdocumento_id_seq OWNED BY public.sip_tdocumento.id;
+
+
+--
+-- Name: sip_tipoactorsocial; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.sip_tipoactorsocial (
+    id bigint NOT NULL,
+    nombre character varying(500) NOT NULL,
+    observaciones character varying(5000),
+    fechacreacion date NOT NULL,
+    fechadeshabilitacion date,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: sip_tipoactorsocial_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.sip_tipoactorsocial_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: sip_tipoactorsocial_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.sip_tipoactorsocial_id_seq OWNED BY public.sip_tipoactorsocial.id;
 
 
 --
@@ -4471,6 +4665,50 @@ CREATE TABLE public.sivel2_sjr_actualizacionbase (
 
 
 --
+-- Name: sivel2_sjr_aspsicosocial; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.sivel2_sjr_aspsicosocial (
+    id bigint NOT NULL,
+    nombre character varying(100) NOT NULL,
+    observaciones character varying(5000),
+    fechacreacion date NOT NULL,
+    fechadeshabilitacion date,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: sivel2_sjr_aspsicosocial_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.sivel2_sjr_aspsicosocial_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: sivel2_sjr_aspsicosocial_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.sivel2_sjr_aspsicosocial_id_seq OWNED BY public.sivel2_sjr_aspsicosocial.id;
+
+
+--
+-- Name: sivel2_sjr_aspsicosocial_respuesta; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.sivel2_sjr_aspsicosocial_respuesta (
+    id_aspsicosocial bigint NOT NULL,
+    id_respuesta bigint NOT NULL
+);
+
+
+--
 -- Name: sivel2_sjr_ayudaestado_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -5328,6 +5566,20 @@ ALTER TABLE ONLY public.cor1440_gen_valorcampotind ALTER COLUMN id SET DEFAULT n
 
 
 --
+-- Name: discapacidad id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.discapacidad ALTER COLUMN id SET DEFAULT nextval('public.discapacidad_id_seq'::regclass);
+
+
+--
+-- Name: espaciopart id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.espaciopart ALTER COLUMN id SET DEFAULT nextval('public.espaciopart_id_seq'::regclass);
+
+
+--
 -- Name: heb412_gen_campohc id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -5419,10 +5671,24 @@ ALTER TABLE ONLY public.sip_anexo ALTER COLUMN id SET DEFAULT nextval('public.si
 
 
 --
+-- Name: sip_datosbio id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sip_datosbio ALTER COLUMN id SET DEFAULT nextval('public.sip_datosbio_id_seq'::regclass);
+
+
+--
 -- Name: sip_grupo id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.sip_grupo ALTER COLUMN id SET DEFAULT nextval('public.sip_grupo_id_seq'::regclass);
+
+
+--
+-- Name: sip_lineaactorsocial id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sip_lineaactorsocial ALTER COLUMN id SET DEFAULT nextval('public.sip_lineaactorsocial_id_seq'::regclass);
 
 
 --
@@ -5454,6 +5720,13 @@ ALTER TABLE ONLY public.sip_tdocumento ALTER COLUMN id SET DEFAULT nextval('publ
 
 
 --
+-- Name: sip_tipoactorsocial id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sip_tipoactorsocial ALTER COLUMN id SET DEFAULT nextval('public.sip_tipoactorsocial_id_seq'::regclass);
+
+
+--
 -- Name: sivel2_gen_combatiente id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -5479,6 +5752,13 @@ ALTER TABLE ONLY public.sivel2_sjr_accionjuridica ALTER COLUMN id SET DEFAULT ne
 --
 
 ALTER TABLE ONLY public.sivel2_sjr_accionjuridica_respuesta ALTER COLUMN id SET DEFAULT nextval('public.sivel2_sjr_accionjuridica_respuesta_id_seq'::regclass);
+
+
+--
+-- Name: sivel2_sjr_aspsicosocial id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sivel2_sjr_aspsicosocial ALTER COLUMN id SET DEFAULT nextval('public.sivel2_sjr_aspsicosocial_id_seq'::regclass);
 
 
 --
@@ -5941,11 +6221,27 @@ ALTER TABLE ONLY public.sivel2_sjr_desplazamiento
 
 
 --
+-- Name: discapacidad discapacidad_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.discapacidad
+    ADD CONSTRAINT discapacidad_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: sivel2_gen_escolaridad escolaridad_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.sivel2_gen_escolaridad
     ADD CONSTRAINT escolaridad_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: espaciopart espaciopart_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.espaciopart
+    ADD CONSTRAINT espaciopart_pkey PRIMARY KEY (id);
 
 
 --
@@ -6381,6 +6677,14 @@ ALTER TABLE ONLY public.sip_clase
 
 
 --
+-- Name: sip_datosbio sip_datosbio_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sip_datosbio
+    ADD CONSTRAINT sip_datosbio_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: sip_departamento sip_departamento_id_key; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6426,6 +6730,14 @@ ALTER TABLE ONLY public.sip_grupo
 
 ALTER TABLE ONLY public.sip_grupoper
     ADD CONSTRAINT sip_grupoper_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: sip_lineaactorsocial sip_lineaactorsocial_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sip_lineaactorsocial
+    ADD CONSTRAINT sip_lineaactorsocial_pkey PRIMARY KEY (id);
 
 
 --
@@ -6490,6 +6802,14 @@ ALTER TABLE ONLY public.sip_persona_trelacion
 
 ALTER TABLE ONLY public.sip_sectoractor
     ADD CONSTRAINT sip_sectoractor_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: sip_tipoactorsocial sip_tipoactorsocial_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sip_tipoactorsocial
+    ADD CONSTRAINT sip_tipoactorsocial_pkey PRIMARY KEY (id);
 
 
 --
@@ -6706,6 +7026,14 @@ ALTER TABLE ONLY public.sivel2_sjr_accionjuridica
 
 ALTER TABLE ONLY public.sivel2_sjr_accionjuridica_respuesta
     ADD CONSTRAINT sivel2_sjr_accionjuridica_respuesta_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: sivel2_sjr_aspsicosocial sivel2_sjr_aspsicosocial_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sivel2_sjr_aspsicosocial
+    ADD CONSTRAINT sivel2_sjr_aspsicosocial_pkey PRIMARY KEY (id);
 
 
 --
@@ -7686,6 +8014,14 @@ ALTER TABLE ONLY public.cor1440_gen_financiador_proyectofinanciero
 
 
 --
+-- Name: sip_actorsocial fk_rails_16d31c62f4; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sip_actorsocial
+    ADD CONSTRAINT fk_rails_16d31c62f4 FOREIGN KEY (municipio_id) REFERENCES public.sip_municipio(id);
+
+
+--
 -- Name: heb412_gen_campohc fk_rails_1e5f26c999; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -7750,6 +8086,14 @@ ALTER TABLE ONLY public.heb412_gen_doc
 
 
 --
+-- Name: sip_datosbio fk_rails_2e6e7eebbe; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sip_datosbio
+    ADD CONSTRAINT fk_rails_2e6e7eebbe FOREIGN KEY (persona_id) REFERENCES public.sip_persona(id);
+
+
+--
 -- Name: cor1440_gen_valorcampoact fk_rails_3060a94455; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -7766,6 +8110,14 @@ ALTER TABLE ONLY public.sivel2_sjr_oficina_proyectofinanciero
 
 
 --
+-- Name: sip_datosbio fk_rails_3511516c50; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sip_datosbio
+    ADD CONSTRAINT fk_rails_3511516c50 FOREIGN KEY (espaciopart_id) REFERENCES public.espaciopart(id);
+
+
+--
 -- Name: sivel2_sjr_categoria_desplazamiento fk_rails_357e09aa50; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -7779,6 +8131,14 @@ ALTER TABLE ONLY public.sivel2_sjr_categoria_desplazamiento
 
 ALTER TABLE ONLY public.sivel2_sjr_accionjuridica_respuesta
     ADD CONSTRAINT fk_rails_362600bcf3 FOREIGN KEY (accionjuridica_id) REFERENCES public.sivel2_sjr_accionjuridica(id);
+
+
+--
+-- Name: sivel2_sjr_aspsicosocial_respuesta fk_rails_389ca79c21; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sivel2_sjr_aspsicosocial_respuesta
+    ADD CONSTRAINT fk_rails_389ca79c21 FOREIGN KEY (id_respuesta) REFERENCES public.sivel2_sjr_respuesta(id);
 
 
 --
@@ -7846,6 +8206,14 @@ ALTER TABLE ONLY public.cor1440_gen_valorcampotind
 
 
 --
+-- Name: sip_datosbio fk_rails_5220b09d71; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sip_datosbio
+    ADD CONSTRAINT fk_rails_5220b09d71 FOREIGN KEY (discapacidad_id) REFERENCES public.discapacidad(id);
+
+
+--
 -- Name: cor1440_gen_actividad_proyectofinanciero fk_rails_524486e06b; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -7859,6 +8227,14 @@ ALTER TABLE ONLY public.cor1440_gen_actividad_proyectofinanciero
 
 ALTER TABLE ONLY public.sal7711_gen_bitacora
     ADD CONSTRAINT fk_rails_52d9d2f700 FOREIGN KEY (usuario_id) REFERENCES public.usuario(id);
+
+
+--
+-- Name: sip_actorsocial fk_rails_548bef9dcf; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sip_actorsocial
+    ADD CONSTRAINT fk_rails_548bef9dcf FOREIGN KEY (lineaactorsocial_id) REFERENCES public.sip_lineaactorsocial(id);
 
 
 --
@@ -7958,6 +8334,14 @@ ALTER TABLE ONLY public.sal7711_gen_articulo_categoriaprensa
 
 
 --
+-- Name: sip_actorsocial fk_rails_898ac05185; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sip_actorsocial
+    ADD CONSTRAINT fk_rails_898ac05185 FOREIGN KEY (tipoactorsocial_id) REFERENCES public.sip_tipoactorsocial(id);
+
+
+--
 -- Name: sip_grupo_usuario fk_rails_8d24f7c1c0; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8035,6 +8419,14 @@ ALTER TABLE ONLY public.sivel2_gen_combatiente
 
 ALTER TABLE ONLY public.sivel2_sjr_casosjr
     ADD CONSTRAINT fk_rails_b324d125c0 FOREIGN KEY (id_statusmigratorio) REFERENCES public.sivel2_sjr_statusmigratorio(id);
+
+
+--
+-- Name: sip_datosbio fk_rails_b4903b3da7; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sip_datosbio
+    ADD CONSTRAINT fk_rails_b4903b3da7 FOREIGN KEY (res_municipio_id) REFERENCES public.sip_municipio(id);
 
 
 --
@@ -8118,6 +8510,14 @@ ALTER TABLE ONLY public.cor1440_gen_indicadorpf
 
 
 --
+-- Name: sip_datosbio fk_rails_d18580755b; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sip_datosbio
+    ADD CONSTRAINT fk_rails_d18580755b FOREIGN KEY (res_departamento_id) REFERENCES public.sip_departamento(id);
+
+
+--
 -- Name: cor1440_gen_indicadorpf fk_rails_d264d408b0; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8179,6 +8579,22 @@ ALTER TABLE ONLY public.sivel2_gen_combatiente
 
 ALTER TABLE ONLY public.cor1440_gen_valorcampoact
     ADD CONSTRAINT fk_rails_e36cf046d1 FOREIGN KEY (actividad_id) REFERENCES public.cor1440_gen_actividad(id);
+
+
+--
+-- Name: sivel2_sjr_aspsicosocial_respuesta fk_rails_e8410c8faa; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sivel2_sjr_aspsicosocial_respuesta
+    ADD CONSTRAINT fk_rails_e8410c8faa FOREIGN KEY (id_aspsicosocial) REFERENCES public.sivel2_sjr_aspsicosocial(id);
+
+
+--
+-- Name: sip_actorsocial fk_rails_e860f377d7; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sip_actorsocial
+    ADD CONSTRAINT fk_rails_e860f377d7 FOREIGN KEY (departamento_id) REFERENCES public.sip_departamento(id);
 
 
 --
@@ -9113,6 +9529,30 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20180914170936'),
 ('20180917072914'),
 ('20180918195008'),
-('20180918195821');
+('20180918195821'),
+('20180920031351'),
+('20180921120954'),
+('20181008100023'),
+('20181011104537'),
+('20181012110629'),
+('20181017094456'),
+('20181018003945'),
+('20181026105324'),
+('20181026113302'),
+('20181029084908'),
+('20181029094031'),
+('20181029094903'),
+('20181029095750'),
+('20181029100626'),
+('20181030103838'),
+('20181030130433'),
+('20181030135202'),
+('20181111181411'),
+('20181119172200'),
+('20181126200244'),
+('20181126203615'),
+('20181126220625'),
+('20181126221928'),
+('20181126222648');
 
 

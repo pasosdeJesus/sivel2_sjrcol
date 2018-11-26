@@ -15,8 +15,12 @@
 #   inflect.acronym 'RESTful'
 # end
 ActiveSupport::Inflector.inflections do |inflect|
-	inflect.irregular 'progestado', 'progsestado'
-	inflect.irregular 'motivosjr', 'motivossjr'
-	inflect.irregular 'categoria', 'categorias'
 	inflect.irregular 'accionjuridica', 'accionesjuridicas'
+	inflect.irregular 'categoria', 'categorias'
+	inflect.irregular 'discapacidad', 'discapacidades'
+	inflect.irregular 'espaciopart', 'espaciospart'
+	inflect.irregular 'lineaactorsocial', 'lineasactorsocial'
+	inflect.irregular 'motivosjr', 'motivossjr'
+	inflect.irregular 'progestado', 'progsestado'
+	inflect.irregular 'tipoactorsocial', 'tiposactorsocial'
 end

@@ -1,0 +1,6 @@
+<%= d.association :res_departamento,
+  collection: Sip::Departamento.habilitados.where(
+  id_pais: Sip::Pais.where(nombre: 'COLOMBIA').take.id),
+  label_method: :nombre,
+  value_method: :id 
+%>

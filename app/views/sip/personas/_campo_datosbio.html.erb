@@ -1,0 +1,48 @@
+<% if f.object.datosbio.nil? %>
+  <% #f.object.datosbio = Sip::Datosbio.new %>
+<% end %>
+
+<%= f.simple_fields_for :datosbio do |d| %>
+  <%= d.input :id, as: :hidden %> 
+  <%= render partial: 'campo_res_departamento', locals: {d: d, f: f} %>
+  <%= render partial: 'campo_res_municipio', locals: {d: d, f: f} %>
+  <%= d.input :veredares%>
+  <%= d.input :direccionres %>
+  <%= d.input :telefono %>
+  <%= d.input :correo %>
+  <%= d.association :discapacidad,
+    label_method: :nombre,
+    value_method: :id,
+    input_html: { class: 'chosen-select' },
+    include_blank: true %>
+  <%= d.input :otradiscapacidad %>
+  <%= d.input :cvulnerabilidad_id %>
+  <%= render partial: 'campo_escolaridad', locals: {d: d, f: f} %>
+  <%= d.input :anioaprobacion %>
+  <%= d.input :nivelsisben%>
+  <%= d.input :eps %>
+  <%= d.input(
+    :tipocotizante, 
+    collection: ApplicationHelper::TIPOAFILIACION,
+    include_blank: false) %>
+  <%= d.input :sistemapensional, 
+    boolean_style: :nested,
+    inline_label: "Sistema pensional" %>
+  <%= d.input :afiliadoarl,
+    boolean_style: :nested,
+    inline_label: "Sistema pensional" %>
+  <%= d.input :subsidioestado %>
+  <%= d.input :personashogar %>
+  <%= d.input :menores12acargo %>
+  <%= d.input :mayores60acargo %>
+  <%= d.association :espaciopart,
+    label_method: :nombre,
+    value_method: :id,
+    input_html: { class: 'chosen-select' },
+    include_blank: true %>
+  <%= d.input :nombreespaciopp %>
+  <%= d.input :fechaingespaciopp,
+    :input_html => { "data-behaviour" => "datepicker"},
+    :as => :string %>
+
+<% end %>

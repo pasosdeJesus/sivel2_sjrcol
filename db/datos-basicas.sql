@@ -16,6 +16,46 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
+-- Data for Name: discapacidad; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO public.discapacidad (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (1, 'FÍSICA', '', '2018-11-26', NULL, '2018-11-26 20:26:02.877509', '2018-11-26 20:26:44.096661');
+INSERT INTO public.discapacidad (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (2, 'VISUAL', '', '2018-11-26', NULL, '2018-11-26 20:26:02.877509', '2018-11-26 20:26:44.096661');
+INSERT INTO public.discapacidad (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (3, 'AUDITIVA', '', '2018-11-26', NULL, '2018-11-26 20:26:02.877509', '2018-11-26 20:26:44.096661');
+INSERT INTO public.discapacidad (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (4, 'COGNITIVA', '', '2018-11-26', NULL, '2018-11-26 20:26:02.877509', '2018-11-26 20:26:44.096661');
+INSERT INTO public.discapacidad (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (5, 'OTRA', '', '2018-11-26', NULL, '2018-11-26 20:26:02.877509', '2018-11-26 20:26:44.096661');
+INSERT INTO public.discapacidad (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (6, 'NINGUNA', '', '2018-11-26', NULL, '2018-11-26 20:26:02.877509', '2018-11-26 20:26:44.096661');
+
+
+--
+-- Name: discapacidad_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.discapacidad_id_seq', 101, true);
+
+
+--
+-- PostgreSQL database dump complete
+--
+
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 10.5
+-- Dumped by pg_dump version 10.5
+
+SET statement_timeout = 0;
+
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
 -- Data for Name: espaciopart; Type: TABLE DATA; Schema: public; Owner: -
 --
 

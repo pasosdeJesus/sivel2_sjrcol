@@ -55,6 +55,9 @@ es:
       "cor1440_gen/proyecto":
         Proyecto: Área de Actividad
         Proyectos: Áreas de Actividad
+      "discapacidad":
+        Discapacidad: Discapacidad
+        Discapacidades: Discapacidades
       "espaciopart":
         Espaciopart: Espacio de participación o red
         Espaciospart: Espacios de participación o redes
@@ -85,6 +88,7 @@ es:
         res_municipio: Municipio de residencia
         nivelsisben: Nivel del SIBEN
         nombreespaciopp: Otro espacio de participación o red
+        otradiscapacidad: Otra discapacidad
         personashogar: Num. personas en el hogar
         sistemapensional: Sistema pensional
         subsidioestado: Subsidio del Estado

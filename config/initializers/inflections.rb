@@ -17,6 +17,7 @@
 ActiveSupport::Inflector.inflections do |inflect|
 	inflect.irregular 'accionjuridica', 'accionesjuridicas'
 	inflect.irregular 'categoria', 'categorias'
+	inflect.irregular 'discapacidad', 'discapacidades'
 	inflect.irregular 'espaciopart', 'espaciospart'
 	inflect.irregular 'lineaactorsocial', 'lineasactorsocial'
 	inflect.irregular 'motivosjr', 'motivossjr'

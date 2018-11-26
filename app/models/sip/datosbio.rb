@@ -8,6 +8,8 @@ class Sip::Datosbio < ActiveRecord::Base
     foreign_key: 'res_departamento_id', validate: true
   belongs_to :res_municipio, class_name: 'Sip::Municipio', 
     foreign_key: 'res_municipio_id', validate: true
+  belongs_to :discapacidad, class_name: '::Discapacidad', 
+    foreign_key: 'discapacidad_id', validate: true
   belongs_to :escolaridad, class_name: 'Sivel2Gen::Escolaridad', 
     foreign_key: 'escolaridad_id', validate: true
   belongs_to :espaciopart, class_name: '::Espaciopart', 

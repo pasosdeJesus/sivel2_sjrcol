@@ -10,7 +10,12 @@
   <%= d.input :direccionres %>
   <%= d.input :telefono %>
   <%= d.input :correo %>
-  <%= d.input :discapacidad %>
+  <%= d.association :discapacidad,
+    label_method: :nombre,
+    value_method: :id,
+    input_html: { class: 'chosen-select' },
+    include_blank: true %>
+  <%= d.input :otradiscapacidad %>
   <%= d.input :cvulnerabilidad_id %>
   <%= render partial: 'campo_escolaridad', locals: {d: d, f: f} %>
   <%= d.input :anioaprobacion %>

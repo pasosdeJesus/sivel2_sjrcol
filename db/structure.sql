@@ -1767,12 +1767,12 @@ CREATE TABLE public.despacho (
 
 CREATE TABLE public.discapacidad (
     id bigint NOT NULL,
-    nombre character varying(500),
+    nombre character varying(500) NOT NULL,
     observaciones character varying(5000),
-    fechacreacion date,
+    fechacreacion date NOT NULL,
     fechadeshabilitacion date,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
 );
 
 
@@ -2503,7 +2503,7 @@ CREATE TABLE public.sip_datosbio (
     direccionres character varying(1000),
     telefono character varying(100),
     correo character varying(100),
-    discapacidad character varying(1000),
+    otradiscapacidad character varying(1000),
     cvulnerabilidad_id integer,
     escolaridad_id integer,
     anioaprobacion integer,
@@ -2519,7 +2519,8 @@ CREATE TABLE public.sip_datosbio (
     espaciopp boolean,
     nombreespaciopp character varying(1000),
     fechaingespaciopp date,
-    espaciopart_id integer
+    espaciopart_id integer,
+    discapacidad_id integer
 );
 
 
@@ -8205,6 +8206,14 @@ ALTER TABLE ONLY public.cor1440_gen_valorcampotind
 
 
 --
+-- Name: sip_datosbio fk_rails_5220b09d71; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sip_datosbio
+    ADD CONSTRAINT fk_rails_5220b09d71 FOREIGN KEY (discapacidad_id) REFERENCES public.discapacidad(id);
+
+
+--
 -- Name: cor1440_gen_actividad_proyectofinanciero fk_rails_524486e06b; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -9542,6 +9551,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20181119172200'),
 ('20181126200244'),
 ('20181126203615'),
-('20181126220625');
+('20181126220625'),
+('20181126221928'),
+('20181126222648');
 
 

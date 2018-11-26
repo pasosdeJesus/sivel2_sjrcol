@@ -1762,6 +1762,74 @@ CREATE TABLE public.despacho (
 
 
 --
+-- Name: discapacidad; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.discapacidad (
+    id bigint NOT NULL,
+    nombre character varying(500),
+    observaciones character varying(5000),
+    fechacreacion date,
+    fechadeshabilitacion date,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: discapacidad_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.discapacidad_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: discapacidad_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.discapacidad_id_seq OWNED BY public.discapacidad.id;
+
+
+--
+-- Name: espaciopart; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.espaciopart (
+    id bigint NOT NULL,
+    nombre character varying(500) NOT NULL,
+    observaciones character varying(5000),
+    fechacreacion date NOT NULL,
+    fechadeshabilitacion date,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: espaciopart_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.espaciopart_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: espaciopart_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.espaciopart_id_seq OWNED BY public.espaciopart.id;
+
+
+--
 -- Name: etapa_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -2450,7 +2518,8 @@ CREATE TABLE public.sip_datosbio (
     mayores60acargo integer,
     espaciopp boolean,
     nombreespaciopp character varying(1000),
-    fechaingespaciopp date
+    fechaingespaciopp date,
+    espaciopart_id integer
 );
 
 
@@ -5496,6 +5565,20 @@ ALTER TABLE ONLY public.cor1440_gen_valorcampotind ALTER COLUMN id SET DEFAULT n
 
 
 --
+-- Name: discapacidad id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.discapacidad ALTER COLUMN id SET DEFAULT nextval('public.discapacidad_id_seq'::regclass);
+
+
+--
+-- Name: espaciopart id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.espaciopart ALTER COLUMN id SET DEFAULT nextval('public.espaciopart_id_seq'::regclass);
+
+
+--
 -- Name: heb412_gen_campohc id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -6137,11 +6220,27 @@ ALTER TABLE ONLY public.sivel2_sjr_desplazamiento
 
 
 --
+-- Name: discapacidad discapacidad_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.discapacidad
+    ADD CONSTRAINT discapacidad_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: sivel2_gen_escolaridad escolaridad_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.sivel2_gen_escolaridad
     ADD CONSTRAINT escolaridad_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: espaciopart espaciopart_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.espaciopart
+    ADD CONSTRAINT espaciopart_pkey PRIMARY KEY (id);
 
 
 --
@@ -8010,6 +8109,14 @@ ALTER TABLE ONLY public.sivel2_sjr_oficina_proyectofinanciero
 
 
 --
+-- Name: sip_datosbio fk_rails_3511516c50; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sip_datosbio
+    ADD CONSTRAINT fk_rails_3511516c50 FOREIGN KEY (espaciopart_id) REFERENCES public.espaciopart(id);
+
+
+--
 -- Name: sivel2_sjr_categoria_desplazamiento fk_rails_357e09aa50; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -9432,6 +9539,9 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20181030130433'),
 ('20181030135202'),
 ('20181111181411'),
-('20181119172200');
+('20181119172200'),
+('20181126200244'),
+('20181126203615'),
+('20181126220625');
 
 

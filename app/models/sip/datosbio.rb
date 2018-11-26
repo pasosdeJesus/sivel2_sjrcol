@@ -10,6 +10,8 @@ class Sip::Datosbio < ActiveRecord::Base
     foreign_key: 'res_municipio_id', validate: true
   belongs_to :escolaridad, class_name: 'Sivel2Gen::Escolaridad', 
     foreign_key: 'escolaridad_id', validate: true
+  belongs_to :espaciopart, class_name: '::Espaciopart', 
+    foreign_key: 'espaciopart_id', validate: true
 
   validates :anioaprobacion, numericality: { 
     only_integer: true,  greater_than: 1900, allow_nil: true,

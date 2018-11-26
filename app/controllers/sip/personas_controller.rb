@@ -74,6 +74,7 @@ module Sip
           :discapacidad,
           :eps,
           :escolaridad_id,
+          :espaciopart_id,
           :fechaingespaciopp,
           :mayores60acargo,
           :menores12acargo,

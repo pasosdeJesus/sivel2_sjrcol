@@ -30,6 +30,11 @@
   <%= d.input :personashogar %>
   <%= d.input :menores12acargo %>
   <%= d.input :mayores60acargo %>
+  <%= d.association :espaciopart,
+    label_method: :nombre,
+    value_method: :id,
+    input_html: { class: 'chosen-select' },
+    include_blank: true %>
   <%= d.input :nombreespaciopp %>
   <%= d.input :fechaingespaciopp,
     :input_html => { "data-behaviour" => "datepicker"},

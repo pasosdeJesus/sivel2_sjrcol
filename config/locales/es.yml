@@ -55,6 +55,9 @@ es:
       "cor1440_gen/proyecto":
         Proyecto: Área de Actividad
         Proyectos: Áreas de Actividad
+      "espaciopart":
+        Espaciopart: Espacio de participación o red
+        Espaciospart: Espacios de participación o redes
       "sal7711_gen/articulo": 
         texto: Resumen
         fuenteprensa: Fuente de prensa
@@ -72,6 +75,8 @@ es:
         cvulnerabilidad_id: Condición de vulnerabilidad
         eps: EPS
         escolaridad_id: Nivel de escolaridad
+        espaciopart_id: Espacio de participación o red
+        espaciopart: Espacio de participación o red
         fechaingespaciopp: Fecha de ingreso al espacio de participación política (si participa)
         res_departamento: Departamento de residencia
         direccionres: Dirección de residencia
@@ -79,7 +84,7 @@ es:
         mayores60acargo: Num. de mayores de 60 a cargo
         res_municipio: Municipio de residencia
         nivelsisben: Nivel del SIBEN
-        nombreespaciopp: Nombre del espacio de participación política o instancia decisoria de políticas públicas, gremiales y/o sociales (si participa)
+        nombreespaciopp: Otro espacio de participación o red
         personashogar: Num. personas en el hogar
         sistemapensional: Sistema pensional
         subsidioestado: Subsidio del Estado

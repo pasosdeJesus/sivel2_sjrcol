@@ -2,7 +2,7 @@ class AgregaTejedores < ActiveRecord::Migration[5.2]
   def up
     if Cor1440Gen::Proyectofinanciero.where(id: 142).count == 0
         execute <<-SQL
-          INSERT INTO cor1440_gen_proyectofinanciero (id, nombre, observaciones, fechainicio, fechacierre, responsable_id, fechacreacion, fechadeshabilitacion, created_at, updated_at, compromisos, monto) VALUES (142, 'U EUROPEA//2018-2020/TEJEDORES DE VIDA: una apuesta de educación para la paz y la reconciliación desde las nuevas generaciones. ', 'Euros', '2018-03-01', '2020-09-30', 27, NULL, NULL, '2018-02-20 19:52:46.855238', '2018-02-23 20:41:18.86084', '', 897425);
+          INSERT INTO cor1440_gen_proyectofinanciero (id, nombre, observaciones, fechainicio, fechacierre, fechacreacion, fechadeshabilitacion, created_at, updated_at, compromisos, monto) VALUES (142, 'U EUROPEA//2018-2020/TEJEDORES DE VIDA: una apuesta de educación para la paz y la reconciliación desde las nuevas generaciones. ', 'Euros', '2018-03-01', '2020-09-30', NULL, NULL, '2018-02-20 19:52:46.855238', '2018-02-23 20:41:18.86084', '', 897425);
           
           SELECT setval('cor1440_gen_proyectofinanciero_id_seq', MAX(id)+1, true) FROM cor1440_gen_proyectofinanciero;
           
@@ -43,11 +43,14 @@ class AgregaTejedores < ActiveRecord::Migration[5.2]
           INSERT INTO cor1440_gen_indicadorpf (id, proyectofinanciero_id, resultadopf_id, numero, indicador, tipoindicador_id, objetivopf_id) VALUES (88, 142, 14, 'I.3.1', ' % de jóvenes y adolescentes que fortalecen sus conocimientos y los ponen en práctica para el reconocimiento de problemáticas socio-ambientales y potencialidades territoriales.', NULL, NULL);
           INSERT INTO cor1440_gen_indicadorpf (id, proyectofinanciero_id, resultadopf_id, numero, indicador, tipoindicador_id, objetivopf_id) VALUES (89, 142, 14, 'I.3.2', '% de jóvenes participantes que generan e implementan propuestas de impacto socio-ambiental en las instituciones educativas y comunidades de influencia.', NULL, NULL);
           INSERT INTO cor1440_gen_indicadorpf (id, proyectofinanciero_id, resultadopf_id, numero, indicador, tipoindicador_id, objetivopf_id) VALUES (90, 142, 14, 'I.3.3', '% de propuestas que han sido implementadas por los adolescentes y jóvenes en las instituciones educativas y comunidades de influencia.', NULL, NULL);
-          INSERT INTO cor1440_gen_indicadorpf (id, proyectofinanciero_id, resultadopf_id, numero, indicador, tipoindicador_id, objetivopf_id) VALUES (91, 142, 14, 'I.3.4', 'Una ción compilando la memoria ambiental de las tres regiones focalizadas para el proyecto.', NULL, NULL);
+          INSERT INTO cor1440_gen_indicadorpf (id, proyectofinanciero_id, resultadopf_id, numero, indicador, tipoindicador_id, objetivopf_id) VALUES (91, 142, 14, 'I.3.4', 'Una publicación compilando la memoria ambiental de las tres regiones focalizadas para el proyecto.', NULL, NULL);
           
           SELECT setval('cor1440_gen_indicadorpf_id_seq', MAX(id)+1, true) FROM cor1440_gen_indicadorpf;
           
-          
+         
+         INSERT INTO public.cor1440_gen_actividadtipo (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, created_at, updated_at, listadoasistencia) VALUES 
+        (17, 'ACCIÓN COLECTIVA', '', '2015-04-18', NULL, '2015-04-18 10:57:38.55163', '2015-04-18 11:00:02.131731', NULL);
+
           INSERT INTO cor1440_gen_actividadtipo (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, created_at, updated_at, listadoasistencia) VALUES (101, 'TALLER / ENCUENTRO', '', '2015-07-17', NULL, '2015-07-17 21:14:15.020975', '2016-02-26 15:43:27.768427', NULL);
           INSERT INTO cor1440_gen_actividadtipo (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, created_at, updated_at, listadoasistencia) VALUES (108, 'SISTEMA DE INFORMACIÓN', 'POR EJEMPLO COMUNICACIONES E INCIDENCIA', '2016-03-07', NULL, '2016-03-07 22:55:47.240146', '2016-03-07 22:55:47.240146', NULL);
           INSERT INTO cor1440_gen_actividadtipo (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, created_at, updated_at, listadoasistencia) VALUES (118, 'CARACTERIZACIÓN DE BENEFICIARIOS Y LEVANTAMIENTO DE LÍNEA DE BASE', 'Tanto personas individuales como organizaciones y comunidades.', '2018-11-27', NULL, '2018-11-27 14:42:25.436966', '2018-11-27 14:43:37.783112', true);

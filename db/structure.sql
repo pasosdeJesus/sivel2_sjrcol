@@ -794,6 +794,16 @@ CREATE TABLE public.cor1440_gen_actividad_actividadtipo (
 
 
 --
+-- Name: cor1440_gen_actividad_actorsocial; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.cor1440_gen_actividad_actorsocial (
+    actividad_id bigint NOT NULL,
+    actorsocial_id bigint NOT NULL
+);
+
+
+--
 -- Name: cor1440_gen_actividad_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -4295,7 +4305,7 @@ CREATE SEQUENCE public.sivel2_gen_pconsolidado_id_seq
 
 CREATE TABLE public.sivel2_gen_pconsolidado (
     id integer DEFAULT nextval('public.sivel2_gen_pconsolidado_id_seq'::regclass) NOT NULL,
-    rotulo character varying(500) COLLATE public.es_co_utf_8 NOT NULL,
+    nombre character varying(500) COLLATE public.es_co_utf_8 NOT NULL,
     tipoviolencia character varying(25) NOT NULL,
     clasificacion character varying(25) NOT NULL,
     peso integer DEFAULT 0,
@@ -4303,6 +4313,7 @@ CREATE TABLE public.sivel2_gen_pconsolidado (
     fechadeshabilitacion date,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
+    observaciones character varying(500),
     CONSTRAINT pconsolidado_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
 
@@ -8262,6 +8273,14 @@ ALTER TABLE ONLY public.sivel2_sjr_progestado_derecho
 
 
 --
+-- Name: cor1440_gen_actividad_actorsocial fk_rails_60b0a60338; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.cor1440_gen_actividad_actorsocial
+    ADD CONSTRAINT fk_rails_60b0a60338 FOREIGN KEY (actividad_id) REFERENCES public.cor1440_gen_actividad(id);
+
+
+--
 -- Name: sivel2_gen_combatiente fk_rails_6485d06d37; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8483,6 +8502,14 @@ ALTER TABLE ONLY public.cor1440_gen_financiador_proyectofinanciero
 
 ALTER TABLE ONLY public.cor1440_gen_actividad_sip_anexo
     ADD CONSTRAINT fk_rails_cc9d44f9de FOREIGN KEY (actividad_id) REFERENCES public.cor1440_gen_actividad(id);
+
+
+--
+-- Name: cor1440_gen_actividad_actorsocial fk_rails_ce380ff451; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.cor1440_gen_actividad_actorsocial
+    ADD CONSTRAINT fk_rails_ce380ff451 FOREIGN KEY (actorsocial_id) REFERENCES public.sip_actorsocial(id);
 
 
 --
@@ -9553,6 +9580,9 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20181126203615'),
 ('20181126220625'),
 ('20181126221928'),
-('20181126222648');
+('20181126222648'),
+('20181130112320'),
+('20181206105121'),
+('20181206143039');
 
 

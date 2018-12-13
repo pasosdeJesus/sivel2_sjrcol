@@ -7,7 +7,7 @@ module Sip
     include Sip::Concerns::Models::Actorsocial
       belongs_to :departamento, class_name: "Sip::Departamento",
         foreign_key: "departamento_id", validate: true
-      belongs_to :lineaactorsocial, class_name: "Sip::Tipoactorsocial",
+      belongs_to :lineaactorsocial, class_name: "Sip::Lineaactorsocial",
         foreign_key: "lineaactorsocial_id", validate: true
       belongs_to :municipio, class_name: "Sip::Municipio",
         foreign_key: "municipio_id", validate: true

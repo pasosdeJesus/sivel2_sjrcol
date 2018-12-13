@@ -98,6 +98,9 @@ es:
       "sip/lineaactorsocial":
         Lineaactorsocial: Línea de trabajo del actor social
         Lineasactorsocial: Línea de trabajo del actor social
+      "sip/sectoractor":
+        Sectoractor: Población relacionada con actor social
+        Sectoresactores: Poblaciones relacionadas con actor social
       "sip/tipoactorsocial":
         Tipoactorsocial: Tipo de actor social
         Tiposactorsocial: Tipos de actor social

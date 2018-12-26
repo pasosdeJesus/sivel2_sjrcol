@@ -3,9 +3,55 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 	<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
-	<title>pruebas-suite1</title>
+	<title>pruebas1-tablas-basicas</title>
 </head>
 <body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">tabla-acciones-juridicas</td></tr>
+</thead>
+<tbody>
+<tr>
+	<td>open</td>
+	<td>/<datalist><option>/</option></datalist></td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Administrar<datalist><option>link=Administrar</option></datalist></td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Tablas Básicas<datalist><option>link=Tablas Básicas</option></datalist></td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Acciones jurídicas<datalist><option>link=Acciones jurídicas</option></datalist></td>
+	<td></td>
+</tr>
+<tr><td>pause</td><td><datalist><option>xpath=(//a[contains(text(),'Nueva')])[3]</option><option>//a[contains(@href, '/admin/accionesjuridicas/nueva')]</option><option>//div/a</option><option></option></datalist></td><td>500</td>
+</tr>
+<tr><td>clickAt</td><td>css=a.btn.btn-primary<datalist><option>css=a.btn.btn-primary</option><option>xpath=(//a[contains(text(),'Nueva')])[2]</option><option>//a[contains(@href, '/admin/accionesjuridicas/nueva')]</option><option>//div[2]/a</option></datalist></td><td>48,15</td>
+</tr>
+<tr><td>clickAt</td><td>id=accionjuridica_nombre<datalist><option>id=accionjuridica_nombre</option><option>name=accionjuridica[nombre]</option><option>css=#accionjuridica_nombre</option><option>//input[@id='accionjuridica_nombre']</option><option>//form[@id='new_accionjuridica']/div[2]/input</option><option>//div[2]/input</option></datalist></td><td>201,23</td>
+</tr>
+<tr><td>type</td><td>id=accionjuridica_nombre<datalist><option>id=accionjuridica_nombre</option><option>name=accionjuridica[nombre]</option><option>css=#accionjuridica_nombre</option><option>//input[@id='accionjuridica_nombre']</option><option>//form[@id='new_accionjuridica']/div[2]/input</option><option>//div[2]/input</option></datalist></td><td>aaa</td>
+</tr>
+<tr><td>clickAt</td><td>id=accionjuridica_observaciones<datalist><option>id=accionjuridica_observaciones</option><option>name=accionjuridica[observaciones]</option><option>css=#accionjuridica_observaciones</option><option>//textarea[@id='accionjuridica_observaciones']</option><option>//form[@id='new_accionjuridica']/div[3]/textarea</option><option>//textarea</option></datalist></td><td>64,23</td>
+</tr>
+<tr><td>type</td><td>id=accionjuridica_observaciones<datalist><option>id=accionjuridica_observaciones</option><option>name=accionjuridica[observaciones]</option><option>css=#accionjuridica_observaciones</option><option>//textarea[@id='accionjuridica_observaciones']</option><option>//form[@id='new_accionjuridica']/div[3]/textarea</option><option>//textarea</option></datalist></td><td>bbb</td>
+</tr>
+<tr><td>clickAt</td><td>name=commit<datalist><option>name=commit</option><option>css=input[name="commit"]</option><option>//input[@name='commit']</option><option>//form[@id='new_accionjuridica']/div[6]/input</option><option>//div[6]/input</option></datalist></td><td>39,26</td>
+</tr>
+<tr><td>chooseOkOnNextConfirmation</td><td><datalist><option></option></datalist></td><td></td>
+</tr>
+<tr><td>clickAt</td><td>link=Eliminar<datalist><option>link=Eliminar</option><option>css=a.btn.btn-danger</option><option>//a[contains(text(),'Eliminar')]</option><option>xpath=(//a[contains(@href, '/admin/accionesjuridicas/101')])[2]</option><option>//div[4]/a</option></datalist></td><td>46,12</td>
+</tr>
+<tr><td>assertText</td><td>css=h1<datalist><option>css=div.page-header</option><option>//div[2]/div[2]</option><option>css=h1</option></datalist></td><td>Acciones jurídicas</td>
+</tr>
+</tbody></table>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
 <tr><td rowspan="1" colspan="3">acreditaciones</td></tr>
@@ -80,10 +126,14 @@
 	<td>link=Tablas Básicas<datalist><option>link=Tablas Básicas</option></datalist></td>
 	<td></td>
 </tr>
+<tr><td>pause</td><td><datalist><option></option><option>xpath=(//a[contains(text(),'Nueva')])[3]</option><option>//a[contains(@href, '/admin/accionesjuridicas/nueva')]</option><option>//div/a</option></datalist></td><td>500</td>
+</tr>
 <tr>
 	<td>click</td>
 	<td>link=Actividades y Oficios<datalist><option>link=Actividades y Oficios</option></datalist></td>
 	<td></td>
+</tr>
+<tr><td>pause</td><td><datalist><option></option><option>xpath=(//a[contains(text(),'Nueva')])[3]</option><option>//a[contains(@href, '/admin/accionesjuridicas/nueva')]</option><option>//div/a</option></datalist></td><td>500</td>
 </tr>
 <tr><td>clickAt</td><td>xpath=(//a[contains(text(),'Nueva')])[3]<datalist><option>xpath=(//a[contains(text(),'Nueva')])[3]</option><option>//a[contains(@href, '/admin/actividadoficios/nueva')]</option><option>//div/a</option></datalist></td><td>51,21</td>
 </tr>
@@ -129,10 +179,14 @@
 	<td>link=Tablas Básicas<datalist><option>link=Tablas Básicas</option></datalist></td>
 	<td></td>
 </tr>
+<tr><td>pause</td><td><datalist><option></option><option>xpath=(//a[contains(text(),'Nueva')])[3]</option><option>//a[contains(@href, '/admin/accionesjuridicas/nueva')]</option><option>//div/a</option></datalist></td><td>500</td>
+</tr>
 <tr>
 	<td>click</td>
 	<td>link=Antecedentes<datalist><option>link=Antecedentes</option></datalist></td>
 	<td></td>
+</tr>
+<tr><td>pause</td><td><datalist><option></option><option>xpath=(//a[contains(text(),'Nueva')])[3]</option><option>//a[contains(@href, '/admin/accionesjuridicas/nueva')]</option><option>//div/a</option></datalist></td><td>500</td>
 </tr>
 <tr><td>clickAt</td><td>xpath=(//a[contains(text(),'Nuevo')])[2]<datalist><option>xpath=(//a[contains(text(),'Nuevo')])[2]</option><option>//a[contains(@href, '/admin/antecedentes/nueva')]</option><option>//div/a</option></datalist></td><td></td>
 </tr>
@@ -267,6 +321,38 @@
 </tbody></table>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
+<tr><td rowspan="1" colspan="3">tabla-asistencia-psicosocial</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://colombia.sjrlac.info:5100/<datalist><option>http://colombia.sjrlac.info:5100/</option></datalist></td><td></td>
+</tr>
+<tr><td>clickAt</td><td>link=Administrar<datalist><option>link=Administrar</option><option>//a[contains(text(),'Administrar')]</option><option>xpath=(//a[contains(@href, '#')])[6]</option><option>//ul[2]/li[2]/a</option></datalist></td><td>67,16</td>
+</tr>
+<tr><td>clickAt</td><td>link=Tablas Básicas<datalist><option>link=Tablas Básicas</option><option>//a[contains(text(),'Tablas Básicas')]</option><option>//a[contains(@href, '/tablasbasicas')]</option><option>//ul[2]/li[2]/ul/li[4]/a</option></datalist></td><td>68,18</td>
+</tr>
+<tr><td>clickAt</td><td>link=Asistencias psicosociales<datalist><option>link=Asistencias psicosociales</option><option>//a[contains(text(),'Asistencias psicosociales')]</option><option>//a[contains(@href, 'admin/aspsicosociales')]</option><option>//article/ul/li[7]/a</option></datalist></td><td>66,11</td>
+</tr>
+<tr><td>clickAt</td><td>css=a.btn.btn-primary<datalist><option>css=a.btn.btn-primary</option><option>xpath=(//a[contains(text(),'Nueva')])[2]</option><option>//a[contains(@href, '/admin/aspsicosociales/nueva')]</option><option>//div[2]/a</option></datalist></td><td>26,18</td>
+</tr>
+<tr><td>clickAt</td><td>id=aspsicosocial_nombre<datalist><option>id=aspsicosocial_nombre</option><option>name=aspsicosocial[nombre]</option><option>css=#aspsicosocial_nombre</option><option>//input[@id='aspsicosocial_nombre']</option><option>//form[@id='new_aspsicosocial']/div[2]/input</option><option>//div[2]/input</option></datalist></td><td>76,17</td>
+</tr>
+<tr><td>type</td><td>id=aspsicosocial_nombre<datalist><option>id=aspsicosocial_nombre</option><option>name=aspsicosocial[nombre]</option><option>css=#aspsicosocial_nombre</option><option>//input[@id='aspsicosocial_nombre']</option><option>//form[@id='new_aspsicosocial']/div[2]/input</option><option>//div[2]/input</option></datalist></td><td>aaa</td>
+</tr>
+<tr><td>clickAt</td><td>id=aspsicosocial_observaciones<datalist><option>id=aspsicosocial_observaciones</option><option>name=aspsicosocial[observaciones]</option><option>css=#aspsicosocial_observaciones</option><option>//textarea[@id='aspsicosocial_observaciones']</option><option>//form[@id='new_aspsicosocial']/div[3]/textarea</option><option>//textarea</option></datalist></td><td>39,38</td>
+</tr>
+<tr><td>type</td><td>id=aspsicosocial_observaciones<datalist><option>id=aspsicosocial_observaciones</option><option>name=aspsicosocial[observaciones]</option><option>css=#aspsicosocial_observaciones</option><option>//textarea[@id='aspsicosocial_observaciones']</option><option>//form[@id='new_aspsicosocial']/div[3]/textarea</option><option>//textarea</option></datalist></td><td>bbb</td>
+</tr>
+<tr><td>clickAt</td><td>name=commit<datalist><option>name=commit</option><option>css=input[name="commit"]</option><option>//input[@name='commit']</option><option>//form[@id='new_aspsicosocial']/div[6]/input</option><option>//div[6]/input</option></datalist></td><td>20,15</td>
+</tr>
+<tr><td>chooseOkOnNextConfirmation</td><td><datalist><option></option></datalist></td><td></td>
+</tr>
+<tr><td>clickAt</td><td>link=Eliminar<datalist><option>link=Eliminar</option><option>css=a.btn.btn-danger</option><option>//a[contains(text(),'Eliminar')]</option><option>xpath=(//a[contains(@href, '/admin/aspsicosociales/102')])[2]</option><option>//div[4]/a</option></datalist></td><td>23,16</td>
+</tr>
+<tr><td>assertText</td><td>css=h1<datalist><option>css=h1</option><option>//h1</option></datalist></td><td>Asistencias psicosociales</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
 <tr><td rowspan="1" colspan="3">ayudas-del-estado</td></tr>
 </thead>
 <tbody>
@@ -379,7 +465,11 @@
 </tr>
 <tr><td>clickAt</td><td>link=Tablas Básicas<datalist><option>link=Tablas Básicas</option><option>//a[contains(text(),'Tablas Básicas')]</option><option>//a[contains(@href, '/tablasbasicas')]</option><option>//ul[2]/li[2]/ul/li[4]/a</option></datalist></td><td>90,12</td>
 </tr>
+<tr><td>pause</td><td><datalist><option></option><option>xpath=(//a[contains(text(),'Nueva')])[3]</option><option>//a[contains(@href, '/admin/accionesjuridicas/nueva')]</option><option>//div/a</option></datalist></td><td>500</td>
+</tr>
 <tr><td>clickAt</td><td>link=Categorias<datalist><option>link=Categorias</option><option>//a[contains(text(),'Categorias')]</option><option>//a[contains(@href, 'admin/categorias')]</option><option>//li[9]/a</option></datalist></td><td>47,9</td>
+</tr>
+<tr><td>pause</td><td><datalist><option></option><option>xpath=(//a[contains(text(),'Nueva')])[3]</option><option>//a[contains(@href, '/admin/accionesjuridicas/nueva')]</option><option>//div/a</option></datalist></td><td>500</td>
 </tr>
 <tr><td>clickAt</td><td>css=a.btn.btn-primary<datalist><option>css=a.btn.btn-primary</option><option>xpath=(//a[contains(text(),'Nueva')])[3]</option><option>//a[contains(@href, '/admin/categorias/nueva')]</option><option>//div/a</option></datalist></td><td>40,18</td>
 </tr>
@@ -434,10 +524,14 @@
 	<td>link=Tablas Básicas<datalist><option>link=Tablas Básicas</option></datalist></td>
 	<td></td>
 </tr>
+<tr><td>pause</td><td><datalist><option></option><option>xpath=(//a[contains(text(),'Nueva')])[3]</option><option>//a[contains(@href, '/admin/accionesjuridicas/nueva')]</option><option>//div/a</option></datalist></td><td>500</td>
+</tr>
 <tr>
 	<td>click</td>
 	<td>link=Categorias de Prensa<datalist><option>link=Categorias de Prensa</option></datalist></td>
 	<td></td>
+</tr>
+<tr><td>pause</td><td><datalist><option></option><option>xpath=(//a[contains(text(),'Nueva')])[3]</option><option>//a[contains(@href, '/admin/accionesjuridicas/nueva')]</option><option>//div/a</option></datalist></td><td>500</td>
 </tr>
 <tr><td>clickAt</td><td>xpath=(//a[contains(text(),'Nueva')])[3]<datalist><option>xpath=(//a[contains(text(),'Nueva')])[3]</option><option>//a[contains(@href, '/admin/categoriasprensa/nueva')]</option><option>//div/a</option></datalist></td><td>35,15</td>
 </tr>
@@ -480,39 +574,55 @@
 </tr>
 <tr><td>clickAt</td><td>link=Administrar<datalist><option>link=Administrar</option><option>//a[contains(text(),'Administrar')]</option><option>xpath=(//a[contains(@href, '#')])[6]</option><option>//ul[2]/li[2]/a</option></datalist></td><td>74,22</td>
 </tr>
+<tr><td>pause</td><td><datalist><option></option><option>xpath=(//a[contains(text(),'Nueva')])[3]</option><option>//a[contains(@href, '/admin/accionesjuridicas/nueva')]</option><option>//div/a</option></datalist></td><td>500</td>
+</tr>
 <tr><td>clickAt</td><td>link=Tablas Básicas<datalist><option>link=Tablas Básicas</option><option>//a[contains(text(),'Tablas Básicas')]</option><option>//a[contains(@href, '/tablasbasicas')]</option><option>//ul[2]/li[2]/ul/li[4]/a</option></datalist></td><td>106,10</td>
+</tr>
+<tr><td>pause</td><td><datalist><option></option><option>xpath=(//a[contains(text(),'Nueva')])[3]</option><option>//a[contains(@href, '/admin/accionesjuridicas/nueva')]</option><option>//div/a</option></datalist></td><td>500</td>
 </tr>
 <tr><td>clickAt</td><td>link=Centros poblados<datalist><option>link=Centros poblados</option><option>//a[contains(text(),'Centros poblados')]</option><option>//a[contains(@href, 'admin/clases')]</option><option>//li[12]/a</option></datalist></td><td>64,3</td>
 </tr>
+<tr><td>pause</td><td><datalist><option></option><option>xpath=(//a[contains(text(),'Nueva')])[3]</option><option>//a[contains(@href, '/admin/accionesjuridicas/nueva')]</option><option>//div/a</option></datalist></td><td>500</td>
+</tr>
 <tr><td>clickAt</td><td>css=a.btn.btn-primary<datalist><option>css=a.btn.btn-primary</option><option>xpath=(//a[contains(text(),'Nuevo')])[2]</option><option>//a[contains(@href, '/admin/clases/nueva')]</option><option>//div/a</option></datalist></td><td>33,8</td>
 </tr>
-<tr><td>pause</td><td><datalist><option></option></datalist></td><td>500</td>
+<tr><td>pause</td><td><datalist><option></option></datalist></td><td>1000</td>
 </tr>
-<tr><td>click</td><td>id=clase_nombre<datalist><option>id=clase_nombre</option><option>name=clase[nombre]</option><option>css=#clase_nombre</option><option>//input[@id='clase_nombre']</option><option>//form[@id='new_clase']/div[2]/input</option><option>//div[2]/input</option></datalist></td><td></td>
+<tr><td>clickAt</td><td>id=clase_nombre<datalist><option>id=clase_nombre</option><option>name=clase[nombre]</option><option>css=#clase_nombre</option><option>//input[@id='clase_nombre']</option><option>//form[@id='new_clase']/div[2]/input</option><option>//div[2]/input</option></datalist></td><td>61,10</td>
 </tr>
 <tr><td>type</td><td>id=clase_nombre<datalist><option>id=clase_nombre</option><option>name=clase[nombre]</option><option>css=#clase_nombre</option><option>//input[@id='clase_nombre']</option><option>//form[@id='new_clase']/div[2]/input</option><option>//div[2]/input</option></datalist></td><td>aaa</td>
 </tr>
 <tr><td>runScript</td><td>$('.chosen-select').removeAttr('style'); $('.chosen-container').remove(); $('.chosen-select').removeClass('chosen-select')<datalist><option>$('.chosen-select').removeAttr('style'); $('.chosen-container').remove(); $('.chosen-select').removeClass('chosen-select')</option></datalist></td><td></td>
 </tr>
-<tr><td>clickAt</td><td>id=clase_id_municipio<datalist><option>id=clase_id_municipio</option><option>name=clase[id_municipio]</option><option>css=#clase_id_municipio</option><option>//select[@id='clase_id_municipio']</option><option>//form[@id='new_clase']/div[3]/select</option><option>//select</option></datalist></td><td>53,12</td>
+<tr><td>select</td><td>id=clase_id_municipio<datalist><option>id=clase_id_municipio</option><option>name=clase[id_municipio]</option><option>css=#clase_id_municipio</option><option>//select[@id='clase_id_municipio']</option><option>//form[@id='new_clase']/div[3]/select</option><option>//select</option></datalist></td><td>label=AGUA DE DIOS / CUNDINAMARCA</td>
 </tr>
-<tr><td>select</td><td>id=clase_id_municipio<datalist><option>id=clase_id_municipio</option><option>name=clase[id_municipio]</option><option>css=#clase_id_municipio</option><option>//select[@id='clase_id_municipio']</option><option>//form[@id='new_clase']/div[3]/select</option><option>//select</option></datalist></td><td>label=ABEJORRAL / ANTIOQUIA / COLOMBIA</td>
+<tr><td>mouseDownAt</td><td>id=clase_id_municipio<datalist><option>id=clase_id_municipio</option><option>name=clase[id_municipio]</option><option>css=#clase_id_municipio</option><option>//select[@id='clase_id_municipio']</option><option>//form[@id='new_clase']/div[3]/select</option><option>//select</option></datalist></td><td>-75,-248</td>
 </tr>
-<tr><td>clickAt</td><td>id=clase_id_municipio<datalist><option>id=clase_id_municipio</option><option>name=clase[id_municipio]</option><option>css=#clase_id_municipio</option><option>//select[@id='clase_id_municipio']</option><option>//form[@id='new_clase']/div[3]/select</option><option>//select</option></datalist></td><td>-68,-248</td>
+<tr><td>mouseMoveAt</td><td>id=clase_id_municipio<datalist><option>id=clase_id_municipio</option><option>name=clase[id_municipio]</option><option>css=#clase_id_municipio</option><option>//select[@id='clase_id_municipio']</option><option>//form[@id='new_clase']/div[3]/select</option><option>//select</option></datalist></td><td>-75,-248</td>
 </tr>
-<tr><td>select</td><td>id=clase_id_tclase<datalist><option>id=clase_id_tclase</option><option>name=clase[id_tclase]</option><option>css=#clase_id_tclase</option><option>//select[@id='clase_id_tclase']</option><option>//form[@id='new_clase']/div[5]/select</option><option>//div[5]/select</option></datalist></td><td>label=CABECERA MUNICIPAL</td>
+<tr><td>mouseUpAt</td><td>id=clase_id_municipio<datalist><option>id=clase_id_municipio</option><option>name=clase[id_municipio]</option><option>css=#clase_id_municipio</option><option>//select[@id='clase_id_municipio']</option><option>//form[@id='new_clase']/div[3]/select</option><option>//select</option></datalist></td><td>-75,-248</td>
 </tr>
-<tr><td>clickAt</td><td>id=clase_id_tclase<datalist><option>id=clase_id_tclase</option><option>name=clase[id_tclase]</option><option>css=#clase_id_tclase</option><option>//select[@id='clase_id_tclase']</option><option>//form[@id='new_clase']/div[5]/select</option><option>//div[5]/select</option></datalist></td><td>-68,-325</td>
+<tr><td>clickAt</td><td>id=clase_id_municipio<datalist><option>id=clase_id_municipio</option><option>name=clase[id_municipio]</option><option>css=#clase_id_municipio</option><option>//select[@id='clase_id_municipio']</option><option>//form[@id='new_clase']/div[3]/select</option><option>//select</option></datalist></td><td>-75,-248</td>
 </tr>
-<tr><td>clickAt</td><td>id=clase_observaciones<datalist><option>id=clase_observaciones</option><option>name=clase[observaciones]</option><option>css=#clase_observaciones</option><option>//textarea[@id='clase_observaciones']</option><option>//form[@id='new_clase']/div[8]/textarea</option><option>//textarea</option></datalist></td><td>64,16</td>
+<tr><td>select</td><td>id=clase_id_tclase<datalist><option>id=clase_id_tclase</option><option>name=clase[id_tclase]</option><option>css=#clase_id_tclase</option><option>//select[@id='clase_id_tclase']</option><option>//form[@id='new_clase']/div[5]/select</option><option>//div[5]/select</option></datalist></td><td>label=CASERIO</td>
 </tr>
-<tr><td>type</td><td>id=clase_observaciones<datalist><option>id=clase_observaciones</option><option>name=clase[observaciones]</option><option>css=#clase_observaciones</option><option>//textarea[@id='clase_observaciones']</option><option>//form[@id='new_clase']/div[8]/textarea</option><option>//textarea</option></datalist></td><td>bbb</td>
+<tr><td>mouseDownAt</td><td>id=clase_id_tclase<datalist><option>id=clase_id_tclase</option><option>name=clase[id_tclase]</option><option>css=#clase_id_tclase</option><option>//select[@id='clase_id_tclase']</option><option>//form[@id='new_clase']/div[5]/select</option><option>//div[5]/select</option></datalist></td><td>-75,-378</td>
 </tr>
-<tr><td>clickAt</td><td>name=commit<datalist><option>name=commit</option><option>css=input[name="commit"]</option><option>//input[@name='commit']</option><option>//form[@id='new_clase']/div[11]/input</option><option>//div[11]/input</option></datalist></td><td>38,18</td>
+<tr><td>mouseMoveAt</td><td>id=clase_id_tclase<datalist><option>id=clase_id_tclase</option><option>name=clase[id_tclase]</option><option>css=#clase_id_tclase</option><option>//select[@id='clase_id_tclase']</option><option>//form[@id='new_clase']/div[5]/select</option><option>//div[5]/select</option></datalist></td><td>-75,-378</td>
+</tr>
+<tr><td>mouseUpAt</td><td>id=clase_id_tclase<datalist><option>id=clase_id_tclase</option><option>name=clase[id_tclase]</option><option>css=#clase_id_tclase</option><option>//select[@id='clase_id_tclase']</option><option>//form[@id='new_clase']/div[5]/select</option><option>//div[5]/select</option></datalist></td><td>-75,-378</td>
+</tr>
+<tr><td>clickAt</td><td>id=clase_id_tclase<datalist><option>id=clase_id_tclase</option><option>name=clase[id_tclase]</option><option>css=#clase_id_tclase</option><option>//select[@id='clase_id_tclase']</option><option>//form[@id='new_clase']/div[5]/select</option><option>//div[5]/select</option></datalist></td><td>-75,-378</td>
+</tr>
+<tr><td>clickAt</td><td>id=clase_observaciones<datalist><option>id=clase_observaciones</option><option>name=clase[observaciones]</option><option>css=#clase_observaciones</option><option>//input[@id='clase_observaciones']</option><option>//form[@id='new_clase']/div[8]/input</option><option>//div[8]/input</option></datalist></td><td>101,17</td>
+</tr>
+<tr><td>type</td><td>id=clase_observaciones<datalist><option>id=clase_observaciones</option><option>name=clase[observaciones]</option><option>css=#clase_observaciones</option><option>//input[@id='clase_observaciones']</option><option>//form[@id='new_clase']/div[8]/input</option><option>//div[8]/input</option></datalist></td><td>bbb</td>
+</tr>
+<tr><td>clickAt</td><td>name=commit<datalist><option>name=commit</option><option>css=input[name="commit"]</option><option>//input[@name='commit']</option><option>//form[@id='new_clase']/div[11]/input</option><option>//div[11]/input</option></datalist></td><td>16,20</td>
 </tr>
 <tr><td>chooseOkOnNextConfirmation</td><td><datalist><option></option></datalist></td><td></td>
 </tr>
-<tr><td>clickAt</td><td>link=Eliminar<datalist><option>link=Eliminar</option><option>css=a.btn.btn-danger</option><option>//a[contains(text(),'Eliminar')]</option><option>xpath=(//a[contains(@href, '/admin/clases/1319244')])[2]</option><option>//a[3]</option></datalist></td><td>40,24</td>
+<tr><td>clickAt</td><td>link=Eliminar<datalist><option>link=Eliminar</option><option>css=a.btn.btn-danger</option><option>//a[contains(text(),'Eliminar')]</option><option>xpath=(//a[contains(@href, '/admin/clases/100001')])[2]</option><option>//div[4]/a</option></datalist></td><td>53,16</td>
 </tr>
 <tr><td>assertText</td><td>css=h1<datalist><option>css=h1</option><option>//h1</option></datalist></td><td>Centros poblados</td>
 </tr>
@@ -536,6 +646,8 @@
 	<td>click</td>
 	<td>link=Tablas Básicas<datalist><option>link=Tablas Básicas</option></datalist></td>
 	<td></td>
+</tr>
+<tr><td></td><td><datalist><option></option></datalist></td><td></td>
 </tr>
 <tr>
 	<td>click</td>
@@ -591,6 +703,8 @@
 	<td>link=Tablas Básicas<datalist><option>link=Tablas Básicas</option></datalist></td>
 	<td></td>
 </tr>
+<tr><td></td><td><datalist><option></option></datalist></td><td></td>
+</tr>
 <tr>
 	<td>click</td>
 	<td>link=Como supo del SJR<datalist><option>link=Como supo del SJR</option></datalist></td>
@@ -645,6 +759,8 @@
 	<td>link=Tablas Básicas<datalist><option>link=Tablas Básicas</option></datalist></td>
 	<td></td>
 </tr>
+<tr><td></td><td><datalist><option></option></datalist></td><td></td>
+</tr>
 <tr>
 	<td>click</td>
 	<td>link=Contextos<datalist><option>link=Contextos</option></datalist></td>
@@ -697,6 +813,8 @@
 	<td>link=Tablas Básicas<datalist><option>link=Tablas Básicas</option></datalist></td>
 	<td></td>
 </tr>
+<tr><td></td><td><datalist><option></option></datalist></td><td></td>
+</tr>
 <tr>
 	<td>click</td>
 	<td>link=Declaro Ante<datalist><option>link=Declaro Ante</option></datalist></td>
@@ -743,6 +861,8 @@
 <tr><td>clickAt</td><td>link=Tablas Básicas<datalist><option>link=Tablas Básicas</option><option>//a[contains(text(),'Tablas Básicas')]</option><option>//a[contains(@href, '/tablasbasicas')]</option><option>//ul[2]/li[2]/ul/li[4]/a</option></datalist></td><td>98,23</td>
 </tr>
 <tr><td>clickAt</td><td>link=Departamentos/Estados<datalist><option>link=Departamentos/Estados</option><option>//a[contains(text(),'Departamentos/Estados')]</option><option>//a[contains(@href, 'admin/departamentos')]</option><option>//li[16]/a</option></datalist></td><td>35,5</td>
+</tr>
+<tr><td></td><td><datalist><option></option></datalist></td><td></td>
 </tr>
 <tr><td>clickAt</td><td>css=a.btn.btn-primary<datalist><option>css=a.btn.btn-primary</option><option>xpath=(//a[contains(text(),'Nuevo')])[2]</option><option>//a[contains(@href, '/admin/departamentos/nueva')]</option><option>//div/a</option></datalist></td><td>37,9</td>
 </tr>
@@ -801,6 +921,8 @@
 	<td>link=Derechos<datalist><option>link=Derechos</option></datalist></td>
 	<td></td>
 </tr>
+<tr><td></td><td><datalist><option></option></datalist></td><td></td>
+</tr>
 <tr><td>clickAt</td><td>xpath=(//a[contains(text(),'Nuevo')])[2]<datalist><option>xpath=(//a[contains(text(),'Nuevo')])[2]</option><option>//a[contains(@href, '/admin/derechos/nueva')]</option><option>//div/a</option></datalist></td><td>37,12</td>
 </tr>
 <tr>
@@ -830,6 +952,74 @@
 </tbody></table>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
+<tr><td rowspan="1" colspan="3">tabla-discapacidad</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://colombia.sjrlac.info:5100/<datalist><option>http://colombia.sjrlac.info:5100/</option></datalist></td><td></td>
+</tr>
+<tr><td>clickAt</td><td>link=Administrar<datalist><option>link=Administrar</option><option>//a[contains(text(),'Administrar')]</option><option>xpath=(//a[contains(@href, '#')])[6]</option><option>//ul[2]/li[2]/a</option></datalist></td><td>43,19</td>
+</tr>
+<tr><td>clickAt</td><td>link=Tablas Básicas<datalist><option>link=Tablas Básicas</option><option>//a[contains(text(),'Tablas Básicas')]</option><option>//a[contains(@href, '/tablasbasicas')]</option><option>//ul[2]/li[2]/ul/li[4]/a</option></datalist></td><td>107,23</td>
+</tr>
+<tr><td>clickAt</td><td>link=Discapacidades<datalist><option>link=Discapacidades</option><option>//a[contains(text(),'Discapacidades')]</option><option>//a[contains(@href, 'admin/discapacidades')]</option><option>//li[19]/a</option></datalist></td><td>76,14</td>
+</tr>
+<tr><td></td><td><datalist><option></option></datalist></td><td></td>
+</tr>
+<tr><td>clickAt</td><td>css=div.col-sm-2 &gt; a.btn.btn-primary<datalist><option>css=div.col-sm-2 &gt; a.btn.btn-primary</option><option>xpath=(//a[contains(text(),'Nuevo')])[3]</option><option>xpath=(//a[contains(@href, '/admin/discapacidades/nueva')])[2]</option><option>//div[2]/a</option></datalist></td><td>29,18</td>
+</tr>
+<tr><td>clickAt</td><td>id=discapacidad_nombre<datalist><option>id=discapacidad_nombre</option><option>name=discapacidad[nombre]</option><option>css=#discapacidad_nombre</option><option>//input[@id='discapacidad_nombre']</option><option>//form[@id='new_discapacidad']/div[2]/input</option><option>//div[2]/input</option></datalist></td><td>66,9</td>
+</tr>
+<tr><td>type</td><td>id=discapacidad_nombre<datalist><option>id=discapacidad_nombre</option><option>name=discapacidad[nombre]</option><option>css=#discapacidad_nombre</option><option>//input[@id='discapacidad_nombre']</option><option>//form[@id='new_discapacidad']/div[2]/input</option><option>//div[2]/input</option></datalist></td><td>aaa</td>
+</tr>
+<tr><td>clickAt</td><td>id=discapacidad_observaciones<datalist><option>id=discapacidad_observaciones</option><option>name=discapacidad[observaciones]</option><option>css=#discapacidad_observaciones</option><option>//textarea[@id='discapacidad_observaciones']</option><option>//form[@id='new_discapacidad']/div[3]/textarea</option><option>//textarea</option></datalist></td><td>39,22</td>
+</tr>
+<tr><td>type</td><td>id=discapacidad_observaciones<datalist><option>id=discapacidad_observaciones</option><option>name=discapacidad[observaciones]</option><option>css=#discapacidad_observaciones</option><option>//textarea[@id='discapacidad_observaciones']</option><option>//form[@id='new_discapacidad']/div[3]/textarea</option><option>//textarea</option></datalist></td><td>bbb</td>
+</tr>
+<tr><td>clickAt</td><td>name=commit<datalist><option>name=commit</option><option>css=input[name="commit"]</option><option>//input[@name='commit']</option><option>//form[@id='new_discapacidad']/div[6]/input</option><option>//div[6]/input</option></datalist></td><td>27,24</td>
+</tr>
+<tr><td>chooseOkOnNextConfirmation</td><td><datalist><option></option></datalist></td><td></td>
+</tr>
+<tr><td>clickAt</td><td>link=Eliminar<datalist><option>link=Eliminar</option><option>css=a.btn.btn-danger</option><option>//a[contains(text(),'Eliminar')]</option><option>xpath=(//a[contains(@href, '/admin/discapacidades/101')])[2]</option><option>//div[4]/a</option></datalist></td><td>49,20</td>
+</tr>
+<tr><td>assertText</td><td>css=h1<datalist><option>css=h1</option><option>//h1</option></datalist></td><td>Discapacidades</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">tabla-espacio-de-participación-o-redes</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://colombia.sjrlac.info:5100/<datalist><option>http://colombia.sjrlac.info:5100/</option></datalist></td><td></td>
+</tr>
+<tr><td>clickAt</td><td>link=Administrar<datalist><option>link=Administrar</option><option>//a[contains(text(),'Administrar')]</option><option>xpath=(//a[contains(@href, '#')])[6]</option><option>//ul[2]/li[2]/a</option></datalist></td><td>64,20</td>
+</tr>
+<tr><td>clickAt</td><td>link=Tablas Básicas<datalist><option>link=Tablas Básicas</option><option>//a[contains(text(),'Tablas Básicas')]</option><option>//a[contains(@href, '/tablasbasicas')]</option><option>//ul[2]/li[2]/ul/li[4]/a</option></datalist></td><td>73,21</td>
+</tr>
+<tr><td>clickAt</td><td>link=Espacios de participación o redes<datalist><option>link=Espacios de participación o redes</option><option>//a[contains(text(),'Espacios de participación o redes')]</option><option>//a[contains(@href, 'admin/espaciospart')]</option><option>//li[20]/a</option></datalist></td><td>56,12</td>
+</tr>
+<tr><td></td><td><datalist><option></option></datalist></td><td></td>
+</tr>
+<tr><td>clickAt</td><td>css=a.btn.btn-primary<datalist><option>css=a.btn.btn-primary</option><option>xpath=(//a[contains(text(),'Nuevo')])[2]</option><option>//a[contains(@href, '/admin/espaciospart/nueva')]</option><option>//div/a</option></datalist></td><td>16,17</td>
+</tr>
+<tr><td>clickAt</td><td>id=espaciopart_nombre<datalist><option>id=espaciopart_nombre</option><option>name=espaciopart[nombre]</option><option>css=#espaciopart_nombre</option><option>//input[@id='espaciopart_nombre']</option><option>//form[@id='new_espaciopart']/div[2]/input</option><option>//div[2]/input</option></datalist></td><td>111,26</td>
+</tr>
+<tr><td>type</td><td>id=espaciopart_nombre<datalist><option>id=espaciopart_nombre</option><option>name=espaciopart[nombre]</option><option>css=#espaciopart_nombre</option><option>//input[@id='espaciopart_nombre']</option><option>//form[@id='new_espaciopart']/div[2]/input</option><option>//div[2]/input</option></datalist></td><td>aaa</td>
+</tr>
+<tr><td>clickAt</td><td>id=espaciopart_observaciones<datalist><option>id=espaciopart_observaciones</option><option>name=espaciopart[observaciones]</option><option>css=#espaciopart_observaciones</option><option>//textarea[@id='espaciopart_observaciones']</option><option>//form[@id='new_espaciopart']/div[3]/textarea</option><option>//textarea</option></datalist></td><td>56,25</td>
+</tr>
+<tr><td>type</td><td>id=espaciopart_observaciones<datalist><option>id=espaciopart_observaciones</option><option>name=espaciopart[observaciones]</option><option>css=#espaciopart_observaciones</option><option>//textarea[@id='espaciopart_observaciones']</option><option>//form[@id='new_espaciopart']/div[3]/textarea</option><option>//textarea</option></datalist></td><td>bbb</td>
+</tr>
+<tr><td>clickAt</td><td>name=commit<datalist><option>name=commit</option><option>css=input[name="commit"]</option><option>//input[@name='commit']</option><option>//form[@id='new_espaciopart']/div[6]/input</option><option>//div[6]/input</option></datalist></td><td>37,24</td>
+</tr>
+<tr><td>chooseOkOnNextConfirmation</td><td><datalist><option></option></datalist></td><td></td>
+</tr>
+<tr><td>clickAt</td><td>link=Eliminar<datalist><option>link=Eliminar</option><option>css=a.btn.btn-danger</option><option>//a[contains(text(),'Eliminar')]</option><option>xpath=(//a[contains(@href, '/admin/espaciospart/101')])[2]</option><option>//div[4]/a</option></datalist></td><td>57,15</td>
+</tr>
+<tr><td>assertText</td><td>css=h1<datalist><option>css=h1</option><option>//h1</option></datalist></td><td>Espacios de participación o redes</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
 <tr><td rowspan="1" colspan="3">tabla-estado-civil</td></tr>
 </thead>
 <tbody>
@@ -847,6 +1037,8 @@
 	<td>click</td>
 	<td>link=Estados Civiles<datalist><option>link=Estados Civiles</option></datalist></td>
 	<td></td>
+</tr>
+<tr><td></td><td><datalist><option></option></datalist></td><td></td>
 </tr>
 <tr><td>clickAt</td><td>xpath=(//a[contains(text(),'Nuevo')])[2]<datalist><option>xpath=(//a[contains(text(),'Nuevo')])[2]</option><option>//a[contains(@href, '/admin/estadosciviles/nueva')]</option><option>//div/a</option></datalist></td><td>41,12</td>
 </tr>
@@ -900,6 +1092,8 @@
 	<td>link=Estatus migratorio<datalist><option>link=Estatus migratorio</option></datalist></td>
 	<td></td>
 </tr>
+<tr><td></td><td><datalist><option></option></datalist></td><td></td>
+</tr>
 <tr><td>clickAt</td><td>xpath=(//a[contains(text(),'Nuevo')])[2]<datalist><option>xpath=(//a[contains(text(),'Nuevo')])[2]</option><option>//a[contains(@href, '/admin/statusmigratorios/nueva')]</option><option>//div/a</option></datalist></td><td>44,15</td>
 </tr>
 <tr>
@@ -952,6 +1146,8 @@
 	<td>link=Etiquetas<datalist><option>link=Etiquetas</option></datalist></td>
 	<td></td>
 </tr>
+<tr><td></td><td><datalist><option></option></datalist></td><td></td>
+</tr>
 <tr><td>clickAt</td><td>xpath=(//a[contains(text(),'Nueva')])[3]<datalist><option>xpath=(//a[contains(text(),'Nueva')])[3]</option><option>//a[contains(@href, '/admin/etiquetas/nueva')]</option><option>//div/a</option></datalist></td><td>29,14</td>
 </tr>
 <tr>
@@ -998,6 +1194,8 @@
 	<td>click</td>
 	<td>link=Etnias<datalist><option>link=Etnias</option></datalist></td>
 	<td></td>
+</tr>
+<tr><td></td><td><datalist><option></option></datalist></td><td></td>
 </tr>
 <tr><td>clickAt</td><td>xpath=(//a[contains(text(),'Nueva')])[3]<datalist><option>xpath=(//a[contains(text(),'Nueva')])[3]</option><option>//a[contains(@href, '/admin/etnias/nueva')]</option><option>//div/a</option></datalist></td><td>35,19</td>
 </tr>
@@ -1058,6 +1256,8 @@
 	<td>link=Financiadores<datalist><option>link=Financiadores</option></datalist></td>
 	<td></td>
 </tr>
+<tr><td></td><td><datalist><option></option></datalist></td><td></td>
+</tr>
 <tr><td>clickAt</td><td>xpath=(//a[contains(text(),'Nuevo')])[2]<datalist><option>xpath=(//a[contains(text(),'Nuevo')])[2]</option><option>//a[contains(@href, '/admin/financiadores/nueva')]</option><option>//div[2]/a</option></datalist></td><td>34,14</td>
 </tr>
 <tr>
@@ -1101,6 +1301,8 @@
 	<td></td>
 </tr>
 <tr><td>clickAt</td><td>link=Fuentes de prensa<datalist><option>link=Fuentes de prensa</option><option>//a[contains(text(),'Fuentes de prensa')]</option><option>//a[contains(@href, 'admin/fuentesprensa')]</option><option>//li[24]/a</option></datalist></td><td>17,13</td>
+</tr>
+<tr><td></td><td><datalist><option></option></datalist></td><td></td>
 </tr>
 <tr><td>clickAt</td><td>css=a.btn.btn-primary<datalist><option>css=a.btn.btn-primary</option><option>xpath=(//a[contains(text(),'Nueva')])[3]</option><option>//a[contains(@href, '/admin/fuentesprensa/nueva')]</option><option>//div/a</option></datalist></td><td>32,20</td>
 </tr>
@@ -1154,6 +1356,8 @@
 	<td>link=Inclusiones<datalist><option>link=Inclusiones</option></datalist></td>
 	<td></td>
 </tr>
+<tr><td></td><td><datalist><option></option></datalist></td><td></td>
+</tr>
 <tr><td>clickAt</td><td>xpath=(//a[contains(text(),'Nueva')])[3]<datalist><option>xpath=(//a[contains(text(),'Nueva')])[3]</option><option>//a[contains(@href, '/admin/inclusiones/nueva')]</option><option>//div/a</option></datalist></td><td>11,20</td>
 </tr>
 <tr>
@@ -1181,6 +1385,42 @@
 	<td></td>
 </tr>
 <tr><td>assertText</td><td>css=h1<datalist><option>css=h1</option><option>//h1</option></datalist></td><td>Inclusiones</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">tabla-linea-de-trabajo-del-actor-social</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://colombia.sjrlac.info:5100/<datalist><option>http://colombia.sjrlac.info:5100/</option></datalist></td><td></td>
+</tr>
+<tr><td>clickAt</td><td>link=Administrar<datalist><option>link=Administrar</option><option>css=li.dropdown.open &gt; a.dropdown-toggle</option><option>//a[contains(text(),'Administrar')]</option><option>xpath=(//a[contains(@href, '#')])[6]</option><option>//ul[2]/li[2]/a</option></datalist></td><td>77,26</td>
+</tr>
+<tr><td>clickAt</td><td>link=Tablas Básicas<datalist><option>link=Tablas Básicas</option><option>//a[contains(text(),'Tablas Básicas')]</option><option>//a[contains(@href, '/tablasbasicas')]</option><option>//ul[2]/li[2]/ul/li[4]/a</option></datalist></td><td>50,14</td>
+</tr>
+<tr><td>clickAt</td><td>link=Línea de trabajo del actor social<datalist><option>link=Línea de trabajo del actor social</option><option>//a[contains(text(),'Línea de trabajo del actor social')]</option><option>//a[contains(@href, 'admin/lineasactorsocial')]</option><option>//li[28]/a</option></datalist></td><td>45,6</td>
+</tr>
+<tr><td>pause</td><td><datalist><option></option></datalist></td><td>500</td>
+</tr>
+<tr><td>clickAt</td><td>css=a.btn.btn-primary<datalist><option>css=a.btn.btn-primary</option><option>xpath=(//a[contains(text(),'Nueva')])[2]</option><option>//a[contains(@href, '/admin/lineasactorsocial/nueva')]</option><option>//div[2]/a</option></datalist></td><td>29,17</td>
+</tr>
+<tr><td>pause</td><td><datalist><option></option></datalist></td><td>500</td>
+</tr>
+<tr><td>clickAt</td><td>id=lineaactorsocial_nombre<datalist><option>id=lineaactorsocial_nombre</option><option>name=lineaactorsocial[nombre]</option><option>css=#lineaactorsocial_nombre</option><option>//input[@id='lineaactorsocial_nombre']</option><option>//form[@id='new_lineaactorsocial']/div[2]/input</option><option>//div[2]/input</option></datalist></td><td>92,9</td>
+</tr>
+<tr><td>type</td><td>id=lineaactorsocial_nombre<datalist><option>id=lineaactorsocial_nombre</option><option>name=lineaactorsocial[nombre]</option><option>css=#lineaactorsocial_nombre</option><option>//input[@id='lineaactorsocial_nombre']</option><option>//form[@id='new_lineaactorsocial']/div[2]/input</option><option>//div[2]/input</option></datalist></td><td>aaa</td>
+</tr>
+<tr><td>clickAt</td><td>id=lineaactorsocial_observaciones<datalist><option>id=lineaactorsocial_observaciones</option><option>name=lineaactorsocial[observaciones]</option><option>css=#lineaactorsocial_observaciones</option><option>//textarea[@id='lineaactorsocial_observaciones']</option><option>//form[@id='new_lineaactorsocial']/div[3]/textarea</option><option>//textarea</option></datalist></td><td>28,18</td>
+</tr>
+<tr><td>type</td><td>id=lineaactorsocial_observaciones<datalist><option>id=lineaactorsocial_observaciones</option><option>name=lineaactorsocial[observaciones]</option><option>css=#lineaactorsocial_observaciones</option><option>//textarea[@id='lineaactorsocial_observaciones']</option><option>//form[@id='new_lineaactorsocial']/div[3]/textarea</option><option>//textarea</option></datalist></td><td>bbb</td>
+</tr>
+<tr><td>clickAt</td><td>name=commit<datalist><option>name=commit</option><option>css=input[name="commit"]</option><option>//input[@name='commit']</option><option>//form[@id='new_lineaactorsocial']/div[6]/input</option><option>//div[6]/input</option></datalist></td><td>18,16</td>
+</tr>
+<tr><td>chooseOkOnNextConfirmation</td><td><datalist><option></option></datalist></td><td></td>
+</tr>
+<tr><td>clickAt</td><td>link=Eliminar<datalist><option>link=Eliminar</option><option>css=a.btn.btn-danger</option><option>//a[contains(text(),'Eliminar')]</option><option>xpath=(//a[contains(@href, '/admin/lineasactorsocial/101')])[2]</option><option>//div[4]/a</option></datalist></td><td>38,20</td>
+</tr>
+<tr><td>assertText</td><td>css=h1<datalist><option>css=h1</option><option>//h1</option></datalist></td><td>Línea de trabajo del actor social</td>
 </tr>
 </tbody></table>
 <table cellpadding="1" cellspacing="1" border="1">
@@ -1257,6 +1497,8 @@
 	<td>link=Modalidades de tenencia de la tierra<datalist><option>link=Modalidades de tenencia de la tierra</option></datalist></td>
 	<td></td>
 </tr>
+<tr><td>pause</td><td><datalist><option></option></datalist></td><td>500</td>
+</tr>
 <tr><td>clickAt</td><td>css=a.btn.btn-primary<datalist><option>css=a.btn.btn-primary</option><option>xpath=(//a[contains(text(),'Nueva')])[3]</option><option>//a[contains(@href, '/admin/modalidadestierra/nueva')]</option><option>//div/a</option></datalist></td><td>43,18</td>
 </tr>
 <tr><td>clickAt</td><td>id=modalidadtierra_nombre<datalist><option>id=modalidadtierra_nombre</option><option>name=modalidadtierra[nombre]</option><option>css=#modalidadtierra_nombre</option><option>//input[@id='modalidadtierra_nombre']</option><option>//form[@id='new_modalidadtierra']/div[2]/input</option><option>//div[2]/input</option></datalist></td><td>95,21</td>
@@ -1278,6 +1520,8 @@
 </tr>
 <tr><td>assertText</td><td>css=h1<datalist><option>css=h1</option><option>//h1</option></datalist></td><td>Modalidades de tenencia de la tierra</td>
 </tr>
+<tr><td>clickAt</td><td>link=Administrar<datalist><option>link=Administrar</option><option>//a[contains(text(),'Administrar')]</option><option>xpath=(//a[contains(@href, '#')])[6]</option><option>//ul[2]/li[2]/a</option></datalist></td><td>58,24</td>
+</tr>
 </tbody></table>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
@@ -1290,7 +1534,11 @@
 </tr>
 <tr><td>clickAt</td><td>link=Tablas Básicas<datalist><option>link=Tablas Básicas</option><option>//a[contains(text(),'Tablas Básicas')]</option><option>//a[contains(@href, '/tablasbasicas')]</option><option>//ul[2]/li[2]/ul/li[4]/a</option></datalist></td><td>34,15</td>
 </tr>
+<tr><td>pause</td><td><datalist><option></option></datalist></td><td>500</td>
+</tr>
 <tr><td>clickAt</td><td>link=Municipios<datalist><option>link=Municipios</option><option>xpath=(//a[contains(text(),'Municipios')])[2]</option><option>//a[contains(@href, 'admin/municipios')]</option><option>//li[27]/a</option></datalist></td><td>31,10</td>
+</tr>
+<tr><td>pause</td><td><datalist><option></option></datalist></td><td>1000</td>
 </tr>
 <tr><td>clickAt</td><td>css=a.btn.btn-primary<datalist><option>css=a.btn.btn-primary</option><option>xpath=(//a[contains(text(),'Nuevo')])[2]</option><option>//a[contains(@href, '/admin/municipios/nueva')]</option><option>//div/a</option></datalist></td><td>29,18</td>
 </tr>
@@ -1345,6 +1593,8 @@
 	<td>link=Necesidades de protección internacional<datalist><option>link=Necesidades de protección internacional</option></datalist></td>
 	<td></td>
 </tr>
+<tr><td>pause</td><td><datalist><option></option></datalist></td><td>500</td>
+</tr>
 <tr><td>clickAt</td><td>xpath=(//a[contains(text(),'Nueva')])[3]<datalist><option>xpath=(//a[contains(text(),'Nueva')])[3]</option><option>//a[contains(@href, '/admin/protecciones/nueva')]</option><option>//div/a</option></datalist></td><td>24,17</td>
 </tr>
 <tr>
@@ -1374,6 +1624,60 @@
 </tbody></table>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
+<tr><td rowspan="1" colspan="3">tabla-nivel-escolaridad</td></tr>
+</thead>
+<tbody>
+<tr>
+	<td>open</td>
+	<td>/<datalist><option>/</option></datalist></td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Administrar<datalist><option>link=Administrar</option></datalist></td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Tablas Básicas<datalist><option>link=Tablas Básicas</option></datalist></td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Niveles de Escolaridad<datalist><option>link=Niveles de Escolaridad</option></datalist></td>
+	<td></td>
+</tr>
+<tr><td>pause</td><td><datalist><option></option></datalist></td><td>500</td>
+</tr>
+<tr><td>clickAt</td><td>xpath=(//a[contains(text(),'Nuevo')])[2]<datalist><option>xpath=(//a[contains(text(),'Nuevo')])[2]</option><option>//a[contains(@href, '/admin/escolaridades/nueva')]</option><option>//div/a</option></datalist></td><td>31,13</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=escolaridad_nombre<datalist><option>id=escolaridad_nombre</option></datalist></td>
+	<td>aaa</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=escolaridad_observaciones<datalist><option>id=escolaridad_observaciones</option></datalist></td>
+	<td>bbb</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>name=commit<datalist><option>name=commit</option></datalist></td>
+	<td></td>
+</tr>
+<tr><td>chooseOkOnNextConfirmation</td><td><datalist><option></option></datalist></td><td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Eliminar<datalist><option>link=Eliminar</option></datalist></td>
+	<td></td>
+</tr>
+<tr><td>assertText</td><td>css=h1<datalist><option>css=h1</option><option>//h1</option></datalist></td><td>Niveles de Escolaridad</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
 <tr><td rowspan="1" colspan="3">tabla-oficina</td></tr>
 </thead>
 <tbody>
@@ -1396,6 +1700,8 @@
 	<td>click</td>
 	<td>link=Oficinas<datalist><option>link=Oficinas</option></datalist></td>
 	<td></td>
+</tr>
+<tr><td>pause</td><td><datalist><option></option></datalist></td><td>500</td>
 </tr>
 <tr><td>clickAt</td><td>xpath=(//a[contains(text(),'Nueva')])[3]<datalist><option>xpath=(//a[contains(text(),'Nueva')])[3]</option><option>//a[contains(@href, '/admin/oficinas/nueva')]</option><option>//div/a</option></datalist></td><td>17,20</td>
 </tr>
@@ -1426,6 +1732,83 @@
 </tbody></table>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
+<tr><td rowspan="1" colspan="3">tabla-pais</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>/<datalist><option>link=Administrar</option><option>//a[contains(text(),'Administrar')]</option><option>xpath=(//a[contains(@href, '#')])[6]</option><option>//ul[2]/li[2]/a</option><option>/</option></datalist></td><td></td>
+</tr>
+<tr><td>clickAt</td><td>link=Administrar<datalist><option>link=Administrar</option><option>//a[contains(text(),'Administrar')]</option><option>xpath=(//a[contains(@href, '#')])[6]</option><option>//ul[2]/li[2]/a</option></datalist></td><td>27,19</td>
+</tr>
+<tr><td>clickAt</td><td>link=Tablas Básicas<datalist><option>link=Tablas Básicas</option><option>//a[contains(text(),'Tablas Básicas')]</option><option>//a[contains(@href, '/tablasbasicas')]</option><option>//ul[2]/li[2]/ul/li[4]/a</option></datalist></td><td>108,16</td>
+</tr>
+<tr><td>pause</td><td><datalist><option></option></datalist></td><td>1000</td>
+</tr>
+<tr><td>clickAt</td><td>link=Paises<datalist><option>link=Paises</option><option>//a[contains(text(),'Paises')]</option><option>//a[contains(@href, 'admin/paises')]</option><option>//li[31]/a</option></datalist></td><td>22,11</td>
+</tr>
+<tr><td>pause</td><td><datalist><option></option></datalist></td><td>1000</td>
+</tr>
+<tr><td>clickAt</td><td>css=a.btn.btn-primary<datalist><option>css=a.btn.btn-primary</option><option>xpath=(//a[contains(text(),'Nuevo')])[2]</option><option>//a[contains(@href, '/admin/paises/nueva')]</option><option>//div/a</option></datalist></td><td>31,17</td>
+</tr>
+<tr><td>clickAt</td><td>id=pais_nombre<datalist><option>id=pais_nombre</option><option>name=pais[nombre]</option><option>css=#pais_nombre</option><option>//input[@id='pais_nombre']</option><option>//form[@id='new_pais']/div[3]/input</option><option>//div[3]/input</option></datalist></td><td>62,14</td>
+</tr>
+<tr><td>type</td><td>id=pais_nombre<datalist><option>id=pais_nombre</option><option>name=pais[nombre]</option><option>css=#pais_nombre</option><option>//input[@id='pais_nombre']</option><option>//form[@id='new_pais']/div[3]/input</option><option>//div[3]/input</option></datalist></td><td>aaa</td>
+</tr>
+<tr><td>runScript</td><td>$('[type=number]').removeAttr('type')<datalist><option>$('#pais_codiso').removeAttr('type')</option><option>$('#pais_id').removeAttr('type')</option><option>$('[type=number]').removeAttr('type')</option></datalist></td><td></td>
+</tr>
+<tr><td>clickAt</td><td>id=pais_nombreiso<datalist><option>id=pais_nombreiso</option><option>name=pais[nombreiso]</option><option>css=#pais_nombreiso</option><option>//input[@id='pais_nombreiso']</option><option>//form[@id='new_pais']/div[4]/input</option><option>//div[4]/input</option></datalist></td><td>32,23</td>
+</tr>
+<tr><td>type</td><td>id=pais_nombreiso<datalist><option>id=pais_nombreiso</option><option>name=pais[nombreiso]</option><option>css=#pais_nombreiso</option><option>//input[@id='pais_nombreiso']</option><option>//form[@id='new_pais']/div[4]/input</option><option>//div[4]/input</option></datalist></td><td>aa</td>
+</tr>
+<tr><td>clickAt</td><td>id=pais_observaciones<datalist><option>id=pais_observaciones</option><option>name=pais[observaciones]</option><option>css=#pais_observaciones</option><option>//textarea[@id='pais_observaciones']</option><option>//form[@id='new_pais']/div[13]/textarea</option><option>//textarea</option></datalist></td><td>96,10</td>
+</tr>
+<tr><td>type</td><td>id=pais_observaciones<datalist><option>id=pais_observaciones</option><option>name=pais[observaciones]</option><option>css=#pais_observaciones</option><option>//textarea[@id='pais_observaciones']</option><option>//form[@id='new_pais']/div[13]/textarea</option><option>//textarea</option></datalist></td><td>bbb</td>
+</tr>
+<tr><td>clickAt</td><td>id=pais_id<datalist><option>id=pais_id</option><option>name=pais[id]</option><option>css=#pais_id</option><option>//input[@id='pais_id']</option><option>//form[@id='new_pais']/div[2]/input</option><option>//div[2]/input</option></datalist></td><td>48,23</td>
+</tr>
+<tr><td>type</td><td>id=pais_id<datalist><option>id=pais_id</option><option>name=pais[id]</option><option>css=#pais_id</option><option>//input[@id='pais_id']</option><option>//form[@id='new_pais']/div[2]/input</option><option>//div[2]/input</option></datalist></td><td>65</td>
+</tr>
+<tr><td>clickAt</td><td>id=pais_nombre<datalist><option>id=pais_nombre</option><option>name=pais[nombre]</option><option>css=#pais_nombre</option><option>//input[@id='pais_nombre']</option><option>//form[@id='new_pais']/div[3]/input</option><option>//div[3]/input</option></datalist></td><td>39,8</td>
+</tr>
+<tr><td>type</td><td>id=pais_nombre<datalist><option>id=pais_nombre</option><option>name=pais[nombre]</option><option>css=#pais_nombre</option><option>//input[@id='pais_nombre']</option><option>//form[@id='new_pais']/div[3]/input</option><option>//div[3]/input</option></datalist></td><td>aaa</td>
+</tr>
+<tr><td>clickAt</td><td>id=pais_nombreiso<datalist><option>id=pais_nombreiso</option><option>name=pais[nombreiso]</option><option>css=#pais_nombreiso</option><option>//input[@id='pais_nombreiso']</option><option>//form[@id='new_pais']/div[4]/input</option><option>//div[4]/input</option></datalist></td><td>40,6</td>
+</tr>
+<tr><td>type</td><td>id=pais_nombreiso<datalist><option>id=pais_nombreiso</option><option>name=pais[nombreiso]</option><option>css=#pais_nombreiso</option><option>//input[@id='pais_nombreiso']</option><option>//form[@id='new_pais']/div[4]/input</option><option>//div[4]/input</option></datalist></td><td>aa</td>
+</tr>
+<tr><td>clickAt</td><td>id=pais_observaciones<datalist><option>id=pais_observaciones</option><option>name=pais[observaciones]</option><option>css=#pais_observaciones</option><option>//textarea[@id='pais_observaciones']</option><option>//form[@id='new_pais']/div[13]/textarea</option><option>//textarea</option></datalist></td><td>74,37</td>
+</tr>
+<tr><td>type</td><td>id=pais_observaciones<datalist><option>id=pais_observaciones</option><option>name=pais[observaciones]</option><option>css=#pais_observaciones</option><option>//textarea[@id='pais_observaciones']</option><option>//form[@id='new_pais']/div[13]/textarea</option><option>//textarea</option></datalist></td><td>bbb</td>
+</tr>
+<tr><td>clickAt</td><td>name=commit<datalist><option>name=commit</option><option>css=input[name="commit"]</option><option>//input[@name='commit']</option><option>//form[@id='new_pais']/div[16]/input</option><option>//div[16]/input</option></datalist></td><td>37,16</td>
+</tr>
+<tr><td>chooseOkOnNextConfirmation</td><td><datalist><option></option></datalist></td><td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Eliminar<datalist><option>link=Eliminar</option></datalist></td>
+	<td></td>
+</tr>
+<tr><td>assertText</td><td>css=h1<datalist><option>css=h1</option><option>//h1</option></datalist></td><td>Paises</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">tabla-perfil-actor-social</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://colombia.sjrlac.info:5100/<datalist><option>http://colombia.sjrlac.info:5100/</option></datalist></td><td></td>
+</tr>
+<tr><td>clickAt</td><td>link=Administrar<datalist><option>link=Administrar</option><option>//a[contains(text(),'Administrar')]</option><option>xpath=(//a[contains(@href, '#')])[6]</option><option>//ul[2]/li[2]/a</option></datalist></td><td>44,15</td>
+</tr>
+<tr><td>clickAt</td><td>link=Tablas Básicas<datalist><option>link=Tablas Básicas</option><option>//a[contains(text(),'Tablas Básicas')]</option><option>//a[contains(@href, '/tablasbasicas')]</option><option>//ul[2]/li[2]/ul/li[4]/a</option></datalist></td><td>72,15</td>
+</tr>
+<tr><td>pause</td><td><datalist><option></option></datalist></td><td>500</td>
+</tr>
+<tr><td>clickAt</td><td>link=Perfilactoressociales<datalist><option>link=Perfilactoressociales</option><option>//a[contains(text(),'Perfilactoressociales')]</option><option>//a[contains(@href, 'admin/perfilactoressociales')]</option><option>//li[36]/a</option></datalist></td><td>80,12</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
 <tr><td rowspan="1" colspan="3">tabla-personas-desean</td></tr>
 </thead>
 <tbody>
@@ -1448,6 +1831,8 @@
 	<td>click</td>
 	<td>link=Personas desean<datalist><option>link=Personas desean</option></datalist></td>
 	<td></td>
+</tr>
+<tr><td>pause</td><td><datalist><option></option></datalist></td><td>500</td>
 </tr>
 <tr><td>clickAt</td><td>xpath=(//a[contains(text(),'Nueva')])[3]<datalist><option>xpath=(//a[contains(text(),'Nueva')])[3]</option><option>//a[contains(@href, '/admin/personadeseas/nueva')]</option><option>//div/a</option></datalist></td><td>38,23</td>
 </tr>
@@ -1478,6 +1863,40 @@
 </tbody></table>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
+<tr><td rowspan="1" colspan="3">tabla-poblaciones-relacionadas-con-actor-social</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://colombia.sjrlac.info:5100/<datalist><option>http://colombia.sjrlac.info:5100/</option></datalist></td><td></td>
+</tr>
+<tr><td>clickAt</td><td>link=Administrar<datalist><option>link=Administrar</option><option>//a[contains(text(),'Administrar')]</option><option>xpath=(//a[contains(@href, '#')])[6]</option><option>//ul[2]/li[2]/a</option></datalist></td><td>41,24</td>
+</tr>
+<tr><td>clickAt</td><td>link=Tablas Básicas<datalist><option>link=Tablas Básicas</option><option>//a[contains(text(),'Tablas Básicas')]</option><option>//a[contains(@href, '/tablasbasicas')]</option><option>//ul[2]/li[2]/ul/li[4]/a</option></datalist></td><td>50,20</td>
+</tr>
+<tr><td>clickAt</td><td>link=Poblaciones relacionadas con actor social<datalist><option>link=Poblaciones relacionadas con actor social</option><option>//a[contains(text(),'Poblaciones relacionadas con actor social')]</option><option>//a[contains(@href, 'admin/sectoresactores')]</option><option>//li[38]/a</option></datalist></td><td>116,4</td>
+</tr>
+<tr><td>pause</td><td><datalist><option></option></datalist></td><td>500</td>
+</tr>
+<tr><td>clickAt</td><td>css=a.btn.btn-primary<datalist><option>css=a.btn.btn-primary</option><option>xpath=(//a[contains(text(),'Nuevo')])[2]</option><option>//a[contains(@href, '/admin/sectoresactores/nueva')]</option><option>//div[2]/a</option></datalist></td><td>61,20</td>
+</tr>
+<tr><td>clickAt</td><td>id=sectoractor_nombre<datalist><option>id=sectoractor_nombre</option><option>name=sectoractor[nombre]</option><option>css=#sectoractor_nombre</option><option>//input[@id='sectoractor_nombre']</option><option>//form[@id='new_sectoractor']/div[2]/input</option><option>//div[2]/input</option></datalist></td><td>77,0</td>
+</tr>
+<tr><td>type</td><td>id=sectoractor_nombre<datalist><option>id=sectoractor_nombre</option><option>name=sectoractor[nombre]</option><option>css=#sectoractor_nombre</option><option>//input[@id='sectoractor_nombre']</option><option>//form[@id='new_sectoractor']/div[2]/input</option><option>//div[2]/input</option></datalist></td><td>aaa</td>
+</tr>
+<tr><td>clickAt</td><td>id=sectoractor_observaciones<datalist><option>id=sectoractor_observaciones</option><option>name=sectoractor[observaciones]</option><option>css=#sectoractor_observaciones</option><option>//textarea[@id='sectoractor_observaciones']</option><option>//form[@id='new_sectoractor']/div[3]/textarea</option><option>//textarea</option></datalist></td><td>50,19</td>
+</tr>
+<tr><td>type</td><td>id=sectoractor_observaciones<datalist><option>id=sectoractor_observaciones</option><option>name=sectoractor[observaciones]</option><option>css=#sectoractor_observaciones</option><option>//textarea[@id='sectoractor_observaciones']</option><option>//form[@id='new_sectoractor']/div[3]/textarea</option><option>//textarea</option></datalist></td><td>bbb</td>
+</tr>
+<tr><td>clickAt</td><td>name=commit<datalist><option>name=commit</option><option>css=input[name="commit"]</option><option>//input[@name='commit']</option><option>//form[@id='new_sectoractor']/div[6]/input</option><option>//div[6]/input</option></datalist></td><td>32,7</td>
+</tr>
+<tr><td>chooseOkOnNextConfirmation</td><td><datalist><option></option></datalist></td><td></td>
+</tr>
+<tr><td>clickAt</td><td>link=Eliminar<datalist><option>link=Eliminar</option><option>css=a.btn.btn-danger</option><option>//a[contains(text(),'Eliminar')]</option><option>xpath=(//a[contains(@href, '/admin/sectoresactores/104')])[2]</option><option>//div[4]/a</option></datalist></td><td>29,13</td>
+</tr>
+<tr><td>assertText</td><td>css=h1<datalist><option>css=h1</option><option>//h1</option></datalist></td><td>Poblaciones relacionadas con actor social</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
 <tr><td rowspan="1" colspan="3">tabla-presunto-responsable</td></tr>
 </thead>
 <tbody>
@@ -1495,6 +1914,8 @@
 	<td>click</td>
 	<td>link=Presuntos responsables<datalist><option>link=Presuntos responsables</option></datalist></td>
 	<td></td>
+</tr>
+<tr><td>pause</td><td><datalist><option></option></datalist></td><td>500</td>
 </tr>
 <tr><td>clickAt</td><td>xpath=(//a[contains(text(),'Nuevo')])[2]<datalist><option>xpath=(//a[contains(text(),'Nuevo')])[2]</option><option>//a[contains(@href, '/admin/presponsables/nueva')]</option><option>//div/a</option></datalist></td><td>13,23</td>
 </tr>
@@ -1543,6 +1964,8 @@
 	<td>link=Profesiones<datalist><option>link=Profesiones</option></datalist></td>
 	<td></td>
 </tr>
+<tr><td>pause</td><td><datalist><option></option></datalist></td><td>500</td>
+</tr>
 <tr><td>clickAt</td><td>xpath=(//a[contains(text(),'Nueva')])[3]<datalist><option>xpath=(//a[contains(text(),'Nueva')])[3]</option><option>//a[contains(@href, '/admin/profesiones/nueva')]</option><option>//div/a</option></datalist></td><td>23,14</td>
 </tr>
 <tr>
@@ -1587,6 +2010,8 @@
 	<td>link=Programas del Estado<datalist><option>link=Programas del Estado</option></datalist></td>
 	<td></td>
 </tr>
+<tr><td>pause</td><td><datalist><option></option></datalist></td><td>500</td>
+</tr>
 <tr><td>clickAt</td><td>xpath=(//a[contains(text(),'Nuevo')])[2]<datalist><option>xpath=(//a[contains(text(),'Nuevo')])[2]</option><option>//a[contains(@href, '/admin/progsestado/nueva')]</option><option>//div/a</option></datalist></td><td>34,27</td>
 </tr>
 <tr>
@@ -1616,6 +2041,75 @@
 </tbody></table>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
+<tr><td rowspan="1" colspan="3">tabla-rango-de-edad</td></tr>
+</thead>
+<tbody>
+<tr>
+	<td>open</td>
+	<td>/<datalist><option>/</option></datalist></td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//ul[2]/li[2]/a/b<datalist><option>//ul[2]/li[2]/a/b</option></datalist></td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Tablas Básicas<datalist><option>link=Tablas Básicas</option></datalist></td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Rangos de Edad<datalist><option>link=Rangos de Edad</option></datalist></td>
+	<td></td>
+</tr>
+<tr><td>pause</td><td><datalist><option></option></datalist></td><td>500</td>
+</tr>
+<tr><td>clickAt</td><td>xpath=(//a[contains(text(),'Nuevo')])[2]<datalist><option>xpath=(//a[contains(text(),'Nuevo')])[2]</option><option>//a[contains(@href, '/admin/rangosedad/nueva')]</option><option>//div/a</option></datalist></td><td>34,10</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=rangoedad_nombre<datalist><option>id=rangoedad_nombre</option></datalist></td>
+	<td>aaa</td>
+</tr>
+<tr><td>runScript</td><td>$('#rangoedad_limiteinferior').removeAttr('type')<datalist><option>$('#pais_codiso').removeAttr('type')</option><option>$('#rangoedad_limiteinferior').removeAttr('type')</option></datalist></td><td></td>
+</tr>
+<tr><td>clickAt</td><td>id=rangoedad_limiteinferior<datalist><option>id=rangoedad_limiteinferior</option><option>name=rangoedad[limiteinferior]</option><option>css=#rangoedad_limiteinferior</option><option>//input[@id='rangoedad_limiteinferior']</option><option>//form[@id='new_rangoedad']/div[3]/input</option><option>//div[3]/input</option></datalist></td><td>9,14</td>
+</tr>
+<tr><td>clickAt</td><td>id=rangoedad_limiteinferior<datalist><option>id=rangoedad_limiteinferior</option><option>name=rangoedad[limiteinferior]</option><option>css=#rangoedad_limiteinferior</option><option>//input[@id='rangoedad_limiteinferior']</option><option>//form[@id='new_rangoedad']/div[3]/input</option><option>//div[3]/input</option></datalist></td><td>21,21</td>
+</tr>
+<tr><td>type</td><td>id=rangoedad_limiteinferior<datalist><option>id=rangoedad_limiteinferior</option><option>name=rangoedad[limiteinferior]</option><option>css=#rangoedad_limiteinferior</option><option>//input[@id='rangoedad_limiteinferior']</option><option>//form[@id='new_rangoedad']/div[3]/input</option><option>//div[3]/input</option></datalist></td><td>1</td>
+</tr>
+<tr><td>runScript</td><td>$('#rangoedad_limitesuperior').removeAttr('type')<datalist><option>$('#pais_codiso').removeAttr('type')</option><option>$('#rangoedad_limitesuperior').removeAttr('type')</option></datalist></td><td></td>
+</tr>
+<tr><td>clickAt</td><td>id=rangoedad_limitesuperior<datalist><option>id=rangoedad_limitesuperior</option><option>name=rangoedad[limitesuperior]</option><option>css=#rangoedad_limitesuperior</option><option>//input[@id='rangoedad_limitesuperior']</option><option>//form[@id='new_rangoedad']/div[4]/input</option><option>//div[4]/input</option></datalist></td><td>16,19</td>
+</tr>
+<tr><td>mouseDownAt</td><td>id=rangoedad_limitesuperior<datalist><option>id=rangoedad_limitesuperior</option><option>name=rangoedad[limitesuperior]</option><option>css=#rangoedad_limitesuperior</option><option>//input[@id='rangoedad_limitesuperior']</option><option>//form[@id='new_rangoedad']/div[4]/input</option><option>//div[4]/input</option></datalist></td><td>23,20</td>
+</tr>
+<tr><td>mouseMoveAt</td><td>id=rangoedad_limitesuperior<datalist><option>id=rangoedad_limitesuperior</option><option>name=rangoedad[limitesuperior]</option><option>css=#rangoedad_limitesuperior</option><option>//input[@id='rangoedad_limitesuperior']</option><option>//form[@id='new_rangoedad']/div[4]/input</option><option>//div[4]/input</option></datalist></td><td>23,20</td>
+</tr>
+<tr><td>mouseUpAt</td><td>id=rangoedad_limitesuperior<datalist><option>id=rangoedad_limitesuperior</option><option>name=rangoedad[limitesuperior]</option><option>css=#rangoedad_limitesuperior</option><option>//input[@id='rangoedad_limitesuperior']</option><option>//form[@id='new_rangoedad']/div[4]/input</option><option>//div[4]/input</option></datalist></td><td>23,20</td>
+</tr>
+<tr><td>clickAt</td><td>id=rangoedad_limitesuperior<datalist><option>id=rangoedad_limitesuperior</option><option>name=rangoedad[limitesuperior]</option><option>css=#rangoedad_limitesuperior</option><option>//input[@id='rangoedad_limitesuperior']</option><option>//form[@id='new_rangoedad']/div[4]/input</option><option>//div[4]/input</option></datalist></td><td>23,20</td>
+</tr>
+<tr><td>type</td><td>id=rangoedad_limitesuperior<datalist><option>id=rangoedad_limitesuperior</option><option>name=rangoedad[limitesuperior]</option><option>css=#rangoedad_limitesuperior</option><option>//input[@id='rangoedad_limitesuperior']</option><option>//form[@id='new_rangoedad']/div[4]/input</option><option>//div[4]/input</option></datalist></td><td>7</td>
+</tr>
+<tr><td>clickAt</td><td>id=rangoedad_observaciones<datalist><option>id=rangoedad_observaciones</option><option>name=rangoedad[observaciones]</option><option>css=#rangoedad_observaciones</option><option>//textarea[@id='rangoedad_observaciones']</option><option>//form[@id='new_rangoedad']/div[5]/textarea</option><option>//textarea</option></datalist></td><td>35,16</td>
+</tr>
+<tr><td>type</td><td>id=rangoedad_observaciones<datalist><option>id=rangoedad_observaciones</option><option>name=rangoedad[observaciones]</option><option>css=#rangoedad_observaciones</option><option>//textarea[@id='rangoedad_observaciones']</option><option>//form[@id='new_rangoedad']/div[5]/textarea</option><option>//textarea</option></datalist></td><td>bbb</td>
+</tr>
+<tr><td>clickAt</td><td>name=commit<datalist><option>name=commit</option><option>css=input[name="commit"]</option><option>//input[@name='commit']</option><option>//form[@id='new_rangoedad']/div[8]/input</option><option>//div[8]/input</option></datalist></td><td>35,9</td>
+</tr>
+<tr><td>chooseOkOnNextConfirmation</td><td><datalist><option></option></datalist></td><td></td>
+</tr>
+<tr><td>clickAt</td><td>link=Eliminar<datalist><option>link=Eliminar</option><option>css=a.btn.btn-danger</option><option>//a[contains(text(),'Eliminar')]</option><option>xpath=(//a[contains(@href, '/admin/rangosedad/105')])[2]</option><option>//a[3]</option></datalist></td><td>35,27</td>
+</tr>
+<tr><td>assertText</td><td>css=h1<datalist><option>¿Está seguro(a)?</option><option>css=h1</option></datalist></td><td>Rangos de Edad</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
 <tr><td rowspan="1" colspan="3">tabla-rango-de-edad-en actividad</td></tr>
 </thead>
 <tbody>
@@ -1635,6 +2129,8 @@
 	<td></td>
 </tr>
 <tr><td>clickAt</td><td>link=Rangos de edad en actividades<datalist><option>link=Rangos de edad en actividades</option><option>//a[contains(text(),'Rangos de edad en actividades')]</option><option>//a[contains(@href, 'admin/rangosedadac')]</option><option>//li[38]/a</option></datalist></td><td>139,11</td>
+</tr>
+<tr><td>pause</td><td><datalist><option></option></datalist></td><td>500</td>
 </tr>
 <tr><td>clickAt</td><td>css=a.btn.btn-primary<datalist><option>css=a.btn.btn-primary</option><option>xpath=(//a[contains(text(),'Nuevo')])[2]</option><option>//a[contains(@href, '/admin/rangosedadac/nueva')]</option><option>//div/a</option></datalist></td><td>28,15</td>
 </tr>
@@ -1752,6 +2248,8 @@
 	<td>link=Resultados de acciones bélicas<datalist><option>link=Resultados de acciones bélicas</option></datalist></td>
 	<td></td>
 </tr>
+<tr><td>pause</td><td><datalist><option></option></datalist></td><td>500</td>
+</tr>
 <tr><td>clickAt</td><td>xpath=(//a[contains(text(),'Nuevo')])[2]<datalist><option>xpath=(//a[contains(text(),'Nuevo')])[2]</option><option>//a[contains(@href, '/admin/resagresiones/nueva')]</option><option>//div[2]/a</option></datalist></td><td>49,19</td>
 </tr>
 <tr>
@@ -1792,6 +2290,8 @@
 </tr>
 <tr><td>clickAt</td><td>link=Roles en familia<datalist><option>link=Roles en familia</option><option>//a[contains(text(),'Roles en familia')]</option><option>//a[contains(@href, 'admin/rolesfamilia')]</option><option>//li[40]/a</option></datalist></td><td>86,7</td>
 </tr>
+<tr><td>pause</td><td><datalist><option></option></datalist></td><td>500</td>
+</tr>
 <tr><td>clickAt</td><td>css=a.btn.btn-primary<datalist><option>css=a.btn.btn-primary</option><option>xpath=(//a[contains(text(),'Nuevo')])[2]</option><option>//a[contains(@href, '/admin/rolesfamilia/nueva')]</option><option>//div/a</option></datalist></td><td>35,11</td>
 </tr>
 <tr><td>clickAt</td><td>id=rolfamilia_nombre<datalist><option>id=rolfamilia_nombre</option><option>name=rolfamilia[nombre]</option><option>css=#rolfamilia_nombre</option><option>//input[@id='rolfamilia_nombre']</option><option>//form[@id='new_rolfamilia']/div[2]/input</option><option>//div[2]/input</option></datalist></td><td>53,10</td>
@@ -1809,44 +2309,6 @@
 <tr><td>clickAt</td><td>link=Eliminar<datalist><option>link=Eliminar</option><option>css=a.btn.btn-danger</option><option>//a[contains(text(),'Eliminar')]</option><option>xpath=(//a[contains(@href, '/admin/rolesfamilia/104')])[2]</option><option>//a[3]</option></datalist></td><td>20,21</td>
 </tr>
 <tr><td>assertText</td><td>css=h1<datalist><option>css=h1</option><option>//h1</option></datalist></td><td>Roles en familia</td>
-</tr>
-</tbody></table>
-<table cellpadding="1" cellspacing="1" border="1">
-<thead>
-<tr><td rowspan="1" colspan="3">tabla-sector-de-actor-social</td></tr>
-</thead>
-<tbody>
-<tr><td>open</td><td>/<datalist><option>/</option></datalist></td><td></td>
-</tr>
-<tr><td>clickAt</td><td>link=Administrar<datalist><option>link=Administrar</option><option>//a[contains(text(),'Administrar')]</option><option>xpath=(//a[contains(@href, '#')])[6]</option><option>//ul[2]/li[2]/a</option></datalist></td><td>54,24</td>
-</tr>
-<tr><td>clickAt</td><td>link=Tablas Básicas<datalist><option>link=Tablas Básicas</option><option>//a[contains(text(),'Tablas Básicas')]</option><option>//a[contains(@href, '/tablasbasicas')]</option><option>//ul[2]/li[2]/ul/li[4]/a</option></datalist></td><td>108,21</td>
-</tr>
-<tr><td>clickAt</td><td>link=Sectores de actores sociales<datalist><option>link=Sectores de actores sociales</option><option>//a[contains(text(),'Sectores de actores sociales')]</option><option>//a[contains(@href, 'admin/sectoresactores')]</option><option>//li[42]/a</option></datalist></td><td>97,11</td>
-</tr>
-<tr><td>clickAt</td><td>css=a.btn.btn-primary<datalist><option>css=a.btn.btn-primary</option><option>xpath=(//a[contains(text(),'Nuevo')])[2]</option><option>//a[contains(@href, '/admin/sectoresactores/nueva')]</option><option>//div[2]/a</option></datalist></td><td>7,14</td>
-</tr>
-<tr><td>clickAt</td><td>id=sectoractor_nombre<datalist><option>id=sectoractor_nombre</option><option>name=sectoractor[nombre]</option><option>css=#sectoractor_nombre</option><option>//input[@id='sectoractor_nombre']</option><option>//form[@id='new_sectoractor']/div[2]/input</option><option>//div[2]/input</option></datalist></td><td>211,8</td>
-</tr>
-<tr><td>type</td><td>id=sectoractor_nombre<datalist><option>id=sectoractor_nombre</option><option>name=sectoractor[nombre]</option><option>css=#sectoractor_nombre</option><option>//input[@id='sectoractor_nombre']</option><option>//form[@id='new_sectoractor']/div[2]/input</option><option>//div[2]/input</option></datalist></td><td>andino</td>
-</tr>
-<tr><td>mouseDownAt</td><td>id=sectoractor_observaciones<datalist><option>id=sectoractor_observaciones</option><option>name=sectoractor[observaciones]</option><option>css=#sectoractor_observaciones</option><option>//textarea[@id='sectoractor_observaciones']</option><option>//form[@id='new_sectoractor']/div[3]/textarea</option><option>//textarea</option></datalist></td><td>158.5,23</td>
-</tr>
-<tr><td>mouseMoveAt</td><td>id=sectoractor_observaciones<datalist><option>id=sectoractor_observaciones</option><option>name=sectoractor[observaciones]</option><option>css=#sectoractor_observaciones</option><option>//textarea[@id='sectoractor_observaciones']</option><option>//form[@id='new_sectoractor']/div[3]/textarea</option><option>//textarea</option></datalist></td><td>158.5,23</td>
-</tr>
-<tr><td>mouseUpAt</td><td>id=sectoractor_observaciones<datalist><option>id=sectoractor_observaciones</option><option>name=sectoractor[observaciones]</option><option>css=#sectoractor_observaciones</option><option>//textarea[@id='sectoractor_observaciones']</option><option>//form[@id='new_sectoractor']/div[3]/textarea</option><option>//textarea</option></datalist></td><td>158.5,23</td>
-</tr>
-<tr><td>clickAt</td><td>id=sectoractor_observaciones<datalist><option>id=sectoractor_observaciones</option><option>name=sectoractor[observaciones]</option><option>css=#sectoractor_observaciones</option><option>//textarea[@id='sectoractor_observaciones']</option><option>//form[@id='new_sectoractor']/div[3]/textarea</option><option>//textarea</option></datalist></td><td>158,23</td>
-</tr>
-<tr><td>type</td><td>id=sectoractor_observaciones<datalist><option>id=sectoractor_observaciones</option><option>name=sectoractor[observaciones]</option><option>css=#sectoractor_observaciones</option><option>//textarea[@id='sectoractor_observaciones']</option><option>//form[@id='new_sectoractor']/div[3]/textarea</option><option>//textarea</option></datalist></td><td>bbb</td>
-</tr>
-<tr><td>clickAt</td><td>name=commit<datalist><option>name=commit</option><option>css=input[name="commit"]</option><option>//input[@name='commit']</option><option>//form[@id='new_sectoractor']/div[6]/input</option><option>//div[6]/input</option></datalist></td><td>38,30</td>
-</tr>
-<tr><td>chooseOkOnNextConfirmation</td><td><datalist><option></option></datalist></td><td></td>
-</tr>
-<tr><td>clickAt</td><td>link=Eliminar<datalist><option>link=Eliminar</option><option>css=a.btn.btn-danger</option><option>//a[contains(text(),'Eliminar')]</option><option>xpath=(//a[contains(@href, '/admin/sectoresactores/101')])[2]</option><option>//a[3]</option></datalist></td><td>15,24</td>
-</tr>
-<tr><td>assertText</td><td>css=h1<datalist><option>css=h1</option><option>//h1</option></datalist></td><td>Sectores de actores sociales</td>
 </tr>
 </tbody></table>
 <table cellpadding="1" cellspacing="1" border="1">
@@ -1873,6 +2335,8 @@
 	<td>click</td>
 	<td>link=Servicios y Asesorias del SJR<datalist><option>link=Servicios y Asesorias del SJR</option></datalist></td>
 	<td></td>
+</tr>
+<tr><td>pause</td><td><datalist><option></option></datalist></td><td>500</td>
 </tr>
 <tr><td>clickAt</td><td>xpath=(//a[contains(text(),'Nueva')])[3]<datalist><option>xpath=(//a[contains(text(),'Nueva')])[3]</option><option>//a[contains(@href, '/admin/motivossjr/nueva')]</option><option>//div/a</option></datalist></td><td>26,12</td>
 </tr>
@@ -1928,6 +2392,8 @@
 	<td>link=Subáreas de Actividad<datalist><option>link=Subáreas de Actividad</option></datalist></td>
 	<td></td>
 </tr>
+<tr><td>pause</td><td><datalist><option></option></datalist></td><td>500</td>
+</tr>
 <tr><td>clickAt</td><td>xpath=(//a[contains(text(),'Nueva')])[3]<datalist><option>xpath=(//a[contains(text(),'Nueva')])[3]</option><option>//a[contains(@href, '/admin/actividadareas/nueva')]</option><option>//div/a</option></datalist></td><td>55,26</td>
 </tr>
 <tr>
@@ -1957,6 +2423,52 @@
 </tbody></table>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
+<tr><td rowspan="1" colspan="3">tabla-supracategorias </td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>/<datalist><option>/</option><option>/</option></datalist></td><td></td>
+</tr>
+<tr><td>clickAt</td><td>link=Administrar<datalist><option>link=Administrar</option><option>//a[contains(text(),'Administrar')]</option><option>xpath=(//a[contains(@href, '#')])[6]</option><option>//ul[2]/li[2]/a</option></datalist></td><td>55,19</td>
+</tr>
+<tr><td>clickAt</td><td>link=Tablas Básicas<datalist><option>link=Tablas Básicas</option><option>//a[contains(text(),'Tablas Básicas')]</option><option>//a[contains(@href, '/tablasbasicas')]</option><option>//ul[2]/li[2]/ul/li[4]/a</option></datalist></td><td>95,23</td>
+</tr>
+<tr><td>clickAt</td><td>link=Supracategorias<datalist><option>link=Supracategorias</option><option>//a[contains(text(),'Supracategorias')]</option><option>//a[contains(@href, 'admin/supracategorias')]</option><option>//li[43]/a</option></datalist></td><td>52,9</td>
+</tr>
+<tr><td>pause</td><td><datalist><option></option></datalist></td><td>500</td>
+</tr>
+<tr><td>mouseOver</td><td>link=Subáreas de Actividad<datalist><option>link=Subáreas de Actividad</option><option>//a[contains(text(),'Subáreas de Actividad')]</option><option>//a[contains(@href, 'admin/actividadareas')]</option><option>//li[42]/a</option></datalist></td><td></td>
+</tr>
+<tr><td>clickAt</td><td>css=a.btn.btn-primary<datalist><option>css=a.btn.btn-primary</option><option>xpath=(//a[contains(text(),'Nueva')])[3]</option><option>//a[contains(@href, '/admin/supracategorias/nueva')]</option><option>//div/a</option></datalist></td><td>31,18</td>
+</tr>
+<tr><td>runScript</td><td>$('#supracategoria_id').removeAttr('type')<datalist><option>$('#pais_codiso').removeAttr('type')</option><option>$('#supracategoria_id').removeAttr('type')</option></datalist></td><td></td>
+</tr>
+<tr><td>clickAt</td><td>id=supracategoria_id<datalist><option>id=supracategoria_id</option><option>name=supracategoria[id]</option><option>css=#supracategoria_id</option><option>//input[@id='supracategoria_id']</option><option>//form[@id='new_supracategoria']/div[2]/input</option><option>//div[2]/input</option></datalist></td><td>70,18</td>
+</tr>
+<tr><td>type</td><td>id=supracategoria_id<datalist><option>id=supracategoria_id</option><option>name=supracategoria[id]</option><option>css=#supracategoria_id</option><option>//input[@id='supracategoria_id']</option><option>//form[@id='new_supracategoria']/div[2]/input</option><option>//div[2]/input</option></datalist></td><td>85</td>
+</tr>
+<tr><td>clickAt</td><td>id=supracategoria_nombre<datalist><option>id=supracategoria_nombre</option><option>name=supracategoria[nombre]</option><option>css=#supracategoria_nombre</option><option>//input[@id='supracategoria_nombre']</option><option>//form[@id='new_supracategoria']/div[3]/input</option><option>//div[3]/input</option></datalist></td><td>240,18</td>
+</tr>
+<tr><td>type</td><td>id=supracategoria_nombre<datalist><option>id=supracategoria_nombre</option><option>name=supracategoria[nombre]</option><option>css=#supracategoria_nombre</option><option>//input[@id='supracategoria_nombre']</option><option>//form[@id='new_supracategoria']/div[3]/input</option><option>//div[3]/input</option></datalist></td><td>aaa</td>
+</tr>
+<tr><td>clickAt</td><td>css=a.chosen-single.chosen-default &gt; span<datalist><option>css=a.chosen-single.chosen-default &gt; span</option><option>//div[@id='supracategoria_id_tviolencia_chosen']/a/span</option><option>//a/span</option></datalist></td><td>204,5</td>
+</tr>
+<tr><td>clickAt</td><td>css=li.active-result.result-selected<datalist><option>css=li.active-result.result-selected</option><option>//div[@id='supracategoria_id_tviolencia_chosen']/div/ul/li[2]</option><option>//div[4]/div/div/ul/li[2]</option></datalist></td><td>149,8</td>
+</tr>
+<tr><td>clickAt</td><td>id=supracategoria_observaciones<datalist><option>id=supracategoria_observaciones</option><option>name=supracategoria[observaciones]</option><option>css=#supracategoria_observaciones</option><option>//textarea[@id='supracategoria_observaciones']</option><option>//form[@id='new_supracategoria']/div[6]/textarea</option><option>//textarea</option></datalist></td><td>146,15</td>
+</tr>
+<tr><td>type</td><td>id=supracategoria_observaciones<datalist><option>id=supracategoria_observaciones</option><option>name=supracategoria[observaciones]</option><option>css=#supracategoria_observaciones</option><option>//textarea[@id='supracategoria_observaciones']</option><option>//form[@id='new_supracategoria']/div[6]/textarea</option><option>//textarea</option></datalist></td><td>bbb</td>
+</tr>
+<tr><td>clickAt</td><td>name=commit<datalist><option>name=commit</option><option>css=input[name="commit"]</option><option>//input[@name='commit']</option><option>//form[@id='new_supracategoria']/div[9]/input</option><option>//div[9]/input</option></datalist></td><td>39,5</td>
+</tr>
+<tr><td>chooseOkOnNextConfirmation</td><td><datalist><option></option></datalist></td><td></td>
+</tr>
+<tr><td>clickAt</td><td>link=Eliminar<datalist><option>link=Eliminar</option><option>css=a.btn.btn-danger</option><option>//a[contains(text(),'Eliminar')]</option><option>xpath=(//a[contains(@href, '/admin/supracategorias/48')])[2]</option><option>//a[3]</option></datalist></td><td>59,24</td>
+</tr>
+<tr><td>assertText</td><td>css=h1<datalist><option>css=h1</option><option>//h1</option></datalist></td><td>Supracategorias</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
 <tr><td rowspan="1" colspan="3">tabla-tipo-de-actividad</td></tr>
 </thead>
 <tbody>
@@ -1974,11 +2486,11 @@
 </tr>
 <tr><td>clickAt</td><td>link=Tipos de actividad<datalist><option>link=Tipos de actividad</option><option>//a[contains(text(),'Tipos de actividad')]</option><option>//a[contains(@href, 'admin/actividadtipos')]</option><option>//li[46]/a</option></datalist></td><td>92,6</td>
 </tr>
+<tr><td>pause</td><td><datalist><option></option></datalist></td><td>1000</td>
+</tr>
 <tr><td>clickAt</td><td>css=a.btn.btn-primary<datalist><option>css=a.btn.btn-primary</option><option>xpath=(//a[contains(text(),'Nuevo')])[2]</option><option>//a[contains(@href, '/admin/actividadtipos/nueva')]</option><option>//div/a</option></datalist></td><td>37,19</td>
 </tr>
 <tr><td>clickAt</td><td>css=a.btn.btn-primary<datalist><option>css=a.btn.btn-primary</option><option>xpath=(//a[contains(text(),'Nuevo')])[2]</option><option>//a[contains(@href, '/admin/actividadtipos/nueva')]</option><option>//div/a</option></datalist></td><td>44,14</td>
-</tr>
-<tr><td>clickAt</td><td>id=actividadtipo_nombre<datalist><option>id=actividadtipo_nombre</option><option>name=actividadtipo[nombre]</option><option>css=#actividadtipo_nombre</option><option>//input[@id='actividadtipo_nombre']</option><option>//form[@id='edit_actividadtipo_117']/div[2]/input</option><option>//div[2]/input</option></datalist></td><td></td>
 </tr>
 <tr><td>clickAt</td><td>id=actividadtipo_nombre<datalist><option>id=actividadtipo_nombre</option><option>name=actividadtipo[nombre]</option><option>css=#actividadtipo_nombre</option><option>//input[@id='actividadtipo_nombre']</option><option>//form[@id='edit_actividadtipo_117']/div[2]/input</option><option>//div[2]/input</option></datalist></td><td></td>
 </tr>
@@ -1995,6 +2507,40 @@
 <tr><td>clickAt</td><td>link=Eliminar<datalist><option>link=Eliminar</option><option>css=a.btn.btn-danger</option><option>//a[contains(text(),'Eliminar')]</option><option>xpath=(//a[contains(@href, '/admin/actividadtipos/104')])[2]</option><option>//a[3]</option></datalist></td><td>40,24</td>
 </tr>
 <tr><td>assertText</td><td>css=h1<datalist><option>css=h1</option><option>//h1</option></datalist></td><td>Tipos de actividad</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">tabla-tipo-de-actor-social</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://colombia.sjrlac.info:5100/<datalist><option>http://colombia.sjrlac.info:5100/</option></datalist></td><td></td>
+</tr>
+<tr><td>clickAt</td><td>link=Administrar<datalist><option>link=Administrar</option><option>//a[contains(text(),'Administrar')]</option><option>xpath=(//a[contains(@href, '#')])[6]</option><option>//ul[2]/li[2]/a</option></datalist></td><td>33,20</td>
+</tr>
+<tr><td>clickAt</td><td>link=Tablas Básicas<datalist><option>link=Tablas Básicas</option><option>//a[contains(text(),'Tablas Básicas')]</option><option>//a[contains(@href, '/tablasbasicas')]</option><option>//ul[2]/li[2]/ul/li[4]/a</option></datalist></td><td>49,13</td>
+</tr>
+<tr><td>clickAt</td><td>link=Tipos de actor social<datalist><option>link=Tipos de actor social</option><option>//a[contains(text(),'Tipos de actor social')]</option><option>//a[contains(@href, 'admin/tiposactorsocial')]</option><option>//li[51]/a</option></datalist></td><td>98,6</td>
+</tr>
+<tr><td>pause</td><td><datalist><option></option></datalist></td><td>1000</td>
+</tr>
+<tr><td>clickAt</td><td>css=a.btn.btn-primary<datalist><option>css=a.btn.btn-primary</option><option>xpath=(//a[contains(text(),'Nuevo')])[2]</option><option>//a[contains(@href, '/admin/tiposactorsocial/nueva')]</option><option>//div[2]/a</option></datalist></td><td>39,20</td>
+</tr>
+<tr><td>clickAt</td><td>id=tipoactorsocial_nombre<datalist><option>id=tipoactorsocial_nombre</option><option>name=tipoactorsocial[nombre]</option><option>css=#tipoactorsocial_nombre</option><option>//input[@id='tipoactorsocial_nombre']</option><option>//form[@id='new_tipoactorsocial']/div[2]/input</option><option>//div[2]/input</option></datalist></td><td>119,22</td>
+</tr>
+<tr><td>type</td><td>id=tipoactorsocial_nombre<datalist><option>id=tipoactorsocial_nombre</option><option>name=tipoactorsocial[nombre]</option><option>css=#tipoactorsocial_nombre</option><option>//input[@id='tipoactorsocial_nombre']</option><option>//form[@id='new_tipoactorsocial']/div[2]/input</option><option>//div[2]/input</option></datalist></td><td>aaa</td>
+</tr>
+<tr><td>clickAt</td><td>id=tipoactorsocial_observaciones<datalist><option>id=tipoactorsocial_observaciones</option><option>name=tipoactorsocial[observaciones]</option><option>css=#tipoactorsocial_observaciones</option><option>//textarea[@id='tipoactorsocial_observaciones']</option><option>//form[@id='new_tipoactorsocial']/div[3]/textarea</option><option>//textarea</option></datalist></td><td>20,14</td>
+</tr>
+<tr><td>type</td><td>id=tipoactorsocial_observaciones<datalist><option>id=tipoactorsocial_observaciones</option><option>name=tipoactorsocial[observaciones]</option><option>css=#tipoactorsocial_observaciones</option><option>//textarea[@id='tipoactorsocial_observaciones']</option><option>//form[@id='new_tipoactorsocial']/div[3]/textarea</option><option>//textarea</option></datalist></td><td>bbb</td>
+</tr>
+<tr><td>clickAt</td><td>name=commit<datalist><option>name=commit</option><option>css=input[name="commit"]</option><option>//input[@name='commit']</option><option>//form[@id='new_tipoactorsocial']/div[6]/input</option><option>//div[6]/input</option></datalist></td><td>38,22</td>
+</tr>
+<tr><td>chooseOkOnNextConfirmation</td><td><datalist><option></option></datalist></td><td></td>
+</tr>
+<tr><td>clickAt</td><td>link=Eliminar<datalist><option>link=Eliminar</option><option>css=a.btn.btn-danger</option><option>//a[contains(text(),'Eliminar')]</option><option>xpath=(//a[contains(@href, '/admin/tiposactorsocial/102')])[2]</option><option>//div[4]/a</option></datalist></td><td>35,9</td>
+</tr>
+<tr><td>assertText</td><td>css=h1<datalist><option>css=h1</option><option>//h1</option></datalist></td><td>Tipos de actor social</td>
 </tr>
 </tbody></table>
 <table cellpadding="1" cellspacing="1" border="1">
@@ -2018,6 +2564,8 @@
 	<td></td>
 </tr>
 <tr><td>clickAt</td><td>link=Tipos de centros poblados<datalist><option>link=Tipos de centros poblados</option><option>//a[contains(text(),'Tipos de centros poblados')]</option><option>//a[contains(@href, 'admin/tclases')]</option><option>//li[47]/a</option></datalist></td><td>99,8</td>
+</tr>
+<tr><td>pause</td><td><datalist><option></option></datalist></td><td>1000</td>
 </tr>
 <tr><td>clickAt</td><td>css=a.btn.btn-primary<datalist><option>css=a.btn.btn-primary</option><option>xpath=(//a[contains(text(),'Nuevo')])[2]</option><option>//a[contains(@href, '/admin/tclases/nueva')]</option><option>//div/a</option></datalist></td><td>47,22</td>
 </tr>
@@ -2069,6 +2617,8 @@
 	<td>link=Tipos de desplazamiento<datalist><option>link=Tipos de desplazamiento</option></datalist></td>
 	<td></td>
 </tr>
+<tr><td>pause</td><td><datalist><option></option></datalist></td><td>1000</td>
+</tr>
 <tr><td>clickAt</td><td>xpath=(//a[contains(text(),'Nuevo')])[2]<datalist><option>xpath=(//a[contains(text(),'Nuevo')])[2]</option><option>//a[contains(@href, '/admin/tiposdesp/nueva')]</option><option>//div/a</option></datalist></td><td>38,17</td>
 </tr>
 <tr>
@@ -2118,6 +2668,8 @@
 </tr>
 <tr><td>clickAt</td><td>link=Tipos de documentos<datalist><option>link=Tipos de documentos</option><option>//a[contains(text(),'Tipos de documentos')]</option><option>//a[contains(@href, 'admin/tdocumentos')]</option><option>//li[49]/a</option></datalist></td><td>118,10</td>
 </tr>
+<tr><td>pause</td><td><datalist><option></option></datalist></td><td>1000</td>
+</tr>
 <tr><td>clickAt</td><td>css=a.btn.btn-primary<datalist><option>css=a.btn.btn-primary</option><option>xpath=(//a[contains(text(),'Nuevo')])[2]</option><option>//a[contains(@href, '/admin/tdocumentos/nueva')]</option><option>//div/a</option></datalist></td><td>38,14</td>
 </tr>
 <tr><td>clickAt</td><td>id=tdocumento_nombre<datalist><option>id=tdocumento_nombre</option><option>name=tdocumento[nombre]</option><option>css=#tdocumento_nombre</option><option>//input[@id='tdocumento_nombre']</option><option>//form[@id='new_tdocumento']/div[2]/input</option><option>//div[2]/input</option></datalist></td><td>21,12</td>
@@ -2152,6 +2704,8 @@
 <tr><td>clickAt</td><td>link=Tablas Básicas<datalist><option>link=Tablas Básicas</option><option>//a[contains(text(),'Tablas Básicas')]</option><option>//a[contains(@href, '/tablasbasicas')]</option><option>//ul[2]/li[2]/ul/li[4]/a</option></datalist></td><td>109,10</td>
 </tr>
 <tr><td>clickAt</td><td>link=Tipos de relaciones familiares<datalist><option>link=Tipos de relaciones familiares</option><option>//a[contains(text(),'Tipos de relaciones familiares')]</option><option>//a[contains(@href, 'admin/trelaciones')]</option><option>//li[50]/a</option></datalist></td><td>60,10</td>
+</tr>
+<tr><td>pause</td><td><datalist><option></option></datalist></td><td>1000</td>
 </tr>
 <tr><td>clickAt</td><td>css=a.btn.btn-primary<datalist><option>css=a.btn.btn-primary</option><option>xpath=(//a[contains(text(),'Nuevo')])[2]</option><option>//a[contains(@href, '/admin/trelaciones/nueva')]</option><option>//div/a</option></datalist></td><td>29,19</td>
 </tr>
@@ -2202,6 +2756,8 @@
 </tr>
 <tr><td>clickAt</td><td>link=Tipos de sitios<datalist><option>link=Tipos de sitios</option><option>//a[contains(text(),'Tipos de sitios')]</option><option>//a[contains(@href, 'admin/tsitios')]</option><option>//li[51]/a</option></datalist></td><td>29,8</td>
 </tr>
+<tr><td>pause</td><td><datalist><option></option></datalist></td><td>1000</td>
+</tr>
 <tr><td>clickAt</td><td>css=a.btn.btn-primary<datalist><option>css=a.btn.btn-primary</option><option>xpath=(//a[contains(text(),'Nuevo')])[2]</option><option>//a[contains(@href, '/admin/tsitios/nueva')]</option><option>//div[2]/a</option></datalist></td><td>39,21</td>
 </tr>
 <tr><td>clickAt</td><td>id=tsitio_nombre<datalist><option>id=tsitio_nombre</option><option>name=tsitio[nombre]</option><option>css=#tsitio_nombre</option><option>//input[@id='tsitio_nombre']</option><option>//form[@id='new_tsitio']/div[2]/input</option><option>//div[2]/input</option></datalist></td><td>140,5</td>
@@ -2245,6 +2801,8 @@
 	<td>click</td>
 	<td>link=Tipos de Violencia<datalist><option>link=Tipos de Violencia</option></datalist></td>
 	<td></td>
+</tr>
+<tr><td>pause</td><td><datalist><option></option></datalist></td><td>1000</td>
 </tr>
 <tr><td>clickAt</td><td>xpath=(//a[contains(text(),'Nuevo')])[2]<datalist><option>xpath=(//a[contains(text(),'Nuevo')])[2]</option><option>//a[contains(@href, '/admin/tviolencias/nueva')]</option><option>//div/a</option></datalist></td><td>33,21</td>
 </tr>

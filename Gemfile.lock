@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: 6432e758cdc638d8a28b4e616c7fe947eb9d972e
+  revision: a1c732425a89090702a0eb001ab75536853d0eb3
   specs:
     cor1440_gen (1.0b2)
       devise
@@ -12,7 +12,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 725ef2288d8ef4c35299b3b4e837bd3a0fdb8003
+  revision: 7b8e910515b468b5af4ca329d0d802a851b6db32
   specs:
     heb412_gen (1.0.a1)
       chosen-rails
@@ -22,8 +22,16 @@ GIT
       sip
 
 GIT
+  remote: https://github.com/pasosdeJesus/mr519_gen.git
+  revision: d5b5ae211b4971f2327d3c3728f7202e25cb42ea
+  specs:
+    mr519_gen (0.1.0)
+      rails (~> 5.2.2, >= 5.2.2)
+      sip
+
+GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: 53b91ab29fdec9b31db6319a851030f3782bd5c2
+  revision: 538225593685398b6cf34fa0771248d10f02aadf
   specs:
     sal7711_gen (1.0.b1)
       rails
@@ -31,7 +39,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: d2dd7a21dc671dae5c07ad3d5bfed655e639dbe6
+  revision: b43e00639c6301197b841f91c41e336364f17bb0
   specs:
     sal7711_web (1.0.a3)
       rails
@@ -39,7 +47,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 349c1fd14e9953566dd6209ece06be298b6d3fb3
+  revision: 6866add3fd9d8eb6720b142f28446458e6e3653e
   specs:
     sip (2.0.b5)
       bootstrap-datepicker-rails
@@ -61,7 +69,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: b981d11ccad9e59eed6a1863d33e87ab6f0aa5e3
+  revision: e23e7b4338cf4fc962d18ae3ae7c049239de0f97
   specs:
     sivel2_gen (2.0b8)
       devise
@@ -70,7 +78,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: e6b16aeccd89e4f3b943a0ce5efdda2d2a1175a8
+  revision: 594ae99f64eea9735b930aef67993ed80a332a78
   specs:
     sivel2_sjr (2.0.b1)
       rails
@@ -135,7 +143,7 @@ GEM
       io-like (~> 0.3.0)
     arel (9.0.0)
     bcrypt (3.1.12)
-    bigdecimal (1.3.5)
+    bigdecimal (1.4.2)
     bindex (0.5.0)
     binding_of_caller (0.8.0)
       debug_inspector (>= 0.0.1)
@@ -418,7 +426,7 @@ PLATFORMS
 
 DEPENDENCIES
   bcrypt
-  bigdecimal (= 1.3.5)
+  bigdecimal
   bootsnap (>= 1.1.0)
   bootstrap-datepicker-rails
   cancancan
@@ -441,6 +449,7 @@ DEPENDENCIES
   libxml-ruby
   minitest-rails-capybara
   minitest-reporters
+  mr519_gen!
   odf-report
   paperclip
   pg

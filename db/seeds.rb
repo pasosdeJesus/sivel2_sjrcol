@@ -10,6 +10,10 @@ motor.each do |m|
     Sip::carga_semillas_sql(conexion, m, :datos)
 end
 
+# Extrañamente borrar el search_path y falla el siguiente o
+# las migraciones
+conexion.execute('SET search_path TO "$user", public')
+
 # Usuario inicial: sjrcol con clave sjrcol123
 conexion.execute("INSERT INTO usuario 
 	(nusuario, email, encrypted_password, password, 

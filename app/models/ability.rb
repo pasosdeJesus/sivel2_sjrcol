@@ -95,6 +95,7 @@ class Ability < Sivel2Sjr::Ability
       Sivel2Sjr::Ability::BASICAS_PROPIAS + 
       BASICAS_PROPIAS - [
         ['Sip', 'grupo'],
+        ['Sip', 'perfilactorsocial'],
         ['Sivel2Gen', 'filiacion'],
         ['Sivel2Gen', 'frontera'],
         ['Sivel2Gen', 'iglesia'],

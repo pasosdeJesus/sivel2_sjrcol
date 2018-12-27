@@ -5,7 +5,7 @@ gem "rails", '~> 5.2.1'
 
 gem "rails-i18n"
 
-gem 'bigdecimal', '1.3.5'
+gem 'bigdecimal'
 
 gem 'bootsnap', '>=1.1.0', require: false
 
@@ -100,6 +100,10 @@ gem 'sip', git: "https://github.com/pasosdeJesus/sip.git"
 # Motor Heb412_gen
 gem 'heb412_gen', git: "https://github.com/pasosdeJesus/heb412_gen.git"
 #gem 'heb412_gen', path: '../heb412_gen'
+
+# Motor formularios y encuestas
+gem 'mr519_gen', git: "https://github.com/pasosdeJesus/mr519_gen.git"
+#gem 'mr519_gen', path: '../mr519_gen'
 
 # Motor de SIVeL 2
 gem 'sivel2_gen', git: "https://github.com/pasosdeJesus/sivel2_gen.git"

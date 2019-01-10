@@ -98,6 +98,9 @@ es:
       "sip/lineaactorsocial":
         Lineaactorsocial: Línea de trabajo del actor social
         Lineasactorsocial: Línea de trabajo del actor social
+      "sip/sectoractor":
+        Sectoractor: Población relacionada con actor social
+        Sectoresactores: Poblaciones relacionadas con actor social
       "sip/tipoactorsocial":
         Tipoactorsocial: Tipo de actor social
         Tiposactorsocial: Tipos de actor social
@@ -121,7 +124,9 @@ es:
         Aslegal: Asesoría Jurídica
         Aslegales: Asesorías Jurídicas
       "sivel2_sjr/ayudaestado": 
-        "{:derechos_ids=>[]}": Derechos relacionados
+        "{:derecho_ids=>[]}": Derechos relacionados
+      "sivel2_sjr/ayudasjr": 
+        "{:derecho_ids=>[]}": Derechos relacionados
       "sivel2_sjr/casosjr": 
         memo1612: Descripción para Resolución 1612
         estatus_refugio: Estatús del refugio
@@ -138,9 +143,12 @@ es:
       "sivel2_sjr/motivosjr": 
         Motivosjr: Servicio y Asesoria del SJR
         Motivossjr: Servicios y Asesorias del SJR
+        "{:derecho_ids=>[]}": Derechos relacionados
       "sivel2_sjr/personadesea": 
         Personadesea: Persona desea
         Personadeseas: Personas desean
+      "sivel2_sjr/progestado": 
+        "{:derecho_ids=>[]}": Derechos relacionados
       "sivel2_sjr/respuesta": 
         accionesder: Acciones de la persona frente a derechos vulnerados
         aslegal: Asesoría jurídica

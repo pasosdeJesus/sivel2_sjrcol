@@ -22,6 +22,14 @@ GIT
       sip
 
 GIT
+  remote: https://github.com/pasosdeJesus/mr519_gen.git
+  revision: 204f6e6f82355d6c983ff8229619d5d4be11196d
+  specs:
+    mr519_gen (0.1.0)
+      rails (~> 5.2.2, >= 5.2.2)
+      sip
+
+GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
   revision: b0d58db5c5eb098d6ffd722c17c6219264067624
   specs:
@@ -135,6 +143,7 @@ GEM
       io-like (~> 0.3.0)
     arel (9.0.0)
     bcrypt (3.1.12)
+    bigdecimal (1.4.3)
     bindex (0.5.0)
     binding_of_caller (0.8.0)
       debug_inspector (>= 0.0.1)
@@ -417,6 +426,7 @@ PLATFORMS
 
 DEPENDENCIES
   bcrypt
+  bigdecimal
   bootsnap (>= 1.1.0)
   bootstrap-datepicker-rails
   cancancan
@@ -439,6 +449,7 @@ DEPENDENCIES
   libxml-ruby
   minitest-rails-capybara
   minitest-reporters
+  mr519_gen!
   odf-report
   paperclip
   pg
@@ -475,4 +486,4 @@ DEPENDENCIES
   will_paginate
 
 BUNDLED WITH
-   1.17.3
+   2.0.1

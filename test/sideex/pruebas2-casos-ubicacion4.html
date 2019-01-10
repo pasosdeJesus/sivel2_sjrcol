@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+	<title>pruebas2-casos-ubicacion4</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">caso-ubicacion-pais</td></tr>
+</thead>
+<tbody>
+<tr><td>clickAt</td><td>link=Editar<datalist><option>link=Editar</option><option>//a[contains(text(),'Editar')]</option><option>//a[contains(@href, '/casos/341/edita')]</option><option>//a[2]</option></datalist></td><td>29,7</td>
+</tr>
+<tr><td>clickAt</td><td>link=Ubicación<datalist><option>link=Ubicación</option><option>//a[contains(text(),'Ubicación')]</option><option>//form[@id='edit_caso_2512']/div/div[2]/ul/li[4]/a</option><option>//a[contains(@href, '#ubicacion')]</option><option>//form/div/div[2]/ul/li[4]/a</option></datalist></td><td>37,16</td>
+</tr>
+<tr><td>pause</td><td><datalist><option></option><option>$('[type=number]').removeAttr('type')</option><option>$('#categoria_id').removeAttr('type')</option><option>$('#pais_codiso').removeAttr('type')</option></datalist></td><td>500</td>
+</tr>
+<tr><td>clickAt</td><td>link=Añadir Ubicación<datalist><option>link=Añadir Ubicación</option><option>css=#ubicacion &gt; div.links &gt; a.btn-primary.add_fields</option><option>//a[contains(text(),'Añadir Ubicación')]</option><option>//div[@id='ubicacion']/div/a</option><option>xpath=(//a[contains(@href, '#')])[22]</option><option>//div[4]/div/a</option></datalist></td><td>71,6</td>
+</tr>
+<tr><td>select</td><td>//div[4]/div/div/div/select<datalist><option>id=caso_ubicacion_attributes_1106_id_pais</option><option>name=caso[ubicacion_attributes][1106][id_pais]</option><option>css=#caso_ubicacion_attributes_1106_id_pais</option><option>//select[@id='caso_ubicacion_attributes_1106_id_pais']</option><option>//div[@id='ubicacion']/div/div/div/select</option><option>//div[4]/div/div/div/select</option></datalist></td><td>label=COLOMBIA</td>
+</tr>
+<tr><td>clickAt</td><td>//div[4]/div/div/div/select<datalist><option>id=caso_ubicacion_attributes_1106_id_pais</option><option>name=caso[ubicacion_attributes][1106][id_pais]</option><option>css=#caso_ubicacion_attributes_1106_id_pais</option><option>//select[@id='caso_ubicacion_attributes_1106_id_pais']</option><option>//div[@id='ubicacion']/div/div/div/select</option><option>//div[4]/div/div/div/select</option></datalist></td><td>96,14</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">caso-ubicacion-departamento</td></tr>
+</thead>
+<tbody>
+<tr><td>select</td><td>//div[4]/div/div/div[2]/select<datalist><option>id=caso_ubicacion_attributes_1107_id_departamento</option><option>name=caso[ubicacion_attributes][1107][id_departamento]</option><option>css=#caso_ubicacion_attributes_1107_id_departamento</option><option>//select[@id='caso_ubicacion_attributes_1107_id_departamento']</option><option>//div[@id='ubicacion']/div/div/div[2]/select</option><option>//div[4]/div/div/div[2]/select</option></datalist></td><td>label=GUAINÍA</td>
+</tr>
+<tr><td>clickAt</td><td>//div[4]/div/div/div[2]/select<datalist><option>id=caso_ubicacion_attributes_1107_id_departamento</option><option>name=caso[ubicacion_attributes][1107][id_departamento]</option><option>css=#caso_ubicacion_attributes_1107_id_departamento</option><option>//select[@id='caso_ubicacion_attributes_1107_id_departamento']</option><option>//div[@id='ubicacion']/div/div/div[2]/select</option><option>//div[4]/div/div/div[2]/select</option></datalist></td><td>-68,-335</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">caso-ubicacion-municipio</td></tr>
+</thead>
+<tbody>
+<tr><td>clickAt</td><td>//div[3]/select<datalist><option>id=caso_ubicacion_attributes_27_id_municipio</option><option>name=caso[ubicacion_attributes][27][id_municipio]</option><option>css=#caso_ubicacion_attributes_27_id_municipio</option><option>//select[@id='caso_ubicacion_attributes_27_id_municipio']</option><option>//div[@id='ubicacion']/div/div/div[3]/select</option><option>//div[3]/select</option></datalist></td><td>-75,-402</td>
+</tr>
+<tr><td>select</td><td>//div[3]/select<datalist><option>id=caso_ubicacion_attributes_27_id_municipio</option><option>name=caso[ubicacion_attributes][27][id_municipio]</option><option>css=#caso_ubicacion_attributes_27_id_municipio</option><option>//select[@id='caso_ubicacion_attributes_27_id_municipio']</option><option>//div[@id='ubicacion']/div/div/div[3]/select</option><option>//div[3]/select</option></datalist></td><td>label=PANA PANA</td>
+</tr>
+<tr><td>clickAt</td><td>//div[3]/select<datalist><option>id=caso_ubicacion_attributes_27_id_municipio</option><option>name=caso[ubicacion_attributes][27][id_municipio]</option><option>css=#caso_ubicacion_attributes_27_id_municipio</option><option>//select[@id='caso_ubicacion_attributes_27_id_municipio']</option><option>//div[@id='ubicacion']/div/div/div[3]/select</option><option>//div[3]/select</option></datalist></td><td>-75,-402</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">caso-ubicacion-centro-poblado</td></tr>
+</thead>
+<tbody>
+<tr><td>select</td><td>//div[4]/div/div/div[4]/select<datalist><option>id=caso_ubicacion_attributes_27_id_clase</option><option>name=caso[ubicacion_attributes][27][id_clase]</option><option>css=#caso_ubicacion_attributes_27_id_clase</option><option>//select[@id='caso_ubicacion_attributes_27_id_clase']</option><option>//div[@id='ubicacion']/div/div/div[4]/select</option><option>//div[4]/div/div/div[4]/select</option></datalist></td><td>label=CAMPO ALEGRE</td>
+</tr>
+<tr><td>clickAt</td><td>//div[4]/div/div/div[4]/select<datalist><option>id=caso_ubicacion_attributes_27_id_clase</option><option>name=caso[ubicacion_attributes][27][id_clase]</option><option>css=#caso_ubicacion_attributes_27_id_clase</option><option>//select[@id='caso_ubicacion_attributes_27_id_clase']</option><option>//div[@id='ubicacion']/div/div/div[4]/select</option><option>//div[4]/div/div/div[4]/select</option></datalist></td><td>-75,-469</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">caso-ubicacion-lugar</td></tr>
+</thead>
+<tbody>
+<tr><td>clickAt</td><td>//div[4]/div/div/div[5]/input<datalist><option>id=caso_ubicacion_attributes_27_lugar</option><option>name=caso[ubicacion_attributes][27][lugar]</option><option>css=#caso_ubicacion_attributes_27_lugar</option><option>//input[@id='caso_ubicacion_attributes_27_lugar']</option><option>//div[@id='ubicacion']/div/div/div[5]/input</option><option>//div[4]/div/div/div[5]/input</option></datalist></td><td>120,19</td>
+</tr>
+<tr><td>type</td><td>//div[4]/div/div/div[5]/input<datalist><option>id=caso_ubicacion_attributes_27_lugar</option><option>name=caso[ubicacion_attributes][27][lugar]</option><option>css=#caso_ubicacion_attributes_27_lugar</option><option>//input[@id='caso_ubicacion_attributes_27_lugar']</option><option>//div[@id='ubicacion']/div/div/div[5]/input</option><option>//div[4]/div/div/div[5]/input</option></datalist></td><td>vereda</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">caso-ubicacion-sitio</td></tr>
+</thead>
+<tbody>
+<tr><td>clickAt</td><td>//div[@id='ubicacion']/div/div/div[6]/input<datalist><option>id=caso_ubicacion_attributes_0_sitio</option><option>name=caso[ubicacion_attributes][0][sitio]</option><option>css=#caso_ubicacion_attributes_0_sitio</option><option>//input[@id='caso_ubicacion_attributes_0_sitio']</option><option>//div[@id='ubicacion']/div/div/div[6]/input</option><option>//div[6]/input</option></datalist></td><td>50,17</td>
+</tr>
+<tr><td>type</td><td>//div[@id='ubicacion']/div/div/div[6]/input<datalist><option>id=caso_ubicacion_attributes_0_sitio</option><option>name=caso[ubicacion_attributes][0][sitio]</option><option>css=#caso_ubicacion_attributes_0_sitio</option><option>//input[@id='caso_ubicacion_attributes_0_sitio']</option><option>//div[@id='ubicacion']/div/div/div[6]/input</option><option>//div[6]/input</option></datalist></td><td>escuela</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">caso-ubicacion-tipo-de-sitio</td></tr>
+</thead>
+<tbody>
+<tr><td>select</td><td>//div[@id='ubicacion']/div/div/div[9]/select<datalist><option>id=caso_ubicacion_attributes_0_id_tsitio</option><option>name=caso[ubicacion_attributes][0][id_tsitio]</option><option>css=#caso_ubicacion_attributes_0_id_tsitio</option><option>//select[@id='caso_ubicacion_attributes_0_id_tsitio']</option><option>//div[@id='ubicacion']/div/div/div[9]/select</option><option>//div[9]/select</option></datalist></td><td>label=URBANO Y RURAL</td>
+</tr>
+<tr><td>clickAt</td><td>//div[@id='ubicacion']/div/div/div[9]/select<datalist><option>id=caso_ubicacion_attributes_0_id_tsitio</option><option>name=caso[ubicacion_attributes][0][id_tsitio]</option><option>css=#caso_ubicacion_attributes_0_id_tsitio</option><option>//select[@id='caso_ubicacion_attributes_0_id_tsitio']</option><option>//div[@id='ubicacion']/div/div/div[9]/select</option><option>//div[9]/select</option></datalist></td><td>-75,-380</td>
+</tr>
+<tr><td>clickAt</td><td>link=Añadir Ubicación<datalist><option>link=Añadir Ubicación</option><option>css=#ubicacion &gt; div.links &gt; a.btn-primary.add_fields</option><option>//a[contains(text(),'Añadir Ubicación')]</option><option>//div[@id='ubicacion']/div[2]/a</option><option>xpath=(//a[contains(@href, '#')])[22]</option><option>//div[4]/div[2]/a</option></datalist></td><td>68,5</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">caso-ubicacion-pais2</td></tr>
+</thead>
+<tbody>
+<tr><td>select</td><td>//div[@id='ubicacion']/div[2]/div/div/select<datalist><option>id=caso_ubicacion_attributes_28_id_pais</option><option>name=caso[ubicacion_attributes][28][id_pais]</option><option>css=#caso_ubicacion_attributes_28_id_pais</option><option>//select[@id='caso_ubicacion_attributes_28_id_pais']</option><option>//div[@id='ubicacion']/div[2]/div/div/select</option><option>//div[4]/div[2]/div/div/select</option></datalist></td><td>label=COLOMBIA</td>
+</tr>
+<tr><td>clickAt</td><td>//div[@id='ubicacion']/div[2]/div/div/select<datalist><option>id=caso_ubicacion_attributes_28_id_pais</option><option>name=caso[ubicacion_attributes][28][id_pais]</option><option>css=#caso_ubicacion_attributes_28_id_pais</option><option>//select[@id='caso_ubicacion_attributes_28_id_pais']</option><option>//div[@id='ubicacion']/div[2]/div/div/select</option><option>//div[4]/div[2]/div/div/select</option></datalist></td><td>114,24</td>
+</tr>
+<tr><td>mouseOver</td><td>link=Documentos<datalist><option>link=Documentos</option><option>css=ul.nav.navbar-nav.navbar-right &gt; li.dropdown &gt; a.dropdown-toggle</option><option>//a[contains(text(),'Documentos')]</option><option>xpath=(//a[contains(@href, '#')])[5]</option><option>//ul[2]/li/a</option></datalist></td><td></td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">caso-ubicacion-departamento2</td></tr>
+</thead>
+<tbody>
+<tr><td>select</td><td>//div[@id='ubicacion']/div[2]/div/div[2]/select<datalist><option>id=caso_ubicacion_attributes_28_id_departamento</option><option>name=caso[ubicacion_attributes][28][id_departamento]</option><option>css=#caso_ubicacion_attributes_28_id_departamento</option><option>//select[@id='caso_ubicacion_attributes_28_id_departamento']</option><option>//div[@id='ubicacion']/div[2]/div/div[2]/select</option><option>//div[2]/div/div[2]/select</option></datalist></td><td>label=CUNDINAMARCA</td>
+</tr>
+<tr><td>clickAt</td><td>//div[@id='ubicacion']/div[2]/div/div[2]/select<datalist><option>id=caso_ubicacion_attributes_28_id_departamento</option><option>name=caso[ubicacion_attributes][28][id_departamento]</option><option>css=#caso_ubicacion_attributes_28_id_departamento</option><option>//select[@id='caso_ubicacion_attributes_28_id_departamento']</option><option>//div[@id='ubicacion']/div[2]/div/div[2]/select</option><option>//div[2]/div/div[2]/select</option></datalist></td><td>-75,-472</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">caso-ubicacion-municipio2</td></tr>
+</thead>
+<tbody>
+<tr><td>select</td><td>//div[@id='ubicacion']/div[2]/div/div[3]/select<datalist><option>id=caso_ubicacion_attributes_28_id_municipio</option><option>name=caso[ubicacion_attributes][28][id_municipio]</option><option>css=#caso_ubicacion_attributes_28_id_municipio</option><option>//select[@id='caso_ubicacion_attributes_28_id_municipio']</option><option>//div[@id='ubicacion']/div[2]/div/div[3]/select</option><option>//div[2]/div/div[3]/select</option></datalist></td><td>label=ARBELÁEZ</td>
+</tr>
+<tr><td>clickAt</td><td>//div[@id='ubicacion']/div[2]/div/div[3]/select<datalist><option>id=caso_ubicacion_attributes_28_id_municipio</option><option>name=caso[ubicacion_attributes][28][id_municipio]</option><option>css=#caso_ubicacion_attributes_28_id_municipio</option><option>//select[@id='caso_ubicacion_attributes_28_id_municipio']</option><option>//div[@id='ubicacion']/div[2]/div/div[3]/select</option><option>//div[2]/div/div[3]/select</option></datalist></td><td>-75,-327</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">caso-ubicacion-centro-poblado</td></tr>
+</thead>
+<tbody>
+<tr><td>select</td><td>//div[2]/div/div[4]/select<datalist><option>id=caso_ubicacion_attributes_1_id_clase</option><option>name=caso[ubicacion_attributes][1][id_clase]</option><option>css=#caso_ubicacion_attributes_1_id_clase</option><option>//select[@id='caso_ubicacion_attributes_1_id_clase']</option><option>//div[@id='ubicacion']/div[2]/div/div[4]/select</option><option>//div[2]/div/div[4]/select</option></datalist></td><td>label=TISINCE</td>
+</tr>
+<tr><td>clickAt</td><td>//div[2]/div/div[4]/select<datalist><option>id=caso_ubicacion_attributes_1_id_clase</option><option>name=caso[ubicacion_attributes][1][id_clase]</option><option>css=#caso_ubicacion_attributes_1_id_clase</option><option>//select[@id='caso_ubicacion_attributes_1_id_clase']</option><option>//div[@id='ubicacion']/div[2]/div/div[4]/select</option><option>//div[2]/div/div[4]/select</option></datalist></td><td>-75,-191</td>
+</tr>
+<tr><td>clickAt</td><td>name=commit<datalist><option>name=commit</option><option>css=input[name="commit"]</option><option>//input[@name='commit']</option><option>//form[@id='edit_caso_344']/div[2]/input</option><option>//div[2]/input</option></datalist></td><td>59,17</td>
+</tr>
+</tbody></table>
+</body>
+</html>

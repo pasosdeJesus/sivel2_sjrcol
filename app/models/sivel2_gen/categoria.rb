@@ -4,13 +4,11 @@ require 'sivel2_sjr/concerns/models/categoria'
 class Sivel2Gen::Categoria < ActiveRecord::Base
   include Sivel2Sjr::Concerns::Models::Categoria
   
-  has_many :categoria_desplazamiento, 
-    class_name: "Sivel2Sjr::CategoriaDesplazamiento",  
+  has_and_belongs_to_many :desplazamiento, 
+    class_name: 'Sivel2Sjr::Desplazamiento',
     foreign_key: :categoria_id, 
-    dependent: :delete_all
-  has_many :desplazamiento, 
-    through: :categoria_desplazamiento,
-    class_name: "Sivel2Sjr::Desplazamiento"
+    association_foreign_key: "desplazamiento_id",
+    join_table: 'sivel2_sjr_categoria_desplazamiento'
 
 end
 

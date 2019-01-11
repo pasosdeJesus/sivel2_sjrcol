@@ -83,6 +83,9 @@
         <% if can? :manage, ::Usuario %>
           <%= menu_item "Usuarios", main_app.usuarios_path %>
         <% end %>
+        <% if can? :manage, Mr519Gen::Formulario %>
+          <%= menu_item "Formularios", mr519_gen.formularios_path %>
+        <% end %>
         <% if current_usuario.rol == Ability::ROLADMIN || 
           current_usuario.rol == Ability::ROLDIR %>
           <%= menu_item "Tablas Básicas", sivel2_gen.tablasbasicas_path %>

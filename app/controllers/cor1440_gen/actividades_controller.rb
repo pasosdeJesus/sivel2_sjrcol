@@ -35,6 +35,7 @@ module Cor1440Gen
         :valorcampoact,
         :objetivo,
         :resultado, 
+        :actorsocial,
         :poblacion,
         :anexos
       ]

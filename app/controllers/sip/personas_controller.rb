@@ -1,39 +1,11 @@
 # encoding: UTF-8
 
-require 'sip/concerns/controllers/personas_controller'
+require 'cor1440_gen/concerns/controllers/personas_controller'
 
 module Sip
   class PersonasController < Heb412Gen::ModelosController
 
-    include Sip::Concerns::Controllers::PersonasController
-
-    def atributos_index
-      [ :id, 
-        :nombres,
-        :apellidos,
-        :tdocumento,
-        :numerodocumento,
-        :fechanac,
-        :sexo,
-        :municipio
-      ]
-    end
-
-    def atributos_show
-      [ :id, 
-        :nombres,
-        :apellidos,
-        :fechanac,
-        :sexo,
-        :pais,
-        :departamento,
-        :municipio,
-        :clase,
-        :nacionalde,
-        :tdocumento,
-        :numerodocumento
-      ]
-    end
+    include Cor1440Gen::Concerns::Controllers::PersonasController
 
 
     def atributos_form
@@ -45,25 +17,18 @@ module Sip
         @registro.datosbio =  @datosbio
       end
       a = atributos_show - [:id] +
-        [:datosbio]
+        [:datosbio, :caracterizaciones]
       return a
     end
 
-    def vistas_manejadas
-      ['Persona']
-    end
-
-    def index(c = nil)
-      super(c)
-    end
-
-    def listaparams
+    def lista_params
       atributos_form + [
         :id_pais,
         :id_departamento,
         :id_municipio,
         :id_clase,
-        :tdocumento_id,
+        :tdocumento_id 
+      ] + [
         :datosbio_attributes => [
           :afiliadoarl,
           :anioaprobacion,
@@ -90,6 +55,17 @@ module Sip
           :telefono,
           :tipocotizante
         ]
+      ] + [
+        "caracterizacionpersona_attributes" =>
+        [ :id,
+          "respuestafor_attributes" => [
+            :id,
+            "valorcampo_attributes" => [
+              :valor,
+              :campo_id,
+              :id
+            ]
+        ] ]
       ]
     end
 

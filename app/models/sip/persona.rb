@@ -28,6 +28,15 @@ module Sip
       self.dianac = p[2].to_i
     end
 
+    def presenta_nombre
+      ip = numerodocumento ? numerodocumento : ''
+      if tdocumento
+        ip = tdocumento.sigla + ":" + ip
+      end
+      r = nombres + " " + apellidos + 
+        " (" + ip + ")"
+    end
+
   end
 end
 

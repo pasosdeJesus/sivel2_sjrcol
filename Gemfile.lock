@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: a7bbb26eae4304ab16490a368196078296372649
+  revision: 1b32da21128d500e29d3d4cdc5f09015aa22a81e
   specs:
     cor1440_gen (1.0b2)
       devise
@@ -13,7 +13,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: fe51e4e301d7c4000930933dbd45e83660d8cb45
+  revision: a57da4a54eb6017412e42a367ac20fe0bee543c3
   specs:
     heb412_gen (1.0.a1)
       chosen-rails
@@ -24,7 +24,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/mr519_gen.git
-  revision: d000c8b0d85dbb6db25c05f76bfbc70daf22c1f3
+  revision: de47acb80428b0e38488f6c6919c6e7e987bd32a
   specs:
     mr519_gen (0.1.0)
       rails (~> 5.2.2, >= 5.2.2)
@@ -32,7 +32,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: b0d58db5c5eb098d6ffd722c17c6219264067624
+  revision: e7e9372668b90c22a9f32c80a4cb86a487c67c80
   specs:
     sal7711_gen (1.0.b1)
       rails
@@ -40,7 +40,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: 0add42dbd0013ca251d3efe2b8716807b35005ba
+  revision: 2452cec060626a369e2fb87c21252b03e9e1eaf4
   specs:
     sal7711_web (1.0.a3)
       rails
@@ -48,7 +48,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: dd5fc92abd3ef16d4db7e8edbacfa4c57e538bb7
+  revision: 7d77443506e75f212559d73be2e766378aa819fa
   specs:
     sip (2.0.b5)
       bootstrap-datepicker-rails
@@ -70,7 +70,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: ad7e616e9892af6b55f1c07680f63cb8e99a7cea
+  revision: f329363db894976c133eede0e2260d33e1a727c4
   specs:
     sivel2_gen (2.0b8)
       devise
@@ -79,7 +79,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 7e44a8241198da99f247f60d4b9251709673f591
+  revision: ab1e4316de1e5bc01c55f8b1d0976b21695d788c
   specs:
     sivel2_sjr (2.0.b1)
       rails
@@ -195,7 +195,7 @@ GEM
       railties (>= 4.1.0, < 6.0)
       responders
       warden (~> 1.2.3)
-    devise-i18n (1.7.0)
+    devise-i18n (1.7.1)
       devise (>= 4.5)
     docile (1.3.1)
     erubi (1.8.0)
@@ -267,7 +267,7 @@ GEM
     msgpack (1.2.6)
     multi_json (1.13.1)
     nio4r (2.3.1)
-    nokogiri (1.10.0)
+    nokogiri (1.10.1)
       mini_portile2 (~> 2.4.0)
     odf-report (0.5.2)
       nokogiri (>= 1.5.0)

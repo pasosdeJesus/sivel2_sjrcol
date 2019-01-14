@@ -79,6 +79,12 @@ module Cor1440Gen
       ]
     end
 
+    # GET /actividades/1/edit
+    def edit
+      edit_cor1440_gen
+      @listadoasistencia = true
+      render layout: 'application'
+    end
 
     def fila_comun(actividad)
       pobf = actividad.actividad_rangoedadac.map { |i| 

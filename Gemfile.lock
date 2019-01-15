@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: e4ddeaf45edaed5f5b3815a4a68c26d50ea16272
+  revision: 0965165003fd54bc26f12189d3d5a0cbff1093a8
   specs:
     cor1440_gen (1.0b2)
       devise
@@ -13,7 +13,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: a57da4a54eb6017412e42a367ac20fe0bee543c3
+  revision: a0005dd52b065569cfd3047f9c190084a4e9f842
   specs:
     heb412_gen (1.0.a1)
       chosen-rails
@@ -24,7 +24,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/mr519_gen.git
-  revision: 2d83c8e701cf9c1dd976c4d923f8527683dbcc98
+  revision: a54854be989b459cda9547c399cbc58c68ed297c
   specs:
     mr519_gen (0.1.0)
       rails (~> 5.2.2, >= 5.2.2)
@@ -32,7 +32,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: c64586165e212c60a3eb9d33b7a1c3f8546eabc6
+  revision: 7f5cc137921fe026bdf732ed7aef6b7d0ef2ef45
   specs:
     sal7711_gen (1.0.b1)
       rails
@@ -40,7 +40,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: e919a5138ad271cd506295622cf6f5d30ba5a5dc
+  revision: 11cdcb7ff72227b5be0af3e0be0cc5e5b7bfdbef
   specs:
     sal7711_web (1.0.a3)
       rails
@@ -48,7 +48,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 96fc0246fba7347c98b32a6f4e6cce0dc0238568
+  revision: d300bb9894b28904b55c6415715f301581ba0da2
   specs:
     sip (2.0.b5)
       bootstrap-datepicker-rails
@@ -70,7 +70,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 704ec55c36e7ecad0eb990f3cd71bb6aa2a640e9
+  revision: 3ad0acb65a4d34a4bb35a899206024bdd4eabf37
   specs:
     sivel2_gen (2.0b8)
       devise
@@ -79,7 +79,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 375ba9777405a21a6791ef105ce5afd7a0022753
+  revision: ff9c38628df91589c217b5d506cb8b1189942ad4
   specs:
     sivel2_sjr (2.0.b1)
       rails

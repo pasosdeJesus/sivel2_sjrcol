@@ -11,7 +11,9 @@ class Sivel2Sjr::Casosjr < ActiveRecord::Base
       foreign_key: 'id_salidam'
     validates :motivom, length: { maximum: 5000 }
     validates :memo1612, length: { maximum: 5000 }
-    validates :contacto, uniqueness: { message: 'Contacto no puede estar repetido en dos casos' }
+    validates :contacto, uniqueness: { 
+      message: 'Contacto no puede estar repetido en dos casos' 
+    }
     
     validates :estatus_refugio, length: { maximum: 5000 }
     validates :docrefugiado, length: { maximum: 128 }

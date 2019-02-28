@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: 90f41ad468fe3f81621ab834c95f57c38079aff0
+  revision: ef848ef5d09f3abac514a21b8d8b57428e91d4f9
   specs:
     cor1440_gen (1.0b2)
       devise
@@ -13,7 +13,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 64b72922deff3263804d4a8caf25abf95bba3817
+  revision: 7f6a6171eb2edf3e674c53229324c15f1abe6d3f
   specs:
     heb412_gen (1.0.a1)
       chosen-rails
@@ -24,7 +24,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/mr519_gen.git
-  revision: a875b6cfe237e1a7b9736930976da938f0df0bb7
+  revision: 4d90a4d52d4c4508f257c945f5a879acfdbbee8d
   specs:
     mr519_gen (0.1.0)
       rails (~> 5.2.2, >= 5.2.2)
@@ -32,7 +32,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: 66978bd5b7d0c3f922c03452fcfa9a4e0dabff49
+  revision: b3c3107692b722911ecf7aca48613a27d7b881f7
   specs:
     sal7711_gen (1.0.b1)
       rails
@@ -40,7 +40,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: 596ff46bdae48d37d9c494e41dc12837f661be5b
+  revision: ad1a78747390257934c7df6c078903482a9b7523
   specs:
     sal7711_web (1.0.a3)
       rails
@@ -48,7 +48,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 7c4b2e5961c1f3ca7bd5a63313a67e98bca778c9
+  revision: abac00c152c97f6e254e2b948bae139d352f96a8
   specs:
     sip (2.0.b5)
       bootstrap-datepicker-rails
@@ -70,7 +70,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 752c9a7cfe8dc8a4185742808caebb2652b22133
+  revision: cbee25ee185461a89627a4acfebd1e2c25ba6e3d
   specs:
     sivel2_gen (2.0b8)
       devise
@@ -79,7 +79,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 1064359950650c257901aa696e2c19dbc69851fd
+  revision: 08a966a97469b971b21b44cf1424e9b13222a699
   specs:
     sivel2_sjr (2.0.b1)
       rails
@@ -148,7 +148,7 @@ GEM
     bindex (0.5.0)
     binding_of_caller (0.8.0)
       debug_inspector (>= 0.0.1)
-    bootsnap (1.3.2)
+    bootsnap (1.4.1)
       msgpack (~> 1.0)
     bootstrap-datepicker-rails (1.8.0.1)
       railties (>= 3.0)
@@ -189,14 +189,14 @@ GEM
     connection_pool (2.2.2)
     crass (1.0.4)
     debug_inspector (0.0.3)
-    devise (4.5.0)
+    devise (4.6.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 4.1.0, < 6.0)
       responders
       warden (~> 1.2.3)
-    devise-i18n (1.7.1)
-      devise (>= 4.5)
+    devise-i18n (1.8.0)
+      devise (>= 4.6)
     docile (1.3.1)
     erubi (1.8.0)
     execjs (2.7.0)
@@ -220,7 +220,7 @@ GEM
       thor (>= 0.14, < 2.0)
     jquery-ui-rails (6.0.1)
       railties (>= 3.2.16)
-    json (2.1.0)
+    json (2.2.0)
     kgio (2.11.2)
     less (2.6.0)
       commonjs (~> 0.2.7)
@@ -269,7 +269,7 @@ GEM
     nio4r (2.3.1)
     nokogiri (1.10.1)
       mini_portile2 (~> 2.4.0)
-    odf-report (0.5.2)
+    odf-report (0.6.0)
       nokogiri (>= 1.5.0)
       rubyzip (~> 1.2.0)
     orm_adapter (0.5.0)
@@ -325,7 +325,7 @@ GEM
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.0.4)
       loofah (~> 2.2, >= 2.2.2)
-    rails-i18n (5.1.2)
+    rails-i18n (5.1.3)
       i18n (>= 0.7, < 2)
       railties (>= 5.0, < 6)
     rails_12factor (0.0.3)

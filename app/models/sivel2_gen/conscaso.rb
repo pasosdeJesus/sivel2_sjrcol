@@ -78,7 +78,7 @@ class Sivel2Gen::Conscaso < ActiveRecord::Base
             CAST(EXTRACT(YEAR FROM fechaatencion)-contacto.anionac AS INTEGER)
         END AS contacto_edad
   FROM sivel2_sjr_respuesta AS respuesta JOIN sivel2_sjr_casosjr AS casosjr ON respuesta.id_caso=casosjr.id_caso
-  JOIN sip_persona as contacto ON contacto.id=casosjr.contacto
+  JOIN sip_persona as contacto ON contacto.id=casosjr.contacto_id
          WHERE (respuesta.id_caso, fechaatencion) in 
         (SELECT id_caso, MAX(fechaatencion)
          FROM sivel2_sjr_respuesta GROUP BY 1));")
@@ -120,7 +120,7 @@ class Sivel2Gen::Conscaso < ActiveRecord::Base
           JOIN sivel2_gen_caso AS caso ON casosjr.id_caso = caso.id 
           JOIN sip_oficina AS oficina ON oficina.id=casosjr.oficina_id
           JOIN usuario ON usuario.id = casosjr.asesor
-          JOIN sip_persona as contacto ON contacto.id=casosjr.contacto
+          JOIN sip_persona AS contacto ON contacto.id=casosjr.contacto_id
           JOIN sivel2_gen_victima AS vcontacto ON 
             vcontacto.id_persona = contacto.id AND vcontacto.id_caso = caso.id
           LEFT JOIN sivel2_sjr_ultimaatencion AS ultimaatencion ON

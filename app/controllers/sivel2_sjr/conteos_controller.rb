@@ -219,9 +219,9 @@ class Sivel2Sjr::ConteosController < ApplicationController
           WHERE id=ubicacion.id_departamento) AS departamento, 
         (SELECT nombre FROM sip_municipio
           WHERE id=ubicacion.id_municipio) AS municipio, 
-        CASE WHEN (casosjr.contacto = victima.id_persona) THEN 1 ELSE 0 END
+        CASE WHEN (casosjr.contacto_id = victima.id_persona) THEN 1 ELSE 0 END
           AS contacto,
-        CASE WHEN (casosjr.contacto<>victima.id_persona) THEN 1 ELSE 0 END
+        CASE WHEN (casosjr.contacto_id<>victima.id_persona) THEN 1 ELSE 0 END
           AS beneficiario, 
         1 as npersona
         FROM sivel2_sjr_desplazamiento AS desplazamiento, 
@@ -256,9 +256,9 @@ class Sivel2Sjr::ConteosController < ApplicationController
           WHERE id=id_departamento) AS departamento, 
         (SELECT nombre FROM sip_municipio 
         WHERE id=ubicacion.id_municipio) AS municipio, 
-        CASE WHEN (casosjr.contacto = victima.id_persona) THEN 1 ELSE 0 END
+        CASE WHEN (casosjr.contacto_id = victima.id_persona) THEN 1 ELSE 0 END
           AS contacto,
-        CASE WHEN (casosjr.contacto<>victima.id_persona) THEN 1 ELSE 0 END
+        CASE WHEN (casosjr.contacto_id<>victima.id_persona) THEN 1 ELSE 0 END
           AS beneficiario, 
         1 as npersona
       FROM sivel2_sjr_desplazamiento AS desplazamiento, 

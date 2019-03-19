@@ -143,7 +143,7 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
         JOIN sivel2_gen_caso AS caso ON casosjr.id_caso = caso.id 
         JOIN sip_oficina AS oficina ON oficina.id=casosjr.oficina_id
         JOIN usuario ON usuario.id = casosjr.asesor
-        JOIN sip_persona as contacto ON contacto.id=casosjr.contacto
+        JOIN sip_persona as contacto ON contacto.id=casosjr.contacto_id
         LEFT JOIN sip_tdocumento AS tdocumento ON 
             tdocumento.id=contacto.tdocumento_id
         JOIN sivel2_gen_victima AS vcontacto ON 

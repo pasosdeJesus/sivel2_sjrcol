@@ -9,20 +9,6 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: -
---
-
-CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
-
-
---
--- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: -
---
-
-COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
-
-
---
 -- Name: es_co_utf_8; Type: COLLATION; Schema: public; Owner: -
 --
 
@@ -393,7 +379,7 @@ CREATE TABLE public.sivel2_sjr_casosjr (
     oficina_id integer DEFAULT 1,
     direccion character varying(1000),
     telefono character varying(1000),
-    contacto integer,
+    contacto_id integer,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     comosupo_id integer DEFAULT 1,
@@ -428,11 +414,11 @@ CREATE VIEW public.cben1 AS
  SELECT caso.id AS id_caso,
     victima.id_persona,
         CASE
-            WHEN (casosjr.contacto = victima.id_persona) THEN 1
+            WHEN (casosjr.contacto_id = victima.id_persona) THEN 1
             ELSE 0
         END AS contacto,
         CASE
-            WHEN (casosjr.contacto <> victima.id_persona) THEN 1
+            WHEN (casosjr.contacto_id <> victima.id_persona) THEN 1
             ELSE 0
         END AS beneficiario,
     1 AS npersona,
@@ -707,11 +693,11 @@ CREATE VIEW public.cmunex AS
            FROM public.sip_municipio
           WHERE (sip_municipio.id = ubicacion.id_municipio)) AS municipio,
         CASE
-            WHEN (casosjr.contacto = victima.id_persona) THEN 1
+            WHEN (casosjr.contacto_id = victima.id_persona) THEN 1
             ELSE 0
         END AS contacto,
         CASE
-            WHEN (casosjr.contacto <> victima.id_persona) THEN 1
+            WHEN (casosjr.contacto_id <> victima.id_persona) THEN 1
             ELSE 0
         END AS beneficiario,
     1 AS npersona
@@ -737,11 +723,11 @@ CREATE VIEW public.cmunrec AS
            FROM public.sip_municipio
           WHERE (sip_municipio.id = ubicacion.id_municipio)) AS municipio,
         CASE
-            WHEN (casosjr.contacto = victima.id_persona) THEN 1
+            WHEN (casosjr.contacto_id = victima.id_persona) THEN 1
             ELSE 0
         END AS contacto,
         CASE
-            WHEN (casosjr.contacto <> victima.id_persona) THEN 1
+            WHEN (casosjr.contacto_id <> victima.id_persona) THEN 1
             ELSE 0
         END AS beneficiario,
     1 AS npersona
@@ -1404,6 +1390,44 @@ ALTER SEQUENCE public.cor1440_gen_informe_id_seq OWNED BY public.cor1440_gen_inf
 
 
 --
+-- Name: cor1440_gen_mindicadorpf; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.cor1440_gen_mindicadorpf (
+    id bigint NOT NULL,
+    proyectofinanciero_id integer NOT NULL,
+    indicadorpf_id integer NOT NULL,
+    formulacion character varying(512),
+    frecuenciaanual character varying(128),
+    descd1 character varying,
+    descd2 character varying,
+    descd3 character varying,
+    meta double precision,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: cor1440_gen_mindicadorpf_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.cor1440_gen_mindicadorpf_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: cor1440_gen_mindicadorpf_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.cor1440_gen_mindicadorpf_id_seq OWNED BY public.cor1440_gen_mindicadorpf.id;
+
+
+--
 -- Name: cor1440_gen_objetivopf; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1432,6 +1456,57 @@ CREATE SEQUENCE public.cor1440_gen_objetivopf_id_seq
 --
 
 ALTER SEQUENCE public.cor1440_gen_objetivopf_id_seq OWNED BY public.cor1440_gen_objetivopf.id;
+
+
+--
+-- Name: cor1440_gen_pmindicadorpf; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.cor1440_gen_pmindicadorpf (
+    id bigint NOT NULL,
+    mindicadorpf_id integer NOT NULL,
+    finicio date,
+    ffin date,
+    restiempo character varying(128),
+    dmed1 double precision,
+    dmed2 double precision,
+    dmed3 double precision,
+    datosmedicion json,
+    rind double precision,
+    meta double precision,
+    resindicador json,
+    porcump double precision,
+    analisis character varying(4096),
+    acciones character varying(4096),
+    responsables character varying(4096),
+    plazo character varying(4096),
+    fecha date,
+    urlev1 character varying(4096),
+    urlev2 character varying(4096),
+    urlev3 character varying(4096),
+    urlevrind character varying(4096),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: cor1440_gen_pmindicadorpf_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.cor1440_gen_pmindicadorpf_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: cor1440_gen_pmindicadorpf_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.cor1440_gen_pmindicadorpf_id_seq OWNED BY public.cor1440_gen_pmindicadorpf.id;
 
 
 --
@@ -2340,7 +2415,7 @@ ALTER SEQUENCE public.mr519_gen_formulario_id_seq OWNED BY public.mr519_gen_form
 
 CREATE TABLE public.mr519_gen_respuestafor (
     id bigint NOT NULL,
-    formulario_id integer NOT NULL,
+    formulario_id integer,
     fechaini date NOT NULL,
     fechacambio date NOT NULL
 );
@@ -3715,7 +3790,7 @@ CREATE VIEW public.sivel2_sjr_ultimaatencion AS
         END AS contacto_edad
    FROM ((public.sivel2_sjr_respuesta respuesta
      JOIN public.sivel2_sjr_casosjr casosjr ON ((respuesta.id_caso = casosjr.id_caso)))
-     JOIN public.sip_persona contacto ON ((contacto.id = casosjr.contacto)))
+     JOIN public.sip_persona contacto ON ((contacto.id = casosjr.contacto_id)))
   WHERE ((respuesta.id_caso, respuesta.fechaatencion) IN ( SELECT sivel2_sjr_respuesta.id_caso,
             max(sivel2_sjr_respuesta.fechaatencion) AS max
            FROM public.sivel2_sjr_respuesta
@@ -3798,7 +3873,7 @@ CREATE VIEW public.sivel2_gen_conscaso1 AS
      JOIN public.sivel2_gen_caso caso ON ((casosjr.id_caso = caso.id)))
      JOIN public.sip_oficina oficina ON ((oficina.id = casosjr.oficina_id)))
      JOIN public.usuario ON ((usuario.id = casosjr.asesor)))
-     JOIN public.sip_persona contacto ON ((contacto.id = casosjr.contacto)))
+     JOIN public.sip_persona contacto ON ((contacto.id = casosjr.contacto_id)))
      JOIN public.sivel2_gen_victima vcontacto ON (((vcontacto.id_persona = contacto.id) AND (vcontacto.id_caso = caso.id))))
      LEFT JOIN public.sivel2_sjr_ultimaatencion ultimaatencion ON ((ultimaatencion.id_caso = caso.id)));
 
@@ -4205,7 +4280,7 @@ CREATE MATERIALIZED VIEW public.sivel2_gen_consexpcaso AS
      JOIN public.sivel2_gen_caso caso ON ((casosjr.id_caso = caso.id)))
      JOIN public.sip_oficina oficina ON ((oficina.id = casosjr.oficina_id)))
      JOIN public.usuario ON ((usuario.id = casosjr.asesor)))
-     JOIN public.sip_persona contacto ON ((contacto.id = casosjr.contacto)))
+     JOIN public.sip_persona contacto ON ((contacto.id = casosjr.contacto_id)))
      LEFT JOIN public.sip_tdocumento tdocumento ON ((tdocumento.id = contacto.tdocumento_id)))
      JOIN public.sivel2_gen_victima vcontacto ON (((vcontacto.id_persona = contacto.id) AND (vcontacto.id_caso = caso.id))))
      LEFT JOIN public.sivel2_gen_etnia etnia ON ((vcontacto.id_etnia = etnia.id)))
@@ -5776,10 +5851,24 @@ ALTER TABLE ONLY public.cor1440_gen_informe ALTER COLUMN id SET DEFAULT nextval(
 
 
 --
+-- Name: cor1440_gen_mindicadorpf id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.cor1440_gen_mindicadorpf ALTER COLUMN id SET DEFAULT nextval('public.cor1440_gen_mindicadorpf_id_seq'::regclass);
+
+
+--
 -- Name: cor1440_gen_objetivopf id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.cor1440_gen_objetivopf ALTER COLUMN id SET DEFAULT nextval('public.cor1440_gen_objetivopf_id_seq'::regclass);
+
+
+--
+-- Name: cor1440_gen_pmindicadorpf id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.cor1440_gen_pmindicadorpf ALTER COLUMN id SET DEFAULT nextval('public.cor1440_gen_pmindicadorpf_id_seq'::regclass);
 
 
 --
@@ -6418,11 +6507,27 @@ ALTER TABLE ONLY public.cor1440_gen_informe
 
 
 --
+-- Name: cor1440_gen_mindicadorpf cor1440_gen_mindicadorpf_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.cor1440_gen_mindicadorpf
+    ADD CONSTRAINT cor1440_gen_mindicadorpf_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: cor1440_gen_objetivopf cor1440_gen_objetivopf_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.cor1440_gen_objetivopf
     ADD CONSTRAINT cor1440_gen_objetivopf_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: cor1440_gen_pmindicadorpf cor1440_gen_pmindicadorpf_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.cor1440_gen_pmindicadorpf
+    ADD CONSTRAINT cor1440_gen_pmindicadorpf_pkey PRIMARY KEY (id);
 
 
 --
@@ -7659,7 +7764,7 @@ CREATE UNIQUE INDEX sivel2_gen_victima_id_caso_id_persona_idx ON public.sivel2_g
 -- Name: sivel2_sjr_casosjr_contacto_idx; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE UNIQUE INDEX sivel2_sjr_casosjr_contacto_idx ON public.sivel2_sjr_casosjr USING btree (contacto);
+CREATE UNIQUE INDEX sivel2_sjr_casosjr_contacto_idx ON public.sivel2_sjr_casosjr USING btree (contacto_id);
 
 
 --
@@ -8087,7 +8192,7 @@ ALTER TABLE ONLY public.sivel2_sjr_casosjr
 --
 
 ALTER TABLE ONLY public.sivel2_sjr_casosjr
-    ADD CONSTRAINT casosjr_contacto_fkey FOREIGN KEY (contacto) REFERENCES public.sip_persona(id);
+    ADD CONSTRAINT casosjr_contacto_fkey FOREIGN KEY (contacto_id) REFERENCES public.sip_persona(id);
 
 
 --
@@ -8339,6 +8444,14 @@ ALTER TABLE ONLY public.cor1440_gen_actividad_valorcampotind
 
 
 --
+-- Name: cor1440_gen_mindicadorpf fk_rails_06564b910d; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.cor1440_gen_mindicadorpf
+    ADD CONSTRAINT fk_rails_06564b910d FOREIGN KEY (proyectofinanciero_id) REFERENCES public.cor1440_gen_proyectofinanciero(id);
+
+
+--
 -- Name: cor1440_gen_resultadopf fk_rails_06ba24bd54; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8376,6 +8489,14 @@ ALTER TABLE ONLY public.cor1440_gen_actividadpf
 
 ALTER TABLE ONLY public.cor1440_gen_financiador_proyectofinanciero
     ADD CONSTRAINT fk_rails_0cd09d688c FOREIGN KEY (financiador_id) REFERENCES public.cor1440_gen_financiador(id);
+
+
+--
+-- Name: cor1440_gen_mindicadorpf fk_rails_0fbac6136b; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.cor1440_gen_mindicadorpf
+    ADD CONSTRAINT fk_rails_0fbac6136b FOREIGN KEY (indicadorpf_id) REFERENCES public.cor1440_gen_indicadorpf(id);
 
 
 --
@@ -8720,6 +8841,14 @@ ALTER TABLE ONLY public.sivel2_sjr_oficina_proyectofinanciero
 
 ALTER TABLE ONLY public.cor1440_gen_caracterizacionpersona
     ADD CONSTRAINT fk_rails_6a82dffb63 FOREIGN KEY (respuestafor_id) REFERENCES public.mr519_gen_respuestafor(id);
+
+
+--
+-- Name: cor1440_gen_pmindicadorpf fk_rails_701d924c54; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.cor1440_gen_pmindicadorpf
+    ADD CONSTRAINT fk_rails_701d924c54 FOREIGN KEY (mindicadorpf_id) REFERENCES public.cor1440_gen_mindicadorpf(id);
 
 
 --
@@ -10108,6 +10237,12 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20190110191802'),
 ('20190111092816'),
 ('20190111102201'),
-('20190116133230');
+('20190116133230'),
+('20190128032125'),
+('20190205203619'),
+('20190206005635'),
+('20190208103518'),
+('20190225143501'),
+('20190308195346');
 
 

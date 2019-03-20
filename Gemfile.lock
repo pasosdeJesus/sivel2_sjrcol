@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: 1ffd044d711401761f4542352ca98f2913d63e01
+  revision: 1226e5535a864a54b33cadcaa17e01fd4d8be4c2
   specs:
     cor1440_gen (1.0b2)
       devise
@@ -13,7 +13,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 3cad685dee0ef8d2c2695cb212ef7c69f016ffda
+  revision: 296092b92c3a4bbc7f709fcbb1a8c68e67f7858a
   specs:
     heb412_gen (1.0.a1)
       chosen-rails
@@ -24,7 +24,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/mr519_gen.git
-  revision: 90af167b1c295b0d7599c088e35961e400a27d6a
+  revision: d70b51b24352d6ba4e63d19aeea89b5b57d46014
   specs:
     mr519_gen (0.1.0)
       rails (~> 5.2.2, >= 5.2.2)
@@ -32,7 +32,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: 44064513582da4bf7f9905f4685f049b27430c76
+  revision: 86bb19c74086f2e2229aadc74eba00a8a190c550
   specs:
     sal7711_gen (1.0.b1)
       rails
@@ -40,7 +40,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: 7637ff0670e8472fbf77afbf68e2d312b7e4a0e1
+  revision: 1b37510fdf33f6595b5d739880920a3d72acf73d
   specs:
     sal7711_web (1.0.a3)
       rails
@@ -48,7 +48,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: ecae2a3632bb2451a72ccd809e1b45ea372612fa
+  revision: baeb0a024403d30c6318fcaaaef99b259a678609
   specs:
     sip (2.0.b5)
       bootstrap-datepicker-rails
@@ -70,7 +70,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 5802c3d18174b8b1fa5d4c42b32f9adeeabbec71
+  revision: 8b728e3b86570730ba07bdfb3ff06212ba43c1d8
   specs:
     sivel2_gen (2.0b8)
       devise
@@ -79,7 +79,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 1aa5e6ea019fa593ea1ebdac4876eed193700c32
+  revision: da7e356ce8236a0e2db796107e97ac634d919cea
   specs:
     sivel2_sjr (2.0.b1)
       rails
@@ -303,7 +303,7 @@ GEM
       binding_of_caller (>= 0.7)
       pry (>= 0.9.11)
     public_suffix (3.0.3)
-    puma (3.12.0)
+    puma (3.12.1)
     rack (2.0.6)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
@@ -405,7 +405,7 @@ GEM
       thread_safe (~> 0.1)
     uglifier (4.1.20)
       execjs (>= 0.3.0, < 3)
-    unicorn (5.5.0)
+    unicorn (5.5.0.1.g6836)
       kgio (~> 2.6)
       raindrops (~> 0.7)
     warden (1.2.8)
@@ -418,7 +418,7 @@ GEM
     websocket-driver (0.7.0)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.3)
-    will_paginate (3.1.6)
+    will_paginate (3.1.7)
     xpath (3.2.0)
       nokogiri (~> 1.8)
 
@@ -482,7 +482,7 @@ DEPENDENCIES
   twitter_cldr
   tzinfo
   uglifier
-  unicorn
+  unicorn (~> 5.5.0.1.g6836)
   web-console
   will_paginate
 

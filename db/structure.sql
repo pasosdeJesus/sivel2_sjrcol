@@ -2410,6 +2410,37 @@ ALTER SEQUENCE public.mr519_gen_formulario_id_seq OWNED BY public.mr519_gen_form
 
 
 --
+-- Name: mr519_gen_opcioncs; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.mr519_gen_opcioncs (
+    id bigint NOT NULL,
+    campo_id integer NOT NULL,
+    nombre character varying(1024) NOT NULL,
+    valor character varying(1024) NOT NULL
+);
+
+
+--
+-- Name: mr519_gen_opcioncs_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.mr519_gen_opcioncs_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: mr519_gen_opcioncs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.mr519_gen_opcioncs_id_seq OWNED BY public.mr519_gen_opcioncs.id;
+
+
+--
 -- Name: mr519_gen_respuestafor; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -6005,6 +6036,13 @@ ALTER TABLE ONLY public.mr519_gen_formulario ALTER COLUMN id SET DEFAULT nextval
 
 
 --
+-- Name: mr519_gen_opcioncs id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.mr519_gen_opcioncs ALTER COLUMN id SET DEFAULT nextval('public.mr519_gen_opcioncs_id_seq'::regclass);
+
+
+--
 -- Name: mr519_gen_respuestafor id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -6896,6 +6934,14 @@ ALTER TABLE ONLY public.mr519_gen_encuestausuario
 
 ALTER TABLE ONLY public.mr519_gen_formulario
     ADD CONSTRAINT mr519_gen_formulario_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: mr519_gen_opcioncs mr519_gen_opcioncs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.mr519_gen_opcioncs
+    ADD CONSTRAINT mr519_gen_opcioncs_pkey PRIMARY KEY (id);
 
 
 --
@@ -8820,6 +8866,14 @@ ALTER TABLE ONLY public.sivel2_gen_combatiente
 
 
 --
+-- Name: mr519_gen_opcioncs fk_rails_656b4a3ca7; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.mr519_gen_opcioncs
+    ADD CONSTRAINT fk_rails_656b4a3ca7 FOREIGN KEY (campo_id) REFERENCES public.mr519_gen_campo(id);
+
+
+--
 -- Name: sal7711_gen_articulo fk_rails_65eae7449f; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10243,6 +10297,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20190206005635'),
 ('20190208103518'),
 ('20190225143501'),
-('20190308195346');
+('20190308195346'),
+('20190322102311');
 
 

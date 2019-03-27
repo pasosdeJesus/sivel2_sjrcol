@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: 1ffd044d711401761f4542352ca98f2913d63e01
+  revision: 0bc6e64aef4c1c5e4de129f1bb15aec28909df94
   specs:
     cor1440_gen (1.0b2)
       devise
@@ -13,7 +13,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 3cad685dee0ef8d2c2695cb212ef7c69f016ffda
+  revision: 60acfd84d8d291eb0ae65726b191e0942c75ba34
   specs:
     heb412_gen (1.0.a1)
       chosen-rails
@@ -24,7 +24,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/mr519_gen.git
-  revision: 90af167b1c295b0d7599c088e35961e400a27d6a
+  revision: 808735dc67af50d7b9ae4ff5fd9311d098e809ca
   specs:
     mr519_gen (0.1.0)
       rails (~> 5.2.2, >= 5.2.2)
@@ -32,7 +32,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: 44064513582da4bf7f9905f4685f049b27430c76
+  revision: fb36748a0a961f1299afe765d7a4bd378ab34e8d
   specs:
     sal7711_gen (1.0.b1)
       rails
@@ -40,7 +40,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: 7637ff0670e8472fbf77afbf68e2d312b7e4a0e1
+  revision: 769e842ff6b2e90c3253aaad5bcf0cb6332b3a05
   specs:
     sal7711_web (1.0.a3)
       rails
@@ -48,7 +48,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: ecae2a3632bb2451a72ccd809e1b45ea372612fa
+  revision: d9bf2f935c94267cddb19aa6842c150e7164bcf0
   specs:
     sip (2.0.b5)
       bootstrap-datepicker-rails
@@ -70,7 +70,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 5802c3d18174b8b1fa5d4c42b32f9adeeabbec71
+  revision: b75f320f59088179436b64b5bf153c636486cef7
   specs:
     sivel2_gen (2.0b8)
       devise
@@ -79,7 +79,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 1aa5e6ea019fa593ea1ebdac4876eed193700c32
+  revision: a321edc136d24c2777194997332e4ffddc59e26e
   specs:
     sivel2_sjr (2.0.b1)
       rails
@@ -87,7 +87,7 @@ GIT
 
 GIT
   remote: https://github.com/vtamara/cocoon.git
-  revision: 9d29a8abcc5b6ed9aefcad85ca54dd1364262583
+  revision: 088c8d9dcce7f51cf3a968398047eaac7a37718b
   branch: new_id_with_ajax
   specs:
     cocoon (1.2.11)
@@ -148,7 +148,7 @@ GEM
     bindex (0.5.0)
     binding_of_caller (0.8.0)
       debug_inspector (>= 0.0.1)
-    bootsnap (1.4.1)
+    bootsnap (1.4.2)
       msgpack (~> 1.0)
     bootstrap-datepicker-rails (1.8.0.1)
       railties (>= 3.0)
@@ -169,7 +169,7 @@ GEM
       coffee-rails (>= 3.2)
       railties (>= 3.0)
       sass-rails (>= 3.2)
-    chromedriver-helper (2.1.0)
+    chromedriver-helper (2.1.1)
       archive-zip (~> 0.10)
       nokogiri (~> 1.8)
     cldr-plurals-runtime-rb (1.0.1)
@@ -189,7 +189,7 @@ GEM
     connection_pool (2.2.2)
     crass (1.0.4)
     debug_inspector (0.0.3)
-    devise (4.6.1)
+    devise (4.6.2)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 4.1.0, < 6.0)
@@ -267,7 +267,7 @@ GEM
     msgpack (1.2.9)
     multi_json (1.13.1)
     nio4r (2.3.1)
-    nokogiri (1.10.1)
+    nokogiri (1.10.2)
       mini_portile2 (~> 2.4.0)
     odf-report (0.6.0)
       nokogiri (>= 1.5.0)
@@ -303,7 +303,7 @@ GEM
       binding_of_caller (>= 0.7)
       pry (>= 0.9.11)
     public_suffix (3.0.3)
-    puma (3.12.0)
+    puma (3.12.1)
     rack (2.0.6)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
@@ -405,7 +405,7 @@ GEM
       thread_safe (~> 0.1)
     uglifier (4.1.20)
       execjs (>= 0.3.0, < 3)
-    unicorn (5.5.0)
+    unicorn (5.5.0.1.g6836)
       kgio (~> 2.6)
       raindrops (~> 0.7)
     warden (1.2.8)
@@ -418,7 +418,7 @@ GEM
     websocket-driver (0.7.0)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.3)
-    will_paginate (3.1.6)
+    will_paginate (3.1.7)
     xpath (3.2.0)
       nokogiri (~> 1.8)
 
@@ -482,7 +482,7 @@ DEPENDENCIES
   twitter_cldr
   tzinfo
   uglifier
-  unicorn
+  unicorn (~> 5.5.0.1.g6836)
   web-console
   will_paginate
 

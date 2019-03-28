@@ -32,11 +32,20 @@ SERVIDOR SJR-60:
 
 SERVIDOR SJR-60-ETB:
 * Como SERVIDOR SJR-60 pero
-* Conexión a Internet en Bogotá por fibra empresarial ETB 10MB simétrico
+* Conexión a Internet en Bogotá por fibra empresarial ETB 10MB bajada y en promedio 4MB subida.
 
 SERVIDOR SJR-60-ETB-exp:
 * Como SERVIDOR SJR-60-ETB pero
 * Refactorizado listado de casos y generación de plantillas
+
+SERVIDOR SJR-64-ETB:
+* AMD Ryzen 5-2600 3.4GHz, 6 núcleos, 12 hilos 
+* RAM: 16GB DDR4
+* Discos: sd0 IDE 4T /var, /home. sd1 SSD 240G /. sd2 IDE 1T. sd3 Externo 4T /mnt/respaldo.
+* Plataforma: adJ 6.4, PostgreSQL 11.2, ruby 2.6.1, RoR 5.2.2, unicorn 5.5.0.1.g6836
+* Cortafuegos con adJ 6.3
+* Conexión a Internet en Bogotá por ETB 30MB fibra óptica bajada 
+  y en promedio 10MB de subida.
 
 
 
@@ -62,6 +71,14 @@ CLIENTE V-2:
 * Disco: 500G
 * Plataforma: adJ 5.6pre2, chrome 36
 * Conexión a Internet por UNE Inalámbrico 2MB
+
+CLIENTE V-3:
+* Intel CoreI7-4700. 1.9GHz.
+* RAM: 8G
+* Disco: IDE 500G. SSD 16G
+* Plataforma: adJ 6.4, chrome 69
+* Conexión a Internet por Comcast 50MB
+
 
 
 ## MEDICIONES
@@ -123,6 +140,22 @@ CLIENTE V-2:
 * Filtrar casos entre 1.Ene.2017 y 31.Ene.2017: 0.3
 * Generar plantilla EMHA con el filtro anterior: 7.4
 * Editar de nuevo: 4.2
+
+
+### Fecha: 27.Mar.2019. SERVIDOR SJR-64-ETB. Cliente: V-3
+* Autenticar: 0.75 (mejora 16%)
+* Lista de actividades: 1.9 (mejora 24%)
+* Editar una actividad: 0.5 (mejora 61%)
+* Lista de casos: 1.3 (mejora 31%)
+* Editar un caso: 1.8 (mejora 58%)
+* Agregar etiqueta y guardar: 5.4 (empera -20%)
+* En vista show botón Editar: 1.6 (mejora 60%)
+* Quitar etiqueta y guardar: 5.4 (empeora -54%)
+* Botón regresar: 1.3 (mejora 18%)
+* Filtrar casos entre 1.Ene.2017 y 31.Ene.2017: 1.2 (empeora -300%)
+* Aprox. (cron cronometro externo) generar plantilla EMHA con el filtro anterior:  ~15s (empeora -100%)
+* Editar de nuevo un caso: 3.14 (mejora 25%)
+promedio
 
 
 

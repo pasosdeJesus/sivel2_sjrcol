@@ -1,11 +1,11 @@
 # encoding: UTF-8
 
-require 'cor1440_gen/concerns/controllers/personas_controller'
+require 'sivel2_sjr/concerns/controllers/personas_controller'
 
 module Sip
   class PersonasController < Heb412Gen::ModelosController
 
-    include Cor1440Gen::Concerns::Controllers::PersonasController
+    include Sivel2Sjr::Concerns::Controllers::PersonasController
 
 
     def atributos_form
@@ -62,10 +62,12 @@ module Sip
             :id,
             "valorcampo_attributes" => [
               :valor,
+              :valor_ids,
               :campo_id,
               :id
-            ]
-        ] ]
+            ] + [:valor_ids => []]
+          ]
+        ] 
       ]
     end
 

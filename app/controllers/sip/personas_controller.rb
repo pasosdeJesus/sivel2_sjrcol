@@ -62,10 +62,12 @@ module Sip
             :id,
             "valorcampo_attributes" => [
               :valor,
+              :valor_ids,
               :campo_id,
               :id
-            ]
-        ] ]
+            ] + [:valor_ids => []]
+          ]
+        ] 
       ]
     end
 

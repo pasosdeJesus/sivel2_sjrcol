@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: 6f05e30fd54e353141faa583f0fe88ec7f9d910d
+  revision: 6b995dfbc52ee1d18b9ecdeaa0c49098b168a800
   specs:
     cor1440_gen (1.0b2)
       devise
@@ -13,7 +13,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 9ef3b3d43ea3bb118eca8495d04facac1931c6b3
+  revision: 8da37dabd759bc833f219b6767af0646c2b7111d
   specs:
     heb412_gen (1.0.a1)
       chosen-rails
@@ -24,7 +24,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/mr519_gen.git
-  revision: 4771ea248315de69a2ea3d67c9b6fca2d70bab4c
+  revision: 7034ae370d2aed2c3787867ac5f15c0b7678e2a1
   specs:
     mr519_gen (0.1.0)
       rails (~> 5.2.2, >= 5.2.2)
@@ -32,7 +32,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: e54fba79b757d9ed440ff560c57fbff2be870868
+  revision: 3bf10166518fa27d58c8e68fd48e6b0d25fd6ae0
   specs:
     sal7711_gen (1.0.b1)
       rails
@@ -40,7 +40,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: 203f62a66e9fae24a08942cc9e7a4281c13a9cd1
+  revision: cb8288f8392ecc8ea169d241d2df10c5f32b9b2c
   specs:
     sal7711_web (1.0.a3)
       rails
@@ -48,7 +48,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: c1c964aa049593667de8c3fa0424413d05df6aea
+  revision: d4572335b736d70c28b26fda2ff27d5bc01e8049
   specs:
     sip (2.0.b5)
       bootstrap-datepicker-rails
@@ -70,7 +70,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 09a8e900d9d8b0f639f9cb2bf07e16d6e1a83512
+  revision: 3ae58ac2e6d6e88a072ec06b5aa77e38fb42be19
   specs:
     sivel2_gen (2.0b8)
       devise
@@ -79,7 +79,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: fdd7ed6864e47676e3357adf31c5357f17f40706
+  revision: 503459caf101790d748df8c64a53c057db90a6bf
   specs:
     sivel2_sjr (2.0.b1)
       rails
@@ -145,7 +145,7 @@ GEM
     arel (9.0.0)
     bcrypt (3.1.12)
     bigdecimal (1.4.3)
-    bindex (0.5.0)
+    bindex (0.6.0)
     binding_of_caller (0.8.0)
       debug_inspector (>= 0.0.1)
     bootsnap (1.4.2)

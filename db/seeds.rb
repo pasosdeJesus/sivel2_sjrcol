@@ -15,7 +15,7 @@ end
 conexion.execute('SET search_path TO "$user", public')
 
 # Usuario inicial: sjrcol con clave sjrcol123
-conexion.execute("INSERT INTO usuario 
+conexion.execute("INSERT INTO public.usuario 
 	(nusuario, email, encrypted_password, password, 
   fechacreacion, created_at, updated_at, rol) 
 	VALUES ('sjrcol', 'sjrcol@localhost.org', 

@@ -46,7 +46,7 @@ module Sivel2Sjr
           'ubicaciones', 'presponsables', 'descripcion', 'memo1612'
         ]
         conscaso = conscaso.where('caso_id in (SELECT id_caso 
-                                        FROM sivel2_gen_acto
+                                        FROM public.sivel2_gen_acto
                                         WHERE id_categoria = 3020
                                         OR id_categoria=3021)')
         @usa_consexpcaso = true

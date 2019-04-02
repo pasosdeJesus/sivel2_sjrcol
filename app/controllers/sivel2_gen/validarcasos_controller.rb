@@ -16,7 +16,7 @@ module Sivel2Gen
         casos, 
         'Casos con respuesta pero sin derecho vulnerado',
         'sivel2_sjr_respuesta.id NOT IN 
-               (SELECT id_respuesta FROM sivel2_sjr_derecho_respuesta)'
+               (SELECT id_respuesta FROM public.sivel2_sjr_derecho_respuesta)'
       )
     end
 
@@ -29,11 +29,11 @@ module Sivel2Gen
         casos, 
         'Casos con respuesta/seguimiento pero sin respuesta del SJR',
         'sivel2_sjr_respuesta.id NOT IN 
-           (SELECT id_respuesta FROM sivel2_sjr_ayudasjr_respuesta)
+           (SELECT id_respuesta FROM public.sivel2_sjr_ayudasjr_respuesta)
          AND sivel2_sjr_respuesta.id NOT IN 
-           (SELECT id_respuesta FROM sivel2_sjr_aslegal_respuesta)
+           (SELECT id_respuesta FROM public.sivel2_sjr_aslegal_respuesta)
          AND sivel2_sjr_respuesta.id NOT IN 
-           (SELECT id_respuesta FROM sivel2_sjr_motivosjr_respuesta)
+           (SELECT id_respuesta FROM public.sivel2_sjr_motivosjr_respuesta)
         '
       )
     end

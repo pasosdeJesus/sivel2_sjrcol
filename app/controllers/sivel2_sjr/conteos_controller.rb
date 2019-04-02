@@ -41,9 +41,9 @@ class Sivel2Sjr::ConteosController < ApplicationController
     # Para la vista cons1 emplear que1, tablas1 y where1
     que1 = 'respuesta.id AS id_respuesta, ' +
       'derecho_respuesta.id_derecho AS id_derecho'
-    tablas1 = 'sivel2_sjr_casosjr AS casosjr, ' +
-      'sivel2_sjr_respuesta AS respuesta, ' +
-      'sivel2_sjr_derecho_respuesta AS derecho_respuesta'
+    tablas1 = 'public.sivel2_sjr_casosjr AS casosjr, ' +
+      'public.sivel2_sjr_respuesta AS respuesta, ' +
+      'public.sivel2_sjr_derecho_respuesta AS derecho_respuesta'
     where1 = ''
 
     # where1 = consulta_and(where1, 'caso.id', GLOBALS['idbus'], '<>')
@@ -86,8 +86,8 @@ class Sivel2Sjr::ConteosController < ApplicationController
     # Paso 2
     # Otra consulta
     q2="CREATE VIEW #{cons2} AS SELECT id_respuesta, derecho_id as id_derecho, id_#{pContar}
-        FROM sivel2_sjr_#{pContar}_respuesta AS ar, 
-          sivel2_sjr_#{pContar}_derecho AS ad 
+        FROM public.sivel2_sjr_#{pContar}_respuesta AS ar, 
+          public.sivel2_sjr_#{pContar}_derecho AS ad 
         WHERE 
           ar.id_#{pContar}=ad.#{pContar}_id "
     puts "q2 es #{q2}"
@@ -97,11 +97,11 @@ class Sivel2Sjr::ConteosController < ApplicationController
     tablas3 = cons1
     where3 = ''
 
-    tablas3 = "sivel2_sjr_derecho AS derecho, cvp1 LEFT OUTER JOIN cvp2 ON 
+    tablas3 = "public.sivel2_sjr_derecho AS derecho, public.cvp1 LEFT OUTER JOIN public.cvp2 ON 
     (cvp1.id_respuesta=cvp2.id_respuesta AND cvp1.id_derecho=cvp2.id_derecho)"
     where3 = consulta_and_sinap(where3, "cvp1.id_derecho", "derecho.id")
     que3 << ["derecho.nombre AS derecho", "Derecho"]
-    que3 << ["(SELECT nombre FROM sivel2_sjr_#{pContar} WHERE id=id_#{pContar}) AS atendido", 
+    que3 << ["(SELECT nombre FROM public.sivel2_sjr_#{pContar} WHERE id=id_#{pContar}) AS atendido", 
       @pque[pContar] ]
 
     #puts que3
@@ -214,17 +214,17 @@ class Sivel2Sjr::ConteosController < ApplicationController
     cons1 = 'cmunex'
     # expulsores
     q1="CREATE OR REPLACE VIEW #{cons1} AS (
-        SELECT (SELECT nombre FROM sip_pais WHERE id=id_pais) AS pais, 
-        (SELECT nombre FROM sip_departamento
+        SELECT (SELECT nombre FROM public.sip_pais WHERE id=id_pais) AS pais, 
+        (SELECT nombre FROM public.sip_departamento
           WHERE id=ubicacion.id_departamento) AS departamento, 
-        (SELECT nombre FROM sip_municipio
+        (SELECT nombre FROM public.sip_municipio
           WHERE id=ubicacion.id_municipio) AS municipio, 
         CASE WHEN (casosjr.contacto_id = victima.id_persona) THEN 1 ELSE 0 END
           AS contacto,
         CASE WHEN (casosjr.contacto_id<>victima.id_persona) THEN 1 ELSE 0 END
           AS beneficiario, 
         1 as npersona
-        FROM sivel2_sjr_desplazamiento AS desplazamiento, 
+        FROM public.sivel2_sjr_desplazamiento AS desplazamiento, 
           sip_ubicacion AS ubicacion, 
           sivel2_gen_victima AS victima,
           sivel2_sjr_casosjr AS casosjr
@@ -251,17 +251,17 @@ class Sivel2Sjr::ConteosController < ApplicationController
     )
     cons2 = 'cmunrec'
     q2="CREATE OR REPLACE VIEW #{cons2} AS (
-      SELECT (SELECT nombre FROM sip_pais WHERE id=id_pais) AS pais, 
-        (SELECT nombre FROM sip_departamento 
+      SELECT (SELECT nombre FROM public.sip_pais WHERE id=id_pais) AS pais, 
+        (SELECT nombre FROM public.sip_departamento 
           WHERE id=id_departamento) AS departamento, 
-        (SELECT nombre FROM sip_municipio 
+        (SELECT nombre FROM public.sip_municipio 
         WHERE id=ubicacion.id_municipio) AS municipio, 
         CASE WHEN (casosjr.contacto_id = victima.id_persona) THEN 1 ELSE 0 END
           AS contacto,
         CASE WHEN (casosjr.contacto_id<>victima.id_persona) THEN 1 ELSE 0 END
           AS beneficiario, 
         1 as npersona
-      FROM sivel2_sjr_desplazamiento AS desplazamiento, 
+      FROM public.sivel2_sjr_desplazamiento AS desplazamiento, 
         sip_ubicacion AS ubicacion, 
         sivel2_gen_victima AS victima,
         sivel2_sjr_casosjr AS casosjr
@@ -319,12 +319,12 @@ class Sivel2Sjr::ConteosController < ApplicationController
     ActiveRecord::Base.connection.select_all("
       CREATE OR REPLACE FUNCTION municipioubicacion(int) RETURNS varchar AS
       $$
-        SELECT (SELECT nombre FROM sip_pais WHERE id=ubicacion.id_pais) 
-            || COALESCE((SELECT '/' || nombre FROM sip_departamento 
+        SELECT (SELECT nombre FROM public.sip_pais WHERE id=ubicacion.id_pais) 
+            || COALESCE((SELECT '/' || nombre FROM public.sip_departamento 
             WHERE sip_departamento.id = ubicacion.id_departamento),'') 
-            || COALESCE((SELECT '/' || nombre FROM sip_municipio 
+            || COALESCE((SELECT '/' || nombre FROM public.sip_municipio 
             WHERE sip_municipio.id = ubicacion.id_municipio),'') 
-            FROM sip_ubicacion AS ubicacion 
+            FROM public.sip_ubicacion AS ubicacion 
             WHERE ubicacion.id=$1;
       $$ 
       LANGUAGE SQL
@@ -336,7 +336,7 @@ class Sivel2Sjr::ConteosController < ApplicationController
       "SELECT ruta, cuenta FROM ((SELECT municipioubicacion(d1.id_expulsion) || ' - ' 
         || municipioubicacion(d1.id_llegada) AS ruta, 
         count(id) AS cuenta
-      FROM sivel2_sjr_desplazamiento AS d1, sivel2_sjr_casosjr AS casosjr
+      FROM public.sivel2_sjr_desplazamiento AS d1, sivel2_sjr_casosjr AS casosjr
       WHERE #{where}
       GROUP BY 1)
       UNION  
@@ -456,10 +456,10 @@ class Sivel2Sjr::ConteosController < ApplicationController
 
     c = ActiveRecord::Base.connection.select_all(
       "SELECT a.nombre, ar.favorable, count(r.id) as cuenta
-        FROM sivel2_sjr_accionjuridica AS a 
-        JOIN sivel2_sjr_accionjuridica_respuesta AS ar ON a.id=ar.accionjuridica_id 
-        JOIN sivel2_sjr_respuesta AS r ON ar.respuesta_id=r.id 
-        JOIN sivel2_sjr_casosjr AS casosjr ON r.id_caso=casosjr.id_caso
+        FROM public.sivel2_sjr_accionjuridica AS a 
+        JOIN public.sivel2_sjr_accionjuridica_respuesta AS ar ON a.id=ar.accionjuridica_id 
+        JOIN public.sivel2_sjr_respuesta AS r ON ar.respuesta_id=r.id 
+        JOIN public.sivel2_sjr_casosjr AS casosjr ON r.id_caso=casosjr.id_caso
       WHERE #{where}
       GROUP BY 1, 2 ORDER BY 1,2;
       "

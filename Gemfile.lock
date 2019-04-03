@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: 82338d80e684ecf85a11f445c0b7f84471582d6f
+  revision: 44ee0e5d692dfef860302894481a7dcf7631792c
   specs:
     cor1440_gen (1.0b2)
       devise
@@ -13,7 +13,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 408db7d0841995eb51f218dafed4f15ff55d22c0
+  revision: af9434b91e0564424205c643cbe9cecf32c873f2
   specs:
     heb412_gen (1.0.a1)
       chosen-rails
@@ -24,7 +24,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/mr519_gen.git
-  revision: 7b3c991197c1f119e3fa0f2cf0c8b5b49c7ec896
+  revision: 5a3b3ebaff5d8fafe4d22300bf6614daee31cc95
   specs:
     mr519_gen (0.1.0)
       rails (~> 5.2.2, >= 5.2.2)
@@ -32,7 +32,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: d425bb3bae556cabf238987fc78acdf638b0920a
+  revision: 8a0f48b6a461e8c6eca9a78b121677a0fa0746ad
   specs:
     sal7711_gen (1.0.b1)
       rails
@@ -40,7 +40,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: 657c77feb8102a092230f8f428f9d52d9f466379
+  revision: fe00a9a639b444509fa704fb9982d252e0aca481
   specs:
     sal7711_web (1.0.a3)
       rails
@@ -48,7 +48,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 5bf55a4073069dd39187046cad8bd550cdb7c504
+  revision: 8e4af452d54e787a24bd5468d7f6c69b22077678
   specs:
     sip (2.0.b5)
       bootstrap-datepicker-rails
@@ -70,7 +70,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 97261e1423583128f0e8462ece1f435155a773f0
+  revision: 9f4d56e35f482d4750a7329775ed113f23720e7b
   specs:
     sivel2_gen (2.0b8)
       devise
@@ -79,7 +79,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 91aae0a053d2022c95485b0948a4a96701fac6ef
+  revision: c25fd1d44ee56d7d170253125e89901535f50978
   specs:
     sivel2_sjr (2.0.b1)
       rails
@@ -304,7 +304,7 @@ GEM
       pry (>= 0.9.11)
     public_suffix (3.0.3)
     puma (3.12.1)
-    rack (2.0.6)
+    rack (2.0.7)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (5.2.3)

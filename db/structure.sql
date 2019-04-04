@@ -426,7 +426,7 @@ CREATE VIEW public.cben1 AS
    FROM public.sivel2_gen_caso caso,
     public.sivel2_sjr_casosjr casosjr,
     public.sivel2_gen_victima victima
-  WHERE ((caso.id = victima.id_caso) AND (caso.id = casosjr.id_caso) AND (caso.id = victima.id_caso));
+  WHERE ((caso.id = victima.id_caso) AND (caso.id = casosjr.id_caso) AND (caso.id = victima.id_caso) AND (casosjr.oficina_id = 3));
 
 
 --
@@ -1456,6 +1456,36 @@ CREATE SEQUENCE public.cor1440_gen_objetivopf_id_seq
 --
 
 ALTER SEQUENCE public.cor1440_gen_objetivopf_id_seq OWNED BY public.cor1440_gen_objetivopf.id;
+
+
+--
+-- Name: cor1440_gen_plantillahcm_proyectofinanciero; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.cor1440_gen_plantillahcm_proyectofinanciero (
+    id bigint NOT NULL,
+    plantillahcm_id integer,
+    proyectofinanciero_id integer
+);
+
+
+--
+-- Name: cor1440_gen_plantillahcm_proyectofinanciero_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.cor1440_gen_plantillahcm_proyectofinanciero_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: cor1440_gen_plantillahcm_proyectofinanciero_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.cor1440_gen_plantillahcm_proyectofinanciero_id_seq OWNED BY public.cor1440_gen_plantillahcm_proyectofinanciero.id;
 
 
 --
@@ -5897,6 +5927,13 @@ ALTER TABLE ONLY public.cor1440_gen_objetivopf ALTER COLUMN id SET DEFAULT nextv
 
 
 --
+-- Name: cor1440_gen_plantillahcm_proyectofinanciero id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.cor1440_gen_plantillahcm_proyectofinanciero ALTER COLUMN id SET DEFAULT nextval('public.cor1440_gen_plantillahcm_proyectofinanciero_id_seq'::regclass);
+
+
+--
 -- Name: cor1440_gen_pmindicadorpf id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -6559,6 +6596,14 @@ ALTER TABLE ONLY public.cor1440_gen_mindicadorpf
 
 ALTER TABLE ONLY public.cor1440_gen_objetivopf
     ADD CONSTRAINT cor1440_gen_objetivopf_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: cor1440_gen_plantillahcm_proyectofinanciero cor1440_gen_plantillahcm_proyectofinanciero_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.cor1440_gen_plantillahcm_proyectofinanciero
+    ADD CONSTRAINT cor1440_gen_plantillahcm_proyectofinanciero_pkey PRIMARY KEY (id);
 
 
 --
@@ -8859,6 +8904,14 @@ ALTER TABLE ONLY public.cor1440_gen_actividad_actorsocial
 
 
 --
+-- Name: cor1440_gen_plantillahcm_proyectofinanciero fk_rails_62c9243a43; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.cor1440_gen_plantillahcm_proyectofinanciero
+    ADD CONSTRAINT fk_rails_62c9243a43 FOREIGN KEY (plantillahcm_id) REFERENCES public.heb412_gen_plantillahcm(id);
+
+
+--
 -- Name: sivel2_gen_combatiente fk_rails_6485d06d37; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -9216,6 +9269,14 @@ ALTER TABLE ONLY public.sal7711_gen_articulo
 
 ALTER TABLE ONLY public.sivel2_sjr_ayudasjr_derecho
     ADD CONSTRAINT fk_rails_d3ef67afc9 FOREIGN KEY (derecho_id) REFERENCES public.sivel2_sjr_derecho(id);
+
+
+--
+-- Name: cor1440_gen_plantillahcm_proyectofinanciero fk_rails_d56d245f70; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.cor1440_gen_plantillahcm_proyectofinanciero
+    ADD CONSTRAINT fk_rails_d56d245f70 FOREIGN KEY (proyectofinanciero_id) REFERENCES public.cor1440_gen_proyectofinanciero(id);
 
 
 --
@@ -10294,6 +10355,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20190322102311'),
 ('20190326150948'),
 ('20190331111015'),
-('20190401175521');
+('20190401175521'),
+('20190403202049');
 
 

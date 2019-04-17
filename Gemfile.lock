@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: 5950fb751000bbe9b285d55283fafe842c1b61ce
+  revision: 6093a209722f83c58e75feb8fb09aa2bd3bc48bf
   specs:
     cor1440_gen (1.0b2)
       devise
@@ -13,7 +13,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: c5a9aba28f1798088fa818e3784a6ee97195774b
+  revision: 62136e108d3e83e91346568be60eeb7570bcb997
   specs:
     heb412_gen (1.0.a1)
       chosen-rails
@@ -24,7 +24,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/mr519_gen.git
-  revision: 6c47132f90622e9c6e0f7b4d2731354a1db62b1b
+  revision: d175e4a460d7ff4bfed12b5e4e85e21befb79e34
   specs:
     mr519_gen (0.1.0)
       rails (~> 5.2.2, >= 5.2.2)
@@ -32,7 +32,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: b93416f12d0a92cd9ab0bf506c8599f0eb582721
+  revision: e1949af203ae741a4a26d83d20888d5886a70400
   specs:
     sal7711_gen (1.0.b1)
       rails
@@ -40,7 +40,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: 55aee4b01e0e9a24c68c935c93d21a9391517f1f
+  revision: 0e433395bfda724c3ba4acc2d1c49a09906aee30
   specs:
     sal7711_web (1.0.a3)
       rails
@@ -48,7 +48,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 15042e90379674bc6dc89d36fabb28ba1335c1df
+  revision: e7494db15be14a71af8dc992d9ae59496ece0759
   specs:
     sip (2.0.b5)
       bootstrap-datepicker-rails
@@ -70,7 +70,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 065bb18557db95ba212e07abeea347aef4be4e09
+  revision: a34a3d981a6867552f5263129cd6d647f84a9889
   specs:
     sivel2_gen (2.0b8)
       devise
@@ -79,7 +79,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: e40859ac0f5f60abcbfc9ead3199593551554bcb
+  revision: 609a97182011b0dbba14337fab9e1b36d701a7cb
   specs:
     sivel2_sjr (2.0.b1)
       rails
@@ -154,7 +154,7 @@ GEM
       railties (>= 3.0)
     builder (3.2.3)
     camertron-eprun (1.1.1)
-    cancancan (3.0.0)
+    cancancan (3.0.1)
     capybara (2.18.0)
       addressable
       mini_mime (>= 0.1.3)
@@ -201,8 +201,8 @@ GEM
     erubi (1.8.0)
     execjs (2.7.0)
     ffi (1.10.0)
-    font-awesome-rails (4.7.0.4)
-      railties (>= 3.2, < 6.0)
+    font-awesome-rails (4.7.0.5)
+      railties (>= 3.2, < 6.1)
     foreman (0.85.0)
       thor (~> 0.19.1)
     globalid (0.4.2)

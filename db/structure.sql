@@ -1226,7 +1226,6 @@ ALTER SEQUENCE public.cor1440_gen_campotind_id_seq OWNED BY public.cor1440_gen_c
 
 CREATE TABLE public.cor1440_gen_caracterizacionpersona (
     id bigint NOT NULL,
-    proyectofinanciero_id integer NOT NULL,
     persona_id integer NOT NULL,
     respuestafor_id integer NOT NULL,
     ulteditor_id integer NOT NULL
@@ -9410,14 +9409,6 @@ ALTER TABLE ONLY public.sivel2_gen_combatiente
 
 
 --
--- Name: cor1440_gen_caracterizacionpersona fk_rails_f910288399; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.cor1440_gen_caracterizacionpersona
-    ADD CONSTRAINT fk_rails_f910288399 FOREIGN KEY (proyectofinanciero_id) REFERENCES public.cor1440_gen_proyectofinanciero(id);
-
-
---
 -- Name: cor1440_gen_actividadpf fk_rails_f941b0c512; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10362,6 +10353,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20190406141156'),
 ('20190406164301'),
 ('20190418011743'),
-('20190418014012');
+('20190418014012'),
+('20190418123920'),
+('20190418142712');
 
 

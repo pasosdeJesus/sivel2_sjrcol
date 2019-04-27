@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: b36cbd7336faf8c450b1094e5a513703e1bfbafa
+  revision: fd6a1c6429751112b4607efebd2d429fd101a3f1
   specs:
     cor1440_gen (1.0b2)
       devise
@@ -13,7 +13,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 33191649dab9ff035743c9e9444e39cde089b349
+  revision: 82c6a7af9f920a2be9324aa9a57e31b25b59c925
   specs:
     heb412_gen (1.0.a1)
       chosen-rails
@@ -24,7 +24,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/mr519_gen.git
-  revision: b351fff8c758b3dfe5d46a2131d406e60517fd9e
+  revision: 4ab28450d835954f66c810f4bc8d689fe0a214ff
   specs:
     mr519_gen (0.1.0)
       rails (~> 5.2.2, >= 5.2.2)
@@ -32,7 +32,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: 6f3dcbbdfb73297f1f56337cee21a26e2f277b6f
+  revision: caaf49c5832be4aa6a12e8f4ddfd372928c49ef1
   specs:
     sal7711_gen (1.0.b1)
       rails
@@ -40,7 +40,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: 7b0666576504e91767125dc02b940c6e206d17a2
+  revision: e0b41231402fd60008541c653711440ba4bb4ae7
   specs:
     sal7711_web (1.0.a3)
       rails
@@ -48,7 +48,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: cb287d1afd2aa195cd3f80a8d587dea6f7a30d4e
+  revision: b0c18e494e0b7030167cbca8c53ef109288d7724
   specs:
     sip (2.0.b5)
       bootstrap-datepicker-rails
@@ -70,7 +70,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 48862ab107a89113b8422dacaf4c8bf7420c5a4e
+  revision: d3aae447cd4bb8a25360de26a6314e148afe3e8a
   specs:
     sivel2_gen (2.0b8)
       devise
@@ -79,7 +79,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: dd1eafcbd50165df0b3d8cfde45c4f1e97b33267
+  revision: 1a9aa267569465f589c26a9d04c6787b1e3c7be8
   specs:
     sivel2_sjr (2.0.b1)
       rails
@@ -148,7 +148,7 @@ GEM
     bindex (0.7.0)
     binding_of_caller (0.8.0)
       debug_inspector (>= 0.0.1)
-    bootsnap (1.4.3)
+    bootsnap (1.4.4)
       msgpack (~> 1.0)
     bootstrap-datepicker-rails (1.8.0.1)
       railties (>= 3.0)
@@ -176,9 +176,9 @@ GEM
     climate_control (0.2.0)
     cliver (0.3.2)
     coderay (1.1.2)
-    coffee-rails (4.2.2)
+    coffee-rails (5.0.0)
       coffee-script (>= 2.2.0)
-      railties (>= 4.0.0)
+      railties (>= 5.2.0)
     coffee-script (2.4.1)
       coffee-script-source
       execjs
@@ -364,7 +364,7 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
-    selenium-webdriver (3.141.5926)
+    selenium-webdriver (3.142.0)
       childprocess (>= 0.5, < 2.0)
       rubyzip (~> 1.2, >= 1.2.2)
     simple_form (4.1.0)

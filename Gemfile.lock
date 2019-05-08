@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: 660e70d702c3b725b47a205086047446015ab027
+  revision: b8a14a6574610fe349e0f7410c5ce9563e403c89
   specs:
     cor1440_gen (1.0b2)
       devise
@@ -13,7 +13,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 833df56b994ee0568dd6d4ed0c3dec33ac64bee9
+  revision: 97ec21f856840a682273993a450d91220d38091d
   specs:
     heb412_gen (1.0.a1)
       chosen-rails
@@ -24,7 +24,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/mr519_gen.git
-  revision: 32e895c45bddd6c039c56eef77f85dd00b3b4f00
+  revision: 0baa2f2a3500936be13e640e1a4fda9fe16731d7
   specs:
     mr519_gen (0.1.0)
       rails (~> 5.2.2, >= 5.2.2)
@@ -32,7 +32,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: 5c4a9a885c6bbaca2797a780ebb0a6945f0e62d2
+  revision: 2d0cdd277ac27862ef7076193c38105fa74f4aef
   specs:
     sal7711_gen (1.0.b1)
       rails
@@ -40,7 +40,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: 23ff6d09f5b5864a6ecd7316d0b40011593cb0db
+  revision: 41f3b67fa9b9dab430915511b719b7eb7478ad0a
   specs:
     sal7711_web (1.0.a3)
       rails
@@ -48,7 +48,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 16e7933a326e3a4859b902dd8376bff7c755f109
+  revision: f48e95107dd5a3941ce75734a28fc1c85d13aef5
   specs:
     sip (2.0.b5)
       bootstrap-datepicker-rails
@@ -70,7 +70,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 270cb02700ea5b6b41792c99105b67f59f4e855b
+  revision: c5ab371538750e302dee7fa427cfd1a6f8619014
   specs:
     sivel2_gen (2.0b8)
       devise
@@ -79,7 +79,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 40472989aee2c612ef580da5de4e9e0f363489e4
+  revision: 16fdf793fbdf041d239ebbce176dc7d258aeae30
   specs:
     sivel2_sjr (2.0.b1)
       rails
@@ -364,7 +364,7 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
-    selenium-webdriver (3.142.0)
+    selenium-webdriver (3.142.1)
       childprocess (>= 0.5, < 2.0)
       rubyzip (~> 1.2, >= 1.2.2)
     simple_form (4.1.0)

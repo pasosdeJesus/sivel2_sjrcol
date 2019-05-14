@@ -159,5 +159,7 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
     "porsjrc"
   end
 
-end
+end # module ClassMethods
+
+
 

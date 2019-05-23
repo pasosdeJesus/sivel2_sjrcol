@@ -31,3 +31,10 @@ public/heb412/
 config/initializers/punto_montaje.rb
 *_test.rb.copia
 coverage
+
+/public/packs
+/public/packs-test
+/node_modules
+/yarn-error.log
+yarn-debug.log*
+.yarn-integrity

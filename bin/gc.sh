@@ -79,11 +79,17 @@ if (test "$?" != "0") then {
 	exit 1;
 } fi;
 
-RACK_MULTIPART_LIMIT=2048 bundle exec rails test
+bundle exec rails test
 if (test "$?" != "0") then {
 	echo "No pasaron pruebas";
 	exit 1;
 } fi;
+CONFIG_HOSTS=127.0.0.1 bundle exec rails test:system
+if (test "$?" != "0") then {
+	echo "No pasaron pruebas";
+	exit 1;
+} fi;
+
 
 RAILS_ENV=test bundle exec rake db:structure:dump
 b=`git branch | grep "^*" | sed -e  "s/^* //g"`

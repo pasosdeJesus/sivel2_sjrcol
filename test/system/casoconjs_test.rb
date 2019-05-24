@@ -1,8 +1,8 @@
 # encoding: UTF-8
 
-require_relative '../test_helper'
+require 'application_system_test_case'
 
-class CasoconjsTest < Capybara::Rails::TestCase
+class CasoconjsTest < ApplicationSystemTestCase
 
   setup do
     @usuario = Usuario.find_by(nusuario: 'sjrcol')

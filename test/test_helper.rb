@@ -3,14 +3,9 @@
 ENV['RAILS_ENV'] ||= 'test'
 
 require 'simplecov'
-SimpleCov.start
-require_relative '../config/environment'
+SimpleCov.start 'rails'
+require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
-
-require "minitest/rails"
-require "minitest/reporters"
-require "minitest/rails/capybara"
-Capybara.javascript_driver = :poltergeist
 
 
 # Usuario para ingresar y hacer pruebas
@@ -30,35 +25,11 @@ PRUEBA_USUARIO = {
 }
 
 class ActiveSupport::TestCase
-  #ActiveRecord::Migration.check_pending!
-  
-  # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
+
   fixtures :all
-
-  # Add more helper methods to be used by all tests here...
-end
-
-class ActionDispatch::IntegrationTest
-  # Ver http://www.rubytutorial.io/how-to-test-an-autocomplete-with-rails/
-  include Capybara::DSL
-
-  require 'capybara/poltergeist'
-
-  Capybara.javascript_driver = :poltergeist
-
-  def teardown
-    Capybara.current_driver = nil
+  
+  protected
+  def load_seeds
+    load "#{Rails.root}/db/seeds.rb"
   end
 end
-
-class ActiveRecord::Base
-  # Ver https://gist.github.com/mperham/3049152
-  mattr_accessor :shared_connection
-  @@shared_connection = nil
-
-  def self.connection
-    @@shared_connection || ConnectionPool::Wrapper.new(:size => 1) { retrieve_connection }
-  end
-end
-ActiveRecord::Base.shared_connection = ActiveRecord::Base.connection
-

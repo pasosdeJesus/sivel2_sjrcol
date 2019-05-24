@@ -1,8 +1,8 @@
 # encoding: UTF-8
 
-require_relative '../test_helper'
+require 'application_system_test_case'
 
-class AccesoTest < Capybara::Rails::TestCase
+class AccesoTest < ApplicationSystemTestCase
 
   test "puede crear caso" do
     @usuario = Usuario.create(PRUEBA_USUARIO)

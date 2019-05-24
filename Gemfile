@@ -111,8 +111,8 @@ gem 'cor1440_gen', git: 'https://github.com/pasosdeJesus/cor1440_gen.git', branc
 #gem 'cor1440_gen', path: '../cor1440_gen'
 
 # Motor de SIVeL 2 - SJR
-gem 'sivel2_sjr', git: 'https://github.com/pasosdeJesus/sivel2_sjr.git', branch: :rails6
-#gem 'sivel2_sjr', path: '../sivel2_sjr'
+#gem 'sivel2_sjr', git: 'https://github.com/pasosdeJesus/sivel2_sjr.git', branch: :rails6
+gem 'sivel2_sjr', path: '../sivel2_sjr'
 
 # Motor Sal7711_gen
 gem 'sal7711_gen', git: 'https://github.com/pasosdeJesus/sal7711_gen.git', branch: :rails6
@@ -125,20 +125,23 @@ gem 'sal7711_web', git: 'https://github.com/pasosdeJesus/sal7711_web.git', branc
 
 
 # Los siguientes son para desarrollo o para pruebas con generadores
-group :development do
+group :development, :test do
   # Depurar
-  #gem 'byebug'
-  
+  gem 'byebug'
+end
+
+group :development do
   # Consola irb en páginas con excepciones o usando <%= console %> en vistasA
   gem 'web-console'
-
 end
+
 
 # Los siguientes son para pruebas y no tiene generadores requeridos en desarrollo
 group :test do
   # Acelera desarrollo ejecutando en fondo.  https://github.com/jonleighton/spring
 
   gem 'simplecov'
+  gem 'capybara'
   gem 'poltergeist'
   # Pruebas de regresión que no requieren javascript
   gem 'selenium-webdriver'

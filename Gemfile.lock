@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: aa6cb41bea7bad5631233cb74d8e8f9721b065db
+  revision: a6fa31bd61831dc8f4be02f1f4783c595a7563f6
   branch: rails6
   specs:
     cor1440_gen (1.0b2)
@@ -14,7 +14,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 589cf35b209dd60213406009929f33868eb3e6af
+  revision: 037985948c3cba4539e7df98e5fdf93313fdc10d
   branch: rails6
   specs:
     heb412_gen (1.0.a1)
@@ -35,7 +35,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: 87f000f181f48bccb9f1d542882bc394f56b55db
+  revision: be604b99a9e34721a6cfa48f462d0e92f547b993
   branch: rails6
   specs:
     sal7711_gen (1.0.b1)
@@ -44,7 +44,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: 7c1f1966f1dbb3114412830a248c363a53fbe3ce
+  revision: 4b26423a00fe2e9a0a71787446ac35d10601dd42
   branch: rails6
   specs:
     sal7711_web (1.0.a3)
@@ -53,7 +53,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 09470447c674bb852f4d8ab489e1f8b04899a369
+  revision: 4cc04f789f0a19939b812210e33b8e5ed6363cb2
   branch: rails6
   specs:
     sip (2.0.b5)
@@ -85,15 +85,6 @@ GIT
       rails
 
 GIT
-  remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 1d7216cc57bb61d8919022602c62dd0652565377
-  branch: rails6
-  specs:
-    sivel2_sjr (2.0.b1)
-      rails
-      sivel2_gen
-
-GIT
   remote: https://github.com/vtamara/chosen-rails.git
   revision: 48c457fc9ef1c4c573b4dcdb9dc07034b46ed6b4
   branch: several-fixes
@@ -109,6 +100,13 @@ GIT
   branch: new_id_with_ajax
   specs:
     cocoon (1.2.11)
+
+PATH
+  remote: ../sivel2_sjr
+  specs:
+    sivel2_sjr (2.0.b1)
+      rails
+      sivel2_gen
 
 GEM
   remote: https://rubygems.org/
@@ -182,6 +180,7 @@ GEM
     bootstrap-datepicker-rails (1.8.0.1)
       railties (>= 3.0)
     builder (3.2.3)
+    byebug (11.0.1)
     camertron-eprun (1.1.1)
     cancancan (3.0.1)
     capybara (3.20.2)
@@ -442,7 +441,9 @@ DEPENDENCIES
   bcrypt
   bootsnap (>= 1.1.0)
   bootstrap-datepicker-rails
+  byebug
   cancancan
+  capybara
   chartkick
   chosen-rails!
   chromedriver-helper

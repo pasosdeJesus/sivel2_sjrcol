@@ -15,7 +15,7 @@ class UsuarioTest < ApplicationSystemTestCase
 
   test "autentica con usuario creado en prueba" do
     @usuario = Usuario.create(PRUEBA_USUARIO)
-    byebug
+    #byebug
     visit main_app.new_usuario_session_path 
     fill_in "Usuario", with: @usuario.nusuario
     fill_in "Clave", with: @usuario.password

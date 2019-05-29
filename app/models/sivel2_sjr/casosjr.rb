@@ -6,9 +6,10 @@ class Sivel2Sjr::Casosjr < ActiveRecord::Base
   include Sivel2Sjr::Concerns::Models::Casosjr
 
     belongs_to :llegadam, class_name: 'Sip::Ubicacion', validate: true,
-      foreign_key: 'id_llegadam'
+      foreign_key: 'id_llegadam', optional: true
     belongs_to :salidam, class_name: 'Sip::Ubicacion', validate: true,
-      foreign_key: 'id_salidam'
+      foreign_key: 'id_salidam', optional: true
+
     validates :motivom, length: { maximum: 5000 }
     validates :memo1612, length: { maximum: 5000 }
     validates :contacto, uniqueness: { 

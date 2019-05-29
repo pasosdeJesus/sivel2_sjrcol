@@ -1,9 +1,8 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: a6fa31bd61831dc8f4be02f1f4783c595a7563f6
-  branch: rails6
+  revision: db70eed188055067f4b9ca1c22de06a7fd99ba59
   specs:
-    cor1440_gen (1.0b2)
+    cor1440_gen (1.0b3)
       devise
       heb412_gen
       jquery-rails
@@ -14,10 +13,9 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 037985948c3cba4539e7df98e5fdf93313fdc10d
-  branch: rails6
+  revision: 39780368a89c42ee4a153211bcd68f830d0ac05f
   specs:
-    heb412_gen (1.0.a1)
+    heb412_gen (1.0.b6)
       chosen-rails
       font-awesome-rails
       redcarpet
@@ -26,26 +24,23 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/mr519_gen.git
-  revision: 88449284303404078a106c8ed13f5547b36bd378
-  branch: rails6
+  revision: 32779aac68e4969dfa21955f8a23bf0ee58a5892
   specs:
-    mr519_gen (0.1.0)
+    mr519_gen (0.2.0)
       rails (~> 6.0.0.rc1, >= 6.0.0.rc1)
       sip
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: be604b99a9e34721a6cfa48f462d0e92f547b993
-  branch: rails6
+  revision: c62f58eba669a2ed6cbb8fc76b4cafdcbf2bb991
   specs:
-    sal7711_gen (1.0.b1)
+    sal7711_gen (1.0.b2)
       rails
       sip
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: 4b26423a00fe2e9a0a71787446ac35d10601dd42
-  branch: rails6
+  revision: 37c2a7b226871cb228f49f6498f0c710cae66da9
   specs:
     sal7711_web (1.0.a3)
       rails
@@ -53,10 +48,9 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 4cc04f789f0a19939b812210e33b8e5ed6363cb2
-  branch: rails6
+  revision: a5f25a7441d45b2df62d4c28d2c99e6c9107abaf
   specs:
-    sip (2.0.b5)
+    sip (2.0.b6)
       bootstrap-datepicker-rails
       cancancan
       chosen-rails
@@ -76,13 +70,20 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 9031c9cfffbf3e3066d39c1964157640ff5a76e4
-  branch: rails6
+  revision: 8580f6065724498d270271fdea8cd21b3149fb93
   specs:
     sivel2_gen (2.0b8)
       devise
       jquery-rails
       rails
+
+GIT
+  remote: https://github.com/pasosdeJesus/sivel2_sjr.git
+  revision: 97267c3a52f1439e1f6f9f49345f0f6137530638
+  specs:
+    sivel2_sjr (2.0.b1)
+      rails
+      sivel2_gen
 
 GIT
   remote: https://github.com/vtamara/chosen-rails.git
@@ -100,13 +101,6 @@ GIT
   branch: new_id_with_ajax
   specs:
     cocoon (1.2.11)
-
-PATH
-  remote: ../sivel2_sjr
-  specs:
-    sivel2_sjr (2.0.b1)
-      rails
-      sivel2_gen
 
 GEM
   remote: https://rubygems.org/
@@ -180,18 +174,17 @@ GEM
     bootstrap-datepicker-rails (1.8.0.1)
       railties (>= 3.0)
     builder (3.2.3)
-    byebug (11.0.1)
     camertron-eprun (1.1.1)
     cancancan (3.0.1)
-    capybara (3.20.2)
+    capybara (3.21.0)
       addressable
       mini_mime (>= 0.1.3)
       nokogiri (~> 1.8)
       rack (>= 1.6.0)
       rack-test (>= 0.6.3)
-      regexp_parser (~> 1.2)
+      regexp_parser (~> 1.5)
       xpath (~> 3.2)
-    chartkick (3.0.2)
+    chartkick (3.1.0)
     childprocess (1.0.1)
       rake (< 13.0)
     chromedriver-helper (2.1.1)
@@ -306,7 +299,7 @@ GEM
     pry-stack_explorer (0.4.9.3)
       binding_of_caller (>= 0.7)
       pry (>= 0.9.11)
-    public_suffix (3.0.3)
+    public_suffix (3.1.0)
     puma (3.12.1)
     rack (2.0.7)
     rack-proxy (0.6.5)
@@ -353,14 +346,14 @@ GEM
     rb-inotify (0.10.0)
       ffi (~> 1.0)
     redcarpet (3.4.0)
-    regexp_parser (1.5.0)
+    regexp_parser (1.5.1)
     responders (2.4.1)
       actionpack (>= 4.2.0, < 6.0)
       railties (>= 4.2.0, < 6.0)
-    rspreadsheet (0.4.5)
+    rspreadsheet (0.4.8)
       andand (~> 1.3)
       rubyzip (~> 1.1)
-    rubyzip (1.2.2)
+    rubyzip (1.2.3)
     sass (3.7.4)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
@@ -422,7 +415,7 @@ GEM
       activemodel (>= 6.0.0.a)
       bindex (>= 0.4.0)
       railties (>= 6.0.0.a)
-    webpacker (4.0.2)
+    webpacker (4.0.4)
       activesupport (>= 4.2)
       rack-proxy (>= 0.6.1)
       railties (>= 4.2)
@@ -441,7 +434,6 @@ DEPENDENCIES
   bcrypt
   bootsnap (>= 1.1.0)
   bootstrap-datepicker-rails
-  byebug
   cancancan
   capybara
   chartkick

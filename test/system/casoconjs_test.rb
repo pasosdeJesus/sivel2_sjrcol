@@ -21,12 +21,6 @@ class CasoconjsTest < ApplicationSystemTestCase
     visit '/casos/nuevo'
     @numcaso=find_field('Código').value
 
-    # Datos básicos
-    #puts page.body
-    fill_in "Fecha de recepción", with: '2014-08-04'
-    fill_in "F. Desp. Emblemático", with: '2014-08-03'
-    #fill_in "Memo", with: 'datos mínimos'
-
     # Sol principal
     click_on "Contacto"
     #if (!find_link('Añadir Sitio Geográfico').visible?)
@@ -37,6 +31,16 @@ class CasoconjsTest < ApplicationSystemTestCase
       fill_in "Nombres", with: 'Nombres Solicitante'
       fill_in "Apellidos", with: 'Apellidos Solicitante'
     end
+
+    # Datos básicos
+    click_on "Datos Básicos"
+    #puts page.body
+    #Problema al abrir 2 calendarios con phantomjs
+    #fill_in "Fecha de recepción", with: '2014-08-04'
+    fill_in "F. Desp. Emblemático", with: '2014-08-03'
+    #fill_in "Memo", with: 'datos mínimos'
+
+
     click_on "Validar y Guardar"
     #page.save_screenshot('tmp/s-sol1.png')
     assert page.has_content? "2014-08-03"

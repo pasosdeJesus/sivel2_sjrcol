@@ -5,15 +5,15 @@ class Sip::Datosbio < ActiveRecord::Base
   belongs_to :persona, class_name: 'Sip::Persona', foreign_key: 'persona_id',
     validate: true
   belongs_to :res_departamento, class_name: 'Sip::Departamento', 
-    foreign_key: 'res_departamento_id', validate: true
+    foreign_key: 'res_departamento_id', validate: true, optional: true
   belongs_to :res_municipio, class_name: 'Sip::Municipio', 
-    foreign_key: 'res_municipio_id', validate: true
+    foreign_key: 'res_municipio_id', validate: true, optional: true
   belongs_to :discapacidad, class_name: '::Discapacidad', 
-    foreign_key: 'discapacidad_id', validate: true
+    foreign_key: 'discapacidad_id', validate: true, optional: true
   belongs_to :escolaridad, class_name: 'Sivel2Gen::Escolaridad', 
-    foreign_key: 'escolaridad_id', validate: true
+    foreign_key: 'escolaridad_id', validate: true, optional: true
   belongs_to :espaciopart, class_name: '::Espaciopart', 
-    foreign_key: 'espaciopart_id', validate: true
+    foreign_key: 'espaciopart_id', validate: true, optional: true
 
   validates :anioaprobacion, numericality: { 
     only_integer: true,  greater_than: 1900, allow_nil: true,

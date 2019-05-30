@@ -30,7 +30,7 @@ module Sip
 
     def presenta_nombre
       ip = numerodocumento ? numerodocumento : ''
-      if tdocumento
+      if tdocumento && tdocumento.sigla
         ip = tdocumento.sigla + ":" + ip
       end
       r = nombres + " " + apellidos + 

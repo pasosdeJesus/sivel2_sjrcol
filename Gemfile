@@ -62,7 +62,7 @@ gem 'twitter-bootstrap-rails'
 gem 'bootstrap-datepicker-rails'
 gem 'font-awesome-rails'
 
-gem 'chartkick'
+gem 'chartkick', '>= 3.2.0'
 
 # Formularios simples 
 gem 'simple_form'

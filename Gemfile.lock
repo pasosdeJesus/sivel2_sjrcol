@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: 0273ce0268d44118e91bb38936ee6aebc2868926
+  revision: 3226ca77b062fa74a494c75f8dad683d74cc9a37
   specs:
     cor1440_gen (1.0b3)
       devise
@@ -13,7 +13,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 7a6d8592c9c16a56d47d1e8a61b40d5ca29cddfd
+  revision: 7cd3f4feb245efafafda7f04b79c7989c25c9594
   specs:
     heb412_gen (1.0.b6)
       chosen-rails
@@ -24,7 +24,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/mr519_gen.git
-  revision: 0d7e7e4d36410423dae8fd086d2eca36a88b5a13
+  revision: 853b40dfcef87839c51790b1f16fc38ac2bcadf2
   specs:
     mr519_gen (0.2.0)
       rails (~> 6.0.0.rc1, >= 6.0.0.rc1)
@@ -32,7 +32,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: ab56b5c5eedd8f621a57e3d44ad44073c64548a0
+  revision: 24e64d583b7fba666649bbbb25539b6e5f6d0853
   specs:
     sal7711_gen (1.0.b2)
       rails
@@ -48,7 +48,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 139dacadd99c645c62c643680369c3eb0c347728
+  revision: ed13bc2235af26d602be64a87ce8c123e748667b
   specs:
     sip (2.0.b6)
       bootstrap-datepicker-rails
@@ -70,7 +70,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 1e24db343a5a42cef3e87bcfb75e38a180b5a19b
+  revision: 97952ce5871761641fdcfc2a366f947486c4e812
   specs:
     sivel2_gen (2.0b9)
       devise
@@ -79,7 +79,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 51b1bdc41bc6eb4e07de7b9c300a8233fc0cbc64
+  revision: 769efe221639e98ab3ac3e7584e0e864427849a7
   specs:
     sivel2_sjr (2.0.b1)
       rails
@@ -176,7 +176,7 @@ GEM
     builder (3.2.3)
     camertron-eprun (1.1.1)
     cancancan (3.0.1)
-    capybara (3.23.0)
+    capybara (3.24.0)
       addressable
       mini_mime (>= 0.1.3)
       nokogiri (~> 1.8)
@@ -214,7 +214,7 @@ GEM
       warden (~> 1.2.3)
     devise-i18n (1.8.0)
       devise (>= 4.6)
-    docile (1.3.1)
+    docile (1.3.2)
     dotenv (0.7.0)
     erubi (1.8.0)
     execjs (2.7.0)
@@ -232,7 +232,7 @@ GEM
     io-like (0.3.0)
     jbuilder (2.9.1)
       activesupport (>= 4.2.0)
-    jquery-rails (4.3.3)
+    jquery-rails (4.3.5)
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)

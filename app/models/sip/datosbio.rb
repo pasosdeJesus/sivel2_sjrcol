@@ -3,7 +3,7 @@
 class Sip::Datosbio < ActiveRecord::Base
 
   belongs_to :persona, class_name: 'Sip::Persona', foreign_key: 'persona_id',
-    validate: true
+    validate: true, optional: true
   belongs_to :res_departamento, class_name: 'Sip::Departamento', 
     foreign_key: 'res_departamento_id', validate: true, optional: true
   belongs_to :res_municipio, class_name: 'Sip::Municipio', 

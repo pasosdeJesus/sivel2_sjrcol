@@ -46,6 +46,6 @@ module Sivel2Sjrcol
 
     config.hosts << ENV['CONFIG_HOSTS'] || '127.0.0.1'
 
-    #config.web_console.whitelisted_ips = ['73.175.20.127']
+    #config.web_console.permission = ['186.102.147.134']
   end
 end

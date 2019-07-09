@@ -15,9 +15,9 @@ module Sip
 
     attr_accessor :fechanac
     def fechanac
-      return Date.new(anionac ? anionac : 1900,
-                  mesnac ? mesnac : 6,
-                  dianac ? dianac : 15)
+      return Date.new(anionac && anionac > 0 ? anionac : 1900,
+                  mesnac && mesnac > 0 && mesnac < 13 ? mesnac : 6,
+                  dianac && dianac > 0 && dianac < 32 ? dianac : 15)
     end
 
     def fechanac=(valc)

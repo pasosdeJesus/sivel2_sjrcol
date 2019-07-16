@@ -58,12 +58,12 @@ CREATE FUNCTION public.campointro(character varying, character varying) RETURNS 
 CREATE FUNCTION public.municipioubicacion(integer) RETURNS character varying
     LANGUAGE sql
     AS $_$
-        SELECT (SELECT nombre FROM sip_pais WHERE id=ubicacion.id_pais) 
-            || COALESCE((SELECT '/' || nombre FROM sip_departamento 
+        SELECT (SELECT nombre FROM public.sip_pais WHERE id=ubicacion.id_pais) 
+            || COALESCE((SELECT '/' || nombre FROM public.sip_departamento 
             WHERE sip_departamento.id = ubicacion.id_departamento),'') 
-            || COALESCE((SELECT '/' || nombre FROM sip_municipio 
+            || COALESCE((SELECT '/' || nombre FROM public.sip_municipio 
             WHERE sip_municipio.id = ubicacion.id_municipio),'') 
-            FROM sip_ubicacion AS ubicacion 
+            FROM public.sip_ubicacion AS ubicacion 
             WHERE ubicacion.id=$1;
       $_$;
 
@@ -427,7 +427,7 @@ CREATE VIEW public.cben1 AS
    FROM public.sivel2_gen_caso caso,
     public.sivel2_sjr_casosjr casosjr,
     public.sivel2_gen_victima victima
-  WHERE ((caso.id = victima.id_caso) AND (caso.id = casosjr.id_caso) AND (caso.id = victima.id_caso));
+  WHERE ((caso.id = victima.id_caso) AND (caso.id = casosjr.id_caso) AND (caso.id = victima.id_caso) AND (casosjr.oficina_id = 2));
 
 
 --
@@ -1967,7 +1967,7 @@ CREATE VIEW public.cres1 AS
     public.sivel2_sjr_casosjr casosjr,
     public.sivel2_sjr_respuesta respuesta,
     public.sivel2_sjr_ayudaestado_respuesta ayudaestado_respuesta
-  WHERE ((caso.id = casosjr.id_caso) AND (caso.id = respuesta.id_caso) AND (respuesta.id = ayudaestado_respuesta.id_respuesta));
+  WHERE ((caso.id = casosjr.id_caso) AND (caso.id = respuesta.id_caso) AND (casosjr.oficina_id = 2) AND (respuesta.id = ayudaestado_respuesta.id_respuesta));
 
 
 --
@@ -4675,30 +4675,6 @@ CREATE TABLE public.sivel2_gen_iglesia (
     observaciones character varying(5000),
     CONSTRAINT iglesia_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
-
-
---
--- Name: sivel2_gen_iniciador; Type: VIEW; Schema: public; Owner: -
---
-
-CREATE VIEW public.sivel2_gen_iniciador AS
- SELECT s3.id_caso,
-    s3.fechainicio,
-    s3.id_usuario,
-    usuario.nusuario
-   FROM public.usuario,
-    ( SELECT s2.id_caso,
-            s2.fechainicio,
-            min(s2.id_usuario) AS id_usuario
-           FROM public.sivel2_gen_caso_usuario s2,
-            ( SELECT f1.id_caso,
-                    min(f1.fechainicio) AS m
-                   FROM public.sivel2_gen_caso_usuario f1
-                  GROUP BY f1.id_caso) c
-          WHERE ((s2.id_caso = c.id_caso) AND (s2.fechainicio = c.m))
-          GROUP BY s2.id_caso, s2.fechainicio
-          ORDER BY s2.id_caso, s2.fechainicio) s3
-  WHERE (usuario.id = s3.id_usuario);
 
 
 --
@@ -9115,14 +9091,6 @@ ALTER TABLE ONLY public.sivel2_sjr_progestado_derecho
 
 
 --
--- Name: cor1440_gen_actividad_actorsocial fk_rails_60b0a60338; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.cor1440_gen_actividad_actorsocial
-    ADD CONSTRAINT fk_rails_60b0a60338 FOREIGN KEY (actividad_id) REFERENCES public.cor1440_gen_actividad(id);
-
-
---
 -- Name: cor1440_gen_plantillahcm_proyectofinanciero fk_rails_62c9243a43; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -9280,6 +9248,14 @@ ALTER TABLE ONLY public.cor1440_gen_formulario_tipoindicador
 
 ALTER TABLE ONLY public.sip_actorsocial
     ADD CONSTRAINT fk_rails_898ac05185 FOREIGN KEY (tipoactorsocial_id) REFERENCES public.sip_tipoactorsocial(id);
+
+
+--
+-- Name: cor1440_gen_actividad_actorsocial fk_rails_8ba599a224; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.cor1440_gen_actividad_actorsocial
+    ADD CONSTRAINT fk_rails_8ba599a224 FOREIGN KEY (actorsocial_id) REFERENCES public.sip_actorsocial(id);
 
 
 --
@@ -9483,14 +9459,6 @@ ALTER TABLE ONLY public.cor1440_gen_actividad_sip_anexo
 
 
 --
--- Name: cor1440_gen_actividad_actorsocial fk_rails_ce380ff451; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.cor1440_gen_actividad_actorsocial
-    ADD CONSTRAINT fk_rails_ce380ff451 FOREIGN KEY (actorsocial_id) REFERENCES public.sip_actorsocial(id);
-
-
---
 -- Name: cor1440_gen_campoact fk_rails_ceb6f1a7f0; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -9632,6 +9600,14 @@ ALTER TABLE ONLY public.cor1440_gen_actividad_valorcampotind
 
 ALTER TABLE ONLY public.mr519_gen_encuestausuario
     ADD CONSTRAINT fk_rails_eccb6f9972 FOREIGN KEY (formulario_id) REFERENCES public.mr519_gen_formulario(id);
+
+
+--
+-- Name: cor1440_gen_actividad_actorsocial fk_rails_ecdad5c731; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.cor1440_gen_actividad_actorsocial
+    ADD CONSTRAINT fk_rails_ecdad5c731 FOREIGN KEY (actividad_id) REFERENCES public.cor1440_gen_actividad(id);
 
 
 --
@@ -10617,7 +10593,6 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20181126221928'),
 ('20181126222648'),
 ('20181130112320'),
-('20181206105121'),
 ('20181206143039'),
 ('20181213103204'),
 ('20181218165548'),
@@ -10660,7 +10635,6 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20190603213842'),
 ('20190603234145'),
 ('20190605143420'),
-('20190611135844'),
 ('20190612101211'),
 ('20190612111043'),
 ('20190612113734'),

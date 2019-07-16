@@ -38,6 +38,9 @@ module Sivel2Sjr
       'fecharec'
     end
 
+    def asegura_camposdinamicos(registro)
+    end
+
     # Tipo de reporte Resolución 1612
     def filtro_particular(conscaso, params_filtro)
       if (params_filtro['dispresenta'] == 'tabla1612') 

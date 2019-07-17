@@ -1,7 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: 3ae8e8c44388a50e756075ba7513b8869118cb91
-  branch: temas
+  revision: 0bf4c2b8a833ad8e3209144c608a2db0d6c0f013
   specs:
     cor1440_gen (1.0b3)
       devise
@@ -14,8 +13,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 62e91c163f4c7ad319aec8458c831559606742c8
-  branch: temas
+  revision: 780adfa379cda800bee0dee8827ff32e69316b80
   specs:
     heb412_gen (1.0.b6)
       chosen-rails
@@ -27,8 +25,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/mr519_gen.git
-  revision: 44735034a866326df25ef651814e98b6cc48b4cf
-  branch: temas
+  revision: 156022970394d3fa3cca9281228e09b8486ef3dd
   specs:
     mr519_gen (0.2.0)
       rails (~> 6.0.0.rc1, >= 6.0.0.rc1)
@@ -36,8 +33,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: 355210732f1bc28d2629c5c713de57e1fa9e37c5
-  branch: temas
+  revision: 1e7f32670173a90d6d2a497d746ecc0a469a9dfb
   specs:
     sal7711_gen (1.0.b2)
       rails
@@ -45,8 +41,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: fb3d1ae7c346874b29826a5496099d7d49a57a40
-  branch: temas
+  revision: d100bbb6c46a67b1f1cd6c533d163ad2788b33ac
   specs:
     sal7711_web (1.0.a3)
       rails
@@ -54,8 +49,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 53ac6cc5bbf8a605d11b6c2633c142e7df837faa
-  branch: temas
+  revision: d4f9c932c91990455535d06609782bd182cbb76c
   specs:
     sip (2.0.b6)
       bootstrap-datepicker-rails
@@ -77,8 +71,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 223270c0f4b724c91bcd6b4ac7091127185019a5
-  branch: temas
+  revision: 5fad3781d356aa6a16d22d20d5d2af4837a19ceb
   specs:
     sivel2_gen (2.0b9)
       devise
@@ -87,8 +80,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 27e63ff33ec4027b1769516180e7115b7193efc1
-  branch: temas
+  revision: b8f655150e12e94450d041b93dc404ccdf551072
   specs:
     sivel2_sjr (2.0.b1)
       rails

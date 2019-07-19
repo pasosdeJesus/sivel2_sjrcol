@@ -1,9 +1,9 @@
 # encoding: UTF-8
-require_dependency "cor1440_gen/concerns/controllers/actividades_controller"
+require_dependency "sivel2_sjr/concerns/controllers/actividades_controller"
 
 module Cor1440Gen
   class ActividadesController < Heb412Gen::ModelosController
-    include Cor1440Gen::Concerns::Controllers::ActividadesController
+    include Sivel2Sjr::Concerns::Controllers::ActividadesController
 
     Cor1440Gen.actividadg1 = "Funcionarias del SJR"
     Cor1440Gen.actividadg3 = "Funcionarios del SJR"

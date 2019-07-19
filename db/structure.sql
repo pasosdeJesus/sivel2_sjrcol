@@ -5200,6 +5200,36 @@ CREATE TABLE public.sivel2_sjr_acreditacion (
 
 
 --
+-- Name: sivel2_sjr_actividad_casosjr; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.sivel2_sjr_actividad_casosjr (
+    id bigint NOT NULL,
+    actividad_id integer,
+    casosjr_id integer
+);
+
+
+--
+-- Name: sivel2_sjr_actividad_casosjr_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.sivel2_sjr_actividad_casosjr_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: sivel2_sjr_actividad_casosjr_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.sivel2_sjr_actividad_casosjr_id_seq OWNED BY public.sivel2_sjr_actividad_casosjr.id;
+
+
+--
 -- Name: sivel2_sjr_actosjr; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -6411,6 +6441,13 @@ ALTER TABLE ONLY public.sivel2_sjr_accionjuridica ALTER COLUMN id SET DEFAULT ne
 --
 
 ALTER TABLE ONLY public.sivel2_sjr_accionjuridica_respuesta ALTER COLUMN id SET DEFAULT nextval('public.sivel2_sjr_accionjuridica_respuesta_id_seq'::regclass);
+
+
+--
+-- Name: sivel2_sjr_actividad_casosjr id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sivel2_sjr_actividad_casosjr ALTER COLUMN id SET DEFAULT nextval('public.sivel2_sjr_actividad_casosjr_id_seq'::regclass);
 
 
 --
@@ -7800,6 +7837,14 @@ ALTER TABLE ONLY public.sivel2_sjr_accionjuridica_respuesta
 
 
 --
+-- Name: sivel2_sjr_actividad_casosjr sivel2_sjr_actividad_casosjr_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sivel2_sjr_actividad_casosjr
+    ADD CONSTRAINT sivel2_sjr_actividad_casosjr_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: sivel2_sjr_aspsicosocial sivel2_sjr_aspsicosocial_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -9065,6 +9110,14 @@ ALTER TABLE ONLY public.cor1440_gen_actividad
 
 
 --
+-- Name: sivel2_sjr_actividad_casosjr fk_rails_4499c9b012; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sivel2_sjr_actividad_casosjr
+    ADD CONSTRAINT fk_rails_4499c9b012 FOREIGN KEY (casosjr_id) REFERENCES public.sivel2_sjr_casosjr(id_caso);
+
+
+--
 -- Name: sip_actorsocial_persona fk_rails_4672f6cbcd; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -9454,6 +9507,14 @@ ALTER TABLE ONLY public.cor1440_gen_beneficiariopf
 
 ALTER TABLE ONLY public.sivel2_gen_combatiente
     ADD CONSTRAINT fk_rails_af43e915a6 FOREIGN KEY (id_filiacion) REFERENCES public.sivel2_gen_filiacion(id);
+
+
+--
+-- Name: sivel2_sjr_actividad_casosjr fk_rails_b2461f538f; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sivel2_sjr_actividad_casosjr
+    ADD CONSTRAINT fk_rails_b2461f538f FOREIGN KEY (actividad_id) REFERENCES public.cor1440_gen_actividad(id);
 
 
 --
@@ -10734,6 +10795,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20190625140232'),
 ('20190703044126'),
 ('20190715083916'),
-('20190715182611');
+('20190715182611'),
+('20190718032712');
 
 

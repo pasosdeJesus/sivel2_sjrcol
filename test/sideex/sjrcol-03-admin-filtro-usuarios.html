@@ -11,23 +11,19 @@
 <tr><td rowspan="1" colspan="3">filtro-usuarios-id </td></tr>
 </thead>
 <tbody>
-<tr><td>clickAt</td><td>link=Regresar<datalist><option>link=Regresar</option><option>css=a.btn</option><option>//a[contains(text(),'Regresar')]</option><option>xpath=(//a[contains(@href, '/usuarios')])[3]</option><option>//div/a</option></datalist></td><td>53,20</td>
+<tr><td>open</td><td>/usuarios<datalist><option>link=Regresar</option><option>css=a.btn</option><option>//a[contains(text(),'Regresar')]</option><option>xpath=(//a[contains(@href, '/usuarios')])[3]</option><option>//div/a</option><option>/usuarios</option></datalist></td><td></td>
 </tr>
 <tr><td>clickAt</td><td>id=filtro_busid<datalist><option>id=filtro_busid</option><option>name=filtro[busid]</option><option>css=#filtro_busid</option><option>//input[@id='filtro_busid']</option><option>//div/input</option></datalist></td><td>34,21</td>
 </tr>
-<tr><td>type</td><td>id=filtro_busid<datalist><option>id=filtro_busid</option><option>name=filtro[busid]</option><option>css=#filtro_busid</option><option>//input[@id='filtro_busid']</option><option>//div/input</option></datalist></td><td>102</td>
+<tr><td>runScript</td><td>$('#filtro_busid').val('102')<datalist><option>id=filtro_busid</option><option>name=filtro[busid]</option><option>css=#filtro_busid</option><option>//input[@id='filtro_busid']</option><option>//div/input</option><option>$('#filtro_busid').val('102')</option></datalist></td><td></td>
 </tr>
-<tr><td>clickAt</td><td>name=filtrar<datalist><option>name=filtrar</option><option>css=input[name="filtrar"]</option><option>//input[@name='filtrar']</option><option>//td[8]/input</option></datalist></td><td>23,15</td>
-</tr>
-<tr><td>clickAt</td><td>id=filtro_busid<datalist><option>id=filtro_busid</option><option>name=filtro[busid]</option><option>css=#filtro_busid</option><option>//input[@id='filtro_busid']</option><option>//div/input</option></datalist></td><td>3,13</td>
-</tr>
-<tr><td>type</td><td>id=filtro_busid<datalist><option>id=filtro_busid</option><option>name=filtro[busid]</option><option>css=#filtro_busid</option><option>//input[@id='filtro_busid']</option><option>//div/input</option></datalist></td><td></td>
-</tr>
-<tr><td>clickAt</td><td>name=filtrar<datalist><option>name=filtrar</option><option>css=input[name="filtrar"]</option><option>//input[@name='filtrar']</option><option>//td[8]/input</option></datalist></td><td>39,14</td>
-</tr>
-<tr><td>clickAt</td><td>link=103<datalist><option>link=103</option><option>css=td &gt; a</option><option>//a[contains(text(),'103')]</option><option>//a[contains(@href, '/usuarios/103')]</option><option>//td/a</option></datalist></td><td>18,15</td>
+<tr><td>clickAt</td><td>name=filtrar<datalist><option>name=filtrar</option><option>css=input[name="filtrar"]</option><option>//input[@name='filtrar']</option><option>//td[9]/input</option></datalist></td><td>6,21</td>
 </tr>
 <tr><td>assertText</td><td>css=h1<datalist><option>css=h1</option><option>//h1</option></datalist></td><td>Usuarios</td>
+</tr>
+<tr><td>storeText</td><td>css=dd<datalist><option>css=dd</option><option>//dd</option></datalist></td><td>idusuario</td>
+</tr>
+<tr><td></td><td><datalist><option></option></datalist></td><td></td>
 </tr>
 </tbody></table>
 <table cellpadding="1" cellspacing="1" border="1">

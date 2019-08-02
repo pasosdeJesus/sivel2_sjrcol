@@ -1,5 +1,4 @@
 require "test_helper"
-require 'capybara/poltergeist'
 
 class NilLogger
     def puts * ; end

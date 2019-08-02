@@ -19,11 +19,13 @@
 </tr>
 <tr><td>clickAt</td><td>name=filtrar<datalist><option>name=filtrar</option><option>css=input[name="filtrar"]</option><option>//input[@name='filtrar']</option><option>//td[9]/input</option></datalist></td><td>6,21</td>
 </tr>
+<tr><td>clickAt</td><td>css=div.container.master-container<datalist><option>css=div.container.master-container</option><option>//body/div</option></datalist></td><td>8,239</td>
+</tr>
+<tr><td>type</td><td>id=filtro_busid<datalist><option>id=filtro_busid</option><option>name=filtro[busid]</option><option>css=#filtro_busid</option><option>//input[@id='filtro_busid']</option><option>//div/input</option></datalist></td><td></td>
+</tr>
+<tr><td>clickAt</td><td>name=filtrar<datalist><option>name=filtrar</option><option>css=input[name="filtrar"]</option><option>//input[@name='filtrar']</option><option>//td[9]/input</option></datalist></td><td>23,12</td>
+</tr>
 <tr><td>assertText</td><td>css=h1<datalist><option>css=h1</option><option>//h1</option></datalist></td><td>Usuarios</td>
-</tr>
-<tr><td>storeText</td><td>css=dd<datalist><option>css=dd</option><option>//dd</option></datalist></td><td>idusuario</td>
-</tr>
-<tr><td></td><td><datalist><option></option></datalist></td><td></td>
 </tr>
 </tbody></table>
 <table cellpadding="1" cellspacing="1" border="1">
@@ -31,8 +33,6 @@
 <tr><td rowspan="1" colspan="3">filtro-usuarios-usuario</td></tr>
 </thead>
 <tbody>
-<tr><td>clickAt</td><td>link=Regresar<datalist><option>link=Regresar</option><option>css=a.btn</option><option>//a[contains(text(),'Regresar')]</option><option>xpath=(//a[contains(@href, '/usuarios')])[3]</option><option>//div/a</option></datalist></td><td>44,24</td>
-</tr>
 <tr><td>runScript</td><td>$('.chosen-select').removeAttr('style'); $('.chosen-container').remove(); $('.chosen-select').removeClass('chosen-select')<datalist><option>$('.chosen-select').removeAttr('style'); $('.chosen-container').remove(); $('.chosen-select').removeClass('chosen-select')</option></datalist></td><td></td>
 </tr>
 <tr><td>select</td><td>id=filtro_busnusuario<datalist><option>id=filtro_busnusuario</option><option>name=filtro[busnusuario]</option><option>css=#filtro_busnusuario</option><option>//select[@id='filtro_busnusuario']</option><option>//select</option></datalist></td><td>label=aaa</td>
@@ -145,15 +145,19 @@
 <tr><td rowspan="1" colspan="3">filtro-usuarios-correo</td></tr>
 </thead>
 <tbody>
-<tr><td>clickAt</td><td>//tbody/tr/td[6]<datalist><option>//tbody/tr/td[6]</option></datalist></td><td>117,25</td>
+<tr><td>clickAt</td><td>id=filtro_busemail<datalist><option>id=filtro_busemail</option><option>name=filtro[busemail]</option><option>css=#filtro_busemail</option><option>//input[@id='filtro_busemail']</option><option>//td[6]/div/input</option></datalist></td><td>43,16</td>
+</tr>
+<tr><td>type</td><td>id=filtro_busemail<datalist><option>id=filtro_busemail</option><option>name=filtro[busemail]</option><option>css=#filtro_busemail</option><option>//input[@id='filtro_busemail']</option><option>//td[6]/div/input</option></datalist></td><td>aaa@aab.org</td>
+</tr>
+<tr><td>clickAt</td><td>name=filtrar<datalist><option>name=filtrar</option><option>css=input[name="filtrar"]</option><option>//input[@name='filtrar']</option><option>//td[9]/input</option></datalist></td><td>43,16</td>
+</tr>
+<tr><td>clickAt</td><td>css=div.container.master-container<datalist><option>css=div.container.master-container</option><option>//body/div</option></datalist></td><td>8,239</td>
 </tr>
 <tr><td>clickAt</td><td>id=filtro_busemail<datalist><option>id=filtro_busemail</option><option>name=filtro[busemail]</option><option>css=#filtro_busemail</option><option>//input[@id='filtro_busemail']</option><option>//td[6]/div/input</option></datalist></td><td>62,20</td>
 </tr>
-<tr><td>type</td><td>id=filtro_busemail<datalist><option>id=filtro_busemail</option><option>name=filtro[busemail]</option><option>css=#filtro_busemail</option><option>//input[@id='filtro_busemail']</option><option>//td[6]/div/input</option></datalist></td><td>aaa@aaab.org</td>
-</tr>
 <tr><td>clickAt</td><td>name=filtrar<datalist><option>name=filtrar</option><option>css=input[name="filtrar"]</option><option>//input[@name='filtrar']</option><option>//td[8]/input</option></datalist></td><td>17,14</td>
 </tr>
-<tr><td>clickAt</td><td>//tr[2]<datalist><option>//tr[2]</option></datalist></td><td>810,36</td>
+<tr><td>type</td><td>id=filtro_busemail<datalist><option>id=filtro_busemail</option><option>name=filtro[busemail]</option><option>css=#filtro_busemail</option><option>//input[@id='filtro_busemail']</option><option>//td[6]/div/input</option></datalist></td><td>aaa@aaab.org</td>
 </tr>
 <tr><td>type</td><td>id=filtro_busemail<datalist><option>id=filtro_busemail</option><option>name=filtro[busemail]</option><option>css=#filtro_busemail</option><option>//input[@id='filtro_busemail']</option><option>//td[6]/div/input</option></datalist></td><td></td>
 </tr>

@@ -11,7 +11,9 @@
 <tr><td rowspan="1" colspan="3">casos-filtro-palabra-completa </td></tr>
 </thead>
 <tbody>
-<tr><td>clickAt</td><td>link=Regresar<datalist><option>link=Regresar</option><option>css=a.btn</option><option>//a[contains(text(),'Regresar')]</option><option>xpath=(//a[contains(@href, '/casos')])[3]</option><option>//div[2]/a</option></datalist></td><td>26,19</td>
+<tr><td>clickAt</td><td>link=Casos<datalist><option>link=Casos</option><option>css=a.dropdown-toggle</option><option>//a[contains(text(),'Casos')]</option><option>//a[contains(@href, '#')]</option><option>//a</option></datalist></td><td>43,25</td>
+</tr>
+<tr><td>clickAt</td><td>link=Listado<datalist><option>link=Listado</option><option>css=li.active &gt; a</option><option>//a[contains(text(),'Listado')]</option><option>//a[contains(@href, '/casos')]</option><option>//li/ul/li/a</option></datalist></td><td>51,18</td>
 </tr>
 <tr><td>clickAt</td><td>id=filtro_q<datalist><option>id=filtro_q</option><option>name=filtro[q]</option><option>css=#filtro_q</option><option>//input[@id='filtro_q']</option><option>//div/input</option></datalist></td><td>67,9</td>
 </tr>
@@ -92,6 +94,34 @@
 <tr><td>clickAt</td><td>css=button.btn.btn-default.btn-xs<datalist><option>css=button.btn.btn-default.btn-xs</option><option>//button[@type='reset']</option><option>//div[5]/button</option></datalist></td><td>23,15</td>
 </tr>
 <tr><td>clickAt</td><td>name=commit<datalist><option>name=commit</option><option>css=input[name="commit"]</option><option>//input[@name='commit']</option><option>//div[4]/input</option></datalist></td><td>22,24</td>
+</tr>
+<tr><td>assertText</td><td>css=h1<datalist><option>css=h1</option><option>//h1</option></datalist></td><td>Casos</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">casos-filtro-fecha-de-recepcion-final</td></tr>
+</thead>
+<tbody>
+<tr><td>clickAt</td><td>id=boton_filtro_avanzado<datalist><option>id=boton_filtro_avanzado</option><option>link=Opciones Avanzadas</option><option>css=#boton_filtro_avanzado</option><option>//a[contains(text(),'Opciones Avanzadas')]</option><option>//a[@id='boton_filtro_avanzado']</option><option>//a[contains(@href, '#filtro_avanzado')]</option><option>//div[5]/a</option></datalist></td><td>65,4</td>
+</tr>
+<tr><td>clickAt</td><td>id=filtro_fecharecfin<datalist><option>id=filtro_fecharecfin</option><option>name=filtro[fecharecfin]</option><option>css=#filtro_fecharecfin</option><option>//input[@id='filtro_fecharecfin']</option><option>//div[@id='filtro_avanzado']/div/div[3]/div[3]/div/input</option><option>//div[3]/div[3]/div/input</option></datalist></td><td>106,9</td>
+</tr>
+<tr><td>clickAt</td><td>css=th.datepicker-switch<datalist><option>css=th.datepicker-switch</option><option>//tr[2]/th[2]</option></datalist></td><td>65,6</td>
+</tr>
+<tr><td>clickAt</td><td>//div[2]/table/thead/tr[2]/th[2]<datalist><option>//div[2]/table/thead/tr[2]/th[2]</option></datalist></td><td>78,20</td>
+</tr>
+<tr><td>clickAt</td><td>//div[3]/table/tbody/tr/td/span[10]<datalist><option>//div[3]/table/tbody/tr/td/span[10]</option></datalist></td><td>15,29</td>
+</tr>
+<tr><td>clickAt</td><td>//span[12]<datalist><option>//span[12]</option></datalist></td><td>22,27</td>
+</tr>
+<tr><td>clickAt</td><td>//div[2]/div/table/tbody/tr[3]/td[5]<datalist><option>//div[2]/div/table/tbody/tr[3]/td[5]</option></datalist></td><td>23,17</td>
+</tr>
+<tr><td>clickAt</td><td>name=commit<datalist><option>name=commit</option><option>css=input[name="commit"]</option><option>//input[@name='commit']</option><option>//div[4]/input</option></datalist></td><td>30,22</td>
+</tr>
+<tr><td>clickAt</td><td>css=button.btn.btn-default.btn-xs<datalist><option>css=button.btn.btn-default.btn-xs</option><option>//button[@type='reset']</option><option>//div[5]/button</option></datalist></td><td>66,10</td>
+</tr>
+<tr><td>clickAt</td><td>name=commit<datalist><option>name=commit</option><option>css=input[name="commit"]</option><option>//input[@name='commit']</option><option>//div[4]/input</option></datalist></td><td>25,17</td>
 </tr>
 <tr><td>assertText</td><td>css=h1<datalist><option>css=h1</option><option>//h1</option></datalist></td><td>Casos</td>
 </tr>
@@ -204,34 +234,6 @@
 <tr><td>clickAt</td><td>css=button.btn.btn-default.btn-xs<datalist><option>css=button.btn.btn-default.btn-xs</option><option>//button[@type='reset']</option><option>//div[5]/button</option></datalist></td><td>49,11</td>
 </tr>
 <tr><td>clickAt</td><td>name=commit<datalist><option>name=commit</option><option>css=input[name="commit"]</option><option>//input[@name='commit']</option><option>//div[4]/input</option></datalist></td><td>29,25</td>
-</tr>
-<tr><td>assertText</td><td>css=h1<datalist><option>css=h1</option><option>//h1</option></datalist></td><td>Casos</td>
-</tr>
-</tbody></table>
-<table cellpadding="1" cellspacing="1" border="1">
-<thead>
-<tr><td rowspan="1" colspan="3">casos-filtro-fecha-de-recepcion-final</td></tr>
-</thead>
-<tbody>
-<tr><td>clickAt</td><td>id=boton_filtro_avanzado<datalist><option>id=boton_filtro_avanzado</option><option>link=Opciones Avanzadas</option><option>css=#boton_filtro_avanzado</option><option>//a[contains(text(),'Opciones Avanzadas')]</option><option>//a[@id='boton_filtro_avanzado']</option><option>//a[contains(@href, '#filtro_avanzado')]</option><option>//div[5]/a</option></datalist></td><td>65,4</td>
-</tr>
-<tr><td>clickAt</td><td>id=filtro_fecharecfin<datalist><option>id=filtro_fecharecfin</option><option>name=filtro[fecharecfin]</option><option>css=#filtro_fecharecfin</option><option>//input[@id='filtro_fecharecfin']</option><option>//div[@id='filtro_avanzado']/div/div[3]/div[3]/div/input</option><option>//div[3]/div[3]/div/input</option></datalist></td><td>106,9</td>
-</tr>
-<tr><td>clickAt</td><td>css=th.datepicker-switch<datalist><option>css=th.datepicker-switch</option><option>//tr[2]/th[2]</option></datalist></td><td>65,6</td>
-</tr>
-<tr><td>clickAt</td><td>//div[2]/table/thead/tr[2]/th[2]<datalist><option>//div[2]/table/thead/tr[2]/th[2]</option></datalist></td><td>78,20</td>
-</tr>
-<tr><td>clickAt</td><td>//div[3]/table/tbody/tr/td/span[10]<datalist><option>//div[3]/table/tbody/tr/td/span[10]</option></datalist></td><td>15,29</td>
-</tr>
-<tr><td>clickAt</td><td>//span[12]<datalist><option>//span[12]</option></datalist></td><td>22,27</td>
-</tr>
-<tr><td>clickAt</td><td>//div[2]/div/table/tbody/tr[3]/td[5]<datalist><option>//div[2]/div/table/tbody/tr[3]/td[5]</option></datalist></td><td>23,17</td>
-</tr>
-<tr><td>clickAt</td><td>name=commit<datalist><option>name=commit</option><option>css=input[name="commit"]</option><option>//input[@name='commit']</option><option>//div[4]/input</option></datalist></td><td>30,22</td>
-</tr>
-<tr><td>clickAt</td><td>css=button.btn.btn-default.btn-xs<datalist><option>css=button.btn.btn-default.btn-xs</option><option>//button[@type='reset']</option><option>//div[5]/button</option></datalist></td><td>66,10</td>
-</tr>
-<tr><td>clickAt</td><td>name=commit<datalist><option>name=commit</option><option>css=input[name="commit"]</option><option>//input[@name='commit']</option><option>//div[4]/input</option></datalist></td><td>25,17</td>
 </tr>
 <tr><td>assertText</td><td>css=h1<datalist><option>css=h1</option><option>//h1</option></datalist></td><td>Casos</td>
 </tr>

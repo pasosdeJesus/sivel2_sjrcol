@@ -2438,6 +2438,64 @@
 </tbody></table>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
+<tr><td rowspan="1" colspan="3">tabla-tema</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>/<datalist><option>http://colombia.sjrlac.info:5100/</option><option>/</option></datalist></td><td></td>
+</tr>
+<tr><td>clickAt</td><td>link=Administrar<datalist><option>link=Administrar</option><option>//a[contains(text(),'Administrar')]</option><option>xpath=(//a[contains(@href, '#')])[6]</option><option>//ul[2]/li[2]/a</option></datalist></td><td>48,20</td>
+</tr>
+<tr><td>clickAt</td><td>link=Tablas Básicas<datalist><option>link=Tablas Básicas</option><option>//a[contains(text(),'Tablas Básicas')]</option><option>//a[contains(@href, '/tablasbasicas')]</option><option>//ul[2]/li[2]/ul/li[5]/a</option></datalist></td><td>57,13</td>
+</tr>
+<tr><td>clickAt</td><td>link=Temas<datalist><option>link=Temas</option><option>//a[contains(text(),'Temas')]</option><option>//a[contains(@href, 'admin/temas')]</option><option>//li[49]/a</option></datalist></td><td>22,11</td>
+</tr>
+<tr><td>clickAt</td><td>css=a.btn.btn-primary<datalist><option>css=a.btn.btn-primary</option><option>xpath=(//a[contains(text(),'Nuevo')])[2]</option><option>//a[contains(@href, '/admin/temas/nueva')]</option><option>//div[2]/a</option></datalist></td><td>37,14</td>
+</tr>
+<tr><td>clickAt</td><td>id=tema_nombre<datalist><option>id=tema_nombre</option><option>name=tema[nombre]</option><option>css=#tema_nombre</option><option>//input[@id='tema_nombre']</option><option>//form[@id='new_tema']/div[2]/input</option><option>//div[2]/input</option></datalist></td><td>319,11</td>
+</tr>
+<tr><td>type</td><td>id=tema_nombre<datalist><option>id=tema_nombre</option><option>name=tema[nombre]</option><option>css=#tema_nombre</option><option>//input[@id='tema_nombre']</option><option>//form[@id='new_tema']/div[2]/input</option><option>//div[2]/input</option></datalist></td><td>Rojo</td>
+</tr>
+<tr><td>clickAt</td><td>css=span.color-preview.current-color<datalist><option>css=span.color-preview.current-color</option><option>//div[@id='tema[nav_ini]']/div/button/span</option><option>//div/div/div/button/span</option></datalist></td><td>5,12</td>
+</tr>
+<tr><td>clickAt</td><td>css=span.color-box.spectrum-red<datalist><option>css=span.color-box.spectrum-red</option><option>//div[@id='tema[nav_ini]']/div/div/div[2]/ul/li[2]/a/span[3]</option><option>//li[2]/a/span[3]</option></datalist></td><td>88,5</td>
+</tr>
+<tr><td>clickAt</td><td>css=span.color-preview.red<datalist><option>css=span.color-preview.red</option><option>//div[@id='tema[nav_ini]']/div/div/div[2]/ul/li[2]/a/span</option><option>//li[2]/a/span</option></datalist></td><td>10,9</td>
+</tr>
+<tr><td>clickAt</td><td>//div[@id='tema[nav_fin]']/div/button/span<datalist><option>//div[@id='tema[nav_fin]']/div/button/span</option><option>//div[4]/div/div/div/div/button/span</option></datalist></td><td>19,7</td>
+</tr>
+<tr><td>clickAt</td><td>css=div.input-group-btn.open &gt; div.color-menu.dropdown-menu &gt; div.basicColors-content.active-content &gt; ul.basic-colors-list &gt; li.color-item &gt; a.red.color-link &gt; span.color-box.spectrum-red<datalist><option>css=div.input-group-btn.open &gt; div.color-menu.dropdown-menu &gt; div.basicColors-content.active-content &gt; ul.basic-colors-list &gt; li.color-item &gt; a.red.color-link &gt; span.color-box.spectrum-red</option><option>//div[@id='tema[nav_fin]']/div/div/div[2]/ul/li[2]/a/span[3]</option><option>//li[2]/a/span[3]</option></datalist></td><td>39,9</td>
+</tr>
+<tr><td>clickAt</td><td>css=div.input-group-btn.open &gt; div.color-menu.dropdown-menu &gt; div.basicColors-content.active-content &gt; ul.basic-colors-list &gt; li.color-item &gt; a.red.color-link &gt; span.color-preview.red<datalist><option>css=div.input-group-btn.open &gt; div.color-menu.dropdown-menu &gt; div.basicColors-content.active-content &gt; ul.basic-colors-list &gt; li.color-item &gt; a.red.color-link &gt; span.color-preview.red</option><option>//div[@id='tema[nav_fin]']/div/div/div[2]/ul/li[2]/a/span</option><option>//div[4]/div/div/div/div/div/div[2]/ul/li[2]/a/span</option></datalist></td><td>10,5</td>
+</tr>
+<tr><td>clickAt</td><td>//div[@id='tema[nav_fuente]']/div/button/span<datalist><option>//div[@id='tema[nav_fuente]']/div/button/span</option><option>//div[5]/div/div/div/div/button/span</option></datalist></td><td>12,18</td>
+</tr>
+<tr><td>clickAt</td><td>css=div.input-group-btn.open &gt; div.color-menu.dropdown-menu &gt; div.basicColors-content.active-content &gt; ul.basic-colors-list &gt; li.color-item &gt; a.yellow.color-link &gt; span.color-box.spectrum-yellow<datalist><option>css=div.input-group-btn.open &gt; div.color-menu.dropdown-menu &gt; div.basicColors-content.active-content &gt; ul.basic-colors-list &gt; li.color-item &gt; a.yellow.color-link &gt; span.color-box.spectrum-yellow</option><option>//div[@id='tema[nav_fuente]']/div/div/div[2]/ul/li[4]/a/span[3]</option><option>//div[5]/div/div/div/div/div/div[2]/ul/li[4]/a/span[3]</option></datalist></td><td>62,9</td>
+</tr>
+<tr><td>clickAt</td><td>css=div.input-group-btn.open &gt; div.color-menu.dropdown-menu &gt; div.basicColors-content.active-content &gt; ul.basic-colors-list &gt; li.color-item &gt; a.yellow.color-link &gt; span.color-preview.yellow<datalist><option>css=div.input-group-btn.open &gt; div.color-menu.dropdown-menu &gt; div.basicColors-content.active-content &gt; ul.basic-colors-list &gt; li.color-item &gt; a.yellow.color-link &gt; span.color-preview.yellow</option><option>//div[@id='tema[nav_fuente]']/div/div/div[2]/ul/li[4]/a/span</option><option>//div[5]/div/div/div/div/div/div[2]/ul/li[4]/a/span</option></datalist></td><td>14,8</td>
+</tr>
+<tr><td>clickAt</td><td>//div[@id='tema[fondo_lista]']/div/button/span<datalist><option>//div[@id='tema[fondo_lista]']/div/button/span</option><option>//div[6]/div/div/div/div/button/span</option></datalist></td><td>19,13</td>
+</tr>
+<tr><td>clickAt</td><td>css=div.input-group-btn.open &gt; div.color-menu.dropdown-menu &gt; div.basicColors-content.active-content &gt; ul.basic-colors-list &gt; li.color-item &gt; a.yellow.color-link &gt; span.color-box.spectrum-yellow<datalist><option>css=div.input-group-btn.open &gt; div.color-menu.dropdown-menu &gt; div.basicColors-content.active-content &gt; ul.basic-colors-list &gt; li.color-item &gt; a.yellow.color-link &gt; span.color-box.spectrum-yellow</option><option>//div[@id='tema[fondo_lista]']/div/div/div[2]/ul/li[4]/a/span[3]</option><option>//div[6]/div/div/div/div/div/div[2]/ul/li[4]/a/span[3]</option></datalist></td><td>10,7</td>
+</tr>
+<tr><td>clickAt</td><td>css=div.input-group-btn.open &gt; div.color-menu.dropdown-menu &gt; div.basicColors-content.active-content &gt; ul.basic-colors-list &gt; li.color-item &gt; a.yellow.color-link &gt; span.color-box.spectrum-yellow<datalist><option>css=div.input-group-btn.open &gt; div.color-menu.dropdown-menu &gt; div.basicColors-content.active-content &gt; ul.basic-colors-list &gt; li.color-item &gt; a.yellow.color-link &gt; span.color-box.spectrum-yellow</option><option>//div[@id='tema[fondo_lista]']/div/div/div[2]/ul/li[4]/a/span[2]</option><option>//div[6]/div/div/div/div/div/div[2]/ul/li[4]/a/span[2]</option></datalist></td><td>22,8</td>
+</tr>
+<tr><td>clickAt</td><td>css=div.input-group-btn.open &gt; div.color-menu.dropdown-menu &gt; div.basicColors-content.active-content &gt; ul.basic-colors-list &gt; li.color-item &gt; a.yellow.color-link &gt; span.color-preview.yellow<datalist><option>css=div.input-group-btn.open &gt; div.color-menu.dropdown-menu &gt; div.basicColors-content.active-content &gt; ul.basic-colors-list &gt; li.color-item &gt; a.yellow.color-link &gt; span.color-preview.yellow</option><option>//div[@id='tema[fondo_lista]']/div/div/div[2]/ul/li[4]/a/span</option><option>//div[6]/div/div/div/div/div/div[2]/ul/li[4]/a/span</option></datalist></td><td>12,15</td>
+</tr>
+<tr><td>clickAt</td><td>id=tema_observaciones<datalist><option>id=tema_observaciones</option><option>name=tema[observaciones]</option><option>css=#tema_observaciones</option><option>//input[@id='tema_observaciones']</option><option>//form[@id='new_tema']/div[7]/input</option><option>//div[7]/input</option></datalist></td><td>99,14</td>
+</tr>
+<tr><td>type</td><td>id=tema_observaciones<datalist><option>id=tema_observaciones</option><option>name=tema[observaciones]</option><option>css=#tema_observaciones</option><option>//input[@id='tema_observaciones']</option><option>//form[@id='new_tema']/div[7]/input</option><option>//div[7]/input</option></datalist></td><td>bbb</td>
+</tr>
+<tr><td>clickAt</td><td>name=commit<datalist><option>name=commit</option><option>css=input[name="commit"]</option><option>//input[@name='commit']</option><option>//form[@id='new_tema']/div[10]/input</option><option>//div[10]/input</option></datalist></td><td>18,23</td>
+</tr>
+<tr><td>chooseOkOnNextConfirmation</td><td><datalist><option></option></datalist></td><td></td>
+</tr>
+<tr><td>clickAt</td><td>link=Eliminar<datalist><option>link=Eliminar</option><option>css=a.btn.btn-danger</option><option>//a[contains(text(),'Eliminar')]</option><option>xpath=(//a[contains(@href, '/admin/temas/102')])[2]</option><option>//div[4]/a</option></datalist></td><td>46,15</td>
+</tr>
+<tr><td>assertText</td><td>css=h1<datalist><option>css=h1</option><option>//h1</option></datalist></td><td>Temas</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
 <tr><td rowspan="1" colspan="3">tabla-tipo-de-actividad-de-proyecto-financiero</td></tr>
 </thead>
 <tbody>

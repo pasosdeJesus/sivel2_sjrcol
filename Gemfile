@@ -145,7 +145,7 @@ group :test do
 
   gem 'simplecov'
   gem 'capybara'
-  gem 'poltergeist'
+
   # Pruebas de regresión que no requieren javascript
   gem 'selenium-webdriver'
   gem 'chromedriver-helper'
@@ -156,7 +156,7 @@ end
 
 group :production do
   # Para despliegue
-  gem 'unicorn', '~> 5.5.0.1.g6836'
+  gem 'unicorn'
 
 
   # Requerido por heroku para usar stdout como bitacora

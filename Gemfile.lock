@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: 8c727dd46ee67266f4bf5b0147a8aa9daa0357b8
+  revision: 63a64dd385e7960e00a65404678559828c2a9d79
   specs:
     cor1440_gen (1.0b3)
       devise
@@ -13,7 +13,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: eac2862a01ccd1df2edd33d1c3bc91787bd94133
+  revision: 39234a61e0474746fbe736d3b73502e805a2ec26
   specs:
     heb412_gen (1.0.b6)
       chosen-rails
@@ -25,7 +25,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/mr519_gen.git
-  revision: 1d1a30d29fc5c15acd156284953d214f9cf23563
+  revision: f73fa82c5586b57140968c1b85974990ae74e26e
   specs:
     mr519_gen (0.2.0)
       rails (~> 6.0.0.rc1, >= 6.0.0.rc1)
@@ -33,7 +33,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: 539a6f4d0e07614fc7be90dee67955969547c0f5
+  revision: 73d7a4c24dddc5700dc7f634ebad5f286f282637
   specs:
     sal7711_gen (1.0.b2)
       rails
@@ -41,7 +41,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: 4fc84e24a35f7e30869ff136146e4cbcc8a36f2b
+  revision: 6554c8ec20b43b0d59aff92b9bb377b637ee615c
   specs:
     sal7711_web (1.0.a3)
       rails
@@ -49,7 +49,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 7fbbe904a5bcd7344e0ed26c35de43fe94f2915e
+  revision: d45802ee888d98bcaaab997f2b42875c707395ce
   specs:
     sip (2.0.b6)
       bootstrap-datepicker-rails
@@ -71,7 +71,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: f7dc98177cf321be5056ee398975ed35aafcf831
+  revision: 29b956ce4062f43024f7fb16ad152f7aa833fc89
   specs:
     sivel2_gen (2.0b9)
       devise
@@ -80,7 +80,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: b93ee71bbe73b65e1b7f842a1ead7260213c1b96
+  revision: a89e6d370c6a3a8b6205e733d483603a7e43c741
   specs:
     sivel2_sjr (2.0.b1)
       rails
@@ -164,8 +164,6 @@ GEM
     addressable (2.6.0)
       public_suffix (>= 2.0.2, < 4.0)
     andand (1.3.3)
-    archive-zip (0.12.0)
-      io-like (~> 0.3.0)
     bcrypt (3.1.13)
     bindex (0.8.1)
     binding_of_caller (0.8.0)
@@ -177,7 +175,7 @@ GEM
     builder (3.2.3)
     camertron-eprun (1.1.1)
     cancancan (3.0.1)
-    capybara (3.27.0)
+    capybara (3.28.0)
       addressable
       mini_mime (>= 0.1.3)
       nokogiri (~> 1.8)
@@ -188,9 +186,6 @@ GEM
     chartkick (3.2.1)
     childprocess (1.0.1)
       rake (< 13.0)
-    chromedriver-helper (2.1.1)
-      archive-zip (~> 0.10)
-      nokogiri (~> 1.8)
     cldr-plurals-runtime-rb (1.0.1)
     climate_control (0.2.0)
     coderay (1.1.2)
@@ -229,7 +224,6 @@ GEM
     i18n (1.6.0)
       concurrent-ruby (~> 1.0)
     interception (0.5)
-    io-like (0.3.0)
     jbuilder (2.9.1)
       activesupport (>= 4.2.0)
     jquery-rails (4.3.5)
@@ -262,7 +256,7 @@ GEM
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
     minitest (5.11.3)
-    msgpack (1.3.0)
+    msgpack (1.3.1)
     nio4r (2.4.0)
     nokogiri (1.10.3)
       mini_portile2 (~> 2.4.0)
@@ -325,7 +319,7 @@ GEM
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
-    rails-html-sanitizer (1.0.4)
+    rails-html-sanitizer (1.1.0)
       loofah (~> 2.2, >= 2.2.2)
     rails-i18n (5.1.3)
       i18n (>= 0.7, < 2)
@@ -441,7 +435,6 @@ DEPENDENCIES
   capybara
   chartkick
   chosen-rails!
-  chromedriver-helper
   cocoon!
   coffee-rails
   colorize

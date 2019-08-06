@@ -1,8 +1,8 @@
 require "test_helper"
 
-class NilLogger
-    def puts * ; end
-end
+#class NilLogger
+#    def puts * ; end
+#end
 
 class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
 

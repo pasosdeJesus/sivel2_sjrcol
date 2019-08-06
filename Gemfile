@@ -148,7 +148,6 @@ group :test do
 
   # Pruebas de regresión que no requieren javascript
   gem 'selenium-webdriver'
-  gem 'chromedriver-helper'
 
   gem 'pry-rescue'
   gem 'pry-stack_explorer'

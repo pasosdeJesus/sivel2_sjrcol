@@ -1,10 +1,10 @@
 # encoding: UTF-8
 
-require 'sip/concerns/models/actorsocial'
+require 'cor1440_gen/concerns/models/actorsocial'
 
 module Sip
   class Actorsocial < ActiveRecord::Base
-    include Sip::Concerns::Models::Actorsocial
+    include Cor1440Gen::Concerns::Models::Actorsocial
       belongs_to :departamento, class_name: "Sip::Departamento",
         foreign_key: "departamento_id", validate: true, optional: true
       belongs_to :lineaactorsocial, class_name: "Sip::Lineaactorsocial",
@@ -16,6 +16,6 @@ module Sip
       
 
       validates :tipoactorsocial_id, presence: true
-      validates :nit, uniqueness: true
+      validates :nit, uniqueness: true, allow_blank: true
   end
 end

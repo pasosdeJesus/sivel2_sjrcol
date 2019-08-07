@@ -1,17 +1,4 @@
 GIT
-  remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: 63a64dd385e7960e00a65404678559828c2a9d79
-  specs:
-    cor1440_gen (1.0b3)
-      devise
-      heb412_gen
-      jquery-rails
-      mr519_gen
-      paperclip
-      rails
-      sip
-
-GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
   revision: 39234a61e0474746fbe736d3b73502e805a2ec26
   specs:
@@ -21,14 +8,6 @@ GIT
       mr519_gen
       redcarpet
       rspreadsheet
-      sip
-
-GIT
-  remote: https://github.com/pasosdeJesus/mr519_gen.git
-  revision: f73fa82c5586b57140968c1b85974990ae74e26e
-  specs:
-    mr519_gen (0.2.0)
-      rails (~> 6.0.0.rc1, >= 6.0.0.rc1)
       sip
 
 GIT
@@ -48,8 +27,52 @@ GIT
       sal7711_gen
 
 GIT
-  remote: https://github.com/pasosdeJesus/sip.git
-  revision: d45802ee888d98bcaaab997f2b42875c707395ce
+  remote: https://github.com/pasosdeJesus/sivel2_gen.git
+  revision: 29b956ce4062f43024f7fb16ad152f7aa833fc89
+  specs:
+    sivel2_gen (2.0b9)
+      devise
+      jquery-rails
+      rails
+
+GIT
+  remote: https://github.com/vtamara/chosen-rails.git
+  revision: 48c457fc9ef1c4c573b4dcdb9dc07034b46ed6b4
+  branch: several-fixes
+  specs:
+    chosen-rails (1.8.7)
+      coffee-rails (>= 3.2)
+      railties (>= 3.0)
+      sass-rails (>= 3.2)
+
+GIT
+  remote: https://github.com/vtamara/cocoon.git
+  revision: 088c8d9dcce7f51cf3a968398047eaac7a37718b
+  branch: new_id_with_ajax
+  specs:
+    cocoon (1.2.11)
+
+PATH
+  remote: ../cor1440_gen
+  specs:
+    cor1440_gen (1.0b3)
+      devise
+      heb412_gen
+      jquery-rails
+      mr519_gen
+      paperclip
+      rails
+      sip
+
+PATH
+  remote: ../mr519_gen
+  specs:
+    mr519_gen (0.2.0)
+      rails (~> 6.0.0.rc1, >= 6.0.0.rc1)
+      sip
+
+PATH
+  remote: ../sip
   specs:
     sip (2.0.b6)
       bootstrap-datepicker-rails
@@ -69,39 +92,12 @@ GIT
       twitter_cldr
       will_paginate
 
-GIT
-  remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 29b956ce4062f43024f7fb16ad152f7aa833fc89
-  specs:
-    sivel2_gen (2.0b9)
-      devise
-      jquery-rails
-      rails
-
-GIT
-  remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: a89e6d370c6a3a8b6205e733d483603a7e43c741
+PATH
+  remote: ../sivel2_sjr
   specs:
     sivel2_sjr (2.0.b1)
       rails
       sivel2_gen
-
-GIT
-  remote: https://github.com/vtamara/chosen-rails.git
-  revision: 48c457fc9ef1c4c573b4dcdb9dc07034b46ed6b4
-  branch: several-fixes
-  specs:
-    chosen-rails (1.8.7)
-      coffee-rails (>= 3.2)
-      railties (>= 3.0)
-      sass-rails (>= 3.2)
-
-GIT
-  remote: https://github.com/vtamara/cocoon.git
-  revision: 088c8d9dcce7f51cf3a968398047eaac7a37718b
-  branch: new_id_with_ajax
-  specs:
-    cocoon (1.2.11)
 
 GEM
   remote: https://rubygems.org/
@@ -173,6 +169,7 @@ GEM
     bootstrap-datepicker-rails (1.8.0.1)
       railties (>= 3.0)
     builder (3.2.3)
+    byebug (11.0.1)
     camertron-eprun (1.1.1)
     cancancan (3.0.1)
     capybara (3.28.0)
@@ -431,6 +428,7 @@ DEPENDENCIES
   bcrypt
   bootsnap (>= 1.1.0)
   bootstrap-datepicker-rails
+  byebug
   cancancan
   capybara
   chartkick

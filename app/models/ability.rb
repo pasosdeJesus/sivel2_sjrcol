@@ -69,18 +69,8 @@ class Ability < Sivel2Sjr::Ability
 
   BASICAS_PROPIAS =  [
     ['Sivel2Sjr', 'accionjuridica'],
-    ['Sivel2Sjr', 'acreditacion'], 
-    ['Sivel2Sjr', 'ayudaestado'], 
-    ['Sivel2Sjr', 'clasifdesp'], 
-    ['Sivel2Sjr', 'declaroante'], 
-    ['Sivel2Sjr', 'derecho'], 
-    ['Sivel2Sjr', 'inclusion'], 
-    ['Sivel2Sjr', 'modalidadtierra'], 
     ['Sivel2Sjr', 'motivosjr'], 
-    ['Sivel2Sjr', 'personadesea'], 
-    ['Sivel2Sjr', 'progestado'], 
     ['Sivel2Sjr', 'regimensalud'],
-    ['Sivel2Sjr', 'tipodesp'],
     ['Sip', 'lineaactorsocial'],
     ['Sip', 'tipoactorsocial'],
     ['', 'discapacidad'],

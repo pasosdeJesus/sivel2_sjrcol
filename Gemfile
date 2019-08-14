@@ -23,7 +23,7 @@ gem 'prawnto_2',  :require => 'prawnto'
 gem 'prawn-table'
 
 # Plantilla ODT
-gem 'odf-report'
+gem 'odf-report', '>= 0.6.0'
 
 
 # Plantilla ODS
@@ -51,7 +51,7 @@ gem 'uglifier'
 gem 'coffee-rails'
 
 # jquery como librería JavaScript
-gem 'jquery-rails'
+gem 'jquery-rails', '>= 4.3.5'
 gem 'jquery-ui-rails'
 
 # Seguir enlaces más rápido. Ver: https://github.com/rails/turbolinks
@@ -65,7 +65,7 @@ gem 'font-awesome-rails'
 gem 'chartkick'
 
 # Facilita elegir colores en tema
-gem 'pick-a-color-rails'
+gem 'pick-a-color-rails', '>= 0.0.1'
 gem 'tiny-color-rails'
 
 # Formularios simples 
@@ -144,7 +144,7 @@ group :test do
   # Acelera desarrollo ejecutando en fondo.  https://github.com/jonleighton/spring
 
   gem 'simplecov'
-  gem 'capybara'
+  gem 'capybara', '>= 3.28.0'
 
   # Pruebas de regresión que no requieren javascript
   gem 'selenium-webdriver'

@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: 57c10f8d19f7dd2f2d4eb6ef619e4b9c8743fccd
+  revision: 7b07941daa829bf87e1f48764d94960127c25bf2
   specs:
     cor1440_gen (1.0b3)
       devise
@@ -13,7 +13,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 82ba6a2f9a829cf03d85e1b784d4abd4cbf80a80
+  revision: 951bd482a122f43737970f9e779734a00f0c1573
   specs:
     heb412_gen (1.0.b6)
       chosen-rails
@@ -25,7 +25,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/mr519_gen.git
-  revision: a247f6404dae09cf8e41b48ae9b2ee6dccc12adb
+  revision: 4408c4cbabf981b83370e45c23103324e45f0ae8
   specs:
     mr519_gen (0.2.0)
       rails (~> 6.0.0.rc1, >= 6.0.0.rc1)
@@ -33,7 +33,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: b6461399319d6d976777efdf32205117b2916e9b
+  revision: 7e920ee9b5d96de1904f0f19583809671ce88b8e
   specs:
     sal7711_gen (1.0.b2)
       rails
@@ -41,7 +41,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: 6554c8ec20b43b0d59aff92b9bb377b637ee615c
+  revision: f97610ed99c9f335e819764f9edf3b9fa13a693c
   specs:
     sal7711_web (1.0.a3)
       rails
@@ -49,7 +49,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 72d5507db91ca1e700a8459a18cf10658642751d
+  revision: 8231d93525c9ed6f0fab2b497b6ec28986255691
   specs:
     sip (2.0.b6)
       bootstrap-datepicker-rails
@@ -71,7 +71,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 4bbe895b1d0337c0d43ece8ec40871ff5075be46
+  revision: 5d66ee815015a2711c562bac5507620a4b60fde8
   specs:
     sivel2_gen (2.0b9)
       devise
@@ -80,7 +80,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: f92e16bb71b611a1c69e5f204b63b3211b2833d6
+  revision: dd867996513023a3ea8f71829de9e24b8491807a
   specs:
     sivel2_sjr (2.0.b1)
       rails
@@ -106,56 +106,56 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
-    actioncable (6.0.0.rc2)
-      actionpack (= 6.0.0.rc2)
+    actioncable (6.0.0)
+      actionpack (= 6.0.0)
       nio4r (~> 2.0)
       websocket-driver (>= 0.6.1)
-    actionmailbox (6.0.0.rc2)
-      actionpack (= 6.0.0.rc2)
-      activejob (= 6.0.0.rc2)
-      activerecord (= 6.0.0.rc2)
-      activestorage (= 6.0.0.rc2)
-      activesupport (= 6.0.0.rc2)
+    actionmailbox (6.0.0)
+      actionpack (= 6.0.0)
+      activejob (= 6.0.0)
+      activerecord (= 6.0.0)
+      activestorage (= 6.0.0)
+      activesupport (= 6.0.0)
       mail (>= 2.7.1)
-    actionmailer (6.0.0.rc2)
-      actionpack (= 6.0.0.rc2)
-      actionview (= 6.0.0.rc2)
-      activejob (= 6.0.0.rc2)
+    actionmailer (6.0.0)
+      actionpack (= 6.0.0)
+      actionview (= 6.0.0)
+      activejob (= 6.0.0)
       mail (~> 2.5, >= 2.5.4)
       rails-dom-testing (~> 2.0)
-    actionpack (6.0.0.rc2)
-      actionview (= 6.0.0.rc2)
-      activesupport (= 6.0.0.rc2)
+    actionpack (6.0.0)
+      actionview (= 6.0.0)
+      activesupport (= 6.0.0)
       rack (~> 2.0)
       rack-test (>= 0.6.3)
       rails-dom-testing (~> 2.0)
-      rails-html-sanitizer (~> 1.0, >= 1.0.2)
-    actiontext (6.0.0.rc2)
-      actionpack (= 6.0.0.rc2)
-      activerecord (= 6.0.0.rc2)
-      activestorage (= 6.0.0.rc2)
-      activesupport (= 6.0.0.rc2)
+      rails-html-sanitizer (~> 1.0, >= 1.2.0)
+    actiontext (6.0.0)
+      actionpack (= 6.0.0)
+      activerecord (= 6.0.0)
+      activestorage (= 6.0.0)
+      activesupport (= 6.0.0)
       nokogiri (>= 1.8.5)
-    actionview (6.0.0.rc2)
-      activesupport (= 6.0.0.rc2)
+    actionview (6.0.0)
+      activesupport (= 6.0.0)
       builder (~> 3.1)
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
-      rails-html-sanitizer (~> 1.0, >= 1.0.3)
-    activejob (6.0.0.rc2)
-      activesupport (= 6.0.0.rc2)
+      rails-html-sanitizer (~> 1.1, >= 1.2.0)
+    activejob (6.0.0)
+      activesupport (= 6.0.0)
       globalid (>= 0.3.6)
-    activemodel (6.0.0.rc2)
-      activesupport (= 6.0.0.rc2)
-    activerecord (6.0.0.rc2)
-      activemodel (= 6.0.0.rc2)
-      activesupport (= 6.0.0.rc2)
-    activestorage (6.0.0.rc2)
-      actionpack (= 6.0.0.rc2)
-      activejob (= 6.0.0.rc2)
-      activerecord (= 6.0.0.rc2)
+    activemodel (6.0.0)
+      activesupport (= 6.0.0)
+    activerecord (6.0.0)
+      activemodel (= 6.0.0)
+      activesupport (= 6.0.0)
+    activestorage (6.0.0)
+      actionpack (= 6.0.0)
+      activejob (= 6.0.0)
+      activerecord (= 6.0.0)
       marcel (~> 0.3.1)
-    activesupport (6.0.0.rc2)
+    activesupport (6.0.0)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 0.7, < 2)
       minitest (~> 5.1)
@@ -201,10 +201,10 @@ GEM
     concurrent-ruby (1.1.5)
     crass (1.0.4)
     debug_inspector (0.0.3)
-    devise (4.6.2)
+    devise (4.7.0)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
-      railties (>= 4.1.0, < 6.0)
+      railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
     devise-i18n (1.8.1)
@@ -258,7 +258,7 @@ GEM
     minitest (5.11.3)
     msgpack (1.3.1)
     nio4r (2.4.0)
-    nokogiri (1.10.3)
+    nokogiri (1.10.4)
       mini_portile2 (~> 2.4.0)
     odf-report (0.6.0)
       nokogiri (>= 1.5.0)
@@ -294,44 +294,44 @@ GEM
       binding_of_caller (>= 0.7)
       pry (>= 0.9.11)
     public_suffix (3.1.1)
-    puma (4.0.1)
+    puma (4.1.0)
       nio4r (~> 2.0)
     rack (2.0.7)
     rack-proxy (0.6.5)
       rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
-    rails (6.0.0.rc2)
-      actioncable (= 6.0.0.rc2)
-      actionmailbox (= 6.0.0.rc2)
-      actionmailer (= 6.0.0.rc2)
-      actionpack (= 6.0.0.rc2)
-      actiontext (= 6.0.0.rc2)
-      actionview (= 6.0.0.rc2)
-      activejob (= 6.0.0.rc2)
-      activemodel (= 6.0.0.rc2)
-      activerecord (= 6.0.0.rc2)
-      activestorage (= 6.0.0.rc2)
-      activesupport (= 6.0.0.rc2)
+    rails (6.0.0)
+      actioncable (= 6.0.0)
+      actionmailbox (= 6.0.0)
+      actionmailer (= 6.0.0)
+      actionpack (= 6.0.0)
+      actiontext (= 6.0.0)
+      actionview (= 6.0.0)
+      activejob (= 6.0.0)
+      activemodel (= 6.0.0)
+      activerecord (= 6.0.0)
+      activestorage (= 6.0.0)
+      activesupport (= 6.0.0)
       bundler (>= 1.3.0)
-      railties (= 6.0.0.rc2)
+      railties (= 6.0.0)
       sprockets-rails (>= 2.0.0)
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
-    rails-html-sanitizer (1.1.0)
+    rails-html-sanitizer (1.2.0)
       loofah (~> 2.2, >= 2.2.2)
-    rails-i18n (5.1.3)
+    rails-i18n (6.0.0)
       i18n (>= 0.7, < 2)
-      railties (>= 5.0, < 6)
+      railties (>= 6.0.0, < 7)
     rails_12factor (0.0.3)
       rails_serve_static_assets
       rails_stdout_logging
     rails_serve_static_assets (0.0.5)
     rails_stdout_logging (0.0.5)
-    railties (6.0.0.rc2)
-      actionpack (= 6.0.0.rc2)
-      activesupport (= 6.0.0.rc2)
+    railties (6.0.0)
+      actionpack (= 6.0.0)
+      activesupport (= 6.0.0)
       method_source
       rake (>= 0.8.7)
       thor (>= 0.20.3, < 2.0)
@@ -354,12 +354,16 @@ GEM
     sass-listen (4.0.0)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
-    sass-rails (5.0.7)
-      railties (>= 4.0.0, < 6)
-      sass (~> 3.1)
-      sprockets (>= 2.8, < 4.0)
-      sprockets-rails (>= 2.0, < 4.0)
-      tilt (>= 1.1, < 3)
+    sass-rails (6.0.0)
+      sassc-rails (~> 2.1, >= 2.1.1)
+    sassc (2.1.0)
+      ffi (~> 1.9)
+    sassc-rails (2.1.2)
+      railties (>= 4.0.0)
+      sassc (>= 2.0)
+      sprockets (> 3.0)
+      sprockets-rails
+      tilt
     selenium-webdriver (3.142.3)
       childprocess (>= 0.5, < 2.0)
       rubyzip (~> 1.2, >= 1.2.2)
@@ -407,11 +411,11 @@ GEM
       raindrops (~> 0.7)
     warden (1.2.8)
       rack (>= 2.0.6)
-    web-console (4.0.0)
-      actionview (>= 6.0.0.a)
-      activemodel (>= 6.0.0.a)
+    web-console (4.0.1)
+      actionview (>= 6.0.0)
+      activemodel (>= 6.0.0)
       bindex (>= 0.4.0)
-      railties (>= 6.0.0.a)
+      railties (>= 6.0.0)
     webpacker (4.0.7)
       activesupport (>= 4.2)
       rack-proxy (>= 0.6.1)
@@ -419,7 +423,7 @@ GEM
     websocket-driver (0.7.1)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.4)
-    will_paginate (3.1.7)
+    will_paginate (3.1.8)
     xpath (3.2.0)
       nokogiri (~> 1.8)
     zeitwerk (2.1.9)

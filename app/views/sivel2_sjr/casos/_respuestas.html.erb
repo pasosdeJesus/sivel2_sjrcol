@@ -97,13 +97,13 @@
               </thead>
               <tbody>
                 <tr>
-                  <td><%= Sivel2Sjr::Accionjuridica.find(aj.valorcampo.where(campo_id: 140).take.valor).nombre %></th>
-                  <td><%= Sip::Trivalente.find(aj.valorcampo.where(campo_id: 141).take.valor).nombre %></th>
+                  <td><%= rt = aj.valorcampo.where(campo_id: 140).take.valor; rt == nil? || rt == '' ? '' : Sivel2Sjr::Accionjuridica.find(rt).nombre %></th>
+                  <td><%= rt = aj.valorcampo.where(campo_id: 141).take.valor; rt == nil? || rt == '' ? '' : Sivel2Sjr::Trivalente.find(rt).nombre %></th>
                 </tr>
                 <% if aj.valorcampo.where(campo_id: 142).count == 1 %>
                   <tr>
-                    <td><%= Sivel2Sjr::Accionjuridica.find(aj.valorcampo.where(campo_id: 142).take.valor).nombre %></th>
-                    <td><%= Sip::Trivalente.find(aj.valorcampo.where(campo_id: 143).take.valor).nombre %></th>
+                    <td><%= rt = aj.valorcampo.where(campo_id: 142).take.valor; rt == nil? || rt == '' ? '' : Sivel2Sjr::Accionjuridica.find(rt).nombre %></th>
+                    <td><%= rt = aj.valorcampo.where(campo_id: 143).take.valor; rt == nil? || rt == '' ? '' : Sivel2Sjr::Trivalente.find(rt).nombre %></th>
                   </tr>
                 <% end %>
               </tbody>

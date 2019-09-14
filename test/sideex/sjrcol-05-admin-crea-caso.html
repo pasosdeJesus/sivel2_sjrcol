@@ -470,6 +470,34 @@
 </tbody></table>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
+<tr><td rowspan="1" colspan="3">casos-causas-antecedentes</td></tr>
+</thead>
+<tbody>
+<tr><td>clickAt</td><td>link=Editar<datalist><option>link=Editar</option><option>//a[contains(text(),'Editar')]</option><option>//a[contains(@href, '/casos/458/edita')]</option><option>//a[2]</option></datalist></td><td>29,13</td>
+</tr>
+<tr><td>clickAt</td><td>link=Causas/Antecedentes<datalist><option>link=Causas/Antecedentes</option><option>//a[contains(text(),'Causas/Antecedentes')]</option><option>//form[@id='edit_caso_428']/div/div[2]/ul/li[9]/a</option><option>//a[contains(@href, '#antecedentes')]</option><option>//li[9]/a</option></datalist></td><td>63,22</td>
+</tr>
+<tr><td>assertText</td><td>css=div.input.select.caso_acto_presponsable &gt; label.select.required.control-label<datalist><option>css=div.input.select.caso_acto_presponsable &gt; label.select.required.control-label</option><option>//div[@id='antecedentes']/div/label</option><option>//div[9]/div/label</option></datalist></td><td>Presunto responsable</td>
+</tr>
+<tr><td>addSelection</td><td>id=caso_acto_id_presponsable<datalist><option>id=caso_acto_id_presponsable</option><option>name=caso_acto_id_presponsable[]</option><option>css=#caso_acto_id_presponsable</option><option>//select[@id='caso_acto_id_presponsable']</option><option>//div[@id='antecedentes']/div/select</option><option>//div[9]/div/select</option></datalist></td><td>label=EJERCITO</td>
+</tr>
+<tr><td>clickAt</td><td>css=#caso_acto_id_presponsable &gt; option[value="4"]<datalist><option>css=#caso_acto_id_presponsable &gt; option[value="4"]</option><option>xpath=(//option[@value='4'])[41]</option><option>//select[@id='caso_acto_id_presponsable']/option</option><option>//div[9]/div/select/option</option></datalist></td><td>67,7</td>
+</tr>
+<tr><td>addSelection</td><td>id=caso_acto_id_categoria<datalist><option>id=caso_acto_id_categoria</option><option>name=caso_acto_id_categoria[]</option><option>css=#caso_acto_id_categoria</option><option>//select[@id='caso_acto_id_categoria']</option><option>//div[@id='antecedentes']/div[2]/select</option><option>//div[9]/div[2]/select</option></datalist></td><td>label=A10 EJECUCIÓN EXTRAJUDICIAL</td>
+</tr>
+<tr><td>clickAt</td><td>css=#caso_acto_id_categoria &gt; option[value="10"]<datalist><option>css=#caso_acto_id_categoria &gt; option[value="10"]</option><option>xpath=(//option[@value='10'])[31]</option><option>//select[@id='caso_acto_id_categoria']/option</option><option>//div[9]/div[2]/select/option</option></datalist></td><td>147,8</td>
+</tr>
+<tr><td>addSelection</td><td>id=caso_acto_id_persona<datalist><option>id=caso_acto_id_persona</option><option>name=caso_acto_id_persona[]</option><option>css=#caso_acto_id_persona</option><option>//select[@id='caso_acto_id_persona']</option><option>//div[@id='antecedentes']/div[3]/select</option><option>//div[9]/div[3]/select</option></datalist></td><td>label=aaa bb</td>
+</tr>
+<tr><td>clickAt</td><td>link=Añadir Causa/Antecedente<datalist><option>link=Añadir Causa/Antecedente</option><option>css=a.agregaractos.btn.btn-primary</option><option>//a[contains(text(),'Añadir Causa/Antecedente')]</option><option>//div[@id='antecedentes']/div[6]/a</option><option>xpath=(//a[contains(@href, '#')])[28]</option><option>//div[6]/a</option></datalist></td><td>104,20</td>
+</tr>
+<tr><td>clickAt</td><td>name=commit<datalist><option>name=commit</option><option>css=input[name="commit"]</option><option>//input[@name='commit']</option><option>//form[@id='edit_caso_458']/div[2]/input</option><option>//div[2]/input</option></datalist></td><td>88,13</td>
+</tr>
+<tr><td>assertText</td><td>css=h1<datalist><option>css=h1</option><option>//h1</option></datalist></td><td>Caso</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
 <tr><td rowspan="1" colspan="3">casos-descripcion</td></tr>
 </thead>
 <tbody>

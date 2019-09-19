@@ -12,6 +12,39 @@ module Cor1440Gen
     Cor1440Gen.actividadg1 = "Funcionarias del SJR"
     Cor1440Gen.actividadg3 = "Funcionarios del SJR"
 
+    def new
+      new_cor1440_gen
+      @registro.fecha = Date.today
+      if params['usuario_id'] && 
+        ::Usuario.where(id: params['usuario_id'].to_i).count == 1
+        @registro.usuario_id = params['usuario_id'].to_i
+      end
+      if params['caso_id'] && 
+        Sivel2Sjr::Casosjr.where(id_caso: params['caso_id'].to_i).count == 1
+        @registro.casosjr_ids = [params['caso_id']]
+      end
+      @registro.proyectofinanciero_ids = [10]
+      if params['nombre'] 
+        @registro.nombre = params['nombre']
+      end
+      @registro.actividadpf_ids = []
+      if params[:ahumanitaria] == "true"
+        @registro.actividadpf_ids |=  [62, 116] # SEGCAS, ASHUM
+      end
+      if params[:ojuridica] == "true"
+        @registro.actividadpf_ids |=  [62, 118] # SEGCAS, ASJUR
+      end
+      if params[:ajuridica] == "true"
+        @registro.actividadpf_ids |=  [62, 125] # SEGCAS, ACJUR
+      end
+      if params[:oservicios] == "true"
+        @registro.actividadpf_ids |=  [62, 126] # SEGCAS, OTSERC
+      end
+
+      redirect_to cor1440_gen.edit_actividad_path(@registro)
+    end
+
+
     def self.filtramas(par, ac, current_usuario)
       @busactividadtipo = param_escapa(par, 'busactividadtipo')
       if @busactividadtipo != '' then

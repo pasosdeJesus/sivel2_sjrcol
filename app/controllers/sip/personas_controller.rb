@@ -18,6 +18,10 @@ module Sip
       end
       a = atributos_show - [:id] +
         [:datosbio, :caracterizaciones]
+      p = a.index(:fechanac)
+      a[p] = :anionac
+      a.insert(p, :mesnac)
+      a.insert(p, :dianac)
       return a
     end
 

@@ -38,7 +38,7 @@ module Sivel2Sjr
       'fecharec'
     end
 
-    def asegura_camposdinamicos(registro)
+    def asegura_camposdinamicos(registro, current_usuario_id)
     end
 
     # Tipo de reporte Resolución 1612

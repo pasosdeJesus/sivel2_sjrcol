@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: f0310508788c07517b41188d996dec4328b4a945
+  revision: f844095fa5646870ee4c687f1b2c4d2b27c5468e
   specs:
     cor1440_gen (1.0b3)
       devise
@@ -13,7 +13,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: ac338c70ec495afe1491e300b958110fe69ea034
+  revision: 3241097f461c8000d6ce5f62d391f37e02e29637
   specs:
     heb412_gen (1.0.b6)
       chosen-rails
@@ -25,7 +25,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/mr519_gen.git
-  revision: 09f4bb8d02056f1f92173cc63a8d734bef51dfc4
+  revision: ebbd39f9ac04c7682a1315c93c587568b2b0f39e
   specs:
     mr519_gen (0.2.0)
       rails (~> 6.0.0.rc1, >= 6.0.0.rc1)
@@ -33,7 +33,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: 9a92fdcc192dfac0c06551161dbc54f6ef749731
+  revision: c7003b4c19b6a3ef9fee48574cc8e67b57f7128d
   specs:
     sal7711_gen (1.0.b2)
       rails
@@ -41,7 +41,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: 72b3c368545c4185394d8acbd3a8491663f4cd2a
+  revision: c00855ae96a74ff7c013bc4e25b0b4cfde1dc734
   specs:
     sal7711_web (1.0.a3)
       rails
@@ -49,7 +49,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 5807f21306e5203ed48acd76089d7f7e2ce6b9de
+  revision: d6e8d522655f3ed4a11c9ee5bd3ed95c987dbc3e
   specs:
     sip (2.0.b6)
       bootstrap-datepicker-rails
@@ -71,7 +71,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: c3dcaded98d4926ece3726a1bdb9056ef13ea7d9
+  revision: 96b3e4acaf849a667e71f59c39cad22a51fe28c8
   specs:
     sivel2_gen (2.0b9)
       devise
@@ -80,7 +80,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: e6127f7e62d92ceab5d8db5fd0b8db335bb1da7e
+  revision: b2ff665f891f1e080c8fdb34960941e25c2323f5
   specs:
     sivel2_sjr (2.0.b1)
       rails
@@ -356,7 +356,7 @@ GEM
       rb-inotify (~> 0.9, >= 0.9.7)
     sass-rails (6.0.0)
       sassc-rails (~> 2.1, >= 2.1.1)
-    sassc (2.2.0)
+    sassc (2.2.1)
       ffi (~> 1.9)
     sassc-rails (2.1.2)
       railties (>= 4.0.0)
@@ -370,7 +370,7 @@ GEM
     simple_form (4.1.0)
       actionpack (>= 5.0)
       activemodel (>= 5.0)
-    simplecov (0.17.0)
+    simplecov (0.17.1)
       docile (~> 1.1)
       json (>= 1.8, < 3)
       simplecov-html (~> 0.10.0)
@@ -390,7 +390,7 @@ GEM
     tiny-color-rails (0.0.2)
       railties (>= 3.0)
     ttfunk (1.5.1)
-    turbolinks (5.2.0)
+    turbolinks (5.2.1)
       turbolinks-source (~> 5.2)
     turbolinks-source (5.2.0)
     twitter-bootstrap-rails (3.2.2)

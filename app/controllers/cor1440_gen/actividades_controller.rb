@@ -19,11 +19,26 @@ module Cor1440Gen
         ::Usuario.where(id: params['usuario_id'].to_i).count == 1
         @registro.usuario_id = params['usuario_id'].to_i
       end
+      if params['oficina_id'] && 
+        Sip::Oficina.where(id: params['oficina_id'].to_i).count == 1
+        @registro.oficina_id = params['oficina_id'].to_i
+      end
+      if params['proyecto_id'] && 
+        Cor1440Gen::Proyecto.where(id: params['proyecto_id'].to_i).count == 1
+        @registro.proyecto_ids = [params['proyecto_id'].to_i]
+      end
       if params['caso_id'] && 
         Sivel2Sjr::Casosjr.where(id_caso: params['caso_id'].to_i).count == 1
         @registro.casosjr_ids = [params['caso_id']]
       end
       @registro.proyectofinanciero_ids = [10]
+      if params['nsegresp_proyectofinanciero_id'] && 
+        Cor1440Gen::Proyectofinanciero.where(
+          id: params['nsegresp_proyectofinanciero_id'].to_i).count == 1
+        @registro.proyectofinanciero_ids |= [params[
+          'nsegresp_proyectofinanciero_id'].to_i]
+      end
+
       if params['nombre'] 
         @registro.nombre = params['nombre']
       end
@@ -40,6 +55,7 @@ module Cor1440Gen
       if params[:oservicios] == "true"
         @registro.actividadpf_ids |=  [62, 126] # SEGCAS, OTSERC
       end
+      @registro.save!(validate: false)
 
       redirect_to cor1440_gen.edit_actividad_path(@registro)
     end

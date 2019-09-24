@@ -1,13 +1,10 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 
-# Pone parametros de formulario en enlace para generar plantilla
-# @elema this de boton Generar
-# @idselplantilla id del campo de seleccion de plantilla
-# @idruta ruta del formulario (e.g '/casos/filtro') si se deja
-#   en blanco se usa el mas cercano a elema
-# @rutagenera ruta por cargar con id de plantilla y valores del 
-#   formulario e.g 'casos/genera/'
+# Modifica un enlace agregando parámetros que toma del formulario
+# @elema this del enlace por modificar
+# @veccv vector de elementos con valores por enviar como parámetros en enlace
+# @datos otros valores por agregar como parámetros a enlace
 @jrscol_agrega_paramscv = (elema, veccv, datos) ->
 
   #root =  window;
@@ -15,7 +12,12 @@
   ruta = $(elema).attr('href') 
   sep = '?'
   veccv.forEach((v) ->
-    vcv = $('#' + v).prop('checked')
+    elemv = $('#' + v)
+    vcv = ''
+    if elemv[0].nodeName == 'INPUT' && elemv[0].type == 'checkbox'
+      vcv = elemv.prop('checked')
+    else if elemv[0].nodeName == 'SELECT'
+      vcv = elemv.val()
     ruta += sep + v + '=' + vcv
     sep = '&' 
   )

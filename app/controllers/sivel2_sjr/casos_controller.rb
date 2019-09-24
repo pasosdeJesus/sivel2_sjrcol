@@ -4,7 +4,7 @@ require_dependency 'sivel2_sjr/concerns/controllers/casos_controller'
 require_dependency 'heb412_gen/docs_controller'
 
 module Sivel2Sjr
-  class CasosController < ApplicationController
+  class CasosController < Heb412Gen::ModelosController
 
     include Sivel2Sjr::Concerns::Controllers::CasosController
 

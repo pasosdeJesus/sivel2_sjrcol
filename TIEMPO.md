@@ -47,6 +47,15 @@ SERVIDOR SJR-64-ETB:
 * Conexión a Internet en Bogotá por ETB 30MB fibra óptica bajada 
   y en promedio 10MB de subida.
 
+SERVIDOR SJR-65-ETB:
+* AMD Ryzen 5-2600 3.4GHz, 6 núcleos, 12 hilos 
+* RAM: 16GB DDR4
+* Discos: sd0 IDE 4T /var, /home. sd1 SSD 240G /. sd2 IDE 1T. sd3 Externo 4T /mnt/respaldo.
+* Plataforma: adJ 6.5, PostgreSQL 11.5, ruby 2.6.4, RoR 6.0.0, unicorn 5.5.1
+* Cortafuegos con adJ 6.5
+* Conexión a Internet en Bogotá por ETB 30MB fibra óptica bajada 
+  y en promedio 10MB de subida.
+
 
 
 ## ESPECIFICACION DE CLIENTES
@@ -78,6 +87,14 @@ CLIENTE V-3:
 * Disco: IDE 500G. SSD 16G
 * Plataforma: adJ 6.4, chrome 69
 * Conexión a Internet por Comcast 50MB
+
+CLIENTE V-4:
+* Intel CoreI7-4700. 1.9GHz.
+* RAM: 8G
+* Disco: IDE 500G. SSD 16G
+* Plataforma: adJ 6.5, chrome 75
+* Conexión a Internet por ETB 10MB
+
 
 
 
@@ -158,5 +175,21 @@ CLIENTE V-3:
 promedio
 
 
+### Fecha: 26.Sep.2019. SERVIDOR SJR-66-ETB. Cliente: V-4
+Tras agregar 24 indices y 1 llave foranea
 
+* Autenticar:   0,6 (-100% de mejora)
+* Lista de actividades:   1,42 (21,1% de mejora)
+* Editar una actividad:   0,6 (33,3%)
+* Lista de casos:  1,1 (45%)
+* Editar un caso:  1,8 (33,3%)
+* Agregar etiqueta y guardar:   3,5 (56,8%)
+* En vista show botón Editar:   1,8 (43,8%)
+* Quitar etiqueta y guardar:   3,7 (54,3%)
+* Botón regresar:   1 28,6
+* Filtrar casos entre 1.Ene.2017 y 31.Ene.2017:   1,2 (82,9%)
+* Generar plantilla EMHA con el filtro anterior:   1 (92,6%)
+* Esperar a que se complete generación  10 (97,7%)
+* Editar de nuevo  2 
 
+Promedio mejora   40,8%

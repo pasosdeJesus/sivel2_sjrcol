@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: a33a6e42b3b870cf50eb74130a92cf0fc8d8099e
+  revision: c65828edd2284635e2cb0abd52a56f7a05f7a5ff
   specs:
     cor1440_gen (1.0b3)
       devise
@@ -13,7 +13,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: c1a2dae3389b5083890603b1c389b46be1d7ff45
+  revision: 60afc4dfc13134236c91387ae847e749ff7d995f
   specs:
     heb412_gen (1.0.b6)
       chosen-rails
@@ -25,7 +25,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/mr519_gen.git
-  revision: 65bac2bb5e7c46c59534ca33aea423eb81bcdf34
+  revision: 57d6b3839f68dd48e84b1e37f9359ed684754b3b
   specs:
     mr519_gen (0.2.0)
       rails (~> 6.0.0.rc1, >= 6.0.0.rc1)
@@ -33,7 +33,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: fbea854eaf0cdcef7d1e9960602da7e682c43819
+  revision: 0f8616d4f05de69776d624edc5e882b7a27fe970
   specs:
     sal7711_gen (1.0.b2)
       rails
@@ -41,7 +41,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: 0b0121fe1f003a4cd471e86e440c21c40b42350d
+  revision: ec7a8a299720371137673c625b3bfad486455756
   specs:
     sal7711_web (1.0.a3)
       rails
@@ -49,7 +49,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 0f2ff51b03eb3a9fc4cb0bfe07ffef355bae5f5c
+  revision: fff621177cc34589f0b6eba352c3c5a42b8a70c5
   specs:
     sip (2.0.b6)
       bootstrap-datepicker-rails
@@ -71,7 +71,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 96b3e4acaf849a667e71f59c39cad22a51fe28c8
+  revision: f3875e7bf2efc05354bd42c3c353076625458fe8
   specs:
     sivel2_gen (2.0b9)
       devise
@@ -80,7 +80,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: ec09fdf196e457857c9ace852b1dfa1b1651141f
+  revision: 2351debe22e037dd79c9e668162bdb8df5a2ab78
   specs:
     sivel2_sjr (2.0.b1)
       rails
@@ -211,7 +211,7 @@ GEM
       devise (>= 4.6)
     docile (1.3.2)
     dotenv (0.7.0)
-    erubi (1.8.0)
+    erubi (1.9.0)
     execjs (2.7.0)
     ffi (1.11.1)
     font-awesome-rails (4.7.0.5)
@@ -404,7 +404,7 @@ GEM
       tzinfo
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
-    uglifier (4.1.20)
+    uglifier (4.2.0)
       execjs (>= 0.3.0, < 3)
     unicorn (5.5.1)
       kgio (~> 2.6)

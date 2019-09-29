@@ -1,4 +1,57 @@
 <div class="panel-group" id="acordeonrs">
+
+  <div class='row'>
+    <div class="col-md-2">
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="ahumanitaria">
+        <label class="form-check-label" for="ahumanitaria">Asistencia humanitaria</label>
+      </div>
+    </div>
+    <div class="col-md-2">
+
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="ojuridica">
+        <label class="form-check-label" for="ojuridica">Orientación jurídica</label>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="ajuridica">
+        <label class="form-check-label" for="ajuridica">Acción jurídica</label>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="oservicios">
+        <label class="form-check-label" for="oservicios">Otros servicios y asesorias</label>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <%= select_tag('nsegresp_proyectofinanciero_id', 
+                     options_from_collection_for_select(
+                       Cor1440Gen::Proyectofinanciero.all, 
+                       'id', 'nombre'), class: 'chosen-select' ) %>
+    </div>
+    <div class="col-md-2">
+      <% if can?(:edit, f.object) %>
+        <% datos={ 
+          nombre: "Seguimiento/Respuesta a caso #{f.object.id}",
+          oficina_id: f.object.casosjr.oficina_id,
+          caso_id: f.object.id, 
+          proyecto_id: 101,
+          usuario_id: controller.current_usuario } %>
+        <% lfun = "jrscol_agrega_paramscv(this,  " +
+          "['ahumanitaria', 'ojuridica', 'ajuridica', 'oservicios', 'nsegresp_proyectofinanciero_id'], " +
+          datos.to_json + ")" %>
+        <%= link_to 'Nueva respuesta/seguimiento',
+          cor1440_gen.new_actividad_path,
+          target: '_blank',
+          class: 'btn btn-xs',
+          onclick: lfun %>
+      <% end %>
+    </div>
+  </div> <!-- row -->
+
   <% ga = Cor1440Gen::Actividad.joins(
     'INNER JOIN sivel2_sjr_actividad_casosjr ' +
     'ON sivel2_sjr_actividad_casosjr.actividad_id = cor1440_gen_actividad.id').
@@ -8,7 +61,7 @@
     'ON cor1440_gen_actividad_actividadpf.actividad_id=cor1440_gen_actividad.id').
     where('cor1440_gen_actividad_actividadpf.actividadpf_id=62') %>
 
-  <% ga2.each  do |ac| %>
+  <% ga2.order('cor1440_gen_actividad.fecha DESC').each  do |ac| %>
 
     <div class="panel panel-default" id="panelra<%= ac.id %>">
       <div class="panel-heading">
@@ -178,7 +231,7 @@
   <% ga3 = ga.where('cor1440_gen_actividad.id NOT IN ' +
           '(SELECT actividad_id FROM cor1440_gen_actividad_actividadpf ' +
           '  WHERE actividadpf_id = 62)') %>
-  <% ga3.each  do |ac| %>
+  <% ga3.order('cor1440_gen_actividad.fecha DESC').each  do |ac| %>
 
     <div class="panel panel-default" id="panelra<%= ac.id %>">
       <div class="panel-heading">
@@ -222,7 +275,7 @@
     where('cor1440_gen_asistencia.persona_id IN ' + 
           '(SELECT id_persona FROM sivel2_gen_victima WHERE ' +
           '  sivel2_gen_victima.id_caso=?)', f.object.id) %>
-  <% ga4.each  do |ac| %>
+  <% ga4.order('cor1440_gen_actividad.fecha DESC').each  do |ac| %>
 
     <div class="panel panel-default" id="panelra<%= ac.id %>">
       <div class="panel-heading">
@@ -238,7 +291,7 @@
             <% pfs = ac.proyectofinanciero_ids - [10] %>
             <% if pfs != [] %>
               <% res += " financiado por " %>
-              <% res += pfs.inject('') {|memo, p| 
+              <% res += pfs.inject('') { |memo, p| 
                 pf = Cor1440Gen::Proyectofinanciero.find(p)
                 memo == '' ? pf.nombre : memo + '; ' + pf.nombre } %>
             <% end %>
@@ -259,59 +312,5 @@
       </div> <!-- panel collapsable -->
     </div> <!-- panel respuesta -->
   <% end %>
-
-  <div class='row'>
-    <div class="col-md-2">
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" id="ahumanitaria">
-        <label class="form-check-label" for="ahumanitaria">Asistencia humanitaria</label>
-      </div>
-    </div>
-    <div class="col-md-2">
-
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" id="ojuridica">
-        <label class="form-check-label" for="ojuridica">Orientación jurídica</label>
-      </div>
-    </div>
-    <div class="col-md-2">
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" id="ajuridica">
-        <label class="form-check-label" for="ajuridica">Acción jurídica</label>
-      </div>
-    </div>
-    <div class="col-md-2">
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" id="oservicios">
-        <label class="form-check-label" for="oservicios">Otros servicios y asesorias</label>
-      </div>
-    </div>
-    <div class="col-md-2">
-      <%= select_tag('nsegresp_proyectofinanciero_id', 
-                     options_from_collection_for_select(
-                       Cor1440Gen::Proyectofinanciero.all, 
-                       'id', 'nombre'), class: 'chosen-select' ) %>
-    </div>
-    <div class="col-md-2">
-      <% if can?(:edit, f.object) %>
-        <% datos={ 
-          nombre: "Seguimiento/Respuesta a caso #{f.object.id}",
-          oficina_id: f.object.casosjr.oficina_id,
-          caso_id: f.object.id, 
-          proyecto_id: 101,
-          usuario_id: controller.current_usuario } %>
-        <% lfun = "jrscol_agrega_paramscv(this,  " +
-          "['ahumanitaria', 'ojuridica', 'ajuridica', 'oservicios', 'nsegresp_proyectofinanciero_id'], " +
-          datos.to_json + ")" %>
-        <%= link_to 'Nueva respuesta/seguimiento',
-          cor1440_gen.new_actividad_path,
-          target: '_blank',
-          class: 'btn btn-xs',
-          onclick: lfun %>
-      <% end %>
-    </div>
-  </div> <!-- row -->
-
-
 
 </div> <!-- acordeon -->

@@ -76,6 +76,13 @@ $(document).on('turbolinks:load ready page:load', function() {
             function (e) {
               actualiza_ubicaciones($(this))
             }) 
+        $(document).on('change', 
+            '[id^=actividad_asistencia_attributes]', 
+            function (e) {
+              jrscol_recalcula_poblacion()
+            }
+        ) 
+
 
 });
 

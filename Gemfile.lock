@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: c65828edd2284635e2cb0abd52a56f7a05f7a5ff
+  revision: badfcdea8bece46083acb118c6ade36b23204dd7
   specs:
     cor1440_gen (1.0b3)
       devise
@@ -33,7 +33,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: 0f8616d4f05de69776d624edc5e882b7a27fe970
+  revision: 9d04acc777bd240e63ce69c2ab8ded069b53f57b
   specs:
     sal7711_gen (1.0.b2)
       rails
@@ -41,7 +41,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: ec7a8a299720371137673c625b3bfad486455756
+  revision: 2ba5e8d6bba82cc31e46a56b76f0183458d7fe5f
   specs:
     sal7711_web (1.0.a3)
       rails
@@ -49,7 +49,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: fff621177cc34589f0b6eba352c3c5a42b8a70c5
+  revision: 766a22fd95ffe2946af30cde0b0af5cbc82166ed
   specs:
     sip (2.0.b6)
       bootstrap-datepicker-rails
@@ -71,7 +71,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: f3875e7bf2efc05354bd42c3c353076625458fe8
+  revision: d85ebd62e18432e4b72d3829cb67e0570da38a71
   specs:
     sivel2_gen (2.0b9)
       devise
@@ -80,7 +80,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 2351debe22e037dd79c9e668162bdb8df5a2ab78
+  revision: ee70fe405bf644f0aa0f617cb378585d8109e647
   specs:
     sivel2_sjr (2.0.b1)
       rails
@@ -241,7 +241,7 @@ GEM
       less (~> 2.6.0)
       sprockets (>= 2)
     libxml-ruby (3.1.0)
-    loofah (2.2.3)
+    loofah (2.3.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.7.1)
@@ -255,7 +255,7 @@ GEM
     mimemagic (0.3.3)
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
-    minitest (5.12.0)
+    minitest (5.12.2)
     msgpack (1.3.1)
     nio4r (2.5.2)
     nokogiri (1.10.4)
@@ -367,7 +367,7 @@ GEM
     selenium-webdriver (3.142.4)
       childprocess (>= 0.5, < 3.0)
       rubyzip (~> 1.2, >= 1.2.2)
-    simple_form (4.1.0)
+    simple_form (5.0.0)
       actionpack (>= 5.0)
       activemodel (>= 5.0)
     simplecov (0.17.1)

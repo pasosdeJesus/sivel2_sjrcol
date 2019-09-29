@@ -467,11 +467,11 @@ DEPENDENCIES
   rails-i18n
   rails_12factor
   redcarpet
-  rspreadsheet
+  rspreadsheet (>= 0.5.1)
   sal7711_gen!
   sal7711_web!
   sass
-  selenium-webdriver
+  selenium-webdriver (>= 3.142.4)
   simple_form
   simplecov
   sip!
@@ -489,4 +489,4 @@ DEPENDENCIES
   will_paginate
 
 BUNDLED WITH
-   2.0.2
+   1.17.3

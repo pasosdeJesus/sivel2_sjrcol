@@ -28,7 +28,7 @@ gem 'odf-report'
 
 # Plantilla ODS
 #gem 'rspreadsheet', path: '../rspreadsheet'
-gem 'rspreadsheet'#, git: 'https://github.com/gorn/rspreadsheet'
+gem 'rspreadsheet', '>= 0.5.1' #, git: 'https://github.com/gorn/rspreadsheet'
 gem 'libxml-ruby'
 
 # Postgresql
@@ -147,7 +147,7 @@ group :test do
   gem 'capybara'
 
   # Pruebas de regresión que no requieren javascript
-  gem 'selenium-webdriver'
+  gem 'selenium-webdriver', '>= 3.142.4'
 
   gem 'pry-rescue'
   gem 'pry-stack_explorer'

@@ -1,0 +1,24 @@
+<tr class='nested-fields'>
+  <% desr = false %>
+  <% if defined?(ac) && ac.object.asistencia.count > 0 %>
+    <% desr = true %>
+  <% end %>
+  <td>
+    <%= f.collection_select :rangoedadac_id, Cor1440Gen::Rangoedadac.all, :id, :nombre %>
+  </td>
+  <td><%= f.number_field :fl, size: "2" %></td>
+  <td>
+    <%= f.number_field :fr, size: "2", readonly: desr %>
+  </td>
+  <td><%= f.number_field :ml, size: "2" %></td>
+  <td>
+    <%= f.number_field :mr, size: "2", readonly: desr %>
+  </td>
+  <td>
+    <%= 
+      f.input :id, as: :hidden %><%= link_to_remove_association "Eliminar", f, 
+        :class => 'btn-danger' 
+      %>
+      <div><%= f.error_notification %></div>
+    </td>
+  </tr>

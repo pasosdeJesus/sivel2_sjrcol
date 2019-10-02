@@ -115,18 +115,58 @@ class Ability < Sivel2Sjr::Ability
       Sivel2Sjr::Ability::BASICAS_PRIO
   end
 
-  if ActiveRecord::Base.connection.data_source_exists?('sivel2_gen_caso')
+  if !ActiveRecord::Base.connection.data_source_exists?(
+      'sivel2_gen_consexpcaso') && 
+     ActiveRecord::Base.connection.data_source_exists?('sivel2_gen_caso')
     Sivel2Gen::Consexpcaso.crea_consexpcaso(nil)
   end
 
   CAMPOS_PLANTILLAS_PROPIAS = { 
     'Caso' => { 
-      campos: ActiveRecord::Base.connection.data_source_exists?(
-        'sivel2_gen_consexpcaso') ?
-        Sivel2Gen::Consexpcaso.column_names : [],
-        controlador: 'Sivel2Sjr::CasosController',
+      campos: [
+        :caso_id,
+        :fecharecepcion,
+        :asesor,
+        :oficina,
+        :fechadespemb,
+        :expulsion,
+        :llegada,
+        :descripcion,
+        :ultimaatencion_mes,
+        :ultimaatencion_fecha,
+        :contacto,
+        :contacto_nombres,
+        :contacto_apellidos,
+        :contacto_identificacion,
+        :contacto_sexo,
+        :contacto_etnia,
+        :contacto_edad_ultimaatencion,
+        :contacto_rangoedad_ultimaatencion,
+        :beneficiarios_0_5,
+        :beneficiarios_6_12,
+        :beneficiarios_13_17,
+        :beneficiarios_18_26,
+        :beneficiarios_27_59,
+        :beneficiarios_60_,
+        :beneficiarias_0_5,
+        :beneficiarias_6_12,
+        :beneficiarias_13_17,
+        :beneficiarias_18_26,
+        :beneficiarias_27_59,
+        :beneficiarias_60_,
+        :ultimaatencion_derechosvul,
+        :ultimaatencion_as_humanitaria,
+        :ultimaatencion_as_juridica,
+        :ultimaatencion_descripcion_at,
+        :tipificacion,
+        :victimas, 
+        :ubicaciones, 
+        :presponsables, 
+        :memo1612
+      ],
+      controlador: 'Sivel2Sjr::CasosController',
         ruta: '/casos'
-    },
+    }
 #    'Actividad' => { 
 #      campos: [
 #        'id', 'nombre', 'fecha', 'lugar', 'oficina', 
@@ -142,10 +182,10 @@ class Ability < Sivel2Sjr::Ability
 
   }
 
-    def campos_plantillas
-      Heb412Gen::Ability::CAMPOS_PLANTILLAS_PROPIAS.clone.
-        merge(Cor1440Gen::Ability::CAMPOS_PLANTILLAS_PROPIAS.clone).
-        merge(CAMPOS_PLANTILLAS_PROPIAS)
+  def campos_plantillas
+    Heb412Gen::Ability::CAMPOS_PLANTILLAS_PROPIAS.clone.
+      merge(Cor1440Gen::Ability::CAMPOS_PLANTILLAS_PROPIAS.clone).
+      merge(CAMPOS_PLANTILLAS_PROPIAS)
   end
 
   def initialize(usuario = nil)

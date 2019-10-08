@@ -74,6 +74,7 @@ module Sivel2Sjr
       sivel2_sjr_destroy
     end
 
+
     def otros_params_respuesta
       [
         :accionjuridica_respuesta_attributes => [

@@ -26,7 +26,6 @@ module Sivel2Sjr
 
     test "existente" do
       regimensalud = Regimensalud.where(id: 0).take
-      byebug
       assert_equal regimensalud.nombre, "SIN INFORMACIÓN"
     end
 

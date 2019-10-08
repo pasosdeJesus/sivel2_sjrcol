@@ -76,13 +76,27 @@ $(document).on('turbolinks:load ready page:load', function() {
             function (e) {
               actualiza_ubicaciones($(this))
             }) 
+
+        // Se recalcula tabla población si cambia fecha o listados de
+        // personas o listado de casos
+       $(document).on('change', 
+            '[id=actividad_fecha_localizada]', 
+            function (e) {
+              jrs_recalcula_poblacion()
+            }
+        ) 
         $(document).on('change', 
             '[id^=actividad_asistencia_attributes]', 
             function (e) {
-              jrscol_recalcula_poblacion()
+              jrs_recalcula_poblacion()
             }
         ) 
-
+        $(document).on('change', 
+            '[id^=actividad_actividad_casosjr_attributes]', 
+            function (e) {
+              jrs_recalcula_poblacion()
+            }
+        ) 
 
 });
 

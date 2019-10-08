@@ -185,7 +185,7 @@ class Ability < Sivel2Sjr::Ability
   def campos_plantillas
     Heb412Gen::Ability::CAMPOS_PLANTILLAS_PROPIAS.clone.
       merge(Cor1440Gen::Ability::CAMPOS_PLANTILLAS_PROPIAS.clone).
-      merge(CAMPOS_PLANTILLAS_PROPIAS)
+      merge(CAMPOS_PLANTILLAS_PROPIAS.clone)
   end
 
   def initialize(usuario = nil)

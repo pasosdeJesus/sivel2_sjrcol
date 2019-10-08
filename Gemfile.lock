@@ -1,6 +1,19 @@
 GIT
+  remote: https://github.com/pasosdeJesus/cor1440_gen.git
+  revision: 18935cc469e0331a30492d3065bb318b39b9975f
+  specs:
+    cor1440_gen (1.0b3)
+      devise
+      heb412_gen
+      jquery-rails
+      mr519_gen
+      paperclip
+      rails
+      sip
+
+GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 2b5fd9757635e840ec72205f1537bb0b39624ec8
+  revision: ab6a1ba8dc58bd2e399c7937ad3f629bc6e56e62
   specs:
     heb412_gen (1.0.b6)
       chosen-rails
@@ -12,7 +25,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/mr519_gen.git
-  revision: 4b24adda23abb08a3d6ff542cb63e861c19affb1
+  revision: 0221965dd6ec92b92345594be5ff009d45317188
   specs:
     mr519_gen (0.2.0)
       rails (~> 6.0.0.rc1, >= 6.0.0.rc1)
@@ -20,7 +33,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: ef1ab0dc1276d93f24f4ea867981f556ac380ecd
+  revision: bcba5e3f4d8c90fd216fc1dd6e95de151b84df97
   specs:
     sal7711_gen (1.0.b2)
       rails
@@ -28,7 +41,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: e3bde96a915a5f8886fcd37d6ba9be6b4c656ebd
+  revision: d891d5d18d43da813171bf7951b20bb2a08b54c6
   specs:
     sal7711_web (1.0.a3)
       rails
@@ -36,7 +49,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 0fde1f2f7306680e482bf93f0b884aadaf5d0a41
+  revision: 676f0b8183ca36caf9b2019bc2d5902e219c7843
   specs:
     sip (2.0.b6)
       bootstrap-datepicker-rails
@@ -58,12 +71,20 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: d3243bc5b0dce1fa1cea62a4fcc80b9bf4042d3d
+  revision: b2da951251da21c4785bd85762ce6e544a062104
   specs:
     sivel2_gen (2.0b9)
       devise
       jquery-rails
       rails
+
+GIT
+  remote: https://github.com/pasosdeJesus/sivel2_sjr.git
+  revision: b53c50a363befc114ec3b992a924b3d7c6dc2c2c
+  specs:
+    sivel2_sjr (2.0.b1)
+      rails
+      sivel2_gen
 
 GIT
   remote: https://github.com/vtamara/chosen-rails.git
@@ -90,25 +111,6 @@ GIT
     odf-report (0.6.1)
       nokogiri (>= 1.5.0)
       rubyzip (>= 1.3.0)
-
-PATH
-  remote: ../cor1440_gen
-  specs:
-    cor1440_gen (1.0b3)
-      devise
-      heb412_gen
-      jquery-rails
-      mr519_gen
-      paperclip
-      rails
-      sip
-
-PATH
-  remote: ../sivel2_sjr
-  specs:
-    sivel2_sjr (2.0.b1)
-      rails
-      sivel2_gen
 
 GEM
   remote: https://rubygems.org/

@@ -52,6 +52,9 @@ es:
       "cor1440_gen/actividadarea":
         actividadarea: Subárea de Actividad
         Actividadareas: Subáreas de Actividad
+      "cor1440_gen/actividadtipo":
+        Actividadtipo: Tipo de actividad de convenio financiado
+        Actividadtipos: Tipos de actividad de convenio financiado
       "cor1440_gen/proyecto":
         Proyecto: Área de Actividad
         Proyectos: Áreas de Actividad

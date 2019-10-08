@@ -21,6 +21,15 @@ Rails.application.routes.draw do
   end
   resources :usuarios, path_names: { new: 'nuevo', edit: 'edita' } 
 
+
+  get "/actividades/poblacion_sexo_rangoedadac" => 'cor1440_gen/actividades#poblacion_sexo_rangoedadac',
+    as: :actividades_poblacion_sexo_rangoedadac
+
+  patch "/actos/agregar" => 'sivel2_sjr/actos#agregar',
+    as: :actos_agregar
+  get "/actos/eliminar" => 'sivel2_sjr/actos#eliminar',
+    as: :actos_eliminar
+ 
   get "/conteos/accionesjuridicas" => 'sivel2_sjr/conteos#accionesjuridicas', 
     as: :conteos_accionesjuridicas
   get "/conteos/desplazamientos" => 'sivel2_sjr/conteos#desplazamientos', 
@@ -32,13 +41,10 @@ Rails.application.routes.draw do
   get "/conteos/vacios" => 'sivel2_sjr/conteos#vacios',
     as: :conteos_vacios
   
-  patch "/actos/agregar" => 'sivel2_sjr/actos#agregar',
-    as: :actos_agregar
-  get "/actos/eliminar" => 'sivel2_sjr/actos#eliminar',
-    as: :actos_eliminar
-  
+ 
   #get "/personas" => 'sip/personas#index'
   #get "/personas/remplazar" => 'sip/personas#remplazar'
+  
  
   root "sip/hogar#index"
   mount Sivel2Sjr::Engine, at: "/", as: 'sivel2_sjr'

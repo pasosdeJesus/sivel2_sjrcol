@@ -27,7 +27,12 @@ PRUEBA_USUARIO = {
 class ActiveSupport::TestCase
 
   fixtures :all
-  
+ 
+  if Sip::Tclase.all.count == 0
+    load "#{Rails.root}/db/seeds.rb"
+    Rake::Task['sip:indices'].invoke
+  end
+
   protected
   def load_seeds
     load "#{Rails.root}/db/seeds.rb"

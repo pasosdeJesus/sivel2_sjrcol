@@ -35,6 +35,7 @@ module Sip
       end
       r = nombres + " " + apellidos + 
         " (" + ip + ")"
+      return r
     end
 
   end

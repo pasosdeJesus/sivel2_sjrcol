@@ -139,6 +139,37 @@ module Cor1440Gen
       render layout: 'application'
     end
 
+    # API retorna poblacion de un caso como matriz por sexo y
+    # rango de edad
+    def poblacion_sexo_rangoedadac
+      caso_id = params[:id_caso].to_i
+      fecha = Sip::FormatoFechaHelper.fecha_local_estandar(
+        params[:fecha])
+      if !fecha
+        render json: "No se pudo convertir fecha #{params[:fecha]}",
+          status: :unprocessable_entity 
+        return
+      end
+      fecha = Date.strptime(fecha, '%Y-%m-%d')
+
+      anio = fecha.year
+      mes = fecha.month
+      dia = fecha.day
+      casosjr = Sivel2Sjr::Casosjr.where(id_caso: caso_id)
+      if casosjr.count == 0
+        render json: "No se encontró caso #{caso_id}",
+          status: :unprocessable_entity 
+        return
+      end
+      rangoedad = {'S' => {}, 'M' => {}, 'F' => {}}
+      totsexo = {}
+      Sivel2Gen::RangoedadHelper.poblacion_por_rangos(
+        casosjr.take.id_caso, fecha.year, fecha.month, fecha.day,
+        'Cor1440Gen::Rangoedadac', rangoedad, totsexo)
+      render json: rangoedad, status: :ok
+    end
+
+
     def fila_comun(actividad)
       pobf = actividad.actividad_rangoedadac.map { |i| 
         (i.fl ? i.fl : 0) + (i.fr ? i.fr : 0)

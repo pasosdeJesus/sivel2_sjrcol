@@ -7,59 +7,40 @@ module Cor1440Gen
 
     before_action :set_actividad, 
       only: [:show, :edit, :update, :destroy],
-      exclude: [:cuenta]
+      exclude: [:contar, :poblacion_sexo_rango]
+    load_and_authorize_resource class: Cor1440Gen::Actividad
 
     Cor1440Gen.actividadg1 = "Funcionarias del SJR"
     Cor1440Gen.actividadg3 = "Funcionarios del SJR"
 
-    def new
-      new_cor1440_gen
-      @registro.fecha = Date.today
-      if params['usuario_id'] && 
-        ::Usuario.where(id: params['usuario_id'].to_i).count == 1
-        @registro.usuario_id = params['usuario_id'].to_i
-      end
-      if params['oficina_id'] && 
-        Sip::Oficina.where(id: params['oficina_id'].to_i).count == 1
-        @registro.oficina_id = params['oficina_id'].to_i
-      end
-      if params['proyecto_id'] && 
-        Cor1440Gen::Proyecto.where(id: params['proyecto_id'].to_i).count == 1
-        @registro.proyecto_ids = [params['proyecto_id'].to_i]
-      end
-      if params['caso_id'] && 
-        Sivel2Sjr::Casosjr.where(id_caso: params['caso_id'].to_i).count == 1
-        @registro.casosjr_ids = [params['caso_id']]
-      end
-      @registro.proyectofinanciero_ids = [10]
-      if params['nsegresp_proyectofinanciero_id'] && 
-        Cor1440Gen::Proyectofinanciero.where(
-          id: params['nsegresp_proyectofinanciero_id'].to_i).count == 1
-        @registro.proyectofinanciero_ids |= [params[
-          'nsegresp_proyectofinanciero_id'].to_i]
-      end
-
-      if params['nombre'] 
-        @registro.nombre = params['nombre']
-      end
-      @registro.actividadpf_ids = []
-      if params[:ahumanitaria] == "true"
-        @registro.actividadpf_ids |=  [62, 116] # SEGCAS, ASHUM
-      end
-      if params[:ojuridica] == "true"
-        @registro.actividadpf_ids |=  [62, 118] # SEGCAS, ASJUR
-      end
-      if params[:ajuridica] == "true"
-        @registro.actividadpf_ids |=  [62, 125] # SEGCAS, ACJUR
-      end
-      if params[:oservicios] == "true"
-        @registro.actividadpf_ids |=  [62, 126] # SEGCAS, OTSERC
-      end
-      @registro.save!(validate: false)
-
-      redirect_to cor1440_gen.edit_actividad_path(@registro)
+    def self.posibles_nuevaresp
+      return {
+        ahumanitaria: ['Asistenia humanitaria', 116],
+        ojuridica: ['Orientación jurídica', 118],
+        ajuridica: ['Accion Jurídica', 125],
+        oservicios: ['Otros servicios y asesorias', 126]
+      } 
     end
 
+    # Retorna datos por enviar a nuevo de este controlador
+    # desde javascript cuando se añade una respuesta a un caso
+    def self.datos_nuevaresp(caso, controller)
+      return {
+        nombre: "Seguimiento/Respuesta a caso #{caso.id}",
+        oficina_id: caso.casosjr.oficina_id,
+        caso_id: caso.id, 
+        proyecto_id: 101,
+        usuario_id: controller.current_usuario.id 
+      } 
+    end
+
+    def self.pf_planest_id
+      10
+    end
+    
+    def self.actividadpf_segcas_id
+      62
+    end
 
     def self.filtramas(par, ac, current_usuario)
       @busactividadtipo = param_escapa(par, 'busactividadtipo')
@@ -138,37 +119,6 @@ module Cor1440Gen
       @listadoasistencia = true
       render layout: 'application'
     end
-
-    # API retorna poblacion de un caso como matriz por sexo y
-    # rango de edad
-    def poblacion_sexo_rangoedadac
-      caso_id = params[:id_caso].to_i
-      fecha = Sip::FormatoFechaHelper.fecha_local_estandar(
-        params[:fecha])
-      if !fecha
-        render json: "No se pudo convertir fecha #{params[:fecha]}",
-          status: :unprocessable_entity 
-        return
-      end
-      fecha = Date.strptime(fecha, '%Y-%m-%d')
-
-      anio = fecha.year
-      mes = fecha.month
-      dia = fecha.day
-      casosjr = Sivel2Sjr::Casosjr.where(id_caso: caso_id)
-      if casosjr.count == 0
-        render json: "No se encontró caso #{caso_id}",
-          status: :unprocessable_entity 
-        return
-      end
-      rangoedad = {'S' => {}, 'M' => {}, 'F' => {}}
-      totsexo = {}
-      Sivel2Gen::RangoedadHelper.poblacion_por_rangos(
-        casosjr.take.id_caso, fecha.year, fecha.month, fecha.day,
-        'Cor1440Gen::Rangoedadac', rangoedad, totsexo)
-      render json: rangoedad, status: :ok
-    end
-
 
     def fila_comun(actividad)
       pobf = actividad.actividad_rangoedadac.map { |i| 

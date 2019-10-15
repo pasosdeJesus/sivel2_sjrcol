@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: dffb66b9befef6bffcd4614e3ad27b80626e2643
+  revision: 6071a5467a50c9af9bcb3e7ea2d36da57a9c1d2e
   specs:
     cor1440_gen (1.0b3)
       devise
@@ -49,7 +49,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 8a2c80636e6f4ed5a1bedb66394c7304f287fee6
+  revision: d9f85765f75f31e09e9ba1f6ac2b0711b85d777a
   specs:
     sip (2.0.b6)
       bootstrap-datepicker-rails
@@ -71,7 +71,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 646c91774e704a255f7f5b87148de61246b09e91
+  revision: de1e9c978aa77225d21127d95f8ed31c5c9ad269
   specs:
     sivel2_gen (2.0b9)
       devise
@@ -80,7 +80,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 7d90a358e3e296be9c1e5323775df9b435395202
+  revision: 1d2f9d6c7b2c7fbbc1255f53c2d478f05cbaa8a0
   specs:
     sivel2_sjr (2.0.b1)
       rails
@@ -405,7 +405,7 @@ GEM
     websocket-driver (0.7.1)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.4)
-    will_paginate (3.2.0)
+    will_paginate (3.2.1)
     xpath (3.2.0)
       nokogiri (~> 1.8)
     zeitwerk (2.2.0)

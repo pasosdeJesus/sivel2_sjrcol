@@ -13,7 +13,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 503dc91bd599e1a3791059d838c610c17a4fc4df
+  revision: 4cf49ed75b80e271d4f3dc367fe485a2927faace
   specs:
     heb412_gen (1.0.b6)
       chosen-rails
@@ -25,7 +25,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/mr519_gen.git
-  revision: 18fbc5ec50580c62e4be421d9e08570a34c507ec
+  revision: dac1490e4d643b7d218717b88ddcf10eaf8c61af
   specs:
     mr519_gen (0.2.0)
       rails (~> 6.0.0.rc1, >= 6.0.0.rc1)

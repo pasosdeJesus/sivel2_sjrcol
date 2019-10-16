@@ -1,6 +1,10 @@
 class ConvierteRespcasoActividad < ActiveRecord::Migration[6.0]
   def up
+    numconv = 0
+    puts "Respuestas por convertir: #{Sivel2Sjr::Respuesta.all.count}"
     Sivel2Sjr::Respuesta.all.each do |r|
+      numconv += 1
+      puts "Convirtiendo respuesta #{r.id} para un total de #{numconv} convertidas"
       a = Cor1440Gen::Actividad.create(
         nombre: "Respuesta al caso #{r.id_caso} del #{r.fechaatencion}",
         fecha: r.fechaatencion,

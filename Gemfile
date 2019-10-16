@@ -115,7 +115,7 @@ gem 'will_paginate' # Listados en páginas
 
 group :development, :test do
   
-  #gem 'byebug' # Depurar
+  # gem 'byebug' # Depurar
 
 end
 

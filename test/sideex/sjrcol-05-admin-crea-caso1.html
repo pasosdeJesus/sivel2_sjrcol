@@ -8,114 +8,6 @@
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">casos-migracion</td></tr>
-</thead>
-<tbody>
-<tr><td>clickAt</td><td>link=Editar<datalist><option>link=Editar</option><option>//a[contains(text(),'Editar')]</option><option>//a[contains(@href, '/casos/458/edita')]</option><option>//a[2]</option></datalist></td><td>29,13</td>
-</tr>
-<tr><td>clickAt</td><td>link=Migración<datalist><option>link=Migración</option><option>//a[contains(text(),'Migración')]</option><option>//form[@id='edit_caso_427']/div/div[2]/ul/li[5]/a</option><option>//a[contains(@href, '#migracion')]</option><option>//div[2]/ul/li[5]/a</option></datalist></td><td>50,19</td>
-</tr>
-<tr><td>pause</td><td><datalist><option></option></datalist></td><td>3000</td>
-</tr>
-<tr><td>clickAt</td><td>id=caso_casosjr_attributes_fechasalidam<datalist><option>id=caso_casosjr_attributes_fechasalidam</option><option>name=caso[casosjr_attributes][fechasalidam]</option><option>css=#caso_casosjr_attributes_fechasalidam</option><option>//input[@id='caso_casosjr_attributes_fechasalidam']</option><option>//div[@id='migracion']/div/input</option><option>//div[6]/div/input</option></datalist></td><td>114,13</td>
-</tr>
-<tr><td>clickAt</td><td>//tr[2]/td[2]<datalist><option>//tr[2]/td[2]</option></datalist></td><td>19,7</td>
-</tr>
-<tr><td>runScript</td><td>$('.chosen-select').removeAttr('style'); $('.chosen-container').remove(); $('.chosen-select').removeClass('chosen-select')<datalist><option>$('.chosen-select').removeAttr('style'); $('.chosen-container').remove(); $('.chosen-select').removeClass('chosen-select')</option></datalist></td><td></td>
-</tr>
-<tr><td>runScript</td><td>$('#caso_casosjr_attributes_id_salidam option:contains(COLOMBIA / CAUCA )').attr('selected', 'selected');<datalist><option>$('#caso_casosjr_attributes_id_salida option:contains(VENEZUELA)').attr('selected', 'selected');</option><option>$('#caso_casosjr_attributes_id_llegada option:contains(COLOMBIA)').attr('selected', 'selected');</option><option>$('#caso_casosjr_attributes_id_llegada option:contains(VENEZUELA)').attr('selected', 'selected');</option><option>$('#caso_casosjr_attributes_id_salida option:contains(COLOMBIA / CAUCA )').attr('selected', 'selected');</option><option>$('#caso_casosjr_attributes_id_salidam option:contains(COLOMBIA / CAUCA )').attr('selected', 'selected');</option></datalist></td><td></td>
-</tr>
-<tr><td>clickAt</td><td>id=caso_casosjr_attributes_id_salidam<datalist><option>id=caso_casosjr_attributes_id_salidam</option><option>name=caso[casosjr_attributes][id_salidam]</option><option>css=#caso_casosjr_attributes_id_salidam</option><option>//select[@id='caso_casosjr_attributes_id_salidam']</option><option>//div[@id='migracion']/div[2]/select</option><option>//div[6]/div[2]/select</option></datalist></td><td>49,23</td>
-</tr>
-<tr><td>select</td><td>id=caso_casosjr_attributes_id_salidam<datalist><option>id=caso_casosjr_attributes_id_salidam</option><option>name=caso[casosjr_attributes][id_salidam]</option><option>css=#caso_casosjr_attributes_id_salidam</option><option>//select[@id='caso_casosjr_attributes_id_salidam']</option><option>//div[@id='migracion']/div[2]/select</option><option>//div[6]/div[2]/select</option></datalist></td><td>label=COLOMBIA / CAUCA / LA VEGA / SANTA JUANA</td>
-</tr>
-<tr><td>clickAt</td><td>id=caso_casosjr_attributes_id_salidam<datalist><option>id=caso_casosjr_attributes_id_salidam</option><option>name=caso[casosjr_attributes][id_salidam]</option><option>css=#caso_casosjr_attributes_id_salidam</option><option>//select[@id='caso_casosjr_attributes_id_salidam']</option><option>//div[@id='migracion']/div[2]/select</option><option>//div[6]/div[2]/select</option></datalist></td><td>-75,-327</td>
-</tr>
-<tr><td>clickAt</td><td>id=caso_casosjr_attributes_fechallegadam<datalist><option>id=caso_casosjr_attributes_fechallegadam</option><option>name=caso[casosjr_attributes][fechallegadam]</option><option>css=#caso_casosjr_attributes_fechallegadam</option><option>//input[@id='caso_casosjr_attributes_fechallegadam']</option><option>//div[@id='migracion']/div[3]/input</option><option>//div[6]/div[3]/input</option></datalist></td><td>47,6</td>
-</tr>
-<tr><td>clickAt</td><td>//tr[3]/td<datalist><option>//tr[3]/td</option></datalist></td><td>13,22</td>
-</tr>
-<tr><td>assertText</td><td>css=div.input.select.optional.caso_casosjr_llegadam &gt; label.select.optional.control-label<datalist><option>css=div.input.select.optional.caso_casosjr_llegadam &gt; label.select.optional.control-label</option><option>//div[@id='migracion']/div[4]/label</option><option>//div[6]/div[4]/label</option></datalist></td><td>Sitio de Llegada</td>
-</tr>
-<tr><td>pause</td><td><datalist><option></option></datalist></td><td>1000</td>
-</tr>
-<tr><td>runScript</td><td>$('#caso_casosjr_attributes_id_llegadam option:contains(COLOMBIA / TOLIMA / FLANDES / EL COLEGIO)').attr('selected', 'selected');<datalist><option>$('#caso_casosjr_attributes_id_llegada option:contains(COLOMBIA)').attr('selected', 'selected');</option><option>$('#caso_casosjr_attributes_id_llegada option:contains(VENEZUELA)').attr('selected', 'selected');</option><option>$('#caso_casosjr_attributes_id_llegada option:contains(COLOMBIA / TOLIMA / FLANDES / EL COLEGIO)').attr('selected', 'selected');</option><option>$('#caso_casosjr_attributes_id_llegadam option:contains(COLOMBIA / TOLIMA / FLANDES / EL COLEGIO)').attr('selected', 'selected');</option></datalist></td><td></td>
-</tr>
-<tr><td>clickAt</td><td>id=caso_casosjr_attributes_id_llegadam<datalist><option>id=caso_casosjr_attributes_id_llegadam</option><option>name=caso[casosjr_attributes][id_llegadam]</option><option>css=#caso_casosjr_attributes_id_llegadam</option><option>//select[@id='caso_casosjr_attributes_id_llegadam']</option><option>//div[@id='migracion']/div[4]/select</option><option>//div[6]/div[4]/select</option></datalist></td><td>47,17</td>
-</tr>
-<tr><td>select</td><td>id=caso_casosjr_attributes_id_llegadam<datalist><option>id=caso_casosjr_attributes_id_llegadam</option><option>name=caso[casosjr_attributes][id_llegadam]</option><option>css=#caso_casosjr_attributes_id_llegadam</option><option>//select[@id='caso_casosjr_attributes_id_llegadam']</option><option>//div[@id='migracion']/div[4]/select</option><option>//div[6]/div[4]/select</option></datalist></td><td>label=COLOMBIA / TOLIMA / FLANDES / EL COLEGIO</td>
-</tr>
-<tr><td>type</td><td>id=caso_casosjr_attributes_motivom<datalist><option>id=caso_casosjr_attributes_motivom</option><option>name=caso[casosjr_attributes][motivom]</option><option>css=#caso_casosjr_attributes_motivom</option><option>//textarea[@id='caso_casosjr_attributes_motivom']</option><option>//div[@id='migracion']/div[5]/textarea</option><option>//textarea</option></datalist></td><td>amenazas a  la familia</td>
-</tr>
-<tr><td>clickAt</td><td>name=commit<datalist><option>name=commit</option><option>css=input[name="commit"]</option><option>//input[@name='commit']</option><option>//form[@id='edit_caso_458']/div[2]/input</option><option>//div[2]/input</option></datalist></td><td>88,13</td>
-</tr>
-<tr><td>assertText</td><td>css=h1<datalist><option>css=h1</option><option>//h1</option></datalist></td><td>Caso</td>
-</tr>
-</tbody></table>
-<table cellpadding="1" cellspacing="1" border="1">
-<thead>
-<tr><td rowspan="1" colspan="3">casos-refugio</td></tr>
-</thead>
-<tbody>
-<tr><td>clickAt</td><td>link=Editar<datalist><option>link=Editar</option><option>//a[contains(text(),'Editar')]</option><option>//a[contains(@href, '/casos/458/edita')]</option><option>//a[2]</option></datalist></td><td>29,13</td>
-</tr>
-<tr><td>clickAt</td><td>link=Refugio<datalist><option>link=Refugio</option><option>//a[contains(text(),'Refugio')]</option><option>//form[@id='edit_caso_427']/div/div[2]/ul/li[6]/a</option><option>//a[contains(@href, '#refugio')]</option><option>//div[2]/ul/li[6]/a</option></datalist></td><td>52,27</td>
-</tr>
-<tr><td>pause</td><td><datalist><option></option></datalist></td><td>3000</td>
-</tr>
-<tr><td>clickAt</td><td>css=body<datalist><option>css=body</option><option>//body</option></datalist></td><td>140,287</td>
-</tr>
-<tr><td>clickAt</td><td>id=caso_casosjr_attributes_fechasalida<datalist><option>id=caso_casosjr_attributes_fechasalida</option><option>name=caso[casosjr_attributes][fechasalida]</option><option>css=#caso_casosjr_attributes_fechasalida</option><option>//input[@id='caso_casosjr_attributes_fechasalida']</option><option>//div[@id='refugio']/div/input</option><option>//div[5]/div/input</option></datalist></td><td>51,13</td>
-</tr>
-<tr><td>clickAt</td><td>//tr[2]/td[2]<datalist><option>//tr[2]/td[2]</option></datalist></td><td>13,11</td>
-</tr>
-<tr><td>clickAt</td><td>id=caso_casosjr_attributes_id_salida<datalist><option>id=caso_casosjr_attributes_id_salida</option><option>name=caso[casosjr_attributes][id_salida]</option><option>css=#caso_casosjr_attributes_id_salida</option><option>//select[@id='caso_casosjr_attributes_id_salida']</option><option>//div[@id='refugio']/div[2]/select</option><option>//div[5]/div[2]/select</option></datalist></td><td>-75,-335</td>
-</tr>
-<tr><td>clickAt</td><td>id=caso_casosjr_attributes_fechallegada<datalist><option>id=caso_casosjr_attributes_fechallegada</option><option>name=caso[casosjr_attributes][fechallegada]</option><option>css=#caso_casosjr_attributes_fechallegada</option><option>//input[@id='caso_casosjr_attributes_fechallegada']</option><option>//div[@id='refugio']/div[3]/input</option><option>//div[5]/div[3]/input</option></datalist></td><td>99,23</td>
-</tr>
-<tr><td>clickAt</td><td>//tr[3]/td[5]<datalist><option>//tr[3]/td[5]</option></datalist></td><td>17,16</td>
-</tr>
-<tr><td>select</td><td>id=caso_casosjr_attributes_id_llegada<datalist><option>id=caso_casosjr_attributes_id_llegada</option><option>name=caso[casosjr_attributes][id_llegada]</option><option>css=#caso_casosjr_attributes_id_llegada</option><option>//select[@id='caso_casosjr_attributes_id_llegada']</option><option>//div[@id='refugio']/div[4]/select</option><option>//div[5]/div[4]/select</option></datalist></td><td>label=COLOMBIA / TOLIMA</td>
-</tr>
-<tr><td>clickAt</td><td>id=caso_casosjr_attributes_id_llegada<datalist><option>id=caso_casosjr_attributes_id_llegada</option><option>name=caso[casosjr_attributes][id_llegada]</option><option>css=#caso_casosjr_attributes_id_llegada</option><option>//select[@id='caso_casosjr_attributes_id_llegada']</option><option>//div[@id='refugio']/div[4]/select</option><option>//div[5]/div[4]/select</option></datalist></td><td>-75,-469</td>
-</tr>
-<tr><td>runScript</td><td>window.scrollTo(0,106)<datalist><option>window.scrollTo(0,106)</option></datalist></td><td></td>
-</tr>
-<tr><td>select</td><td>id=caso_casosjr_attributes_categoriaref<datalist><option>id=caso_casosjr_attributes_categoriaref</option><option>name=caso[casosjr_attributes][categoriaref]</option><option>css=#caso_casosjr_attributes_categoriaref</option><option>//select[@id='caso_casosjr_attributes_categoriaref']</option><option>//div[@id='refugio']/div[5]/select</option><option>//div[5]/div[5]/select</option></datalist></td><td>label=R2030 PERSECUCIÓN</td>
-</tr>
-<tr><td>clickAt</td><td>id=caso_casosjr_attributes_categoriaref<datalist><option>id=caso_casosjr_attributes_categoriaref</option><option>name=caso[casosjr_attributes][categoriaref]</option><option>css=#caso_casosjr_attributes_categoriaref</option><option>//select[@id='caso_casosjr_attributes_categoriaref']</option><option>//div[@id='refugio']/div[5]/select</option><option>//div[5]/div[5]/select</option></datalist></td><td>-75,-430</td>
-</tr>
-<tr><td>select</td><td>id=caso_casosjr_attributes_id_statusmigratorio<datalist><option>id=caso_casosjr_attributes_id_statusmigratorio</option><option>name=caso[casosjr_attributes][id_statusmigratorio]</option><option>css=#caso_casosjr_attributes_id_statusmigratorio</option><option>//select[@id='caso_casosjr_attributes_id_statusmigratorio']</option><option>//div[@id='refugio']/div[6]/select</option><option>//div[6]/select</option></datalist></td><td>label=NACIONAL POR NACIMIENTO</td>
-</tr>
-<tr><td>clickAt</td><td>id=caso_casosjr_attributes_id_statusmigratorio<datalist><option>id=caso_casosjr_attributes_id_statusmigratorio</option><option>name=caso[casosjr_attributes][id_statusmigratorio]</option><option>css=#caso_casosjr_attributes_id_statusmigratorio</option><option>//select[@id='caso_casosjr_attributes_id_statusmigratorio']</option><option>//div[@id='refugio']/div[6]/select</option><option>//div[6]/select</option></datalist></td><td>-75,-497</td>
-</tr>
-<tr><td>clickAt</td><td>id=caso_casosjr_attributes_estatus_refugio<datalist><option>id=caso_casosjr_attributes_estatus_refugio</option><option>name=caso[casosjr_attributes][estatus_refugio]</option><option>css=#caso_casosjr_attributes_estatus_refugio</option><option>//input[@id='caso_casosjr_attributes_estatus_refugio']</option><option>//div[@id='refugio']/div[7]/input</option><option>//div[5]/div[7]/input</option></datalist></td><td>78,13</td>
-</tr>
-<tr><td>type</td><td>id=caso_casosjr_attributes_estatus_refugio<datalist><option>id=caso_casosjr_attributes_estatus_refugio</option><option>name=caso[casosjr_attributes][estatus_refugio]</option><option>css=#caso_casosjr_attributes_estatus_refugio</option><option>//input[@id='caso_casosjr_attributes_estatus_refugio']</option><option>//div[@id='refugio']/div[7]/input</option><option>//div[5]/div[7]/input</option></datalist></td><td>refugio</td>
-</tr>
-<tr><td>clickAt</td><td>id=caso_casosjr_attributes_fechadecrefugio<datalist><option>id=caso_casosjr_attributes_fechadecrefugio</option><option>name=caso[casosjr_attributes][fechadecrefugio]</option><option>css=#caso_casosjr_attributes_fechadecrefugio</option><option>//input[@id='caso_casosjr_attributes_fechadecrefugio']</option><option>//div[@id='refugio']/div[8]/input</option><option>//div[5]/div[8]/input</option></datalist></td><td>70,13</td>
-</tr>
-<tr><td>clickAt</td><td>//tr[3]/td[7]<datalist><option>//tr[3]/td[7]</option></datalist></td><td>22,16</td>
-</tr>
-<tr><td>clickAt</td><td>id=caso_casosjr_attributes_docrefugiado<datalist><option>id=caso_casosjr_attributes_docrefugiado</option><option>name=caso[casosjr_attributes][docrefugiado]</option><option>css=#caso_casosjr_attributes_docrefugiado</option><option>//input[@id='caso_casosjr_attributes_docrefugiado']</option><option>//div[@id='refugio']/div[9]/input</option><option>//div[5]/div[9]/input</option></datalist></td><td>49,14</td>
-</tr>
-<tr><td>type</td><td>id=caso_casosjr_attributes_docrefugiado<datalist><option>id=caso_casosjr_attributes_docrefugiado</option><option>name=caso[casosjr_attributes][docrefugiado]</option><option>css=#caso_casosjr_attributes_docrefugiado</option><option>//input[@id='caso_casosjr_attributes_docrefugiado']</option><option>//div[@id='refugio']/div[9]/input</option><option>//div[5]/div[9]/input</option></datalist></td><td>45623</td>
-</tr>
-<tr><td>select</td><td>id=caso_casosjr_attributes_id_proteccion<datalist><option>id=caso_casosjr_attributes_id_proteccion</option><option>name=caso[casosjr_attributes][id_proteccion]</option><option>css=#caso_casosjr_attributes_id_proteccion</option><option>//select[@id='caso_casosjr_attributes_id_proteccion']</option><option>//div[@id='refugio']/div[10]/select</option><option>//div[10]/select</option></datalist></td><td>label=SOLICITANTE DE REFUGIO</td>
-</tr>
-<tr><td>clickAt</td><td>id=caso_casosjr_attributes_id_proteccion<datalist><option>id=caso_casosjr_attributes_id_proteccion</option><option>name=caso[casosjr_attributes][id_proteccion]</option><option>css=#caso_casosjr_attributes_id_proteccion</option><option>//select[@id='caso_casosjr_attributes_id_proteccion']</option><option>//div[@id='refugio']/div[10]/select</option><option>//div[10]/select</option></datalist></td><td>-75,-500</td>
-</tr>
-<tr><td>clickAt</td><td>id=caso_casosjr_attributes_observacionesref<datalist><option>id=caso_casosjr_attributes_observacionesref</option><option>name=caso[casosjr_attributes][observacionesref]</option><option>css=#caso_casosjr_attributes_observacionesref</option><option>//input[@id='caso_casosjr_attributes_observacionesref']</option><option>//div[@id='refugio']/div[11]/input</option><option>//div[11]/input</option></datalist></td><td>36,3</td>
-</tr>
-<tr><td>type</td><td>id=caso_casosjr_attributes_observacionesref<datalist><option>id=caso_casosjr_attributes_observacionesref</option><option>name=caso[casosjr_attributes][observacionesref]</option><option>css=#caso_casosjr_attributes_observacionesref</option><option>//input[@id='caso_casosjr_attributes_observacionesref']</option><option>//div[@id='refugio']/div[11]/input</option><option>//div[11]/input</option></datalist></td><td>bbb</td>
-</tr>
-<tr><td>clickAt</td><td>name=commit<datalist><option>name=commit</option><option>css=input[name="commit"]</option><option>//input[@name='commit']</option><option>//form[@id='edit_caso_462']/div[2]/input</option><option>//div[2]/input</option></datalist></td><td>87,17</td>
-</tr>
-<tr><td>assertText</td><td>css=h1<datalist><option>css=h1</option><option>//h1</option></datalist></td><td>Caso</td>
-</tr>
-</tbody></table>
-<table cellpadding="1" cellspacing="1" border="1">
-<thead>
 <tr><td rowspan="1" colspan="3">casos-desplazamientos</td></tr>
 </thead>
 <tbody>
@@ -125,15 +17,29 @@
 </tr>
 <tr><td>clickAt</td><td>link=Añadir Desplazamiento<datalist><option>link=Añadir Desplazamiento</option><option>css=#desplazamiento &gt; div.links &gt; a.btn-primary.add_fields</option><option>//a[contains(text(),'Añadir Desplazamiento')]</option><option>//div[@id='desplazamiento']/div/a</option><option>xpath=(//a[contains(@href, '#')])[25]</option><option>//div[7]/div/a</option></datalist></td><td>79,7</td>
 </tr>
-<tr><td>runScript</td><td>window.scrollTo(0,83)<datalist><option>window.scrollTo(0,83)</option></datalist></td><td></td>
+<tr><td>runScript</td><td>$('#caso_casosjr_attributes_id_expulsion option:contains(COLOMBIA / CAUCA )').attr('selected', 'selected');<datalist><option>$('#caso_casosjr_attributes_id_salidam option:contains(COLOMBIA / CAUCA )').attr('selected', 'selected');</option><option>$('#caso_casosjr_attributes_id_salida option:contains(VENEZUELA)').attr('selected', 'selected');</option><option>$('#caso_casosjr_attributes_id_llegada option:contains(COLOMBIA)').attr('selected', 'selected');</option><option>$('#caso_casosjr_attributes_id_llegada option:contains(VENEZUELA)').attr('selected', 'selected');</option><option>$('#caso_casosjr_attributes_id_salida option:contains(COLOMBIA / CAUCA )').attr('selected', 'selected');</option><option>$('#caso_casosjr_attributes_id_expulsion option:contains(COLOMBIA / CAUCA )').attr('selected', 'selected');</option></datalist></td><td></td>
 </tr>
 <tr><td>clickAt</td><td>//div[7]/div/div/div[3]/select<datalist><option>id=caso_desplazamiento_attributes_4_id_expulsion</option><option>name=caso[desplazamiento_attributes][4][id_expulsion]</option><option>css=#caso_desplazamiento_attributes_4_id_expulsion</option><option>//select[@id='caso_desplazamiento_attributes_4_id_expulsion']</option><option>//div[@id='desplazamiento']/div/div/div[3]/select</option><option>//div[7]/div/div/div[3]/select</option></datalist></td><td>-75,-229</td>
+</tr>
+<tr><td>runScript</td><td>$('.chosen-select').removeAttr('style'); $('.chosen-container').remove(); $('.chosen-select').removeClass('chosen-select')<datalist><option>$('.chosen-select').removeAttr('style'); $('.chosen-container').remove(); $('.chosen-select').removeClass('chosen-select')</option></datalist></td><td></td>
+</tr>
+<tr><td>assertText</td><td>css=div.input.select.optional.caso_casosjr_llegadam &gt; label.select.optional.control-label<datalist><option>css=div.input.select.optional.caso_casosjr_llegadam &gt; label.select.optional.control-label</option><option>//div[@id='migracion']/div[4]/label</option><option>//div[6]/div[4]/label</option></datalist></td><td>Sitio de Llegada</td>
+</tr>
+<tr><td>clickAt</td><td>//div[7]/div/div/div[5]/select<datalist><option>id=caso_desplazamiento_attributes_31_id_llegada</option><option>name=caso[desplazamiento_attributes][31][id_llegada]</option><option>css=#caso_desplazamiento_attributes_31_id_llegada</option><option>//select[@id='caso_desplazamiento_attributes_31_id_llegada']</option><option>//div[@id='desplazamiento']/div/div/div[5]/select</option><option>//div[7]/div/div/div[5]/select</option></datalist></td><td>-75,-385</td>
+</tr>
+<tr><td>runScript</td><td>$('#caso_casosjr_attributes_id_llegadam option:contains(COLOMBIA / TOLIMA / FLANDES / EL COLEGIO)').attr('selected', 'selected');<datalist><option>$('#caso_casosjr_attributes_id_llegadam option:contains(COLOMBIA / TOLIMA / FLANDES / EL COLEGIO)').attr('selected', 'selected');</option><option>$('#caso_casosjr_attributes_id_llegada option:contains(COLOMBIA)').attr('selected', 'selected');</option><option>$('#caso_casosjr_attributes_id_llegada option:contains(VENEZUELA)').attr('selected', 'selected');</option><option>$('#caso_casosjr_attributes_id_llegada option:contains(COLOMBIA / TOLIMA / FLANDES / EL COLEGIO)').attr('selected', 'selected');</option></datalist></td><td></td>
+</tr>
+<tr><td>runScript</td><td>$('#caso_casosjr_attributes_id_llegada option:contains(COLOMBIA / TOLIMA / FLANDES / EL COLEGIO)').attr('selected', 'selected');<datalist><option>id=caso_desplazamiento_attributes_25_id_llegada</option><option>name=caso[desplazamiento_attributes][25][id_llegada]</option><option>css=#caso_desplazamiento_attributes_25_id_llegada</option><option>//select[@id='caso_desplazamiento_attributes_25_id_llegada']</option><option>//div[@id='desplazamiento']/div/div/div[5]/select</option><option>//div[7]/div/div/div[5]/select</option><option>$('#caso_casosjr_attributes_id_llegada option:contains(COLOMBIA / TOLIMA / FLANDES / EL COLEGIO)').attr('selected', 'selected');</option></datalist></td><td>label=COLOMBIA / TOLIMA / FLANDES / EL COLEGIO</td>
+</tr>
+<tr><td>clickAt</td><td>//div[7]/div/div/div[5]/select<datalist><option>id=caso_desplazamiento_attributes_25_id_llegada</option><option>name=caso[desplazamiento_attributes][25][id_llegada]</option><option>css=#caso_desplazamiento_attributes_25_id_llegada</option><option>//select[@id='caso_desplazamiento_attributes_25_id_llegada']</option><option>//div[@id='desplazamiento']/div/div/div[5]/select</option><option>//div[7]/div/div/div[5]/select</option></datalist></td><td>-75,-469</td>
+</tr>
+<tr><td>runScript</td><td>$('#caso_casosjr_attributes_id_llegada option:contains(COLOMBIA / TOLIMA / FLANDES / EL COLEGIO)').attr('selected', 'selected');<datalist><option>$('#caso_casosjr_attributes_id_llegadam option:contains(COLOMBIA / TOLIMA / FLANDES / EL COLEGIO)').attr('selected', 'selected');</option><option>$('#caso_casosjr_attributes_id_llegada option:contains(COLOMBIA)').attr('selected', 'selected');</option><option>$('#caso_casosjr_attributes_id_llegada option:contains(VENEZUELA)').attr('selected', 'selected');</option><option>$('#caso_casosjr_attributes_id_llegada option:contains(COLOMBIA / TOLIMA / FLANDES / EL COLEGIO)').attr('selected', 'selected');</option></datalist></td><td>label=COLOMBIA / TOLIMA / FLANDES / EL COLEGIO</td>
 </tr>
 <tr><td>select</td><td>//div[7]/div/div/div[5]/select<datalist><option>id=caso_desplazamiento_attributes_4_id_llegada</option><option>name=caso[desplazamiento_attributes][4][id_llegada]</option><option>css=#caso_desplazamiento_attributes_4_id_llegada</option><option>//select[@id='caso_desplazamiento_attributes_4_id_llegada']</option><option>//div[@id='desplazamiento']/div/div/div[5]/select</option><option>//div[7]/div/div/div[5]/select</option></datalist></td><td>label=COLOMBIA / TOLIMA / FLANDES / EL COLEGIO</td>
 </tr>
 <tr><td>clickAt</td><td>//div[7]/div/div/div[5]/select<datalist><option>id=caso_desplazamiento_attributes_4_id_llegada</option><option>name=caso[desplazamiento_attributes][4][id_llegada]</option><option>css=#caso_desplazamiento_attributes_4_id_llegada</option><option>//select[@id='caso_desplazamiento_attributes_4_id_llegada']</option><option>//div[@id='desplazamiento']/div/div/div[5]/select</option><option>//div[7]/div/div/div[5]/select</option></datalist></td><td>-75,-363</td>
 </tr>
-<tr><td>runScript</td><td>window.scrollTo(0,265)<datalist><option>window.scrollTo(0,265)</option></datalist></td><td></td>
+<tr><td>runScript</td><td>$('#caso_casosjr_attributes_id_llegadam option:contains(COLOMBIA / CAUCA )').attr('selected', 'selected');<datalist><option>$('#caso_casosjr_attributes_id_salidam option:contains(COLOMBIA / CAUCA )').attr('selected', 'selected');</option><option>$('#caso_casosjr_attributes_id_salida option:contains(VENEZUELA)').attr('selected', 'selected');</option><option>$('#caso_casosjr_attributes_id_llegada option:contains(COLOMBIA)').attr('selected', 'selected');</option><option>$('#caso_casosjr_attributes_id_llegada option:contains(VENEZUELA)').attr('selected', 'selected');</option><option>$('#caso_casosjr_attributes_id_salida option:contains(COLOMBIA / CAUCA )').attr('selected', 'selected');</option><option>$('#caso_casosjr_attributes_id_llegadam option:contains(COLOMBIA / CAUCA )').attr('selected', 'selected');</option></datalist></td><td></td>
 </tr>
 <tr><td>clickAt</td><td>//div[7]/div/div/div[6]/input<datalist><option>id=caso_desplazamiento_attributes_4_descripcion</option><option>name=caso[desplazamiento_attributes][4][descripcion]</option><option>css=#caso_desplazamiento_attributes_4_descripcion</option><option>//input[@id='caso_desplazamiento_attributes_4_descripcion']</option><option>//div[@id='desplazamiento']/div/div/div[6]/input</option><option>//div[7]/div/div/div[6]/input</option></datalist></td><td>41,8</td>
 </tr>
@@ -208,6 +114,68 @@
 <tr><td>clickAt</td><td>link=Editar<datalist><option>link=Editar</option><option>//a[contains(text(),'Editar')]</option><option>//a[contains(@href, '/casos/458/edita')]</option><option>//a[2]</option></datalist></td><td>29,13</td>
 </tr>
 <tr><td>clickAt</td><td>name=commit<datalist><option>name=commit</option><option>css=input[name="commit"]</option><option>//input[@name='commit']</option><option>//form[@id='edit_caso_458']/div[2]/input</option><option>//div[2]/input</option></datalist></td><td>88,13</td>
+</tr>
+<tr><td>assertText</td><td>css=h1<datalist><option>css=h1</option><option>//h1</option></datalist></td><td>Caso</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">casos-refugio</td></tr>
+</thead>
+<tbody>
+<tr><td>clickAt</td><td>link=Editar<datalist><option>link=Editar</option><option>//a[contains(text(),'Editar')]</option><option>//a[contains(@href, '/casos/458/edita')]</option><option>//a[2]</option></datalist></td><td>29,13</td>
+</tr>
+<tr><td>clickAt</td><td>link=Refugio<datalist><option>link=Refugio</option><option>//a[contains(text(),'Refugio')]</option><option>//form[@id='edit_caso_427']/div/div[2]/ul/li[6]/a</option><option>//a[contains(@href, '#refugio')]</option><option>//div[2]/ul/li[6]/a</option></datalist></td><td>52,27</td>
+</tr>
+<tr><td>pause</td><td><datalist><option></option></datalist></td><td>3000</td>
+</tr>
+<tr><td>clickAt</td><td>css=body<datalist><option>css=body</option><option>//body</option></datalist></td><td>140,287</td>
+</tr>
+<tr><td>clickAt</td><td>id=caso_casosjr_attributes_fechasalida<datalist><option>id=caso_casosjr_attributes_fechasalida</option><option>name=caso[casosjr_attributes][fechasalida]</option><option>css=#caso_casosjr_attributes_fechasalida</option><option>//input[@id='caso_casosjr_attributes_fechasalida']</option><option>//div[@id='refugio']/div/input</option><option>//div[5]/div/input</option></datalist></td><td>51,13</td>
+</tr>
+<tr><td>clickAt</td><td>//tr[2]/td[2]<datalist><option>//tr[2]/td[2]</option></datalist></td><td>13,11</td>
+</tr>
+<tr><td>clickAt</td><td>id=caso_casosjr_attributes_id_salida<datalist><option>id=caso_casosjr_attributes_id_salida</option><option>name=caso[casosjr_attributes][id_salida]</option><option>css=#caso_casosjr_attributes_id_salida</option><option>//select[@id='caso_casosjr_attributes_id_salida']</option><option>//div[@id='refugio']/div[2]/select</option><option>//div[5]/div[2]/select</option></datalist></td><td>-75,-335</td>
+</tr>
+<tr><td>clickAt</td><td>id=caso_casosjr_attributes_fechallegada<datalist><option>id=caso_casosjr_attributes_fechallegada</option><option>name=caso[casosjr_attributes][fechallegada]</option><option>css=#caso_casosjr_attributes_fechallegada</option><option>//input[@id='caso_casosjr_attributes_fechallegada']</option><option>//div[@id='refugio']/div[3]/input</option><option>//div[5]/div[3]/input</option></datalist></td><td>99,23</td>
+</tr>
+<tr><td>clickAt</td><td>//tr[3]/td[5]<datalist><option>//tr[3]/td[5]</option></datalist></td><td>17,16</td>
+</tr>
+<tr><td>select</td><td>id=caso_casosjr_attributes_id_llegada<datalist><option>id=caso_casosjr_attributes_id_llegada</option><option>name=caso[casosjr_attributes][id_llegada]</option><option>css=#caso_casosjr_attributes_id_llegada</option><option>//select[@id='caso_casosjr_attributes_id_llegada']</option><option>//div[@id='refugio']/div[4]/select</option><option>//div[5]/div[4]/select</option></datalist></td><td>label=COLOMBIA / TOLIMA</td>
+</tr>
+<tr><td>clickAt</td><td>id=caso_casosjr_attributes_id_llegada<datalist><option>id=caso_casosjr_attributes_id_llegada</option><option>name=caso[casosjr_attributes][id_llegada]</option><option>css=#caso_casosjr_attributes_id_llegada</option><option>//select[@id='caso_casosjr_attributes_id_llegada']</option><option>//div[@id='refugio']/div[4]/select</option><option>//div[5]/div[4]/select</option></datalist></td><td>-75,-469</td>
+</tr>
+<tr><td>runScript</td><td>window.scrollTo(0,106)<datalist><option>window.scrollTo(0,106)</option></datalist></td><td></td>
+</tr>
+<tr><td>select</td><td>id=caso_casosjr_attributes_categoriaref<datalist><option>id=caso_casosjr_attributes_categoriaref</option><option>name=caso[casosjr_attributes][categoriaref]</option><option>css=#caso_casosjr_attributes_categoriaref</option><option>//select[@id='caso_casosjr_attributes_categoriaref']</option><option>//div[@id='refugio']/div[5]/select</option><option>//div[5]/div[5]/select</option></datalist></td><td>label=R2030 PERSECUCIÓN</td>
+</tr>
+<tr><td>clickAt</td><td>id=caso_casosjr_attributes_categoriaref<datalist><option>id=caso_casosjr_attributes_categoriaref</option><option>name=caso[casosjr_attributes][categoriaref]</option><option>css=#caso_casosjr_attributes_categoriaref</option><option>//select[@id='caso_casosjr_attributes_categoriaref']</option><option>//div[@id='refugio']/div[5]/select</option><option>//div[5]/div[5]/select</option></datalist></td><td>-75,-430</td>
+</tr>
+<tr><td>select</td><td>id=caso_casosjr_attributes_id_statusmigratorio<datalist><option>id=caso_casosjr_attributes_id_statusmigratorio</option><option>name=caso[casosjr_attributes][id_statusmigratorio]</option><option>css=#caso_casosjr_attributes_id_statusmigratorio</option><option>//select[@id='caso_casosjr_attributes_id_statusmigratorio']</option><option>//div[@id='refugio']/div[6]/select</option><option>//div[6]/select</option></datalist></td><td>label=NACIONAL POR NACIMIENTO</td>
+</tr>
+<tr><td>clickAt</td><td>id=caso_casosjr_attributes_id_statusmigratorio<datalist><option>id=caso_casosjr_attributes_id_statusmigratorio</option><option>name=caso[casosjr_attributes][id_statusmigratorio]</option><option>css=#caso_casosjr_attributes_id_statusmigratorio</option><option>//select[@id='caso_casosjr_attributes_id_statusmigratorio']</option><option>//div[@id='refugio']/div[6]/select</option><option>//div[6]/select</option></datalist></td><td>-75,-497</td>
+</tr>
+<tr><td>clickAt</td><td>id=caso_casosjr_attributes_estatus_refugio<datalist><option>id=caso_casosjr_attributes_estatus_refugio</option><option>name=caso[casosjr_attributes][estatus_refugio]</option><option>css=#caso_casosjr_attributes_estatus_refugio</option><option>//input[@id='caso_casosjr_attributes_estatus_refugio']</option><option>//div[@id='refugio']/div[7]/input</option><option>//div[5]/div[7]/input</option></datalist></td><td>78,13</td>
+</tr>
+<tr><td>type</td><td>id=caso_casosjr_attributes_estatus_refugio<datalist><option>id=caso_casosjr_attributes_estatus_refugio</option><option>name=caso[casosjr_attributes][estatus_refugio]</option><option>css=#caso_casosjr_attributes_estatus_refugio</option><option>//input[@id='caso_casosjr_attributes_estatus_refugio']</option><option>//div[@id='refugio']/div[7]/input</option><option>//div[5]/div[7]/input</option></datalist></td><td>refugio</td>
+</tr>
+<tr><td>clickAt</td><td>id=caso_casosjr_attributes_fechadecrefugio<datalist><option>id=caso_casosjr_attributes_fechadecrefugio</option><option>name=caso[casosjr_attributes][fechadecrefugio]</option><option>css=#caso_casosjr_attributes_fechadecrefugio</option><option>//input[@id='caso_casosjr_attributes_fechadecrefugio']</option><option>//div[@id='refugio']/div[8]/input</option><option>//div[5]/div[8]/input</option></datalist></td><td>70,13</td>
+</tr>
+<tr><td>clickAt</td><td>//tr[3]/td[7]<datalist><option>//tr[3]/td[7]</option></datalist></td><td>22,16</td>
+</tr>
+<tr><td>clickAt</td><td>id=caso_casosjr_attributes_docrefugiado<datalist><option>id=caso_casosjr_attributes_docrefugiado</option><option>name=caso[casosjr_attributes][docrefugiado]</option><option>css=#caso_casosjr_attributes_docrefugiado</option><option>//input[@id='caso_casosjr_attributes_docrefugiado']</option><option>//div[@id='refugio']/div[9]/input</option><option>//div[5]/div[9]/input</option></datalist></td><td>49,14</td>
+</tr>
+<tr><td>type</td><td>id=caso_casosjr_attributes_docrefugiado<datalist><option>id=caso_casosjr_attributes_docrefugiado</option><option>name=caso[casosjr_attributes][docrefugiado]</option><option>css=#caso_casosjr_attributes_docrefugiado</option><option>//input[@id='caso_casosjr_attributes_docrefugiado']</option><option>//div[@id='refugio']/div[9]/input</option><option>//div[5]/div[9]/input</option></datalist></td><td>45623</td>
+</tr>
+<tr><td>select</td><td>id=caso_casosjr_attributes_id_proteccion<datalist><option>id=caso_casosjr_attributes_id_proteccion</option><option>name=caso[casosjr_attributes][id_proteccion]</option><option>css=#caso_casosjr_attributes_id_proteccion</option><option>//select[@id='caso_casosjr_attributes_id_proteccion']</option><option>//div[@id='refugio']/div[10]/select</option><option>//div[10]/select</option></datalist></td><td>label=SOLICITANTE DE REFUGIO</td>
+</tr>
+<tr><td>clickAt</td><td>id=caso_casosjr_attributes_id_proteccion<datalist><option>id=caso_casosjr_attributes_id_proteccion</option><option>name=caso[casosjr_attributes][id_proteccion]</option><option>css=#caso_casosjr_attributes_id_proteccion</option><option>//select[@id='caso_casosjr_attributes_id_proteccion']</option><option>//div[@id='refugio']/div[10]/select</option><option>//div[10]/select</option></datalist></td><td>-75,-500</td>
+</tr>
+<tr><td>clickAt</td><td>id=caso_casosjr_attributes_observacionesref<datalist><option>id=caso_casosjr_attributes_observacionesref</option><option>name=caso[casosjr_attributes][observacionesref]</option><option>css=#caso_casosjr_attributes_observacionesref</option><option>//input[@id='caso_casosjr_attributes_observacionesref']</option><option>//div[@id='refugio']/div[11]/input</option><option>//div[11]/input</option></datalist></td><td>36,3</td>
+</tr>
+<tr><td>type</td><td>id=caso_casosjr_attributes_observacionesref<datalist><option>id=caso_casosjr_attributes_observacionesref</option><option>name=caso[casosjr_attributes][observacionesref]</option><option>css=#caso_casosjr_attributes_observacionesref</option><option>//input[@id='caso_casosjr_attributes_observacionesref']</option><option>//div[@id='refugio']/div[11]/input</option><option>//div[11]/input</option></datalist></td><td>bbb</td>
+</tr>
+<tr><td>clickAt</td><td>name=commit<datalist><option>name=commit</option><option>css=input[name="commit"]</option><option>//input[@name='commit']</option><option>//form[@id='edit_caso_462']/div[2]/input</option><option>//div[2]/input</option></datalist></td><td>87,17</td>
 </tr>
 <tr><td>assertText</td><td>css=h1<datalist><option>css=h1</option><option>//h1</option></datalist></td><td>Caso</td>
 </tr>

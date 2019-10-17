@@ -54,6 +54,14 @@
 </tbody></table>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
+<tr><td rowspan="1" colspan="3">tabla-tipo-de-actividad-de-convenio-financiado</td></tr>
+</thead>
+<tbody>
+<tr><td>pause</td><td><datalist><option></option><option>xpath=(//a[contains(text(),'Nueva')])[3]</option><option>//a[contains(@href, '/admin/accionesjuridicas/nueva')]</option><option>//div/a</option></datalist></td><td>500</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
 <tr><td rowspan="1" colspan="3">tabla-acreditaciones</td></tr>
 </thead>
 <tbody>
@@ -525,12 +533,12 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Categorias de Prensa<datalist><option>link=Categorias de Prensa</option></datalist></td>
+	<td>link=Categoriaprensas<datalist><option>link=Categoriaprensas</option><option>//a[contains(text(),'Categoriaprensas')]</option><option>//a[contains(@href, 'admin/categoriaprensas')]</option><option>//li[10]/a</option></datalist></td>
 	<td></td>
 </tr>
 <tr><td>pause</td><td><datalist><option></option><option>xpath=(//a[contains(text(),'Nueva')])[3]</option><option>//a[contains(@href, '/admin/accionesjuridicas/nueva')]</option><option>//div/a</option></datalist></td><td>500</td>
 </tr>
-<tr><td>clickAt</td><td>xpath=(//a[contains(text(),'Nueva')])[3]<datalist><option>xpath=(//a[contains(text(),'Nueva')])[3]</option><option>//a[contains(@href, '/admin/categoriasprensa/nueva')]</option><option>//div/a</option></datalist></td><td>35,15</td>
+<tr><td>clickAt</td><td>//a[contains(@href, '/admin/categoriasprensa/nueva')]<datalist><option>xpath=(//a[contains(text(),'Nueva')])[3]</option><option>//a[contains(@href, '/admin/categoriasprensa/nueva')]</option><option>//div/a</option></datalist></td><td>35,15</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -2402,8 +2410,6 @@
 <tr><td>clickAt</td><td>link=Supracategorias<datalist><option>link=Supracategorias</option><option>//a[contains(text(),'Supracategorias')]</option><option>//a[contains(@href, 'admin/supracategorias')]</option><option>//li[43]/a</option></datalist></td><td>52,9</td>
 </tr>
 <tr><td>pause</td><td><datalist><option></option></datalist></td><td>500</td>
-</tr>
-<tr><td>mouseOver</td><td>link=Subáreas de Actividad<datalist><option>link=Subáreas de Actividad</option><option>//a[contains(text(),'Subáreas de Actividad')]</option><option>//a[contains(@href, 'admin/actividadareas')]</option><option>//li[42]/a</option></datalist></td><td></td>
 </tr>
 <tr><td>clickAt</td><td>css=a.btn.btn-primary<datalist><option>css=a.btn.btn-primary</option><option>xpath=(//a[contains(text(),'Nueva')])[3]</option><option>//a[contains(@href, '/admin/supracategorias/nueva')]</option><option>//div/a</option></datalist></td><td>31,18</td>
 </tr>

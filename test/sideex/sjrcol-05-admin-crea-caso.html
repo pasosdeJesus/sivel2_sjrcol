@@ -422,6 +422,50 @@
 </tbody></table>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
+<tr><td rowspan="1" colspan="3">casos-migracion</td></tr>
+</thead>
+<tbody>
+<tr><td>clickAt</td><td>link=Editar<datalist><option>link=Editar</option><option>//a[contains(text(),'Editar')]</option><option>//a[contains(@href, '/casos/458/edita')]</option><option>//a[2]</option></datalist></td><td>29,13</td>
+</tr>
+<tr><td>clickAt</td><td>link=Migración<datalist><option>link=Migración</option><option>//a[contains(text(),'Migración')]</option><option>//form[@id='edit_caso_427']/div/div[2]/ul/li[5]/a</option><option>//a[contains(@href, '#migracion')]</option><option>//div[2]/ul/li[5]/a</option></datalist></td><td>50,19</td>
+</tr>
+<tr><td>pause</td><td><datalist><option></option></datalist></td><td>3000</td>
+</tr>
+<tr><td>clickAt</td><td>id=caso_casosjr_attributes_fechasalidam<datalist><option>id=caso_casosjr_attributes_fechasalidam</option><option>name=caso[casosjr_attributes][fechasalidam]</option><option>css=#caso_casosjr_attributes_fechasalidam</option><option>//input[@id='caso_casosjr_attributes_fechasalidam']</option><option>//div[@id='migracion']/div/input</option><option>//div[6]/div/input</option></datalist></td><td>114,13</td>
+</tr>
+<tr><td>clickAt</td><td>//tr[2]/td[2]<datalist><option>//tr[2]/td[2]</option></datalist></td><td>19,7</td>
+</tr>
+<tr><td>runScript</td><td>$('.chosen-select').removeAttr('style'); $('.chosen-container').remove(); $('.chosen-select').removeClass('chosen-select')<datalist><option>$('.chosen-select').removeAttr('style'); $('.chosen-container').remove(); $('.chosen-select').removeClass('chosen-select')</option></datalist></td><td></td>
+</tr>
+<tr><td>runScript</td><td>$('#caso_casosjr_attributes_id_salidam option:contains(COLOMBIA / CAUCA )').attr('selected', 'selected');<datalist><option>$('#caso_casosjr_attributes_id_salida option:contains(VENEZUELA)').attr('selected', 'selected');</option><option>$('#caso_casosjr_attributes_id_llegada option:contains(COLOMBIA)').attr('selected', 'selected');</option><option>$('#caso_casosjr_attributes_id_llegada option:contains(VENEZUELA)').attr('selected', 'selected');</option><option>$('#caso_casosjr_attributes_id_salida option:contains(COLOMBIA / CAUCA )').attr('selected', 'selected');</option><option>$('#caso_casosjr_attributes_id_salidam option:contains(COLOMBIA / CAUCA )').attr('selected', 'selected');</option></datalist></td><td></td>
+</tr>
+<tr><td>clickAt</td><td>id=caso_casosjr_attributes_id_salidam<datalist><option>id=caso_casosjr_attributes_id_salidam</option><option>name=caso[casosjr_attributes][id_salidam]</option><option>css=#caso_casosjr_attributes_id_salidam</option><option>//select[@id='caso_casosjr_attributes_id_salidam']</option><option>//div[@id='migracion']/div[2]/select</option><option>//div[6]/div[2]/select</option></datalist></td><td>49,23</td>
+</tr>
+<tr><td>clickAt</td><td>id=caso_casosjr_attributes_id_salidam<datalist><option>id=caso_casosjr_attributes_id_salidam</option><option>name=caso[casosjr_attributes][id_salidam]</option><option>css=#caso_casosjr_attributes_id_salidam</option><option>//select[@id='caso_casosjr_attributes_id_salidam']</option><option>//div[@id='migracion']/div[2]/select</option><option>//div[6]/div[2]/select</option></datalist></td><td>-75,-327</td>
+</tr>
+<tr><td>clickAt</td><td>id=caso_casosjr_attributes_fechallegadam<datalist><option>id=caso_casosjr_attributes_fechallegadam</option><option>name=caso[casosjr_attributes][fechallegadam]</option><option>css=#caso_casosjr_attributes_fechallegadam</option><option>//input[@id='caso_casosjr_attributes_fechallegadam']</option><option>//div[@id='migracion']/div[3]/input</option><option>//div[6]/div[3]/input</option></datalist></td><td>47,6</td>
+</tr>
+<tr><td>clickAt</td><td>//tr[3]/td<datalist><option>//tr[3]/td</option></datalist></td><td>13,22</td>
+</tr>
+<tr><td>assertText</td><td>css=div.input.select.optional.caso_casosjr_llegadam &gt; label.select.optional.control-label<datalist><option>css=div.input.select.optional.caso_casosjr_llegadam &gt; label.select.optional.control-label</option><option>//div[@id='migracion']/div[4]/label</option><option>//div[6]/div[4]/label</option></datalist></td><td>Sitio de Llegada</td>
+</tr>
+<tr><td>pause</td><td><datalist><option></option></datalist></td><td>1000</td>
+</tr>
+<tr><td>select</td><td>id=caso_casosjr_attributes_id_salidam<datalist><option>id=caso_casosjr_attributes_id_salidam</option><option>name=caso[casosjr_attributes][id_salidam]</option><option>css=#caso_casosjr_attributes_id_salidam</option><option>//select[@id='caso_casosjr_attributes_id_salidam']</option><option>//div[@id='migracion']/div[2]/select</option><option>//div[6]/div[2]/select</option></datalist></td><td>label=COLOMBIA / CAUCA / LA VEGA / SANTA JUANA</td>
+</tr>
+<tr><td>runScript</td><td>$('#caso_casosjr_attributes_id_llegadam option:contains(COLOMBIA / TOLIMA / FLANDES / EL COLEGIO)').attr('selected', 'selected');<datalist><option>$('#caso_casosjr_attributes_id_llegada option:contains(COLOMBIA)').attr('selected', 'selected');</option><option>$('#caso_casosjr_attributes_id_llegada option:contains(VENEZUELA)').attr('selected', 'selected');</option><option>$('#caso_casosjr_attributes_id_llegada option:contains(COLOMBIA / TOLIMA / FLANDES / EL COLEGIO)').attr('selected', 'selected');</option><option>$('#caso_casosjr_attributes_id_llegadam option:contains(COLOMBIA / TOLIMA / FLANDES / EL COLEGIO)').attr('selected', 'selected');</option></datalist></td><td></td>
+</tr>
+<tr><td>clickAt</td><td>id=caso_casosjr_attributes_id_llegadam<datalist><option>id=caso_casosjr_attributes_id_llegadam</option><option>name=caso[casosjr_attributes][id_llegadam]</option><option>css=#caso_casosjr_attributes_id_llegadam</option><option>//select[@id='caso_casosjr_attributes_id_llegadam']</option><option>//div[@id='migracion']/div[4]/select</option><option>//div[6]/div[4]/select</option></datalist></td><td>47,17</td>
+</tr>
+<tr><td>type</td><td>id=caso_casosjr_attributes_motivom<datalist><option>id=caso_casosjr_attributes_motivom</option><option>name=caso[casosjr_attributes][motivom]</option><option>css=#caso_casosjr_attributes_motivom</option><option>//textarea[@id='caso_casosjr_attributes_motivom']</option><option>//div[@id='migracion']/div[5]/textarea</option><option>//textarea</option></datalist></td><td>amenazas a  la familia</td>
+</tr>
+<tr><td>clickAt</td><td>name=commit<datalist><option>name=commit</option><option>css=input[name="commit"]</option><option>//input[@name='commit']</option><option>//form[@id='edit_caso_458']/div[2]/input</option><option>//div[2]/input</option></datalist></td><td>88,13</td>
+</tr>
+<tr><td>assertText</td><td>css=h1<datalist><option>css=h1</option><option>//h1</option></datalist></td><td>Caso</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
 <tr><td rowspan="1" colspan="3">casos-presuntos-responsables</td></tr>
 </thead>
 <tbody>
@@ -498,6 +542,42 @@
 </tbody></table>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
+<tr><td rowspan="1" colspan="3">casos-respuesta-institucional-seguimiento-</td></tr>
+</thead>
+<tbody>
+<tr><td>clickAt</td><td>link=Editar<datalist><option>link=Editar</option><option>//a[contains(text(),'Editar')]</option><option>//a[contains(@href, '/casos/458/edita')]</option><option>//a[2]</option></datalist></td><td>29,13</td>
+</tr>
+<tr><td>pause</td><td><datalist><option></option></datalist></td><td>1000</td>
+</tr>
+<tr><td>clickAt</td><td>link=Respuesta Institucional y Seguimiento<datalist><option>link=Respuesta Institucional y Seguimiento</option><option>//a[contains(text(),'Respuesta Institucional y Seguimiento')]</option><option>//form[@id='edit_caso_428']/div/div[2]/ul/li[10]/a</option><option>//a[contains(@href, '#atencion')]</option><option>//li[10]/a</option></datalist></td><td>136,26</td>
+</tr>
+<tr><td>pause</td><td><datalist><option></option></datalist></td><td>1000</td>
+</tr>
+<tr><td>clickAt</td><td>id=ahumanitaria<datalist><option>id=ahumanitaria</option><option>css=#ahumanitaria</option><option>//input[@id='ahumanitaria']</option><option>//div[@id='acordeonrs']/div/div/div/input</option><option>//div[10]/div/div/div/div/input</option></datalist></td><td>7,8</td>
+</tr>
+<tr><td>clickAt</td><td>id=ojuridica<datalist><option>id=ojuridica</option><option>css=#ojuridica</option><option>//input[@id='ojuridica']</option><option>//div[@id='acordeonrs']/div/div[2]/div/input</option><option>//div[10]/div/div/div[2]/div/input</option></datalist></td><td>3,7</td>
+</tr>
+<tr><td>clickAt</td><td>id=ajuridica<datalist><option>id=ajuridica</option><option>css=#ajuridica</option><option>//input[@id='ajuridica']</option><option>//div[@id='acordeonrs']/div/div[3]/div/input</option><option>//div[10]/div/div/div[3]/div/input</option></datalist></td><td>9,7</td>
+</tr>
+<tr><td>clickAt</td><td>id=oservicios<datalist><option>id=oservicios</option><option>css=#oservicios</option><option>//input[@id='oservicios']</option><option>//div[@id='acordeonrs']/div/div[4]/div/input</option><option>//div[4]/div/input</option></datalist></td><td>5,1</td>
+</tr>
+<tr><td>clickAt</td><td>css=div &gt; b<datalist><option>css=div &gt; b</option><option>//div[@id='nsegresp_proyectofinanciero_id_chosen']/a/div/b</option><option>//div/b</option></datalist></td><td>11,15</td>
+</tr>
+<tr><td>clickAt</td><td>//div[@id='nsegresp_proyectofinanciero_id_chosen']/div/ul/li[3]<datalist><option>//div[@id='nsegresp_proyectofinanciero_id_chosen']/div/ul/li[3]</option><option>//div[5]/div/div/ul/li[3]</option></datalist></td><td>74,0</td>
+</tr>
+<tr><td>clickAt</td><td>link=Nueva respuesta/seguimiento<datalist><option>link=Nueva respuesta/seguimiento</option><option>css=div.col-md-2 &gt; a.btn.btn-xs</option><option>//a[contains(text(),'Nueva respuesta/seguimiento')]</option><option>//a[@onclick=concat("jrscol_agrega_paramscv(this,  ['ahumanitaria', 'ojuridica', 'ajuridica', 'oservicios', 'nsegresp_proyectofinanciero_id'], {",'"nombre":"Seguimiento/Respuesta a caso 480","oficina_id":7,"caso_id":480,"proyecto_id":101,"usuario_id":{"nusuario":"sjrcol","password":null,"nombre":"sjrcol","descripcion":"","rol":1,"idioma":"es_CO","id":1,"fechacreacion":"2014-01-12","fechadeshabilitacion":null,"email":"sjrcol@localhost.org","created_at":"2013-12-23T19:00:00.000-05:00","updated_at":"2019-09-25T11:02:33.467-05:00","oficina_id":null,"tema_id":1}})')]</option><option>//div[@id='acordeonrs']/div/div[6]/a</option><option>xpath=(//a[contains(@href, '/actividades/nueva')])[2]</option><option>//div[10]/div/div/div[6]/a</option></datalist></td><td>54,8</td>
+</tr>
+<tr><td>selectWindow</td><td>win_ser_1<datalist><option>win_ser_1</option></datalist></td><td></td>
+</tr>
+<tr><td>selectWindow</td><td>win_ser_local<datalist><option>win_ser_local</option></datalist></td><td></td>
+</tr>
+<tr><td>clickAt</td><td>name=commit<datalist><option>name=commit</option><option>css=input[name="commit"]</option><option>//input[@name='commit']</option><option>//form[@id='edit_caso_480']/div[2]/input</option><option>//div[2]/input</option></datalist></td><td>86,16</td>
+</tr>
+<tr><td>assertText</td><td>css=h1<datalist><option>css=h1</option><option>//h1</option></datalist></td><td>Caso</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
 <tr><td rowspan="1" colspan="3">casos-descripcion</td></tr>
 </thead>
 <tbody>
@@ -540,42 +620,6 @@
 <tr><td>type</td><td>//div[@id='etiquetas']/div/div/div[3]/input<datalist><option>id=caso_caso_etiqueta_attributes_1555082271448_observaciones</option><option>name=caso[caso_etiqueta_attributes][1555082271448][observaciones]</option><option>css=#caso_caso_etiqueta_attributes_1555082271448_observaciones</option><option>//input[@id='caso_caso_etiqueta_attributes_1555082271448_observaciones']</option><option>//div[@id='etiquetas']/div/div/div[3]/input</option><option>//div[13]/div/div/div[3]/input</option></datalist></td><td>bbb</td>
 </tr>
 <tr><td>clickAt</td><td>name=commit<datalist><option>name=commit</option><option>css=input[name="commit"]</option><option>//input[@name='commit']</option><option>//form[@id='edit_caso_458']/div[2]/input</option><option>//div[2]/input</option></datalist></td><td>88,13</td>
-</tr>
-<tr><td>assertText</td><td>css=h1<datalist><option>css=h1</option><option>//h1</option></datalist></td><td>Caso</td>
-</tr>
-</tbody></table>
-<table cellpadding="1" cellspacing="1" border="1">
-<thead>
-<tr><td rowspan="1" colspan="3">casos-respuesta-institucional-seguimiento-</td></tr>
-</thead>
-<tbody>
-<tr><td>clickAt</td><td>link=Editar<datalist><option>link=Editar</option><option>//a[contains(text(),'Editar')]</option><option>//a[contains(@href, '/casos/458/edita')]</option><option>//a[2]</option></datalist></td><td>29,13</td>
-</tr>
-<tr><td>pause</td><td><datalist><option></option></datalist></td><td>1000</td>
-</tr>
-<tr><td>clickAt</td><td>link=Respuesta Institucional y Seguimiento<datalist><option>link=Respuesta Institucional y Seguimiento</option><option>//a[contains(text(),'Respuesta Institucional y Seguimiento')]</option><option>//form[@id='edit_caso_428']/div/div[2]/ul/li[10]/a</option><option>//a[contains(@href, '#atencion')]</option><option>//li[10]/a</option></datalist></td><td>136,26</td>
-</tr>
-<tr><td>pause</td><td><datalist><option></option></datalist></td><td>1000</td>
-</tr>
-<tr><td>clickAt</td><td>id=ahumanitaria<datalist><option>id=ahumanitaria</option><option>css=#ahumanitaria</option><option>//input[@id='ahumanitaria']</option><option>//div[@id='acordeonrs']/div/div/div/input</option><option>//div[10]/div/div/div/div/input</option></datalist></td><td>7,8</td>
-</tr>
-<tr><td>clickAt</td><td>id=ojuridica<datalist><option>id=ojuridica</option><option>css=#ojuridica</option><option>//input[@id='ojuridica']</option><option>//div[@id='acordeonrs']/div/div[2]/div/input</option><option>//div[10]/div/div/div[2]/div/input</option></datalist></td><td>3,7</td>
-</tr>
-<tr><td>clickAt</td><td>id=ajuridica<datalist><option>id=ajuridica</option><option>css=#ajuridica</option><option>//input[@id='ajuridica']</option><option>//div[@id='acordeonrs']/div/div[3]/div/input</option><option>//div[10]/div/div/div[3]/div/input</option></datalist></td><td>9,7</td>
-</tr>
-<tr><td>clickAt</td><td>id=oservicios<datalist><option>id=oservicios</option><option>css=#oservicios</option><option>//input[@id='oservicios']</option><option>//div[@id='acordeonrs']/div/div[4]/div/input</option><option>//div[4]/div/input</option></datalist></td><td>5,1</td>
-</tr>
-<tr><td>clickAt</td><td>css=div &gt; b<datalist><option>css=div &gt; b</option><option>//div[@id='nsegresp_proyectofinanciero_id_chosen']/a/div/b</option><option>//div/b</option></datalist></td><td>11,15</td>
-</tr>
-<tr><td>clickAt</td><td>//div[@id='nsegresp_proyectofinanciero_id_chosen']/div/ul/li[3]<datalist><option>//div[@id='nsegresp_proyectofinanciero_id_chosen']/div/ul/li[3]</option><option>//div[5]/div/div/ul/li[3]</option></datalist></td><td>74,0</td>
-</tr>
-<tr><td>clickAt</td><td>link=Nueva respuesta/seguimiento<datalist><option>link=Nueva respuesta/seguimiento</option><option>css=div.col-md-2 &gt; a.btn.btn-xs</option><option>//a[contains(text(),'Nueva respuesta/seguimiento')]</option><option>//a[@onclick=concat("jrscol_agrega_paramscv(this,  ['ahumanitaria', 'ojuridica', 'ajuridica', 'oservicios', 'nsegresp_proyectofinanciero_id'], {",'"nombre":"Seguimiento/Respuesta a caso 480","oficina_id":7,"caso_id":480,"proyecto_id":101,"usuario_id":{"nusuario":"sjrcol","password":null,"nombre":"sjrcol","descripcion":"","rol":1,"idioma":"es_CO","id":1,"fechacreacion":"2014-01-12","fechadeshabilitacion":null,"email":"sjrcol@localhost.org","created_at":"2013-12-23T19:00:00.000-05:00","updated_at":"2019-09-25T11:02:33.467-05:00","oficina_id":null,"tema_id":1}})')]</option><option>//div[@id='acordeonrs']/div/div[6]/a</option><option>xpath=(//a[contains(@href, '/actividades/nueva')])[2]</option><option>//div[10]/div/div/div[6]/a</option></datalist></td><td>54,8</td>
-</tr>
-<tr><td>selectWindow</td><td>win_ser_1<datalist><option>win_ser_1</option></datalist></td><td></td>
-</tr>
-<tr><td>selectWindow</td><td>win_ser_local<datalist><option>win_ser_local</option></datalist></td><td></td>
-</tr>
-<tr><td>clickAt</td><td>name=commit<datalist><option>name=commit</option><option>css=input[name="commit"]</option><option>//input[@name='commit']</option><option>//form[@id='edit_caso_480']/div[2]/input</option><option>//div[2]/input</option></datalist></td><td>86,16</td>
 </tr>
 <tr><td>assertText</td><td>css=h1<datalist><option>css=h1</option><option>//h1</option></datalist></td><td>Caso</td>
 </tr>

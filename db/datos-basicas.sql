@@ -130,9 +130,3 @@ INSERT INTO public.heb412_gen_campoplantillahcm (id, plantillahcm_id, nombrecamp
 INSERT INTO public.heb412_gen_campoplantillahcm (id, plantillahcm_id, nombrecampo, columna) VALUES (26, 1, 'oficina', 'Z');
 
 
-
-INSERT INTO public.sivel2_sjr_regimensalud (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at, observaciones) VALUES (0, 'SIN INFORMACIÓN', '2013-05-16', NULL, NULL, NULL, NULL);
-INSERT INTO public.sivel2_sjr_regimensalud (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at, observaciones) VALUES (1, 'SUBSIDIADO', '2013-05-16', NULL, NULL, NULL, NULL);
-INSERT INTO public.sivel2_sjr_regimensalud (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at, observaciones) VALUES (2, 'CONTRIBUTIVO', '2013-05-16', NULL, NULL, NULL, NULL);
-INSERT INTO public.sivel2_sjr_regimensalud (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at, observaciones) VALUES (3, 'NO AFILIADO/A', '2013-05-16', NULL, NULL, NULL, NULL);
-

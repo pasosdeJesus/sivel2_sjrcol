@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: 6071a5467a50c9af9bcb3e7ea2d36da57a9c1d2e
+  revision: da35a33d368324d9fd5a228e09ecd25b81c5f9db
   specs:
     cor1440_gen (1.0b3)
       devise
@@ -13,7 +13,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 80195dbc2eab39e121c69b62161be0409c027c54
+  revision: b8e0b54fd1d0469350720321eaa680b639097fa8
   specs:
     heb412_gen (1.0.b6)
       chosen-rails
@@ -25,7 +25,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/mr519_gen.git
-  revision: dac1490e4d643b7d218717b88ddcf10eaf8c61af
+  revision: 6adaa48c3efe50e329ee428b6c052cba5864bcf8
   specs:
     mr519_gen (0.2.0)
       rails (~> 6.0.0.rc1, >= 6.0.0.rc1)
@@ -33,7 +33,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: f675106ac1fc4b572449f974b405f5c15dff5cd1
+  revision: db8560f8c68373df913928083ef466bdde17afd3
   specs:
     sal7711_gen (1.0.b2)
       rails
@@ -41,7 +41,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: 519b773d782b6d1b40c4c16e6caf6b69ae034785
+  revision: 68f9a2a219447f9fad2788df192f49fd2d2a122f
   specs:
     sal7711_web (1.0.a3)
       rails
@@ -49,7 +49,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 625172394548da12d9121eb60debeedd425133c6
+  revision: 46bb348a3d07be10b4ec8e3e6eacf0a22a47870b
   specs:
     sip (2.0.b6)
       bootstrap-datepicker-rails
@@ -71,7 +71,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 152b7881c91bada1d26fce2826e0aadfac2e8e14
+  revision: e9b06d894abf0fe7b50a6e5d1a20b24ee7b2c5bf
   specs:
     sivel2_gen (2.0b10)
       devise
@@ -80,7 +80,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: cb04931a88f49698dc6122b1f4f0354703491f5e
+  revision: 9fb3f87561e16a5a6790c5108a2dfe202dc2a897
   specs:
     sivel2_sjr (2.0b10)
       rails
@@ -102,15 +102,6 @@ GIT
   branch: new_id_with_ajax
   specs:
     cocoon (1.2.11)
-
-GIT
-  remote: https://github.com/vtamara/odf-report.git
-  revision: d656a1d6e4aa85615bb7db12af950c2414acafba
-  branch: rubyzip-1.3
-  specs:
-    odf-report (0.6.1)
-      nokogiri (>= 1.5.0)
-      rubyzip (>= 1.3.0)
 
 GEM
   remote: https://rubygems.org/
@@ -259,6 +250,9 @@ GEM
     nio4r (2.5.2)
     nokogiri (1.10.4)
       mini_portile2 (~> 2.4.0)
+    odf-report (0.6.1)
+      nokogiri (>= 1.5.0)
+      rubyzip (>= 1.3.0)
     orm_adapter (0.5.0)
     paperclip (6.1.0)
       activemodel (>= 4.2.0)
@@ -434,7 +428,7 @@ DEPENDENCIES
   jquery-ui-rails
   libxml-ruby
   mr519_gen!
-  odf-report!
+  odf-report
   paperclip
   pg
   pick-a-color-rails

@@ -45,7 +45,7 @@ gem 'libxml-ruby'
 gem 'mr519_gen', git: 'https://github.com/pasosdeJesus/mr519_gen.git'
 #gem 'mr519_gen', path: '../mr519_gen'
 
-gem 'odf-report', git: 'https://github.com/vtamara/odf-report.git', branch: 'rubyzip-1.3' # Genera ODT
+gem 'odf-report' # Genera ODT
 
 gem 'paperclip' # Maneja adjuntos
 
@@ -115,7 +115,7 @@ gem 'will_paginate' # Listados en páginas
 
 group :development, :test do
   
-  # gem 'byebug' # Depurar
+  #gem 'byebug' # Depurar
 
 end
 

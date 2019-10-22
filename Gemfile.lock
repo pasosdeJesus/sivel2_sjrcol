@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: d63ff5ca21517dad5d720554f7a4ea83ebb7c2a2
+  revision: db407196e2aa82e0dab71eca9211df5f2ce93154
   specs:
     cor1440_gen (1.0b3)
       devise
@@ -231,7 +231,7 @@ GEM
       less (~> 2.6.0)
       sprockets (>= 2)
     libxml-ruby (3.1.0)
-    loofah (2.3.0)
+    loofah (2.3.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.7.1)

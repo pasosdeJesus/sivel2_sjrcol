@@ -40,7 +40,8 @@ Rails.application.routes.draw do
     as: :contes_rutas
   get "/conteos/vacios" => 'sivel2_sjr/conteos#vacios',
     as: :conteos_vacios
-  
+
+ get '/migraciones/nuevo' => 'sivel2_sjr/migraciones#nuevo'  
  
   #get "/personas" => 'sip/personas#index'
   #get "/personas/remplazar" => 'sip/personas#remplazar'

@@ -20,7 +20,7 @@
 //= require chartkick
 //= require_tree .
 
-$(document).on('turbolinks:load ready page:load', function() {
+document.addEventListener('turbolinks:load', function() {
 	var root;
 	root = typeof exports !== "undefined" && exports !== null ? 
 		exports : window;

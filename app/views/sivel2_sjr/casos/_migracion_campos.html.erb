@@ -1,0 +1,79 @@
+<div class='control-group nested-fields'>
+  <div class="controls">
+    <%= f.input :id, as: :hidden %>
+    <div class="row">
+      <div class=" col-md-offset-0 col-md-6">
+        <%= f.input :fechasalida, 
+          as: :string, 
+          label: "Fecha del Hecho",
+          input_html: { 
+            "data-behaviour" => "datepicker",
+            "data-toggle" => 'tooltip'
+          } %>
+      </div>
+      <div class="col-md-6">
+        <%= f.association :salida_pais,
+          collection: Sip::Pais.habilitados,
+          label: "País",
+          label_method: :nombre,
+          value_method: :id,
+          input_html: {
+            "data-toggle" => 'tooltip' 
+          } %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-offset-0 col-md-4">
+        <%= f.association :salida_departamento,
+          collection: Sip::Departamento.habilitados,
+          label: "Departamento",
+          label_method: :nombre,
+          value_method: :id,
+          input_html: {
+            "data-toggle" => 'tooltip'
+          } %>
+      </div>
+      <div class="col-md-4">
+        <%= f.association :salida_municipio,
+          collection: Sip::Municipio.habilitados,
+          label: "Municipio",
+          label_method: :nombre,
+          value_method: :id,
+          input_html: {
+            "data-toggle" => 'tooltip'
+          } %>
+      </div>
+      <div class="col-md-4">
+        <%= f.association :salida_clase,
+          collection: Sip::Clase.habilitados,
+          label: "Centro poblado",
+          label_method: :nombre,
+          value_method: :id,
+          input_html: {
+            "data-toggle" => 'tooltip'
+          } %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-offset-0 col-md-6">
+      <%= f.input :fechallegada, 
+        as: :string, 
+        label: "Fecha de Llegada",
+        input_html: { 
+          "data-behaviour" => "datepicker",
+          "data-toggle" => 'tooltip'
+        } %>
+      </div>
+      <div class="col-md-offset-0 col-md-6">
+        <%= f.input :se_establece_en_sitio_llegada,
+          boolean_style: :nested,
+          inline_label: '¿Piensa establecerse en este lugar?' %>
+      </div>
+
+    </div>
+
+    <%= link_to_remove_association "Eliminar Migracion", f, 
+      {class: 'btn-danger', :'data-existing' => 'true'} 
+    %>
+  </div>
+</div>

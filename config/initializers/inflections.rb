@@ -14,6 +14,12 @@
 # ActiveSupport::Inflector.inflections(:en) do |inflect|
 #   inflect.acronym 'RESTful'
 # end
+['sip', 'mr519_gen', 'heb412_gen', 'cor1440_gen', 'sal7711_gen', 'sal7711_web',
+ 'sivel2_gen', 'sivel2_sjr'].each do |s| 
+  require_dependency File.join(Gem::Specification.find_by_name(s).gem_dir,
+                             '/config/initializers/inflections.rb')
+end
+
 ActiveSupport::Inflector.inflections do |inflect|
 	inflect.irregular 'accionjuridica', 'accionesjuridicas'
 	inflect.irregular 'categoria', 'categorias'
@@ -22,6 +28,7 @@ ActiveSupport::Inflector.inflections do |inflect|
 	inflect.irregular 'espaciopart', 'espaciospart'
 	inflect.irregular 'lineaactorsocial', 'lineasactorsocial'
 	inflect.irregular 'motivosjr', 'motivossjr'
+	inflect.irregular 'migracion', 'migraciones'
 	inflect.irregular 'progestado', 'progsestado'
 	inflect.irregular 'tipoactorsocial', 'tiposactorsocial'
 end

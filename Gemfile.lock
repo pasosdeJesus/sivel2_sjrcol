@@ -181,7 +181,7 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (~> 1.5)
       xpath (~> 3.2)
-    chartkick (3.2.1)
+    chartkick (3.3.0)
     childprocess (3.0.0)
     cldr-plurals-runtime-rb (1.0.1)
     climate_control (0.2.0)
@@ -413,7 +413,7 @@ DEPENDENCIES
   bootstrap-datepicker-rails
   cancancan
   capybara
-  chartkick
+  chartkick (>= 3.3.0)
   chosen-rails!
   cocoon!
   coffee-rails
@@ -462,4 +462,4 @@ DEPENDENCIES
   will_paginate
 
 BUNDLED WITH
-   2.0.2
+   1.17.3

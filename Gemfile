@@ -9,7 +9,7 @@ gem 'bootstrap-datepicker-rails'
 
 gem 'cancancan'
 
-gem 'chartkick'
+gem 'chartkick', '>= 3.3.0'
 
 gem 'chosen-rails', git: 'https://github.com/vtamara/chosen-rails.git', branch: 'several-fixes' # Cuadros de selección para búsquedas
 

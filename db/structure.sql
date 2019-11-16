@@ -59,12 +59,12 @@ CREATE FUNCTION public.campointro(character varying, character varying) RETURNS 
 CREATE FUNCTION public.municipioubicacion(integer) RETURNS character varying
     LANGUAGE sql
     AS $_$
-        SELECT (SELECT nombre FROM sip_pais WHERE id=ubicacion.id_pais) 
-            || COALESCE((SELECT '/' || nombre FROM sip_departamento 
+        SELECT (SELECT nombre FROM public.sip_pais WHERE id=ubicacion.id_pais) 
+            || COALESCE((SELECT '/' || nombre FROM public.sip_departamento 
             WHERE sip_departamento.id = ubicacion.id_departamento),'') 
-            || COALESCE((SELECT '/' || nombre FROM sip_municipio 
+            || COALESCE((SELECT '/' || nombre FROM public.sip_municipio 
             WHERE sip_municipio.id = ubicacion.id_municipio),'') 
-            FROM sip_ubicacion AS ubicacion 
+            FROM public.sip_ubicacion AS ubicacion 
             WHERE ubicacion.id=$1;
       $_$;
 
@@ -4745,30 +4745,6 @@ CREATE TABLE public.sivel2_gen_iglesia (
 
 
 --
--- Name: sivel2_gen_iniciador; Type: VIEW; Schema: public; Owner: -
---
-
-CREATE VIEW public.sivel2_gen_iniciador AS
- SELECT s3.id_caso,
-    s3.fechainicio,
-    s3.id_usuario,
-    usuario.nusuario
-   FROM public.usuario,
-    ( SELECT s2.id_caso,
-            s2.fechainicio,
-            min(s2.id_usuario) AS id_usuario
-           FROM public.sivel2_gen_caso_usuario s2,
-            ( SELECT f1.id_caso,
-                    min(f1.fechainicio) AS m
-                   FROM public.sivel2_gen_caso_usuario f1
-                  GROUP BY f1.id_caso) c
-          WHERE ((s2.id_caso = c.id_caso) AND (s2.fechainicio = c.m))
-          GROUP BY s2.id_caso, s2.fechainicio
-          ORDER BY s2.id_caso, s2.fechainicio) s3
-  WHERE (usuario.id = s3.id_usuario);
-
-
---
 -- Name: sivel2_gen_intervalo_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -5631,8 +5607,7 @@ CREATE TABLE public.sivel2_sjr_migracion (
     destino_departamento_id integer,
     destino_municipio_id integer,
     destino_clase_id integer,
-    migracontactopre_id integer,
-    statusmigratorio_id integer
+    migracontactopre_id integer
 );
 
 
@@ -9400,14 +9375,6 @@ ALTER TABLE ONLY public.sivel2_sjr_aspsicosocial_respuesta
 
 
 --
--- Name: sivel2_sjr_migracion fk_rails_393930af08; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.sivel2_sjr_migracion
-    ADD CONSTRAINT fk_rails_393930af08 FOREIGN KEY (statusmigratorio_id) REFERENCES public.sivel2_sjr_statusmigratorio(id);
-
-
---
 -- Name: cor1440_gen_actividad_proyecto fk_rails_395faa0882; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -11314,7 +11281,6 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20191016100031'),
 ('20191105185049'),
 ('20191116151549'),
-('20191116160553'),
-('20191116165332');
+('20191116160553');
 
 

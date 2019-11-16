@@ -51,6 +51,25 @@ GIT
       sal7711_gen
 
 GIT
+  remote: https://github.com/pasosdeJesus/sip.git
+  revision: 93f7cf6930b72e5a1db54e0c1370ab6f245ba590
+  branch: bs4
+  specs:
+    sip (2.0.b7)
+      cancancan
+      chosen-rails
+      devise
+      devise-i18n
+      jquery-ui-rails
+      minitest
+      paperclip
+      rails
+      rails-i18n
+      simple_form
+      twitter_cldr
+      will_paginate
+
+GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
   revision: b3a1848e0f42873d44a7980634b46d82a52b5051
   branch: bs4
@@ -75,23 +94,6 @@ GIT
   branch: new_id_with_ajax
   specs:
     cocoon (1.2.11)
-
-PATH
-  remote: ../sip
-  specs:
-    sip (2.0.b7)
-      cancancan
-      chosen-rails
-      devise
-      devise-i18n
-      jquery-ui-rails
-      minitest
-      paperclip
-      rails
-      rails-i18n
-      simple_form
-      twitter_cldr
-      will_paginate
 
 GEM
   remote: https://rubygems.org/
@@ -161,7 +163,6 @@ GEM
     bootstrap-datepicker-rails (1.8.0.1)
       railties (>= 3.0)
     builder (3.2.3)
-    byebug (11.0.1)
     camertron-eprun (1.1.1)
     cancancan (3.0.1)
     capybara (3.29.0)
@@ -377,7 +378,6 @@ DEPENDENCIES
   bcrypt
   bootsnap (>= 1.1.0)
   bootstrap-datepicker-rails
-  byebug
   cancancan
   capybara
   chartkick

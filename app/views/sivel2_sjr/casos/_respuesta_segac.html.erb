@@ -27,11 +27,11 @@
         <%= link_to t('.edit', :default => t("helpers.links.edit")),
           cor1440_gen.edit_actividad_path(ac),
           target: '_blank',
-          :class => 'btn btn-xs' %>
+          :class => 'btn btn-sm' %>
       <% end %>
       <div class='row'>
         <% dv = ac.respuestafor.where(formulario_id: 10) %>
-        <div class='col-xs-12'>Derechos vulnerados:
+        <div class='col-sm-12'>Derechos vulnerados:
           <% if dv.count == 0 %>
             <p style='alert'>Faltan derechos vulnerados!</p>
           <% elsif dv.count > 1 %>
@@ -45,7 +45,7 @@
                 join("; ") %>
             <% end %>
           <% end %> 
-        </div> <!-- col-xs-12 -->
+        </div> <!-- col-sm-12 -->
       </div> <!-- row -->
 
       <% ah = ac.respuestafor.where(formulario_id: 11) %>
@@ -57,7 +57,7 @@
           <div class="panel-heading">ASISTENCIA HUMANITARIA</div>
           <div class="panel-body">
             <div class='row'>
-              <div class='col-xs-6'>Asistencia humanitaria: 
+              <div class='col-sm-6'>Asistencia humanitaria: 
 
                 <% vc = ah.valorcampo.where(campo_id: 110).take %>
                 <% if vc.valorjson %>
@@ -66,7 +66,7 @@
                     join("; ") %>
                 <% end %>
               </div>
-              <div class='col-xs-6'>Detalle: 
+              <div class='col-sm-6'>Detalle: 
                 <%= ah.valorcampo.where(campo_id: 111).take.valor %>
               </div>
             </div>
@@ -83,7 +83,7 @@
           <div class="panel-heading">ASESORIA JURÍDICA</div>
           <div class="panel-body">
             <div class='row'>
-              <div class='col-xs-6'>Asesoria Jurídica: 
+              <div class='col-sm-6'>Asesoria Jurídica: 
                 <% vc = al.valorcampo.where(campo_id: 130).take %>
                 <% if vc.valorjson %>
                   <% aj = vc.valorjson.select {|i| i != ''}.map { |id| 
@@ -94,7 +94,7 @@
                   <%= aj %>
                 <% end %>
               </div>
-              <div class='col-xs-6'>Detalle: 
+              <div class='col-sm-6'>Detalle: 
                 <%= al.valorcampo.where(campo_id: 131).take.valor %>
               </div>
             </div>
@@ -143,7 +143,7 @@
           <div class="panel-heading">OTROS SERVICIOS Y ASESORIAS</div>
           <div class="panel-body">
             <div class='row'>
-              <div class='col-xs-6'>Otros servicios y asesorias: 
+              <div class='col-sm-6'>Otros servicios y asesorias: 
                 <% vc = os.valorcampo.where(campo_id: 150).take %>
                 <% if vc.valorjson %>
                   <%= vc.valorjson.select {|i| i != ''}.
@@ -151,7 +151,7 @@
                     join("; ") %>
                 <% end %>
               </div>
-              <div class='col-xs-6'>Detalle: 
+              <div class='col-sm-6'>Detalle: 
                 <%= os.valorcampo.where(campo_id: 151).take.valor %>
               </div>
             </div>
@@ -163,7 +163,7 @@
         <%= link_to t('.edit', :default => t("helpers.links.edit")),
           cor1440_gen.edit_actividad_path(ac),
           target: '_blank',
-          :class => 'btn btn-xs' %>
+          :class => 'btn btn-sm' %>
       <% end %>
     </div> <!-- panel-body respuesta -->
   </div> <!-- panel collapsable -->

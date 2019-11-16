@@ -2362,6 +2362,40 @@ CREATE SEQUENCE public.mecanismoder_seq
 
 
 --
+-- Name: migracontactopre; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.migracontactopre (
+    id bigint NOT NULL,
+    nombre character varying(500) NOT NULL,
+    observaciones character varying(5000),
+    fechacreacion date NOT NULL,
+    fechadeshabilitacion date,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: migracontactopre_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.migracontactopre_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: migracontactopre_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.migracontactopre_id_seq OWNED BY public.migracontactopre.id;
+
+
+--
 -- Name: motivoconsulta_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -5596,7 +5630,9 @@ CREATE TABLE public.sivel2_sjr_migracion (
     destino_pais_id integer,
     destino_departamento_id integer,
     destino_municipio_id integer,
-    destino_clase_id integer
+    destino_clase_id integer,
+    migracontactopre_id integer,
+    statusmigratorio_id integer
 );
 
 
@@ -6307,6 +6343,13 @@ ALTER TABLE ONLY public.heb412_gen_plantillahcm ALTER COLUMN id SET DEFAULT next
 --
 
 ALTER TABLE ONLY public.heb412_gen_plantillahcr ALTER COLUMN id SET DEFAULT nextval('public.heb412_gen_plantillahcr_id_seq'::regclass);
+
+
+--
+-- Name: migracontactopre id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.migracontactopre ALTER COLUMN id SET DEFAULT nextval('public.migracontactopre_id_seq'::regclass);
 
 
 --
@@ -7224,6 +7267,14 @@ ALTER TABLE ONLY public.sivel2_gen_maternidad
 
 ALTER TABLE ONLY public.sivel2_sjr_mecanismoder
     ADD CONSTRAINT mecanismoder_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: migracontactopre migracontactopre_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.migracontactopre
+    ADD CONSTRAINT migracontactopre_pkey PRIMARY KEY (id);
 
 
 --
@@ -9349,6 +9400,14 @@ ALTER TABLE ONLY public.sivel2_sjr_aspsicosocial_respuesta
 
 
 --
+-- Name: sivel2_sjr_migracion fk_rails_393930af08; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sivel2_sjr_migracion
+    ADD CONSTRAINT fk_rails_393930af08 FOREIGN KEY (statusmigratorio_id) REFERENCES public.sivel2_sjr_statusmigratorio(id);
+
+
+--
 -- Name: cor1440_gen_actividad_proyecto fk_rails_395faa0882; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -9498,6 +9557,14 @@ ALTER TABLE ONLY public.sivel2_sjr_migracion
 
 ALTER TABLE ONLY public.cor1440_gen_objetivopf
     ADD CONSTRAINT fk_rails_57b4fd8780 FOREIGN KEY (proyectofinanciero_id) REFERENCES public.cor1440_gen_proyectofinanciero(id);
+
+
+--
+-- Name: sivel2_sjr_migracion fk_rails_5a00c018f2; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sivel2_sjr_migracion
+    ADD CONSTRAINT fk_rails_5a00c018f2 FOREIGN KEY (migracontactopre_id) REFERENCES public.migracontactopre(id);
 
 
 --
@@ -11245,6 +11312,9 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20191012042150'),
 ('20191012042159'),
 ('20191016100031'),
-('20191105185049');
+('20191105185049'),
+('20191116151549'),
+('20191116160553'),
+('20191116165332');
 
 

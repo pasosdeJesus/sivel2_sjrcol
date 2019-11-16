@@ -74,7 +74,8 @@ class Ability < Sivel2Sjr::Ability
     ['Sip', 'lineaactorsocial'],
     ['Sip', 'tipoactorsocial'],
     ['', 'discapacidad'],
-    ['', 'espaciopart']
+    ['', 'espaciopart'],
+    ['', 'migracontactopre']
   ]
   
   def tablasbasicas 

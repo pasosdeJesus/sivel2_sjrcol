@@ -1,7 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: 4002b72e1b76a987146449418ee0f4627998bf02
-  branch: bs4
+  revision: b05dcb2c90eb65e0b665d558a349caca8e26ea95
   specs:
     cor1440_gen (1.0b3)
       devise
@@ -14,8 +13,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 48611954c0b8c8820d102652ee7ef58630f4c8f0
-  branch: bs4
+  revision: a9db9071b45c6077a56030d7225ebbb1aec7835e
   specs:
     heb412_gen (1.0.b6)
       mr519_gen
@@ -25,8 +23,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/mr519_gen.git
-  revision: 2f71e19fddf66a3dcc7797604a018a028a524dc1
-  branch: bs4
+  revision: edf83c22a608a4b850ce7833db7d167e9bf55570
   specs:
     mr519_gen (0.2.0)
       rails (~> 6.0.0.rc1, >= 6.0.0.rc1)
@@ -34,8 +31,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: 5aae0fee7e98631483456cabd937e3110f7acd69
-  branch: bs4
+  revision: 331f75610c30b4c9a7cc4f152ad210661a23a344
   specs:
     sal7711_gen (1.0.b2)
       rails
@@ -43,8 +39,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: bae44288a12363b473997ee394405fa41962d2cb
-  branch: bs4
+  revision: ce23cf29efabaae26ff81a507692ae596d9cfaad
   specs:
     sal7711_web (1.0.a3)
       rails
@@ -52,8 +47,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 93f7cf6930b72e5a1db54e0c1370ab6f245ba590
-  branch: bs4
+  revision: 35635c75adad73a62573297cced018b4b46972ec
   specs:
     sip (2.0.b7)
       cancancan
@@ -71,8 +65,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: b3a1848e0f42873d44a7980634b46d82a52b5051
-  branch: bs4
+  revision: deda5f93da1d40b2b78da3a3824d24d8602f27de
   specs:
     sivel2_gen (2.0b10)
       devise
@@ -81,8 +74,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 2991644276dd9c4d8efbee6fac9f8be41928a956
-  branch: bs4
+  revision: 83b8cca46d948317b4bf5ce3ea6fa926a1b035a1
   specs:
     sivel2_sjr (2.0b10)
       rails
@@ -343,7 +335,7 @@ GEM
     tiny-color-rails (0.0.2)
       railties (>= 3.0)
     ttfunk (1.5.1)
-    twitter_cldr (5.0.0)
+    twitter_cldr (5.1.0)
       camertron-eprun
       cldr-plurals-runtime-rb (~> 1.0)
       tzinfo

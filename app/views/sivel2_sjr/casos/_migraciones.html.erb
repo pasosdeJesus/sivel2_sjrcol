@@ -1,0 +1,14 @@
+<%= f.simple_fields_for :migracion do |migracion| %>
+  <%= render 'migracion_campos', f: migracion %>
+<% end %>
+<div class="links">
+  <%= link_to_add_association 'Añadir Migración', f, :migracion, {
+    partial: 'migracion_campos',
+    class: 'btn-primary',
+    "data-ajax" => File.join(
+      Rails.configuration.relative_url_root,
+      "migraciones/nuevo"
+    ), 
+    "data-ajaxdata" => "caso_id" }
+  %>
+  </div>

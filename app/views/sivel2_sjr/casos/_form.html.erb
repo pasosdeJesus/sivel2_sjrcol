@@ -16,97 +16,97 @@
 
       <div role="tabpanel">       
         <ul class="nav nav-tabs" role="tablist">
-          <li role="presentation" class="active"><a href="#basicos" 
-            class="fichacambia" aria-controls="basicos" role="tab" 
+          <li role="presentation" class="nav-item"><a href="#basicos" 
+            class="fichacambia nav-link active" aria-selected="true" aria-controls="basicos" role="tab" 
             data-toggle="tab">Datos Básicos</a></li>
-          <li role="presentation"><a href="#contacto" class="fichacambia" 
+          <li role="presentation" class="nav-item"><a href="#contacto" class="fichacambia nav-link" 
             aria-controls="contacto" role="tab"
             data-toggle="tab">Contacto</a></li>
-          <li role="presentation"><a href="#victima" class="fichacambia" 
+          <li role="presentation" class="nav-item"><a href="#victima" class="fichacambia nav-link" 
             aria-controls="victima" role="tab"
             data-toggle="tab">Núcleo Familiar</a></li>
-          <li role="presentation"><a href="#ubicacion" class="fichacambia" 
+          <li role="presentation" class="nav-item"><a href="#ubicacion" class="fichacambia nav-link" 
             aria-controls="ubicacion" role="tab" 
             data-toggle="tab">Ubicación</a></li>
-          <li role="presentation"><a href="#migracion" class="fichacambia" 
+          <li role="presentation" class="nav-item"><a href="#migracion" class="fichacambia nav-link" 
             aria-controls="migracion" role="tab" 
             data-toggle="tab">Migración</a></li>
-          <li role="presentation"><a href="#refugio" class="fichacambia" 
+          <li role="presentation" class="nav-item"><a href="#refugio" class="fichacambia nav-link" 
             aria-controls="refugio" role="tab" 
             data-toggle="tab">Refugio</a></li>
-          <li role="presentation"><a href="#desplazamiento" class="fichacambia" 
+          <li role="presentation" class="nav-item"><a href="#desplazamiento" class="fichacambia nav-link" 
             aria-controls="desplazamiento" role="tab" 
             data-toggle="tab">Desplazamientos</a></li>
-          <li role="presentation"><a href="#presponsable" class="fichacambia" 
+          <li role="presentation" class="nav-item"><a href="#presponsable" class="fichacambia nav-link" 
             aria-controls="presponsable" role="tab" 
             data-toggle="tab">Presuntos Responsables</a></li>
-          <li role="presentation"><a href="#antecedentes" class="fichacambia" 
+          <li role="presentation" class="nav-item"><a href="#antecedentes" class="fichacambia nav-link" 
             aria-controls="antecedentes" role="tab" 
             data-toggle="tab">Causas/Antecedentes</a></li>
-          <li role="presentation"><a href="#atencion" class="fichacambia" 
+          <li role="presentation" class="nav-item"><a href="#atencion" class="fichacambia nav-link" 
             aria-controls="atencion" role="tab" 
             data-toggle="tab">Respuesta Institucional y Seguimiento</a></li>
-          <li role="presentation"><a href="#descripcion" class="fichacambia" 
+          <li role="presentation" class="nav-item"><a href="#descripcion" class="fichacambia nav-link" 
             aria-controls="descripcion" role="tab" 
             data-toggle="tab">Descripción</a></li>
-          <li role="presentation"><a href="#anexos" class="fichacambia" 
+          <li role="presentation" class="nav-item"><a href="#anexos" class="fichacambia nav-link" 
             aria-controls="anexos" role="tab" 
             data-toggle="tab">Anexos</a></li>
-          <li role="presentation"><a href="#etiquetas" class="fichacambia" 
+          <li role="presentation" class="nav-item"><a href="#etiquetas" class="fichacambia nav-link" 
             aria-controls="etiquetas" role="tab" 
             data-toggle="tab">Etiquetas</a></li>
         </ul>
         <div class="tab-content">
           <%= f.simple_fields_for :casosjr do |s| %>
-            <div role="tabpanel" class="tab-pane active" id="basicos" > 
+            <div role="tabpanel" class="tab-pane fade active show" id="basicos" > 
               <%= render 'basicos', :f => f, :s => s %>
             </div> 
 
-            <div role="tabpanel" class="tab-pane" id="contacto" > 
+            <div role="tabpanel" class="tab-pane fade" id="contacto" > 
               <%= render 'contacto', :f => f, :s => s %>
             </div>
 
-            <div role="tabpanel" class="tab-pane" id="victima" > 
+            <div role="tabpanel" class="tab-pane fade" id="victima" > 
               <%= render 'victimas', :f => f, :s => s %>
             </div> 
 
-            <div role="tabpanel" class="tab-pane" id="ubicacion" > 
+            <div role="tabpanel" class="tab-pane fade" id="ubicacion" > 
               <%= render 'ubicaciones', :f => f, :s => s %>
             </div>
 
-            <div role="tabpanel" class="tab-pane" id="refugio" > 
+            <div role="tabpanel" class="tab-pane fade" id="refugio" > 
               <%= render 'refugio', :f => f, :s => s %>
             </div> 
 
-            <div role="tabpanel" class="tab-pane" id="migracion" > 
-              <%= render 'migracion', :f => f, :s => s %>
+            <div role="tabpanel" class="tab-pane fade" id="migracion" > 
+              <%= render 'migraciones', :f => f, :s => s %>
             </div> 
 
-          <div role="tabpanel" class="tab-pane" id="desplazamiento" > 
+          <div role="tabpanel" class="tab-pane fade" id="desplazamiento" > 
             <%= render 'desplazamientos', :f => f %>
           </div>
 
-          <div role="tabpanel" class="tab-pane" id="presponsable"> 
+          <div role="tabpanel" class="tab-pane fade" id="presponsable"> 
             <%= render 'sivel2_gen/casos/presponsables', :f => f %>
           </div> 
   
-          <div role="tabpanel" class="tab-pane" id="antecedentes" > 
+          <div role="tabpanel" class="tab-pane fade" id="antecedentes" > 
             <%= render 'antecedentes', :f => f %>
           </div>
   
-          <div role="tabpanel" class="tab-pane" id="atencion" > 
+          <div role="tabpanel" class="tab-pane fade" id="atencion" > 
             <%= render 'respuestas', :f => f %>
           </div> 
 
-          <div role="tabpanel" class="tab-pane" id="descripcion" > 
+          <div role="tabpanel" class="tab-pane fade" id="descripcion" > 
             <%= render 'memo', :f => f, :s => s %>
           </div>
 
-          <div role="tabpanel" class="tab-pane" id="anexos"> 
+          <div role="tabpanel" class="tab-pane fade" id="anexos"> 
             <%= render 'sivel2_gen/casos/anexos', :f => f  %>
           </div>
 
-          <div role="tabpanel" class="tab-pane" id="etiquetas"> 
+          <div role="tabpanel" class="tab-pane fade" id="etiquetas"> 
             <%= render 'sivel2_gen/casos/etiquetas', :f => f  %>
           </div> 
 

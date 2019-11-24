@@ -74,7 +74,8 @@ class Ability < Sivel2Sjr::Ability
     ['Sip', 'lineaactorsocial'],
     ['Sip', 'tipoactorsocial'],
     ['', 'discapacidad'],
-    ['', 'espaciopart']
+    ['', 'espaciopart'],
+    ['', 'migracontactopre']
   ]
   
   def tablasbasicas 
@@ -206,6 +207,7 @@ class Ability < Sivel2Sjr::Ability
     can :nuevo, Sivel2Gen::Victima
 
     can :nuevo, Sivel2Sjr::Desplazamiento
+    can :nuevo, Sivel2Sjr::Migracion
     can :nuevo, Sivel2Sjr::Respuesta
 
     if !usuario.nil? && !usuario.rol.nil? then

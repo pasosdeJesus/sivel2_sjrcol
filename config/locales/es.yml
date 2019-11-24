@@ -64,6 +64,9 @@ es:
       "espaciopart":
         Espaciopart: Espacio de participación o red
         Espaciospart: Espacios de participación o redes
+      "migracontactopre":
+        Migracontactopre: Contacto previo con Colombia
+        Migracontactospre: Contactos previos con Colombia
       "sal7711_gen/articulo": 
         texto: Resumen
         fuenteprensa: Fuente de prensa
@@ -143,6 +146,8 @@ es:
         Declaroantes: Declaro Ante
       "sivel2_sjr/desplazamiento":
         categoria: Antecedentes no individuales
+      "sivel2_sjr/migracion":
+        migracontactopre: Contacto previo con Colombia
       "sivel2_sjr/motivosjr": 
         Motivosjr: Servicio y Asesoria del SJR
         Motivossjr: Servicios y Asesorias del SJR

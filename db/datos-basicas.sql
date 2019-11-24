@@ -95,6 +95,15 @@ INSERT INTO public.espaciopart (id, nombre, observaciones, fechacreacion, fechad
 SELECT pg_catalog.setval('public.espaciopart_id_seq', 100, true);
 
 
+
+INSERT INTO public.migracontactopre (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (1, 'AMIGO', NULL, '2019-11-16', NULL, '2019-11-16 16:19:24.121644', '2019-11-16 16:19:24.121644');
+INSERT INTO public.migracontactopre (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (2, 'CONOCIDO', NULL, '2019-11-16', NULL, '2019-11-16 16:19:24.126942', '2019-11-16 16:19:24.126942');
+INSERT INTO public.migracontactopre (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (3, 'FAMILIAR', NULL, '2019-11-16', NULL, '2019-11-16 16:19:24.131423', '2019-11-16 16:19:24.131423');
+INSERT INTO public.migracontactopre (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (4, 'NINGUNO', NULL, '2019-11-16', NULL, '2019-11-16 16:19:24.135542', '2019-11-16 16:19:24.135542');
+
+
+SELECT pg_catalog.setval('public.migracontactopre_id_seq', 100, true);
+
 --
 -- PostgreSQL database dump complete
 --

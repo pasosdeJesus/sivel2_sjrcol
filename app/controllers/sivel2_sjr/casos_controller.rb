@@ -85,5 +85,28 @@ module Sivel2Sjr
         ]
       ]
     end
+
+    def otros_params
+      [
+        :migracion_attributes => [
+          :destino_clase_id,
+          :destino_departamento_id,
+          :destino_municipio_id,
+          :destino_pais_id,
+          :fechallegada,
+          :fechasalida,
+          :id,
+          :migracontactopre_id,
+          :salida_pais_id,
+          :salida_departamento_id,
+          :salida_municipio_id,
+          :salida_clase_id,
+          :se_establece_en_sitio_llegada,
+          :statusmigratorio_id,
+          :_destroy
+        ]
+      ]
+    end
+
   end
 end

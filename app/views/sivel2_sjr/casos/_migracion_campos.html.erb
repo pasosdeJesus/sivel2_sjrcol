@@ -1,0 +1,158 @@
+<div class='control-group nested-fields'>
+  <div class="controls">
+    <%= f.input :id, as: :hidden %>
+    <div class="row">
+      <div class=" offset-md-0 col-md-6">
+        <%= f.input :fechasalida, 
+          as: :string, 
+          label: "Fecha del Hecho",
+          input_html: { 
+            "data-behaviour" => "datepicker",
+            "data-toggle" => 'tooltip'
+          } %>
+      </div>
+      <div class="col-md-6">
+        <%= f.association :salida_pais,
+          collection: Sip::Pais.habilitados,
+          label: "País",
+          label_method: :nombre,
+          value_method: :id,
+          input_html: {
+            "data-toggle" => 'tooltip' 
+          } %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="offset-md-0 col-md-4">
+        <%= f.association :salida_departamento,
+          collection: Sip::Departamento.habilitados,
+          label: "Departamento",
+          label_method: :nombre,
+          value_method: :id,
+          input_html: {
+            "data-toggle" => 'tooltip'
+          } %>
+      </div>
+      <div class="col-md-4">
+        <%= f.association :salida_municipio,
+          collection: Sip::Municipio.habilitados,
+          label: "Municipio",
+          label_method: :nombre,
+          value_method: :id,
+          input_html: {
+            "data-toggle" => 'tooltip'
+          } %>
+      </div>
+      <div class="col-md-4">
+        <%= f.association :salida_clase,
+          collection: Sip::Clase.habilitados,
+          label: "Centro poblado",
+          label_method: :nombre,
+          value_method: :id,
+          input_html: {
+            "data-toggle" => 'tooltip'
+          } %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="offset-md-0 col-md-6">
+      <%= f.input :fechallegada, 
+        as: :string, 
+        label: "Fecha de Llegada",
+        input_html: { 
+          "data-behaviour" => "datepicker",
+          "data-toggle" => 'tooltip'
+        } %>
+      </div>
+      <div class="offset-md-0 col-md-6">
+        <%= f.input :se_establece_en_sitio_llegada,
+          boolean_style: :nested,
+          inline_label: '¿Piensa establecerse en este lugar?' %>
+      </div>
+    </div> <!-- row -->
+
+    <% edest = f.object.se_establece_en_sitio_llegada ? 'display: none' : '' %>
+    <div class='row'>
+      <div class="col-md-6">
+        <%= f.association :destino_pais,
+          collection: Sip::Pais.habilitados,
+          label: "País de destino",
+          label_method: :nombre,
+          value_method: :id,
+          input_html: {
+            "data-toggle" => 'tooltip'
+          },
+          wrapper_html: {
+            style: edest
+          } %>
+      </div>
+      <div class="offset-md-0 col-md-6">
+        <%= f.association :destino_departamento,
+          collection: Sip::Departamento.habilitados,
+          label: "Departamento de destino",
+          label_method: :nombre,
+          value_method: :id,
+          input_html: {
+            "data-toggle" => 'tooltip',
+          },
+          wrapper_html: {
+            style: edest
+          } %>
+      </div>
+    </div> <!-- row -->
+
+    <div class='row'>
+      <div class="col-md-6">
+        <%= f.association :destino_municipio,
+          collection: Sip::Municipio.habilitados,
+          label: "Municipio destino",
+          label_method: :nombre,
+          value_method: :id,
+          input_html: {
+            "data-toggle" => 'tooltip',
+          },
+          wrapper_html: {
+            style: edest
+          } %>
+      </div>
+      <div class="col-md-6">
+        <%= f.association :destino_clase,
+          collection: Sip::Clase.habilitados,
+          label: "Centro poblado destino",
+          label_method: :nombre,
+          value_method: :id,
+          input_html: {
+            "data-toggle" => 'tooltip',
+          },
+          wrapper_html: {
+            style: edest
+          } %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="offset-md-0 col-md-6">
+        <%= f.association :migracontactopre,
+          collection: ::Migracontactopre.habilitados,
+          label_method: :nombre,
+          value_method: :id,
+          input_html: {
+            class: 'chosen-select' 
+          } %>
+      </div>
+      <div class="offset-md-0 col-md-6">
+        <%= f.association :statusmigratorio,
+          collection: Sivel2Sjr::Statusmigratorio.habilitados,
+          label_method: :nombre,
+          value_method: :id,
+          input_html: {
+            class: 'chosen-select' 
+          } %>
+      </div>
+    </div> <!-- row -->
+
+    <%= link_to_remove_association "Eliminar Migracion", f, 
+      {class: 'btn-danger', :'data-existing' => 'true'} 
+    %>
+  </div>
+</div>

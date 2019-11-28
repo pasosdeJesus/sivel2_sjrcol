@@ -32,7 +32,7 @@ import tinycolor from 'tinycolor2'
 
 document.addEventListener('change', 
   function (event) {
-    var m = event.target.id.match(/^caso_migracion_attributes_([0-9]*)_se_establece_en_sitio_llegada$/)
+    var m = event.target.id.match(/^caso_migracion_attributes_([0-9]*)_perfilmigracion_id$/)
     if (m != null) {
       var pd = document.getElementById('caso_migracion_attributes_'+m[1]+
         '_destino_pais_id').parentElement;
@@ -42,6 +42,7 @@ document.addEventListener('change',
         '_destino_municipio_id').parentElement;
       var cd = document.getElementById('caso_migracion_attributes_'+m[1]+
         '_destino_clase_id').parentElement;
+      debugger
       if (event.target.checked) {
         pd.style.display = 'none'
         dd.style.display = 'none'

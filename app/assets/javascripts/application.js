@@ -98,6 +98,46 @@ document.addEventListener('turbolinks:load', function() {
             }
         ) 
 
+         $(document).on('cocoon:after-insert', '#migracion', 
+            function (e) {
+              $('[data-behaviour~=datepicker]').datepicker({
+                format: 'yyyy-mm-dd',
+                autoclose: true,
+                todayHighlight: true,
+                language: 'es',
+              })
+              debugger
+              e.stopPropagation();
+            }
+        ) 
+
+        $(document).on('change', 
+            '[id^=caso_migracion_attributes_][id$=_perfilmigracion_id]', 
+            function (evento) {
+              pid = evento.target.getAttribute('id').split('_')
+              var pd = document.getElementById('caso_migracion_attributes_'+pid[3]+
+                '_destino_pais_id').parentElement;
+              var dd = document.getElementById('caso_migracion_attributes_'+pid[3]+
+                '_destino_departamento_id').parentElement;
+              var md = document.getElementById('caso_migracion_attributes_'+pid[3]+
+                '_destino_municipio_id').parentElement;
+              var cd = document.getElementById('caso_migracion_attributes_'+pid[3]+
+                '_destino_clase_id').parentElement;
+              if (+evento.target.value != 2) {
+                pd.style.display = 'none'
+                dd.style.display = 'none'
+                md.style.display = 'none'
+                cd.style.display = 'none'
+              } else {
+                pd.style.display = ''
+                dd.style.display = ''
+                md.style.display = ''
+                cd.style.display = ''
+              }
+           }
+        ) 
+
+
 });
 
 /*jQuery.ajaxSetup({

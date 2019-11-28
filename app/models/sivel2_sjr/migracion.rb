@@ -32,6 +32,11 @@ class Sivel2Sjr::Migracion < ActiveRecord::Base
     class_name: '::Migracontactopre', foreign_key: "migracontactopre_id", 
     optional: true
 
+  belongs_to :perfilmigracion,
+    class_name: '::Perfilmigracion', 
+    foreign_key: "perfilmigracion_id", 
+    optional: true
+
   belongs_to :salida_pais, 
     class_name: 'Sip::Pais', foreign_key: "salida_pais_id", optional: true
   belongs_to :salida_departamento, 

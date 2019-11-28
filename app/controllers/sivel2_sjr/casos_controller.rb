@@ -97,6 +97,7 @@ module Sivel2Sjr
           :fechasalida,
           :id,
           :migracontactopre_id,
+          :perfilmigracion_id,
           :salida_pais_id,
           :salida_departamento_id,
           :salida_municipio_id,

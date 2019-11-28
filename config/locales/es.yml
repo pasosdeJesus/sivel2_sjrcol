@@ -67,6 +67,9 @@ es:
       "migracontactopre":
         Migracontactopre: Contacto previo con Colombia
         Migracontactospre: Contactos previos con Colombia
+      "perfilmigracion":
+        Perfilmigracion: Perfil de migración
+        Perfilesmigracion: Perfiles de migración
       "sal7711_gen/articulo": 
         texto: Resumen
         fuenteprensa: Fuente de prensa
@@ -148,6 +151,8 @@ es:
         categoria: Antecedentes no individuales
       "sivel2_sjr/migracion":
         migracontactopre: Contacto previo con Colombia
+        statusmigratorio: Estatus migratorio
+        perfilmigracion: Perfil de migración
       "sivel2_sjr/motivosjr": 
         Motivosjr: Servicio y Asesoria del SJR
         Motivossjr: Servicios y Asesorias del SJR

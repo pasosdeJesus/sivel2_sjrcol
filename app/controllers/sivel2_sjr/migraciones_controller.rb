@@ -23,7 +23,12 @@ module Sivel2Sjr
         end
         @migracion.fechasalida = fex
         @migracion.fechallegada = fex+1
-        byebug
+        if current_usuario && current_usuario.oficina
+          @migracion.llegada_pais_id = current_usuario.oficina.pais_id
+          @migracion.llegada_departamento_id = current_usuario.oficina.departamento_id
+          @migracion.llegada_municipio_id = current_usuario.oficina.municipio_id
+          @migracion.llegada_clase_id = current_usuario.oficina.clase_id
+        end
         if @migracion.save
           h=@migracion.as_json
           h['migracion'] = @migracion.id

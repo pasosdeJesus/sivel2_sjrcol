@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: c954b741f5837c1bcec1237e1e81c643c509545a
+  revision: a7db76f059dd91a4e8f865ad89005af2d29bea41
   specs:
     cor1440_gen (1.0b3)
       devise
@@ -13,7 +13,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 2d7746e2ead71deeabc81da1b6d5f459f7353e69
+  revision: 4313c219a90ea15976d406968fd67c88d6cadcc5
   specs:
     heb412_gen (1.0.b6)
       mr519_gen
@@ -23,7 +23,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/mr519_gen.git
-  revision: f420a4306d34d19165dbf2055d11fb5c2c18ee52
+  revision: 440ccd721562c63d21294383767d1e40028eeaa3
   specs:
     mr519_gen (0.2.0)
       rails (~> 6.0.0.rc1, >= 6.0.0.rc1)
@@ -39,7 +39,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: 6948de985da3d84061f400aa4f28811c419fdf48
+  revision: e85f3015cf584a08465e49938f5e4eaf91419b3b
   specs:
     sal7711_web (1.0.a3)
       rails
@@ -47,7 +47,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: b8648ee5a1b462bbbf2ddcb175bac3301386f76b
+  revision: 238197d67ceb85d2320dc03450e041a51f981898
   specs:
     sip (2.0.b7)
       cancancan
@@ -65,7 +65,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 1b2f69b7c480011185e4314a526536d6079ddd35
+  revision: 1e5f9e85fe5719db4251e9d8fc50c0a28015d2dc
   specs:
     sivel2_gen (2.0b10)
       devise
@@ -74,7 +74,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 5d11029085dd76e681afd63b4725bdb92dde6c74
+  revision: 4675c784048e77126d50312b4b23722cd0e35952
   specs:
     sivel2_sjr (2.0b10)
       rails
@@ -194,7 +194,7 @@ GEM
     docile (1.3.2)
     erubi (1.9.0)
     execjs (2.7.0)
-    ffi (1.11.2)
+    ffi (1.11.3)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     i18n (1.7.0)
@@ -210,7 +210,7 @@ GEM
     json (2.2.0)
     kgio (2.11.2)
     libxml-ruby (3.1.0)
-    loofah (2.3.1)
+    loofah (2.4.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.7.1)

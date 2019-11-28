@@ -2639,6 +2639,40 @@ ALTER SEQUENCE public.mr519_gen_valorcampo_id_seq OWNED BY public.mr519_gen_valo
 
 
 --
+-- Name: perfilmigracion; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.perfilmigracion (
+    id bigint NOT NULL,
+    nombre character varying(500) NOT NULL,
+    observaciones character varying(5000),
+    fechacreacion date NOT NULL,
+    fechadeshabilitacion date,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: perfilmigracion_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.perfilmigracion_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: perfilmigracion_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.perfilmigracion_id_seq OWNED BY public.perfilmigracion.id;
+
+
+--
 -- Name: proceso_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -3272,6 +3306,10 @@ CREATE TABLE public.sip_oficina (
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     observaciones character varying(5000) COLLATE public.es_co_utf_8,
+    pais_id integer,
+    departamento_id integer,
+    municipio_id integer,
+    clase_id integer,
     CONSTRAINT regionsjr_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
 
@@ -5438,6 +5476,26 @@ ALTER SEQUENCE public.sivel2_sjr_comosupo_id_seq OWNED BY public.sivel2_sjr_como
 
 
 --
+-- Name: sivel2_sjr_consactividadcaso; Type: MATERIALIZED VIEW; Schema: public; Owner: -
+--
+
+CREATE MATERIALIZED VIEW public.sivel2_sjr_consactividadcaso AS
+ SELECT ac.casosjr_id AS caso_id,
+    ac.actividad_id,
+    actividad.fecha AS actividad_fecha,
+    victima.id AS victima_id,
+    persona.id AS persona_id,
+    persona.nombres AS persona_nombres,
+    persona.apellidos AS persona_apellidos
+   FROM ((((public.sivel2_sjr_actividad_casosjr ac
+     JOIN public.cor1440_gen_actividad actividad ON ((ac.actividad_id = actividad.id)))
+     JOIN public.sivel2_gen_caso caso ON ((caso.id = ac.casosjr_id)))
+     JOIN public.sivel2_gen_victima victima ON ((victima.id_caso = caso.id)))
+     JOIN public.sip_persona persona ON ((persona.id = victima.id_persona)))
+  WITH NO DATA;
+
+
+--
 -- Name: sivel2_sjr_declaroante_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -5632,7 +5690,8 @@ CREATE TABLE public.sivel2_sjr_migracion (
     destino_municipio_id integer,
     destino_clase_id integer,
     migracontactopre_id integer,
-    statusmigratorio_id integer
+    statusmigratorio_id integer,
+    perfilmigracion_id integer
 );
 
 
@@ -6399,6 +6458,13 @@ ALTER TABLE ONLY public.mr519_gen_respuestafor ALTER COLUMN id SET DEFAULT nextv
 --
 
 ALTER TABLE ONLY public.mr519_gen_valorcampo ALTER COLUMN id SET DEFAULT nextval('public.mr519_gen_valorcampo_id_seq'::regclass);
+
+
+--
+-- Name: perfilmigracion id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.perfilmigracion ALTER COLUMN id SET DEFAULT nextval('public.perfilmigracion_id_seq'::regclass);
 
 
 --
@@ -7379,6 +7445,14 @@ ALTER TABLE ONLY public.sivel2_gen_organizacion
 
 ALTER TABLE ONLY public.sivel2_gen_pconsolidado
     ADD CONSTRAINT pconsolidado_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: perfilmigracion perfilmigracion_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.perfilmigracion
+    ADD CONSTRAINT perfilmigracion_pkey PRIMARY KEY (id);
 
 
 --
@@ -9248,6 +9322,14 @@ ALTER TABLE ONLY public.cor1440_gen_caracterizacionpf
 
 
 --
+-- Name: sip_oficina fk_rails_1e27fc6829; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sip_oficina
+    ADD CONSTRAINT fk_rails_1e27fc6829 FOREIGN KEY (clase_id) REFERENCES public.sip_clase(id);
+
+
+--
 -- Name: heb412_gen_campohc fk_rails_1e5f26c999; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -9480,6 +9562,14 @@ ALTER TABLE ONLY public.sip_ubicacion
 
 
 --
+-- Name: sip_oficina fk_rails_4ddab7b9ca; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sip_oficina
+    ADD CONSTRAINT fk_rails_4ddab7b9ca FOREIGN KEY (pais_id) REFERENCES public.sip_pais(id);
+
+
+--
 -- Name: cor1440_gen_efecto fk_rails_4ebe8f74fc; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -9680,11 +9770,27 @@ ALTER TABLE ONLY public.sip_ubicacion
 
 
 --
+-- Name: sip_oficina fk_rails_6f52b85db3; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sip_oficina
+    ADD CONSTRAINT fk_rails_6f52b85db3 FOREIGN KEY (departamento_id) REFERENCES public.sip_departamento(id);
+
+
+--
 -- Name: cor1440_gen_pmindicadorpf fk_rails_701d924c54; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.cor1440_gen_pmindicadorpf
     ADD CONSTRAINT fk_rails_701d924c54 FOREIGN KEY (mindicadorpf_id) REFERENCES public.cor1440_gen_mindicadorpf(id);
+
+
+--
+-- Name: sip_oficina fk_rails_729931f131; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sip_oficina
+    ADD CONSTRAINT fk_rails_729931f131 FOREIGN KEY (municipio_id) REFERENCES public.sip_municipio(id);
 
 
 --
@@ -10165,6 +10271,14 @@ ALTER TABLE ONLY public.sivel2_sjr_categoria_desplazamiento
 
 ALTER TABLE ONLY public.cor1440_gen_informe
     ADD CONSTRAINT fk_rails_daf0af8605 FOREIGN KEY (filtrooficina) REFERENCES public.sip_oficina(id);
+
+
+--
+-- Name: sivel2_sjr_migracion fk_rails_dcf3147f89; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sivel2_sjr_migracion
+    ADD CONSTRAINT fk_rails_dcf3147f89 FOREIGN KEY (perfilmigracion_id) REFERENCES public.perfilmigracion(id);
 
 
 --
@@ -11315,6 +11429,10 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20191105185049'),
 ('20191116151549'),
 ('20191116160553'),
-('20191116165332');
+('20191116165332'),
+('20191127173053'),
+('20191127181739'),
+('20191127182834'),
+('20191127230143');
 
 

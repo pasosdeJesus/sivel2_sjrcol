@@ -23,7 +23,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/mr519_gen.git
-  revision: 440ccd721562c63d21294383767d1e40028eeaa3
+  revision: cbe9792deb7c79aca398abbf929b08ddc54dfa01
   specs:
     mr519_gen (0.2.0)
       rails (~> 6.0.0.rc1, >= 6.0.0.rc1)
@@ -47,7 +47,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 238197d67ceb85d2320dc03450e041a51f981898
+  revision: fce9fd3282ec0b963288057042ba38d5b5ac1efa
   specs:
     sip (2.0.b7)
       cancancan
@@ -74,7 +74,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 4675c784048e77126d50312b4b23722cd0e35952
+  revision: 3c908c955a45d34e4001ee01e6b0fd0be2e4f9ba
   specs:
     sivel2_sjr (2.0b10)
       rails
@@ -361,7 +361,7 @@ GEM
     will_paginate (3.2.1)
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    zeitwerk (2.2.1)
+    zeitwerk (2.2.2)
 
 PLATFORMS
   ruby

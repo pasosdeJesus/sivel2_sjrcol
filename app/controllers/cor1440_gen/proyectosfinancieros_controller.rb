@@ -7,5 +7,9 @@ module Cor1440Gen
     
     include Sivel2Sjr::Concerns::Controllers::ProyectosfinancierosController
 
+    load_and_authorize_resource  class: Cor1440Gen::Proyectofinanciero,
+      only: [:new, :create, :destroy, :edit, :update, :index, :show,
+             :objetivospf]
+
   end
 end

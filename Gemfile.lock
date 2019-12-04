@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: e6c7b8ab610d7ec695648a730515d68478400522
+  revision: 560ac4f7b30b8a16adb70dc055cc03d803d7a8a3
   specs:
     cor1440_gen (1.0b3)
       devise
@@ -13,7 +13,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 4313c219a90ea15976d406968fd67c88d6cadcc5
+  revision: 19fa19460fe0c1fd9ff05006dd7504b518fddec2
   specs:
     heb412_gen (1.0.b6)
       mr519_gen
@@ -23,7 +23,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/mr519_gen.git
-  revision: 316527d3c24dc7fd2d933418de798e1279661612
+  revision: 88239750e4de0d39e2699c5f0102510094acc9b4
   specs:
     mr519_gen (0.2.0)
       rails (~> 6.0.0.rc1, >= 6.0.0.rc1)
@@ -39,7 +39,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: e85f3015cf584a08465e49938f5e4eaf91419b3b
+  revision: 10403c5915f9e65d5900d3fd22433cb30f11820c
   specs:
     sal7711_web (1.0.a3)
       rails
@@ -47,7 +47,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 552391cd5e054a3112e5a18dd5816fc4826c0c77
+  revision: 206b81d672d6c286e1164b3f36c17bc4a03f342e
   specs:
     sip (2.0.b7)
       cancancan
@@ -65,7 +65,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 1e5f9e85fe5719db4251e9d8fc50c0a28015d2dc
+  revision: 1e1bf607765bb57be8fb09c501251e745e8e7833
   specs:
     sivel2_gen (2.0b10)
       devise
@@ -227,7 +227,7 @@ GEM
     minitest (5.13.0)
     msgpack (1.3.1)
     nio4r (2.5.2)
-    nokogiri (1.10.6)
+    nokogiri (1.10.7)
       mini_portile2 (~> 2.4.0)
     odf-report (0.6.1)
       nokogiri (>= 1.5.0)

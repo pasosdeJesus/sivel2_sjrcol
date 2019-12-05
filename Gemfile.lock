@@ -74,7 +74,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 3c908c955a45d34e4001ee01e6b0fd0be2e4f9ba
+  revision: 8c0559a4d057c9418ef6b46a353c9b461cebae4d
   specs:
     sivel2_sjr (2.0b10)
       rails
@@ -254,7 +254,7 @@ GEM
       prawn (>= 1.0.0)
       rails (>= 3.2)
     public_suffix (4.0.1)
-    puma (4.3.0)
+    puma (4.3.1)
       nio4r (~> 2.0)
     rack (2.0.7)
     rack-proxy (0.6.5)

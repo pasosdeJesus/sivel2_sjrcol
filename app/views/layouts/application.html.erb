@@ -70,7 +70,7 @@
       <% if can? :read, ::Heb412Gen::Doc %>
         <%= despliega_abajo "Documentos" do %>
           <%= opcion_menu "Manual del sistema", 
-            'https://docs.google.com/document/d/1qxJOBzbG_lQPN0nfhlJ1QyeRO4a9hrYlK8Z_bRO3UJU/edit?usp=sharing', desplegable: true, target: '_blank',
+            'https://docs.google.com/document/d/1qxJOBzbG_lQPN0nfhlJ1QyeRO4a9hrYlK8Z_bRO3UJU/edit?usp=sharing', target: '_blank',
           desplegable: true %>
           <%= opcion_menu "Nube", 
             heb412_gen.sisini_path, desplegable: true %>
@@ -91,7 +91,7 @@
         <% end %>
       <% end %>
       <%= despliega_abajo "Administrar" do %>
-        <%= opcion_menu "Clave", main_app.editar_registro_usuario_path, desplegable: true %>
+        <%= opcion_menu "Clave y tema", main_app.editar_registro_usuario_path, desplegable: true %>
         <% if session[:capturacaso_acordeon] %>
           <%= opcion_menu 'Ficha caso vertical ✓', 
             sivel2_gen.fichacasovertical_path,

@@ -16,45 +16,45 @@
             "data-behaviour" => "datepicker",
             "data-toggle" => 'tooltip'
           } %>
-      </div>
-      <div class="col-md-3">
-        <%= f.association :salida_pais,
-          collection: Sip::Pais.habilitados,
-          label_method: :nombre,
-          value_method: :id,
-          label: false,
-          input_html: {
-            "data-toggle" => 'tooltip',
-            placeholder: 'País de salida',
-            'data-placeholder' => "País de salida...",
-            class: 'chosen-select' 
-          } %>
-      </div>
-      <div class="col-md-2">
-        <%= f.association :salida_departamento,
-          collection: Sip::Departamento.habilitados,
-          label_method: :nombre,
-          value_method: :id,
-          label: false,
-          input_html: {
-            "data-toggle" => 'tooltip',
-            placeholder: 'Departamento',
-            'data-placeholder' => "Departamento de salida...",
-            class: 'chosen-select' 
-          } %>
-      </div>
-      <div class="col-md-2">
-        <%= f.association :salida_municipio,
-          collection: Sip::Municipio.habilitados,
-          label_method: :nombre,
-          value_method: :id,
-          label: false,
-          input_html: {
-            "data-toggle" => 'tooltip',
-            placeholder: 'Municipio',
-            'data-placeholder' => "Municipio de salida...",
-            class: 'chosen-select' 
-          } %>
+    </div>
+    <div class="col-md-3">
+      <%= f.association :salida_pais,
+        collection: Sip::Pais.habilitados,
+        label_method: :nombre,
+        value_method: :id,
+        label: false,
+        input_html: {
+          "data-toggle" => 'tooltip',
+          placeholder: 'País de salida',
+          'data-placeholder' => "País de salida...",
+          class: 'chosen-select' 
+        } %>
+  </div>
+  <div class="col-md-2">
+    <%= f.association :salida_departamento,
+      collection: Sip::Departamento.habilitados,
+      label_method: :nombre,
+      value_method: :id,
+      label: false,
+      input_html: {
+        "data-toggle" => 'tooltip',
+        placeholder: 'Departamento',
+        'data-placeholder' => "Departamento de salida...",
+        class: 'chosen-select' 
+      } %>
+</div>
+<div class="col-md-2">
+  <%= f.association :salida_municipio,
+    collection: Sip::Municipio.habilitados,
+    label_method: :nombre,
+    value_method: :id,
+    label: false,
+    input_html: {
+      "data-toggle" => 'tooltip',
+      placeholder: 'Municipio',
+      'data-placeholder' => "Municipio de salida...",
+      class: 'chosen-select' 
+    } %>
       </div>
       <div class="col-md-2">
         <%= f.association :salida_clase,
@@ -68,7 +68,7 @@
             'data-placeholder' => "Centro poblado de salida...",
             class: 'chosen-select' 
           } %>
-      </div>
+    </div>
     </div>
     <div class="row">
       <div class="col-md-12">
@@ -86,45 +86,45 @@
             "data-behaviour" => "datepicker",
             "data-toggle" => 'tooltip'
           } %>
-      </div>
-      <div class="col-md-3">
-        <%= f.association :llegada_pais,
-          collection: Sip::Pais.habilitados,
-          label_method: :nombre,
-          value_method: :id,
-          label: false,
-          input_html: {
-            "data-toggle" => 'tooltip',
-            placeholder: 'País de llegada',
-            'data-placeholder' => "País de llegada...",
-            class: 'chosen-select' 
-          } %>
-      </div>
-      <div class="col-md-2">
-        <%= f.association :llegada_departamento,
-          collection: Sip::Departamento.habilitados,
-          label_method: :nombre,
-          value_method: :id,
-          label: false,
-          input_html: {
-            "data-toggle" => 'tooltip',
-            placeholder: 'Departamento',
-            'data-placeholder' => "Departamento de llegada...",
-            class: 'chosen-select' 
-          } %>
-      </div>
-      <div class="col-md-2">
-        <%= f.association :llegada_municipio,
-          collection: Sip::Municipio.habilitados,
-          label_method: :nombre,
-          value_method: :id,
-          label: false,
-          input_html: {
-            "data-toggle" => 'tooltip',
-            placeholder: 'Municipio',
-            'data-placeholder' => "Municipio de llegada...",
-            class: 'chosen-select' 
-          } %>
+    </div>
+    <div class="col-md-3">
+      <%= f.association :llegada_pais,
+        collection: Sip::Pais.habilitados,
+        label_method: :nombre,
+        value_method: :id,
+        label: false,
+        input_html: {
+          "data-toggle" => 'tooltip',
+          placeholder: 'País de llegada',
+          'data-placeholder' => "País de llegada...",
+          class: 'chosen-select' 
+        } %>
+  </div>
+  <div class="col-md-2">
+    <%= f.association :llegada_departamento,
+      collection: Sip::Departamento.habilitados,
+      label_method: :nombre,
+      value_method: :id,
+      label: false,
+      input_html: {
+        "data-toggle" => 'tooltip',
+        placeholder: 'Departamento',
+        'data-placeholder' => "Departamento de llegada...",
+        class: 'chosen-select' 
+      } %>
+</div>
+<div class="col-md-2">
+  <%= f.association :llegada_municipio,
+    collection: Sip::Municipio.habilitados,
+    label_method: :nombre,
+    value_method: :id,
+    label: false,
+    input_html: {
+      "data-toggle" => 'tooltip',
+      placeholder: 'Municipio',
+      'data-placeholder' => "Municipio de llegada...",
+      class: 'chosen-select' 
+    } %>
       </div>
       <div class="col-md-2">
         <%= f.association :llegada_clase,
@@ -138,11 +138,11 @@
             'data-placeholder' => "Centro poblado de llegada...",
             class: 'chosen-select' 
           } %>
-      </div>
+    </div>
     </div>
 
-    <div class="col-md-12">
-        Perfil de migración
+    <div>
+      Perfil de migración
     </div>
     <div class="row">
       <div class="col-md-3">
@@ -157,54 +157,54 @@
         <!--%= f.input :perfilmig, as: :check_boxes, collection: ['Pendular', 'En transito', 'Con vocación de permanencia'], wrapper: :custom_collection_inline %-->
         <% edest = f.object.perfilmigracion && f.object.perfilmigracion_id != 2 ? 
           'display: none' : '' %>
-      </div>
-      <div class="col-md-3">
-        <%= f.association :destino_pais,
-          collection: Sip::Pais.habilitados,
-          label_method: :nombre,
-          value_method: :id,
-          label: false,
-          wrapper_html: {
-            style: edest
-          },
-          input_html: {
-            "data-toggle" => 'tooltip',
-            placeholder: 'País de destino',
-            'data-placeholder' => "País de destino...",
-            class: 'chosen-select' 
-          } %>
-      </div>
-      <div class="col-md-2">
-        <%= f.association :destino_departamento,
-          collection: Sip::Departamento.habilitados,
-          label_method: :nombre,
-          value_method: :id,
-          label: false,
-          wrapper_html: {
-            style: edest
-          },
-          input_html: {
-            "data-toggle" => 'tooltip',
-            placeholder: 'Departamento',
-            'data-placeholder' => "Departamento de destino...",
-            class: 'chosen-select' 
-          } %>
-      </div>
-      <div class="col-md-2">
-        <%= f.association :destino_municipio,
-          collection: Sip::Municipio.habilitados,
-          label_method: :nombre,
-          value_method: :id,
-          label: false,
-          wrapper_html: {
-            style: edest
-          },
-          input_html: {
-            "data-toggle" => 'tooltip',
-            placeholder: 'Municipio',
-            'data-placeholder' => "Municipio de destino...",
-            class: 'chosen-select' 
-          } %>
+    </div>
+    <div class="col-md-3">
+      <%= f.association :destino_pais,
+        collection: Sip::Pais.habilitados,
+        label_method: :nombre,
+        value_method: :id,
+        label: false,
+        wrapper_html: {
+          style: edest
+        },
+        input_html: {
+          "data-toggle" => 'tooltip',
+          placeholder: 'País de destino',
+          'data-placeholder' => "País de destino...",
+          class: 'chosen-select' 
+        } %>
+  </div>
+  <div class="col-md-2">
+    <%= f.association :destino_departamento,
+      collection: Sip::Departamento.habilitados,
+      label_method: :nombre,
+      value_method: :id,
+      label: false,
+      wrapper_html: {
+        style: edest
+      },
+      input_html: {
+        "data-toggle" => 'tooltip',
+        placeholder: 'Departamento',
+        'data-placeholder' => "Departamento de destino...",
+        class: 'chosen-select' 
+      } %>
+</div>
+<div class="col-md-2">
+  <%= f.association :destino_municipio,
+    collection: Sip::Municipio.habilitados,
+    label_method: :nombre,
+    value_method: :id,
+    label: false,
+    wrapper_html: {
+      style: edest
+    },
+    input_html: {
+      "data-toggle" => 'tooltip',
+      placeholder: 'Municipio',
+      'data-placeholder' => "Municipio de destino...",
+      class: 'chosen-select' 
+    } %>
       </div>
       <div class="col-md-2">
         <%= f.association :destino_clase,
@@ -221,7 +221,7 @@
             'data-placeholder' => "Centro poblado de destino...",
             class: 'chosen-select' 
           } %>
-      </div>
+    </div>
 
     </div>
 
@@ -234,20 +234,81 @@
           input_html: {
             class: 'chosen-select' 
           } %>
-      </div>
-      <div class="offset-md-0 col-md-6">
-        <%= f.association :statusmigratorio,
-          collection: Sivel2Sjr::Statusmigratorio.habilitados,
-          label_method: :nombre,
-          value_method: :id,
-          input_html: {
-            class: 'chosen-select' 
-          } %>
-      </div>
+    </div>
+    <div class="offset-md-0 col-md-6">
+      <%= f.association :statusmigratorio,
+        collection: Sivel2Sjr::Statusmigratorio.habilitados,
+        label_method: :nombre,
+        value_method: :id,
+        input_html: {
+          class: 'chosen-select' 
+        } %>
+  </div>
     </div> <!-- row -->
 
-    <%= link_to_remove_association "Eliminar Migracion", f, 
-      {class: 'btn-danger', :'data-existing' => 'true'} 
-    %>
+    <div class="row">
+      <div class="offset-md-0 col-md-6">
+        <div class="row">
+          <div class="offset-md-0 col-md-8">
+            <label class="form-check-label" for="riesgoApatridia">
+              ¿Se encuentra en situación de apátrida?
+            </label>  
+          </div>
+          <div class="offset-md-0 col-md-4">
+            <%=f.input :apatrida, 
+              label: false,
+              as: :boolean %>
+        </div>
+        </div>
+      </div>
+      <div class="offset-md-0 col-md-6">
+        <div class="row">
+          <div class="offset-md-0 col-md-8">
+            <label class="form-check-label" for="riesgoApatridia">
+              ¿Se encuentra en riesgo de apatridia?
+            </label>  
+          </div>
+          <div class="offset-md-0 col-md-4">
+            <%=f.input :riesgoApatridia, 
+              label: false,
+              as: :boolean %>
+        </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="offset-md-0 col-md-6">
+        <div class="row">
+          <div class="offset-md-0 col-md-8">
+            <label class="form-check-label" for="riesgoApatridia">
+              ¿Cuenta con permiso especial de permanencia (PEP)?
+            </label>  
+          </div>
+          <div class="offset-md-0 col-md-4">
+            <%=f.input :pep, 
+              label: false,
+              as: :boolean %>
+        </div>
+        </div>
+      </div>
+      <div class="offset-md-0 col-md-6">
+        <div>
+          Fecha de Registro PEP:
+        </div>
+        <%= f.input :fechaPep, 
+          as: :string, 
+          label: false,
+          input_html: { 
+            placeholder: 'Fecha dr registro',
+            "data-behaviour" => "datepicker",
+            "data-toggle" => 'tooltip'
+          } %>
+    </div>
+    </div>  
   </div>
-</div>
+  <%= link_to_remove_association "Eliminar Migracion", f, 
+    {class: 'btn-danger', :'data-existing' => 'true'} 
+  %>
+  </div>
+  </div>

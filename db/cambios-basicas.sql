@@ -32,7 +32,6 @@ INSERT INTO public.cor1440_gen_rangoedadac (id, nombre, limiteinferior, limitesu
 
 
 
-INSERT INTO public.sip_oficina (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at, observaciones, pais_id, departamento_id, municipio_id, clase_id) VALUES (1, 'SIN INFORMACIÓN', '2014-09-01', NULL, '2014-09-01 12:54:42.630253', '2014-09-03 10:40:11.967004', NULL, NULL, NULL, NULL, NULL);
 INSERT INTO public.sip_oficina (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at, observaciones, pais_id, departamento_id, municipio_id, clase_id) VALUES (4, 'CÚCUTA', '2013-05-13', NULL, NULL, '2019-11-27 21:37:59.742224', '', 170, 39, 32, 9041);
 INSERT INTO public.sip_oficina (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at, observaciones, pais_id, departamento_id, municipio_id, clase_id) VALUES (3, 'MAGDALENA MEDIO', '2013-05-13', NULL, NULL, '2019-11-27 21:40:24.544825', '', 170, 43, 1319, 9899);
 INSERT INTO public.sip_oficina (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at, observaciones, pais_id, departamento_id, municipio_id, clase_id) VALUES (7, 'NACIONAL', '2013-07-05', NULL, NULL, '2019-11-27 21:41:06.947402', '', 170, 4, 24, 238);
@@ -68,3 +67,25 @@ INSERT INTO public.sivel2_sjr_regimensalud (id, nombre, fechacreacion, fechadesh
 -- PostgreSQL database dump complete
 --
 
+
+UPDATE public.sip_tema SET
+fondo = '#f2f2ff',
+color_fuen = '#000000',
+nav_ini = '#5377a6',
+nav_fin = '#1f4e8c',
+nav_fuen = '#f2f2ff',
+fondo_lis = '#5377a6',
+b_primario_fondo_ini = '#04c4d9',
+b_primario_fondo_fin = '#1f4e8c',
+b_primario_fuen = '#f2f2ff',
+b_peligro_fondo_ini = '#ff1b30',
+b_peligro_fondo_fin = '#ad0a0a',
+b_peligro_fuen = '#f2f2ff',
+b_accion_fondo_ini = '#f2f2ff',
+b_accion_fondo_fin= '#d6d6f0',
+b_accion_fuen = '#000000',
+aler_exi_fondo = '#01a7d1',
+aler_exi_fuen = '#1f4e8c',
+aler_problema_fondo = '#f8d7da',
+aler_problema_fuen = '#721c24'
+WHERE id=1;

@@ -46,24 +46,6 @@ GIT
       sal7711_gen
 
 GIT
-  remote: https://github.com/pasosdeJesus/sip.git
-  revision: c73381727fb88a5aff9a1d932ce1cdd1340f8b4e
-  specs:
-    sip (2.0.b7)
-      cancancan
-      chosen-rails
-      devise
-      devise-i18n
-      jquery-ui-rails
-      minitest
-      paperclip
-      rails
-      rails-i18n
-      simple_form
-      twitter_cldr
-      will_paginate
-
-GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
   revision: 1e1bf607765bb57be8fb09c501251e745e8e7833
   specs:
@@ -86,6 +68,23 @@ GIT
   branch: new_id_with_ajax
   specs:
     cocoon (1.2.11)
+
+PATH
+  remote: ../sip
+  specs:
+    sip (2.0.b7)
+      cancancan
+      chosen-rails
+      devise
+      devise-i18n
+      jquery-ui-rails
+      minitest
+      paperclip
+      rails
+      rails-i18n
+      simple_form
+      twitter_cldr
+      will_paginate
 
 GEM
   remote: https://rubygems.org/

@@ -10,7 +10,6 @@ environment.plugins.prepend(
     jquery: 'jquery',
     'window.jQuery': 'jquery',
     Popper: ['popper.js', 'default'],
-    tinycolor: 'tinycolor2'
   })
 )
 
@@ -19,7 +18,6 @@ environment.loaders.append('expose', {
   use: [
     { loader: 'expose-loader', options: '$' },
     { loader: 'expose-loader', options: 'jQuery' },
-    { loader: 'expose-loader', options: 'tinycolor' }
   ]
 })
 

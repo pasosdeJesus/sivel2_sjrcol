@@ -4600,11 +4600,7 @@ CREATE MATERIALIZED VIEW public.sivel2_gen_consexpcaso AS
      JOIN public.sivel2_gen_victima vcontacto ON (((vcontacto.id_persona = contacto.id) AND (vcontacto.id_caso = caso.id))))
      LEFT JOIN public.sivel2_gen_etnia etnia ON ((vcontacto.id_etnia = etnia.id)))
      LEFT JOIN public.sivel2_sjr_ultimaatencion ultimaatencion ON ((ultimaatencion.id_caso = caso.id)))
-  WHERE (conscaso.caso_id IN ( SELECT sivel2_gen_conscaso.caso_id
-           FROM public.sivel2_gen_conscaso
-          WHERE (sivel2_gen_conscaso.caso_id = 236)
-          ORDER BY sivel2_gen_conscaso.fecharec DESC, sivel2_gen_conscaso.caso_id))
-  ORDER BY conscaso.fecha, conscaso.caso_id
+  WHERE (true = false)
   WITH NO DATA;
 
 
@@ -11460,8 +11456,14 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20191205200007'),
 ('20191205202150'),
 ('20191205204511'),
-('20191206154511');
+('20191206154511'),
 ('20191206160131'),
 ('20191206161605'),
 ('20191206165746'),
-('20191206170518');
+('20191206170518'),
+('20191208225117'),
+('20191208225311'),
+('20191208225358'),
+('20191208225448');
+
+

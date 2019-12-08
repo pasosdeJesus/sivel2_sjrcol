@@ -114,7 +114,7 @@ document.addEventListener('turbolinks:load', function() {
   $(document).on('change', 
     '[id^=caso_migracion_attributes_][id$=_perfilmigracion_id]', 
     function (evento) {
-      pid = evento.target.getAttribute('id').split('_')
+      pid = evento.target.getAttribute('id').split('_');
       var pd = document.getElementById('caso_migracion_attributes_'+pid[3]+
         '_destino_pais_id').parentElement;
       var dd = document.getElementById('caso_migracion_attributes_'+pid[3]+
@@ -124,60 +124,60 @@ document.addEventListener('turbolinks:load', function() {
       var cd = document.getElementById('caso_migracion_attributes_'+pid[3]+
         '_destino_clase_id').parentElement;
       if (+evento.target.value != 2) {
-        pd.style.display = 'none'
-        dd.style.display = 'none'
-        md.style.display = 'none'
-        cd.style.display = 'none'
+        pd.style.display = 'none';
+        dd.style.display = 'none';
+        md.style.display = 'none';
+        cd.style.display = 'none';
       } else {
-        pd.style.display = ''
-        dd.style.display = ''
-        md.style.display = ''
-        cd.style.display = ''
+        pd.style.display = '';
+        dd.style.display = '';
+        md.style.display = '';
+        cd.style.display = '';
       }
     }
-  ) 
+  );
 
   $(document).on('change', 
     '[id^=caso_migracion_attributes_][id$=_apatrida]', 
     function (evento) {
-      pid = evento.target.getAttribute('id').split('_')
+      pid = evento.target.getAttribute('id').split('_');
       var rd = $('#caso_migracion_attributes_'+pid[3]+
         '_riesgoApatridia').parents()[3];
       console.log(+evento.target.checked);
       if (+evento.target.checked != 0) {
-        rd.style.display = 'none'
+        rd.style.display = 'none';
       } else {
-        rd.style.display = ''
+        rd.style.display = '';
       }
-    })
+    });
 
   $(document).on('change', 
     '[id^=caso_migracion_attributes_][id$=_riesgoApatridia]', 
     function (evento) {
-      pid = evento.target.getAttribute('id').split('_')
+      pid = evento.target.getAttribute('id').split('_');
       var ad = $('#caso_migracion_attributes_'+pid[3]+
         '_apatrida').parents()[3];
       console.log(+evento.target.checked);
       if (+evento.target.checked != 0) {
-        ad.style.display = 'none'
+        ad.style.display = 'none';
       } else {
-        ad.style.display = ''
+        ad.style.display = '';
       }
-    })
+    });
 
   $(document).on('change', 
     '[id^=caso_migracion_attributes_][id$=_pep]', 
     function (evento) {
-      pid = evento.target.getAttribute('id').split('_')
+      pid = evento.target.getAttribute('id').split('_');
       var ped = $('#caso_migracion_attributes_'+pid[3]+
         '_fechaPep').parents()[1];
       console.log(+evento.target.checked);
       if (+evento.target.checked != 1) {
-        ped.style.display = 'none'
+        ped.style.display = 'none';
       } else {
-        ped.style.display = ''
+        ped.style.display = '';
       }
-    })
+    });
 });
 
 /*jQuery.ajaxSetup({

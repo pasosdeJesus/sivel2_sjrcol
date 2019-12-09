@@ -141,7 +141,7 @@
       </div>
     </div>
 
-    <div class="col-md-12">
+    <div>
         Perfil de migración
     </div>
     <div class="row">
@@ -222,7 +222,6 @@
             class: 'chosen-select' 
           } %>
       </div>
-
     </div>
 
     <div class="row">
@@ -245,6 +244,112 @@
           } %>
       </div>
     </div> <!-- row -->
+    
+    <div class="row">
+      <div class="offset-md-0 col-md-6">
+        <div class="row">
+          <div class="offset-md-0 col-md-8">
+            <label class="form-check-label" for="riesgoApatridia">
+              ¿Se encuentra en situación de apátrida?
+            </label>  
+          </div>
+          <div class="offset-md-0 col-md-4">
+            <%=f.input :apatrida, 
+              label: false,
+              as: :boolean %>
+          </div>
+        </div>
+      </div>
+      <div class="offset-md-0 col-md-6">
+        <div class="row">
+          <div class="offset-md-0 col-md-8">
+            <label class="form-check-label" for="riesgoApatridia">
+              ¿Se encuentra en riesgo de apatridia?
+            </label>  
+          </div>
+          <div class="offset-md-0 col-md-4">
+            <%=f.input :riesgoApatridia, 
+              label: false,
+              as: :boolean %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="offset-md-0 col-md-6">
+        <div class="row">
+          <div class="offset-md-0 col-md-8">
+            <label class="form-check-label" for="riesgoApatridia">
+              ¿Cuenta con permiso especial de permanencia (PEP)?
+            </label>  
+          </div>
+          <div class="offset-md-0 col-md-4">
+            <%=f.input :pep, 
+              label: false,
+              as: :boolean %>
+          </div>
+        </div>
+      </div>
+      <div class="offset-md-0 col-md-3" style="display:none">
+        <div>
+          Fecha de Registro PEP:
+        </div>
+        <%= f.input :fechaPep, 
+          as: :string, 
+          label: false,
+          input_html: { 
+            placeholder: 'Seleccione fecha de registro',
+            "data-behaviour" => "datepicker",
+            "data-toggle" => 'tooltip'
+          } %>
+      </div>
+    </div> 
+    
+    <div class="row">
+      <div class="offset-md-0 col-md-6">
+        <div class="row">
+          <div class="offset-md-0 col-md-8">
+            <label class="form-check-label" for="riesgoApatridia">
+              Persona con Necesidad de Protección Internacional NPI i.e Refugiado
+            </label>  
+          </div>
+          <div class="offset-md-0 col-md-4">
+            <%=f.input :npi, 
+              label: false,
+              as: :boolean %>
+        </div>
+        </div>
+      </div>
+      <div class="offset-md-0 col-md-3" style="display:none">
+        <div>
+          Fecha de declaración:
+        </div>
+        <%= f.input :fechaNpi, 
+          as: :string, 
+          label: false,
+          input_html: { 
+            placeholder: 'Seleccione fecha de registro',
+            "data-behaviour" => "datepicker",
+            "data-toggle" => 'tooltip'
+          } %>
+        <div>
+          Número de salvoconducto:
+        </div>
+        <%= f.input :salvoNpi,
+          as: :string,
+          label: false %>
+        <div>
+          Causa del refugio:
+        </div>
+        <%= f.input :causaRefugio, 
+          #collection: Sivel2Gen::Categoria.habilitados.where(id_supracategoria: [200,201,202]),
+          as: :string,
+          label: false
+        %>
+    </div>
+    </div>  
+
 
     <%= link_to_remove_association "Eliminar Migracion", f, 
       {class: 'btn-danger', :'data-existing' => 'true'} 

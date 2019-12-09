@@ -23,6 +23,9 @@ module Sivel2Sjr
         end
         @migracion.fechasalida = fex
         @migracion.fechallegada = fex+1
+        @migracion.fechaPep = nil
+        @migracion.salvoNpi = nil
+        @migracion.fechaNpi = nil
         if current_usuario && current_usuario.oficina
           @migracion.llegada_pais_id = current_usuario.oficina.pais_id
           @migracion.llegada_departamento_id = current_usuario.oficina.departamento_id
@@ -39,7 +42,10 @@ module Sivel2Sjr
           end
         else
           respond_to do |format|
-            format.html { render action: "error" }
+            format.html { 
+              render inline: @migracion.errors, 
+              status: :unprocessable_entity 
+            }
             format.json { 
               render json: @migracion.errors, 
               status: :unprocessable_entity

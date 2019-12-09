@@ -342,11 +342,19 @@
         <div>
           Causa del refugio:
         </div>
-        <%= f.input :causaRefugio, 
-          #collection: Sivel2Gen::Categoria.habilitados.where(id_supracategoria: [200,201,202]),
-          as: :string,
-          label: false
-        %>
+        <%= f.association :causa_refugio, 
+          collection: Sivel2Gen::Categoria.habilitados.
+          where(supracategoria_id: [200,201,202]),
+          label: false,
+          label_method: :nombre,
+          value_method: :id,
+          input_html: {
+            "data-toggle" => 'tooltip',
+            placeholder: 'Causa del refugio',
+            'data-placeholder' => "Causa del refugio...",
+            class: 'chosen-select' 
+          } %>
+
     </div>
     </div>  
 

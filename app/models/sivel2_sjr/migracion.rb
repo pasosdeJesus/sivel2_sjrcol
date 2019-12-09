@@ -5,6 +5,9 @@ class Sivel2Sjr::Migracion < ActiveRecord::Base
   belongs_to :caso,
     class_name: 'Sivel2Gen::Caso', foreign_key: "caso_id"
 
+  belongs_to :causa_refugio, class_name: 'Sivel2Gen::Categoria', 
+    foreign_key: "causa_refugio_id", optional: true
+    
   belongs_to :destino_pais, 
     class_name: 'Sip::Pais', foreign_key: "destino_pais_id", optional: true
   belongs_to :destino_departamento, 

@@ -178,6 +178,20 @@ document.addEventListener('turbolinks:load', function() {
         ped.style.display = '';
       }
     });
+
+  $(document).on('change', 
+    '[id^=caso_migracion_attributes_][id$=_npi]', 
+    function (evento) {
+      pid = evento.target.getAttribute('id').split('_');
+      var ped = $('#caso_migracion_attributes_'+pid[3]+
+        '_fechaNpi').parents()[1];
+      console.log(+evento.target.checked);
+      if (+evento.target.checked != 1) {
+        ped.style.display = 'none';
+      } else {
+        ped.style.display = '';
+      }
+    });
 });
 
 /*jQuery.ajaxSetup({

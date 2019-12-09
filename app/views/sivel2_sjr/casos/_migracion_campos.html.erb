@@ -304,7 +304,53 @@
             "data-toggle" => 'tooltip'
           } %>
       </div>
+    </div> 
+    
+    <div class="row">
+      <div class="offset-md-0 col-md-6">
+        <div class="row">
+          <div class="offset-md-0 col-md-8">
+            <label class="form-check-label" for="riesgoApatridia">
+              Persona con Necesidad de Protección Internacional NPI i.e Refugiado
+            </label>  
+          </div>
+          <div class="offset-md-0 col-md-4">
+            <%=f.input :npi, 
+              label: false,
+              as: :boolean %>
+        </div>
+        </div>
+      </div>
+      <div class="offset-md-0 col-md-3" style="display:none">
+        <div>
+          Fecha de declaración:
+        </div>
+        <%= f.input :fechaNpi, 
+          as: :string, 
+          label: false,
+          input_html: { 
+            placeholder: 'Seleccione fecha de registro',
+            "data-behaviour" => "datepicker",
+            "data-toggle" => 'tooltip'
+          } %>
+        <div>
+          Número de salvoconducto:
+        </div>
+        <%= f.input :salvoNpi,
+          as: :string,
+          label: false %>
+        <div>
+          Causa del refugio:
+        </div>
+        <%= f.input :causaRefugio, 
+          #collection: Sivel2Gen::Categoria.habilitados.where(id_supracategoria: [200,201,202]),
+          as: :string,
+          label: false
+        %>
+    </div>
     </div>  
+
+
     <%= link_to_remove_association "Eliminar Migracion", f, 
       {class: 'btn-danger', :'data-existing' => 'true'} 
     %>

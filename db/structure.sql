@@ -5710,7 +5710,12 @@ CREATE TABLE public.sivel2_sjr_migracion (
     apatrida boolean,
     "riesgoApatridia" boolean,
     pep boolean,
-    "fechaPep" date
+    "fechaPep" date,
+    "salvoNpi" character varying(127),
+    "fechaNpi" date,
+    npi boolean,
+    "causaRefugio_id" integer,
+    "causaRefugio" character varying
 );
 
 
@@ -9805,6 +9810,14 @@ ALTER TABLE ONLY public.cor1440_gen_pmindicadorpf
 
 
 --
+-- Name: sivel2_sjr_migracion fk_rails_70b4c24bbe; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sivel2_sjr_migracion
+    ADD CONSTRAINT fk_rails_70b4c24bbe FOREIGN KEY ("causaRefugio_id") REFERENCES public.sivel2_gen_categoria(id);
+
+
+--
 -- Name: sip_oficina fk_rails_729931f131; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -11464,6 +11477,17 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20191208225117'),
 ('20191208225311'),
 ('20191208225358'),
-('20191208225448');
+('20191208225448'),
+('20191208230414'),
+('20191208230533'),
+('20191208231121'),
+('20191208231731'),
+('20191208234420'),
+('20191208234821'),
+('20191208234911'),
+('20191208235017'),
+('20191209004930'),
+('20191209005146'),
+('20191209005851');
 
 

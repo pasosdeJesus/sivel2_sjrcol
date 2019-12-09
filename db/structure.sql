@@ -4600,7 +4600,11 @@ CREATE MATERIALIZED VIEW public.sivel2_gen_consexpcaso AS
      JOIN public.sivel2_gen_victima vcontacto ON (((vcontacto.id_persona = contacto.id) AND (vcontacto.id_caso = caso.id))))
      LEFT JOIN public.sivel2_gen_etnia etnia ON ((vcontacto.id_etnia = etnia.id)))
      LEFT JOIN public.sivel2_sjr_ultimaatencion ultimaatencion ON ((ultimaatencion.id_caso = caso.id)))
-  WHERE (true = false)
+  WHERE (conscaso.caso_id IN ( SELECT sivel2_gen_conscaso.caso_id
+           FROM public.sivel2_gen_conscaso
+          WHERE (sivel2_gen_conscaso.caso_id = 236)
+          ORDER BY sivel2_gen_conscaso.fecharec DESC, sivel2_gen_conscaso.caso_id))
+  ORDER BY conscaso.fecha, conscaso.caso_id
   WITH NO DATA;
 
 
@@ -5714,8 +5718,7 @@ CREATE TABLE public.sivel2_sjr_migracion (
     "salvoNpi" character varying(127),
     "fechaNpi" date,
     npi boolean,
-    "causaRefugio_id" integer,
-    "causaRefugio" character varying
+    causa_refugio_id integer
 );
 
 
@@ -9810,14 +9813,6 @@ ALTER TABLE ONLY public.cor1440_gen_pmindicadorpf
 
 
 --
--- Name: sivel2_sjr_migracion fk_rails_70b4c24bbe; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.sivel2_sjr_migracion
-    ADD CONSTRAINT fk_rails_70b4c24bbe FOREIGN KEY ("causaRefugio_id") REFERENCES public.sivel2_gen_categoria(id);
-
-
---
 -- Name: sip_oficina fk_rails_729931f131; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10191,6 +10186,14 @@ ALTER TABLE ONLY public.sivel2_gen_combatiente
 
 ALTER TABLE ONLY public.cor1440_gen_informe
     ADD CONSTRAINT fk_rails_c02831dd89 FOREIGN KEY (filtroactividadarea) REFERENCES public.cor1440_gen_actividadarea(id);
+
+
+--
+-- Name: sivel2_sjr_migracion fk_rails_c2e34c5df9; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sivel2_sjr_migracion
+    ADD CONSTRAINT fk_rails_c2e34c5df9 FOREIGN KEY (causa_refugio_id) REFERENCES public.sivel2_gen_categoria(id);
 
 
 --
@@ -11470,24 +11473,13 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20191205202150'),
 ('20191205204511'),
 ('20191206154511'),
-('20191206160131'),
-('20191206161605'),
-('20191206165746'),
-('20191206170518'),
 ('20191208225117'),
 ('20191208225311'),
 ('20191208225358'),
 ('20191208225448'),
-('20191208230414'),
-('20191208230533'),
-('20191208231121'),
-('20191208231731'),
-('20191208234420'),
 ('20191208234821'),
 ('20191208234911'),
 ('20191208235017'),
-('20191209004930'),
-('20191209005146'),
 ('20191209005851');
 
 

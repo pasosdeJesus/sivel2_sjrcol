@@ -155,7 +155,8 @@
             class: 'chosen-select' 
           } %>
         <!--%= f.input :perfilmig, as: :check_boxes, collection: ['Pendular', 'En transito', 'Con vocación de permanencia'], wrapper: :custom_collection_inline %-->
-        <% edest = f.object.perfilmigracion && f.object.perfilmigracion_id != 2 ? 
+        <% edest = !f.object.perfilmigracion || 
+          f.object.perfilmigracion_id != 2 ? 
           'display: none' : '' %>
       </div>
       <div class="col-md-3">
@@ -342,7 +343,7 @@
         <div>
           Causa del refugio:
         </div>
-        <%= f.association :causa_refugio, 
+        <%= f.association :causaRefugio, 
           collection: Sivel2Gen::Categoria.habilitados.
           where(supracategoria_id: [200,201,202]),
           label: false,

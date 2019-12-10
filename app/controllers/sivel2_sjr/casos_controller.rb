@@ -90,7 +90,7 @@ module Sivel2Sjr
       [
         :migracion_attributes => [
           :apatrida,
-          :causa_refugio_id,
+          :causaRefugio_id,
           :destino_clase_id,
           :destino_departamento_id,
           :destino_municipio_id,

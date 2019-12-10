@@ -5718,7 +5718,7 @@ CREATE TABLE public.sivel2_sjr_migracion (
     "salvoNpi" character varying(127),
     "fechaNpi" date,
     npi boolean,
-    causa_refugio_id integer
+    "causaRefugio_id" integer
 );
 
 
@@ -9813,6 +9813,14 @@ ALTER TABLE ONLY public.cor1440_gen_pmindicadorpf
 
 
 --
+-- Name: sivel2_sjr_migracion fk_rails_70b4c24bbe; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sivel2_sjr_migracion
+    ADD CONSTRAINT fk_rails_70b4c24bbe FOREIGN KEY ("causaRefugio_id") REFERENCES public.sivel2_gen_categoria(id);
+
+
+--
 -- Name: sip_oficina fk_rails_729931f131; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10186,14 +10194,6 @@ ALTER TABLE ONLY public.sivel2_gen_combatiente
 
 ALTER TABLE ONLY public.cor1440_gen_informe
     ADD CONSTRAINT fk_rails_c02831dd89 FOREIGN KEY (filtroactividadarea) REFERENCES public.cor1440_gen_actividadarea(id);
-
-
---
--- Name: sivel2_sjr_migracion fk_rails_c2e34c5df9; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.sivel2_sjr_migracion
-    ADD CONSTRAINT fk_rails_c2e34c5df9 FOREIGN KEY (causa_refugio_id) REFERENCES public.sivel2_gen_categoria(id);
 
 
 --

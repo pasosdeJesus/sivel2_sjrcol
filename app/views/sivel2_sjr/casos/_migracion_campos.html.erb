@@ -157,7 +157,7 @@
         <!--%= f.input :perfilmig, as: :check_boxes, collection: ['Pendular', 'En transito', 'Con vocación de permanencia'], wrapper: :custom_collection_inline %-->
         <% edest = !f.object.perfilmigracion || 
           f.object.perfilmigracion_id != 2 ? 
-          'display: none' : '' %>
+          'display:none' : '' %>
       </div>
       <div class="col-md-3">
         <%= f.association :destino_pais,
@@ -292,7 +292,9 @@
           </div>
         </div>
       </div>
-      <div class="offset-md-0 col-md-3" style="display:none">
+      <% pepest = !f.object.pep ? 
+        'display:none' : '' %>
+      <div class="offset-md-0 col-md-3" style=<%= pepest %>>
         <div>
           Fecha de Registro PEP:
         </div>
@@ -300,7 +302,7 @@
           as: :string, 
           label: false,
           input_html: { 
-            placeholder: 'Seleccione fecha de registro',
+            placeholder: 'Seleccione fecha',
             "data-behaviour" => "datepicker",
             "data-toggle" => 'tooltip'
           } %>
@@ -322,7 +324,10 @@
         </div>
         </div>
       </div>
-      <div class="offset-md-0 col-md-3" style="display:none">
+      
+        <% npiest = !f.object.npi ? 
+          'display:none' : '' %>
+        <div class="offset-md-0 col-md-3" style=<%= npiest %>>
         <div>
           Fecha de declaración:
         </div>

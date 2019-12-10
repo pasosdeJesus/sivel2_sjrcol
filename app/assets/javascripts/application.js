@@ -142,12 +142,11 @@ document.addEventListener('turbolinks:load', function() {
     function (evento) {
       pid = evento.target.getAttribute('id').split('_')
       var rd = $('#caso_migracion_attributes_'+pid[3]+
-        '_riesgoApatridia').parents()[3]
-      console.log(+evento.target.checked)
+        '_riesgoApatridia').parents()[0]
       if (+evento.target.checked != 0) {
-        rd.style.display = 'none'
+        rd.lastElementChild.disabled = true
       } else {
-        rd.style.display = ''
+        rd.lastElementChild.disabled = false
       }
     })
 
@@ -156,12 +155,11 @@ document.addEventListener('turbolinks:load', function() {
     function (evento) {
       pid = evento.target.getAttribute('id').split('_')
       var ad = $('#caso_migracion_attributes_'+pid[3]+
-        '_apatrida').parents()[3]
-      console.log(+evento.target.checked)
+        '_apatrida').parents()[0]
       if (+evento.target.checked != 0) {
-        ad.style.display = 'none'
+        ad.lastElementChild.disabled = true
       } else {
-        ad.style.display = ''
+        ad.lastElementChild.disabled = false
       }
     })
 
@@ -171,7 +169,6 @@ document.addEventListener('turbolinks:load', function() {
       pid = evento.target.getAttribute('id').split('_')
       var ped = $('#caso_migracion_attributes_'+pid[3]+
         '_fechaPep').parents()[1]
-      console.log(+evento.target.checked)
       if (+evento.target.checked != 1) {
         ped.style.display = 'none'
       } else {

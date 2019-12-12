@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: 1693117d948f414d295c74055aab1bcfbee8f0ca
+  revision: 09e9275bf0ff70ad5bc7df77dcc4f75883db15c2
   specs:
     cor1440_gen (1.0b3)
       devise
@@ -13,7 +13,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 20aebe6e717fc1982f0fbea8d27142e6cf50079e
+  revision: 5b4b263f28fc41064f5a7b1641b522a331a39eb0
   specs:
     heb412_gen (1.0.b6)
       mr519_gen
@@ -23,7 +23,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/mr519_gen.git
-  revision: 0969784c422a84499c12bc64c856f73210c25774
+  revision: fc50bb0155b2946eae87c9e8f8a4ffda3eb76aca
   specs:
     mr519_gen (0.2.0)
       rails (~> 6.0.0.rc1, >= 6.0.0.rc1)
@@ -39,7 +39,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: 083799e42de0745d0cc170eced580e5a37ec61e1
+  revision: 42047fd2063e630efc92d3916834ba04755c294d
   specs:
     sal7711_web (1.0.a3)
       rails
@@ -47,7 +47,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 09539d5a295ad987ce2717c2297b59b1682724ee
+  revision: 29243da56463193b21f9fc5d7d8ba24f07a30ae4
   specs:
     sip (2.0.b7)
       cancancan
@@ -65,7 +65,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 1e1bf607765bb57be8fb09c501251e745e8e7833
+  revision: c5b0a6df1448c98a65600fd94fec2654b714639c
   specs:
     sivel2_gen (2.0b10)
       devise
@@ -74,7 +74,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 8c0559a4d057c9418ef6b46a353c9b461cebae4d
+  revision: 8d39eccdd4ae56754af8cd11e0a1b1954bb3090f
   specs:
     sivel2_sjr (2.0b10)
       rails
@@ -154,7 +154,7 @@ GEM
       msgpack (~> 1.0)
     bootstrap-datepicker-rails (1.8.0.1)
       railties (>= 3.0)
-    builder (3.2.3)
+    builder (3.2.4)
     camertron-eprun (1.1.1)
     cancancan (3.0.1)
     capybara (3.29.0)
@@ -207,7 +207,7 @@ GEM
       thor (>= 0.14, < 2.0)
     jquery-ui-rails (6.0.1)
       railties (>= 3.2.16)
-    json (2.2.0)
+    json (2.3.0)
     kgio (2.11.2)
     libxml-ruby (3.1.0)
     loofah (2.4.0)

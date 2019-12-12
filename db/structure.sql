@@ -5499,16 +5499,38 @@ ALTER SEQUENCE public.sivel2_sjr_comosupo_id_seq OWNED BY public.sivel2_sjr_como
 --
 
 CREATE MATERIALIZED VIEW public.sivel2_sjr_consactividadcaso AS
- SELECT ac.casosjr_id AS caso_id,
+ SELECT ((ac.actividad_id * 500000) + persona.id) AS id,
+    ac.casosjr_id AS caso_id,
     ac.actividad_id,
-    actividad.fecha AS actividad_fecha,
     victima.id AS victima_id,
+        CASE
+            WHEN (casosjr.contacto_id = persona.id) THEN 1
+            ELSE 0
+        END AS es_contacto,
+    actividad.fecha AS actividad_fecha,
+    ( SELECT sip_oficina.nombre
+           FROM public.sip_oficina
+          WHERE (sip_oficina.id = actividad.oficina_id)
+         LIMIT 1) AS actividad_oficina,
+    ( SELECT usuario.nusuario
+           FROM public.usuario
+          WHERE (usuario.id = actividad.usuario_id)
+         LIMIT 1) AS actividad_responsable,
+    array_to_string(ARRAY( SELECT cor1440_gen_proyectofinanciero.nombre
+           FROM public.cor1440_gen_proyectofinanciero
+          WHERE (cor1440_gen_proyectofinanciero.id IN ( SELECT apf.proyectofinanciero_id
+                   FROM public.cor1440_gen_actividad_proyectofinanciero apf
+                  WHERE (apf.actividad_id = actividad.id)))), ','::text) AS actividad_convenios,
     persona.id AS persona_id,
     persona.nombres AS persona_nombres,
-    persona.apellidos AS persona_apellidos
-   FROM ((((public.sivel2_sjr_actividad_casosjr ac
+    persona.apellidos AS persona_apellidos,
+    caso.memo AS caso_memo,
+    casosjr.fecharec AS caso_fecharec
+   FROM ((((((public.sivel2_sjr_actividad_casosjr ac
      JOIN public.cor1440_gen_actividad actividad ON ((ac.actividad_id = actividad.id)))
+     JOIN public.sip_oficina oficinaac ON ((oficinaac.id = actividad.oficina_id)))
      JOIN public.sivel2_gen_caso caso ON ((caso.id = ac.casosjr_id)))
+     JOIN public.sivel2_sjr_casosjr casosjr ON ((casosjr.id_caso = ac.casosjr_id)))
      JOIN public.sivel2_gen_victima victima ON ((victima.id_caso = caso.id)))
      JOIN public.sip_persona persona ON ((persona.id = victima.id_persona)))
   WITH NO DATA;

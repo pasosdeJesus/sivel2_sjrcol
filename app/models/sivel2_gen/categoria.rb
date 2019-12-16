@@ -10,9 +10,9 @@ class Sivel2Gen::Categoria < ActiveRecord::Base
     association_foreign_key: "desplazamiento_id",
     join_table: 'sivel2_sjr_categoria_desplazamiento'
 
-  has_many :causa_refugio, 
+  has_many :causaRefugio, 
     class_name: 'Sivel2Sjr::Migracion',
-    foreign_key: :causa_refugio_id
+    foreign_key: :causaRefugio_id
 
 end
 

@@ -297,10 +297,10 @@ CREATE TABLE public.causaref (
 
 
 --
--- Name: desplazamiento_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: sivel2_gen_caso_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE public.desplazamiento_seq
+CREATE SEQUENCE public.sivel2_gen_caso_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -309,123 +309,25 @@ CREATE SEQUENCE public.desplazamiento_seq
 
 
 --
--- Name: sip_departamento_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: sivel2_gen_caso; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE public.sip_departamento_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: sip_departamento; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.sip_departamento (
-    id_deplocal integer,
-    nombre character varying(500) COLLATE public.es_co_utf_8 NOT NULL,
-    latitud double precision,
-    longitud double precision,
-    fechacreacion date DEFAULT ('now'::text)::date NOT NULL,
-    fechadeshabilitacion date,
+CREATE TABLE public.sivel2_gen_caso (
+    id integer DEFAULT nextval('public.sivel2_gen_caso_id_seq'::regclass) NOT NULL,
+    titulo character varying(50),
+    fecha date NOT NULL,
+    hora character varying(10),
+    duracion character varying(10),
+    memo text NOT NULL,
+    grconfiabilidad character varying(5),
+    gresclarecimiento character varying(5),
+    grimpunidad character varying(8),
+    grinformacion character varying(8),
+    bienes text,
+    id_intervalo integer DEFAULT 5,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    id_pais integer NOT NULL,
-    id integer DEFAULT nextval('public.sip_departamento_id_seq'::regclass) NOT NULL,
-    observaciones character varying(5000) COLLATE public.es_co_utf_8,
-    CONSTRAINT departamento_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
-);
-
-
---
--- Name: sip_municipio_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE public.sip_municipio_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: sip_municipio; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.sip_municipio (
-    id_munlocal integer,
-    nombre character varying(500) COLLATE public.es_co_utf_8 NOT NULL,
-    latitud double precision,
-    longitud double precision,
-    fechacreacion date DEFAULT ('now'::text)::date NOT NULL,
-    fechadeshabilitacion date,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone,
-    id_departamento integer,
-    id integer DEFAULT nextval('public.sip_municipio_id_seq'::regclass) NOT NULL,
-    observaciones character varying(5000) COLLATE public.es_co_utf_8,
-    CONSTRAINT municipio_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
-);
-
-
---
--- Name: sip_pais; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.sip_pais (
-    id integer NOT NULL,
-    nombre character varying(200) COLLATE public.es_co_utf_8,
-    nombreiso character varying(200),
-    latitud double precision,
-    longitud double precision,
-    alfa2 character varying(2),
-    alfa3 character varying(3),
-    codiso integer,
-    div1 character varying(100),
-    div2 character varying(100),
-    div3 character varying(100),
-    fechacreacion date,
-    fechadeshabilitacion date,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone,
-    observaciones character varying(5000) COLLATE public.es_co_utf_8
-);
-
-
---
--- Name: sip_ubicacion_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE public.sip_ubicacion_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: sip_ubicacion; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.sip_ubicacion (
-    id integer DEFAULT nextval('public.sip_ubicacion_id_seq'::regclass) NOT NULL,
-    lugar character varying(500) COLLATE public.es_co_utf_8,
-    sitio character varying(500) COLLATE public.es_co_utf_8,
-    id_tsitio integer DEFAULT 1 NOT NULL,
-    id_caso integer NOT NULL,
-    latitud double precision,
-    longitud double precision,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone,
-    id_pais integer,
-    id_departamento integer,
-    id_municipio integer,
-    id_clase integer
+    ubicacion_id integer
 );
 
 
@@ -507,6 +409,171 @@ CREATE TABLE public.sivel2_sjr_casosjr (
 
 
 --
+-- Name: cben1; Type: VIEW; Schema: public; Owner: -
+--
+
+CREATE VIEW public.cben1 AS
+ SELECT caso.id AS id_caso,
+    victima.id_persona,
+        CASE
+            WHEN (casosjr.contacto_id = victima.id_persona) THEN 1
+            ELSE 0
+        END AS contacto,
+        CASE
+            WHEN (casosjr.contacto_id <> victima.id_persona) THEN 1
+            ELSE 0
+        END AS beneficiario,
+    1 AS npersona,
+    'total'::text AS total
+   FROM public.sivel2_gen_caso caso,
+    public.sivel2_sjr_casosjr casosjr,
+    public.sivel2_gen_victima victima
+  WHERE ((caso.id = victima.id_caso) AND (caso.id = casosjr.id_caso) AND (caso.id = victima.id_caso));
+
+
+--
+-- Name: desplazamiento_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.desplazamiento_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: sip_clase_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.sip_clase_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: sip_clase; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.sip_clase (
+    id_clalocal integer,
+    nombre character varying(500) COLLATE public.es_co_utf_8 NOT NULL,
+    id_tclase character varying(10) DEFAULT 'CP'::character varying NOT NULL,
+    latitud double precision,
+    longitud double precision,
+    fechacreacion date NOT NULL,
+    fechadeshabilitacion date,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    id_municipio integer,
+    id integer DEFAULT nextval('public.sip_clase_id_seq'::regclass) NOT NULL,
+    observaciones character varying(5000) COLLATE public.es_co_utf_8,
+    CONSTRAINT clase_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
+);
+
+
+--
+-- Name: sip_departamento_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.sip_departamento_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: sip_departamento; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.sip_departamento (
+    id_deplocal integer,
+    nombre character varying(500) COLLATE public.es_co_utf_8 NOT NULL,
+    latitud double precision,
+    longitud double precision,
+    fechacreacion date DEFAULT ('now'::text)::date NOT NULL,
+    fechadeshabilitacion date,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    id_pais integer NOT NULL,
+    id integer DEFAULT nextval('public.sip_departamento_id_seq'::regclass) NOT NULL,
+    observaciones character varying(5000) COLLATE public.es_co_utf_8,
+    CONSTRAINT departamento_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
+);
+
+
+--
+-- Name: sip_municipio_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.sip_municipio_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: sip_municipio; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.sip_municipio (
+    id_munlocal integer,
+    nombre character varying(500) COLLATE public.es_co_utf_8 NOT NULL,
+    latitud double precision,
+    longitud double precision,
+    fechacreacion date DEFAULT ('now'::text)::date NOT NULL,
+    fechadeshabilitacion date,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    id_departamento integer,
+    id integer DEFAULT nextval('public.sip_municipio_id_seq'::regclass) NOT NULL,
+    observaciones character varying(5000) COLLATE public.es_co_utf_8,
+    CONSTRAINT municipio_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
+);
+
+
+--
+-- Name: sip_ubicacion_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.sip_ubicacion_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: sip_ubicacion; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.sip_ubicacion (
+    id integer DEFAULT nextval('public.sip_ubicacion_id_seq'::regclass) NOT NULL,
+    lugar character varying(500) COLLATE public.es_co_utf_8,
+    sitio character varying(500) COLLATE public.es_co_utf_8,
+    id_tsitio integer DEFAULT 1 NOT NULL,
+    id_caso integer NOT NULL,
+    latitud double precision,
+    longitud double precision,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    id_pais integer,
+    id_departamento integer,
+    id_municipio integer,
+    id_clase integer
+);
+
+
+--
 -- Name: sivel2_sjr_desplazamiento; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -543,6 +610,73 @@ CREATE TABLE public.sivel2_sjr_desplazamiento (
     updated_at timestamp without time zone,
     id integer DEFAULT nextval('public.desplazamiento_seq'::regclass) NOT NULL,
     CONSTRAINT desplazamiento_declaro_check CHECK (((declaro = 'S'::bpchar) OR (declaro = 'N'::bpchar) OR (declaro = 'R'::bpchar)))
+);
+
+
+--
+-- Name: ultimodesplazamiento; Type: VIEW; Schema: public; Owner: -
+--
+
+CREATE VIEW public.ultimodesplazamiento AS
+ SELECT sivel2_sjr_desplazamiento.id,
+    s.id_caso,
+    s.fechaexpulsion,
+    sivel2_sjr_desplazamiento.id_expulsion
+   FROM public.sivel2_sjr_desplazamiento,
+    ( SELECT sivel2_sjr_desplazamiento_1.id_caso,
+            max(sivel2_sjr_desplazamiento_1.fechaexpulsion) AS fechaexpulsion
+           FROM public.sivel2_sjr_desplazamiento sivel2_sjr_desplazamiento_1
+          GROUP BY sivel2_sjr_desplazamiento_1.id_caso) s
+  WHERE ((sivel2_sjr_desplazamiento.id_caso = s.id_caso) AND (sivel2_sjr_desplazamiento.fechaexpulsion = s.fechaexpulsion));
+
+
+--
+-- Name: cben2; Type: VIEW; Schema: public; Owner: -
+--
+
+CREATE VIEW public.cben2 AS
+ SELECT cben1.id_caso,
+    cben1.id_persona,
+    cben1.contacto,
+    cben1.beneficiario,
+    cben1.npersona,
+    cben1.total,
+    ubicacion.id_departamento,
+    departamento.nombre AS departamento_nombre,
+    ubicacion.id_municipio,
+    municipio.nombre AS municipio_nombre,
+    ubicacion.id_clase,
+    clase.nombre AS clase_nombre,
+    ultimodesplazamiento.fechaexpulsion
+   FROM (((((public.cben1
+     LEFT JOIN public.ultimodesplazamiento ON ((cben1.id_caso = ultimodesplazamiento.id_caso)))
+     LEFT JOIN public.sip_ubicacion ubicacion ON ((ultimodesplazamiento.id_expulsion = ubicacion.id)))
+     LEFT JOIN public.sip_departamento departamento ON ((ubicacion.id_departamento = departamento.id)))
+     LEFT JOIN public.sip_municipio municipio ON ((ubicacion.id_municipio = municipio.id)))
+     LEFT JOIN public.sip_clase clase ON ((ubicacion.id_clase = clase.id)));
+
+
+--
+-- Name: sip_pais; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.sip_pais (
+    id integer NOT NULL,
+    nombre character varying(200) COLLATE public.es_co_utf_8,
+    nombreiso character varying(200),
+    latitud double precision,
+    longitud double precision,
+    alfa2 character varying(2),
+    alfa3 character varying(3),
+    codiso integer,
+    div1 character varying(100),
+    div2 character varying(100),
+    div3 character varying(100),
+    fechacreacion date,
+    fechadeshabilitacion date,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    observaciones character varying(5000) COLLATE public.es_co_utf_8
 );
 
 
@@ -1767,41 +1901,6 @@ CREATE SEQUENCE public.respuesta_seq
 
 
 --
--- Name: sivel2_gen_caso_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE public.sivel2_gen_caso_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: sivel2_gen_caso; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.sivel2_gen_caso (
-    id integer DEFAULT nextval('public.sivel2_gen_caso_id_seq'::regclass) NOT NULL,
-    titulo character varying(50),
-    fecha date NOT NULL,
-    hora character varying(10),
-    duracion character varying(10),
-    memo text NOT NULL,
-    grconfiabilidad character varying(5),
-    gresclarecimiento character varying(5),
-    grimpunidad character varying(8),
-    grinformacion character varying(8),
-    bienes text,
-    id_intervalo integer DEFAULT 5,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone,
-    ubicacion_id integer
-);
-
-
---
 -- Name: sivel2_sjr_ayudaestado_respuesta; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -3006,39 +3105,6 @@ ALTER SEQUENCE public.sip_anexo_id_seq OWNED BY public.sip_anexo.id;
 
 
 --
--- Name: sip_clase_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE public.sip_clase_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: sip_clase; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.sip_clase (
-    id_clalocal integer,
-    nombre character varying(500) COLLATE public.es_co_utf_8 NOT NULL,
-    id_tclase character varying(10) DEFAULT 'CP'::character varying NOT NULL,
-    latitud double precision,
-    longitud double precision,
-    fechacreacion date NOT NULL,
-    fechadeshabilitacion date,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone,
-    id_municipio integer,
-    id integer DEFAULT nextval('public.sip_clase_id_seq'::regclass) NOT NULL,
-    observaciones character varying(5000) COLLATE public.es_co_utf_8,
-    CONSTRAINT clase_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
-);
-
-
---
 -- Name: sip_datosbio; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -3549,7 +3615,9 @@ CREATE TABLE public.sip_tema (
     alerta_problema_fondo character varying(127),
     alerta_problema_fuente character varying(127),
     fondo character varying(127),
-    color_fuente character varying(127)
+    color_fuente character varying(127),
+    color_flota_subitem_fuente character varying,
+    color_flota_subitem_fondo character varying
 );
 
 
@@ -6151,23 +6219,6 @@ CREATE TABLE public.tproceso (
     fechadeshabilitacion date,
     CONSTRAINT tproceso_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
-
-
---
--- Name: ultimodesplazamiento; Type: VIEW; Schema: public; Owner: -
---
-
-CREATE VIEW public.ultimodesplazamiento AS
- SELECT sivel2_sjr_desplazamiento.id,
-    s.id_caso,
-    s.fechaexpulsion,
-    sivel2_sjr_desplazamiento.id_expulsion
-   FROM public.sivel2_sjr_desplazamiento,
-    ( SELECT sivel2_sjr_desplazamiento_1.id_caso,
-            max(sivel2_sjr_desplazamiento_1.fechaexpulsion) AS fechaexpulsion
-           FROM public.sivel2_sjr_desplazamiento sivel2_sjr_desplazamiento_1
-          GROUP BY sivel2_sjr_desplazamiento_1.id_caso) s
-  WHERE ((sivel2_sjr_desplazamiento.id_caso = s.id_caso) AND (sivel2_sjr_desplazamiento.fechaexpulsion = s.fechaexpulsion));
 
 
 --
@@ -11502,6 +11553,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20191208234821'),
 ('20191208234911'),
 ('20191208235017'),
-('20191209005851');
+('20191209005851'),
+('20191219011910');
 
 

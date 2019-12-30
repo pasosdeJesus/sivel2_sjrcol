@@ -14,5 +14,45 @@
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
+console.log('Hola Mundo desde Webpacker')
 
-console.log('Hello World from Webpacker')
+require('@rails/ujs').start()   // Javascript no intrusivo segun rails
+require('turbolinks').start()   // Acelera carga de paginas
+
+import {$, jQuery} from 'jquery';
+import 'popper.js'              // Dialogos emergentes usados por bootstrap
+import 'bootstrap'              // Maquetacion y elementos de diseño
+import 'chosen-js/chosen.jquery';       // Cuadros de seleccion potenciados
+import 'bootstrap-datepicker'
+import 'bootstrap-datepicker/dist/locales/bootstrap-datepicker.es.min.js'
+import 'jquery-ui'
+import 'jquery-ui/ui/widgets/autocomplete'
+
+document.addEventListener('change', 
+  function (event) {
+    var m = event.target.id.match(/^caso_migracion_attributes_([0-9]*)_perfilmigracion_id$/)
+    if (m != null) {
+      var pd = document.getElementById('caso_migracion_attributes_'+m[1]+
+        '_destino_pais_id').parentElement;
+      var dd = document.getElementById('caso_migracion_attributes_'+m[1]+
+        '_destino_departamento_id').parentElement;
+      var md = document.getElementById('caso_migracion_attributes_'+m[1]+
+        '_destino_municipio_id').parentElement;
+      var cd = document.getElementById('caso_migracion_attributes_'+m[1]+
+        '_destino_clase_id').parentElement;
+      debugger
+      if (event.target.checked) {
+        pd.style.display = 'none'
+        dd.style.display = 'none'
+        md.style.display = 'none'
+        cd.style.display = 'none'
+      } else {
+        pd.style.display = ''
+        dd.style.display = ''
+        md.style.display = ''
+        cd.style.display = ''
+      }
+      
+    }
+  }
+)

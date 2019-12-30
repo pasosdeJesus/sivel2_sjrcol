@@ -10,10 +10,15 @@
 #   inflect.uncountable %w( fish sheep )
 # end
 
-# These inflection rules are supported but not enabled by default:
-# ActiveSupport::Inflector.inflections(:en) do |inflect|
-#   inflect.acronym 'RESTful'
-# end
+# Podria forzarse orden con:
+
+#['sip', 'mr519_gen', 'heb412_gen', 'cor1440_gen', 'sal7711_gen', 'sal7711_web',
+# 'sivel2_gen', 'sivel2_sjr'].each do |s| 
+#  byebug
+#  require_dependency File.join(Gem::Specification.find_by_name(s).gem_dir,
+#                             '/config/initializers/inflections.rb')
+#end
+
 ActiveSupport::Inflector.inflections do |inflect|
 	inflect.irregular 'accionjuridica', 'accionesjuridicas'
 	inflect.irregular 'categoria', 'categorias'
@@ -22,6 +27,9 @@ ActiveSupport::Inflector.inflections do |inflect|
 	inflect.irregular 'espaciopart', 'espaciospart'
 	inflect.irregular 'lineaactorsocial', 'lineasactorsocial'
 	inflect.irregular 'motivosjr', 'motivossjr'
+	inflect.irregular 'migracion', 'migraciones'
+	inflect.irregular 'migracontactopre', 'migracontactospre'
+	inflect.irregular 'perfilmigracion', 'perfilesmigracion'
 	inflect.irregular 'progestado', 'progsestado'
 	inflect.irregular 'tipoactorsocial', 'tiposactorsocial'
 end

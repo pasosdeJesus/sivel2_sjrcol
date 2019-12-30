@@ -7,7 +7,7 @@ class CasoconjsTest < ApplicationSystemTestCase
   setup do
     @usuario = Usuario.find_by(nusuario: 'sjrcol')
     @usuario.password = 'sjrcol123'
-    visit main_app.new_usuario_session_path 
+    visit new_usuario_session_path 
     fill_in "Usuario", with: @usuario.nusuario
     fill_in "Clave", with: @usuario.password
     click_button "Iniciar Sesión"

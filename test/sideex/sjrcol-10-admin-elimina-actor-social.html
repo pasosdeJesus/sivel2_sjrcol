@@ -11,17 +11,21 @@
 <tr><td rowspan="1" colspan="3">actor-social-elimina</td></tr>
 </thead>
 <tbody>
-<tr><td>clickAt</td><td>css=div &gt; b<datalist><option>css=div &gt; b</option><option>//div[@id='filtro_busgrupoper_id_chosen']/a/div/b</option><option>//div/b</option></datalist></td><td>13,15</td>
+<tr><td>clickAt</td><td>id=navbarDropdownActividades<datalist><option>id=navbarDropdownActividades</option><option>link=Actividades</option><option>css=#navbarDropdownActividades</option><option>//a[contains(text(),'Actividades')]</option><option>//a[@id='navbarDropdownActividades']</option><option>//div[@id='navbarSupportedContent']/ul/li[3]/a</option><option>xpath=(//a[contains(@href, '#')])[3]</option><option>//li[3]/a</option></datalist></td><td>48,23</td>
 </tr>
-<tr><td>clickAt</td><td>link=Select an Option<datalist><option>link=Select an Option</option><option>css=a.chosen-single.chosen-default</option><option>//div[@id='filtro_busgrupoper_id_chosen']/a</option><option>//div/a</option></datalist></td><td>107,11</td>
+<tr><td>clickAt</td><td>link=Actores sociales<datalist><option>link=Actores sociales</option><option>//a[contains(text(),'Actores sociales')]</option><option>//div[@id='navbarSupportedContent']/ul/li[3]/div/a[8]</option><option>xpath=(//a[contains(@href, '/actoressociales')])[2]</option><option>//a[8]</option></datalist></td><td>68,15</td>
 </tr>
-<tr><td>clickAt</td><td>css=li.active-result.result-selected<datalist><option>css=li.active-result.result-selected</option><option>//div[@id='filtro_busgrupoper_id_chosen']/div/ul/li[2]</option><option>//div/div/div/ul/li[2]</option></datalist></td><td>82,13</td>
+<tr><td>runScript</td><td>$('.chosen-select').removeAttr('style'); $('.chosen-container').remove(); $('.chosen-select').removeClass('chosen-select')<datalist><option>$('.chosen-select').removeAttr('style'); $('.chosen-container').remove(); $('.chosen-select').removeClass('chosen-select')</option></datalist></td><td></td>
+</tr>
+<tr><td>select</td><td>id=filtro_busgrupoper_id<datalist><option>id=filtro_busgrupoper_id</option><option>name=filtro[busgrupoper_id]</option><option>css=#filtro_busgrupoper_id</option><option>//select[@id='filtro_busgrupoper_id']</option><option>//select</option></datalist></td><td>label=aaa</td>
+</tr>
+<tr><td>clickAt</td><td>id=filtro_busgrupoper_id<datalist><option>id=filtro_busgrupoper_id</option><option>name=filtro[busgrupoper_id]</option><option>css=#filtro_busgrupoper_id</option><option>//select[@id='filtro_busgrupoper_id']</option><option>//select</option></datalist></td><td>-196,-281</td>
 </tr>
 <tr><td>chooseOkOnNextConfirmation</td><td><datalist><option></option></datalist></td><td></td>
 </tr>
-<tr><td>clickAt</td><td>link=Eliminar<datalist><option>link=Eliminar</option><option>css=a.btn.btn-xs.btn-danger</option><option>//a[contains(text(),'Eliminar')]</option><option>xpath=(//a[contains(@href, '/actoressociales/22')])[3]</option><option>//a[2]</option></datalist></td><td>39,15</td>
+<tr><td>clickAt</td><td>link=Eliminar<datalist><option>link=Eliminar</option><option>css=a.btn.btn-sm.btn-danger</option><option>//a[contains(text(),'Eliminar')]</option><option>xpath=(//a[contains(@href, '/actoressociales/38')])[3]</option><option>//td[15]/a[2]</option></datalist></td><td>23,24</td>
 </tr>
-<tr><td>assertText</td><td>css=h1<datalist><option>css=h1</option><option>//h1</option></datalist></td><td>Actores sociales</td>
+<tr><td>clickAt</td><td>css=h1<datalist><option>css=h1</option><option>//h1</option></datalist></td><td>Actor social</td>
 </tr>
 </tbody></table>
 </body>

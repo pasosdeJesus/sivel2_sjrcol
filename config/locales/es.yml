@@ -58,12 +58,23 @@ es:
       "cor1440_gen/proyecto":
         Proyecto: Área de Actividad
         Proyectos: Áreas de Actividad
+      "cor1440_gen/proyectofinanciero":
+        proyecto: Área de Actividad
+        financiador_ids: Financiador
+        "{:proyecto_ids=>[]}": Área de actividad
+        proyecto_ids: Área de actividad
       "discapacidad":
         Discapacidad: Discapacidad
         Discapacidades: Discapacidades
       "espaciopart":
         Espaciopart: Espacio de participación o red
         Espaciospart: Espacios de participación o redes
+      "migracontactopre":
+        Migracontactopre: Contacto previo con Colombia
+        Migracontactospre: Contactos previos con Colombia
+      "perfilmigracion":
+        Perfilmigracion: Perfil de migración
+        Perfilesmigracion: Perfiles de migración
       "sal7711_gen/articulo": 
         texto: Resumen
         fuenteprensa: Fuente de prensa
@@ -143,6 +154,10 @@ es:
         Declaroantes: Declaro Ante
       "sivel2_sjr/desplazamiento":
         categoria: Antecedentes no individuales
+      "sivel2_sjr/migracion":
+        migracontactopre: Contacto previo con Colombia
+        statusmigratorio: Estatus migratorio
+        perfilmigracion: Perfil de migración
       "sivel2_sjr/motivosjr": 
         Motivosjr: Servicio y Asesoria del SJR
         Motivossjr: Servicios y Asesorias del SJR

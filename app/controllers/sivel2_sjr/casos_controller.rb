@@ -85,5 +85,41 @@ module Sivel2Sjr
         ]
       ]
     end
+
+    def otros_params
+      [
+        :migracion_attributes => [
+          :apatrida,
+          :causaRefugio_id,
+          :destino_clase_id,
+          :destino_departamento_id,
+          :destino_municipio_id,
+          :destino_pais_id,
+          :fechallegada,
+          :fechaNpi,
+          :fechaPep,
+          :fechasalida,
+          :id,
+          :llegada_clase_id,
+          :llegada_departamento_id,
+          :llegada_municipio_id,
+          :llegada_pais_id,
+          :migracontactopre_id,
+          :npi,
+          :pep,
+          :perfilmigracion_id,
+          :riesgoApatrida,
+          :salida_pais_id,
+          :salida_departamento_id,
+          :salida_municipio_id,
+          :salida_clase_id,
+          :salvoNpi,
+          :se_establece_en_sitio_llegada,
+          :statusmigratorio_id,
+          :_destroy
+        ]
+      ]
+    end
+
   end
 end

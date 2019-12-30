@@ -13,26 +13,28 @@
       <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.1/html5shiv.js" type="text/javascript"></script>
     <![endif]-->
 
-    <%= stylesheet_link_tag "application", :media => "all" %>
+    <%= stylesheet_link_tag "application", :media => "all",
+      'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag "application" %>
 
     <%= favicon_link_tag 'favicon.ico', :rel => 'shortcut icon' %>
 
-    <%= javascript_include_tag "application" %>
   </head>
   <body>
-    <%= nav_bar :fixed => :top, 
-      :brand => '',
-      brand_link: sip.root_url,
-      :responsive => true do 
+    <%= barra_navegacion :fixed => :top, 
+      marca: '',
+      enlace_marc: sip.root_url,
+      responsive: true do 
     %>
       <%= yield :menu %>
     <% end %>
 
     <div class="container master-container">
-	    <ul class="breadcrumb">
-        <%= yield :breadcrumb %>
-	    </ul>
-	    <%= bootstrap_flash %>
+	    <!--ul class="breadcrumb"-->
+        <!--%= yield :breadcrumb %-->
+	    <!--/ul-->
+	    <%= anuncios_bootstrap %>
 	    <%= yield %>
     </div>
 

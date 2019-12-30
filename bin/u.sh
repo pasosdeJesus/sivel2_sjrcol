@@ -11,7 +11,7 @@ if (test "$?" != "0") then {
 if (test "$CONFIG_HOSTS" = "") then {
 	CONFIG_HOSTS=127.0.0.1
 } fi;
-$DOAS su vtamara -c "cd /var/www/htdocs/sivel2_sjrcol; bin/rails assets:precompile; echo \"Iniciando unicorn...\"; CONFIG_HOSTS=${CONFIG_HOSTS} RACK_MULTIPART_LIMIT=2048 SECRET_KEY_BASE=${SECRET_KEY_BASE} bundle exec unicorn_rails -c ../sivel2_sjrcol/config/unicorn.conf.minimal.rb  -E production -D"
+$DOAS su vtamara -c "cd /var/www/htdocs/sivel2_sjrcol; RAILS_ENV=production bin/rails assets:precompile; RAILS_ENV=production bin/rails sip:indices; echo \"Iniciando unicorn...\"; CONFIG_HOSTS=${CONFIG_HOSTS} RACK_MULTIPART_LIMIT=2048 SECRET_KEY_BASE=${SECRET_KEY_BASE} bundle exec unicorn_rails -c ../sivel2_sjrcol/config/unicorn.conf.minimal.rb  -E production -D"
 
 
   

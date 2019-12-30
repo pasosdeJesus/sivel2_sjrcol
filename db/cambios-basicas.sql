@@ -32,12 +32,13 @@ INSERT INTO public.cor1440_gen_rangoedadac (id, nombre, limiteinferior, limitesu
 
 
 
-INSERT INTO public.sip_oficina (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (2, 'VALLE', '2013-05-13', NULL, NULL, NULL);
-INSERT INTO public.sip_oficina (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (3, 'MAGDALENA MEDIO', '2013-05-13', NULL, NULL, NULL);
-INSERT INTO public.sip_oficina (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (4, 'CÚCUTA', '2013-05-13', NULL, NULL, NULL);
-INSERT INTO public.sip_oficina (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (5, 'NARIÑO', '2013-05-13', NULL, NULL, NULL);
-INSERT INTO public.sip_oficina (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (6, 'SOACHA', '2013-05-13', '2014-01-01', NULL, NULL);
-INSERT INTO public.sip_oficina (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (7, 'NACIONAL', '2013-07-05', NULL, NULL, NULL);
+INSERT INTO public.sip_oficina (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at, observaciones, pais_id, departamento_id, municipio_id, clase_id) VALUES (4, 'CÚCUTA', '2013-05-13', NULL, NULL, '2019-11-27 21:37:59.742224', '', 170, 39, 32, 9041);
+INSERT INTO public.sip_oficina (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at, observaciones, pais_id, departamento_id, municipio_id, clase_id) VALUES (3, 'MAGDALENA MEDIO', '2013-05-13', NULL, NULL, '2019-11-27 21:40:24.544825', '', 170, 43, 1319, 9899);
+INSERT INTO public.sip_oficina (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at, observaciones, pais_id, departamento_id, municipio_id, clase_id) VALUES (7, 'NACIONAL', '2013-07-05', NULL, NULL, '2019-11-27 21:41:06.947402', '', 170, 4, 24, 238);
+INSERT INTO public.sip_oficina (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at, observaciones, pais_id, departamento_id, municipio_id, clase_id) VALUES (5, 'NARIÑO', '2013-05-13', NULL, NULL, '2019-11-27 22:59:01.58987', '', 170, 38, 44, 7907);
+INSERT INTO public.sip_oficina (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at, observaciones, pais_id, departamento_id, municipio_id, clase_id) VALUES (6, 'SOACHA', '2013-05-13', NULL, NULL, '2019-11-27 22:59:39.810354', '', 170, 27, 1216, 4758);
+INSERT INTO public.sip_oficina (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at, observaciones, pais_id, departamento_id, municipio_id, clase_id) VALUES (2, 'VALLE', '2013-05-13', NULL, NULL, '2019-11-27 23:00:00.649667', '', 170, 47, 86, 11771);
+
 
 --
 -- PostgreSQL database dump
@@ -66,3 +67,24 @@ INSERT INTO public.sivel2_sjr_regimensalud (id, nombre, fechacreacion, fechadesh
 -- PostgreSQL database dump complete
 --
 
+UPDATE sip_tema SET
+  fondo = '#f2f2ff',
+  color_fuente = '#000000',
+  nav_ini = '#5377a6',
+  nav_fin = '#1f4e8c',
+  nav_fuente = '#f2f2ff',
+  fondo_lista = '#5377a6',
+  btn_primario_fondo_ini = '#04c4d9',
+  btn_primario_fondo_fin = '#1f4e8c',
+  btn_primario_fuente = '#f2f2ff',
+  btn_peligro_fondo_ini = '#ff1b30',
+  btn_peligro_fondo_fin = '#ad0a0a',
+  btn_peligro_fuente = '#f2f2ff',
+  btn_accion_fondo_ini = '#f2f2ff',
+  btn_accion_fondo_fin= '#d6d6f0',
+  btn_accion_fuente = '#000000',
+  alerta_exito_fondo = '#01a7d1',
+  alerta_exito_fuente = '#1f4e8c',
+  alerta_problema_fondo = '#f8d7da',
+  alerta_problema_fuente = '#721c24'
+WHERE id=1;

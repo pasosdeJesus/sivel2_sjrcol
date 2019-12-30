@@ -74,7 +74,9 @@ class Ability < Sivel2Sjr::Ability
     ['Sip', 'lineaactorsocial'],
     ['Sip', 'tipoactorsocial'],
     ['', 'discapacidad'],
-    ['', 'espaciopart']
+    ['', 'espaciopart'],
+    ['', 'migracontactopre'],
+    ['', 'perfilmigracion']
   ]
   
   def tablasbasicas 
@@ -184,6 +186,7 @@ class Ability < Sivel2Sjr::Ability
 
   def campos_plantillas
     Heb412Gen::Ability::CAMPOS_PLANTILLAS_PROPIAS.clone.
+      merge(Sivel2Sjr::Ability::CAMPOS_PLANTILLAS_PROPIAS.clone).
       merge(Cor1440Gen::Ability::CAMPOS_PLANTILLAS_PROPIAS.clone).
       merge(CAMPOS_PLANTILLAS_PROPIAS.clone)
   end
@@ -206,6 +209,7 @@ class Ability < Sivel2Sjr::Ability
     can :nuevo, Sivel2Gen::Victima
 
     can :nuevo, Sivel2Sjr::Desplazamiento
+    can :nuevo, Sivel2Sjr::Migracion
     can :nuevo, Sivel2Sjr::Respuesta
 
     if !usuario.nil? && !usuario.rol.nil? then
@@ -251,6 +255,8 @@ class Ability < Sivel2Sjr::Ability
           casosjr: { asesor: usuario.id, oficina_id:usuario.oficina_id }
         can :new, Sivel2Gen::Caso 
         
+        can :read, Sivel2Sjr::Consactividadcaso
+
       when Ability::ROLANALI
 
         can :manage, Cor1440Gen::Actividad, oficina_id: [1, usuario.oficina_id]
@@ -271,6 +277,7 @@ class Ability < Sivel2Sjr::Ability
         can [:update, :create, :destroy, :edit], Sivel2Gen::Caso, 
           casosjr: { oficina_id: usuario.oficina_id }
 
+        can :read, Sivel2Sjr::Consactividadcaso
       when Ability::ROLCOOR
         can :manage, Cor1440Gen::Informe
         can [:read, :new], Cor1440Gen::Actividad
@@ -288,6 +295,8 @@ class Ability < Sivel2Sjr::Ability
         can :new, Sivel2Gen::Caso
         can [:update, :create, :destroy, :poneretcomp], Sivel2Gen::Caso, 
           casosjr: { oficina_id: usuario.oficina_id }
+
+        can :read, Sivel2Sjr::Consactividadcaso
 
       when Ability::ROLADMIN, Ability::ROLDIR
         can :manage, Cor1440Gen::Actividad
@@ -310,6 +319,8 @@ class Ability < Sivel2Sjr::Ability
 
         can :manage, Sivel2Gen::Caso
         can :manage, Sivel2Gen::Acto
+
+        can :read, Sivel2Sjr::Consactividadcaso
 
         can :manage, Usuario
         can :manage, :tablasbasicas

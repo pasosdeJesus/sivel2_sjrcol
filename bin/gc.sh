@@ -5,19 +5,11 @@ if (test -f ".env") then {
 	. ./.env
 } fi;
 
-function cableado {
-	for n in $*; do 
-		echo "Revisando $n"
-		grep "^ *gem *.${n}.*, *path:" Gemfile > /dev/null 2> /dev/null
-		if (test "$?" = "0") then {
-			echo "Gemfile incluye un ${n} cableado al sistema de archivos"
-			exit 1;
-		} fi;
-	done
-}
-
-d=`grep "gem.*pasosdeJesus" Gemfile | sed -e "s/.*gem ['\"]//g;s/['\"].*//g"`
-cableado $d
+s=`grep -B 1 "^ *path" Gemfile 2> /dev/null`
+if (test "$?" = "0") then {
+  echo "Gemfile incluye gema cableada al sistema de archivos ($s)"
+  exit 1;
+} fi;
 
 grep "^ *gem *.debugger*" Gemfile > /dev/null 2> /dev/null
 if (test "$?" = "0") then {

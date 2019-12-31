@@ -1771,10 +1771,6 @@
 </tr>
 <tr><td>clickAt</td><td>xpath=(//a[contains(text(),'Nueva')])[3]<datalist><option>xpath=(//a[contains(text(),'Nueva')])[3]</option><option>//a[contains(@href, '/admin/oficinas/nueva')]</option><option>//div/a</option></datalist></td><td>17,20</td>
 </tr>
-<tr><td>assertText</td><td>css=h1<datalist><option>css=h1</option><option>//h1</option></datalist></td><td>Nueva Oficina</td>
-</tr>
-<tr><td>assertText</td><td>css=h1<datalist><option>css=h1</option><option>//h1</option></datalist></td><td>Nueva Oficina</td>
-</tr>
 <tr>
 	<td>type</td>
 	<td>id=oficina_nombre<datalist><option>id=oficina_nombre</option></datalist></td>
@@ -1786,6 +1782,8 @@
 	<td>bbb</td>
 </tr>
 <tr><td>clickAt</td><td>css=a.chosen-single.chosen-default &gt; span<datalist><option>css=a.chosen-single.chosen-default &gt; span</option><option>//div[@id='oficina_pais_id_chosen']/a/span</option><option>//a/span</option></datalist></td><td>60,9</td>
+</tr>
+<tr><td>assertText</td><td>css=h1<datalist><option>css=h1</option><option>//h1</option></datalist></td><td>Nueva Oficina</td>
 </tr>
 <tr><td>runScript</td><td>$('.chosen-select').removeAttr('style'); $('.chosen-container').remove(); $('.chosen-select').removeClass('chosen-select')<datalist><option>$('.chosen-select').removeAttr('style'); $('.chosen-container').remove(); $('.chosen-select').removeClass('chosen-select')</option></datalist></td><td></td>
 </tr>
@@ -2573,7 +2571,7 @@
 </tr>
 <tr><td>clickAt</td><td>id=tema_fondo<datalist><option>id=tema_fondo</option><option>name=tema[fondo]</option><option>css=#tema_fondo</option><option>//input[@id='tema_fondo']</option><option>//form[@id='new_tema']/div[3]/input</option><option>//div[3]/input</option></datalist></td><td>64,15</td>
 </tr>
-<tr><td>clickAt</td><td>css=span.color-box.spectrum-red<datalist><option>css=span.color-box.spectrum-red</option><option>//div[@id='tema[nav_ini]']/div/div/div[2]/ul/li[2]/a/span[3]</option><option>//li[2]/a/span[3]</option></datalist></td><td>88,5</td>
+<tr><td>clickAt</td><td>//li[2]/a/span[3]<datalist><option>css=span.color-box.spectrum-red</option><option>//div[@id='tema[nav_ini]']/div/div/div[2]/ul/li[2]/a/span[3]</option><option>//li[2]/a/span[3]</option></datalist></td><td>88,5</td>
 </tr>
 <tr><td>clickAt</td><td>id=tema_observaciones<datalist><option>id=tema_observaciones</option><option>name=tema[observaciones]</option><option>css=#tema_observaciones</option><option>//input[@id='tema_observaciones']</option><option>//form[@id='new_tema']/div[7]/input</option><option>//div[7]/input</option></datalist></td><td>99,14</td>
 </tr>

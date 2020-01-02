@@ -138,32 +138,6 @@ document.addEventListener('turbolinks:load', function() {
   )
 
   $(document).on('change', 
-    '[id^=caso_migracion_attributes_][id$=_apatrida]', 
-    function (evento) {
-      pid = evento.target.getAttribute('id').split('_')
-      var rd = $('#caso_migracion_attributes_'+pid[3]+
-        '_riesgoApatridia').parents()[0]
-      if (+evento.target.checked != 0) {
-        rd.lastElementChild.disabled = true
-      } else {
-        rd.lastElementChild.disabled = false
-      }
-    })
-
-  $(document).on('change', 
-    '[id^=caso_migracion_attributes_][id$=_riesgoApatridia]', 
-    function (evento) {
-      pid = evento.target.getAttribute('id').split('_')
-      var ad = $('#caso_migracion_attributes_'+pid[3]+
-        '_apatrida').parents()[0]
-      if (+evento.target.checked != 0) {
-        ad.lastElementChild.disabled = true
-      } else {
-        ad.lastElementChild.disabled = false
-      }
-    })
-
-  $(document).on('change', 
     '[id^=caso_migracion_attributes_][id$=_pep]', 
     function (evento) {
       pid = evento.target.getAttribute('id').split('_')

@@ -5709,8 +5709,6 @@ CREATE TABLE public.sivel2_sjr_migracion (
     migracontactopre_id integer,
     statusmigratorio_id integer,
     perfilmigracion_id integer,
-    apatrida boolean,
-    "riesgoApatridia" boolean,
     pep boolean,
     "fechaPep" date,
     "salvoNpi" character varying(127),
@@ -11492,6 +11490,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20191209005146'),
 ('20191209005851'),
 ('20191219011910'),
-('20191219143243');
+('20191219143243'),
+('20200104131841'),
+('20200104144303');
 
 

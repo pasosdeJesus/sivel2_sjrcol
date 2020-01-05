@@ -143,7 +143,8 @@ document.addEventListener('turbolinks:load', function() {
       pid = evento.target.getAttribute('id').split('_')
       var ped = $('#caso_migracion_attributes_'+pid[3]+
         '_fechaPep').parents()[1]
-      if (+evento.target.checked != 1) {
+      var selected = evento.target.value.substring(event.target.selectionStart, event.target.selectionEnd)
+      if (selected != 2) {
         ped.style.display = 'none'
       } else {
         ped.style.display = ''
@@ -156,7 +157,6 @@ document.addEventListener('turbolinks:load', function() {
       pid = evento.target.getAttribute('id').split('_')
       var ped = $('#caso_migracion_attributes_'+pid[3]+
         '_fechaNpi').parents()[1]
-      console.log(+evento.target.checked)
       if (+evento.target.checked != 1) {
         ped.style.display = 'none'
       } else {

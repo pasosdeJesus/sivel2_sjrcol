@@ -257,7 +257,11 @@
           <div class="offset-md-0 col-md-4">
             <%=f.input :pep, 
               label: false,
-              as: :boolean %>
+              :collection => { 'No' => 1, 'Si' => 2}, 
+              input_html: {
+                class: 'chosen-select' 
+              },
+              selected: 1%>
           </div>
         </div>
       </div>

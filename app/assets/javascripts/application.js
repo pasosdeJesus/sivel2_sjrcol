@@ -138,6 +138,20 @@ document.addEventListener('turbolinks:load', function() {
   )
 
   $(document).on('change', 
+    '[id^=caso_migracion_attributes_][id$=_statusmigratorio_id]', 
+    function (evento) {
+      pid = evento.target.getAttribute('id').split('_')
+      var ped = $('#camposPep')
+      var selected = +evento.target.value.substring(event.target.selectionStart, event.target.selectionEnd)
+      if (selected !=1 && selected !=5 && selected !=6) {
+        console.log("entra")
+        ped.attr("style", "display:none")
+      } else {
+        ped.attr("style", "display:block")
+      }
+    })
+
+  $(document).on('change', 
     '[id^=caso_migracion_attributes_][id$=_pep]', 
     function (evento) {
       pid = evento.target.getAttribute('id').split('_')

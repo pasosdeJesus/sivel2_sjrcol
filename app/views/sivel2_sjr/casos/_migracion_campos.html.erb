@@ -306,7 +306,7 @@
         </div>
       </div>
       
-        <% npiest = !f.object.npi ? 
+        <% npiest = !f.object.proteccion ? 
           'display:none' : '' %>
         <div class="offset-md-0 col-md-3" style=<%= npiest %>>
         <div>
@@ -344,7 +344,6 @@
 
     </div>
     </div>  
-
 
     <%= link_to_remove_association "Eliminar Migracion", f, 
       {class: 'btn-danger', :'data-existing' => 'true'} 

@@ -104,7 +104,6 @@ module Sivel2Sjr
           :llegada_municipio_id,
           :llegada_pais_id,
           :migracontactopre_id,
-          :npi,
           :pep,
           :perfilmigracion_id,
           :proteccion,

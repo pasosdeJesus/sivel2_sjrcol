@@ -107,6 +107,7 @@ module Sivel2Sjr
           :npi,
           :pep,
           :perfilmigracion_id,
+          :proteccion,
           :salida_pais_id,
           :salida_departamento_id,
           :salida_municipio_id,

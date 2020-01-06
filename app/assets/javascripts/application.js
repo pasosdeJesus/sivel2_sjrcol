@@ -142,9 +142,8 @@ document.addEventListener('turbolinks:load', function() {
     function (evento) {
       pid = evento.target.getAttribute('id').split('_')
       var ped = $('#camposPep')
-      var selected = +evento.target.value.substring(event.target.selectionStart, event.target.selectionEnd)
-      if (selected !=1 && selected !=5 && selected !=6) {
-        console.log("entra")
+      var seleccionado = +evento.target.value.substring(event.target.selectionStart, event.target.selectionEnd)
+      if (seleccionado !=1 && seleccionado !=5 && seleccionado !=6) {
         ped.attr("style", "display:none")
       } else {
         ped.attr("style", "display:block")
@@ -157,8 +156,8 @@ document.addEventListener('turbolinks:load', function() {
       pid = evento.target.getAttribute('id').split('_')
       var ped = $('#caso_migracion_attributes_'+pid[3]+
         '_fechaPep').parents()[1]
-      var selected = evento.target.value.substring(event.target.selectionStart, event.target.selectionEnd)
-      if (selected != 2) {
+      var seleccionado = evento.target.value.substring(event.target.selectionStart, event.target.selectionEnd)
+      if (seleccionado != 2) {
         ped.style.display = 'none'
       } else {
         ped.style.display = ''
@@ -166,12 +165,13 @@ document.addEventListener('turbolinks:load', function() {
     })
 
   $(document).on('change', 
-    '[id^=caso_migracion_attributes_][id$=_npi]', 
+    '[id^=caso_migracion_attributes_][id$=_proteccion]', 
     function (evento) {
       pid = evento.target.getAttribute('id').split('_')
+      var seleccionado = +evento.target.value.substring(event.target.selectionStart, event.target.selectionEnd)
       var ped = $('#caso_migracion_attributes_'+pid[3]+
         '_fechaNpi').parents()[1]
-      if (+evento.target.checked != 1) {
+      if (seleccionado != 8) {
         ped.style.display = 'none'
       } else {
         ped.style.display = ''

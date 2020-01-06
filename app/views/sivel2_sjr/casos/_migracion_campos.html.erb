@@ -291,9 +291,17 @@
             </label>  
           </div>
           <div class="offset-md-0 col-md-4">
-            <%=f.input :npi, 
+            <%= f.input :proteccion,
+              collection: Sivel2Sjr::Proteccion.habilitados,
+              label_method: :nombre,
+              value_method: :id,
               label: false,
-              as: :boolean %>
+              input_html: {
+                "data-toggle" => 'tooltip',
+                "title" => 'Elegir de la lista el nivel protección internacional que requiere el solicitante',
+              class: 'chosen-select' 
+              }
+            %>
         </div>
         </div>
       </div>

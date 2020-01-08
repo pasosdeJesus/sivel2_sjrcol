@@ -5715,7 +5715,8 @@ CREATE TABLE public.sivel2_sjr_migracion (
     "fechaNpi" date,
     "causaRefugio_id" integer,
     "causaRefugio" character varying,
-    proteccion character varying
+    proteccion character varying,
+    observacionesref character varying(5000)
 );
 
 
@@ -11495,6 +11496,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200104144303'),
 ('20200105154040'),
 ('20200106131708'),
-('20200106141436');
+('20200106141436'),
+('20200106144215');
 
 

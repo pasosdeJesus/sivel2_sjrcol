@@ -345,6 +345,21 @@
     </div>
     </div>  
 
+    <div class="row">
+      <div class="offset-md-0 col-md-6">
+        <label class="form-check-label" for="riesgoApatridia">
+          Observaciones
+        </label>
+        <%= f.input :observacionesref, 
+          label: false,
+          input_html: {
+            "data-toggle" => 'tooltip',
+            "title" => 'Añada los comentarios adicionales que considere necesarios'
+          }
+        %>
+      </div>
+    </div>
+
     <%= link_to_remove_association "Eliminar Migracion", f, 
       {class: 'btn-danger', :'data-existing' => 'true'} 
     %>

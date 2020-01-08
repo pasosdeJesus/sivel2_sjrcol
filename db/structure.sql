@@ -5715,8 +5715,8 @@ CREATE TABLE public.sivel2_sjr_migracion (
     "fechaNpi" date,
     "causaRefugio_id" integer,
     "causaRefugio" character varying,
-    proteccion character varying,
-    observacionesref character varying(5000)
+    observacionesref character varying(5000),
+    proteccion_id integer
 );
 
 
@@ -9531,6 +9531,14 @@ ALTER TABLE ONLY public.sivel2_sjr_motivosjr_derecho
 
 
 --
+-- Name: sivel2_sjr_migracion fk_rails_40371f9525; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sivel2_sjr_migracion
+    ADD CONSTRAINT fk_rails_40371f9525 FOREIGN KEY (proteccion_id) REFERENCES public.sivel2_sjr_proteccion(id);
+
+
+--
 -- Name: cor1440_gen_informe fk_rails_40cb623d50; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -11497,6 +11505,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200105154040'),
 ('20200106131708'),
 ('20200106141436'),
-('20200106144215');
+('20200106144215'),
+('20200108153919'),
+('20200108154229');
 
 

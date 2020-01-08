@@ -291,7 +291,7 @@
             </label>  
           </div>
           <div class="offset-md-0 col-md-4">
-            <%= f.input :proteccion,
+            <%= f.input :proteccion_id,
               collection: Sivel2Sjr::Proteccion.habilitados,
               label_method: :nombre,
               value_method: :id,
@@ -306,7 +306,7 @@
         </div>
       </div>
       
-        <% npiest = !f.object.proteccion ? 
+        <% npiest = !f.object.proteccion_id ? 
           'display:none' : '' %>
         <div class="offset-md-0 col-md-3" style=<%= npiest %>>
         <div>

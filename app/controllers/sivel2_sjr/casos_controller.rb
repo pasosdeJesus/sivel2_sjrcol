@@ -107,7 +107,7 @@ module Sivel2Sjr
           :observacionesref,
           :pep,
           :perfilmigracion_id,
-          :proteccion,
+          :proteccion_id,
           :salida_pais_id,
           :salida_departamento_id,
           :salida_municipio_id,

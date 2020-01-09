@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: a2e00a54169c77f811e2e92482df16e063449469
+  revision: 1c63654dd9f2a9592d0e137a8ecfcc0a0a4fc088
   specs:
     cor1440_gen (1.0b3)
       devise
@@ -13,7 +13,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 9500449f775b65e0cd6556306de04c0fca4c2e4f
+  revision: 5fb8ec46bc2ede1777c2d1395106fe57eba699bf
   specs:
     heb412_gen (1.0.b6)
       mr519_gen
@@ -23,7 +23,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/mr519_gen.git
-  revision: 35cbb78b9aa5919d1265faede56ca50b2f4d00c0
+  revision: d0a10ab95bb7537a2392afb563b27e5d9b791004
   specs:
     mr519_gen (0.2.0)
       rails (~> 6.0.0.rc1, >= 6.0.0.rc1)
@@ -31,7 +31,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: 9874f7af7231c4b121237342ec873e676bd13e06
+  revision: b41e900c98374e38a832ee36cdf68a5dd3c77b60
   specs:
     sal7711_gen (1.0.b2)
       rails
@@ -39,7 +39,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: 824b158d12e6b660338fad929f87056be680d119
+  revision: 940b4361469e82a56b44124ac2e5bc78c0f73d47
   specs:
     sal7711_web (1.0.a3)
       rails
@@ -47,7 +47,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 762f2c712b4d7fad4a413b8217a547e2026fb0e0
+  revision: 45f1518c2b7476f8cb3e89e6cc925ba458296ab9
   specs:
     sip (2.0.b7)
       cancancan
@@ -65,7 +65,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 7101281bc19c33a1d38f816ceddff585908b2640
+  revision: ee2e789ab9e8eb8bbd8a19e662239f2c45f69954
   specs:
     sivel2_gen (2.0b10)
       devise
@@ -165,7 +165,7 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (~> 1.5)
       xpath (~> 3.2)
-    chartkick (3.3.0)
+    chartkick (3.3.1)
     childprocess (3.0.0)
     chosen-rails (1.9.0)
       coffee-rails (>= 3.2)
@@ -197,7 +197,7 @@ GEM
     ffi (1.11.3)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
-    i18n (1.7.0)
+    i18n (1.8.1)
       concurrent-ruby (~> 1.0)
     jbuilder (2.9.1)
       activesupport (>= 4.2.0)
@@ -208,7 +208,7 @@ GEM
     jquery-ui-rails (6.0.1)
       railties (>= 3.2.16)
     json (2.3.0)
-    kgio (2.11.2)
+    kgio (2.11.3)
     libxml-ruby (3.1.0)
     loofah (2.4.0)
       crass (~> 1.0.2)
@@ -218,7 +218,7 @@ GEM
     marcel (0.3.3)
       mimemagic (~> 0.3.2)
     method_source (0.9.2)
-    mime-types (3.3)
+    mime-types (3.3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2019.1009)
     mimemagic (0.3.3)
@@ -240,7 +240,7 @@ GEM
       mimemagic (~> 0.3.0)
       terrapin (~> 0.6.0)
     pdf-core (0.7.0)
-    pg (1.2.0)
+    pg (1.2.2)
     pick-a-color-rails (0.0.1)
       jquery-rails
       railties (>= 3.0)
@@ -253,7 +253,7 @@ GEM
     prawnto_2 (0.3.0)
       prawn (>= 1.0.0)
       rails (>= 3.2)
-    public_suffix (4.0.1)
+    public_suffix (4.0.3)
     puma (4.3.1)
       nio4r (~> 2.0)
     rack (2.0.8)
@@ -290,7 +290,7 @@ GEM
       method_source
       rake (>= 0.8.7)
       thor (>= 0.20.3, < 2.0)
-    raindrops (0.19.0)
+    raindrops (0.19.1)
     rake (13.0.1)
     redcarpet (3.5.0)
     regexp_parser (1.6.0)
@@ -309,7 +309,7 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
-    selenium-webdriver (3.142.6)
+    selenium-webdriver (3.142.7)
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
     simple_form (5.0.1)
@@ -334,8 +334,8 @@ GEM
     tilt (2.0.10)
     tiny-color-rails (0.0.2)
       railties (>= 3.0)
-    ttfunk (1.5.1)
-    twitter_cldr (5.2.0)
+    ttfunk (1.6.1)
+    twitter_cldr (5.3.0)
       camertron-eprun
       cldr-plurals-runtime-rb (~> 1.0)
       tzinfo

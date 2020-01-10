@@ -38,7 +38,8 @@ INSERT INTO public.sip_oficina (id, nombre, fechacreacion, fechadeshabilitacion,
 INSERT INTO public.sip_oficina (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at, observaciones, pais_id, departamento_id, municipio_id, clase_id) VALUES (5, 'NARIÑO', '2013-05-13', NULL, NULL, '2019-11-27 22:59:01.58987', '', 170, 38, 44, 7907);
 INSERT INTO public.sip_oficina (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at, observaciones, pais_id, departamento_id, municipio_id, clase_id) VALUES (6, 'SOACHA', '2013-05-13', NULL, NULL, '2019-11-27 22:59:39.810354', '', 170, 27, 1216, 4758);
 INSERT INTO public.sip_oficina (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at, observaciones, pais_id, departamento_id, municipio_id, clase_id) VALUES (2, 'VALLE', '2013-05-13', NULL, NULL, '2019-11-27 23:00:00.649667', '', 170, 47, 86, 11771);
-
+INSERT INTO sivel2_sjr_proteccion (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (9, 'APATRIDA', '2020-01-04', NULL, NULL, NULL);
+INSERT INTO sivel2_sjr_proteccion (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (10, 'EN RIESGO DE APATRIDA', '2020-01-04', NULL, NULL, NULL);
 
 --
 -- PostgreSQL database dump

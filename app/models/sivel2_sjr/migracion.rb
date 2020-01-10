@@ -40,6 +40,11 @@ class Sivel2Sjr::Migracion < ActiveRecord::Base
     foreign_key: "perfilmigracion_id", 
     optional: true
 
+  belongs_to :proteccion,
+    class_name: 'Sivel2Sjr::Proteccion', 
+    foreign_key: "proteccion_id", 
+    optional: true
+  
   belongs_to :salida_pais, 
     class_name: 'Sip::Pais', foreign_key: "salida_pais_id", optional: true
   belongs_to :salida_departamento, 

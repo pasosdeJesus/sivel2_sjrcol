@@ -139,3 +139,4 @@ INSERT INTO public.heb412_gen_campoplantillahcm (id, plantillahcm_id, nombrecamp
 INSERT INTO public.heb412_gen_campoplantillahcm (id, plantillahcm_id, nombrecampo, columna) VALUES (26, 1, 'oficina', 'Z');
 
 
+

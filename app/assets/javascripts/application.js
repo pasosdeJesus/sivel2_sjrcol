@@ -157,7 +157,7 @@ document.addEventListener('turbolinks:load', function() {
       var ped = $('#caso_migracion_attributes_'+pid[3]+
         '_fechaPep').parents()[1]
       var seleccionado = evento.target.value.substring(event.target.selectionStart, event.target.selectionEnd)
-      if (seleccionado != 2) {
+      if (seleccionado != 1) {
         ped.style.display = 'none'
       } else {
         ped.style.display = ''

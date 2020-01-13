@@ -245,39 +245,8 @@
           } %>
       </div>
     </div> <!-- row -->
-    
-    <div class="row">
-      <div class="offset-md-0 col-md-6">
-        <div class="row">
-          <div class="offset-md-0 col-md-8">
-            <label class="form-check-label" for="riesgoApatridia">
-              ¿Se encuentra en situación de apátrida?
-            </label>  
-          </div>
-          <div class="offset-md-0 col-md-4">
-            <%=f.input :apatrida, 
-              label: false,
-              as: :boolean %>
-          </div>
-        </div>
-      </div>
-      <div class="offset-md-0 col-md-6">
-        <div class="row">
-          <div class="offset-md-0 col-md-8">
-            <label class="form-check-label" for="riesgoApatridia">
-              ¿Se encuentra en riesgo de apatridia?
-            </label>  
-          </div>
-          <div class="offset-md-0 col-md-4">
-            <%=f.input :riesgoApatridia, 
-              label: false,
-              as: :boolean %>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
+ 
+    <div class="row" id="camposPep" style="display:none" >
       <div class="offset-md-0 col-md-6">
         <div class="row">
           <div class="offset-md-0 col-md-8">
@@ -288,7 +257,11 @@
           <div class="offset-md-0 col-md-4">
             <%=f.input :pep, 
               label: false,
-              as: :boolean %>
+              :collection => { 'No' => 0, 'Si' => 1}, 
+              input_html: {
+                class: 'chosen-select' 
+              },
+              selected: 0 %>
           </div>
         </div>
       </div>
@@ -318,14 +291,22 @@
             </label>  
           </div>
           <div class="offset-md-0 col-md-4">
-            <%=f.input :npi, 
+            <%= f.input :proteccion_id,
+              collection: Sivel2Sjr::Proteccion.habilitados,
+              label_method: :nombre,
+              value_method: :id,
               label: false,
-              as: :boolean %>
+              input_html: {
+                "data-toggle" => 'tooltip',
+                "title" => 'Elegir de la lista el nivel protección internacional que requiere el solicitante',
+              class: 'chosen-select' 
+              }
+            %>
         </div>
         </div>
       </div>
       
-        <% npiest = !f.object.npi ? 
+        <% npiest = !f.object.proteccion_id ? 
           'display:none' : '' %>
         <div class="offset-md-0 col-md-3" style=<%= npiest %>>
         <div>
@@ -364,6 +345,20 @@
     </div>
     </div>  
 
+    <div class="row">
+      <div class="offset-md-0 col-md-6">
+        <label class="form-check-label">
+          Observaciones
+        </label>
+        <%= f.input :observacionesref, 
+          label: false,
+          input_html: {
+            "data-toggle" => 'tooltip',
+            "title" => 'Añada los comentarios adicionales que considere necesarios'
+          }
+        %>
+      </div>
+    </div>
 
     <%= link_to_remove_association "Eliminar Migracion", f, 
       {class: 'btn-danger', :'data-existing' => 'true'} 

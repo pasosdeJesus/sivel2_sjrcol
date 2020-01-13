@@ -138,28 +138,15 @@ document.addEventListener('turbolinks:load', function() {
   )
 
   $(document).on('change', 
-    '[id^=caso_migracion_attributes_][id$=_apatrida]', 
+    '[id^=caso_migracion_attributes_][id$=_statusmigratorio_id]', 
     function (evento) {
       pid = evento.target.getAttribute('id').split('_')
-      var rd = $('#caso_migracion_attributes_'+pid[3]+
-        '_riesgoApatridia').parents()[0]
-      if (+evento.target.checked != 0) {
-        rd.lastElementChild.disabled = true
+      var ped = $('#camposPep')
+      var seleccionado = +evento.target.value.substring(event.target.selectionStart, event.target.selectionEnd)
+      if (seleccionado != 1 && seleccionado != 5 && seleccionado != 6) {
+        ped.attr("style", "display:none")
       } else {
-        rd.lastElementChild.disabled = false
-      }
-    })
-
-  $(document).on('change', 
-    '[id^=caso_migracion_attributes_][id$=_riesgoApatridia]', 
-    function (evento) {
-      pid = evento.target.getAttribute('id').split('_')
-      var ad = $('#caso_migracion_attributes_'+pid[3]+
-        '_apatrida').parents()[0]
-      if (+evento.target.checked != 0) {
-        ad.lastElementChild.disabled = true
-      } else {
-        ad.lastElementChild.disabled = false
+        ped.attr("style", "display:block")
       }
     })
 
@@ -169,7 +156,8 @@ document.addEventListener('turbolinks:load', function() {
       pid = evento.target.getAttribute('id').split('_')
       var ped = $('#caso_migracion_attributes_'+pid[3]+
         '_fechaPep').parents()[1]
-      if (+evento.target.checked != 1) {
+      var seleccionado = evento.target.value.substring(event.target.selectionStart, event.target.selectionEnd)
+      if (seleccionado != 2) {
         ped.style.display = 'none'
       } else {
         ped.style.display = ''
@@ -177,13 +165,13 @@ document.addEventListener('turbolinks:load', function() {
     })
 
   $(document).on('change', 
-    '[id^=caso_migracion_attributes_][id$=_npi]', 
+    '[id^=caso_migracion_attributes_][id$=_proteccion]', 
     function (evento) {
       pid = evento.target.getAttribute('id').split('_')
+      var seleccionado = +evento.target.value.substring(event.target.selectionStart, event.target.selectionEnd)
       var ped = $('#caso_migracion_attributes_'+pid[3]+
         '_fechaNpi').parents()[1]
-      console.log(+evento.target.checked)
-      if (+evento.target.checked != 1) {
+      if (seleccionado != 8) {
         ped.style.display = 'none'
       } else {
         ped.style.display = ''

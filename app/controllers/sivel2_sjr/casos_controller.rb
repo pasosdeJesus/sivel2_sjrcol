@@ -89,7 +89,6 @@ module Sivel2Sjr
     def otros_params
       [
         :migracion_attributes => [
-          :apatrida,
           :causaRefugio_id,
           :destino_clase_id,
           :destino_departamento_id,
@@ -105,10 +104,10 @@ module Sivel2Sjr
           :llegada_municipio_id,
           :llegada_pais_id,
           :migracontactopre_id,
-          :npi,
+          :observacionesref,
           :pep,
           :perfilmigracion_id,
-          :riesgoApatrida,
+          :proteccion_id,
           :salida_pais_id,
           :salida_departamento_id,
           :salida_municipio_id,

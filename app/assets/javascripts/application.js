@@ -165,7 +165,7 @@ document.addEventListener('turbolinks:load', function() {
     })
 
   $(document).on('change', 
-    '[id^=caso_migracion_attributes_][id$=_proteccion]', 
+    '[id^=caso_migracion_attributes_][id$=_proteccion_id]', 
     function (evento) {
       pid = evento.target.getAttribute('id').split('_')
       var seleccionado = +evento.target.value.substring(event.target.selectionStart, event.target.selectionEnd)

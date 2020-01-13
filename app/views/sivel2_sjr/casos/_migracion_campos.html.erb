@@ -256,7 +256,7 @@
         <div class="row">
           <div class="offset-md-0 col-md-8">
             <label class="form-check-label" for="riesgoApatridia">
-              ¿Cuenta con permiso especial de permanencia (PEP)?
+              ¿Cuenta con PEP?
             </label>  
           </div>
           <div class="offset-md-0 col-md-4">
@@ -264,6 +264,8 @@
               label: false,
               :collection => { 'No' => 0, 'Si' => 1}, 
               input_html: {
+                "data-toggle" => 'tooltip',
+                "title" => '¿Cuenta con Permiso Especial de Permanencia?',
                 class: 'chosen-select' 
               },
               selected: f.object.pep ? 1 : 0 %>
@@ -292,7 +294,7 @@
         <div class="row">
           <div class="offset-md-0 col-md-8">
             <label class="form-check-label" for="riesgoApatridia">
-              Persona con Necesidad de Protección Internacional NPI i.e Refugiado
+              Persona con NPI
             </label>  
           </div>
           <div class="offset-md-0 col-md-4">
@@ -303,17 +305,17 @@
               label: false,
               input_html: {
                 "data-toggle" => 'tooltip',
-                "title" => 'Elegir de la lista el nivel protección internacional que requiere el solicitante',
-              class: 'chosen-select' 
+                "title" => 'Elegir de la lista el Nivel Protección Internacional que requiere el solicitante',
+                class: 'chosen-select' 
               }
             %>
         </div>
         </div>
       </div>
       
-        <% npiest = !f.object.proteccion_id ? 
-          'display:none' : '' %>
-        <div class="offset-md-0 col-md-3" style=<%= npiest %>>
+      <% npiest = f.object.proteccion && f.object.proteccion_id == 8 ? 
+        '' : 'display:none' %>
+      <div class="offset-md-0 col-md-3 datosNpi" style=<%= npiest %>>
         <div>
           Fecha de declaración:
         </div>
@@ -351,7 +353,7 @@
     </div>  
 
     <div class="row">
-      <div class="offset-md-0 col-md-6">
+      <div class="offset-md-0 col-md-12">
         <label class="form-check-label">
           Observaciones
         </label>

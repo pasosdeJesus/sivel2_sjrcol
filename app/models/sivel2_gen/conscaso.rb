@@ -4,7 +4,21 @@ require 'sivel2_sjr/concerns/models/conscaso'
 
 class Sivel2Gen::Conscaso < ActiveRecord::Base
   include Sivel2Sjr::Concerns::Models::Conscaso
-  
+
+  scope :filtro_numerodocumento, lambda { |a|
+    joins(:casosjr).joins(:persona).
+      where('sivel2_sjr_casosjr.contacto_id = sip_persona.id ' +
+            'AND sip_persona.numerodocumento ILIKE \'%' +
+            ActiveRecord::Base.connection.quote_string(a) + '%\'')
+  }
+
+  scope :filtro_tdocumento, lambda { |a|
+    joins(:casosjr).joins(:persona).
+      where('sivel2_sjr_casosjr.contacto_id = sip_persona.id ' +
+            'AND sip_persona.tdocumento ILIKE \'%' +
+            ActiveRecord::Base.connection.quote_string(a) + '%\'')
+  }
+
   scope :filtro_expulsion_pais_id, lambda { |id|
     where('(caso_id, fecha) IN (SELECT sip_ubicacion.id_caso, 
           sivel2_sjr_desplazamiento.fechaexpulsion FROM
@@ -62,7 +76,7 @@ class Sivel2Gen::Conscaso < ActiveRecord::Base
   def self.refresca_conscaso
     if !ActiveRecord::Base.connection.data_source_exists? 'sivel2_sjr_ultimaatencion'
       ActiveRecord::Base.connection.execute(
-        "CREATE OR REPLACE VIEW sivel2_sjr_ultimaatencion AS 
+        "CREATE OR REPLACE VIEW sivel2_sjr_ultimaatencion ASq 
         (SELECT respuesta.id_caso, respuesta.id, respuesta.fechaatencion, respuesta.descatencion, respuesta.detallemotivo, 
          respuesta.detalleal, respuesta.detallear,
         CASE WHEN contacto.anionac IS NULL THEN NULL

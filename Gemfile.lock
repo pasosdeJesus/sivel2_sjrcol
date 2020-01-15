@@ -12,16 +12,6 @@ GIT
       sip
 
 GIT
-  remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: c272d1a53bf85cb2c27424d540df571ef8bc6635
-  specs:
-    heb412_gen (1.0.b6)
-      mr519_gen
-      redcarpet
-      rspreadsheet
-      sip
-
-GIT
   remote: https://github.com/pasosdeJesus/mr519_gen.git
   revision: 3c6058a029c3c3ffc893440cf14476337cc606d3
   specs:
@@ -86,6 +76,15 @@ GIT
   branch: new_id_with_ajax
   specs:
     cocoon (1.2.11)
+
+PATH
+  remote: ../heb412_gen
+  specs:
+    heb412_gen (1.0.b6)
+      mr519_gen
+      redcarpet
+      rspreadsheet
+      sip
 
 GEM
   remote: https://rubygems.org/

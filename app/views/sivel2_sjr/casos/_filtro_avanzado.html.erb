@@ -19,6 +19,13 @@
           label: false,
           placeholder: 'Nombre(s)'
         %>
+        <%= f.input :tdocumento_id,
+          collection: Sip::Tdocumento.habilitados,
+          label_method: :nombre,
+          value_method: :id,
+          label: false,
+          include_blank: '-- Tipo de documento'
+        %>
       </div>
       <div class="offset-sm-0 col-sm-4 offset-md-1 col-md-3">
         <%= f.input :apellidossp,
@@ -26,6 +33,10 @@
           size: 10,
           label: false,
           placeholder: 'Apellido(s)'
+        %>
+        <%= f.input :numerodocumento,
+          label: false,
+          placeholder: 'Número de documento'
         %>
       </div>
       <div class="offset-sm-0 col-sm-1 text-center">

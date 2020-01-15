@@ -20,9 +20,10 @@ module Sivel2Sjr
       end
 
       def create
-        m = Sivel2Sjr::Progestado.create(id: progestado_params[:id], nombre: progestado_params[:nombre], observaciones: progestado_params[:observaciones], fechacreacion: progestado_params[:fechacreacion], fechadeshabilitacion: progestado_params[:fechadeshabilitacion])
-        
-        n = Sivel2Sjr::ProgestadoDerecho.create(progestado_id: m.id, derecho_id: progestado_params[:derecho_ids])
+        m = Sivel2Sjr::Progestado.new(nombre: progestado_params[:nombre], observaciones: progestado_params[:observaciones], fechacreacion: progestado_params[:fechacreacion], fechadeshabilitacion: progestado_params[:fechadeshabilitacion])
+        m.save!
+        m.derecho_ids = progestado_params[:derecho_ids]
+        m.save!
         redirect_to "/admin/progsestado"
       end  
       # Use callbacks to share common setup or constraints between actions.

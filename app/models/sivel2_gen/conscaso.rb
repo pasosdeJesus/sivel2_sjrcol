@@ -6,17 +6,11 @@ class Sivel2Gen::Conscaso < ActiveRecord::Base
   include Sivel2Sjr::Concerns::Models::Conscaso
 
   scope :filtro_numerodocumento, lambda { |a|
-    joins(:casosjr).joins(:persona).
-      where('sivel2_sjr_casosjr.contacto_id = sip_persona.id ' +
-            'AND sip_persona.numerodocumento ILIKE \'%' +
-            ActiveRecord::Base.connection.quote_string(a) + '%\'')
+    joins(:persona).joins('JOIN sivel2_gen_victima ON sivel2_gen_victima.id_caso=sivel2_gen_conscaso.caso_id').where('sip_persona.numerodocumento=?', a)
   }
 
   scope :filtro_tdocumento, lambda { |a|
-    joins(:casosjr).joins(:persona).
-      where('sivel2_sjr_casosjr.contacto_id = sip_persona.id ' +
-            'AND sip_persona.tdocumento ILIKE \'%' +
-            ActiveRecord::Base.connection.quote_string(a) + '%\'')
+    joins(:persona).joins('JOIN sivel2_gen_victima ON sivel2_gen_victima.id_caso=sivel2_gen_conscaso.caso_id').where('sip_persona.tdocumento_id=?', a.to_i)
   }
 
   scope :filtro_expulsion_pais_id, lambda { |id|

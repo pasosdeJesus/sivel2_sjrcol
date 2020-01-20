@@ -107,6 +107,12 @@ document.addEventListener('turbolinks:load', function() {
         language: 'es',
       })
       $('.chosen-select').chosen()
+      ofpais = $('#caso_casosjr_attributes_oficina').val()
+      console.log(ofpais)
+      $('[id^=caso_migracion_attributes_][id$=_llegada_pais_id]').val(ofpais).trigger("chosen:updated");
+      $('[id^=caso_migracion_attributes_][id$=_llegada_departamento_id]').val(4).trigger("chosen:updated");
+      $('[id^=caso_migracion_attributes_][id$=_llegada_municipio_id]').val(24).trigger("chosen:updated");
+      $('[id^=caso_migracion_attributes_][id$=_llegada_clase_id]').val(238).trigger("chosen:updated");
       e.stopPropagation()
     }
   ) 

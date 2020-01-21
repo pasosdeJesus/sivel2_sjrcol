@@ -107,12 +107,20 @@ document.addEventListener('turbolinks:load', function() {
         language: 'es',
       })
       $('.chosen-select').chosen()
-      ofpais = $('#caso_casosjr_attributes_oficina').val()
-      console.log(ofpais)
-      $('[id^=caso_migracion_attributes_][id$=_llegada_pais_id]').val(ofpais).trigger("chosen:updated");
-      $('[id^=caso_migracion_attributes_][id$=_llegada_departamento_id]').val(4).trigger("chosen:updated");
-      $('[id^=caso_migracion_attributes_][id$=_llegada_municipio_id]').val(24).trigger("chosen:updated");
-      $('[id^=caso_migracion_attributes_][id$=_llegada_clase_id]').val(238).trigger("chosen:updated");
+        id_ofi = $('#caso_casosjr_attributes_oficina_id').val()
+        console.log(id_ofi)
+      opais = '[id^=caso_migracion_attributes_][id$=_llegada_pais_id]'
+      odep = '[id^=caso_migracion_attributes_][id$=_llegada_departamento_id]'
+      omun = '[id^=caso_migracion_attributes_][id$=_llegada_municipio_id]'
+      oclas = '[id^=caso_migracion_attributes_][id$=_llegada_clase_id]'
+      if(id_ofi != 1){
+      $.getJSON("../../admin/oficinas/"+ id_ofi +".json", function(o){
+        $(opais).val(o.pais_id).trigger("chosen:updated");
+        $(odep).val(o.departamento_id).trigger("chosen:updated");
+        $(omun).val(o.municipio_id).trigger("chosen:updated");
+        $(oclas).val(o.clase_id).trigger("chosen:updated");
+        });
+      }
       e.stopPropagation()
     }
   ) 

@@ -14,7 +14,7 @@ class Sivel2Gen::Conscaso < ActiveRecord::Base
 
   scope :filtro_tdocumento, lambda { |a|
     joins('JOIN sivel2_gen_victima ON sivel2_gen_victima.id_caso='+
-          'sivel2_gen_conscaso.caso_id').joins('JOIN sip_persona ON '
+          'sivel2_gen_conscaso.caso_id').joins('JOIN sip_persona ON '+
           'sivel2_gen_victima.id_persona = sip_persona.id')
       .where('sip_persona.tdocumento_id=?', a.to_i)
   }

@@ -6,13 +6,13 @@ module Sivel2Sjr
       load_and_authorize_resource  class: Sivel2Sjr::Progestado
 
       def clase 
-        "Sivel2Sjr::Progestado"
+        'Sivel2Sjr::Progestado'
       end
 
       def atributos_index
-        ["id",  "nombre" ] + 
+        ['id',  'nombre' ] + 
           [ :derecho_ids =>  [] ] +
-          ["observaciones", "fechacreacion", "fechadeshabilitacion"] 
+          ['observaciones', 'fechacreacion', 'fechadeshabilitacion'] 
       end
 
       def genclase
@@ -20,18 +20,22 @@ module Sivel2Sjr
       end
 
       def create
-        m = Sivel2Sjr::Progestado.new(nombre: progestado_params[:nombre], observaciones: progestado_params[:observaciones], fechacreacion: progestado_params[:fechacreacion], fechadeshabilitacion: progestado_params[:fechadeshabilitacion])
+        m = Sivel2Sjr::Progestado.new(
+          nombre: progestado_params[:nombre], 
+          observaciones: progestado_params[:observaciones], 
+          fechacreacion: progestado_params[:fechacreacion], 
+          fechadeshabilitacion: progestado_params[:fechadeshabilitacion]
+        )
         m.save!
         m.derecho_ids = progestado_params[:derecho_ids]
         m.save!
-        redirect_to "/admin/progsestado"
-      end  
-      # Use callbacks to share common setup or constraints between actions.
+        redirect_to sivel2_sjr.admin_progsestado_path #'/admin/progsestado'
+      end
+
       def set_progestado
         @basica = Sivel2Sjr::Progestado.find(params[:id])
       end
 
-      # Never trust parameters from the scary internet, only allow the white list through.
       def progestado_params
         params.require(:progestado).permit(*atributos_form)
       end

@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: 2c60053376211d95f3ba4d137e1cfaa15bd0cc7f
+  revision: bdfbbfc6b62862a0301150cccc226af5c3c4af09
   specs:
     cor1440_gen (1.0b3)
       devise
@@ -13,7 +13,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: c272d1a53bf85cb2c27424d540df571ef8bc6635
+  revision: 4e9c3dd5420fe61b9fe5caf0d9f642d6a83766c6
   specs:
     heb412_gen (1.0.b6)
       mr519_gen
@@ -23,7 +23,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/mr519_gen.git
-  revision: 3c6058a029c3c3ffc893440cf14476337cc606d3
+  revision: db247ed134faa1895e4dc21f62718cb4a225aec4
   specs:
     mr519_gen (0.2.0)
       rails (~> 6.0.0.rc1, >= 6.0.0.rc1)
@@ -31,7 +31,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: 98288278d1eb662b73558ab3cd31113486f741b9
+  revision: c410a182f9561e0785dfc73cd7704299f88dfa2d
   specs:
     sal7711_gen (1.0.b2)
       rails
@@ -39,7 +39,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: 726cff4deb33c53bb32c2b75b81376e92cd947a6
+  revision: 9470ea57e98acf26c5a2ab4744522787993d7f5d
   specs:
     sal7711_web (1.0.a3)
       rails
@@ -47,9 +47,9 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: bff418d758378a89a862000a47b456fce6681493
+  revision: b4ffb2f66575fecb757211216321b3a216571d8a
   specs:
-    sip (2.0.b7)
+    sip (2.0.b10)
       cancancan
       chosen-rails
       devise
@@ -74,7 +74,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: ac97558bd3c3428f1fa134f716d551cbf727a32d
+  revision: 0584cf5935744ea8c79d582c58b33a1c39c7f718
   specs:
     sivel2_sjr (2.0b10)
       rails
@@ -156,7 +156,7 @@ GEM
       railties (>= 3.0)
     builder (3.2.4)
     camertron-eprun (1.1.1)
-    cancancan (3.0.1)
+    cancancan (3.0.2)
     capybara (3.30.0)
       addressable
       mini_mime (>= 0.1.3)

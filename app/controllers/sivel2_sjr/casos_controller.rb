@@ -18,7 +18,7 @@ module Sivel2Sjr
        :ultimaatencion_fechaini, :ultimaatencion_fechafin,
        :expulsion_pais_id, :expulsion_departamento_id, :expulsion_municipio_id,
        :llegada_pais_id, :llegada_departamento_id, :llegada_municipio_id,
-       :nombressp, :apellidossp,
+       :nombressp, :apellidossp, :tdocumento, :numerodocumento,
        :nombres, :apellidos, :sexo, :rangoedad_id, 
        :categoria_id,
        :descripcion

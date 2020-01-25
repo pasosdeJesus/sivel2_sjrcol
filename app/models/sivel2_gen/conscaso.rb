@@ -4,7 +4,21 @@ require 'sivel2_sjr/concerns/models/conscaso'
 
 class Sivel2Gen::Conscaso < ActiveRecord::Base
   include Sivel2Sjr::Concerns::Models::Conscaso
-  
+
+  scope :filtro_numerodocumento, lambda { |a|
+    joins('JOIN sivel2_gen_victima ON sivel2_gen_victima.id_caso='+
+          'sivel2_gen_conscaso.caso_id').joins('JOIN sip_persona ON '+
+          'sivel2_gen_victima.id_persona = sip_persona.id')
+      .where('sip_persona.numerodocumento=?', a)
+  }
+
+  scope :filtro_tdocumento, lambda { |a|
+    joins('JOIN sivel2_gen_victima ON sivel2_gen_victima.id_caso='+
+          'sivel2_gen_conscaso.caso_id').joins('JOIN sip_persona ON '+
+          'sivel2_gen_victima.id_persona = sip_persona.id')
+      .where('sip_persona.tdocumento_id=?', a.to_i)
+  }
+
   scope :filtro_expulsion_pais_id, lambda { |id|
     where('(caso_id, fecha) IN (SELECT sip_ubicacion.id_caso, 
           sivel2_sjr_desplazamiento.fechaexpulsion FROM

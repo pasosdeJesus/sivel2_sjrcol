@@ -323,7 +323,8 @@
           as: :string, 
           label: false,
           input_html: { 
-            placeholder: 'Seleccione fecha de registro',
+            value: f.object.fechaNpi ? f.object.fechaNpi : '',
+            "title" => 'Seleccione fecha de registro',
             "data-behaviour" => "datepicker",
             "data-toggle" => 'tooltip'
           } %>
@@ -332,7 +333,10 @@
         </div>
         <%= f.input :salvoNpi,
           as: :string,
-          label: false %>
+          label: false,
+          input_html: {
+            value: f.object.salvoNpi ? f.object.salvoNpi : '',
+          } %>
         <div>
           Causa del refugio:
         </div>
@@ -360,6 +364,7 @@
         <%= f.input :observacionesref, 
           label: false,
           input_html: {
+            value: f.object.observacionesref ? f.object.observacionesref : '',
             "data-toggle" => 'tooltip',
             "title" => 'Añada los comentarios adicionales que considere necesarios'
           }

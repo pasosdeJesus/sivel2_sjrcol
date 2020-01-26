@@ -2,6 +2,14 @@ jQuery ->
   $("a[rel~=popover], .has-popover").popover()
   $("a[rel~=tooltip], .has-tooltip").tooltip()
 
+
+# En listado de asistencia permite autocompletar nombres
+$(document).on('focusin', 
+'input[id^=actividad_asistencia_attributes_][id$=_persona_attributes_numerodocumento]', 
+(e) ->
+  cor1440_gen_busca_asistente($(this))
+)
+
 # Llena campos clasificacion y subclasificacion de desplazamiento
 @llena_clasifdesp = (ide, idl, jqthis) ->
   ee = $("#" + ide)

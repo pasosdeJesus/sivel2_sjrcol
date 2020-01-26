@@ -4,8 +4,9 @@ jQuery ->
 
 
 # En listado de asistencia permite autocompletar nombres
-$(document).on('focusin', 
-'input[id^=actividad_asistencia_attributes_][id$=_persona_attributes_numerodocumento]', 
+$(document).on('focusin',
+'input[id^=actividad_asistencia_attributes_]'+
+'[id$=_persona_attributes_numerodocumento]',
 (e) ->
   cor1440_gen_busca_asistente($(this))
 )

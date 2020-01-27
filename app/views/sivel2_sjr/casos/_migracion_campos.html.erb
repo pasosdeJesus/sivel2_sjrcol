@@ -282,6 +282,7 @@
           as: :string, 
           label: false,
           input_html: { 
+            value: f.object.fechaPep ? f.object.fechaPep : '',
             placeholder: 'Seleccione fecha',
             "data-behaviour" => "datepicker",
             "data-toggle" => 'tooltip'

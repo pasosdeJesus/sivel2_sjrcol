@@ -1,0 +1,85 @@
+<tr class='nested-fields'>
+  
+  <% if f.object.persona.nil? %>
+    <% f.object.persona = Sip::Persona.new %>
+  <% end %>
+
+  <%= f.simple_fields_for :persona do |p| %>
+    <td>
+      <%= p.input :nombres,
+        value_method: lambda {|t| '' if t.nombres == 'N'},
+        label: false %>
+    </td>
+    <td>
+      <%= p.input :apellidos, label: false %>
+    </td>
+    <td>
+      <%= p.input :tdocumento_id,
+        collection: Sip::Tdocumento.habilitados,
+        label_method: :sigla,
+        value_method: :id ,
+        label: false,
+        input_html: { style: 'width: 5em' }
+      %>
+    </td>
+    <td>
+      <%= p.input :id, as: :hidden %>
+      <% ph = 'N'
+      ac = {'data-autocompleta' => 'no',
+             style: 'width: 9em' }
+      if (!p.object.numerodocumento || p.object.numerodocumento == 'N' || p.object.numerodocumento == '')
+        ph = 'Buscar'
+        ac = { style: 'width: 9em' }
+      end %>
+      <%= p.input :numerodocumento, placeholder: ph,
+        input_html: ac,
+        label: false %>
+    </td>
+    <td>
+      <%= p.input :sexo, 
+        collection: [["F", :F], ["M", :M]], 
+        label: false,
+        input_html: { style: 'width: 4em' },
+        include_blank: false %>
+    </td>
+    <td>
+      <%= p.input :anionac, 
+        input_html: { style: 'width: 9em' },
+        label: false %>
+    </td>
+    <td>
+      <%= p.input :mesnac, 
+        input_html: { style: 'width: 9em' },
+        label: false %>
+    </td>
+    <td>
+      <%= p.input :dianac, 
+        input_html: { style: 'width: 9em' },
+        label: false %>
+    </td>
+  <% end %>
+  <td>
+    <%= f.association :actorsocial,
+      collection: Sip::Actorsocial.all,
+      label_method: :presenta_nombre,
+      value_method: :id,
+      label: false
+    %>
+  </td>
+  <td>
+    <%= f.association :perfilactorsocial,
+      collection: Sip::Perfilactorsocial.habilitados,
+      label_method: :nombre,
+      value_method: :id,
+      input_html: { style: 'width: 10em' },
+      label: false
+    %>
+  </td>
+  <td>
+    <%= f.input :id, as: :hidden %>
+    <%= link_to_remove_association "Eliminar", f, 
+        :class => 'btn-danger' 
+    %>
+    <div><%= f.error_notification %></div>
+  </td>
+</tr>

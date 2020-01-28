@@ -16,7 +16,6 @@ class UsuariosController < Sip::ModelosController
     #render layout: '/application'
   end
 
-
   def atributos_index
     [ :id,
       :nusuario,
@@ -26,8 +25,6 @@ class UsuariosController < Sip::ModelosController
       :email,
       :tema,
       :habilitado,
-      :created_at_localizada
-    ]
+      :created_at_localizada ]
   end
-
 end

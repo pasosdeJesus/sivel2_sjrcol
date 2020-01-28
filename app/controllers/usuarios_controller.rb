@@ -16,4 +16,18 @@ class UsuariosController < Sip::ModelosController
     #render layout: '/application'
   end
 
+
+  def atributos_index
+    [ :id,
+      :nusuario,
+      :nombre,
+      :rol,
+      :oficina_id,
+      :email,
+      :tema,
+      :habilitado,
+      :created_at_localizada
+    ]
+  end
+
 end

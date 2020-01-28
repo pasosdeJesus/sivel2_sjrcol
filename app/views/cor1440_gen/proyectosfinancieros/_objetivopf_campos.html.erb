@@ -1,0 +1,17 @@
+<% f.object = Cor1440Gen::Objetivopf.new() if !f.object  %>
+<tr class='nested-fields'>
+  <td>
+    <%= f.input :numero, 
+      label: false %>
+  </td>
+  <td>
+    <%= f.input :objetivo, as: :text, input_html: {rows: 3}, label: false %>
+  </td>
+  <td>
+    <%= f.input :id, as: :hidden %>
+    <%= link_to_remove_association "Eliminar", f, 
+      :class => 'btn-danger', "data-existing" => true %>
+    <div><%= f.error_notification %></div>
+  </td>
+</tr>
+

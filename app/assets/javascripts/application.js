@@ -158,7 +158,8 @@ document.addEventListener('turbolinks:load', function() {
     '[id^=caso_migracion_attributes_][id$=_statusmigratorio_id]', 
     function (evento) {
       pid = evento.target.getAttribute('id').split('_')
-      var ped = $('#camposPep')
+      $('#camposPep').attr('id','camposPep' + pid[3])
+      var ped = $('#camposPep'+ pid[3])
       var seleccionado = +evento.target.value.substring(event.target.selectionStart, event.target.selectionEnd)
       if (seleccionado != 1 && seleccionado != 5 && seleccionado != 6) {
         ped.attr("style", "display:none")

@@ -195,5 +195,13 @@ document.addEventListener('turbolinks:load', function() {
         ped.style.display = ''
       }
     })
+
+  $(document).on('change', '#persona_id_pais',
+    function (evento) {
+      pais = $('#persona_id_pais').val()
+      if (!$('#persona_nacionalde').val()){
+        $('#persona_nacionalde').val(pais)
+      }
+    })
 })
 

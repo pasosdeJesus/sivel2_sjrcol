@@ -181,7 +181,9 @@ document.addEventListener('turbolinks:load', function() {
   $(document).on('change', '#persona_id_pais',
     function (evento) {
       pais = $('#persona_id_pais').val()
-      $('#persona_nacionalde').val(pais)
+      if (!$('#persona_nacionalde').val()){
+        $('#persona_nacionalde').val(pais)
+      }
     })
 })
 

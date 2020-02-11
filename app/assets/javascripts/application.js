@@ -107,6 +107,23 @@ document.addEventListener('turbolinks:load', function() {
         language: 'es',
       })
       $('.chosen-select').chosen()
+
+      // Que el lugar de llegada en migración sea la ubicación de la oficina
+      id_ofi = $('#caso_casosjr_attributes_oficina_id').val()
+      opais = '[id^=caso_migracion_attributes_][id$=_llegada_pais_id]'
+      odep = '[id^=caso_migracion_attributes_][id$=_llegada_departamento_id]'
+      omun = '[id^=caso_migracion_attributes_][id$=_llegada_municipio_id]'
+      oclas = '[id^=caso_migracion_attributes_][id$=_llegada_clase_id]'
+      if(id_ofi != 1){
+        $.getJSON("../../admin/oficinas/"+ id_ofi +".json", function(o){
+          cu = 'chosen:updated'
+          $(opais).val(o.pais_id).trigger(cu)
+          $(odep).val(o.departamento_id).trigger(cu)
+          $(omun).val(o.municipio_id).trigger(cu)
+          $(oclas).val(o.clase_id).trigger(cu)
+        });
+      }
+
       e.stopPropagation()
     }
   ) 
@@ -141,7 +158,8 @@ document.addEventListener('turbolinks:load', function() {
     '[id^=caso_migracion_attributes_][id$=_statusmigratorio_id]', 
     function (evento) {
       pid = evento.target.getAttribute('id').split('_')
-      var ped = $('#camposPep')
+      $('#camposPep').attr('id','camposPep' + pid[3])
+      var ped = $('#camposPep'+ pid[3])
       var seleccionado = +evento.target.value.substring(event.target.selectionStart, event.target.selectionEnd)
       if (seleccionado != 1 && seleccionado != 5 && seleccionado != 6) {
         ped.attr("style", "display:none")
@@ -175,6 +193,14 @@ document.addEventListener('turbolinks:load', function() {
         ped.style.display = 'none'
       } else {
         ped.style.display = ''
+      }
+    })
+
+  $(document).on('change', '#persona_id_pais',
+    function (evento) {
+      pais = $('#persona_id_pais').val()
+      if (!$('#persona_nacionalde').val()){
+        $('#persona_nacionalde').val(pais)
       }
     })
 })

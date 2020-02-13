@@ -27,7 +27,8 @@ import 'bootstrap-datepicker'
 import 'bootstrap-datepicker/dist/locales/bootstrap-datepicker.es.min.js'
 import 'jquery-ui'
 import 'jquery-ui/ui/widgets/autocomplete'
-
+var L = require('leaflet')
+var mc= require('leaflet.markercluster')
 document.addEventListener('change', 
   function (event) {
     var m = event.target.id.match(/^caso_migracion_attributes_([0-9]*)_perfilmigracion_id$/)

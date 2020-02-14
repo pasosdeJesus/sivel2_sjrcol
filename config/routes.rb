@@ -46,7 +46,6 @@ Rails.application.routes.draw do
   #get "/personas" => 'sip/personas#index'
   #get "/personas/remplazar" => 'sip/personas#remplazar'
   
- 
   root "sip/hogar#index"
 
   mount Sivel2Sjr::Engine, at: "/", as: 'sivel2_sjr'

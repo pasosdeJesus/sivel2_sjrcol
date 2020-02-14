@@ -15,6 +15,8 @@
         <%= despliega_abajo "Casos" do %>
           <%= opcion_menu "Listado", sivel2_gen.casos_path, 
             {desplegable: true} %>
+          <%= opcion_menu "Casos sobre Open Street Maps",
+            sivel2_sjr.casos_mapaosm_path, desplegable: true %>
           <% if can? :edit, Sivel2Gen::Caso then %>
             <%= opcion_menu "Nuevo", sivel2_gen.new_caso_path, desplegable: true %>
             <%= opcion_menu "Validaciones", sivel2_gen.validarcasos_path, desplegable: true %>

@@ -14,6 +14,7 @@
 //= require heb412_gen/motor
 //= require mr519_gen/motor
 //= require sivel2_gen/motor
+//= require sivel2_gen/mapaosm
 //= require sivel2_sjr/motor
 //= require cor1440_gen/motor
 //= require sal7711_web/motor

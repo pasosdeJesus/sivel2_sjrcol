@@ -1,6 +1,55 @@
 GIT
-  remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: c8dcd25cb1a223c8c5f7e8fe3d8cc5354de44d03
+  remote: https://github.com/pasosdeJesus/heb412_gen.git
+  revision: 0fde5ef5aa257b637b8f9453f69e25451afd96f4
+  specs:
+    heb412_gen (1.0.b6)
+      mr519_gen
+      redcarpet
+      rspreadsheet
+      sip
+
+GIT
+  remote: https://github.com/pasosdeJesus/mr519_gen.git
+  revision: 2e77b23729249b732657d9eb0b219cae7f9396ac
+  specs:
+    mr519_gen (0.2.0)
+      rails (~> 6.0.0.rc1, >= 6.0.0.rc1)
+      sip
+
+GIT
+  remote: https://github.com/pasosdeJesus/sal7711_gen.git
+  revision: c1aaf0e3552eba92d7b326212a363be9dba471d5
+  specs:
+    sal7711_gen (1.0.b2)
+      rails
+      sip
+
+GIT
+  remote: https://github.com/pasosdeJesus/sal7711_web.git
+  revision: 7d59b844977a12e65e8b89f7d8f94da1685414a5
+  specs:
+    sal7711_web (1.0.a3)
+      rails
+      sal7711_gen
+
+GIT
+  remote: https://github.com/pasosdeJesus/sivel2_gen.git
+  revision: f511c5e6cd27763cc68640808a4cbfffd294bf61
+  specs:
+    sivel2_gen (2.0b10)
+      devise
+      jquery-rails
+      rails
+
+GIT
+  remote: https://github.com/vtamara/cocoon.git
+  revision: 088c8d9dcce7f51cf3a968398047eaac7a37718b
+  branch: new_id_with_ajax
+  specs:
+    cocoon (1.2.11)
+
+PATH
+  remote: ../cor1440_gen
   specs:
     cor1440_gen (1.0b3)
       devise
@@ -11,43 +60,8 @@ GIT
       rails
       sip
 
-GIT
-  remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 9c5cffe243cfce6fae54131e8c185ff8a7e23d6f
-  specs:
-    heb412_gen (1.0.b6)
-      mr519_gen
-      redcarpet
-      rspreadsheet
-      sip
-
-GIT
-  remote: https://github.com/pasosdeJesus/mr519_gen.git
-  revision: e18fc16fd044ad337d4ef6b649937dc9b4428cf9
-  specs:
-    mr519_gen (0.2.0)
-      rails (~> 6.0.0.rc1, >= 6.0.0.rc1)
-      sip
-
-GIT
-  remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: 9be318da222118c26aaf74d6c4cc2a7104f758be
-  specs:
-    sal7711_gen (1.0.b2)
-      rails
-      sip
-
-GIT
-  remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: 4d9caa4e5b7ff9ea28673824280b4d7227931f13
-  specs:
-    sal7711_web (1.0.a3)
-      rails
-      sal7711_gen
-
-GIT
-  remote: https://github.com/pasosdeJesus/sip.git
-  revision: 9742971865059f241c300087883b0f6fe27a3c03
+PATH
+  remote: ../sip
   specs:
     sip (2.0.b10)
       cancancan
@@ -63,29 +77,12 @@ GIT
       twitter_cldr
       will_paginate
 
-GIT
-  remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 03667921d951e24bd5292b275f186ab65a15f896
-  specs:
-    sivel2_gen (2.0b10)
-      devise
-      jquery-rails
-      rails
-
-GIT
-  remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 09e2ae2686133c5ac3228b9ec6bee6a352965682
+PATH
+  remote: ../sivel2_sjr
   specs:
     sivel2_sjr (2.0b10)
       rails
       sivel2_gen
-
-GIT
-  remote: https://github.com/vtamara/cocoon.git
-  revision: 088c8d9dcce7f51cf3a968398047eaac7a37718b
-  branch: new_id_with_ajax
-  specs:
-    cocoon (1.2.11)
 
 GEM
   remote: https://rubygems.org/
@@ -155,6 +152,7 @@ GEM
     bootstrap-datepicker-rails (1.9.0.1)
       railties (>= 3.0)
     builder (3.2.4)
+    byebug (11.1.1)
     camertron-eprun (1.1.1)
     cancancan (3.0.2)
     capybara (3.31.0)
@@ -315,10 +313,10 @@ GEM
     simple_form (5.0.2)
       actionpack (>= 5.0)
       activemodel (>= 5.0)
-    simplecov (0.18.1)
+    simplecov (0.18.2)
       docile (~> 1.1)
-      simplecov-html (~> 0.11.0)
-    simplecov-html (0.11.0)
+      simplecov-html (~> 0.11)
+    simplecov-html (0.12.0)
     sprockets (4.0.0)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
@@ -369,6 +367,7 @@ DEPENDENCIES
   bcrypt
   bootsnap (>= 1.1.0)
   bootstrap-datepicker-rails
+  byebug
   cancancan
   capybara
   chartkick

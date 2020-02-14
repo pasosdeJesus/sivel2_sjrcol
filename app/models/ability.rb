@@ -262,6 +262,7 @@ class Ability < Sivel2Sjr::Ability
         can :manage, Cor1440Gen::Actividad, oficina_id: [1, usuario.oficina_id]
         can [:read, :new], Cor1440Gen::Actividad
         can :read, Cor1440Gen::Informe
+        can :index, Cor1440Gen::Mindicadorpf
         can :read, Cor1440Gen::Proyectofinanciero
 
         can :read, Heb412Gen::Doc
@@ -301,6 +302,7 @@ class Ability < Sivel2Sjr::Ability
       when Ability::ROLADMIN, Ability::ROLDIR
         can :manage, Cor1440Gen::Actividad
         can :manage, Cor1440Gen::Informe
+        can :manage, Cor1440Gen::Mindicadorpf
         can :manage, Cor1440Gen::Proyectofinanciero
         can :manage, Cor1440Gen::Sectoractor
 

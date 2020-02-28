@@ -126,5 +126,11 @@ module Sivel2Sjr
       ]
     end
 
+    def importa_dato(datosent, datossal, menserror, registro = nil, opciones = {})
+      importa_dato_gen(datosent, datossal, menserror, registro, opciones)
+      # byebug
+      # Aqui si el parametro incluia crear caso, crearlo
+    end
+
   end
 end

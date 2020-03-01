@@ -9,8 +9,7 @@ class UsuariosController < Sip::ModelosController
 
   def index
     authorize! :read, ::Usuario
-    @registros= @usuarios = Usuario.where(
-      'fechadeshabilitacion IS NULL').order(
+    @registros= @usuarios = Usuario.order(
       'LOWER(nusuario)').paginate(:page => params[:pagina], per_page: 20)
     super(@usuarios)
     #render layout: '/application'

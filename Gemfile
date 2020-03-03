@@ -33,7 +33,7 @@ gem 'pg'#, '~> 0.21' # Postgresql
 
 gem 'pick-a-color-rails' # Facilita elegir colores en tema
 
-gem 'puma' # Servidor web
+gem 'puma' , '>= 4.3.3' # Servidor web
 
 gem 'prawn' # Generación de PDF
 

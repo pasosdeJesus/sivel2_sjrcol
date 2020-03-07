@@ -6,7 +6,7 @@ module Sip
   class PersonasController < Heb412Gen::ModelosController
 
     include Sivel2Sjr::Concerns::Controllers::PersonasController
-
+    include Sip::Concerns::Controllers::ModelosController
 
     def atributos_form
       if @registro && @registro.datosbio.nil?
@@ -31,7 +31,8 @@ module Sip
         :id_departamento,
         :id_municipio,
         :id_clase,
-        :tdocumento_id 
+        :tdocumento_id,
+        :numerodocumento
       ] + [
         :datosbio_attributes => [
           :afiliadoarl,
@@ -74,6 +75,13 @@ module Sip
         ] 
       ]
     end
-
+    
+    def update
+      if params[:persona][:numerodocumento].blank?
+        redirect_to edit_persona_path, flash: { error: "Se requiere numero de documento" }
+      else
+        update_gen
+      end
+    end
   end
 end

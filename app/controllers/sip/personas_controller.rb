@@ -78,8 +78,7 @@ module Sip
 
     def update
       if params[:persona][:numerodocumento].blank?
-        redirect_to edit_persona_path, 
-          flash: { error: "Se requiere numero de documento" }
+        redirect_to edit_persona_path, flash: { error: "Se requiere numero de documento" }
       else
         update_gen
       end

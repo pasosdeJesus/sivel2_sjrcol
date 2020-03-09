@@ -56,15 +56,15 @@ module Cor1440Gen
     end
 
     def atributos_index
-      [ :id, 
-        :fecha_localizada, 
-        :oficina, 
+      [ :id,
+        :fecha_localizada,
+        :oficina,
         :responsable,
-        :nombre, 
+        :nombre,
         :proyecto,
         :actividadareas,
         :proyectofinanciero,
-        :actividadpf, 
+        :actividadpf,
         :objetivo,
         :ubicacion,
         :poblacion_hombres,

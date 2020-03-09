@@ -1,4 +1,4 @@
-# encoding: UTF-8
+# frozen_string_literal: true
 
 require_relative '../../test_helper'
 
@@ -11,7 +11,7 @@ module Sip
       @current_usuario = ::Usuario.create(PRUEBA_USUARIO)
       sign_in @current_usuario
     end
-    
+
     PRUEBA_PERSONA = {
       nombres: 'Nombres',
       apellidos: 'Apellidos',
@@ -27,12 +27,12 @@ module Sip
       numerodocumento: '123',
       nacionalde: 170
     }
-    
+
     PRUEBA_PERSONA_SINDOC = {
       nombres: 'Nombres',
       apellidos: 'Apellidos',
       sexo: 'F',
-      numerodocumento: '',
+      numerodocumento: ''
     }
 
     test 'Crea una persona y la elimina' do

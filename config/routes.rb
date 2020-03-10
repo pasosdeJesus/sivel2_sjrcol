@@ -21,7 +21,8 @@ Rails.application.routes.draw do
   end
   resources :usuarios, path_names: { new: 'nuevo', edit: 'edita' } 
 
-
+  get "/actividades/rangosedadac" => 'cor1440_gen/actividades#rangosedadac',
+    as: :actividades_rangosedadac
   get "/actividades/poblacion_sexo_rangoedadac" => 'cor1440_gen/actividades#poblacion_sexo_rangoedadac',
     as: :actividades_poblacion_sexo_rangoedadac
 

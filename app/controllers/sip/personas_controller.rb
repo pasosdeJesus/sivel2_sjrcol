@@ -7,7 +7,6 @@ module Sip
 
     include Sivel2Sjr::Concerns::Controllers::PersonasController
 
-
     def atributos_form
       if @registro && @registro.datosbio.nil?
         @datosbio = Sip::Datosbio.new()
@@ -31,7 +30,8 @@ module Sip
         :id_departamento,
         :id_municipio,
         :id_clase,
-        :tdocumento_id 
+        :tdocumento_id,
+        :numerodocumento
       ] + [
         :datosbio_attributes => [
           :afiliadoarl,
@@ -75,5 +75,20 @@ module Sip
       ]
     end
 
+    def create
+      if params[:persona][:numerodocumento].blank?
+        redirect_to new_persona_path, flash: { error: "Se requiere número de documento" }
+      else
+        create_gen
+      end
+    end
+
+    def update
+      if params[:persona][:numerodocumento].blank?
+        redirect_to edit_persona_path, flash: { error: "Se requiere número de documento" }
+      else
+        update_gen
+      end
+    end
   end
 end

@@ -75,20 +75,13 @@ module Sip
       ]
     end
 
-    def create
+    def validaciones(registro)
       if params[:persona][:numerodocumento].blank?
-        redirect_to new_persona_path, flash: { error: "Se requiere número de documento" }
-      else
-        create_gen
+        @validaciones_error = "Se requiere número de documento" 
+        return false
       end
+      return true
     end
 
-    def update
-      if params[:persona][:numerodocumento].blank?
-        redirect_to edit_persona_path, flash: { error: "Se requiere número de documento" }
-      else
-        update_gen
-      end
-    end
   end
 end

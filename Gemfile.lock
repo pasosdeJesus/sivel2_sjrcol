@@ -47,7 +47,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 1e6e2632d442b16cd8cdbb8bf890a8eeec5ce198
+  revision: 08817c9520fd13dc862ec4aa5ae8c2a456a80eea
   specs:
     sip (2.0.b10)
       cancancan
@@ -74,7 +74,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: a5a571ada42c6c29bbad26f55c0c534c330a8a6b
+  revision: 148ceed672ddbda7b8b5238f9799e06bc236f1c0
   specs:
     sivel2_sjr (2.0b10)
       rails

@@ -4,11 +4,9 @@ require 'sivel2_sjr/concerns/models/actividad'
 
 module Cor1440Gen
   class Actividad < ActiveRecord::Base
-    include Mr519Gen::Modelo
-    include Sip::Localizacion
     include Sivel2Sjr::Concerns::Models::Actividad
 
-    def presenta_actividad_pob(atr)
+    def presenta(atr)
       case atr.to_s
       when 'ubicacion'
         lugar
@@ -34,13 +32,8 @@ module Cor1440Gen
         }
 
       else
-        presenta_gen(atr)
+        presenta_actividad(atr)
       end
-    end
-
-    def presenta(atr)
-      presenta_actividad(atr)
-      presenta_actividad_pob(atr)
     end
   end
 end

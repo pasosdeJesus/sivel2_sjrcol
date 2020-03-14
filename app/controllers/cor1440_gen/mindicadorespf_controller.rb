@@ -128,7 +128,7 @@ module Cor1440Gen
                  sinsexo, urlevsinsexo ]
       when 214 # R1I3 Número de personas
         actpf = res.actividadpf.where(id: 348)  # ? Relacionado con R1A1
-        contar = :porcentaje
+        #contar = :porcentaje
       when 215 # R1I4 porcentaje
         actpf = res.actividadpf.where(id: 348)  # ? Relacionada con R1A1
         contar = :porcentaje

@@ -60,7 +60,6 @@ module Cor1440Gen
 
       # Puede ser :personas, :actividades
       contar = :personas
-
       case ind.id
       # RESULTADO 1
       when 212 # R1I1 Número de beneficiarios directos e indirectos pero no asistentes

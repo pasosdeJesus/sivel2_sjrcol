@@ -19,7 +19,7 @@ module Cor1440Gen
         actpf = res.actividadpf.where(id: 349)  # R1A2
       when 214 # R1I3 Número de personas
         actpf = res.actividadpf.where(id: 348)  # ? Relacionado con R1A1
-        contar = :porcentaje
+        #contar = :porcentaje
       when 215 # R1I4 porcentaje
         actpf = res.actividadpf.where(id: 348)  # ? Relacionada con R1A1
         contar = :porcentaje
@@ -77,7 +77,6 @@ module Cor1440Gen
       else
         return [-1, '#', -1, '#', -1, '#', -1, '#']
       end
-
       resind = -1
       hombres = -1
       mujeres = -1
@@ -96,6 +95,17 @@ module Cor1440Gen
         where('fecha <= ?', ffin).
         pluck(:id).uniq
       if contar == :personas
+        if ind.id == 214
+          ## se escogen solo las actividades que tienen accion juridica con 
+          ## plan estrategico 1. actividadpf 125
+          lac = Cor1440Gen::Actividad.where(id: lac).
+            joins(:actividadpf).
+            where('cor1440_gen_actividadpf.id = 125').
+            pluck(:id).uniq
+        end
+        asistentes = Cor1440Gen::Asistencia.joins(:persona).
+          where(actividad_id: lac).
+          where('sip_persona.sexo = \'M\'').count
         ## Calcula Hombres 
         asistentes = Cor1440Gen::Asistencia.joins(:persona).
           where(actividad_id: lac).

@@ -8,6 +8,9 @@ module Sivel2Sjr
 
     include Sivel2Sjr::Concerns::Controllers::CasosController
 
+    before_action :set_caso, only: [:show, :edit, :update, :destroy],
+      exclude: [:poblacion_sexo_rangoedadac]
+    load_and_authorize_resource class: Sivel2Gen::Caso
 
     # Campos en filtro
     def campos_filtro1

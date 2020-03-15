@@ -22,9 +22,6 @@ Rails.application.routes.draw do
   resources :usuarios, path_names: { new: 'nuevo', edit: 'edita' } 
 
 
-  get "/actividades/poblacion_sexo_rangoedadac" => 'cor1440_gen/actividades#poblacion_sexo_rangoedadac',
-    as: :actividades_poblacion_sexo_rangoedadac
-
   patch "/actos/agregar" => 'sivel2_sjr/actos#agregar',
     as: :actos_agregar
   get "/actos/eliminar" => 'sivel2_sjr/actos#eliminar',

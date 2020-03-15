@@ -9,7 +9,7 @@ module Cor1440Gen
 
     before_action :set_actividad, 
       only: [:show, :edit, :update, :destroy],
-      exclude: [:contar, :poblacion_sexo_rango]
+      exclude: [:contar, :poblacion_sexo_rangoedadac]
     load_and_authorize_resource class: Cor1440Gen::Actividad
 
     Cor1440Gen.actividadg1 = "Funcionarias del SJR"

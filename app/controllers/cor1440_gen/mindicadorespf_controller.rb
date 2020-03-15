@@ -125,7 +125,6 @@ module Cor1440Gen
           where(:'sivel2_sjr_actividad_casosjr.actividad_id' => lac).
           where('fechadesagregacion IS NULL OR fechadesagregacion > ?', ffin).
           where.not(:'sip_persona.id' => idscontactos).uniq.count
-        byebug
         hombres = asistentes + benef_dir + benef_indir
 
         ## CLACULA MUJERES

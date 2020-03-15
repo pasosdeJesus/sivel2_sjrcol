@@ -19,7 +19,6 @@ module Cor1440Gen
         actpf = res.actividadpf.where(id: 349)  # R1A2
       when 214 # R1I3 Número de personas
         actpf = res.actividadpf.where(id: 348)  # ? Relacionado con R1A1
-        #contar = :porcentaje
       when 215 # R1I4 porcentaje
         actpf = res.actividadpf.where(id: 348)  # ? Relacionada con R1A1
         contar = :porcentaje
@@ -116,7 +115,7 @@ module Cor1440Gen
           joins('JOIN sivel2_sjr_actividad_casosjr ON casosjr_id=sivel2_sjr_casosjr.id_caso').
           where('sip_persona.sexo = \'M\'').
           where(:'sivel2_sjr_actividad_casosjr.actividad_id' => lac)
-        benef_dir = contactos.count
+        benef_dir = contactos.uniq.count
         idscontactos = contactos.pluck(:contacto_id).uniq
         benef_indir =
           Sivel2Sjr::Victimasjr.joins(:victima).
@@ -125,8 +124,8 @@ module Cor1440Gen
           where('sip_persona.sexo = \'M\'').
           where(:'sivel2_sjr_actividad_casosjr.actividad_id' => lac).
           where('fechadesagregacion IS NULL OR fechadesagregacion > ?', ffin).
-          where.not(:'sip_persona.id' => idscontactos).count
-
+          where.not(:'sip_persona.id' => idscontactos).uniq.count
+        byebug
         hombres = asistentes + benef_dir + benef_indir
 
         ## CLACULA MUJERES
@@ -140,7 +139,7 @@ module Cor1440Gen
           joins('JOIN sivel2_sjr_actividad_casosjr ON casosjr_id=sivel2_sjr_casosjr.id_caso').
           where('sip_persona.sexo = \'F\'').
           where(:'sivel2_sjr_actividad_casosjr.actividad_id' => lac)
-        benef_dir = contactos.count
+        benef_dir = contactos.uniq.count
         idscontactos = contactos.pluck(:contacto_id).uniq
         benef_indir =
           Sivel2Sjr::Victimasjr.joins(:victima).
@@ -149,7 +148,7 @@ module Cor1440Gen
           where('sip_persona.sexo = \'F\'').
           where(:'sivel2_sjr_actividad_casosjr.actividad_id' => lac).
           where('fechadesagregacion IS NULL OR fechadesagregacion > ?', ffin).
-          where.not(:'sip_persona.id' => idscontactos).count
+          where.not(:'sip_persona.id' => idscontactos).uniq.count
 
         mujeres = asistentes + benef_dir + benef_indir
 
@@ -163,7 +162,7 @@ module Cor1440Gen
           joins('JOIN sivel2_sjr_actividad_casosjr ON casosjr_id=sivel2_sjr_casosjr.id_caso').
           where('sip_persona.sexo <> \'M\' AND sip_persona.sexo <> \'F\'').
           where(:'sivel2_sjr_actividad_casosjr.actividad_id' => lac)
-        benef_dir = contactos.count
+        benef_dir = contactos.uniq.count
         idscontactos = contactos.pluck(:contacto_id).uniq
         benef_indir =
           Sivel2Sjr::Victimasjr.joins(:victima).
@@ -172,7 +171,7 @@ module Cor1440Gen
           where('sip_persona.sexo <> \'M\' AND sip_persona.sexo <> \'F\'').
           where(:'sivel2_sjr_actividad_casosjr.actividad_id' => lac).
           where('fechadesagregacion IS NULL OR fechadesagregacion > ?', ffin).
-          where.not(:'sip_persona.id' => idscontactos).count
+          where.not(:'sip_persona.id' => idscontactos).uniq.count
 
         sinsexo = asistentes + benef_dir + benef_indir
 

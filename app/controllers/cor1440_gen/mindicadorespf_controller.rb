@@ -8,6 +8,79 @@ module Cor1440Gen
     def mideindicador_PRM20(ind, fini, ffin)
       res = ind.resultadopf
       actpf = [] 
+      
+      resind = -1
+      hombres = -1
+      mujeres = -1
+      sinsexo = -1
+      
+      def calcula_lac(actpf, fini, ffin)
+        lac = Cor1440Gen::Actividad.joins(:actividadpf).
+          where('cor1440_gen_actividadpf.id=?', actpf.take.id).
+          where('fecha >= ?', fini).
+          where('fecha <= ?', ffin).
+          pluck(:id).uniq
+      end
+
+      def calcula_benef_hombres(lac, ffin)
+        contactos =
+          Sivel2Sjr::Casosjr.
+          joins('JOIN sip_persona ON sip_persona.id=sivel2_sjr_casosjr.contacto_id').
+          joins('JOIN sivel2_sjr_actividad_casosjr ON casosjr_id=sivel2_sjr_casosjr.id_caso').
+          where('sip_persona.sexo = \'M\'').
+          where(:'sivel2_sjr_actividad_casosjr.actividad_id' => lac)
+        benef_dir = contactos.uniq.count
+        idscontactos = contactos.pluck(:contacto_id).uniq
+        benef_indir =
+          Sivel2Sjr::Victimasjr.joins(:victima).
+          joins('JOIN sip_persona ON sip_persona.id=sivel2_gen_victima.id_persona').
+          joins('JOIN sivel2_sjr_actividad_casosjr ON casosjr_id=sivel2_gen_victima.id_caso').
+          where('sip_persona.sexo = \'M\'').
+          where(:'sivel2_sjr_actividad_casosjr.actividad_id' => lac).
+          where('fechadesagregacion IS NULL OR fechadesagregacion > ?', ffin).
+          where.not(:'sip_persona.id' => idscontactos).uniq.count
+        [benef_dir, benef_indir]
+      end
+
+      def calcula_benef_mujeres(lac, ffin)
+        contactos =
+          Sivel2Sjr::Casosjr.
+          joins('JOIN sip_persona ON sip_persona.id=sivel2_sjr_casosjr.contacto_id').
+          joins('JOIN sivel2_sjr_actividad_casosjr ON casosjr_id=sivel2_sjr_casosjr.id_caso').
+          where('sip_persona.sexo = \'F\'').
+          where(:'sivel2_sjr_actividad_casosjr.actividad_id' => lac)
+        benef_dir = contactos.uniq.count
+        idscontactos = contactos.pluck(:contacto_id).uniq
+        benef_indir =
+          Sivel2Sjr::Victimasjr.joins(:victima).
+          joins('JOIN sip_persona ON sip_persona.id=sivel2_gen_victima.id_persona').
+          joins('JOIN sivel2_sjr_actividad_casosjr ON casosjr_id=sivel2_gen_victima.id_caso').
+          where('sip_persona.sexo = \'F\'').
+          where(:'sivel2_sjr_actividad_casosjr.actividad_id' => lac).
+          where('fechadesagregacion IS NULL OR fechadesagregacion > ?', ffin).
+          where.not(:'sip_persona.id' => idscontactos).uniq.count
+        [benef_dir, benef_indir]
+      end
+
+      def calcula_benef_sinsexo(lac, ffin)
+        contactos = 
+          Sivel2Sjr::Casosjr.
+          joins('JOIN sip_persona ON sip_persona.id=sivel2_sjr_casosjr.contacto_id').
+          joins('JOIN sivel2_sjr_actividad_casosjr ON casosjr_id=sivel2_sjr_casosjr.id_caso').
+          where('sip_persona.sexo <> \'M\' AND sip_persona.sexo <> \'F\'').
+          where(:'sivel2_sjr_actividad_casosjr.actividad_id' => lac)
+        benef_dir = contactos.uniq.count
+        idscontactos = contactos.pluck(:contacto_id).uniq
+        benef_indir =
+          Sivel2Sjr::Victimasjr.joins(:victima).
+          joins('JOIN sip_persona ON sip_persona.id=sivel2_gen_victima.id_persona').
+          joins('JOIN sivel2_sjr_actividad_casosjr ON casosjr_id=sivel2_gen_victima.id_caso').
+          where('sip_persona.sexo <> \'M\' AND sip_persona.sexo <> \'F\'').
+          where(:'sivel2_sjr_actividad_casosjr.actividad_id' => lac).
+          where('fechadesagregacion IS NULL OR fechadesagregacion > ?', ffin).
+          where.not(:'sip_persona.id' => idscontactos).uniq.count
+        [benef_dir, benef_indir]
+      end
 
       # Puede ser :personas, :actividades
       contar = :personas
@@ -15,6 +88,22 @@ module Cor1440Gen
       # RESULTADO 1
       when 212 # R1I1 Número de personas
         actpf = res.actividadpf.where(id: 348)  # R1A1
+        lac = calcula_lac(actpf, fini, ffin)
+        hombrescasos = calcula_benef_hombres(lac, ffin)
+        mujerescasos = calcula_benef_mujeres(lac, ffin)
+        sinsexocasos = calcula_benef_sinsexo(lac, ffin)
+        hombres = hombrescasos[0] + hombrescasos[1]
+        mujeres = mujerescasos[0] + mujerescasos[1]
+        sinsexo = sinsexocasos[0] + sinsexocasos[1]
+        benef_dirtotal = hombrescasos[0] + mujerescasos[0] + sinsexocasos[0]
+        benef_indirtotal = hombrescasos[1] + mujerescasos[1] + sinsexocasos[1]
+        resind = hombres + mujeres + sinsexo
+        if lac.count > 0
+          urlevrind = cor1440_gen.actividades_url +
+            '?filtro[busid]='+lac.join(',')
+        end
+        return [ resind, urlevrind, benef_dirtotal, '#', benef_indirtotal, '#', -1, '#']
+
       when 213 # R1I2  Número de personas
         actpf = res.actividadpf.where(id: 349)  # R1A2
       when 214 # R1I3 Número de personas
@@ -78,10 +167,6 @@ module Cor1440Gen
         return [-1, '#', -1, '#', -1, '#', -1, '#']
       end
 
-      resind = -1
-      hombres = -1
-      mujeres = -1
-      sinsexo = -1
       if actpf.count == 0
         puts "No hay actividadpf para #{ind.id}"
         return [-1, '#', -1, '#', -1, '#', -1, '#']
@@ -90,81 +175,44 @@ module Cor1440Gen
         puts "Hay más de una actividadpf para #{ind.id}"
         return [-1, '#', -1, '#', -1, '#', -1, '#']
       end
-      lac = Cor1440Gen::Actividad.joins(:actividadpf).
-        where('cor1440_gen_actividadpf.id=?', actpf.take.id).
-        where('fecha >= ?', fini).
-        where('fecha <= ?', ffin).
-        pluck(:id).uniq
+      
+      lac = calcula_lac(actpf, fini, ffin)
       if contar == :personas
         ## Calcula Hombres 
-        asistentes = Cor1440Gen::Asistencia.joins(:persona).
+        hombres = Cor1440Gen::Asistencia.joins(:persona).
           where(actividad_id: lac).
           where('sip_persona.sexo = \'M\'').count
-        contactos =
-          Sivel2Sjr::Casosjr.
-          joins('JOIN sip_persona ON sip_persona.id=sivel2_sjr_casosjr.contacto_id').
-          joins('JOIN sivel2_sjr_actividad_casosjr ON casosjr_id=sivel2_sjr_casosjr.id_caso').
-          where('sip_persona.sexo = \'M\'').
-          where(:'sivel2_sjr_actividad_casosjr.actividad_id' => lac)
-        benef_dir = contactos.count
-        idscontactos = contactos.pluck(:contacto_id).uniq
-        benef_indir =
+        hombres +=
           Sivel2Sjr::Victimasjr.joins(:victima).
           joins('JOIN sip_persona ON sip_persona.id=sivel2_gen_victima.id_persona').
           joins('JOIN sivel2_sjr_actividad_casosjr ON casosjr_id=sivel2_gen_victima.id_caso').
           where('sip_persona.sexo = \'M\'').
           where(:'sivel2_sjr_actividad_casosjr.actividad_id' => lac).
-          where('fechadesagregacion IS NULL OR fechadesagregacion > ?', ffin).
-          where.not(:'sip_persona.id' => idscontactos).count
-
-        hombres = asistentes + benef_dir + benef_indir
+          where('fechadesagregacion IS NULL OR fechadesagregacion > ?', ffin).count
 
         ## CLACULA MUJERES
-
-        asistentes = Cor1440Gen::Asistencia.joins(:persona).
+        mujeres = Cor1440Gen::Asistencia.joins(:persona).
           where(actividad_id: lac).
           where('sip_persona.sexo = \'F\'').count
-        contactos =
-          Sivel2Sjr::Casosjr.
-          joins('JOIN sip_persona ON sip_persona.id=sivel2_sjr_casosjr.contacto_id').
-          joins('JOIN sivel2_sjr_actividad_casosjr ON casosjr_id=sivel2_sjr_casosjr.id_caso').
-          where('sip_persona.sexo = \'F\'').
-          where(:'sivel2_sjr_actividad_casosjr.actividad_id' => lac)
-        benef_dir = contactos.count
-        idscontactos = contactos.pluck(:contacto_id).uniq
-        benef_indir =
+        mujeres +=
           Sivel2Sjr::Victimasjr.joins(:victima).
           joins('JOIN sip_persona ON sip_persona.id=sivel2_gen_victima.id_persona').
           joins('JOIN sivel2_sjr_actividad_casosjr ON casosjr_id=sivel2_gen_victima.id_caso').
           where('sip_persona.sexo = \'F\'').
           where(:'sivel2_sjr_actividad_casosjr.actividad_id' => lac).
-          where('fechadesagregacion IS NULL OR fechadesagregacion > ?', ffin).
-          where.not(:'sip_persona.id' => idscontactos).count
-
-        mujeres = asistentes + benef_dir + benef_indir
+          where('fechadesagregacion IS NULL OR fechadesagregacion > ?', ffin).count
 
         ## CALCULA SIN SEXO
-        asistentes = Cor1440Gen::Asistencia.joins(:persona).
+        sinsexo = Cor1440Gen::Asistencia.joins(:persona).
           where(actividad_id: lac).
           where('sip_persona.sexo <> \'M\' AND sip_persona.sexo <> \'F\'').count
-        contactos = 
-          Sivel2Sjr::Casosjr.
-          joins('JOIN sip_persona ON sip_persona.id=sivel2_sjr_casosjr.contacto_id').
-          joins('JOIN sivel2_sjr_actividad_casosjr ON casosjr_id=sivel2_sjr_casosjr.id_caso').
-          where('sip_persona.sexo <> \'M\' AND sip_persona.sexo <> \'F\'').
-          where(:'sivel2_sjr_actividad_casosjr.actividad_id' => lac)
-        benef_dir = contactos.count
-        idscontactos = contactos.pluck(:contacto_id).uniq
-        benef_indir =
+        sinsexo +=
           Sivel2Sjr::Victimasjr.joins(:victima).
           joins('JOIN sip_persona ON sip_persona.id=sivel2_gen_victima.id_persona').
           joins('JOIN sivel2_sjr_actividad_casosjr ON casosjr_id=sivel2_gen_victima.id_caso').
           where('sip_persona.sexo <> \'M\' AND sip_persona.sexo <> \'F\'').
           where(:'sivel2_sjr_actividad_casosjr.actividad_id' => lac).
-          where('fechadesagregacion IS NULL OR fechadesagregacion > ?', ffin).
-          where.not(:'sip_persona.id' => idscontactos).count
-
-        sinsexo = asistentes + benef_dir + benef_indir
+          where('fechadesagregacion IS NULL OR fechadesagregacion > ?', ffin).count
 
         resind = hombres + mujeres + sinsexo
       elsif contar == :actividades

@@ -55,6 +55,24 @@ module Cor1440Gen
       return ac
     end
 
+    def atributos_index
+      [ :id,
+        :fecha_localizada,
+        :oficina,
+        :responsable,
+        :nombre,
+        :proyecto,
+        :actividadareas,
+        :proyectofinanciero,
+        :actividadpf,
+        :objetivo,
+        :ubicacion,
+        :poblacion_hombres,
+        :poblacion_mujeres,
+        :poblacion_sin_sexo,
+        :anexos
+      ]
+    end
 
     def atributos_show
       [ :id, 

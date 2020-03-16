@@ -75,6 +75,9 @@ es:
       "perfilmigracion":
         Perfilmigracion: Perfil de migración
         Perfilesmigracion: Perfiles de migración
+      "trivalentepositiva":
+        Trivalentepositiva: Trivalente Positiva
+        Trivalentespositiva: Trivalentes Positiva
       "sal7711_gen/articulo": 
         texto: Resumen
         fuenteprensa: Fuente de prensa

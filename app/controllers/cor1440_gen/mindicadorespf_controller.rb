@@ -106,28 +106,6 @@ module Cor1440Gen
 
       when 213 # R1I2  Número de personas
         actpf = res.actividadpf.where(id: 349)  # R1A2
-        lac = calcula_lac(actpf, fini, ffin)
-        hombrescasos = calcula_benef_hombres(lac, ffin)
-        mujerescasos = calcula_benef_mujeres(lac, ffin)
-        sinsexocasos = calcula_benef_sinsexo(lac, ffin)
-        hombresasistentes = Cor1440Gen::Asistencia.joins(:persona).
-          where(actividad_id: lac).
-          where('sip_persona.sexo = \'M\'').uniq.count
-        hombres = hombresasistentes + hombrescasos[0] + hombrescasos[1]
-        mujeresasistentes = Cor1440Gen::Asistencia.joins(:persona).
-          where(actividad_id: lac).
-          where('sip_persona.sexo = \'F\'').uniq.count
-        mujeres = mujeresasistentes + mujerescasos[0] + mujerescasos[1]
-        sinsexoasistentes = Cor1440Gen::Asistencia.joins(:persona).
-          where(actividad_id: lac).
-          where('sip_persona.sexo <> \'M\' AND sip_persona.sexo <> \'F\'').count
-        sinsexo = sinsexoasistentes + sinsexocasos[0] + sinsexocasos[1]
-        resind = hombres + mujeres + sinsexo
-        if lac.count > 0
-          urlevrind = cor1440_gen.actividades_url +
-            '?filtro[busid]='+lac.join(',')
-        end
-        return [ resind, urlevrind, hombres, '#', mujeres, '#', sinsexo, '#']
       when 214 # R1I3 Número de personas
         actpf = res.actividadpf.where(id: 348)  # ? Relacionado con R1A1
         contar = :porcentaje

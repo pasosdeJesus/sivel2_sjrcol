@@ -105,7 +105,8 @@ module Cor1440Gen
           joins('JOIN sip_persona ON sip_persona.id=sivel2_gen_victima.id_persona').
           joins('JOIN sivel2_sjr_actividad_casosjr ON casosjr_id=sivel2_gen_victima.id_caso').
           where('sip_persona.sexo = \'M\'').
-          where(:'sivel2_sjr_actividad_casosjr.actividad_id' => lac).count
+          where(:'sivel2_sjr_actividad_casosjr.actividad_id' => lac).
+          where('fechadesagregacion IS NULL OR fechadesagregacion > ?', ffin).count
 
         mujeres = Cor1440Gen::Asistencia.joins(:persona).
           where(actividad_id: lac).
@@ -115,7 +116,8 @@ module Cor1440Gen
           joins('JOIN sip_persona ON sip_persona.id=sivel2_gen_victima.id_persona').
           joins('JOIN sivel2_sjr_actividad_casosjr ON casosjr_id=sivel2_gen_victima.id_caso').
           where('sip_persona.sexo = \'F\'').
-          where(:'sivel2_sjr_actividad_casosjr.actividad_id' => lac).count
+          where(:'sivel2_sjr_actividad_casosjr.actividad_id' => lac).
+          where('fechadesagregacion IS NULL OR fechadesagregacion > ?', ffin).count
 
         sinsexo = Cor1440Gen::Asistencia.joins(:persona).
           where(actividad_id: lac).
@@ -125,8 +127,8 @@ module Cor1440Gen
           joins('JOIN sip_persona ON sip_persona.id=sivel2_gen_victima.id_persona').
           joins('JOIN sivel2_sjr_actividad_casosjr ON casosjr_id=sivel2_gen_victima.id_caso').
           where('sip_persona.sexo <> \'M\' AND sip_persona.sexo <> \'F\'').
-          where(:'sivel2_sjr_actividad_casosjr.actividad_id' => lac).count
-
+          where(:'sivel2_sjr_actividad_casosjr.actividad_id' => lac).
+          where('fechadesagregacion IS NULL OR fechadesagregacion > ?', ffin).count
 
         resind = hombres + mujeres + sinsexo
       elsif contar == :actividades

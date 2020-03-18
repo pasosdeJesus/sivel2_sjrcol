@@ -128,7 +128,41 @@ module Cor1440Gen
                  sinsexo, urlevsinsexo ]
       when 214 # R1I3 Número de personas
         actpf = res.actividadpf.where(id: 348)  # ? Relacionado con R1A1
-        #contar = :porcentaje
+        if actpf.count == 0
+          puts 'Falta en marco logico actividadpf con id 348'
+          return [ -1, '#', -1, '#', -1, '#', -1, '#']
+        end
+        ## se escogen solo las actividades que tienen accion juridica con 
+        ## plan estrategico 1. actividadpf 125
+        lact = calcula_lac(actpf, fini, ffin)
+        lac = Cor1440Gen::Actividad.where(id: lact).
+          joins(:actividadpf).
+          where('cor1440_gen_actividadpf.id = 125').
+          pluck(:id).uniq
+        hombrescasos = calcula_benef_por_sexo(lac, 'M', ffin)
+        mujerescasos = calcula_benef_por_sexo(lac, 'F', ffin)
+        sinsexocasos = calcula_benef_por_sexo(lac, 'S', ffin)
+        benef_dir = hombrescasos[0] + mujerescasos[0] + sinsexocasos[0]
+        benef_indir = hombrescasos[1] + mujerescasos[1] + sinsexocasos[1]
+        resind = benef_dir.count + benef_indir.count
+        if lac.count > 0
+          urlevrind = cor1440_gen.actividades_url +
+            '?filtro[busid]='+lac.join(',')
+        end
+        urlevdir = '#'
+        if benef_dir.count > 0
+          urlevdir = sip.personas_url + '?filtro[busid]=' + benef_dir.join(',')
+        end
+        urlevindir = '#'
+        if benef_indir.count > 0
+          urlevindir = sip.personas_url + '?filtro[busid]=' + 
+            benef_indir.join(',')
+        end
+
+        return [ resind, urlevrind, 
+                 benef_dir, urlevdir, 
+                 benef_indir, urlevindir, 
+                 -1, '#' ]
       when 215 # R1I4 porcentaje
         actpf = res.actividadpf.where(id: 348)  # ? Relacionada con R1A1
         contar = :porcentaje

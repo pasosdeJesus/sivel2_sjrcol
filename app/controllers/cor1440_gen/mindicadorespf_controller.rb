@@ -24,6 +24,19 @@ module Cor1440Gen
           pluck(:id).uniq
       end
 
+      def calcula_poblacion_detabla(lac)
+        pob = Cor1440Gen::ActividadRangoedadac.
+          where(actividad_id: lac)
+        ml = pob[0].ml.nil? ? 0 : pob[0].ml
+        mr = pob[0].mr.nil? ? 0 : pob[0].mr
+        fl = pob[0].fl.nil? ? 0 : pob[0].fl
+        fr = pob[0].fr.nil? ? 0 : pob[0].fr
+        s = pob[0].s.nil? ? 0 : pob[0].s
+        hombres = ml + mr
+        mujeres = fl + fr
+        sinsexo = s
+        [hombres, mujeres, sinsexo]
+      end
       # Calcula beneficiarios diferentes con el sexo `sexo` no desagregados
       # antes de la fecha `ffin en casos beneficiarios de actividades con ids 
       # `lac`
@@ -140,31 +153,20 @@ module Cor1440Gen
           return [ -1, '#', -1, '#', -1, '#', -1, '#']
         end
         lac = calcula_lac(actpf, fini, ffin)
-        hombres = asistencia_por_sexo(lac, 'M')
-        mujeres = asistencia_por_sexo(lac, 'F')
-        sinsexo = asistencia_por_sexo(lac, 'S')
-        resind = hombres.count + mujeres.count + sinsexo.count
+        poblacion = calcula_poblacion_detabla(lac)
+        hombres = poblacion[0]
+        mujeres = poblacion[1]
+        sinsexo = poblacion[2]
+        resind = hombres + mujeres + sinsexo
         if lac.count > 0
           urlevrind = cor1440_gen.actividades_url +
             '?filtro[busid]='+lac.join(',')
         end
-        if hombres.count > 0
-          urlevhombres = sip.personas_url + '?filtro[busid]=' + 
-            hombres.join(',')
-        end
-        if mujeres.count > 0
-          urlevmujeres = sip.personas_url + '?filtro[busid]=' + 
-            mujeres.join(',')
-        end
-        if sinsexo.count > 0
-          urlevsinsexo= sip.personas_url + '?filtro[busid]=' + 
-            sinsexo.join(',')
-        end
 
-        return [ resind, urlevrind, 
-                 hombres.count, urlevhombres,
-                 mujeres.count, urlevmujeres,
-                 sinsexo, urlevsinsexo ]
+        return [ resind, urlevrind,
+                 hombres, '#',
+                 mujeres, '#',
+                 sinsexo, '#']
 
       when 217 # R1I6 Número de estrategias
         actpf = res.actividadpf.where(id: 351)  # R1A4

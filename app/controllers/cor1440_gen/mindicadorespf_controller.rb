@@ -135,6 +135,37 @@ module Cor1440Gen
         contar = :porcentaje
       when 216 # R1I5 Número de personas
         actpf = res.actividadpf.where(id: 350)  # R1A3
+        if actpf.count == 0
+          puts 'Falta en marco logico actividadpf con id 350'
+          return [ -1, '#', -1, '#', -1, '#', -1, '#']
+        end
+        lac = calcula_lac(actpf, fini, ffin)
+        hombres = asistencia_por_sexo(lac, 'M')
+        mujeres = asistencia_por_sexo(lac, 'F')
+        sinsexo = asistencia_por_sexo(lac, 'S')
+        resind = hombres.count + mujeres.count + sinsexo.count
+        if lac.count > 0
+          urlevrind = cor1440_gen.actividades_url +
+            '?filtro[busid]='+lac.join(',')
+        end
+        if hombres.count > 0
+          urlevhombres = sip.personas_url + '?filtro[busid]=' + 
+            hombres.join(',')
+        end
+        if mujeres.count > 0
+          urlevmujeres = sip.personas_url + '?filtro[busid]=' + 
+            mujeres.join(',')
+        end
+        if sinsexo.count > 0
+          urlevsinsexo= sip.personas_url + '?filtro[busid]=' + 
+            sinsexo.join(',')
+        end
+
+        return [ resind, urlevrind, 
+                 hombres.count, urlevhombres,
+                 mujeres.count, urlevmujeres,
+                 sinsexo, urlevsinsexo ]
+
       when 217 # R1I6 Número de estrategias
         actpf = res.actividadpf.where(id: 351)  # R1A4
         contar = :actividades

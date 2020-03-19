@@ -5,6 +5,7 @@ require 'application_system_test_case'
 class AccesoTest < ApplicationSystemTestCase
 
   test "puede crear caso" do
+    skip
     @usuario = Usuario.create(PRUEBA_USUARIO)
     visit new_usuario_session_path 
     fill_in "Usuario", with: @usuario.nusuario

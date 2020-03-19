@@ -18,6 +18,7 @@ class CasoconjsTest < ApplicationSystemTestCase
   end
 
   test "puede crear caso con datos mínimos" do
+    skip
     visit '/casos/nuevo'
     @numcaso=find_field('Código').value
 

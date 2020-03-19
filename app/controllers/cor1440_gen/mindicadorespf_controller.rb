@@ -185,6 +185,56 @@ module Cor1440Gen
         actpf = res.actividadpf.where(id: 355)  # R2A3 + R2A4
       when 222 # R2I4 Número de mujeres gestantes o lactantes
         actpf = res.actividadpf.where(id: 357)  # R2A5
+        if actpf.count == 0
+          puts 'Falta en marco logico actividadpf con id 348'
+          return [ -1, '#', -1, '#', -1, '#', -1, '#']
+        end
+        lac = calcula_lac(actpf, fini, ffin)
+        mujerescasos = calcula_benef_por_sexo(lac, 'F', ffin)
+        sinsexocasos = calcula_benef_por_sexo(lac, 'S', ffin)
+        benef_dir = mujerescasos[0] + sinsexocasos[0]
+        benef_indir = mujerescasos[1] + sinsexocasos[1]
+
+        def calcula_maternidad(benef, idmat)
+          meternidad = Sivel2Gen::Victima.
+            joins('JOIN sivel2_sjr_victimasjr ON sivel2_gen_victima.id=sivel2_sjr_victimasjr.id_victima').
+            joins('JOIN sip_persona ON sip_persona.id=sivel2_gen_victima.id_persona').
+            joins('JOIN sivel2_sjr_actividad_casosjr ON casosjr_id=sivel2_gen_victima.id_caso').
+            where(:'sip_persona.id' => benef).
+            where(:'sivel2_sjr_victimasjr.id_maternidad' => idmat).pluck('id_persona').uniq
+        end
+
+        lact_contactos = calcula_maternidad(benef_dir, 2)      
+        lact_familiares = calcula_maternidad(benef_indir, 2)      
+        gest_contactos = calcula_maternidad(benef_dir, 1)      
+        gest_familiares = calcula_maternidad(benef_indir, 1)
+        
+        lact_total = lact_contactos.count + lact_familiares.count      
+        gest_total = (gest_contactos.count + gest_familiares.count) * 2
+        
+        resind = lact_total + gest_total
+        benef_dir = lact_contactos + gest_contactos 
+        benef_indir = lact_familiares + gest_familiares
+
+        if lac.count > 0
+          urlevrind = cor1440_gen.actividades_url +
+            '?filtro[busid]='+lac.join(',')
+        end
+        urlevdir = '#'
+        if benef_dir.count > 0
+          urlevdir = sip.personas_url + '?filtro[busid]=' + benef_dir.join(',')
+        end
+        urlevindir = '#'
+        if benef_indir.count > 0
+          urlevindir = sip.personas_url + '?filtro[busid]=' + 
+            benef_indir.join(',')
+        end
+
+        return [ resind, urlevrind, 
+                 benef_dir, urlevdir, 
+                 benef_indir, urlevindir, 
+                 -1, '#' ]
+
       when 223 # R2I5 Número de personas que reciben acompañamiento psic
         actpf = res.actividadpf.where(id: 358)  # R2A6
       when 224 # R2I6 Número de personas que participan

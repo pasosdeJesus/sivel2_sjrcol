@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: 1b532267d565dcb2f4d8ae602116ac55447a5c01
+  revision: c6fec7c938e719b6c6496f5b52bb2acb2bed3d37
   specs:
     cor1440_gen (1.0b3)
       devise
@@ -31,7 +31,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: aa3ac41766ea536988d76f24afe7f476180e64fb
+  revision: f2ce134f5ef22230a438fd3eb8b747978e0211a3
   specs:
     sal7711_gen (1.0.b2)
       rails
@@ -47,7 +47,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 91abf8e97214e187a09755ea412a832d5590d018
+  revision: 6ffb355626f4c358c0c337f6a6d05c221e3f26d3
   specs:
     sip (2.0.b10)
       cancancan
@@ -65,7 +65,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 2e9e8461371ab71b34b99fb487b5d5101b6f07df
+  revision: 189495387667a555f0cfa3c11a80f275cd68857d
   specs:
     sivel2_gen (2.0b10)
       devise
@@ -312,6 +312,7 @@ GEM
     selenium-webdriver (3.142.7)
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
+    semantic_range (2.3.0)
     simple_form (5.0.2)
       actionpack (>= 5.0)
       activemodel (>= 5.0)
@@ -350,10 +351,11 @@ GEM
       activemodel (>= 6.0.0)
       bindex (>= 0.4.0)
       railties (>= 6.0.0)
-    webpacker (4.2.2)
-      activesupport (>= 4.2)
+    webpacker (5.0.0)
+      activesupport (>= 5.2)
       rack-proxy (>= 0.6.1)
-      railties (>= 4.2)
+      railties (>= 5.2)
+      semantic_range (>= 2.3.0)
     websocket-driver (0.7.1)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.4)
@@ -414,4 +416,4 @@ DEPENDENCIES
   will_paginate
 
 BUNDLED WITH
-   2.1.2
+   2.1.4

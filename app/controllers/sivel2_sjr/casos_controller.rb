@@ -8,6 +8,9 @@ module Sivel2Sjr
 
     include Sivel2Sjr::Concerns::Controllers::CasosController
 
+    before_action :set_caso, only: [:show, :edit, :update, :destroy],
+      exclude: [:poblacion_sexo_rangoedadac]
+    load_and_authorize_resource class: Sivel2Gen::Caso
 
     # Campos en filtro
     def campos_filtro1
@@ -74,13 +77,6 @@ module Sivel2Sjr
       sivel2_sjr_destroy
     end
 
-     # GET casos/mapaosm
-    def mapaosm
-      @fechadesde = Sip::FormatoFechaHelper.inicio_semestre(Date.today - 182)
-      @fechahasta = Sip::FormatoFechaHelper.fin_semestre(Date.today - 182)
-      render 'mapaosm', layout: 'application'
-    end
-
     def otros_params_respuesta
       [
         :accionjuridica_respuesta_attributes => [
@@ -124,6 +120,12 @@ module Sivel2Sjr
           :_destroy
         ]
       ]
+    end
+
+    def importa_dato(datosent, datossal, menserror, registro = nil, opciones = {})
+      importa_dato_gen(datosent, datossal, menserror, registro, opciones)
+      # byebug
+      # Aqui si el parametro incluia crear caso, crearlo
     end
 
   end

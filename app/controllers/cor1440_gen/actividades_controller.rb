@@ -9,7 +9,7 @@ module Cor1440Gen
 
     before_action :set_actividad, 
       only: [:show, :edit, :update, :destroy],
-      exclude: [:contar, :poblacion_sexo_rango]
+      exclude: [:contar, :poblacion_sexo_rangoedadac]
     load_and_authorize_resource class: Cor1440Gen::Actividad
 
     Cor1440Gen.actividadg1 = "Funcionarias del SJR"
@@ -55,6 +55,24 @@ module Cor1440Gen
       return ac
     end
 
+    def atributos_index
+      [ :id,
+        :fecha_localizada,
+        :oficina,
+        :responsable,
+        :nombre,
+        :proyecto,
+        :actividadareas,
+        :proyectofinanciero,
+        :actividadpf,
+        :objetivo,
+        :ubicacion,
+        :poblacion_hombres,
+        :poblacion_mujeres,
+        :poblacion_sin_sexo,
+        :anexos
+      ]
+    end
 
     def atributos_show
       [ :id, 

@@ -162,8 +162,8 @@ es:
         statusmigratorio: Estatus migratorio
         perfilmigracion: Perfil de migración
       "sivel2_sjr/motivosjr": 
-        Motivosjr: Servicio y Asesoria del SJR
-        Motivossjr: Servicios y Asesorias del SJR
+        Motivosjr: Servicio y Asesoria del JRS
+        Motivossjr: Servicios y Asesorias del JRS
         "{:derecho_ids=>[]}": Derechos relacionados
       "sivel2_sjr/personadesea": 
         Personadesea: Persona desea
@@ -179,18 +179,18 @@ es:
         descamp: Descripción o ampliación del caso
         descatencion: Descripción de la atención
         detalleal: Detalle asesoría jurídica
-        detallemotivo: Detalle servicios y asesorias del SJR
+        detallemotivo: Detalle servicios y asesorias del JRS
         difobsprog: Dificultades y Observaciones respecto a Respuesta del Estado
         efectividad: Efectividad en la acción
         fechaultima: Fecha última prorroga
-        gestionessjr: Gestiones del SJR
+        gestionessjr: Gestiones del JRS
         informacionder: Se brindó información
         institucionayes: Instituciones que ayudaron
         lugar: Lugar solicitud turno
         lugarultima: Lugar última prorroga
         montoprorrogas: Monto prorrogas
         montoal: Monto S. judicial
-        motivosjr: Otros servicios y asesorias del SJR
+        motivosjr: Otros servicios y asesorias del JRS
         numprorrogas: Número de prorrogas
         observaciones: Observaciones del caso
         orientaciones: Recomendaciones
@@ -200,5 +200,5 @@ es:
         sesionatencion: "respuesta"
         turno: Turno próxima prorroga
         verifcper: Verificación compromisos persona
-        verifcsjr: Verificación compromisos SJR
+        verifcsjr: Verificación compromisos JRS
 

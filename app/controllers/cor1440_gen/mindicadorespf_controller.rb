@@ -127,7 +127,7 @@ module Cor1440Gen
                  mujeres.count, urlevmujeres,
                  sinsexo, urlevsinsexo ]
       when 214 # R1I3 Número de personas
-        actpf = res.actividadpf.where(id: 348)  # ? Relacionado con R1A1
+        actpf = res.actividadpf.where(id: 348)  
         if actpf.count == 0
           puts 'Falta en marco logico actividadpf con id 348'
           return [ -1, '#', -1, '#', -1, '#', -1, '#']

@@ -225,7 +225,7 @@ class Ability < Sivel2Sjr::Ability
       case usuario.rol 
       when Ability::ROLINV
         #cannot :buscar, Sivel2Gen::Caso
-        can :read, Sivel2Gen::Caso, 
+        can [:read, :index], Sivel2Gen::Caso, 
           etiqueta: { id: usuario.etiqueta.map(&:id) }
 
       when Ability::ROLANALIPRENSA

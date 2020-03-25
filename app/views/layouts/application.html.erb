@@ -11,12 +11,14 @@
   <%= grupo_menus do %>
     <% if !current_usuario.nil? %>
 
-      <% if can? :read, Sivel2Gen::Caso then %>
+      <% if can? :index, Sivel2Gen::Caso then %>
         <%= despliega_abajo "Casos" do %>
           <%= opcion_menu "Listado", sivel2_gen.casos_path, 
             {desplegable: true} %>
-          <%= opcion_menu "Casos sobre Open Street Maps",
-            sivel2_sjr.casos_mapaosm_path, desplegable: true %>
+          <% if can? :mapaosm, Sivel2Gen::Caso then %>
+            <%= opcion_menu "Casos sobre Open Street Maps",
+              sivel2_sjr.casos_mapaosm_path, desplegable: true %>
+          <% end %>
           <% if can? :edit, Sivel2Gen::Caso then %>
             <%= opcion_menu "Nuevo", sivel2_gen.new_caso_path, desplegable: true %>
             <%= opcion_menu "Validaciones", sivel2_gen.validarcasos_path, desplegable: true %>
@@ -51,13 +53,19 @@
           <%= opcion_menu 'Reporte de actividades con casos', 
             sivel2_sjr.consactividadcaso_path, 
             desplegable: true %>
-          <%= opcion_menu "Convenios Financiados", 
-            cor1440_gen.proyectosfinancieros_path, desplegable: true %>
-          <%= opcion_menu "Medición de indicadores", 
-            cor1440_gen.mindicadorespf_path, desplegable: true %>
-          <%= opcion_menu "Informes", cor1440_gen.informes_path, desplegable: true %>
-          <%= opcion_menu "Actores sociales", sip.actoressociales_path, desplegable: true %>
-          <%= opcion_menu "Beneficiarios", sip.personas_path, desplegable: true %>
+          <% if can? :read, Cor1440Gen::Proyectofinanciero then %>
+            <%= opcion_menu "Convenios Financiados", 
+              cor1440_gen.proyectosfinancieros_path, desplegable: true %>
+            <%= opcion_menu "Medición de indicadores", 
+              cor1440_gen.mindicadorespf_path, desplegable: true %>
+            <%= opcion_menu "Informes", cor1440_gen.informes_path, desplegable: true %>
+          <% end %>
+          <% if can? :read, Sip::Actorsocial then %>
+            <%= opcion_menu "Actores sociales", sip.actoressociales_path, desplegable: true %>
+          <% end %>
+          <% if can? :read, Sip::Persona then %>
+            <%= opcion_menu "Beneficiarios", sip.personas_path, desplegable: true %>
+          <% end %>
         <% end %>
       <% end %>
 

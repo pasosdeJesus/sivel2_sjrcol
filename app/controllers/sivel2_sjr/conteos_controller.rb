@@ -146,7 +146,7 @@ class Sivel2Sjr::ConteosController < ApplicationController
 
 
     respond_to do |format|
-      format.html { }
+      format.html { render 'vacios' }
       format.json { head :no_content }
       format.js   { render 'vacios' }
     end

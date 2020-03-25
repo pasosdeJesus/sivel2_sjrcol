@@ -12,6 +12,7 @@ module Sivel2Sjr
       exclude: [:poblacion_sexo_rangoedadac]
     load_and_authorize_resource class: Sivel2Gen::Caso
 
+
     # Campos en filtro
     def campos_filtro1
       [:codigo,
@@ -42,6 +43,20 @@ module Sivel2Sjr
     end
 
     def asegura_camposdinamicos(registro, current_usuario_id)
+    end
+
+    def filtrar_ca(conscaso)
+      if current_usuario && current_usuario.rol == Ability::ROLINV
+        aeu = current_usuario.etiqueta_usuario.map { |eu| eu.etiqueta_id }
+        conscaso = conscaso.joins(
+          'JOIN sivel2_gen_caso_etiqueta as cet ON cet.id_caso=id_caso')
+        if aeu.count == 0
+          conscaso = conscaso.where('FALSE')
+        else
+          conscaso = conscaso.where('cet.id_etiqueta IN [?]', aeu.join(','))
+        end
+      end
+      return conscaso
     end
 
     # Tipo de reporte Resolución 1612

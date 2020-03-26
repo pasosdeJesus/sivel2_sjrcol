@@ -373,14 +373,11 @@
 	<td>link=Tablas Básicas<datalist><option>link=Tablas Básicas</option></datalist></td>
 	<td></td>
 </tr>
-<tr>
-	<td>click</td>
-	<td>link=Ayudas del SJR<datalist><option>link=Ayudas del SJR</option></datalist></td>
-	<td></td>
+<tr><td>clickAt</td><td>link=Ayudas del JRS<datalist><option>link=Ayudas del JRS</option><option>//a[contains(text(),'Ayudas del JRS')]</option><option>//a[contains(@href, 'admin/ayudassjr')]</option><option>//li[9]/a</option></datalist></td><td>81,9</td>
 </tr>
 <tr><td>clickAt</td><td>xpath=(//a[contains(text(),'Nueva')])[3]<datalist><option>xpath=(//a[contains(text(),'Nueva')])[3]</option><option>//a[contains(@href, '/admin/ayudassjr/nueva')]</option><option>//div/a</option></datalist></td><td></td>
 </tr>
-<tr><td>assertText</td><td>css=h1<datalist><option>css=h1</option><option>//h1</option></datalist></td><td>Nueva Ayuda del SJR</td>
+<tr><td>assertText</td><td>css=h1<datalist><option>css=h1</option><option>//h1</option></datalist></td><td>Nueva Ayuda del JRS</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -404,7 +401,7 @@
 	<td>link=Eliminar<datalist><option>link=Eliminar</option></datalist></td>
 	<td></td>
 </tr>
-<tr><td>assertText</td><td>css=h1<datalist><option>css=h1</option><option>//h1</option></datalist></td><td>Ayudas del SJR</td>
+<tr><td>assertText</td><td>css=h1<datalist><option>css=h1</option><option>//h1</option></datalist></td><td>Ayudas del JRS</td>
 </tr>
 </tbody></table>
 <table cellpadding="1" cellspacing="1" border="1">
@@ -604,12 +601,12 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Como supo del SJR<datalist><option>link=Como supo del SJR</option></datalist></td>
+	<td>link=Como supo del JRS<datalist><option>link=Como supo del SJR</option><option>link=Como supo del JRS</option></datalist></td>
 	<td></td>
 </tr>
 <tr><td>clickAt</td><td>xpath=(//a[contains(text(),'Nueva')])[3]<datalist><option>xpath=(//a[contains(text(),'Nueva')])[3]</option><option>//a[contains(@href, '/admin/comosupos/nueva')]</option><option>//div/a</option></datalist></td><td>32,10</td>
 </tr>
-<tr><td>assertText</td><td>css=h1<datalist><option>css=h1</option><option>//h1</option></datalist></td><td>Nueva Como supo del SJR</td>
+<tr><td>assertText</td><td>css=h1<datalist><option>css=h1</option><option>//h1</option></datalist></td><td>Nueva Como supo del JRS</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -633,7 +630,7 @@
 	<td>link=Eliminar<datalist><option>link=Eliminar</option></datalist></td>
 	<td></td>
 </tr>
-<tr><td>assertText</td><td>css=h1<datalist><option>css=h1</option><option>//h1</option></datalist></td><td>Como supo del SJR</td>
+<tr><td>assertText</td><td>css=h1<datalist><option>css=h1</option><option>//h1</option></datalist></td><td>Como supo del JRS</td>
 </tr>
 </tbody></table>
 <table cellpadding="1" cellspacing="1" border="1">
@@ -2708,12 +2705,6 @@
 	<td>id=tviolencia_nombre<datalist><option>id=tviolencia_nombre</option></datalist></td>
 	<td>aaa</td>
 </tr>
-<tr><td>runScript</td><td>$('[type=number]').removeAttr('type')<datalist><option>$('[type=number]').removeAttr('type')</option><option>$('#rangoedad_limiteinferior').removeAttr('type')</option><option>$('#pais_codiso').removeAttr('type')</option></datalist></td><td></td>
-</tr>
-<tr><td>clickAt</td><td>id=tviolencia_id<datalist><option>id=tviolencia_id</option><option>name=tviolencia[id]</option><option>css=#tviolencia_id</option><option>//input[@id='tviolencia_id']</option><option>//form[@id='new_tviolencia_']/div[2]/input</option><option>//div[2]/input</option></datalist></td><td>88,8</td>
-</tr>
-<tr><td>type</td><td>id=tviolencia_id<datalist><option>id=tviolencia_id</option><option>name=tviolencia[id]</option><option>css=#tviolencia_id</option><option>//input[@id='tviolencia_id']</option><option>//form[@id='new_tviolencia_']/div[2]/input</option><option>//div[2]/input</option></datalist></td><td>4</td>
-</tr>
 <tr>
 	<td>type</td>
 	<td>id=tviolencia_nomcorto<datalist><option>id=tviolencia_nomcorto</option></datalist></td>
@@ -2737,6 +2728,12 @@
 	<td></td>
 </tr>
 <tr><td>assertText</td><td>css=h1<datalist><option>css=h1</option><option>//h1</option></datalist></td><td>Tipos de Violencia</td>
+</tr>
+<tr><td>clickAt</td><td>id=tviolencia_id<datalist><option>id=tviolencia_id</option><option>name=tviolencia[id]</option><option>css=#tviolencia_id</option><option>//input[@id='tviolencia_id']</option><option>//form[@id='new_tviolencia_']/div[2]/input</option><option>//div[2]/input</option></datalist></td><td>88,8</td>
+</tr>
+<tr><td>type</td><td>id=tviolencia_id<datalist><option>id=tviolencia_id</option><option>name=tviolencia[id]</option><option>css=#tviolencia_id</option><option>//input[@id='tviolencia_id']</option><option>//form[@id='new_tviolencia_']/div[2]/input</option><option>//div[2]/input</option></datalist></td><td>4</td>
+</tr>
+<tr><td>runScript</td><td>$('[type=number]').removeAttr('type')<datalist><option>$('[type=number]').removeAttr('type')</option><option>$('#rangoedad_limiteinferior').removeAttr('type')</option><option>$('#pais_codiso').removeAttr('type')</option></datalist></td><td></td>
 </tr>
 </tbody></table>
 <table cellpadding="1" cellspacing="1" border="1">

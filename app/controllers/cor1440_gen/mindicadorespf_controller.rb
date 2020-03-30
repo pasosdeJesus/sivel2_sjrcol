@@ -194,7 +194,7 @@ module Cor1440Gen
         sinsexocasos = calcula_benef_por_sexo(lac, 'S', ffin)
         benef_dir = mujerescasos[0] + sinsexocasos[0]
         benef_indir = mujerescasos[1] + sinsexocasos[1]
-
+        benef = benef_dir + benef_indir
         def calcula_maternidad(benef, idmat)
           meternidad = Sivel2Gen::Victima.
             joins('JOIN sivel2_sjr_victimasjr ON sivel2_gen_victima.id=sivel2_sjr_victimasjr.id_victima').
@@ -203,18 +203,42 @@ module Cor1440Gen
             where(:'sip_persona.id' => benef).
             where(:'sivel2_sjr_victimasjr.id_maternidad' => idmat).pluck('id_persona').uniq
         end
+        
+        def calcula_bebes(lac, ffin)
+          bebes = []
+          acti_ben = Hash.new
+          lac.each do |l|
+            mc = calcula_benef_por_sexo(l, 'F', ffin)
+            hc = calcula_benef_por_sexo(l, 'M', ffin)
+            sc = calcula_benef_por_sexo(l, 'S', ffin)
+            benef = mc[1] + hc[1] + sc[1]
+            if benef.any?
+              acti_ben[l] = benef
+            end
+          end
+          acti_ben.each do |li, benef|
+            fecha_act = Cor1440Gen::Actividad.find(li).fecha.to_s.split('-')
+            anio_ac = fecha_act[0].to_i
+            mes_ac = fecha_act[1].to_i
+            dia_ac = fecha_act[2].to_i
+            benef.each do |p|
+              per = Sip::Persona.find(p)
+              edad_ben = Sivel2Gen::RangoedadHelper.
+                edad_de_fechanac_fecha(per.anionac, per.mesnac, per.dianac, anio_ac, mes_ac, dia_ac)
+              if edad_ben == 0
+                bebes.push(per.id)
+              end
+            end
+          end
+          return bebes
+        end
 
-        lact_contactos = calcula_maternidad(benef_dir, 2)      
-        lact_familiares = calcula_maternidad(benef_indir, 2)      
-        gest_contactos = calcula_maternidad(benef_dir, 1)      
-        gest_familiares = calcula_maternidad(benef_indir, 1)
-        
-        lact_total = lact_contactos.count + lact_familiares.count      
-        gest_total = (gest_contactos.count + gest_familiares.count) * 2
-        
-        resind = lact_total + gest_total
-        benef_dir = lact_contactos + gest_contactos 
-        benef_indir = lact_familiares + gest_familiares
+        bebes_presentes = calcula_bebes(lac, ffin)
+        bebes_total = bebes_presentes.count
+        lact_total = calcula_maternidad(benef, 2).count
+        gestantes = calcula_maternidad(benef, 1).count
+        gest_total = gestantes * 2
+        resind = lact_total + gest_total + bebes_total
 
         if lac.count > 0
           urlevrind = cor1440_gen.actividades_url +
@@ -230,11 +254,10 @@ module Cor1440Gen
             benef_indir.join(',')
         end
 
-        return [ resind, urlevrind, 
-                 benef_dir, urlevdir, 
-                 benef_indir, urlevindir, 
+        return [ resind, urlevrind,
+                 lact_total, gest_total,
+                 bebes_total, urlevindir,
                  -1, '#' ]
-
       when 223 # R2I5 Número de personas que reciben acompañamiento psic
         actpf = res.actividadpf.where(id: 358)  # R2A6
       when 224 # R2I6 Número de personas que participan

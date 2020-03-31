@@ -152,7 +152,6 @@ module Cor1440Gen
                  benef_indir, urlevindir, 
                  -1, '#' ]
 
-          
       when 222 # R2I4 Número de mujeres gestantes o lactantes
         actpf = res.actividadpf.where(id: 357)  # R2A5
         if actpf.count == 0

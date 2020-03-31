@@ -77,28 +77,27 @@ module Cor1440Gen
           puts 'Falta en marco logico actividadpf con id 348'
           return [ -1, '#', -1, '#', -1, '#', -1, '#']
         end
-        lact = calcula_listado_ac(actpf, fini, ffin)
-        lac = lact.pluck(:id).uniq
+        idacs = calcula_listado_ac(actpf, fini, ffin)
         
-        def calcula_maternidad(lac, idmat)
+        def calcula_maternidad(idacs, idmat)
           meternidad = Sivel2Gen::Victima.
             joins('JOIN sivel2_sjr_victimasjr ON sivel2_gen_victima.id=sivel2_sjr_victimasjr.id_victima').
             joins('JOIN sip_persona ON sip_persona.id=sivel2_gen_victima.id_persona').
             joins('JOIN sivel2_sjr_actividad_casosjr ON casosjr_id=sivel2_gen_victima.id_caso').
-            where(:'sivel2_sjr_actividad_casosjr.actividad_id' => lac).
+            where(:'sivel2_sjr_actividad_casosjr.actividad_id' => idacs).
             where(:'sivel2_sjr_victimasjr.id_maternidad' => idmat).pluck('id_persona').uniq
         end
         
-        def calcula_bebes(lac, ffin)
+        def calcula_bebes(idacs, ffin)
           bebes = []
      
-          Cor1440Gen::Actividad.where(id: lac).each do |act|
+          Cor1440Gen::Actividad.where(id: idacs).each do |act|
             anio_ac = act.fecha.year
             mes_ac = act.fecha.month
             dia_ac = act.fecha.day
-            act.casos.each do |caso|
-              caso.victima.each do |victima|
-                if Sivel2Sjr::Casosjr.find(caso.id).contacto_id != victima.persona_id # Beneficiario
+            act.actividad_casosjr.each do |acaso|
+              acaso.casosjr.caso.victima.each do |victima|
+                if acaso.casosjr.contacto_id != victima.id_persona # Beneficiario
                   per = victima.persona
                   edad_ben = Sivel2Gen::RangoedadHelper.
                     edad_de_fechanac_fecha(per.anionac, per.mesnac, per.dianac, anio_ac, mes_ac, dia_ac)
@@ -112,26 +111,26 @@ module Cor1440Gen
           return bebes
         end
 
-        bebes_presentes = calcula_bebes(lac, ffin)
+        bebes_presentes = calcula_bebes(idacs, ffin)
         bebes_total = bebes_presentes.count
-        lact = calcula_maternidad(benef, 2)
-        lact_total = lact.count
-        gestantes = calcula_maternidad(benef, 1)
-        gest_total = gestantes.count * 2
-        resind = lact_total + gest_total + bebes_total
+        lactantes = calcula_maternidad(idacs, 2)
+        lactantes_total = lactantes.count
+        gest = calcula_maternidad(idacs, 1)
+        gest_total = gest.count * 2
+        resind = lactantes_total + gest_total + bebes_total
 
-        if lac.count > 0
+        if idacs.count > 0
           urlevrind = cor1440_gen.actividades_url +
-            '?filtro[busid]='+lac.join(',')
+            '?filtro[busid]=' + idacs.join(',')
         end
         urlevbebes = '#'
         if bebes_presentes.count > 0
           urlevbebes = sip.personas_url + '?filtro[busid]=' + bebes_presentes.join(',')
         end
         urlevlact = '#'
-        if lact.count > 0
+        if lactantes.count > 0
           urlevlact = sip.personas_url + '?filtro[busid]=' + 
-            lact.join(',')
+            lactantes.join(',')
         end
         urlevgest = '#'
         if gest.count > 0
@@ -140,7 +139,7 @@ module Cor1440Gen
         end
 
         return [ resind, urlevrind,
-                 lact_total, urlevlact,
+                 lactantes_total, urlevlact,
                  gest_total, urlevgest,
                  bebes_total, urlevbebes,
                ]

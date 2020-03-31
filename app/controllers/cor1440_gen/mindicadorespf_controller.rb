@@ -1,11 +1,12 @@
-require_dependency "cor1440_gen/concerns/controllers/mindicadorespf_controller"
+require_dependency "sivel2_sjr/concerns/controllers/mindicadorespf_controller"
 
 module Cor1440Gen
   class MindicadorespfController < Sip::ModelosController
 
-    include Cor1440Gen::Concerns::Controllers::MindicadorespfController
+    include Sivel2Sjr::Concerns::Controllers::MindicadorespfController
 
-    def mideindicador_PRM20(ind, fini, ffin)
+    # Indicadores de PRM20 que no tienen tipo
+    def mideindicador_PRM20(mind, ind, fini, ffin)
       res = ind.resultadopf
       actpf = [] 
       
@@ -14,119 +15,8 @@ module Cor1440Gen
       mujeres = -1
       sinsexo = -1
      
-      # Retorna listado de ids diferentes de 
-      # actividades con actividadpf actpf en un rango de tiempo 
-      def calcula_lac(actpf, fini, ffin)
-        lac = Cor1440Gen::Actividad.joins(:actividadpf).
-          where('cor1440_gen_actividadpf.id=?', actpf.take.id).
-          where('fecha >= ?', fini).
-          where('fecha <= ?', ffin).
-          pluck(:id).uniq
-      end
-
-      # Calcula beneficiarios diferentes con el sexo `sexo` no desagregados
-      # antes de la fecha `ffin en casos beneficiarios de actividades con ids 
-      # `lac`
-      # Retorna ids diferentes de beneficiarios directos y 
-      #   ids diferentes de beneficiarios indirectos
-      def calcula_benef_por_sexo(lac, sexo, ffin)
-        contactos =
-          Sivel2Sjr::Casosjr.
-          joins('JOIN sip_persona ON sip_persona.id=sivel2_sjr_casosjr.contacto_id').
-          joins('JOIN sivel2_sjr_actividad_casosjr ON casosjr_id=sivel2_sjr_casosjr.id_caso').
-          where(:'sip_persona.sexo' => sexo).
-          where(:'sivel2_sjr_actividad_casosjr.actividad_id' => lac)
-        idscontactos = contactos.pluck(:contacto_id).uniq
-        benef_indir =
-          Sivel2Gen::Victima.
-          joins('JOIN sivel2_sjr_victimasjr ON sivel2_gen_victima.id=sivel2_sjr_victimasjr.id_victima').
-          joins('JOIN sip_persona ON sip_persona.id=sivel2_gen_victima.id_persona').
-          joins('JOIN sivel2_sjr_actividad_casosjr ON casosjr_id=sivel2_gen_victima.id_caso').
-          where(:'sip_persona.sexo' => sexo).
-          where(:'sivel2_sjr_actividad_casosjr.actividad_id' => lac).
-          where('fechadesagregacion IS NULL OR fechadesagregacion > ?', ffin).
-          where.not(:'sip_persona.id' => idscontactos)
-        idsbenefindir = benef_indir.pluck('id_persona').uniq
-        [idscontactos, idsbenefindir]
-      end
-
-      # Cuenta personas unicas asistentes a actividades de listado lac 
-      # Retorna listado de ids diferentes
-      def asistencia_por_sexo(lac, sexo)
-        Cor1440Gen::Asistencia.joins(:persona).
-          where(actividad_id: lac).
-          where('sip_persona.sexo = ?', sexo).pluck(:persona_id).uniq
-      end
-
-      # Puede ser :personas, :actividades
-      contar = :personas
       case ind.id
-      # RESULTADO 1
-      when 212 # R1I1 Número de beneficiarios directos e indirectos pero no asistentes
-        actpf = res.actividadpf.where(id: 348)  # R1A1
-        if actpf.count == 0
-          puts 'Falta en marco logico actividadpf con id 348'
-          return [ -1, '#', -1, '#', -1, '#', -1, '#']
-        end
-        lac = calcula_lac(actpf, fini, ffin)
-        hombrescasos = calcula_benef_por_sexo(lac, 'M', ffin)
-        mujerescasos = calcula_benef_por_sexo(lac, 'F', ffin)
-        sinsexocasos = calcula_benef_por_sexo(lac, 'S', ffin)
-        benef_dir = hombrescasos[0] + mujerescasos[0] + sinsexocasos[0]
-        benef_indir = hombrescasos[1] + mujerescasos[1] + sinsexocasos[1]
-        resind = benef_dir.count + benef_indir.count
-        if lac.count > 0
-          urlevrind = cor1440_gen.actividades_url +
-            '?filtro[busid]='+lac.join(',')
-        end
-        urlevdir = '#'
-        if benef_dir.count > 0
-          urlevdir = sip.personas_url + '?filtro[busid]=' + benef_dir.join(',')
-        end
-        urlevindir = '#'
-        if benef_indir.count > 0
-          urlevindir = sip.personas_url + '?filtro[busid]=' + 
-            benef_indir.join(',')
-        end
-
-        return [ resind, urlevrind, 
-                 benef_dir, urlevdir, 
-                 benef_indir, urlevindir, 
-                 -1, '#' ]
-
-      when 213 # R1I2  Número de asistentes a actividades pero no de casos
-        actpf = res.actividadpf.where(id: 349)  # R1A2
-        if actpf.count == 0
-          puts 'Falta en marco logico actividadpf con id 349'
-          return [ -1, '#', -1, '#', -1, '#', -1, '#']
-        end
-        lac = calcula_lac(actpf, fini, ffin)
-        hombres = asistencia_por_sexo(lac, 'M')
-        mujeres = asistencia_por_sexo(lac, 'F')
-        sinsexo = asistencia_por_sexo(lac, 'S')
-        resind = hombres.count + mujeres.count + sinsexo.count
-        if lac.count > 0
-          urlevrind = cor1440_gen.actividades_url +
-            '?filtro[busid]='+lac.join(',')
-        end
-        if hombres.count > 0
-          urlevhombres = sip.personas_url + '?filtro[busid]=' + 
-            hombres.join(',')
-        end
-        if mujeres.count > 0
-          urlevmujeres = sip.personas_url + '?filtro[busid]=' + 
-            mujeres.join(',')
-        end
-        if sinsexo.count > 0
-          urlevsinsexo= sip.personas_url + '?filtro[busid]=' + 
-            sinsexo.join(',')
-        end
-
-        return [ resind, urlevrind, 
-                 hombres.count, urlevhombres,
-                 mujeres.count, urlevmujeres,
-                 sinsexo, urlevsinsexo ]
-      when 214 # R1I3 Número de personas
+      when 214 # R1I3 Número de personas (pueden ser repetidas)
         actpf = res.actividadpf.where(id: 348)  
         if actpf.count == 0
           puts 'Falta en marco logico actividadpf con id 348'
@@ -134,23 +24,23 @@ module Cor1440Gen
         end
         ## se escogen solo las actividades que tienen accion juridica con 
         ## plan estrategico 1. actividadpf 125
-        lact = calcula_lac(actpf, fini, ffin)
+        lact = calcula_listado_ac(actpf, fini, ffin)
         lac = Cor1440Gen::Actividad.where(id: lact).
           joins(:actividadpf).
           where('cor1440_gen_actividadpf.id = 125').
           pluck(:id).uniq
-        hombrescasos = calcula_benef_por_sexo(lac, 'M', ffin)
-        mujerescasos = calcula_benef_por_sexo(lac, 'F', ffin)
-        sinsexocasos = calcula_benef_por_sexo(lac, 'S', ffin)
+        hombrescasos = calcula_benef_por_sexo(lac, 'M', ffin, false)
+        mujerescasos = calcula_benef_por_sexo(lac, 'F', ffin, false)
+        sinsexocasos = calcula_benef_por_sexo(lac, 'S', ffin, false)
         benef_dir = hombrescasos[0] + mujerescasos[0] + sinsexocasos[0]
         benef_indir = hombrescasos[1] + mujerescasos[1] + sinsexocasos[1]
         resind = benef_dir.count + benef_indir.count
-        if lac.count > 0
+        if lac.count > 0 then
           urlevrind = cor1440_gen.actividades_url +
             '?filtro[busid]='+lac.join(',')
         end
         urlevdir = '#'
-        if benef_dir.count > 0
+        if benef_dir.count > 0 then
           urlevdir = sip.personas_url + '?filtro[busid]=' + benef_dir.join(',')
         end
         urlevindir = '#'
@@ -160,73 +50,62 @@ module Cor1440Gen
         end
 
         return [ resind, urlevrind, 
+                 benef_dir.count, urlevdir, 
+                 benef_indir.count, urlevindir, 
+                 -1, '#' ]
+      when 215 # R1I4 porcentaje
+        actpf = res.actividadpf.where(id: 348)  # Relacionada con R1A1
+        contar = :porcentaje
+
+        return [ resind, urlevrind, 
                  benef_dir, urlevdir, 
                  benef_indir, urlevindir, 
                  -1, '#' ]
-      when 215 # R1I4 porcentaje
-        actpf = res.actividadpf.where(id: 348)  # ? Relacionada con R1A1
-        contar = :porcentaje
+
       when 216 # R1I5 Número de personas
         actpf = res.actividadpf.where(id: 350)  # R1A3
-      when 217 # R1I6 Número de estrategias
-        actpf = res.actividadpf.where(id: 351)  # R1A4
-        contar = :actividades
-      when 218 # R1I7 Número de acciones
-        actpf = res.actividadpf.where(id: 352)  # R1A5
-        contar = :actividades
 
-      # RESULTADO 2
-      when 219 # R2I1 Número de centros de salud
-        actpf = res.actividadpf.where(id: 353)  # R2A1
-        contar = :actividades
-      when 220 # R2I2 Número de personas atendidas
-        actpf = res.actividadpf.where(id: 354)  # R2A2
-      when 221 # R2I3 Número de personas que reciben
-        actpf = res.actividadpf.where(id: 355)  # R2A3 + R2A4
+        return [ resind, urlevrind, 
+                 benef_dir, urlevdir, 
+                 benef_indir, urlevindir, 
+                 -1, '#' ]
+
+          
       when 222 # R2I4 Número de mujeres gestantes o lactantes
         actpf = res.actividadpf.where(id: 357)  # R2A5
         if actpf.count == 0
           puts 'Falta en marco logico actividadpf con id 348'
           return [ -1, '#', -1, '#', -1, '#', -1, '#']
         end
-        lac = calcula_lac(actpf, fini, ffin)
-        mujerescasos = calcula_benef_por_sexo(lac, 'F', ffin)
-        sinsexocasos = calcula_benef_por_sexo(lac, 'S', ffin)
-        benef_dir = mujerescasos[0] + sinsexocasos[0]
-        benef_indir = mujerescasos[1] + sinsexocasos[1]
-        benef = benef_dir + benef_indir
-        def calcula_maternidad(benef, idmat)
+        lact = calcula_listado_ac(actpf, fini, ffin)
+        lac = lact.pluck(:id).uniq
+        
+        def calcula_maternidad(lac, idmat)
           meternidad = Sivel2Gen::Victima.
             joins('JOIN sivel2_sjr_victimasjr ON sivel2_gen_victima.id=sivel2_sjr_victimasjr.id_victima').
             joins('JOIN sip_persona ON sip_persona.id=sivel2_gen_victima.id_persona').
             joins('JOIN sivel2_sjr_actividad_casosjr ON casosjr_id=sivel2_gen_victima.id_caso').
-            where(:'sip_persona.id' => benef).
+            where(:'sivel2_sjr_actividad_casosjr.actividad_id' => lac).
             where(:'sivel2_sjr_victimasjr.id_maternidad' => idmat).pluck('id_persona').uniq
         end
         
         def calcula_bebes(lac, ffin)
           bebes = []
-          acti_ben = Hash.new
-          lac.each do |l|
-            mc = calcula_benef_por_sexo(l, 'F', ffin)
-            hc = calcula_benef_por_sexo(l, 'M', ffin)
-            sc = calcula_benef_por_sexo(l, 'S', ffin)
-            benef = mc[1] + hc[1] + sc[1]
-            if benef.any?
-              acti_ben[l] = benef
-            end
-          end
-          acti_ben.each do |li, benef|
-            fecha_act = Cor1440Gen::Actividad.find(li).fecha.to_s.split('-')
-            anio_ac = fecha_act[0].to_i
-            mes_ac = fecha_act[1].to_i
-            dia_ac = fecha_act[2].to_i
-            benef.each do |p|
-              per = Sip::Persona.find(p)
-              edad_ben = Sivel2Gen::RangoedadHelper.
-                edad_de_fechanac_fecha(per.anionac, per.mesnac, per.dianac, anio_ac, mes_ac, dia_ac)
-              if edad_ben == 0
-                bebes.push(per.id)
+     
+          Cor1440Gen::Actividad.where(id: lac).each do |act|
+            anio_ac = act.fecha.year
+            mes_ac = act.fecha.month
+            dia_ac = act.fecha.day
+            act.casos.each do |caso|
+              caso.victima.each do |victima|
+                if Sivel2Sjr::Casosjr.find(caso.id).contacto_id != victima.persona_id # Beneficiario
+                  per = victima.persona
+                  edad_ben = Sivel2Gen::RangoedadHelper.
+                    edad_de_fechanac_fecha(per.anionac, per.mesnac, per.dianac, anio_ac, mes_ac, dia_ac)
+                  if edad_ben == 0
+                    bebes.push(per.id)
+                  end
+                end
               end
             end
           end
@@ -235,127 +114,64 @@ module Cor1440Gen
 
         bebes_presentes = calcula_bebes(lac, ffin)
         bebes_total = bebes_presentes.count
-        lact_total = calcula_maternidad(benef, 2).count
-        gestantes = calcula_maternidad(benef, 1).count
-        gest_total = gestantes * 2
+        lact = calcula_maternidad(benef, 2)
+        lact_total = lact.count
+        gestantes = calcula_maternidad(benef, 1)
+        gest_total = gestantes.count * 2
         resind = lact_total + gest_total + bebes_total
 
         if lac.count > 0
           urlevrind = cor1440_gen.actividades_url +
             '?filtro[busid]='+lac.join(',')
         end
-        urlevdir = '#'
-        if benef_dir.count > 0
-          urlevdir = sip.personas_url + '?filtro[busid]=' + benef_dir.join(',')
+        urlevbebes = '#'
+        if bebes_presentes.count > 0
+          urlevbebes = sip.personas_url + '?filtro[busid]=' + bebes_presentes.join(',')
         end
-        urlevindir = '#'
-        if benef_indir.count > 0
-          urlevindir = sip.personas_url + '?filtro[busid]=' + 
-            benef_indir.join(',')
+        urlevlact = '#'
+        if lact.count > 0
+          urlevlact = sip.personas_url + '?filtro[busid]=' + 
+            lact.join(',')
+        end
+        urlevgest = '#'
+        if gest.count > 0
+          urlevgest = sip.personas_url + '?filtro[busid]=' + 
+            gest.join(',')
         end
 
         return [ resind, urlevrind,
-                 lact_total, gest_total,
-                 bebes_total, urlevindir,
-                 -1, '#' ]
-      when 223 # R2I5 Número de personas que reciben acompañamiento psic
-        actpf = res.actividadpf.where(id: 358)  # R2A6
-      when 224 # R2I6 Número de personas que participan
-        actpf = res.actividadpf.where(id: 359)  # R2A7
-      when 225 # R2I7 Número de personas qu reciben ... satisfechos..
-        actpf = res.actividadpf.where(id: 359)  # ? relacionada con R2A7 R2A6
-        contar = :porcentaje
-      when 226 # R2I8 Número de convenios/acuerdos
-        actpf = res.actividadpf.where(id: 362)  # R1A8
-        contar = :actividades
-
-      # RESULTADO 3
-      when 227 # R3I1 Número de albergues o casas de acogida
-        actpf = res.actividadpf.where(id: 363)  # R3A1
-        contar = :actividades
-      when 228 # R3I2 Número personas beenficiadas
-        actpf = res.actividadpf.where(id: 364)  # R3A2
-      when 229 # R3I3 Números de personas beneficiadas
-        actpf = res.actividadpf.where(id: 365)  # R3A3
-      when 230 # R3I4 Porcentaje de personas 
-        actpf = res.actividadpf.where(id: 365)  # ? relacionada con R3A1, R3A2, y R3A3 
-        contar = :porcentaje
-
-      # RESULTADO 4
-      when 231 # R4I2  Número de personas beneficiadas
-        actpf = res.actividadpf.where(id: 366)  # R4A1
-      when 232 # R4I3 Porcentajes que han mejorado autos
-        actpf = res.actividadpf.where(id: 367)  # ? relacionada con R4A1
-        contar = :porcentaje
-      when 233 # R4I4 Número de personas capacitdas en emprendimiento
-        actpf = res.actividadpf.where(id: 368)  # R4A2 + R4A3
-
-      else
-        return [-1, '#', -1, '#', -1, '#', -1, '#']
+                 lact_total, urlevlact,
+                 gest_total, urlevgest,
+                 bebes_total, urlevbebes,
+               ]
+     
       end
 
-      if actpf.count == 0
-        puts "No hay actividadpf para #{ind.id}"
-        return [-1, '#', -1, '#', -1, '#', -1, '#']
-      end
-      if actpf.count > 1
-        puts "Hay más de una actividadpf para #{ind.id}"
-        return [-1, '#', -1, '#', -1, '#', -1, '#']
-      end
-      
-      lac = calcula_lac(actpf, fini, ffin)
-      if contar == :personas
-        hombres = asistencia_por_sexo(lac, 'M')
-        hombrescasos = calcula_benef_por_sexo(lac, 'M', ffin)
-
-        hombres += hombrescasos[0] + hombrescasos[1]
-        hombres.uniq!
-        if hombres.count > 0
-          urlevhombres = sip.personas_url + '?filtro[busid]=' + 
-            hombres.join(',')
-        end
-
-        mujeres = asistencia_por_sexo(lac, 'F')
-        mujerescasos = calcula_benef_por_sexo(lac, 'F', ffin)
-        mujeres += mujerescasos[0] + mujerescasos[1]
-        mujeres.uniq!
-        if mujeres.count > 0
-          urlevmujeres = sip.personas_url + '?filtro[busid]=' + 
-            mujeres.join(',')
-        end
-
-        sinsexo = asistencia_por_sexo(lac, 'S')
-        sinsexocasos = calcula_benef_por_sexo(lac, 'S', ffin)
-        sinsexo += sinsexocasos[0] + sinsexocasos[1]
-        sinsexo.uniq!
-        if sinsexo.count > 0
-          urlevsinsexo = sip.personas_url + '?filtro[busid]=' + 
-            sinsexo.join(',')
-        end
-
-        resind = hombres.count + mujeres.count + sinsexo.count
-      elsif contar == :actividades
-        resind = lac.count
-      end
-      if lac.count > 0
-        urlevrind = cor1440_gen.actividades_url +
-          '?filtro[busid]='+lac.join(',')
-        urlevhombres = '#'
-        urlevmujeres = '#'
-        urlevsinsexo = '#'
-      end
-      [resind, urlevrind, 
-       hombres, urlevhombres, 
-       mujeres, urlevmujeres,
-       sinsexo, urlevsinsexo]
+      return [-1, '#', -1, '#', -1, '#', -1, '#']
     end
 
 
-    def mideindicador_particular(ind, fini, ffin)
-      if ind.proyectofinanciero_id == 181
-        return mideindicador_PRM20(ind, fini, ffin)
+    def mideindicador_particular(mind, ind, fini, ffin)
+      if ind.proyectofinanciero_id == 181 && ( # PRM
+          ind.id == 214 || # R1I3
+          ind.id == 215 || # R1I4
+          ind.id == 216 || # R1I5
+          ind.id == 222) then  # R2I4
+        return mideindicador_PRM20(mind, ind, fini, ffin)
+      elsif ind.proyectofinanciero_id == 181 && ( # PRM
+        ind.id == 225 || # R2I7 No son de efecto
+        ind.id == 230 || # R3I4 No es de efecto
+        # R4I1 No se mide
+        ind.id == 232 ) # R4I3 No es de efecto
+        return [-1, '#', -1, '#', -1, '#', -1, '#']
       end
-      return mideindicador_cor1440_gen(ind,fini, ffin)
+        
+      # Los demás de este convenio se miden con tipos de indicador 
+      # Tipo 1: R1I6, R1I7, R2I1, R2I8, R3I1
+      # Tipo 4: R1I2, R2I6 
+      # Tipo 30: R1I1, R2I3, R3I2, R3I3, R4I2
+      # Tipo 31: R2I2, R2I5, R4I4
+      return mideindicador_sivel2_sjr(mind, ind,fini, ffin)
     end
 
   end

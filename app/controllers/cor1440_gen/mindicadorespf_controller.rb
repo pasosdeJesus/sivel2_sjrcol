@@ -63,14 +63,84 @@ module Cor1440Gen
                  -1, '#' ]
 
       when 216 # R1I5 Número de personas
-        actpf = res.actividadpf.where(id: 350)  # R1A3
+        actpf1 = res.actividadpf.where(id: 350)  # R1A3
+        actpf2 = res.actividadpf.where(id: 423)  # R1A6
+        actpf3 = res.actividadpf.where(id: 424)  # R1A7
+        actpf4 = res.actividadpf.where(id: 425)  # R1A8
 
-        return [ resind, urlevrind, 
-                 benef_dir, urlevdir, 
-                 benef_indir, urlevindir, 
-                 -1, '#' ]
+        if actpf1.count == 0 && actpf2.count == 0 && actpf2.count == 0 && actpf4.count == 0
+          puts 'Falta en marco logico actividadpf con id 350'
+          return [ -1, '#', -1, '#', -1, '#', -1, '#']
+        end
+        lac1 = calcula_lac(actpf1, fini, ffin)
+        lac2 = calcula_lac(actpf2, fini, ffin)
+        lac3 = calcula_lac(actpf3, fini, ffin)
+        lac4 = calcula_lac(actpf4, fini, ffin)
 
-          
+        hombres1 = calcula_benef_por_sexo(lac1, 'M', ffin)
+        mujeres1 = calcula_benef_por_sexo(lac1, 'F', ffin)
+        sinsexo1 = calcula_benef_por_sexo(lac1, 'S', ffin)
+        directos1 = hombres1[0] + mujeres1[0] + sinsexo1[0] + hombres1[1] + mujeres1[1] + sinsexo1[1]
+        indirectos1 = []
+        hombres2 = calcula_benef_por_sexo(lac2, 'M', ffin)
+        mujeres2 = calcula_benef_por_sexo(lac2, 'F', ffin)
+        sinsexo2 = calcula_benef_por_sexo(lac2, 'S', ffin)
+        directos2 = hombres2[0] + mujeres2[0] + sinsexo2[0] + hombres2[1] + mujeres2[1] + sinsexo2[1]
+        indirectos2 = []
+        hombres3 = calcula_benef_por_sexo(lac3, 'M', ffin)
+        mujeres3 = calcula_benef_por_sexo(lac3, 'F', ffin)
+        sinsexo3 = calcula_benef_por_sexo(lac3, 'S', ffin)
+        grupo3 = hombres2[0] + mujeres2[0] + sinsexo2[0] +
+          hombres2[1] + mujeres2[1] + sinsexo2[1]
+        menores = []
+        mayores = []
+        grupo3.each do |f|
+          per = Sip::Persona.find(f)
+          hoy = Date.today.to_s.split('-')
+          edad_ben = Sivel2Gen::RangoedadHelper.
+            edad_de_fechanac_fecha(per.anionac, per.mesnac, per.dianac, hoy[0].to_i, hoy[1].to_i, hoy[2].to_i)
+          if 0<= edad_ben < 18
+            menores.push(f)
+          elsif edad_ben >= 18
+            mayores.push(f)
+          end
+        end
+        if menores.any?
+          directos3 = menores
+          indirectos3 = mayores
+        else
+          directos3 = mayores
+          indirectos3 = []
+        end
+        hombres4 = calcula_benef_por_sexo(lac4, 'M', ffin)
+        mujeres4 = calcula_benef_por_sexo(lac4, 'F', ffin)
+        sinsexo4 = calcula_benef_por_sexo(lac4, 'S', ffin)
+        directos4 = hombres4[0] + mujeres4[0] + sinsexo4[0]
+        indirectos4 = hombres4[1] + mujeres4[1] + sinsexo4[1]
+        directos = directos1 + directos2 + directos3 + directos4
+        indirectos = indirectos1 + indirectos2 + indirectos3 + indirectos4
+       
+        resind = directos.count + indirectos.count
+        if (lac1.count+lac2.count+lac3.count+lac4.count) > 0
+          lacs = lac1 | lac2 | lac3 | lac4
+          urlevrind = cor1440_gen.actividades_url +
+            '?filtro[busid]=' + lacs.join(',')
+        end
+        urlevdir = '#'
+        if directos.count > 0
+          urlevdir = sip.personas_url + '?filtro[busid]=' + directos.join(',')
+        end
+        urlevindir = '#'
+        if indirectos.count > 0
+          urlevindir = sip.personas_url + '?filtro[busid]=' + 
+            indirectos.join(',')
+        end
+
+        return [ resind, urlevrind,
+                 directos.count, urlevdir,
+                 indirectos.count , urlevindir,
+                 -1, '#']
+
       when 222 # R2I4 Número de mujeres gestantes o lactantes
         actpf = res.actividadpf.where(id: 357)  # R2A5
         if actpf.count == 0

@@ -90,11 +90,11 @@ module Cor1440Gen
         hombres3 = calcula_benef_por_sexo(lac3, 'M', ffin)
         mujeres3 = calcula_benef_por_sexo(lac3, 'F', ffin)
         sinsexo3 = calcula_benef_por_sexo(lac3, 'S', ffin)
-        contactos3 = hombres2[0] + mujeres2[0] + sinsexo2[0]
-        familiares3 = hombres2[1] + mujeres2[1] + sinsexo2[1]
+        grupo3 = hombres2[0] + mujeres2[0] + sinsexo2[0] +
+          hombres2[1] + mujeres2[1] + sinsexo2[1]
         menores = []
         mayores = []
-        familiares3.each do |f|
+        grupo3.each do |f|
           per = Sip::Persona.find(f)
           hoy = Date.today.to_s.split('-')
           edad_ben = Sivel2Gen::RangoedadHelper.
@@ -106,25 +106,26 @@ module Cor1440Gen
           end
         end
         if menores.any?
-          directos3 = contactos3 + menores
-          indirectos3 = contactos3 + mayores
+          directos3 = menores
+          indirectos3 = mayores
         else
-          directos3 = contactos3 + mayores
+          directos3 = mayores
           indirectos3 = []
         end
-        directos4 = 1
         hombres4 = calcula_benef_por_sexo(lac4, 'M', ffin)
         mujeres4 = calcula_benef_por_sexo(lac4, 'F', ffin)
         sinsexo4 = calcula_benef_por_sexo(lac4, 'S', ffin)
-        contactos4 = hombres4[0] + mujeres4[0] + sinsexo4[0]
-        familiares4 = hombres4[1] + mujeres4[1] + sinsexo4[1]
-        indirectos4 = contactos4 + familiares4
-        directos = directos1 + directos2 + directos3
+        directos4 = hombres4[0] + mujeres4[0] + sinsexo4[0]
+        indirectos4 = hombres4[1] + mujeres4[1] + sinsexo4[1]
+        directos = directos1 + directos2 + directos3 + directos4
         indirectos = indirectos1 + indirectos2 + indirectos3 + indirectos4
-        
-        totaldirectos = directos.count + 1 # el 1 es del R1A8
-        totalindirectos = indirectos.count - 1 # el 1 es del R1A8
-        resind = totaldirectos + totalindirectos
+       
+        resind = directos.count + indirectos.count
+        if (lac1.count+lac2.count+lac3.count+lac4.count) > 0
+          lacs = lac1 | lac2 | lac3 | lac4
+          urlevrind = cor1440_gen.actividades_url +
+            '?filtro[busid]=' + lacs.join(',')
+        end
         urlevdir = '#'
         if directos.count > 0
           urlevdir = sip.personas_url + '?filtro[busid]=' + directos.join(',')
@@ -136,21 +137,9 @@ module Cor1440Gen
         end
 
         return [ resind, urlevrind,
-                 hombres, '#',
-                 mujeres, '#',
-                 sinsexo, '#']
-
-      when 217 # R1I6 Número de estrategias
-        actpf = res.actividadpf.where(id: 351)  # R1A4
-        contar = :actividades
-      when 218 # R1I7 Número de acciones
-        actpf = res.actividadpf.where(id: 352)  # R1A5
-        contar = :actividades
-
-        return [ resind, urlevrind, 
-                 benef_dir, urlevdir, 
-                 benef_indir, urlevindir, 
-                 -1, '#' ]
+                 directos.count, urlevdir,
+                 indirectos.count , urlevindir,
+                 -1, '#']
 
       when 222 # R2I4 Número de mujeres gestantes o lactantes
         actpf = res.actividadpf.where(id: 357)  # R2A5

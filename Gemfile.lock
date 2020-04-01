@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: 7969d97f55130aa3333be5d7cde6c60af6c015ba
+  revision: 5ebd820e958ab64114b712e56aba134d1a7c539c
   specs:
     cor1440_gen (1.0b3)
       devise
@@ -13,7 +13,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 0ba45dde150f29749b5bf8da1c8b4c389475ef68
+  revision: b74e6a31b8957d286bea083ecb4267a4c3a83450
   specs:
     heb412_gen (1.0.b6)
       mr519_gen
@@ -23,7 +23,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/mr519_gen.git
-  revision: f5f868639f0d8aad17f109feb5d5f841bf2d31aa
+  revision: 798b554ddc2cbd3fa7c31949e7a891f582ce688d
   specs:
     mr519_gen (0.2.0)
       rails (~> 6.0.0.rc1, >= 6.0.0.rc1)
@@ -31,7 +31,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: f8943a9748de387c36a8a9e5a6325978394396c1
+  revision: 5756b769b0addc5d733dbe24fee1a5091c9fa98b
   specs:
     sal7711_gen (1.0.b2)
       rails
@@ -39,7 +39,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: 031a9aa060d8f7b41834648e4559241c4c847b02
+  revision: c2920034237cb03d172fe791f9da041625a1fb48
   specs:
     sal7711_web (1.0.a3)
       rails
@@ -47,7 +47,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 4dcaf53ba3209b373aeae11f41bae592a83e6e67
+  revision: f0cc27ef922ee851caab943ff20b20f9c746775d
   specs:
     sip (2.0.b10)
       cancancan
@@ -65,7 +65,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: e38ed3c9506cae6863f8172c12657c9d5dedf27d
+  revision: 953e806314f8d5bed72489a41fe623cc6c97a514
   specs:
     sivel2_gen (2.0b10)
       devise
@@ -74,7 +74,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: f19fdf76500307120e5b169bd1d5e60f405c50ba
+  revision: 0c3ce180bd4f33f8b1076797d8c083549feb36b7
   specs:
     sivel2_sjr (2.0b10)
       rails
@@ -155,7 +155,6 @@ GEM
     bootstrap-datepicker-rails (1.9.0.1)
       railties (>= 3.0)
     builder (3.2.4)
-    byebug (11.1.1)
     camertron-eprun (1.1.1)
     cancancan (3.1.0)
     capybara (3.32.0)
@@ -372,7 +371,6 @@ DEPENDENCIES
   bcrypt
   bootsnap (>= 1.1.0)
   bootstrap-datepicker-rails
-  byebug
   cancancan
   capybara
   chartkick

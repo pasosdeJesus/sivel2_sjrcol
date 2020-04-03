@@ -9,12 +9,12 @@ module Cor1440Gen
     def mideindicador_PRM20(mind, ind, fini, ffin)
       res = ind.resultadopf
       actpf = [] 
-      
+    
       resind = -1
       hombres = -1
       mujeres = -1
       sinsexo = -1
-     
+      
       case ind.id
       when 214 # R1I3 Número de personas (pueden ser repetidas)
         actpf = res.actividadpf.where(id: 348)  
@@ -55,11 +55,58 @@ module Cor1440Gen
                  -1, '#' ]
       when 215 # R1I4 porcentaje
         actpf = res.actividadpf.where(id: 348)  # Relacionada con R1A1
-        contar = :porcentaje
+        if actpf.count == 0
+          puts 'Falta en marco logico actividadpf con id 348'
+          return [ -1, '#', -1, '#', -1, '#', -1, '#']
+        end
+        ## se escogen solo las actividades que tienen accion juridica con 
+        ## plan estrategico 1. actividadpf 125
+        lact = calcula_listado_ac(actpf, fini, ffin)
+        lac = Cor1440Gen::Actividad.where(id: lact).
+          joins(:actividadpf).
+          where('cor1440_gen_actividadpf.id = 125').
+          pluck(:id).uniq
+        hombrescasos = calcula_benef_por_sexo(lac, 'M', ffin, false)
+        mujerescasos = calcula_benef_por_sexo(lac, 'F', ffin, false)
+        sinsexocasos = calcula_benef_por_sexo(lac, 'S', ffin, false)
+        benef_dir = hombrescasos[0] + mujerescasos[0] + sinsexocasos[0]
+        benef_indir = hombrescasos[1] + mujerescasos[1] + sinsexocasos[1]
+        universo_r1i3 = benef_dir.count + benef_indir.count
+        benef_dir_conres = []
+        benef_indir_conres = []
+        Cor1440Gen::Actividad.where(id: lac).each do |act|
+          resp_id = Cor1440Gen::ActividadRespuestafor.where(actividad_id: act.id).pluck(:respuestafor_id)
+          resp = Mr519Gen::Valorcampo.where(respuestafor_id: resp_id).pluck(:valor)
+          
+          act.actividad_casosjr.each do |acaso|
+            acaso.casosjr.caso.victima.each do |victima|
+              if resp.include?("1") || resp.include?("2")
+                if acaso.casosjr.contacto_id != victima.id_persona # Beneficiario
+                  benef_dir_conres.push(victima.id_persona)
+                else
+                  benef_indir_conres.push(victima.id_persona)
+                end
+              end
+            end
+          end
+        end
+
+        res_res = benef_dir_conres.count + benef_indir_conres.count
+        resind = (res_res.to_f * 100)/universo_r1i3
+
+        urlevdir = '#'
+        if benef_dir_conres.count > 0 then
+          urlevdir = sip.personas_url + '?filtro[busid]=' + benef_dir.join(',')
+        end
+        urlevindir = '#'
+        if benef_indir_conres.count > 0
+          urlevindir = sip.personas_url + '?filtro[busid]=' + 
+            benef_indir.join(',')
+        end
 
         return [ resind, urlevrind, 
-                 benef_dir, urlevdir, 
-                 benef_indir, urlevindir, 
+                 benef_dir_conres.count, urlevdir, 
+                 benef_indir_conres.count, urlevindir, 
                  -1, '#' ]
 
       when 216 # R1I5 Número de personas

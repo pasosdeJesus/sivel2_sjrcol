@@ -101,7 +101,7 @@ module Cor1440Gen
           sinsexocasos_conr[1]
 
         res_res = benef_dir_conres.count + benef_indir_conres.count
-        resind = (res_res.to_f * 100)/universo_r1i3
+        resind = (res_res * 100)/universo_r1i3
 
         urlevrind = '#'
         if resp_ids.count > 0 then
@@ -120,8 +120,8 @@ module Cor1440Gen
         end
 
         return [ resind, urlevrind, 
-                 benef_dir_conres.count, urlevdir, 
-                 benef_indir_conres.count, urlevindir, 
+                 benef_dir_conres, urlevdir, 
+                 benef_indir_conres, urlevindir, 
                  -1, '#' ]
 
       when 216 # R1I5 Número de personas

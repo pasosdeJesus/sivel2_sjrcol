@@ -228,10 +228,10 @@ module Cor1440Gen
           ind.id == 222) then  # R2I4
         return mideindicador_PRM20(mind, ind, fini, ffin)
       elsif ind.proyectofinanciero_id == 181 && ( # PRM
-        ind.id == 225 || # R2I7 No son de efecto
-        ind.id == 230 || # R3I4 No es de efecto
+        ind.id == 225 || # R2I7 Es de efecto
+        ind.id == 230 || # R3I4 Es de efecto
         # R4I1 No se mide
-        ind.id == 232 ) # R4I3 No es de efecto
+        ind.id == 232 ) # R4I3 Es de efecto
         return [-1, '#', -1, '#', -1, '#', -1, '#']
       end
         

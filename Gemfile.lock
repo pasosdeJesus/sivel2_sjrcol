@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: ddbcd17e928c3ac7e7d823a0ff649ea828b974f3
+  revision: 76a5e3c9332b9381e85fe187f59fa8964ce72a0d
   specs:
     cor1440_gen (1.0b3)
       devise
@@ -13,7 +13,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 5b700a1bfe01034834a7e01a55515d1afbbd4081
+  revision: d5abf6e49cb18942cb36392b70280fa257286ccc
   specs:
     heb412_gen (1.0.b6)
       mr519_gen
@@ -23,7 +23,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/mr519_gen.git
-  revision: 5a9649196416854672145aabcc554de93ddeccfb
+  revision: e4fa1f55043b7ed7d432d15ba977b6cb6a372bb7
   specs:
     mr519_gen (0.2.0)
       rails (~> 6.0.0.rc1, >= 6.0.0.rc1)
@@ -31,7 +31,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: 796c743e310fc99698e5cc626a60d0cba8d46853
+  revision: 7430be2f8a5119ca4a2e39a4b41b25d6441090ed
   specs:
     sal7711_gen (1.0.b2)
       rails
@@ -39,7 +39,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: ed5a2486e688bbe0204ea5735af3abcd600e3fc9
+  revision: ed0c30769111d8fa5940911daf9e0eeb61ab6c45
   specs:
     sal7711_web (1.0.a3)
       rails
@@ -47,7 +47,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: a7afb9f3b2e93d38ea875515909a100b71a92146
+  revision: 7f3186fac1e58dd7c0f71e1a20f9cf441a77b985
   specs:
     sip (2.0.b10)
       cancancan
@@ -65,7 +65,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 57add6289dd40dc840403c93ea0e7af0a3b5d30b
+  revision: 078b4c8640a2cc495caaad8edc2c0076002c1810
   specs:
     sivel2_gen (2.0b10)
       devise
@@ -74,7 +74,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 408282981c301a37a09626891daf8bcb617da65e
+  revision: 97ef41912f1f37fd1e61f56ddafdb2617a11d5a7
   specs:
     sivel2_sjr (2.0b10)
       rails
@@ -155,10 +155,9 @@ GEM
     bootstrap-datepicker-rails (1.9.0.1)
       railties (>= 3.0)
     builder (3.2.4)
-    byebug (11.1.1)
     camertron-eprun (1.1.1)
     cancancan (3.1.0)
-    capybara (3.32.0)
+    capybara (3.32.1)
       addressable
       mini_mime (>= 0.1.3)
       nokogiri (~> 1.8)
@@ -210,7 +209,7 @@ GEM
       railties (>= 3.2.16)
     kgio (2.11.3)
     libxml-ruby (3.1.0)
-    loofah (2.4.0)
+    loofah (2.5.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.7.1)
@@ -254,7 +253,7 @@ GEM
     prawnto_2 (0.3.0)
       prawn (>= 1.0.0)
       rails (>= 3.2)
-    public_suffix (4.0.3)
+    public_suffix (4.0.4)
     puma (4.3.3)
       nio4r (~> 2.0)
     rack (2.2.2)
@@ -372,7 +371,6 @@ DEPENDENCIES
   bcrypt
   bootsnap (>= 1.1.0)
   bootstrap-datepicker-rails
-  byebug
   cancancan
   capybara
   chartkick

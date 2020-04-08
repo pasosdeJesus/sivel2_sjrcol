@@ -56,13 +56,19 @@ es:
         Actividadtipo: Tipo de actividad de convenio financiado
         Actividadtipos: Tipos de actividad de convenio financiado
       "cor1440_gen/proyecto":
+        financiador_ids: Financiador
         Proyecto: Área de Actividad
         Proyectos: Áreas de Actividad
       "cor1440_gen/proyectofinanciero":
+        actividadpf: Actividades de convenio
+        indicadorobjetivo: Indicadores de efecto
+        indicadorpf: Indicadores de resultado
+        objetivopf: Objetivos
+        oficina_ids: Oficinas
         proyecto: Área de Actividad
-        financiador_ids: Financiador
         "{:proyecto_ids=>[]}": Área de actividad
         proyecto_ids: Área de actividad
+        resultadopf: Resutados
       "discapacidad":
         Discapacidad: Discapacidad
         Discapacidades: Discapacidades

@@ -59,8 +59,7 @@ module Cor1440Gen
           puts 'Falta en marco logico actividadpf con id 348'
           return [ -1, '#', -1, '#', -1, '#', -1, '#']
         end
-        ## se escogen solo las actividades que tienen accion juridica con 
-        ## plan estrategico 1. actividadpf 125
+        ## Vuleven calcularse lo del indicador R1I3
         lact = calcula_listado_ac(actpf, fini, ffin)
         lac = Cor1440Gen::Actividad.where(id: lact).
           joins(:actividadpf).
@@ -74,34 +73,50 @@ module Cor1440Gen
         universo_r1i3 = benef_dir.count + benef_indir.count
         benef_dir_conres = []
         benef_indir_conres = []
-        Cor1440Gen::Actividad.where(id: lac).each do |act|
-          resp_id = Cor1440Gen::ActividadRespuestafor.where(actividad_id: act.id).pluck(:respuestafor_id)
-          resp = Mr519Gen::Valorcampo.where(respuestafor_id: resp_id).pluck(:valor)
-          
-          act.actividad_casosjr.each do |acaso|
-            acaso.casosjr.caso.victima.each do |victima|
-              if resp.include?("1") || resp.include?("2")
-                if acaso.casosjr.contacto_id != victima.id_persona # Beneficiario
-                  benef_dir_conres.push(victima.id_persona)
-                else
-                  benef_indir_conres.push(victima.id_persona)
-                end
-              end
-            end
-          end
-        end
+        # De las actividades filtradas, extrae donde haya formulario
+        # de ACCION JURIDICA con respuesta SI o NO  en campo con
+        # opciones de tabal trivalentepositiva
+        resp_ids = Mr519Gen::Respuestafor.
+          joins('JOIN cor1440_gen_actividad_respuestafor ' +
+                'ON respuestafor_id=mr519_gen_respuestafor.id').
+          where('cor1440_gen_actividad_respuestafor.actividad_id' => lac).
+          where(formulario_id: 14). # ACCION JURÍDICA
+          joins('JOIN mr519_gen_valorcampo ON ' +
+                'mr519_gen_valorcampo.respuestafor_id=mr519_gen_respuestafor.id').
+          joins('JOIN mr519_gen_campo ON ' +
+                'mr519_gen_valorcampo.campo_id=mr519_gen_campo.id').
+          where('(mr519_gen_campo.tablabasica = \'trivalentespositiva\' AND ' +
+                '(mr519_gen_valorcampo.valor = \'1\' OR ' + # POSITIVA
+                'mr519_gen_valorcampo.valor = \'2\')) OR ' + # NEGATIVA
+                '(mr519_gen_campo.tablabasica = \'trivalentes\' AND ' +
+                '(mr519_gen_valorcampo.valor = \'2\' OR ' + # POSITIVA
+                'mr519_gen_valorcampo.valor = \'3\'))'). # NEGATIVA
+          pluck(:'cor1440_gen_actividad_respuestafor.actividad_id').uniq
+        hombrescasos_conr = calcula_benef_por_sexo(resp_ids, 'M', ffin, false)
+        mujerescasos_conr = calcula_benef_por_sexo(resp_ids, 'F', ffin, false)
+        sinsexocasos_conr = calcula_benef_por_sexo(resp_ids, 'S', ffin, false)
+        benef_dir_conres = hombrescasos_conr[0] + mujerescasos_conr[0] + 
+          sinsexocasos_conr[0]
+        benef_indir_conres = hombrescasos_conr[1] + mujerescasos_conr[1] + 
+          sinsexocasos_conr[1]
 
         res_res = benef_dir_conres.count + benef_indir_conres.count
         resind = (res_res.to_f * 100)/universo_r1i3
 
+        urlevrind = '#'
+        if resp_ids.count > 0 then
+          urlevrind = cor1440_gen.actividades_url +
+            '?filtro[busid]='+resp_ids.join(',')
+        end
         urlevdir = '#'
         if benef_dir_conres.count > 0 then
-          urlevdir = sip.personas_url + '?filtro[busid]=' + benef_dir.join(',')
+          urlevdir = sip.personas_url + '?filtro[busid]=' + 
+            benef_dir_conres.join(',')
         end
         urlevindir = '#'
         if benef_indir_conres.count > 0
           urlevindir = sip.personas_url + '?filtro[busid]=' + 
-            benef_indir.join(',')
+            benef_indir_conres.join(',')
         end
 
         return [ resind, urlevrind, 

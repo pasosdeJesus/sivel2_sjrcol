@@ -56,7 +56,7 @@
           <% if can? :read, Cor1440Gen::Proyectofinanciero then %>
             <%= opcion_menu "Convenios Financiados", 
               cor1440_gen.proyectosfinancieros_path, desplegable: true %>
-            <%= opcion_menu "Medición de indicadores", 
+            <%= opcion_menu "Medición de indicadores de resultado", 
               cor1440_gen.mindicadorespf_path, desplegable: true %>
             <%= opcion_menu "Informes", cor1440_gen.informes_path, desplegable: true %>
           <% end %>

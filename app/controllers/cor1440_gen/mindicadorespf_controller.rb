@@ -86,8 +86,8 @@ module Cor1440Gen
           joins('JOIN mr519_gen_campo ON ' +
                 'mr519_gen_valorcampo.campo_id=mr519_gen_campo.id').
           where('(mr519_gen_campo.tablabasica = \'trivalentespositiva\' AND ' +
-                '(mr519_gen_valorcampo.valor = \'1\' OR ' + # POSITIVA
-                'mr519_gen_valorcampo.valor = \'2\')) OR ' + # NEGATIVA
+                '(mr519_gen_valorcampo.valor = \'2\' OR ' + # POSITIVA
+                'mr519_gen_valorcampo.valor = \'3\')) OR ' + # NEGATIVA
                 '(mr519_gen_campo.tablabasica = \'trivalentes\' AND ' +
                 '(mr519_gen_valorcampo.valor = \'2\' OR ' + # POSITIVA
                 'mr519_gen_valorcampo.valor = \'3\'))'). # NEGATIVA

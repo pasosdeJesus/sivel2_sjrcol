@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: e65bb7aecee021f7682158f9ca53e29f9a0ce11f
+  revision: 3431ccff425e907b8b9278e90808613494023042
   specs:
     cor1440_gen (1.0b3)
       devise
@@ -13,7 +13,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 30bc99f2a67e6588ca6609a855dcd3401937f4ef
+  revision: bc63c3744cd64343a5265ecdc8a49d6ba171a3c8
   specs:
     heb412_gen (1.0.b6)
       mr519_gen
@@ -23,7 +23,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/mr519_gen.git
-  revision: 37cd3885ea5afa170b859f8b8f1cb66101fc7e22
+  revision: 4a6daa4f8d0affbb4699794f56bd212001665123
   specs:
     mr519_gen (0.2.0)
       rails (~> 6.0.0.rc1, >= 6.0.0.rc1)
@@ -31,7 +31,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: 8bddaeeec51cfc02c6556f9972234bafdbaf619c
+  revision: 8855038d587c31be71f954775907697d5077a92d
   specs:
     sal7711_gen (1.0.b2)
       rails
@@ -39,7 +39,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: 53c2d9c8fae888421e141951f361f26d96a125e4
+  revision: ad515bce86f1a6d4e295adddbbde85678a0456fe
   specs:
     sal7711_web (1.0.a3)
       rails
@@ -47,7 +47,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 54cdc46079d761dfbaa3b779e35885aa3c0796b9
+  revision: 89280a2f26c18ef2385fad5e6cf9944a0b0187bf
   specs:
     sip (2.0.b10)
       cancancan
@@ -65,7 +65,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 2341652f6ce4c4d269c6ed8a9d6d5a7556c2fb03
+  revision: 3fca1a06091884a4dc349b97a56dc60dc6ac0eda
   specs:
     sivel2_gen (2.0b10)
       devise
@@ -74,7 +74,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 1abaef229b5ebb0f55525bc1c4171565b8ade1a8
+  revision: 689c342410da4b937a1a6d38596587f39c0425a9
   specs:
     sivel2_sjr (2.0b10)
       rails
@@ -351,7 +351,7 @@ GEM
       activemodel (>= 6.0.0)
       bindex (>= 0.4.0)
       railties (>= 6.0.0)
-    webpacker (5.0.1)
+    webpacker (5.1.1)
       activesupport (>= 5.2)
       rack-proxy (>= 0.6.1)
       railties (>= 5.2)

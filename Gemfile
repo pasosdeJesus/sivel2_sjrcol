@@ -107,7 +107,6 @@ gem 'sivel2_sjr',
   git: 'https://github.com/pasosdeJesus/sivel2_sjr.git'
   #path: '../sivel2_sjr'
 
-
 group :development, :test do
   
   #gem 'byebug' # Depurar

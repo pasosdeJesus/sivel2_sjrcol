@@ -1379,6 +1379,68 @@ CREATE TABLE public.cor1440_gen_caracterizacionpf (
 
 
 --
+-- Name: cor1440_gen_datointermedioti; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.cor1440_gen_datointermedioti (
+    id bigint NOT NULL,
+    nombre character varying(1024) NOT NULL,
+    tipoindicador_id integer NOT NULL
+);
+
+
+--
+-- Name: cor1440_gen_datointermedioti_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.cor1440_gen_datointermedioti_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: cor1440_gen_datointermedioti_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.cor1440_gen_datointermedioti_id_seq OWNED BY public.cor1440_gen_datointermedioti.id;
+
+
+--
+-- Name: cor1440_gen_datointermedioti_pmindicadorpf; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.cor1440_gen_datointermedioti_pmindicadorpf (
+    id bigint NOT NULL,
+    datointermedioti_id integer NOT NULL,
+    pmindicadorpf_id integer NOT NULL,
+    valor double precision,
+    rutaevidencia character varying(5000)
+);
+
+
+--
+-- Name: cor1440_gen_datointermedioti_pmindicadorpf_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.cor1440_gen_datointermedioti_pmindicadorpf_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: cor1440_gen_datointermedioti_pmindicadorpf_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.cor1440_gen_datointermedioti_pmindicadorpf_id_seq OWNED BY public.cor1440_gen_datointermedioti_pmindicadorpf.id;
+
+
+--
 -- Name: cor1440_gen_efecto; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1651,7 +1713,7 @@ CREATE TABLE public.cor1440_gen_pmindicadorpf (
     dmed2 double precision,
     dmed3 double precision,
     datosmedicion json,
-    rind double precision,
+    resind double precision,
     meta double precision,
     resindicador json,
     porcump double precision,
@@ -1663,7 +1725,7 @@ CREATE TABLE public.cor1440_gen_pmindicadorpf (
     urlev1 character varying(4096),
     urlev2 character varying(4096),
     urlev3 character varying(4096),
-    urlevrind character varying(4096),
+    rutaevidencia character varying(4096),
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
@@ -4183,6 +4245,16 @@ CREATE TABLE public.sivel2_gen_caso_region (
 
 
 --
+-- Name: sivel2_gen_caso_respuestafor; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.sivel2_gen_caso_respuestafor (
+    caso_id bigint NOT NULL,
+    respuestafor_id bigint NOT NULL
+);
+
+
+--
 -- Name: sivel2_gen_caso_usuario; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -6489,6 +6561,20 @@ ALTER TABLE ONLY public.cor1440_gen_caracterizacionpersona ALTER COLUMN id SET D
 
 
 --
+-- Name: cor1440_gen_datointermedioti id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.cor1440_gen_datointermedioti ALTER COLUMN id SET DEFAULT nextval('public.cor1440_gen_datointermedioti_id_seq'::regclass);
+
+
+--
+-- Name: cor1440_gen_datointermedioti_pmindicadorpf id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.cor1440_gen_datointermedioti_pmindicadorpf ALTER COLUMN id SET DEFAULT nextval('public.cor1440_gen_datointermedioti_pmindicadorpf_id_seq'::regclass);
+
+
+--
 -- Name: cor1440_gen_efecto id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -7254,6 +7340,22 @@ ALTER TABLE ONLY public.cor1440_gen_campotind
 
 ALTER TABLE ONLY public.cor1440_gen_caracterizacionpersona
     ADD CONSTRAINT cor1440_gen_caracterizacionpersona_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: cor1440_gen_datointermedioti cor1440_gen_datointermedioti_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.cor1440_gen_datointermedioti
+    ADD CONSTRAINT cor1440_gen_datointermedioti_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: cor1440_gen_datointermedioti_pmindicadorpf cor1440_gen_datointermedioti_pmindicadorpf_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.cor1440_gen_datointermedioti_pmindicadorpf
+    ADD CONSTRAINT cor1440_gen_datointermedioti_pmindicadorpf_pkey PRIMARY KEY (id);
 
 
 --
@@ -8530,6 +8632,13 @@ CREATE INDEX cor1440_gen_actividad_proyectofinanci_proyectofinanciero_id_idx ON 
 --
 
 CREATE INDEX cor1440_gen_actividad_proyectofinanciero_actividad_id_idx ON public.cor1440_gen_actividad_proyectofinanciero USING btree (actividad_id);
+
+
+--
+-- Name: cor1440_gen_datointermedioti_pmindicadorpf_llaves_idx; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX cor1440_gen_datointermedioti_pmindicadorpf_llaves_idx ON public.cor1440_gen_datointermedioti_pmindicadorpf USING btree (datointermedioti_id, pmindicadorpf_id);
 
 
 --
@@ -9874,6 +9983,14 @@ ALTER TABLE ONLY public.sivel2_sjr_aspsicosocial_respuesta
 
 
 --
+-- Name: cor1440_gen_datointermedioti_pmindicadorpf fk_rails_390cd96f7c; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.cor1440_gen_datointermedioti_pmindicadorpf
+    ADD CONSTRAINT fk_rails_390cd96f7c FOREIGN KEY (pmindicadorpf_id) REFERENCES public.cor1440_gen_pmindicadorpf(id);
+
+
+--
 -- Name: sivel2_sjr_migracion fk_rails_393930af08; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -9895,6 +10012,22 @@ ALTER TABLE ONLY public.cor1440_gen_actividad_proyecto
 
 ALTER TABLE ONLY public.sivel2_sjr_motivosjr_derecho
     ADD CONSTRAINT fk_rails_3a735f78d3 FOREIGN KEY (motivosjr_id) REFERENCES public.sivel2_sjr_motivosjr(id);
+
+
+--
+-- Name: sivel2_gen_caso_respuestafor fk_rails_3aa0de8b93; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sivel2_gen_caso_respuestafor
+    ADD CONSTRAINT fk_rails_3aa0de8b93 FOREIGN KEY (caso_id) REFERENCES public.sivel2_gen_caso(id);
+
+
+--
+-- Name: sivel2_gen_caso_respuestafor fk_rails_3fd971983e; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sivel2_gen_caso_respuestafor
+    ADD CONSTRAINT fk_rails_3fd971983e FOREIGN KEY (respuestafor_id) REFERENCES public.mr519_gen_respuestafor(id);
 
 
 --
@@ -10594,6 +10727,14 @@ ALTER TABLE ONLY public.cor1440_gen_informe
 
 
 --
+-- Name: cor1440_gen_datointermedioti_pmindicadorpf fk_rails_c5ec912cc3; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.cor1440_gen_datointermedioti_pmindicadorpf
+    ADD CONSTRAINT fk_rails_c5ec912cc3 FOREIGN KEY (datointermedioti_id) REFERENCES public.cor1440_gen_datointermedioti(id);
+
+
+--
 -- Name: cor1440_gen_actividadpf fk_rails_c68e2278b2; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10831,6 +10972,14 @@ ALTER TABLE ONLY public.sivel2_gen_combatiente
 
 ALTER TABLE ONLY public.cor1440_gen_actividadtipo_formulario
     ADD CONSTRAINT fk_rails_f17af6bf9c FOREIGN KEY (actividadtipo_id) REFERENCES public.cor1440_gen_actividadtipo(id);
+
+
+--
+-- Name: cor1440_gen_datointermedioti fk_rails_f2e0ba2f26; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.cor1440_gen_datointermedioti
+    ADD CONSTRAINT fk_rails_f2e0ba2f26 FOREIGN KEY (tipoindicador_id) REFERENCES public.cor1440_gen_tipoindicador(id);
 
 
 --
@@ -11930,6 +12079,13 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200331212346'),
 ('20200409203129'),
 ('20200409213831'),
-('20200410201058');
+('20200410201058'),
+('20200411094012'),
+('20200411095105'),
+('20200411100013'),
+('20200415021859'),
+('20200415102103'),
+('20200422103916'),
+('20200423100344');
 
 

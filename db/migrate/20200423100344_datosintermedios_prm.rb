@@ -19,40 +19,53 @@ class DatosintermediosPrm < ActiveRecord::Migration[6.0]
     )
     Cor1440Gen::Datointermedioti.create(
       id: 110, tipoindicador_id: 109,
-      nombre: 'Personas casos R1A3'
+      nombre: 'Personas en casos con ayuda alimentaria'
     )
     Cor1440Gen::Datointermedioti.create(
       id: 111, tipoindicador_id: 109,
-      nombre: 'Personas casos R1A6'
+      nombre: 'Personas en casos con ayuda de transporte'
     )
     Cor1440Gen::Datointermedioti.create(
       id: 112, tipoindicador_id: 109,
-      nombre: 'Personas casos R1A7 < 18'
+      nombre: 'Menores en casos con kit escolar'
     )
     Cor1440Gen::Datointermedioti.create(
       id: 113, tipoindicador_id: 109,
-      nombre: 'Personas casos R1A7 >= 18'
+      nombre: 'Adultos en casos con kit escolar'
     )
     Cor1440Gen::Datointermedioti.create(
       id: 114, tipoindicador_id: 109,
-      nombre: 'Defunciones R1A8'
+      nombre: 'Apoyos gastos funerarios'
     )
     Cor1440Gen::Datointermedioti.create(
       id: 115, tipoindicador_id: 109,
-      nombre: 'Beneficiarios R1A8'
+      nombre: 'Beneficiarios apoyo gasto funerario (-1)'
     )
     Cor1440Gen::Datointermedioti.create(
       id: 116, tipoindicador_id: 109,
       nombre: 'Directos'
     )
     Cor1440Gen::Datointermedioti.create(
-      id: 117, tipoindicador_id: 110,
+      id: 117, tipoindicador_id: 109,
       nombre: 'Indirectos'
     )
+    Cor1440Gen::Datointermedioti.create(
+      id: 120, tipoindicador_id: 110,
+      nombre: 'Lactantes'
+    )
+    Cor1440Gen::Datointermedioti.create(
+      id: 121, tipoindicador_id: 110,
+      nombre: 'Gestantes+Bebés'
+    )
+    Cor1440Gen::Datointermedioti.create(
+      id: 122, tipoindicador_id: 110,
+      nombre: 'Bebés'
+    )
+
   end
 
   def down
-    Cor1440Gen::Datointermedioti.where('id >= 100 AND id <= 117').destroy_all
+    Cor1440Gen::Datointermedioti.where('id >= 100 AND id <= 122').destroy_all
   end
 
 end

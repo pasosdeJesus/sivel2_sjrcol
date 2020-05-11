@@ -332,7 +332,9 @@ class Ability < Sivel2Sjr::Ability
           can :manage, c
         end
       end
+      cannot :solocambiaretiquetas, Sivel2Gen::Caso
     end
+
   end
 
 

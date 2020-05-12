@@ -19,7 +19,8 @@ module Sip
         :departamento,
         :municipio,
         :direccion,
-        :nit
+        :nit,
+        :habilitado
       ]
     end
 

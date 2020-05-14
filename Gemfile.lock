@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: fa7e39007116bc1f037ce061b614480d6a3d4071
+  revision: 938b14c9294f58aa7181b40adec120f370d75792
   specs:
     cor1440_gen (1.0b3)
       devise
@@ -47,7 +47,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 2343363acd1ed0ac0b57c4cbff2177a8edf055cd
+  revision: 2e56ab3791458da0b931602cc26e17174cd16f75
   specs:
     sip (2.0.b10)
       cancancan
@@ -74,7 +74,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: de93c67f57933a96ff712793baf24103c77eea9b
+  revision: 05d26207eaca51dfefad9306979f848d582466df
   specs:
     sivel2_sjr (2.0b10)
       rails
@@ -219,7 +219,7 @@ GEM
     method_source (1.0.0)
     mime-types (3.3.1)
       mime-types-data (~> 3.2015)
-    mime-types-data (3.2020.0425)
+    mime-types-data (3.2020.0512)
     mimemagic (0.3.5)
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)

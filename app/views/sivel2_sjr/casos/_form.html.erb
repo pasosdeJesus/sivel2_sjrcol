@@ -16,12 +16,9 @@
 
       <div role="tabpanel">       
         <ul class="nav nav-tabs" role="tablist">
-          <li role="presentation" class="nav-item"><a href="#basicos" 
+          <li role="presentation" class="nav-item"><a href="#basicoscontacto" 
             class="fichacambia nav-link active" aria-selected="true" aria-controls="basicos" role="tab" 
-            data-toggle="tab">Datos Básicos</a></li>
-          <li role="presentation" class="nav-item"><a href="#contacto" class="fichacambia nav-link" 
-            aria-controls="contacto" role="tab"
-            data-toggle="tab">Contacto</a></li>
+            data-toggle="tab">Datos Básicos y Contacto</a></li>
           <li role="presentation" class="nav-item"><a href="#victima" class="fichacambia nav-link" 
             aria-controls="victima" role="tab"
             data-toggle="tab">Núcleo Familiar</a></li>
@@ -55,13 +52,9 @@
         </ul>
         <div class="tab-content">
           <%= f.simple_fields_for :casosjr do |s| %>
-            <div role="tabpanel" class="tab-pane fade active show" id="basicos" > 
-              <%= render 'basicos', :f => f, :s => s %>
+            <div role="tabpanel" class="tab-pane fade active show" id="basicoscontacto" > 
+              <%= render 'basicoscontacto', :f => f, :s => s %>
             </div> 
-
-            <div role="tabpanel" class="tab-pane fade" id="contacto" > 
-              <%= render 'contacto', :f => f, :s => s %>
-            </div>
 
             <div role="tabpanel" class="tab-pane fade" id="victima" > 
               <%= render 'victimas', :f => f, :s => s %>

@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: 938b14c9294f58aa7181b40adec120f370d75792
+  revision: 9eecf1c486962c91654b862fed246f6be75a8a00
   specs:
     cor1440_gen (1.0b3)
       devise
@@ -13,7 +13,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 1d1b5fecc9804c004d4d3aba4298b53f8e7dea0b
+  revision: eb3b2f3a32ef002f3480b435e88424e4ed27e773
   specs:
     heb412_gen (1.0.b6)
       mr519_gen
@@ -23,7 +23,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/mr519_gen.git
-  revision: d96cee4a0c7a85309191076c17660a84e15a1ec4
+  revision: 8eae9db0c8d55d031a46c98b8e16042e8abbf0ff
   specs:
     mr519_gen (0.2.0)
       rails (~> 6.0.0.rc1, >= 6.0.0.rc1)
@@ -31,7 +31,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: ef5a6389302240861b35aa07d314c7b230a0de32
+  revision: 36cad7b044a79bfc221600f12be3f994e57ada2d
   specs:
     sal7711_gen (1.0.b3)
       rails
@@ -39,7 +39,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: ecfddcc5b4f471788d6699436bca1fbb4dece1f4
+  revision: 398e8f4791dff5d0efdf6d37b15f4b2dd49cd524
   specs:
     sal7711_web (1.0.a3)
       rails
@@ -47,7 +47,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 2e56ab3791458da0b931602cc26e17174cd16f75
+  revision: 8e77b8936a50ee836808ec28f009e5e9dbfe2e03
   specs:
     sip (2.0.b10)
       cancancan
@@ -65,7 +65,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 0243b8bc5f1718c86e9ef456b3a240f121fea987
+  revision: 4d79e6a2376ce87bb1f923bb78791bb43c0decf2
   specs:
     sivel2_gen (2.0b11)
       devise
@@ -74,7 +74,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 05d26207eaca51dfefad9306979f848d582466df
+  revision: 7aa7c279f9b8a75f68e80b3419d66045b37ecb74
   specs:
     sivel2_sjr (2.0b10)
       rails
@@ -157,7 +157,7 @@ GEM
     builder (3.2.4)
     camertron-eprun (1.1.1)
     cancancan (3.1.0)
-    capybara (3.32.1)
+    capybara (3.32.2)
       addressable
       mini_mime (>= 0.1.3)
       nokogiri (~> 1.8)
@@ -223,7 +223,7 @@ GEM
     mimemagic (0.3.5)
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
-    minitest (5.14.0)
+    minitest (5.14.1)
     msgpack (1.3.3)
     nio4r (2.5.2)
     nokogiri (1.10.9)
@@ -335,7 +335,7 @@ GEM
     tiny-color-rails (0.0.2)
       railties (>= 3.0)
     ttfunk (1.6.2.1)
-    twitter_cldr (6.0.0)
+    twitter_cldr (6.0.1)
       camertron-eprun
       cldr-plurals-runtime-rb (~> 1.0)
       tzinfo

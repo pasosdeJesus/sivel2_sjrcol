@@ -5,6 +5,7 @@
 <div class="row">
   <div class="col-sm-6">
     <%= victima.association :rangoedad,
+      as: :hidden,
       collection: Sivel2Gen::Rangoedad.habilitados,
       include_blank: false,
       label: "Rango de Edad en desp. emblemático",
@@ -14,6 +15,7 @@
   </div>
   <div class="col-sm-6">
     <%= victima.association :rangoedadactual,
+      as: :hidden,
       collection: Sivel2Gen::Rangoedad.habilitados,
       include_blank: false,
       label: "Rango de Edad actual",
@@ -24,7 +26,7 @@
 </div>
 
 <div class="row">
-  <div class="col-sm-6">
+  <div class="col-md-6">
     <%= victima.association :etnia,
       collection: Sivel2Gen::Etnia.habilitados,
       include_blank: false,
@@ -33,7 +35,7 @@
       value_method: :id 
     %>
   </div>
-  <div class="col-sm-6">
+  <div class="col-md-6">
     <%= victima.input(:orientacionsexual, collection: [
       [:HETEROSEXUAL, :H], [:LESBIANA, :L], [:GAY, :G], 
       [:BISEXUAL, :B], [:TRANSEXUAL, :T], [:INTERSEXUAL, :I]

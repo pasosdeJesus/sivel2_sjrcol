@@ -56,6 +56,7 @@
   <%= render partial: 'basicos_pie', locals: {f: f, s: s} %>
 </div>
 </div>
+<br>
 <h5>DATOS BÁSICOS DEL CONTACTO</h5>
 <%= f.simple_fields_for :victima, Sivel2Gen::Victima.
   where(id_caso: @caso.id).
@@ -223,10 +224,11 @@
          } %>
       </div>
     </div>
-    
+    <br> 
     <h5>ANEXOS</h5>
     <div class="row">
     </div>
+    <br> 
     <h5>DATOS AMPLIOS DEL CONTACTO</h5>
       <%= victima.simple_fields_for :victimasjr do |victimasjr| %>
         <% [2,4,5,1].each do |i| %>
@@ -237,6 +239,7 @@
           %>
         <% end %>
       <% end %>
+    <br> 
     <h5>INFORMACIÓN INSTITUCIONAL Y MANEJO DE DATOS</h5>
     <div class="row">
       <div class="col-md-6">
@@ -255,6 +258,7 @@
       </div>
     </div>
 
+    <br> 
     <h5>Política de datos</h5>
     <div class="row">
     </div>

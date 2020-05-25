@@ -10,90 +10,81 @@
     <td>
       ¿Es cabeza de familia?
     </td>  
-      <%= victimasjr.collection_radio_buttons(
-        :cabezafamilia, [[true, 'Si'] , [false, 'No'], [nil, 'No Responde']], :first, :last
-      ) do |b| %>
-        <td style="text-align:center">
-          <%= b.label { b.radio_button} %>
-        </td> 
-      <% end %>
+    <%= render(partial: 'victima_radio_triestado', locals: {
+      victimasjr: victimasjr, campo: :cabezafamilia}) %>
     <td>
-    <%= victimasjr.association :rolfamilia,
-      collection: Sivel2Sjr::Rolfamilia.habilitados,
-      include_blank: false,
-      label: "Rol en Familia",
-      label_method: :nombre, 
-      value_method: :id,
-      input_html: {
-        "data-toggle" => 'tooltip',
-        "title" => 'Solicite a la persona identificar su rol en la familia, con ello podremos analizar el tipo de ayuda que requiere'
-      } %>
+      <%= victimasjr.association :rolfamilia,
+        collection: Sivel2Sjr::Rolfamilia.habilitados,
+        include_blank: false,
+        label: "Rol en Familia",
+        label_method: :nombre, 
+        value_method: :id,
+        input_html: {
+          "data-toggle" => 'tooltip',
+          "title" => 'Solicite a la persona identificar su rol en la familia, con ello podremos analizar el tipo de ayuda que requiere'
+        } %>
     </td>  
   </tr>
+
   <tr>
     <td>
      ¿Tiene SISBEN?
     </td>  
-      <%= victimasjr.collection_radio_buttons(
-        :tienesisben, [[true, 'Si'] , [false, 'No'], [nil, 'No Responde']], :first, :last
-      ) do |b| %>
-        <td style="text-align:center">
-          <%= b.label { b.radio_button} %>
-        </td> 
-      <% end %>
+    <%= render(partial: 'victima_radio_triestado', locals: {
+      victimasjr: victimasjr, campo: :tienesisben }) %>
     <td>
-    <%= victimasjr.association :regimensalud,
-      collection: Sivel2Sjr::Regimensalud.all.order(:nombre),
-      include_blank: false,
-      label: "Régimen de Salud",
-      label_method: :nombre, 
-      value_method: :id %>
+      <%= victimasjr.association :regimensalud,
+        collection: Sivel2Sjr::Regimensalud.all.order(:nombre),
+        include_blank: false,
+        label: "Régimen de Salud",
+        label_method: :nombre, 
+        value_method: :id %>
     </td>  
   </tr>
+
   <tr>
     <td>
-      ¿Asiste a la Ecuela?
+      ¿Asiste a la escuela?
     </td>  
-      <%= victimasjr.collection_radio_buttons(
-        :asisteescuela, [[true, 'Si'] , [false, 'No'], [nil, 'No Responde']], :first, :last
-      ) do |b| %>
-        <td style="text-align:center">
-          <%= b.label { b.radio_button } %>
-        </td> 
-      <% end %>
+    <%= render(partial: 'victima_radio_triestado', locals: {
+      victimasjr: victimasjr, campo: :asisteescuela }) %>
     <td>
-    <%= victimasjr.association :escolaridad,
-      collection: Sivel2Gen::Escolaridad.habilitados,
-      include_blank: false,
-      label: "Nivel Escolar",
-      label_method: :nombre, 
-      value_method: :id %>
+      <%= victimasjr.association :escolaridad,
+        collection: Sivel2Gen::Escolaridad.habilitados,
+        include_blank: false,
+        label: "Nivel Escolar",
+        label_method: :nombre, 
+        value_method: :id %>
     </td>  
   </tr>
+
   <tr>
     <td>
-      ¿Actualmente Trabajando?
+      ¿Trabaja actualmente?
     </td>  
-      <%= victimasjr.collection_radio_buttons(
-        :actualtrabajando, [[true, 'Si'] , [false, 'No'], [nil, 'No Responde']], :first, :last
-      ) do |b| %>
-        <td style="text-align:center">
-          <%= b.label { b.radio_button } %>
-        </td> 
-      <% end %>
+    <%= render(partial: 'victima_radio_triestado', locals: {
+      victimasjr: victimasjr, campo: :actualtrabajando}) %>
     <td>
-    <%= victima.association :profesion,
-      collection: Sivel2Gen::Profesion.habilitados,
-      include_blank: false,
-      label: "Profesión",
-      label_method: :nombre, 
-      value_method: :id %>
-    <%= victimasjr.association :actividadoficio,
-      collection: Sivel2Gen::Actividadoficio.habilitados,
-      include_blank: false,
-      label: "Actividad/Oficio actual",
-      label_method: :nombre, 
-      value_method: :id %>
+      <%= victima.association :profesion,
+        collection: Sivel2Gen::Profesion.habilitados,
+        include_blank: false,
+        label: "Profesión",
+        label_method: :nombre, 
+        value_method: :id %>
+    </td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>
+      <%= victimasjr.association :actividadoficio,
+        collection: Sivel2Gen::Actividadoficio.habilitados,
+        include_blank: false,
+        label: "Actividad/Oficio actual",
+        label_method: :nombre, 
+        value_method: :id %>
     </td>  
   </tr>
  

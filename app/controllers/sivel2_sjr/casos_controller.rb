@@ -78,9 +78,23 @@ module Sivel2Sjr
       return conscaso
     end
 
+    def update
+      # Convertir valores de radios tri-estado, el valor 3 en el 
+      # botón de radio es nil en la base de datos
+      if params && params[:caso] && params[:caso][:victima_attributes]
+        params[:caso][:victima_attributes].each do |l, v|
+          [:actualtrabajando, :asisteescuela, 
+           :cabezafamilia, :tienesisben].each do |sym|
+            if v[:victimasjr_attributes][sym] == '3'
+              v[:victimasjr_attributes][sym] = nil
+            end
+          end
+        end
+      end
+      update_sivel2_sjr
+    end
 
     def destroy
-
       if @caso.casosjr.respuesta
         # No se logró hacer ni con dependente:destroy en
         # las relaciones ni borrando con delete 
@@ -101,6 +115,10 @@ module Sivel2Sjr
           :_destroy
         ]
       ]
+    end
+
+    def otros_params_victimasjr 
+      [ :actualtrabajando ]
     end
 
     def otros_params

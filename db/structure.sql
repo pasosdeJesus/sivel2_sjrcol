@@ -434,7 +434,8 @@ CREATE TABLE public.sivel2_sjr_victimasjr (
     fechadesagregacion date,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    id_victima integer NOT NULL
+    id_victima integer NOT NULL,
+    actualtrabajando boolean
 );
 
 
@@ -12088,6 +12089,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200422103916'),
 ('20200423100344'),
 ('20200427091939'),
-('20200430101709');
+('20200430101709'),
+('20200519022054');
 
 

@@ -1,0 +1,14 @@
+<% # Botones de radio para un campo booleano tri-estado,
+  # Si en base de datos es nil, lo presenta como id 3 => No Responde
+%>
+<%= victimasjr.collection_radio_buttons(
+  campo, [[true, 'Si'] , [false, 'No'], ['3', 'No Responde']], :first, 
+  :last) do |b| %>
+  <td style="text-align:center">
+    <% if victimasjr.object[campo].nil? && b.value == '3' %>
+      <%= b.label { b.radio_button(checked: true) } %>
+    <% else %>
+      <%= b.label { b.radio_button} %>
+    <% end %>
+  </td> 
+<% end %>

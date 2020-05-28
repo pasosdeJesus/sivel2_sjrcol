@@ -85,7 +85,7 @@ module Sivel2Sjr
         params[:caso][:victima_attributes].each do |l, v|
           [:actualtrabajando, :asisteescuela, 
            :cabezafamilia, :tienesisben].each do |sym|
-            if v[:victimasjr_attributes][sym] == '3'
+            if v[:victimasjr_attributes] && v[:victimasjr_attributes][sym] && v[:victimasjr_attributes][sym] == '3'
               v[:victimasjr_attributes][sym] = nil
             end
           end
@@ -151,7 +151,33 @@ module Sivel2Sjr
           :se_establece_en_sitio_llegada,
           :statusmigratorio_id,
           :_destroy
-        ]
+        ],
+          :victima_attributes => [
+            :anotaciones,
+            :id, 
+            :id_etnia, 
+            :id_filiacion, 
+            :id_iglesia, 
+            :id_organizacion, 
+            :id_persona, 
+            :id_profesion, 
+            :id_rangoedad, 
+            :id_vinculoestado, 
+            :orientacionsexual, 
+            :_destroy, 
+            :anexo_victima_attributes => [
+              :fecha_localizada,
+              :id, 
+              :id_victima,
+              :_destroy,
+              :sip_anexo_attributes => [
+                :adjunto, 
+                :descripcion, 
+                :id, 
+                :_destroy
+              ]
+            ],
+          ],
       ]
     end
 

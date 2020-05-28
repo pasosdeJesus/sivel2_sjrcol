@@ -4014,6 +4014,37 @@ CREATE TABLE public.sivel2_gen_anexo_caso (
 
 
 --
+-- Name: sivel2_gen_anexo_victima; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.sivel2_gen_anexo_victima (
+    id bigint NOT NULL,
+    anexo_id integer,
+    victima_id integer,
+    fecha date
+);
+
+
+--
+-- Name: sivel2_gen_anexo_victima_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.sivel2_gen_anexo_victima_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: sivel2_gen_anexo_victima_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.sivel2_gen_anexo_victima_id_seq OWNED BY public.sivel2_gen_anexo_victima.id;
+
+
+--
 -- Name: sivel2_gen_antecedente_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -6926,6 +6957,13 @@ ALTER TABLE ONLY public.sip_trivalente ALTER COLUMN id SET DEFAULT nextval('publ
 
 
 --
+-- Name: sivel2_gen_anexo_victima id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sivel2_gen_anexo_victima ALTER COLUMN id SET DEFAULT nextval('public.sivel2_gen_anexo_victima_id_seq'::regclass);
+
+
+--
 -- Name: sivel2_gen_combatiente id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -8269,6 +8307,14 @@ ALTER TABLE ONLY public.sivel2_gen_actocolectivo
 
 ALTER TABLE ONLY public.sivel2_gen_actocolectivo
     ADD CONSTRAINT sivel2_gen_actocolectivo_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: sivel2_gen_anexo_victima sivel2_gen_anexo_victima_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sivel2_gen_anexo_victima
+    ADD CONSTRAINT sivel2_gen_anexo_victima_pkey PRIMARY KEY (id);
 
 
 --
@@ -9832,6 +9878,14 @@ ALTER TABLE ONLY public.heb412_gen_campohc
 
 
 --
+-- Name: sivel2_gen_anexo_victima fk_rails_1ee17419cc; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sivel2_gen_anexo_victima
+    ADD CONSTRAINT fk_rails_1ee17419cc FOREIGN KEY (anexo_id) REFERENCES public.sip_anexo(id);
+
+
+--
 -- Name: sivel2_sjr_motivosjr_derecho fk_rails_2403b12f71; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -9941,6 +9995,14 @@ ALTER TABLE ONLY public.sip_datosbio
 
 ALTER TABLE ONLY public.cor1440_gen_valorcampoact
     ADD CONSTRAINT fk_rails_3060a94455 FOREIGN KEY (campoact_id) REFERENCES public.cor1440_gen_campoact(id);
+
+
+--
+-- Name: sivel2_gen_anexo_victima fk_rails_33ed22a32a; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sivel2_gen_anexo_victima
+    ADD CONSTRAINT fk_rails_33ed22a32a FOREIGN KEY (victima_id) REFERENCES public.sivel2_gen_victima(id);
 
 
 --
@@ -12090,6 +12152,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200423100344'),
 ('20200427091939'),
 ('20200430101709'),
-('20200519022054');
+('20200519022054'),
+('20200522142932');
 
 

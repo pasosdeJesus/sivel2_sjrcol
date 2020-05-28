@@ -121,6 +121,21 @@ module Sivel2Sjr
       [ :actualtrabajando ]
     end
 
+    def otros_params_victima
+      [:anexo_victima_attributes => [
+        :fecha_localizada,
+        :id, 
+        :id_victima,
+        :_destroy,
+        :sip_anexo_attributes => [
+          :adjunto, 
+          :descripcion, 
+          :id, 
+          :_destroy
+        ]
+      ] ]
+    end
+
     def otros_params
       [
         :migracion_attributes => [
@@ -152,36 +167,11 @@ module Sivel2Sjr
           :statusmigratorio_id,
           :_destroy
         ],
-          :victima_attributes => [
-            :anotaciones,
-            :id, 
-            :id_etnia, 
-            :id_filiacion, 
-            :id_iglesia, 
-            :id_organizacion, 
-            :id_persona, 
-            :id_profesion, 
-            :id_rangoedad, 
-            :id_vinculoestado, 
-            :orientacionsexual, 
-            :_destroy, 
-            :anexo_victima_attributes => [
-              :fecha_localizada,
-              :id, 
-              :id_victima,
-              :_destroy,
-              :sip_anexo_attributes => [
-                :adjunto, 
-                :descripcion, 
-                :id, 
-                :_destroy
-              ]
-            ],
-          ],
       ]
     end
 
-    def importa_dato(datosent, datossal, menserror, registro = nil, opciones = {})
+    def importa_dato(datosent, datossal, menserror, registro = nil, 
+                     opciones = {})
       importa_dato_gen(datosent, datossal, menserror, registro, opciones)
       # byebug
       # Aqui si el parametro incluia crear caso, crearlo

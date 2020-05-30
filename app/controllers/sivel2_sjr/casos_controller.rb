@@ -12,6 +12,9 @@ module Sivel2Sjr
       exclude: [:poblacion_sexo_rangoedadac]
     load_and_authorize_resource class: Sivel2Gen::Caso
 
+    def vistas_manejadas
+      ['Caso']
+    end
 
     # Campos en filtro
     def campos_filtro1

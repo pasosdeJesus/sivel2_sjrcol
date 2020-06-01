@@ -2,14 +2,16 @@ class LlenaTipoanexo < ActiveRecord::Migration[6.0]
   def up
     execute <<-SQL
       INSERT INTO sip_tipoanexo (id, nombre, fechacreacion, created_at, updated_at) 
-        VALUES (1, 'ANEXO DE VICTIMA', '2016-03-08', '2016-03-08', '2016-03-18');
+        VALUES (10, 'ANEXO DE VICTIMA', '2020-05-27', '2020-05-27', '2020-03-18');
       INSERT INTO sip_tipoanexo (id, nombre, fechacreacion, created_at, updated_at) 
-        VALUES (2, 'CONSENTIMIENTO DE DATOS', '2016-03-08', '2016-03-08', '2016-03-08');
+        VALUES (11, 'CONSENTIMIENTO DE DATOS', '2020-05-27', '2020-05-27', '2020-05-27');
+      INSERT INTO sip_tipoanexo (id, nombre, fechacreacion, created_at, updated_at)
+        VALUES (12, 'OTRO', '2020-05-27', '2020-05-27', '2020-05-27');
     SQL
   end
   def down
     execute <<-SQL
-      DELETE FROM sip_tipoanexo WHERE id>='1' AND id<='2';
+      DELETE FROM sip_tipoanexo WHERE id>='10' AND id<='12';
     SQL
   end
 end

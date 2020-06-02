@@ -184,8 +184,10 @@ module Sivel2Sjr
     def fichaimp
       @registro = @basica = clase.constantize.find(params[:id])
       datos_campos = {}
-      datos_campos['contacto_nombres'] = @registro.casosjr.contacto.nombres + @registro.casosjr.contacto.apellidos
-      datos_campos['contacto_identificacion'] = @registro.casosjr.contacto.tdocumento.sigla + @registro.casosjr.contacto.numerodocumento
+      datos_campos['contacto_nombres'] = @registro.casosjr.
+        contacto.nombres + @registro.casosjr.contacto.apellidos
+      datos_campos['contacto_identificacion'] = @registro.casosjr.contacto.
+        tdocumento.sigla + '. ' + @registro.casosjr.contacto.numerodocumento
       datos_campos['caso_id'] = @registro.id
       @registro = datos_campos
       puts params
@@ -209,6 +211,7 @@ module Sivel2Sjr
           filename: narchivo
       end
     end
+
     def genera_ods(plantilla_id, narchivo)
       plantilla = Heb412Gen::Plantillahcr.find(plantilla_id)
       if !plantilla

@@ -180,6 +180,46 @@ module Sivel2Sjr
       # byebug
       # Aqui si el parametro incluia crear caso, crearlo
     end
+    
+    def fichaimp
+      @registro = @basica = clase.constantize.find(params[:id])
+      datos_campos = {}
+      datos_campos['contacto_nombres'] = @registro.casosjr.contacto.nombres + @registro.casosjr.contacto.apellidos
+      datos_campos['contacto_identificacion'] = @registro.casosjr.contacto.tdocumento.sigla + @registro.casosjr.contacto.numerodocumento
+      datos_campos['caso_id'] = @registro.id
+      @registro = datos_campos
+      puts params
+      narchivo = ''
+      tipomime = ''
+      npl = params[:idplantilla].to_i
+      if !params[:format] || params[:format] == 'odt'
+        reporte_a = genera_odt(npl, narchivo)
+        tipomime = 'application/vnd.oasis.opendocument.text'
+      elsif params[:format] == 'ods'
+        reporte_a = genera_ods(npl, narchivo)
+        tipomime = 'application/vnd.oasis.opendocument.spreadsheet'
+      end
+      # El enlace en la vista debe tener data-turbolinks=false
+      if reporte_a == ''
+        flash.now[:error] = "Problemas al generar plantilla #{npl}"
+      else
+        send_file reporte_a, #x_sendfile: true,
+          type: tipomime,
+          disposition: 'attachment',
+          filename: narchivo
+      end
+    end
+    def genera_ods(plantilla_id, narchivo)
+      plantilla = Heb412Gen::Plantillahcr.find(plantilla_id)
+      if !plantilla
+        return
+      end
+      narchivo << File.basename(plantilla.ruta)
+      ngen = Heb412Gen::PlantillahcrController.llena_plantilla_fd(
+        plantilla, @registro)
+
+      return ngen
+    end
 
   end
 end

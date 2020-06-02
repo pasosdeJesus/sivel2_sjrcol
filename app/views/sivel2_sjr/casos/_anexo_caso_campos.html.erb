@@ -1,0 +1,53 @@
+<h6> Hola desde caso </h6>
+<div class='control-group nested-fields'>
+  <div class="controls">
+      <div class="row">
+        <div class="col-md-6">
+          <%= f.input :tipoanexo_id,
+            collection: Sip::Tipoanexo.habilitados,
+            include_blank: false,
+            label_method: :nombre,
+            value_method: :id
+          %>
+        </div>
+      </div>
+    <%  f.object.sip_anexo = Sip::Anexo.new if !f.object.sip_anexo %>
+
+    <%= f.simple_fields_for :sip_anexo do |a| %>
+      
+      <div class="row">
+        <div class="col-md-6">
+          <%= f.input :fecha_localizada, 
+            :input_html => { "data-behaviour" => "datepicker" },
+            :as => :string, :label => "Fecha" %>
+        </div>
+
+        <div class="col-md-6">
+          <% if !a.object || !a.object.adjunto_file_name || !a.object.id %>
+            <%= a.input :adjunto, as: :file, label: 'Archivo' %>
+          <% else %>
+            <div class="sip_anexo_adjunto">
+              <label for="sip_anexo_attributes_<%=a.object.id%>_adjunto">
+                Archivo
+              </label>
+              <a id="sip_anexo_attributes_<%=a.object.id%>_adjunto" 
+                 href="<%= sip.descarga_anexo_path(a.object.id) %>" 
+                 style="text-decoration:none" 
+                 data-turbolinks='false'>
+                 <%= a.object.adjunto_file_name %>
+              </a>
+            </div>
+          <% end %>
+        </div>
+
+      </div>
+    
+      <%= a.input :descripcion %>
+
+      <%= a.input :id, as: :hidden %>
+    <% end %> <!-- f.simple_fields_for :sip_anexo -->
+    <%= link_to_remove_association "Eliminar Anexo", f, 
+      :class => 'btn-danger' 
+    %> 
+  </div>
+</div>

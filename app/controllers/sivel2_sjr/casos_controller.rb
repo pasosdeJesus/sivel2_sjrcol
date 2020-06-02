@@ -124,6 +124,7 @@ module Sivel2Sjr
     def otros_params_victima
       [:anexo_victima_attributes => [
         :fecha_localizada,
+        :tipoanexo_id,
         :id, 
         :id_victima,
         :_destroy,

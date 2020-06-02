@@ -1,9 +1,9 @@
 <%= f.simple_fields_for :anexo_victima do |anexo| %>
-  <%= render 'sivel2_gen/casos/anexo_caso_campos', :f => anexo %>
+  <%= render 'anexo_caso_campos', :f => anexo %>
 <% end %>
 <div class="links">
   <%= link_to_add_association 'Añadir Anexo', f, :anexo_victima, 
-     partial: 'sivel2_gen/casos/anexo_caso_campos',
+     partial: 'anexo_caso_campos',
      :class => 'btn-primary' 
   %>
 </div>

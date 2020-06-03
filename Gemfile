@@ -37,11 +37,11 @@ gem 'puma' , '>= 4.3.3' # Servidor web
 
 gem 'prawn' # Generación de PDF
 
-gem 'prawnto_2',  :require => 'prawnto'
+gem 'prawnto_2', '>= 0.3.0', :require => 'prawnto'
 
 gem 'prawn-table'
 
-gem 'rails', '~> 6.0.0' # Rails (internacionalización)
+gem 'rails', '~> 6.0.3', '>= 6.0.3.1' # Rails (internacionalización)
 
 gem 'rails-i18n'
 

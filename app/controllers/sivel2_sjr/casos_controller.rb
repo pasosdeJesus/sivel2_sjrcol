@@ -212,17 +212,5 @@ module Sivel2Sjr
       end
     end
 
-    def genera_ods(plantilla_id, narchivo)
-      plantilla = Heb412Gen::Plantillahcr.find(plantilla_id)
-      if !plantilla
-        return
-      end
-      narchivo << File.basename(plantilla.ruta)
-      ngen = Heb412Gen::PlantillahcrController.llena_plantilla_fd(
-        plantilla, @registro)
-
-      return ngen
-    end
-
   end
 end

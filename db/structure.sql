@@ -3847,6 +3847,40 @@ ALTER SEQUENCE public.sip_tipoactorsocial_id_seq OWNED BY public.sip_tipoactorso
 
 
 --
+-- Name: sip_tipoanexo; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.sip_tipoanexo (
+    id bigint NOT NULL,
+    nombre character varying(500) NOT NULL,
+    observaciones character varying(5000),
+    fechacreacion date NOT NULL,
+    fechadeshabilitacion date,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: sip_tipoanexo_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.sip_tipoanexo_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: sip_tipoanexo_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.sip_tipoanexo_id_seq OWNED BY public.sip_tipoanexo.id;
+
+
+--
 -- Name: sip_trelacion; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -4021,7 +4055,8 @@ CREATE TABLE public.sivel2_gen_anexo_victima (
     id bigint NOT NULL,
     anexo_id integer,
     victima_id integer,
-    fecha date
+    fecha date,
+    tipoanexo_id integer
 );
 
 
@@ -6950,6 +6985,13 @@ ALTER TABLE ONLY public.sip_tipoactorsocial ALTER COLUMN id SET DEFAULT nextval(
 
 
 --
+-- Name: sip_tipoanexo id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sip_tipoanexo ALTER COLUMN id SET DEFAULT nextval('public.sip_tipoanexo_id_seq'::regclass);
+
+
+--
 -- Name: sip_trivalente id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -8243,6 +8285,14 @@ ALTER TABLE ONLY public.sip_tema
 
 ALTER TABLE ONLY public.sip_tipoactorsocial
     ADD CONSTRAINT sip_tipoactorsocial_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: sip_tipoanexo sip_tipoanexo_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sip_tipoanexo
+    ADD CONSTRAINT sip_tipoanexo_pkey PRIMARY KEY (id);
 
 
 --
@@ -10011,6 +10061,14 @@ ALTER TABLE ONLY public.sivel2_gen_anexo_victima
 
 ALTER TABLE ONLY public.sivel2_sjr_oficina_proyectofinanciero
     ADD CONSTRAINT fk_rails_3479b42b5c FOREIGN KEY (oficina_id) REFERENCES public.sip_oficina(id);
+
+
+--
+-- Name: sivel2_gen_anexo_victima fk_rails_34cb4b0e2b; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sivel2_gen_anexo_victima
+    ADD CONSTRAINT fk_rails_34cb4b0e2b FOREIGN KEY (tipoanexo_id) REFERENCES public.sip_tipoanexo(id);
 
 
 --
@@ -12153,6 +12211,11 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200427091939'),
 ('20200430101709'),
 ('20200519022054'),
-('20200522142932');
+('20200522142932'),
+('20200527234620'),
+('20200527234835'),
+('20200527235952'),
+('20200601224756'),
+('20200601232156');
 
 

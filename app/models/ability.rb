@@ -244,6 +244,7 @@ class Ability < Sivel2Sjr::Ability
         can [:new, :read], Cor1440Gen::Actividad
         can :manage, Cor1440Gen::Actividad, oficina_id: [1, usuario.oficina_id]
         can :read, Cor1440Gen::Proyectofinanciero
+        can [:index, :read], Cor1440Gen::Rangoedadac
 
         can :read, Heb412Gen::Doc
         can :create, Heb412Gen::Doc
@@ -265,6 +266,7 @@ class Ability < Sivel2Sjr::Ability
         can :read, Cor1440Gen::Informe
         can :index, Cor1440Gen::Mindicadorpf
         can :read, Cor1440Gen::Proyectofinanciero
+        can [:index, :read], Cor1440Gen::Rangoedadac
 
         can :read, Heb412Gen::Doc
         can :create, Heb412Gen::Doc
@@ -285,6 +287,7 @@ class Ability < Sivel2Sjr::Ability
         can [:read, :new], Cor1440Gen::Actividad
         can :manage, Cor1440Gen::Actividad, oficina_id: [1, usuario.oficina_id]
         can :read, Cor1440Gen::Proyectofinanciero
+        can [:index, :read], Cor1440Gen::Rangoedadac
 
         can :read, Heb412Gen::Doc
         can :create, Heb412Gen::Doc

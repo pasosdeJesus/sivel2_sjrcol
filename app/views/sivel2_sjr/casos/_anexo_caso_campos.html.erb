@@ -1,6 +1,7 @@
-<h6> Hola desde caso </h6>
 <div class='control-group nested-fields'>
   <div class="controls">
+    <%  f.object.sip_anexo = Sip::Anexo.new if !f.object.sip_anexo %>
+    <%= f.simple_fields_for :sip_anexo do |a| %>
       <div class="row">
         <div class="col-md-6">
           <%= f.input :tipoanexo_id,
@@ -10,18 +11,6 @@
             value_method: :id
           %>
         </div>
-      </div>
-    <%  f.object.sip_anexo = Sip::Anexo.new if !f.object.sip_anexo %>
-
-    <%= f.simple_fields_for :sip_anexo do |a| %>
-      
-      <div class="row">
-        <div class="col-md-6">
-          <%= f.input :fecha_localizada, 
-            :input_html => { "data-behaviour" => "datepicker" },
-            :as => :string, :label => "Fecha" %>
-        </div>
-
         <div class="col-md-6">
           <% if !a.object || !a.object.adjunto_file_name || !a.object.id %>
             <%= a.input :adjunto, as: :file, label: 'Archivo' %>
@@ -39,11 +28,12 @@
             </div>
           <% end %>
         </div>
-
       </div>
     
       <%= a.input :descripcion %>
 
+      <%= f.input :fecha_localizada, as: 'hidden',
+        input_html: { value: f.object.fecha_localizada || Sip::FormatoFechaHelper.fecha_estandar_local(Date.today) } %>
       <%= a.input :id, as: :hidden %>
     <% end %> <!-- f.simple_fields_for :sip_anexo -->
     <%= link_to_remove_association "Eliminar Anexo", f, 

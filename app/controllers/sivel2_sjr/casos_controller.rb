@@ -177,39 +177,19 @@ module Sivel2Sjr
     def importa_dato(datosent, datossal, menserror, registro = nil, 
                      opciones = {})
       importa_dato_gen(datosent, datossal, menserror, registro, opciones)
-      # byebug
-      # Aqui si el parametro incluia crear caso, crearlo
     end
-    
-    def fichaimp
-      @registro = @basica = clase.constantize.find(params[:id])
-      datos_campos = {}
-      datos_campos['contacto_nombres'] = @registro.casosjr.
-        contacto.nombres + @registro.casosjr.contacto.apellidos
-      datos_campos['contacto_identificacion'] = @registro.casosjr.contacto.
-        tdocumento.sigla + '. ' + @registro.casosjr.contacto.numerodocumento
-      datos_campos['caso_id'] = @registro.id
-      @registro = datos_campos
-      puts params
-      narchivo = ''
-      tipomime = ''
-      npl = params[:idplantilla].to_i
-      if !params[:format] || params[:format] == 'odt'
-        reporte_a = genera_odt(npl, narchivo)
-        tipomime = 'application/vnd.oasis.opendocument.text'
-      elsif params[:format] == 'ods'
-        reporte_a = genera_ods(npl, narchivo)
-        tipomime = 'application/vnd.oasis.opendocument.spreadsheet'
+  
+    def establece_registro
+      @registro = @basica = nil
+      if !params || !params[:id] || 
+          Sivel2Gen::Caso.where(id: params[:id]).count != 1
+        return
       end
-      # El enlace en la vista debe tener data-turbolinks=false
-      if reporte_a == ''
-        flash.now[:error] = "Problemas al generar plantilla #{npl}"
-      else
-        send_file reporte_a, #x_sendfile: true,
-          type: tipomime,
-          disposition: 'attachment',
-          filename: narchivo
-      end
+      Sivel2Gen::Conscaso.refresca_conscaso
+      cc = Sivel2Gen::Conscaso.where(caso_id: params[:id])
+      ce = Sivel2Gen::Consexpcaso.crea_consexpcaso(cc, nil)
+      @registro = @basica = Sivel2Gen::Consexpcaso.
+        where(caso_id: params[:id]).take
     end
 
   end

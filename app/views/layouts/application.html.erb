@@ -96,10 +96,6 @@
               <%= opcion_menu 'Definir plantillas para un registro en hoja de calculo',
                 heb412_gen.plantillashcr_path, desplegable: true %>
             <% end %>
-            <% if can? :manage, ::Heb412Gen::Plantilladoc %>
-              <%= opcion_menu "Definir plantillas para un registro en documento",
-                heb412_gen.plantillasdoc_path, desplegable: true %>
-            <% end %>
         <% end %>
       <% end %>
       <%= despliega_abajo "Administrar" do %>

@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: 7ff1d773b46368313043d24dcc5b47a479e953a4
+  revision: 7d0e1fe94a200f63b5014b2e79bab168e7d488fc
   specs:
     cor1440_gen (1.0b3)
       devise
@@ -13,7 +13,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 52e0681e3ae2238fc2e3bc4e02e866f2fde15e95
+  revision: d1d5c033169fb6af4b3af93a85ab5fa071f493c1
   specs:
     heb412_gen (1.0.b6)
       mr519_gen
@@ -23,7 +23,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/mr519_gen.git
-  revision: a4eea86cb3e7c436f801a930a66beab66932533c
+  revision: fdb6e9d0acf3257c0ce12e4a7457f887eced75bd
   specs:
     mr519_gen (0.2.0)
       rails (~> 6.0.0.rc1, >= 6.0.0.rc1)
@@ -31,7 +31,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: 9ecff4a3b66a301f80b9d6e41ddb1fbf0a27ffe9
+  revision: 84e70ce7084b22e6f35a775c8ff4970d4ff512b2
   specs:
     sal7711_gen (1.0.b3)
       rails
@@ -39,7 +39,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: e88e9ff9081bc8ee4e5ad4a49535a4e44a5efb8a
+  revision: ef51f27e3920d4f6dea95b1a17edc4208a29e97e
   specs:
     sal7711_web (1.0.a3)
       rails
@@ -47,7 +47,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: cfccd627e827ad6175a25b015d8201f916d4585b
+  revision: 3bf1b9fff35c14bb351f495015fb0c1d53531314
   specs:
     sip (2.0.b10)
       cancancan
@@ -65,7 +65,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 9d4e135c5a85886ee03dad463d41df542c077d8b
+  revision: 671d3782d09ee201f5eae6e536f6e1c517948e39
   specs:
     sivel2_gen (2.0b11)
       devise
@@ -74,7 +74,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 861726475f809c08f24f36c680dc7c24f48b06c5
+  revision: 8ca61c0840525344e459b7fc8735cfbe3c1da308
   specs:
     sivel2_sjr (2.0b10)
       rails
@@ -183,7 +183,7 @@ GEM
     colorize (0.8.1)
     concurrent-ruby (1.1.6)
     crass (1.0.6)
-    devise (4.7.1)
+    devise (4.7.2)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 4.1.0)
@@ -194,7 +194,7 @@ GEM
     docile (1.3.2)
     erubi (1.9.0)
     execjs (2.7.0)
-    ffi (1.13.0)
+    ffi (1.13.1)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     i18n (1.8.3)

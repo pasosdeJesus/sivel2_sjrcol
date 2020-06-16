@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: 7d0e1fe94a200f63b5014b2e79bab168e7d488fc
+  revision: 2dae83ee99bba773471e2cb4e5bd0996b3644ed8
   specs:
     cor1440_gen (1.0b3)
       devise
@@ -65,7 +65,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 671d3782d09ee201f5eae6e536f6e1c517948e39
+  revision: b6b6bbb2684d8697a28299b670fc23003cdba2f8
   specs:
     sivel2_gen (2.0b11)
       devise
@@ -256,7 +256,7 @@ GEM
     public_suffix (4.0.5)
     puma (4.3.5)
       nio4r (~> 2.0)
-    rack (2.2.2)
+    rack (2.2.3)
     rack-proxy (0.6.5)
       rack
     rack-test (1.1.0)

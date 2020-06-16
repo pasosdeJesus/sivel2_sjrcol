@@ -19,8 +19,8 @@
           <li role="presentation" class="nav-item"><a href="#basicoscontacto" 
             class="fichacambia nav-link active" aria-selected="true" aria-controls="basicos" role="tab" 
             data-toggle="tab">Datos Básicos y Contacto</a></li>
-          <li role="presentation" class="nav-item"><a href="#victima" class="fichacambia nav-link" 
-            aria-controls="victima" role="tab"
+          <li role="presentation" class="nav-item"><a href="#victimas" class="fichacambia nav-link" 
+            aria-controls="victimas" role="tab"
             data-toggle="tab">Núcleo Familiar</a></li>
           <li role="presentation" class="nav-item"><a href="#ubicacion" class="fichacambia nav-link" 
             aria-controls="ubicacion" role="tab" 
@@ -31,8 +31,8 @@
           <li role="presentation" class="nav-item"><a href="#desplazamiento" class="fichacambia nav-link" 
             aria-controls="desplazamiento" role="tab" 
             data-toggle="tab">Desplazamientos</a></li>
-          <li role="presentation" class="nav-item"><a href="#presponsable" class="fichacambia nav-link" 
-            aria-controls="presponsable" role="tab" 
+          <li role="presentation" class="nav-item"><a href="#presponsables" class="fichacambia nav-link" 
+            aria-controls="presponsables" role="tab" 
             data-toggle="tab">Presuntos Responsables</a></li>
           <li role="presentation" class="nav-item"><a href="#antecedentes" class="fichacambia nav-link" 
             aria-controls="antecedentes" role="tab" 
@@ -56,11 +56,11 @@
               <%= render 'basicoscontacto', :f => f, :s => s %>
             </div> 
 
-            <div role="tabpanel" class="tab-pane fade" id="victima" > 
+            <div role="tabpanel" class="tab-pane fade" id="victimas" > 
               <%= render 'victimas', :f => f, :s => s %>
             </div> 
 
-            <div role="tabpanel" class="tab-pane fade" id="ubicacion" > 
+            <div role="tabpanel" class="tab-pane fade" id="ubicaciones" > 
               <%= render 'ubicaciones', :f => f, :s => s %>
             </div>
 
@@ -72,7 +72,7 @@
             <%= render 'desplazamientos', :f => f %>
           </div>
 
-          <div role="tabpanel" class="tab-pane fade" id="presponsable"> 
+          <div role="tabpanel" class="tab-pane fade" id="presponsables"> 
             <%= render 'sivel2_gen/casos/presponsables', :f => f %>
           </div> 
   

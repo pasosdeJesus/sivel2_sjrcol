@@ -84,4 +84,11 @@ $(document).on 'ready page:load',  ->
     })
   )
 
-
+$(document).on('cocoon:after-insert', '', (e, victima) ->
+    hijos = $('.nested-fields').length
+    iditem = 'victimacolapsable' + hijos
+    victima.find('h3.tituloenlace').text('Integrante ' + hijos)
+    victima.find('a.itemvictima').attr('data-toggle', 'collapse')
+    victima.find('a.itemvictima').attr('href', '#' + iditem)
+    victima.find('div.divcolapse').attr('id', iditem)
+  )

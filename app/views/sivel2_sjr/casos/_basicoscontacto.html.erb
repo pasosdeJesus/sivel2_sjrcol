@@ -60,7 +60,7 @@
 <a data-toggle="collapse" href='#datosbasicos'>
   <h5>DATOS BÁSICOS DEL CONTACTO</h5>
 </a>
-<div class="collapse multi-collapse" id="datosbasicos">
+<div class="collapse multi-collapse campos_persona" id="datosbasicos">
 <%= f.simple_fields_for :victima, Sivel2Gen::Victima.
   where(id_caso: @caso.id).
   where(id_persona: @caso.casosjr.contacto.id) do |victima| %>

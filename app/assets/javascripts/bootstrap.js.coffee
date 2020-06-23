@@ -84,11 +84,26 @@ $(document).on 'ready page:load',  ->
     })
   )
 
+@agregar_colapsables_cocoon = (nombrecampo, posicion) ->
+  hijos = $('.nested-fields.vic').length
+  hijo = $('.nested-fields.vic')[posicion]
+  id = posicion + 1
+  objeto = $(hijo)
+  if hijos > 0
+    iditem = nombrecampo + 'colapsable' + id
+    objeto.find('h3.tituloenlace').text('Integrante ' + id)
+    objeto.find('a.itemvictima').attr('data-toggle', 'collapse')
+    objeto.find('a.itemvictima').attr('href', '#' + iditem)
+    objeto.find('div.divcolapse').attr('id', iditem)
+
 $(document).on('cocoon:after-insert', '', (e, victima) ->
-    hijos = $('.nested-fields').length
-    iditem = 'victimacolapsable' + hijos
-    victima.find('h3.tituloenlace').text('Integrante ' + hijos)
-    victima.find('a.itemvictima').attr('data-toggle', 'collapse')
-    victima.find('a.itemvictima').attr('href', '#' + iditem)
-    victima.find('div.divcolapse').attr('id', iditem)
-  )
+  hijos = $('.nested-fields.vic').length
+  agregar_colapsables_cocoon('victima', hijos-1)
+)
+
+document.addEventListener('turbolinks:load', () ->
+  items_victimas = $('.nested-fields.vic')
+  if items_victimas.length > 0
+    for item in [0 .. items_victimas.length-1]
+      agregar_colapsables_cocoon('victima', item)
+)

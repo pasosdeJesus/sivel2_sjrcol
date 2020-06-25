@@ -43,6 +43,9 @@ es:
     proyectos: Áreas de Actividad
   activerecord:
     attributes:
+      "sivel2_gen/anexo_victima":
+        tipoanexo: Tipo de anexo
+        tipoanexo_id: Tipo de anexo
       "cor1440_gen/actividad":
         fecha: Fecha inicial
         poblacionmujeres: 'Población Mujeres'
@@ -127,6 +130,9 @@ es:
       "sip/tipoactorsocial":
         Tipoactorsocial: Tipo de actor social
         Tiposactorsocial: Tipos de actor social
+      "sip/tipoanexo":
+        Tipoanexo: Tipo de anexo
+        Tiposanexo: Tipos de anexo
       "sip/ubicacion":
         Ubicacion: Ubicación
       "sivel2_gen/caso": 
@@ -155,6 +161,7 @@ es:
         estatus_refugio: Estatús del refugio
         fechadecrefugio: Fecha de declaración
         docrefugiado: Número de salvoconducto
+        tipoanexo: Tipo de anexo
       "sivel2_sjr/clasifdesp": 
         Clasifdesp: Clasificación de Desplazamiento
         Clasifdesps: Clasificaciones de Desplazamientos

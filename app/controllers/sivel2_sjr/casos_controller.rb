@@ -12,6 +12,9 @@ module Sivel2Sjr
       exclude: [:poblacion_sexo_rangoedadac]
     load_and_authorize_resource class: Sivel2Gen::Caso
 
+    def vistas_manejadas
+      ['Caso']
+    end
 
     # Campos en filtro
     def campos_filtro1
@@ -78,9 +81,23 @@ module Sivel2Sjr
       return conscaso
     end
 
+    def update
+      # Convertir valores de radios tri-estado, el valor 3 en el 
+      # botón de radio es nil en la base de datos
+      if params && params[:caso] && params[:caso][:victima_attributes]
+        params[:caso][:victima_attributes].each do |l, v|
+          [:actualtrabajando, :asisteescuela, 
+           :cabezafamilia, :tienesisben].each do |sym|
+            if v[:victimasjr_attributes] && v[:victimasjr_attributes][sym] && v[:victimasjr_attributes][sym] == '3'
+              v[:victimasjr_attributes][sym] = nil
+            end
+          end
+        end
+      end
+      update_sivel2_sjr
+    end
 
     def destroy
-
       if @caso.casosjr.respuesta
         # No se logró hacer ni con dependente:destroy en
         # las relaciones ni borrando con delete 
@@ -101,6 +118,26 @@ module Sivel2Sjr
           :_destroy
         ]
       ]
+    end
+
+    def otros_params_victimasjr 
+      [ :actualtrabajando ]
+    end
+
+    def otros_params_victima
+      [:anexo_victima_attributes => [
+        :fecha_localizada,
+        :tipoanexo_id,
+        :id, 
+        :id_victima,
+        :_destroy,
+        :sip_anexo_attributes => [
+          :adjunto, 
+          :descripcion, 
+          :id, 
+          :_destroy
+        ]
+      ] ]
     end
 
     def otros_params
@@ -133,14 +170,26 @@ module Sivel2Sjr
           :se_establece_en_sitio_llegada,
           :statusmigratorio_id,
           :_destroy
-        ]
+        ],
       ]
     end
 
-    def importa_dato(datosent, datossal, menserror, registro = nil, opciones = {})
+    def importa_dato(datosent, datossal, menserror, registro = nil, 
+                     opciones = {})
       importa_dato_gen(datosent, datossal, menserror, registro, opciones)
-      # byebug
-      # Aqui si el parametro incluia crear caso, crearlo
+    end
+  
+    def establece_registro
+      @registro = @basica = nil
+      if !params || !params[:id] || 
+          Sivel2Gen::Caso.where(id: params[:id]).count != 1
+        return
+      end
+      Sivel2Gen::Conscaso.refresca_conscaso
+      cc = Sivel2Gen::Conscaso.where(caso_id: params[:id])
+      ce = Sivel2Gen::Consexpcaso.crea_consexpcaso(cc, nil)
+      @registro = @basica = Sivel2Gen::Consexpcaso.
+        where(caso_id: params[:id]).take
     end
 
   end

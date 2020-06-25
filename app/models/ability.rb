@@ -72,6 +72,7 @@ class Ability < Sivel2Sjr::Ability
     ['Sivel2Sjr', 'motivosjr'], 
     ['Sivel2Sjr', 'regimensalud'],
     ['Sip', 'lineaactorsocial'],
+    ['Sip', 'tipoanexo'],
     ['Sip', 'tipoactorsocial'],
     ['', 'discapacidad'],
     ['', 'espaciopart'],

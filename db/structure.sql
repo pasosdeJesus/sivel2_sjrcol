@@ -434,7 +434,8 @@ CREATE TABLE public.sivel2_sjr_victimasjr (
     fechadesagregacion date,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    id_victima integer NOT NULL
+    id_victima integer NOT NULL,
+    actualtrabajando boolean
 );
 
 
@@ -3846,6 +3847,40 @@ ALTER SEQUENCE public.sip_tipoactorsocial_id_seq OWNED BY public.sip_tipoactorso
 
 
 --
+-- Name: sip_tipoanexo; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.sip_tipoanexo (
+    id bigint NOT NULL,
+    nombre character varying(500) NOT NULL,
+    observaciones character varying(5000),
+    fechacreacion date NOT NULL,
+    fechadeshabilitacion date,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: sip_tipoanexo_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.sip_tipoanexo_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: sip_tipoanexo_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.sip_tipoanexo_id_seq OWNED BY public.sip_tipoanexo.id;
+
+
+--
 -- Name: sip_trelacion; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -4013,6 +4048,38 @@ CREATE TABLE public.sivel2_gen_anexo_caso (
 
 
 --
+-- Name: sivel2_gen_anexo_victima; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.sivel2_gen_anexo_victima (
+    id bigint NOT NULL,
+    anexo_id integer,
+    victima_id integer,
+    fecha date,
+    tipoanexo_id integer
+);
+
+
+--
+-- Name: sivel2_gen_anexo_victima_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.sivel2_gen_anexo_victima_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: sivel2_gen_anexo_victima_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.sivel2_gen_anexo_victima_id_seq OWNED BY public.sivel2_gen_anexo_victima.id;
+
+
+--
 -- Name: sivel2_gen_antecedente_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -4160,7 +4227,7 @@ CREATE TABLE public.sivel2_gen_caso_fotra (
     id_fotra integer,
     anotacion character varying(200),
     fecha date NOT NULL,
-    ubicacionfisica character varying(100),
+    ubicacionfisica character varying(1024),
     tfuente character varying(25),
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
@@ -4202,7 +4269,7 @@ CREATE TABLE public.sivel2_gen_caso_fuenteprensa (
     fecha date NOT NULL,
     ubicacion character varying(100),
     clasificacion character varying(100),
-    ubicacionfisica character varying(100),
+    ubicacionfisica character varying(1024),
     fuenteprensa_id integer NOT NULL,
     id_caso integer NOT NULL,
     created_at timestamp without time zone,
@@ -4849,7 +4916,9 @@ CREATE MATERIALIZED VIEW public.sivel2_gen_consexpcaso AS
      JOIN public.sivel2_gen_victima vcontacto ON (((vcontacto.id_persona = contacto.id) AND (vcontacto.id_caso = caso.id))))
      LEFT JOIN public.sivel2_gen_etnia etnia ON ((vcontacto.id_etnia = etnia.id)))
      LEFT JOIN public.sivel2_sjr_ultimaatencion ultimaatencion ON ((ultimaatencion.id_caso = caso.id)))
-  WHERE (true = false)
+  WHERE (conscaso.caso_id IN ( SELECT sivel2_gen_conscaso.caso_id
+           FROM public.sivel2_gen_conscaso
+          WHERE (sivel2_gen_conscaso.caso_id = 264)))
   WITH NO DATA;
 
 
@@ -6918,10 +6987,24 @@ ALTER TABLE ONLY public.sip_tipoactorsocial ALTER COLUMN id SET DEFAULT nextval(
 
 
 --
+-- Name: sip_tipoanexo id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sip_tipoanexo ALTER COLUMN id SET DEFAULT nextval('public.sip_tipoanexo_id_seq'::regclass);
+
+
+--
 -- Name: sip_trivalente id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.sip_trivalente ALTER COLUMN id SET DEFAULT nextval('public.sip_trivalente_id_seq'::regclass);
+
+
+--
+-- Name: sivel2_gen_anexo_victima id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sivel2_gen_anexo_victima ALTER COLUMN id SET DEFAULT nextval('public.sivel2_gen_anexo_victima_id_seq'::regclass);
 
 
 --
@@ -8207,6 +8290,14 @@ ALTER TABLE ONLY public.sip_tipoactorsocial
 
 
 --
+-- Name: sip_tipoanexo sip_tipoanexo_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sip_tipoanexo
+    ADD CONSTRAINT sip_tipoanexo_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: sip_trivalente sip_trivalente_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8268,6 +8359,14 @@ ALTER TABLE ONLY public.sivel2_gen_actocolectivo
 
 ALTER TABLE ONLY public.sivel2_gen_actocolectivo
     ADD CONSTRAINT sivel2_gen_actocolectivo_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: sivel2_gen_anexo_victima sivel2_gen_anexo_victima_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sivel2_gen_anexo_victima
+    ADD CONSTRAINT sivel2_gen_anexo_victima_pkey PRIMARY KEY (id);
 
 
 --
@@ -9831,6 +9930,14 @@ ALTER TABLE ONLY public.heb412_gen_campohc
 
 
 --
+-- Name: sivel2_gen_anexo_victima fk_rails_1ee17419cc; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sivel2_gen_anexo_victima
+    ADD CONSTRAINT fk_rails_1ee17419cc FOREIGN KEY (anexo_id) REFERENCES public.sip_anexo(id);
+
+
+--
 -- Name: sivel2_sjr_motivosjr_derecho fk_rails_2403b12f71; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -9943,11 +10050,27 @@ ALTER TABLE ONLY public.cor1440_gen_valorcampoact
 
 
 --
+-- Name: sivel2_gen_anexo_victima fk_rails_33ed22a32a; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sivel2_gen_anexo_victima
+    ADD CONSTRAINT fk_rails_33ed22a32a FOREIGN KEY (victima_id) REFERENCES public.sivel2_gen_victima(id);
+
+
+--
 -- Name: sivel2_sjr_oficina_proyectofinanciero fk_rails_3479b42b5c; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.sivel2_sjr_oficina_proyectofinanciero
     ADD CONSTRAINT fk_rails_3479b42b5c FOREIGN KEY (oficina_id) REFERENCES public.sip_oficina(id);
+
+
+--
+-- Name: sivel2_gen_anexo_victima fk_rails_34cb4b0e2b; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sivel2_gen_anexo_victima
+    ADD CONSTRAINT fk_rails_34cb4b0e2b FOREIGN KEY (tipoanexo_id) REFERENCES public.sip_tipoanexo(id);
 
 
 --
@@ -12088,6 +12211,14 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200422103916'),
 ('20200423100344'),
 ('20200427091939'),
-('20200430101709');
+('20200430101709'),
+('20200519022054'),
+('20200522142932'),
+('20200527234620'),
+('20200527234835'),
+('20200527235952'),
+('20200601224756'),
+('20200601232156'),
+('20200622193241');
 
 

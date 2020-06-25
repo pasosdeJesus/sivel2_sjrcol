@@ -38,11 +38,17 @@ Rails.application.routes.draw do
   get "/conteos/vacios" => 'sivel2_sjr/conteos#vacios',
     as: :conteos_vacios
 
- get '/migraciones/nuevo' => 'sivel2_sjr/migraciones#nuevo'  
+  get '/migraciones/nuevo' => 'sivel2_sjr/migraciones#nuevo'  
  
   #get "/personas" => 'sip/personas#index'
   #get "/personas/remplazar" => 'sip/personas#remplazar'
-  
+
+  get "/casos/:id/fichaimp" => "sivel2_sjr/casos#fichaimp",
+    as: :caso_fichaimp
+
+  get "/casos/:id/fichapdf" => "sivel2_sjr/casos#fichapdf",
+    as: :caso_fichapdf
+
   root "sip/hogar#index"
 
   mount Sivel2Sjr::Engine, at: "/", as: 'sivel2_sjr'

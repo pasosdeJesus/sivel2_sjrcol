@@ -33,4 +33,5 @@ ActiveSupport::Inflector.inflections do |inflect|
 	inflect.irregular 'trivalentepositiva', 'trivalentespositiva'
 	inflect.irregular 'progestado', 'progsestado'
 	inflect.irregular 'tipoactorsocial', 'tiposactorsocial'
+	inflect.irregular 'tipoanexo', 'tiposanexo'
 end

@@ -1,0 +1,153 @@
+<div class="row">
+  <div class="col-md-6">
+    <%= f.input :id, readonly: true%>
+  </div>
+  <div class="col-md-6">
+    <%= s.input :fecharec, 
+      as: :string, 
+      input_html: {
+        "data-behaviour" => "datepicker",
+        "data-toggle" => 'tooltip',
+        "title" => 'Fecha inicial de atención al caso'
+      } %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <% colus= current_usuario.oficina_id ? 
+      Usuario.where(oficina_id: current_usuario.oficina_id).
+      order('LOWER(nusuario)') :
+      Usuario.order('LOWER(nusuario)') %>
+    <%= s.association :usuario,
+      collection: colus,
+      include_blank: false,
+      label_method: :nusuario, 
+      value_method: :id %>
+  </div>
+  <div class="col-md-6">
+    <% colof= current_usuario.oficina_id ? 
+      Sip::Oficina.habilitados.where(id: current_usuario.oficina_id) :
+      Sip::Oficina.habilitados %>
+    <%= s.association :oficina,
+      collection: colof,
+      include_blank: false,
+      label_method: :nombre, 
+      value_method: :id,
+      input_html: {
+        "data-toggle" => 'tooltip',
+        "title" => 'Oficina del SJR que reporta el caso'
+      } %>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <%= f.input :fecha,
+      as: :string, 
+      wrapper_html: { style: "padding-bottom: 18px;" },
+      input_html: {
+        "data-behaviour" => "datepicker",
+        "data-toggle" => 'tooltip',
+        "title" => 'Fecha en la que el solicitante sufrió el ' + 
+        'desplazamiento principal'
+      } %>
+</div>
+<div class="col-md-6">
+  <%= render partial: 'basicos_pie', locals: {f: f, s: s} %>
+</div>
+</div>
+<br>
+<a data-toggle="collapse" href='#datosbasicos'>
+  <h5>DATOS BÁSICOS DEL CONTACTO</h5>
+</a>
+<div class="collapse multi-collapse campos_persona" id="datosbasicos">
+<%= f.simple_fields_for :victima, Sivel2Gen::Victima.
+  where(id_caso: @caso.id).
+  where(id_persona: @caso.casosjr.contacto.id) do |victima| %>
+  <%= victima.input :id, as: :hidden %> 
+  <%= victima.simple_fields_for :persona do |p| %>
+    <%= render partial: 'comun_persona', locals: {p: p, victima: victima} %>
+
+    <div class="row">
+      <div class="col-md-6">
+    <%= s.input :direccion, 
+      input_html: {
+      "data-toggle" => 'tooltip',
+      "title" => 'Registrar dirección completa, especificando calle, apto, barrio o finca'
+    } %>
+      </div>
+      <div class="col-md-6">
+         <%= s.input :telefono, 
+           input_html: {
+           "data-toggle" => 'tooltip',
+           "title" => 'Registrar teléfono del solicitante sin símbolos de puntuación' 
+         } %>
+      </div>
+    </div>
+</div>
+<br>
+<a data-toggle="collapse" href='#datosanexos'>
+  <h5>ANEXOS DEL CONTACTO</h5>
+</a>
+<div class="collapse multi-collapse" id="datosanexos">
+  <%= render partial: 'anexovictima', locals: {f: victima} %>
+</div>
+<br>
+<a data-toggle="collapse" href='#amplioscontacto'>
+  <h5>DATOS AMPLIOS DEL CONTACTO</h5>
+</a>
+<div class="collapse multi-collapse" id="amplioscontacto">
+  <%= victima.simple_fields_for :victimasjr do |victimasjr| %>
+    <% [2,4,5,1].each do |i| %>
+      <%= render partial: 'victima_campos' + i.to_s, 
+        locals: { victima: victima, 
+                  victimasjr: victimasjr,
+                  persona: p }
+                %>
+     <% end %>
+   <% end %>
+</div>
+<br>
+<a data-toggle="collapse" href='#institucional'>
+    <h5>INFORMACIÓN INSTITUCIONAL Y MANEJO DE DATOS</h5>
+</a>
+<div class="collapse multi-collapse" id="institucional">
+    <div class="row">
+      <div class="col-md-6">
+    <%= s.association :comosupo,
+      collection: Sivel2Sjr::Comosupo.habilitados,
+      include_blank: false,
+      label_method: :nombre, 
+      value_method: :id 
+    %>
+      </div>
+      <div class="col-md-6">
+    <%= render 'contacto_campos2',
+      victima: victima,
+      casosjr: s
+    %>
+      </div>
+    </div>
+</div>
+<br> 
+<a data-toggle="collapse" href='#politicadatos'>
+  <h5>POLÍTICA DE DATOS</h5>
+</a>
+<div class="collapse multi-collapse" id="politicadatos">
+    <%= s.input :concentimientosjr, 
+      boolean_style: :nested,
+      inline_label: Sivel2Sjr::Casosjr.human_attribute_name(:concentimientosjr),
+      input_html: {
+      "data-toggle" => 'tooltip',
+      "title" => 'Informar a la persona sobre el uso interno de la información en el SJR' 
+    } %>
+    <%= s.input :concentimientobd, 
+      boolean_style: :nested,
+      inline_label: Sivel2Sjr::Casosjr.human_attribute_name(:concentimientobd),
+      input_html: {
+      "data-toggle" => 'tooltip',
+      "title" => 'Informar a la persona sobre el uso de la información en el Banco de Datos de violencia sociopolítica del CINEP' 
+      } %>
+</div>
+<% end %> <!-- simple_fields_for :persona-->
+<% end %> <!-- simple_fields_for :victima -->

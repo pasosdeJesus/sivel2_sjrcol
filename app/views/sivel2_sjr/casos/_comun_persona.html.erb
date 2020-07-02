@@ -103,15 +103,17 @@ end %>
     <%= victima.input :edadactual, as: :hidden %>
   </div>
 </div>
+<% 
+ph = 'N'
+ac = {'data-autocompleta' => 'no' }
+if (!p.object.pais || p.object.pais == 'N' || p.object.pais == '')
+  ph = 'Buscar'
+  ac = {:data => {autocomplete_source: "ubicaciones"}}
+end %>
 
-<div class="row">
-  <div class="col-md-6">
-    <%= p.association :pais,
-      collection: Sip::Pais.habilitados,
-      label_method: :nombre,
-      value_method: :id %>
-  </div>
-</div>
+    <%= p.input :pais,
+      value_method: :id,
+      :input_html => ac %>
 <div class="row">
   <div class="col-md-6">
     <%= p.association :departamento,

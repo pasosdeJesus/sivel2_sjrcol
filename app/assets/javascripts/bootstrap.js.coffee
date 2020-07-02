@@ -11,6 +11,55 @@ $(document).on('focusin',
   cor1440_gen_busca_asistente($(this))
 )
 
+@autocompleta_ubicacion = (label, id, id_victima, divcp, root) ->
+  sip_arregla_puntomontaje(root)
+  cs = id.split(";")
+  id_persona = cs[0]
+  pl = []
+  ini = 0
+  for i in [0..cs.length] by 1
+     t = parseInt(cs[i])
+     pl[i] = label.substring(ini, ini + t)
+     ini = ini + t + 1
+  # pl[1] cnom, pl[2] es cape, pl[3] es cdoc
+  d = "id_victima=" + id_victima
+  d += "&id_persona=" + id_persona
+  a = root.puntomontaje + 'personas/remplazar'
+  $.ajax(url: a, data: d, dataType: "html").fail( (jqXHR, texto) ->
+    alert("Error: " + jqXHR.responseText)
+  ).done( (e, r) ->
+    divcp.html(e)
+    $(document).trigger("sip:autocompleto_persona", [id_victima, id_persona])
+    return
+  )
+  return
+
+@busca_ubicacion = (s) ->
+  root = window
+  sip_arregla_puntomontaje(root)
+  cnom = s.attr('id')
+  v = $("#" + cnom).data('autocompleta')
+  if (v != 1 && v != "no") 
+    $("#" + cnom).data('autocompleta', 1)
+    divcp = s.closest('.campos_persona')
+    if (typeof divcp == 'undefined')
+      alert('No se ubico .campos_persona')
+      return
+    ubis = root.puntomontaje + $("#" + cnom).data("autocomplete-source")
+    $("#" + cnom).autocomplete({
+      source: ubis
+    })
+  return
+
+# En pais de nacimiento permite autocompletar
+# Pais - Dpto - Municipio - Centro Poblado
+$(document).on('focusin',
+'input[id^=caso_victima_attributes_]'+
+'[id$=_persona_attributes_pais]',
+(e) ->
+  busca_ubicacion($(this))
+)
+
 # Llena campos clasificacion y subclasificacion de desplazamiento
 @llena_clasifdesp = (ide, idl, jqthis) ->
   ee = $("#" + ide)

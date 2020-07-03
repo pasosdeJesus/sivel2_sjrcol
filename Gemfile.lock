@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: 97db2b117f21a84681382415dc6141f534c9c573
+  revision: d478e8f4139fe761828bfb8dfd3d1135c06cfce6
   specs:
     cor1440_gen (1.0b3)
       devise
@@ -13,7 +13,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 948a46a0a69f3290ce338a354eb0f252c2fdf87b
+  revision: e151abb6fae892f0d2f87b2635e988e39e760122
   specs:
     heb412_gen (1.0.b6)
       mr519_gen
@@ -23,7 +23,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/mr519_gen.git
-  revision: 31d6f006588fb203e109bf2946ad0deb9c78c4bb
+  revision: 6354c54cae2ca7c9f3a6a2b74f4d54904694a82f
   specs:
     mr519_gen (0.2.0)
       rails (~> 6.0.0.rc1, >= 6.0.0.rc1)
@@ -31,7 +31,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: f963fe3df8c6364aded7e3099afeccf4a947f9a2
+  revision: 79ecf0cca4239023cccc7a12528858940fccc71d
   specs:
     sal7711_gen (1.0.b3)
       rails
@@ -39,7 +39,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: ebb3e66c48bb07d9971c09d46e7d0e935a8e9c91
+  revision: ba64ef21ad6def36a5db94a7eb25a5bb4c6da89c
   specs:
     sal7711_web (1.0.a3)
       rails
@@ -47,7 +47,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 62415e62a6e0c308a50219ba3dc02a2ec1df50ae
+  revision: 8dcd983dd8febbbb0f00ba43f9f7dde447036fbd
   specs:
     sip (2.0.b10)
       cancancan
@@ -65,7 +65,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 28b55ceddfde530fa2b685305f0a94c2222989c1
+  revision: 9aacb8005a23361766d07948ea45e93065521655
   specs:
     sivel2_gen (2.0b11)
       devise
@@ -362,7 +362,7 @@ GEM
     will_paginate (3.3.0)
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    zeitwerk (2.3.0)
+    zeitwerk (2.3.1)
 
 PLATFORMS
   ruby

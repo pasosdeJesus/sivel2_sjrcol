@@ -90,7 +90,7 @@
   <h5>ANEXOS DEL CONTACTO</h5>
 </a>
 <div class="collapse multi-collapse" id="datosanexos">
-  <%= render partial: 'anexovictima', locals: {f: victima} %>
+  <%= render partial: 'anexovictima', locals: {f: victima, consentimiento: false} %>
 </div>
 <br>
 <a data-toggle="collapse" href='#amplioscontacto'>
@@ -148,6 +148,13 @@
       "data-toggle" => 'tooltip',
       "title" => 'Informar a la persona sobre el uso de la información en el Banco de Datos de violencia sociopolítica del CINEP' 
       } %>
+</div>
+<br>
+<a data-toggle="collapse" href='#datosanexoscon'>
+  <h5>ANEXOS DE CONSENTIMIENTO</h5>
+</a>
+<div class="collapse multi-collapse" id="datosanexoscon">
+  <%= render partial: 'anexovictima', locals: {f: victima, consentimiento: true} %>
 </div>
 <% end %> <!-- simple_fields_for :persona-->
 <% end %> <!-- simple_fields_for :victima -->

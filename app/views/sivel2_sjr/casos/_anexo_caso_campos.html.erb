@@ -4,12 +4,21 @@
     <%= f.simple_fields_for :sip_anexo do |a| %>
       <div class="row">
         <div class="col-md-6">
-          <%= f.input :tipoanexo_id,
-            collection: Sip::Tipoanexo.habilitados,
-            include_blank: false,
-            label_method: :nombre,
-            value_method: :id
-          %>
+          <% if consentimiento %>
+            <%= f.input :tipoanexo_id,
+              collection: Sip::Tipoanexo.habilitados.where(nombre: "CONSENTIMIENTO DE DATOS"),
+              include_blank: false,
+              label_method: :nombre,
+              value_method: :id
+            %>
+          <% else %>
+            <%= f.input :tipoanexo_id,
+              collection: Sip::Tipoanexo.habilitados.where.not(nombre: "CONSENTIMIENTO DE DATOS"),
+              include_blank: false,
+              label_method: :nombre,
+              value_method: :id
+            %>
+          <% end %>
         </div>
         <div class="col-md-6">
           <% if !a.object || !a.object.adjunto_file_name || !a.object.id %>

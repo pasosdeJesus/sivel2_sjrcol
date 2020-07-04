@@ -14,6 +14,8 @@ module Sip
     validates :numerodocumento, :allow_blank => true, uniqueness: {message: "Documento de identidad ya registrado"}
 
     attr_accessor :fechanac
+    attr_accessor :ubinacimiento
+    
     def fechanac
       return Date.new(anionac && anionac > 0 ? anionac : 1900,
                   mesnac && mesnac > 0 && mesnac < 13 ? mesnac : 6,

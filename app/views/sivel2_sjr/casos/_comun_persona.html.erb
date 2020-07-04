@@ -105,15 +105,25 @@ end %>
 </div>
 <% 
 ph = 'N'
-ac = {'data-autocompleta' => 'no' }
+ac = {'data-autocompleta' => 'no', 'onkeyup' => "this.value = this.value.toUpperCase();"}
 if (!p.object.pais || p.object.pais == 'N' || p.object.pais == '')
   ph = 'Buscar'
-  ac = {:data => {autocomplete_source: "ubicaciones"}}
+  ac = {:data => {autocomplete_source: "ubicaciones"}, 'onkeyup' => "this.value = this.value.toUpperCase();"}
 end %>
 
-    <%= p.input :pais,
+    <%= p.input :ubinacimiento,
       value_method: :id,
+      label: "Buscar Ubicaciones",
       :input_html => ac %>
+
+<div class="row">
+  <div class="col-md-6">
+    <%= p.association :pais,
+      collection: Sip::Pais.habilitados,
+      label_method: :nombre,
+      value_method: :id %>
+  </div>
+</div>
 <div class="row">
   <div class="col-md-6">
     <%= p.association :departamento,

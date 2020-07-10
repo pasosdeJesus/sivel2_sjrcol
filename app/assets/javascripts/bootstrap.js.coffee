@@ -11,6 +11,84 @@ $(document).on('focusin',
   cor1440_gen_busca_asistente($(this))
 )
 
+@autocompleta_ubicacion = (label, id, id_victima, divcp, root) ->
+  sip_arregla_puntomontaje(root)
+  cs = id.split(";")
+  id_persona = cs[0]
+  pl = []
+  ini = 0
+  for i in [0..cs.length] by 1
+     t = parseInt(cs[i])
+     pl[i] = label.substring(ini, ini + t)
+     ini = ini + t + 1
+  # pl[1] cnom, pl[2] es cape, pl[3] es cdoc
+  d = "id_victima=" + id_victima
+  d += "&id_persona=" + id_persona
+  a = root.puntomontaje + 'personas/remplazar'
+  $.ajax(url: a, data: d, dataType: "html").fail( (jqXHR, texto) ->
+    alert("Error: " + jqXHR.responseText)
+  ).done( (e, r) ->
+    divcp.html(e)
+    $(document).trigger("sip:autocompleto_persona", [id_victima, id_persona])
+    return
+  )
+  return
+
+@busca_ubicacion = (s) ->
+  root = window
+  sip_arregla_puntomontaje(root)
+  cnom = s.attr('id')
+  v = $("#" + cnom).data('autocompleta')
+  if (v != 1 && v != "no") 
+    $("#" + cnom).data('autocompleta', 1)
+    divcp = s.closest('.campos_persona')
+    if (typeof divcp == 'undefined')
+      alert('No se ubico .campos_persona')
+      return
+    ubis = root.puntomontaje + $("#" + cnom).data("autocomplete-source")
+    $("#" + cnom).autocomplete({
+      source: ubis,
+      minLength: 2,
+      select: ( event, ui ) ->
+        ubicaciones= ui.item.label.split("/")
+        div_padre = $("#" + cnom).closest("div")
+        div_pais = div_padre.nextAll().eq(0)
+        div_dep = div_padre.nextAll().eq(1)
+        div_mun = div_padre.nextAll().eq(2)
+        input_pais = div_pais.find('select[id^=caso_victima_attributes_][id$=_persona_attributes_id_pais]')
+        input_dep = div_dep.find('select[id^=caso_victima_attributes_][id$=_persona_attributes_id_departamento]')
+        input_mun = div_mun.find('select[id^=caso_victima_attributes_][id$=_persona_attributes_id_municipio]')
+        pais= $.trim(ubicaciones[3])
+        departamento= $.trim(ubicaciones[2])
+        municipio= $.trim(ubicaciones[1])
+        x = $.getJSON(root.puntomontaje + "admin/paises?filtro%5Bbusid%5D=&filtro%5Bbusnombre%5D=" + pais)
+        y = $.getJSON(root.puntomontaje + "admin/departamentos?filtro%5Bbusid%5D=&filtro%5Bbusnombre%5D=" + departamento)
+        x.done( ( data ) ->
+          id_pais = data[0].id
+          input_pais.val(id_pais).trigger('chosen:updated')
+        )
+        y.done( ( data ) ->
+          datad = data
+          llena_departamento_congancho($(input_pais), root, sincoord=false, datad, input_dep)
+          input_dep.trigger('chosen:updated')
+          z = $.getJSON(root.puntomontaje + "admin/municipios?filtro%5Bbusid%5D=&filtro%5Bbusnombre%5D=" + municipio)
+          z.done( ( data ) ->
+            datam = data
+            llena_municipio_congancho($(input_dep), root, sincoord=false, datam, input_mun)
+            )
+        )
+    })
+  return
+
+# En pais de nacimiento permite autocompletar
+# Pais - Dpto - Municipio - Centro Poblado
+$(document).on('focusin',
+'input[id^=caso_victima_attributes_]'+
+'[id$=_persona_attributes_ubinacimiento]',
+(e) ->
+  busca_ubicacion($(this))
+)
+
 # Llena campos clasificacion y subclasificacion de desplazamiento
 @llena_clasifdesp = (ide, idl, jqthis) ->
   ee = $("#" + ide)

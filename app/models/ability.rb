@@ -100,6 +100,7 @@ class Ability < Sivel2Sjr::Ability
         ['Sivel2Gen', 'sectorsocial'],
         ['Sivel2Gen', 'vinculoestado'],
         ['Sivel2Sjr', 'idioma']
+        ['Sivel2Sjr', 'clasifdesps']
       ]
   end
 

@@ -30,11 +30,13 @@ $(document).on('focusin',
     if pe[0] != pl[0] 
       cl = "TRANSFRONTERIZO"
     else
-      cl = "ENTRE DEPARTAMENTOS"
+      cl = "INTERDEPARTAMENTAL"
       if pe.length > 1 && pl.length > 1 && pe[1] == pl[1]
-        cl = " ENTRE MUNCIPIOS DEL MISMO DEPARTAMENTO"
+        cl = "INTERMUNICIPAL"
         if pe.length > 2 && pl.length > 2 && pe[2] == pl[2]
           cl = "DENTRO DE UN MUNICIPIO"
+          if pe.length == 4 && pl.length == 4 && pe[3] == pl[3]
+            cl = "INTRAURBANO"
   ue = "RURAL"
   if pe.length == 4
     ue = "URBANO"

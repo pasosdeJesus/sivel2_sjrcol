@@ -57,7 +57,10 @@
 </div>
 </div>
 <br>
-<h5>DATOS BÁSICOS DEL CONTACTO</h5>
+<a data-toggle="collapse" href='#datosbasicos'>
+  <h5>DATOS BÁSICOS DEL CONTACTO</h5>
+</a>
+<div class="collapse multi-collapse campos_persona" id="datosbasicos">
 <%= f.simple_fields_for :victima, Sivel2Gen::Victima.
   where(id_caso: @caso.id).
   where(id_persona: @caso.casosjr.contacto.id) do |victima| %>
@@ -81,22 +84,34 @@
          } %>
       </div>
     </div>
-    <br> 
-    <h5>ANEXOS</h5>
-      <%= render partial: 'anexovictima', locals: {f: victima} %>
-    <br> 
-    <h5>DATOS AMPLIOS DEL CONTACTO</h5>
-      <%= victima.simple_fields_for :victimasjr do |victimasjr| %>
-        <% [2,4,5,1].each do |i| %>
-          <%= render partial: 'victima_campos' + i.to_s, 
-            locals: { victima: victima, 
-                      victimasjr: victimasjr,
-                      persona: p }
-          %>
-        <% end %>
-      <% end %>
-    <br> 
+</div>
+<br>
+<a data-toggle="collapse" href='#datosanexos'>
+  <h5>ANEXOS DEL CONTACTO</h5>
+</a>
+<div class="collapse multi-collapse" id="datosanexos">
+  <%= render partial: 'anexovictima', locals: {f: victima} %>
+</div>
+<br>
+<a data-toggle="collapse" href='#amplioscontacto'>
+  <h5>DATOS AMPLIOS DEL CONTACTO</h5>
+</a>
+<div class="collapse multi-collapse" id="amplioscontacto">
+  <%= victima.simple_fields_for :victimasjr do |victimasjr| %>
+    <% [2,4,5,1].each do |i| %>
+      <%= render partial: 'victima_campos' + i.to_s, 
+        locals: { victima: victima, 
+                  victimasjr: victimasjr,
+                  persona: p }
+                %>
+     <% end %>
+   <% end %>
+</div>
+<br>
+<a data-toggle="collapse" href='#institucional'>
     <h5>INFORMACIÓN INSTITUCIONAL Y MANEJO DE DATOS</h5>
+</a>
+<div class="collapse multi-collapse" id="institucional">
     <div class="row">
       <div class="col-md-6">
     <%= s.association :comosupo,
@@ -113,11 +128,12 @@
     %>
       </div>
     </div>
-
-    <br> 
-    <h5>Política de datos</h5>
-    <div class="row">
-    </div>
+</div>
+<br> 
+<a data-toggle="collapse" href='#politicadatos'>
+  <h5>POLÍTICA DE DATOS</h5>
+</a>
+<div class="collapse multi-collapse" id="politicadatos">
     <%= s.input :concentimientosjr, 
       boolean_style: :nested,
       inline_label: Sivel2Sjr::Casosjr.human_attribute_name(:concentimientosjr),
@@ -131,6 +147,7 @@
       input_html: {
       "data-toggle" => 'tooltip',
       "title" => 'Informar a la persona sobre el uso de la información en el Banco de Datos de violencia sociopolítica del CINEP' 
-    } %>
-  <% end %> <!-- simple_fields_for :persona-->
+      } %>
+</div>
+<% end %> <!-- simple_fields_for :persona-->
 <% end %> <!-- simple_fields_for :victima -->

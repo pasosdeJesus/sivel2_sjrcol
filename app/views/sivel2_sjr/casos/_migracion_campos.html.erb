@@ -71,6 +71,21 @@
       </div>
     </div>
     <div class="row">
+      <div class="col-md-6">
+        Vía de Ingreso
+        <%= f.association :viadeingreso,
+          collection: Viadeingreso.habilitados,
+          label_method: :nombre,
+          value_method: :id,
+          label: false,
+          input_html: {
+            "data-toggle" => 'tooltip',
+            'data-placeholder' => "Vía de ingerso...",
+            class: 'chosen-select' 
+          } %>
+      </div>
+    </div>
+    <div class="row">
       <div class="col-md-12">
         Llegada
       </div>

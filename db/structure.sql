@@ -6142,7 +6142,10 @@ CREATE TABLE public.sivel2_sjr_migracion (
     observacionesref character varying(5000),
     viadeingreso_id integer,
     causamigracion_id integer,
-    pagoingreso_id integer
+    pagoingreso_id integer,
+    valor_pago character varying,
+    concepto_pago character varying,
+    actor_pago character varying
 );
 
 
@@ -12391,6 +12394,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200712215715'),
 ('20200713032557'),
 ('20200713034223'),
-('20200713161527');
+('20200713161527'),
+('20200713194611');
 
 

@@ -25,7 +25,7 @@ module Admin
     end
 
     def genclase
-      'M'
+      'F'
     end
 
     def viadeingreso_params

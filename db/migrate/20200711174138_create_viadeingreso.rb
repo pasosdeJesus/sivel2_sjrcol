@@ -1,12 +1,12 @@
 class CreateViadeingreso < ActiveRecord::Migration[6.0]
   def change
     create_table :viadeingreso do |t|
-      t.string :nombre, limit: 500
+      t.string :nombre, limit: 500, null: false
       t.string :observaciones, limit: 5000
-      t.date :fechacreacion
+      t.date :fechacreacion, null: false
       t.date :fechadeshabilitacion
-      t.timestamp :created_at
-      t.timestamp :updated_at
+      t.timestamp :created_at, null: false
+      t.timestamp :updated_at, null: false
     end
   end
 end

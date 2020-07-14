@@ -6141,7 +6141,11 @@ CREATE TABLE public.sivel2_sjr_migracion (
     proteccion_id integer,
     observacionesref character varying(5000),
     viadeingreso_id integer,
-    causamigracion_id integer
+    causamigracion_id integer,
+    pagoingreso_id integer,
+    valor_pago character varying,
+    concepto_pago character varying,
+    actor_pago character varying
 );
 
 
@@ -10605,6 +10609,14 @@ ALTER TABLE ONLY public.sip_grupo_usuario
 
 
 --
+-- Name: sivel2_sjr_migracion fk_rails_757246b473; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sivel2_sjr_migracion
+    ADD CONSTRAINT fk_rails_757246b473 FOREIGN KEY (pagoingreso_id) REFERENCES public.sip_trivalente(id);
+
+
+--
 -- Name: sivel2_sjr_progestado_derecho fk_rails_7598f6bf76; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -12375,12 +12387,14 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200601232156'),
 ('20200622193241'),
 ('20200706113547'),
-('20200710103327');
 ('20200710103327'),
 ('20200711174138'),
 ('20200711182402'),
 ('20200711195547'),
 ('20200712215715'),
 ('20200713032557'),
-('20200713034223');
+('20200713034223'),
+('20200713161527'),
+('20200713194611');
+
 

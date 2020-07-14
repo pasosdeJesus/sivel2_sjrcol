@@ -23,12 +23,13 @@ class LlenaCausamigracion < ActiveRecord::Migration[6.0]
         VALUES (10, 'Intento de reclutamiento forzado', null, '2020-07-13', null, '2020-07-13', '2020-07-13');
       INSERT INTO public.causamigracion (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, created_at, updated_at) 
         VALUES (11, 'Otra', null, '2020-07-13', null, '2020-07-13', '2020-07-13');
+      SELECT setval('public.causamigracion_id_seq', 100);
     SQL
   end
 
   def down
     execute <<-SQL
-      DELETE FROM public.causamigracion WHERE id>='1' AND id<='11'
+      DELETE FROM public.causamigracion WHERE id>='1' AND id<='100'
     SQL
   end
 end

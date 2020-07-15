@@ -29,7 +29,7 @@ class LlenaCausamigracion < ActiveRecord::Migration[6.0]
 
   def down
     execute <<-SQL
-      DELETE FROM public.causamigracion WHERE id>='1' AND id<='100'
+      DELETE FROM public.causamigracion WHERE id>='1' AND id<='11'
     SQL
   end
 end

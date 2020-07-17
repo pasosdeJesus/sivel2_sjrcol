@@ -78,7 +78,8 @@ class Ability < Sivel2Sjr::Ability
     ['', 'espaciopart'],
     ['', 'migracontactopre'],
     ['', 'perfilmigracion'],
-    ['', 'trivalentepositiva']
+    ['', 'trivalentepositiva'],
+    ['', 'viadeingreso']
   ]
   
   def tablasbasicas 

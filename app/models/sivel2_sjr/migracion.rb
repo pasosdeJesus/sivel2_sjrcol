@@ -18,7 +18,8 @@ class Sivel2Sjr::Migracion < ActiveRecord::Base
     optional: true
   belongs_to :destino_clase, 
     class_name: 'Sip::Clase', foreign_key: "destino_clase_id", optional: true
-
+  belongs_to :viadeingreso,
+    class_name: 'Viadeingreso', foreign_key: "viadeingreso_id", optional: true
 
   belongs_to :llegada_pais, 
     class_name: 'Sip::Pais', foreign_key: "llegada_pais_id", optional: true

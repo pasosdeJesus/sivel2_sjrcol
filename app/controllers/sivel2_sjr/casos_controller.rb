@@ -143,7 +143,10 @@ module Sivel2Sjr
     def otros_params
       [
         :migracion_attributes => [
+          :actor_pago,
           :causaRefugio_id,
+          :causamigracion_id,
+          :concepto_pago,
           :destino_clase_id,
           :destino_departamento_id,
           :destino_municipio_id,
@@ -159,6 +162,7 @@ module Sivel2Sjr
           :llegada_pais_id,
           :migracontactopre_id,
           :observacionesref,
+          :pagoingreso_id,
           :pep,
           :perfilmigracion_id,
           :proteccion_id,
@@ -169,6 +173,8 @@ module Sivel2Sjr
           :salvoNpi,
           :se_establece_en_sitio_llegada,
           :statusmigratorio_id,
+          :valor_pago,
+          :viadeingreso_id,
           :_destroy
         ],
       ]

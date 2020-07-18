@@ -270,6 +270,40 @@ CREATE SEQUENCE public.caso_presponsable_seq
 
 
 --
+-- Name: causamigracion; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.causamigracion (
+    id bigint NOT NULL,
+    nombre character varying(500) NOT NULL,
+    observaciones character varying(5000),
+    fechacreacion date NOT NULL,
+    fechadeshabilitacion date,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: causamigracion_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.causamigracion_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: causamigracion_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.causamigracion_id_seq OWNED BY public.causamigracion.id;
+
+
+--
 -- Name: causaref_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -6105,7 +6139,13 @@ CREATE TABLE public.sivel2_sjr_migracion (
     "fechaNpi" date,
     "causaRefugio_id" integer,
     observacionesref character varying(5000),
-    proteccion_id integer
+    proteccion_id integer,
+    viadeingreso_id integer,
+    causamigracion_id integer,
+    pagoingreso_id integer DEFAULT 1,
+    valor_pago integer,
+    concepto_pago character varying DEFAULT ''::character varying,
+    actor_pago character varying DEFAULT ''::character varying
 );
 
 
@@ -6523,6 +6563,40 @@ ALTER SEQUENCE public.trivalentepositiva_id_seq OWNED BY public.trivalentepositi
 
 
 --
+-- Name: viadeingreso; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.viadeingreso (
+    id bigint NOT NULL,
+    nombre character varying(500) NOT NULL,
+    observaciones character varying(5000),
+    fechacreacion date NOT NULL,
+    fechadeshabilitacion date,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: viadeingreso_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.viadeingreso_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: viadeingreso_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.viadeingreso_id_seq OWNED BY public.viadeingreso.id;
+
+
+--
 -- Name: vvictimasoundexesp; Type: MATERIALIZED VIEW; Schema: public; Owner: -
 --
 
@@ -6537,6 +6611,13 @@ CREATE MATERIALIZED VIEW public.vvictimasoundexesp AS
     public.sivel2_gen_victima
   WHERE (sip_persona.id = sivel2_gen_victima.id_persona)
   WITH NO DATA;
+
+
+--
+-- Name: causamigracion id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.causamigracion ALTER COLUMN id SET DEFAULT nextval('public.causamigracion_id_seq'::regclass);
 
 
 --
@@ -7121,6 +7202,13 @@ ALTER TABLE ONLY public.trivalentepositiva ALTER COLUMN id SET DEFAULT nextval('
 
 
 --
+-- Name: viadeingreso id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.viadeingreso ALTER COLUMN id SET DEFAULT nextval('public.viadeingreso_id_seq'::regclass);
+
+
+--
 -- Name: accion accion_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -7302,6 +7390,14 @@ ALTER TABLE ONLY public.sivel2_sjr_casosjr
 
 ALTER TABLE ONLY public.sivel2_gen_categoria
     ADD CONSTRAINT categoria_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: causamigracion causamigracion_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.causamigracion
+    ADD CONSTRAINT causamigracion_pkey PRIMARY KEY (id);
 
 
 --
@@ -8686,6 +8782,14 @@ ALTER TABLE ONLY public.sip_ubicacion
 
 ALTER TABLE ONLY public.usuario
     ADD CONSTRAINT usuario_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: viadeingreso viadeingreso_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.viadeingreso
+    ADD CONSTRAINT viadeingreso_pkey PRIMARY KEY (id);
 
 
 --
@@ -10521,6 +10625,14 @@ ALTER TABLE ONLY public.sip_grupo_usuario
 
 
 --
+-- Name: sivel2_sjr_migracion fk_rails_757246b473; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sivel2_sjr_migracion
+    ADD CONSTRAINT fk_rails_757246b473 FOREIGN KEY (pagoingreso_id) REFERENCES public.sip_trivalente(id);
+
+
+--
 -- Name: sivel2_sjr_progestado_derecho fk_rails_7598f6bf76; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10814,6 +10926,14 @@ ALTER TABLE ONLY public.sivel2_sjr_casosjr
 
 ALTER TABLE ONLY public.sip_datosbio
     ADD CONSTRAINT fk_rails_b4903b3da7 FOREIGN KEY (res_municipio_id) REFERENCES public.sip_municipio(id);
+
+
+--
+-- Name: sivel2_sjr_migracion fk_rails_b52dcfd040; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sivel2_sjr_migracion
+    ADD CONSTRAINT fk_rails_b52dcfd040 FOREIGN KEY (viadeingreso_id) REFERENCES public.viadeingreso(id);
 
 
 --
@@ -11174,6 +11294,14 @@ ALTER TABLE ONLY public.sivel2_gen_combatiente
 
 ALTER TABLE ONLY public.cor1440_gen_actividadpf
     ADD CONSTRAINT fk_rails_f941b0c512 FOREIGN KEY (proyectofinanciero_id) REFERENCES public.cor1440_gen_proyectofinanciero(id);
+
+
+--
+-- Name: sivel2_sjr_migracion fk_rails_fa38ef778b; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sivel2_sjr_migracion
+    ADD CONSTRAINT fk_rails_fa38ef778b FOREIGN KEY (causamigracion_id) REFERENCES public.causamigracion(id);
 
 
 --
@@ -12260,6 +12388,14 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200601232156'),
 ('20200622193241'),
 ('20200706113547'),
-('20200710103327');
+('20200710103327'),
+('20200711174138'),
+('20200711182402'),
+('20200711195547'),
+('20200712215715'),
+('20200713032557'),
+('20200713034223'),
+('20200713161527'),
+('20200713194611');
 
 

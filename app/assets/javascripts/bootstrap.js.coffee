@@ -3,6 +3,16 @@ jQuery ->
   $("a[rel~=tooltip], .has-tooltip").tooltip()
 
 
+# En formulario de caso-migracion si pagó por ingreso a colombia muestra campos de detalles
+$(document).on('change', 'select[id^=caso_migracion_attributes_][id$=pagoingreso_id]', (e) ->
+  res = $(this).val()
+  id_pago = $(this).attr('id').replace('pagoingreso_id', 'valor_pago')  
+  div_detalles = $('#' + id_pago).closest('.detalles_pago')
+  if (res == '2')
+   div_detalles.css("display", "block")
+  else
+   div_detalles.css("display", "none")
+)
 # En listado de asistencia permite autocompletar nombres
 $(document).on('focusin',
 'input[id^=actividad_asistencia_attributes_]'+

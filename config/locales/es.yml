@@ -87,6 +87,12 @@ es:
       "trivalentepositiva":
         Trivalentepositiva: Trivalente Positiva
         Trivalentespositiva: Trivalentes Positiva
+      "causamigracion":
+        Causamigracion: Causa de migración
+        Causasmigracion: Causas de migración
+      "viadeingreso":
+        Viadeingreso: Vía de ingreso
+        Viasdeingreso: Vías de ingreso
       "sal7711_gen/articulo": 
         texto: Resumen
         fuenteprensa: Fuente de prensa

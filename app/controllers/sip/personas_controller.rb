@@ -16,7 +16,7 @@ module Sip
         @registro.datosbio =  @datosbio
       end
       a = atributos_show - [:id] +
-        [:datosbio, :caracterizaciones]
+        [:datosbio, :proyectofinanciero_ids, :caracterizaciones]
       p = a.index(:fechanac)
       a[p] = :anionac
       a.insert(p, :mesnac)

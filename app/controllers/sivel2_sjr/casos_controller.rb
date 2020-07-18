@@ -144,6 +144,7 @@ module Sivel2Sjr
       [
         :migracion_attributes => [
           :causaRefugio_id,
+          :causamigracion_id,
           :destino_clase_id,
           :destino_departamento_id,
           :destino_municipio_id,

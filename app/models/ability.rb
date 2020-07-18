@@ -74,6 +74,7 @@ class Ability < Sivel2Sjr::Ability
     ['Sip', 'lineaactorsocial'],
     ['Sip', 'tipoanexo'],
     ['Sip', 'tipoactorsocial'],
+    ['', 'causamigracion'],
     ['', 'discapacidad'],
     ['', 'espaciopart'],
     ['', 'migracontactopre'],

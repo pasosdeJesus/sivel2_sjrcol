@@ -21,6 +21,8 @@ class Sivel2Sjr::Migracion < ActiveRecord::Base
   belongs_to :viadeingreso,
     class_name: 'Viadeingreso', foreign_key: "viadeingreso_id", optional: true
 
+  belongs_to :causamigracion, 
+    class_name: 'Causamigracion', foreign_key: "causamigracion_id", optional: true
   belongs_to :llegada_pais, 
     class_name: 'Sip::Pais', foreign_key: "llegada_pais_id", optional: true
   belongs_to :llegada_departamento, 

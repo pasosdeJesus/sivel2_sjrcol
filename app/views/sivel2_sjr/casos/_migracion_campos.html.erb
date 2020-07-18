@@ -72,7 +72,7 @@
     </div>
     <div class="row">
       <div class="col-md-6">
-        Vía de Ingreso
+         Vía de Ingreso
         <%= f.association :viadeingreso,
           collection: Viadeingreso.habilitados,
           label_method: :nombre,
@@ -81,6 +81,19 @@
           input_html: {
             "data-toggle" => 'tooltip',
             'data-placeholder' => "Vía de ingerso...",
+            class: 'chosen-select' 
+          } %>
+      </div>
+      <div class="col-md-6">
+        Causa de Migración
+        <%= f.association :causamigracion,
+          collection: Causamigracion.habilitados,
+          label_method: :nombre,
+          value_method: :id,
+          label: false,
+          input_html: {
+            "data-toggle" => 'tooltip',
+            'data-placeholder' => "Causa de la migración...",
             class: 'chosen-select' 
           } %>
       </div>

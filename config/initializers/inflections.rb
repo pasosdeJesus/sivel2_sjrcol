@@ -35,4 +35,5 @@ ActiveSupport::Inflector.inflections do |inflect|
 	inflect.irregular 'progestado', 'progsestado'
 	inflect.irregular 'tipoactorsocial', 'tiposactorsocial'
 	inflect.irregular 'tipoanexo', 'tiposanexo'
+	inflect.irregular 'viadeingreso', 'viasdeingreso'
 end

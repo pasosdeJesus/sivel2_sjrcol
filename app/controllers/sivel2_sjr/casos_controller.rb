@@ -170,6 +170,7 @@ module Sivel2Sjr
           :salvoNpi,
           :se_establece_en_sitio_llegada,
           :statusmigratorio_id,
+          :viadeingreso_id,
           :_destroy
         ],
       ]

@@ -145,6 +145,7 @@ module Sivel2Sjr
         :migracion_attributes => [
           :actor_pago,
           :causaRefugio_id,
+          :causamigracion_id,
           :concepto_pago,
           :destino_clase_id,
           :destino_departamento_id,
@@ -173,6 +174,7 @@ module Sivel2Sjr
           :se_establece_en_sitio_llegada,
           :statusmigratorio_id,
           :valor_pago,
+          :viadeingreso_id,
           :_destroy
         ],
       ]

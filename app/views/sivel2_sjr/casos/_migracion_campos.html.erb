@@ -107,15 +107,22 @@
           collection: Sip::Trivalente.habilitados,
           label_method: :nombre,
           value_method: :id,
-          selected: 1,
           label: false,
           input_html: {
             "data-toggle" => 'tooltip',
             class: 'chosen-select' 
           } %>
-        <div class="detalles_pago" style="display: none">
+      </div>
+      <div class="col-md-6">
+        <% if f.object && f.object.pagoingreso_id && 
+            f.object.pagoingreso_id == 2 %>
+          <% estilodetpago = 'display: block' %>
+        <% else %>
+          <% estilodetpago = 'display: none' %>
+        <% end %>
+        <div class="detalles_pago" style="<%= estilodetpago %>">
           <label class="form-check-label">
-            Valor
+            Valor (en pesos)
           </label>
           <%= f.input :valor_pago, 
             label: false %>
@@ -125,7 +132,7 @@
           <%= f.input :concepto_pago,
             label: false %>
           <label class="form-check-label">
-            Actor que pagó
+            Actor que cobró
           </label>
           <%= f.input :actor_pago,
             label: false %>

@@ -173,6 +173,7 @@ module Sivel2Sjr
           :salvoNpi,
           :se_establece_en_sitio_llegada,
           :statusmigratorio_id,
+          :ubifamilia,
           :valor_pago,
           :viadeingreso_id,
           :_destroy

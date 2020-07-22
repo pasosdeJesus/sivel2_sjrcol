@@ -1,7 +1,13 @@
 # encoding: UTF-8
 
 class Sivel2Sjr::Migracion < ActiveRecord::Base
-
+  
+  has_and_belongs_to_many :agresionmigracion, 
+    class_name: 'Agresionmigracion',
+    foreign_key: :migracion_id, 
+    association_foreign_key: 'agremigracion_id',
+    join_table: 'sivel2_sjr_agremigracion_migracion'
+  
   belongs_to :caso,
     class_name: 'Sivel2Gen::Caso', foreign_key: "caso_id"
 

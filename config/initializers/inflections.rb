@@ -26,6 +26,7 @@ ActiveSupport::Inflector.inflections do |inflect|
 	inflect.irregular 'migracion', 'migraciones'
 	inflect.irregular 'causaagresion', 'causasagresion'
 	inflect.irregular 'causamigracion', 'causasmigracion'
+	inflect.irregular 'dificultadmigracion', 'dificultadesmigracion'
 	inflect.irregular 'discapacidad', 'discapacidades'
 	inflect.irregular 'espaciopart', 'espaciospart'
 	inflect.irregular 'lineaactorsocial', 'lineasactorsocial'
@@ -37,4 +38,5 @@ ActiveSupport::Inflector.inflections do |inflect|
 	inflect.irregular 'tipoactorsocial', 'tiposactorsocial'
 	inflect.irregular 'tipoanexo', 'tiposanexo'
 	inflect.irregular 'viadeingreso', 'viasdeingreso'
+	inflect.irregular 'agresionmigracion', 'agresionesmigracion'
 end

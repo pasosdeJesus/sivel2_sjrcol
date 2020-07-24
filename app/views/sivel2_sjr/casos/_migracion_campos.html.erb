@@ -190,6 +190,21 @@
             class: 'chosen-select'
           } %>
       </div>
+      <div class="col-md-6">
+        Presuntas causas de la agresión
+        <%= f.association :causaagresion,
+          collection: Causaagresion.habilitados,
+          label_method: :nombre,
+          value_method: :id,
+          label: false,
+          include_blank: false,
+          input_html: {
+            "data-toggle" => 'tooltip'
+            'data-placeholder' => "Presuntas causas...",
+            multiple: true,
+            class: 'chosen-select'
+          } %>
+      </div>
     </div>
     <div class="row">
       <div class="col-md-12">

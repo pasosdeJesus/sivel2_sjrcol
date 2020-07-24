@@ -1,7 +1,7 @@
 # encoding: UTF-8
 
 class Sivel2Sjr::Migracion < ActiveRecord::Base
-
+  
   belongs_to :caso,
     class_name: 'Sivel2Gen::Caso', foreign_key: "caso_id"
 
@@ -66,7 +66,6 @@ class Sivel2Sjr::Migracion < ActiveRecord::Base
     class_name: 'Sivel2Sjr::Statusmigratorio', 
     foreign_key: "statusmigratorio_id", 
     optional: true
-
-
+  
   validates :fechasalida, presence: true
 end

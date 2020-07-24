@@ -97,6 +97,17 @@
             'data-placeholder' => "Causa de la migración...",
             class: 'chosen-select' 
           } %>
+        <% if f.object && f.object.causamigracion_id && 
+            f.object.causamigracion_id == 11 %>
+          <% estiloracausa = 'display: block' %>
+        <% else %>
+          <% estilotracausa = 'display: none' %>
+        <% end %>
+        <div class="otra_causamigracion" style="<%= estilotracausa %>">
+          <%= f.input :otracausa, 
+            label: "Otra, ¿Cuál?"
+          %> 
+        </div>
       </div>
     </div>
 

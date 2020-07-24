@@ -162,6 +162,7 @@ module Sivel2Sjr
           :llegada_pais_id,
           :migracontactopre_id,
           :observacionesref,
+          :otracausa,
           :pagoingreso_id,
           :pep,
           :perfilmigracion_id,

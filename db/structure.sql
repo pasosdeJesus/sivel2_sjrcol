@@ -320,6 +320,40 @@ CREATE SEQUENCE public.caso_presponsable_seq
 
 
 --
+-- Name: causaagresion; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.causaagresion (
+    id bigint NOT NULL,
+    nombre character varying(500) NOT NULL,
+    observaciones character varying(5000),
+    fechacreacion date NOT NULL,
+    fechadeshabilitacion date,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: causaagresion_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.causaagresion_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: causaagresion_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.causaagresion_id_seq OWNED BY public.causaagresion.id;
+
+
+--
 -- Name: causamigracion; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -5971,6 +6005,16 @@ CREATE TABLE public.sivel2_sjr_categoria_desplazamiento (
 
 
 --
+-- Name: sivel2_sjr_causaagresion_migracion; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.sivel2_sjr_causaagresion_migracion (
+    causaagresion_id integer,
+    migracion_id integer
+);
+
+
+--
 -- Name: sivel2_sjr_clasifdesp_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -6771,6 +6815,13 @@ ALTER TABLE ONLY public.agresionmigracion ALTER COLUMN id SET DEFAULT nextval('p
 
 
 --
+-- Name: causaagresion id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.causaagresion ALTER COLUMN id SET DEFAULT nextval('public.causaagresion_id_seq'::regclass);
+
+
+--
 -- Name: causamigracion id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -7562,6 +7613,14 @@ ALTER TABLE ONLY public.sivel2_sjr_casosjr
 
 ALTER TABLE ONLY public.sivel2_gen_categoria
     ADD CONSTRAINT categoria_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: causaagresion causaagresion_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.causaagresion
+    ADD CONSTRAINT causaagresion_pkey PRIMARY KEY (id);
 
 
 --
@@ -9230,6 +9289,20 @@ CREATE INDEX index_sivel2_sjr_casosjr_on_comosupo_id ON public.sivel2_sjr_casosj
 
 
 --
+-- Name: index_sivel2_sjr_causaagresion_migracion_on_causaagresion_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_sivel2_sjr_causaagresion_migracion_on_causaagresion_id ON public.sivel2_sjr_causaagresion_migracion USING btree (causaagresion_id);
+
+
+--
+-- Name: index_sivel2_sjr_causaagresion_migracion_on_migracion_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_sivel2_sjr_causaagresion_migracion_on_migracion_id ON public.sivel2_sjr_causaagresion_migracion USING btree (migracion_id);
+
+
+--
 -- Name: index_sivel2_sjr_difmigracion_migracion_on_difmigracion_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -10122,6 +10195,14 @@ ALTER TABLE ONLY public.cor1440_gen_actividad_valorcampotind
 
 ALTER TABLE ONLY public.cor1440_gen_anexo_efecto
     ADD CONSTRAINT fk_rails_037289a77c FOREIGN KEY (efecto_id) REFERENCES public.cor1440_gen_efecto(id);
+
+
+--
+-- Name: sivel2_sjr_causaagresion_migracion fk_rails_061c047c82; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sivel2_sjr_causaagresion_migracion
+    ADD CONSTRAINT fk_rails_061c047c82 FOREIGN KEY (migracion_id) REFERENCES public.sivel2_sjr_migracion(id);
 
 
 --
@@ -11453,6 +11534,14 @@ ALTER TABLE ONLY public.cor1440_gen_valorcampoact
 
 
 --
+-- Name: sivel2_sjr_causaagresion_migracion fk_rails_e5161bdd4e; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sivel2_sjr_causaagresion_migracion
+    ADD CONSTRAINT fk_rails_e5161bdd4e FOREIGN KEY (causaagresion_id) REFERENCES public.causaagresion(id);
+
+
+--
 -- Name: cor1440_gen_beneficiariopf fk_rails_e6ba73556e; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -12707,6 +12796,9 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200722023954'),
 ('20200722024432'),
 ('20200722032255'),
+('20200722051806'),
+('20200722051939'),
+('20200722052937'),
 ('20200722210144'),
 ('20200723133542');
 

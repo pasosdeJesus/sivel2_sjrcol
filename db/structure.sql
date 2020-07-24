@@ -53,6 +53,22 @@ CREATE FUNCTION public.campointro(character varying, character varying) RETURNS 
 
 
 --
+-- Name: completa_obs(character varying, character varying); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION public.completa_obs(obs character varying, nuevaobs character varying) RETURNS character varying
+    LANGUAGE plpgsql
+    AS $$
+      BEGIN
+        RETURN CASE WHEN obs IS NULL THEN nuevaobs
+          WHEN obs='' THEN nuevaobs
+          WHEN RIGHT(obs, 1)='.' THEN obs || ' ' || nuevaobs
+          ELSE obs || '. ' || nuevaobs
+        END;
+      END; $$;
+
+
+--
 -- Name: municipioubicacion(integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
@@ -6189,7 +6205,8 @@ CREATE TABLE public.sivel2_sjr_migracion (
     pagoingreso_id integer DEFAULT 1,
     valor_pago integer,
     concepto_pago character varying DEFAULT ''::character varying,
-    actor_pago character varying DEFAULT ''::character varying
+    actor_pago character varying DEFAULT ''::character varying,
+    otracausa character varying
 );
 
 
@@ -12502,6 +12519,9 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200713161527'),
 ('20200713194611'),
 ('20200720005020'),
-('20200720013144');
+('20200720013144'),
+('20200721221535'),
+('20200722210144'),
+('20200723133542');
 
 

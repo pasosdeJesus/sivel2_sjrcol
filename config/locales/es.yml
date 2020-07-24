@@ -93,6 +93,9 @@ es:
       "causamigracion":
         Causamigracion: Causa de migración
         Causasmigracion: Causas de migración
+      "dificultadmigracion":
+        Dificultadmigracion: Accidente o Dificultad en la migración
+        Dificultadesmigracion: Accidentes o Dificultades en la migración
       "viadeingreso":
         Viadeingreso: Vía de ingreso
         Viasdeingreso: Vías de ingreso

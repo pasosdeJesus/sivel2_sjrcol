@@ -3,6 +3,17 @@ jQuery ->
   $("a[rel~=tooltip], .has-tooltip").tooltip()
 
 
+# En formulario de caso-migracion si elige otra causa muestra campo para especificarla
+$(document).on('change', 'select[id^=caso_migracion_attributes_][id$=causamigracion_id]', (e) ->
+  res = $(this).val()
+  id_causa = $(this).attr('id') 
+  div_otracausa = $('#' + id_causa).parent().next()
+  if (res == '11')
+   div_otracausa.css("display", "block")
+  else
+   div_otracausa.css("display", "none")
+)
+
 # En formulario de caso-migracion si pagó por ingreso a colombia muestra campos de detalles
 $(document).on('change', 'select[id^=caso_migracion_attributes_][id$=pagoingreso_id]', (e) ->
   res = $(this).val()

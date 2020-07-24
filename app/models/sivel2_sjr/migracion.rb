@@ -7,6 +7,12 @@ class Sivel2Sjr::Migracion < ActiveRecord::Base
     foreign_key: :migracion_id, 
     association_foreign_key: 'agremigracion_id',
     join_table: 'sivel2_sjr_agremigracion_migracion'
+
+  has_and_belongs_to_many :dificultadmigracion, 
+    class_name: 'Dificultadmigracion',
+    foreign_key: :migracion_id, 
+    association_foreign_key: 'difmigracion_id',
+    join_table: 'sivel2_sjr_difmigracion_migracion'
   
   belongs_to :caso,
     class_name: 'Sivel2Gen::Caso', foreign_key: "caso_id"
@@ -26,8 +32,6 @@ class Sivel2Sjr::Migracion < ActiveRecord::Base
     class_name: 'Sip::Clase', foreign_key: "destino_clase_id", optional: true
   belongs_to :viadeingreso,
     class_name: 'Viadeingreso', foreign_key: "viadeingreso_id", optional: true
-
-
   belongs_to :causamigracion, 
     class_name: 'Causamigracion', foreign_key: "causamigracion_id", optional: true
   belongs_to :pagoingreso, 
@@ -72,7 +76,6 @@ class Sivel2Sjr::Migracion < ActiveRecord::Base
     class_name: 'Sivel2Sjr::Statusmigratorio', 
     foreign_key: "statusmigratorio_id", 
     optional: true
-
-
+  
   validates :fechasalida, presence: true
 end

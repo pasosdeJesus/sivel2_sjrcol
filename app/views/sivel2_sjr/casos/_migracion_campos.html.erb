@@ -175,6 +175,17 @@
       </div>
     </div>
     <div class="row">
+      <div class="col-md-6">
+        ¿Enfrentó alguna agresión durante la migración?
+        <%= f.association :agresionmigracion,
+          collection: Agresionmigracion.habilitados,
+            'data-placeholder' => "Agresiones durante la migración...",
+            multiple: true,
+            class: 'chosen-select'
+          } %>
+      </div>
+    </div>
+    <div class="row">
       <div class="col-md-12">
         Llegada
       </div>

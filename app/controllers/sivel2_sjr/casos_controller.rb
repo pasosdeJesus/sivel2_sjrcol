@@ -178,6 +178,7 @@ module Sivel2Sjr
           :valor_pago,
           :viadeingreso_id,
           :_destroy,
+          :agresionmigracion_ids => [],
           :dificultadmigracion_ids => []
         ],
       ]

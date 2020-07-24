@@ -43,6 +43,9 @@ es:
     proyectos: Áreas de Actividad
   activerecord:
     attributes:
+      "agresionmigracion":
+        Agresionmigracion: Agresion durante la migración
+        Agresionesmigracion: Agresiones durante la migración
       "sivel2_gen/anexo_victima":
         tipoanexo: Tipo de anexo
         tipoanexo_id: Tipo de anexo

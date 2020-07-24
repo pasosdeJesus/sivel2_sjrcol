@@ -238,6 +238,40 @@ CREATE SEQUENCE public.acto_seq
 
 
 --
+-- Name: agresionmigracion; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.agresionmigracion (
+    id bigint NOT NULL,
+    nombre character varying(500) NOT NULL,
+    observaciones character varying(5000),
+    fechacreacion date NOT NULL,
+    fechadeshabilitacion date,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: agresionmigracion_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.agresionmigracion_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: agresionmigracion_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.agresionmigracion_id_seq OWNED BY public.agresionmigracion.id;
+
+
+--
 -- Name: anexo_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -2259,6 +2293,40 @@ CREATE TABLE public.despacho (
     fechadeshabilitacion date,
     CONSTRAINT despacho_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
+
+
+--
+-- Name: dificultadmigracion; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.dificultadmigracion (
+    id bigint NOT NULL,
+    nombre character varying(500) NOT NULL,
+    observaciones character varying(5000),
+    fechacreacion date NOT NULL,
+    fechadeshabilitacion date,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: dificultadmigracion_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.dificultadmigracion_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: dificultadmigracion_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.dificultadmigracion_id_seq OWNED BY public.dificultadmigracion.id;
 
 
 --
@@ -5801,6 +5869,16 @@ CREATE TABLE public.sivel2_sjr_actualizacionbase (
 
 
 --
+-- Name: sivel2_sjr_agremigracion_migracion; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.sivel2_sjr_agremigracion_migracion (
+    agremigracion_id integer,
+    migracion_id integer
+);
+
+
+--
 -- Name: sivel2_sjr_aspsicosocial; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -6045,6 +6123,16 @@ CREATE TABLE public.sivel2_sjr_derecho_progestado (
 
 
 --
+-- Name: sivel2_sjr_difmigracion_migracion; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.sivel2_sjr_difmigracion_migracion (
+    difmigracion_id integer,
+    migracion_id integer
+);
+
+
+--
 -- Name: sivel2_sjr_etiqueta_usuario; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -6206,7 +6294,8 @@ CREATE TABLE public.sivel2_sjr_migracion (
     valor_pago integer,
     concepto_pago character varying DEFAULT ''::character varying,
     actor_pago character varying DEFAULT ''::character varying,
-    otracausa character varying
+    otracausa character varying,
+    ubifamilia character varying
 );
 
 
@@ -6675,6 +6764,13 @@ CREATE MATERIALIZED VIEW public.vvictimasoundexesp AS
 
 
 --
+-- Name: agresionmigracion id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.agresionmigracion ALTER COLUMN id SET DEFAULT nextval('public.agresionmigracion_id_seq'::regclass);
+
+
+--
 -- Name: causamigracion id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -6896,6 +6992,13 @@ ALTER TABLE ONLY public.cor1440_gen_valorcampoact ALTER COLUMN id SET DEFAULT ne
 --
 
 ALTER TABLE ONLY public.cor1440_gen_valorcampotind ALTER COLUMN id SET DEFAULT nextval('public.cor1440_gen_valorcampotind_id_seq'::regclass);
+
+
+--
+-- Name: dificultadmigracion id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.dificultadmigracion ALTER COLUMN id SET DEFAULT nextval('public.dificultadmigracion_id_seq'::regclass);
 
 
 --
@@ -7323,6 +7426,14 @@ ALTER TABLE ONLY public.sivel2_sjr_actosjr
 
 ALTER TABLE ONLY public.sivel2_sjr_actualizacionbase
     ADD CONSTRAINT actualizacionbase_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: agresionmigracion agresionmigracion_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.agresionmigracion
+    ADD CONSTRAINT agresionmigracion_pkey PRIMARY KEY (id);
 
 
 --
@@ -7787,6 +7898,14 @@ ALTER TABLE ONLY public.sivel2_sjr_desplazamiento
 
 ALTER TABLE ONLY public.sivel2_sjr_desplazamiento
     ADD CONSTRAINT desplazamiento_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: dificultadmigracion dificultadmigracion_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.dificultadmigracion
+    ADD CONSTRAINT dificultadmigracion_pkey PRIMARY KEY (id);
 
 
 --
@@ -9090,10 +9209,38 @@ CREATE INDEX index_sivel2_gen_sectorsocialsec_victima_on_victima_id ON public.si
 
 
 --
+-- Name: index_sivel2_sjr_agremigracion_migracion_on_agremigracion_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_sivel2_sjr_agremigracion_migracion_on_agremigracion_id ON public.sivel2_sjr_agremigracion_migracion USING btree (agremigracion_id);
+
+
+--
+-- Name: index_sivel2_sjr_agremigracion_migracion_on_migracion_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_sivel2_sjr_agremigracion_migracion_on_migracion_id ON public.sivel2_sjr_agremigracion_migracion USING btree (migracion_id);
+
+
+--
 -- Name: index_sivel2_sjr_casosjr_on_comosupo_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_sivel2_sjr_casosjr_on_comosupo_id ON public.sivel2_sjr_casosjr USING btree (comosupo_id);
+
+
+--
+-- Name: index_sivel2_sjr_difmigracion_migracion_on_difmigracion_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_sivel2_sjr_difmigracion_migracion_on_difmigracion_id ON public.sivel2_sjr_difmigracion_migracion USING btree (difmigracion_id);
+
+
+--
+-- Name: index_sivel2_sjr_difmigracion_migracion_on_migracion_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_sivel2_sjr_difmigracion_migracion_on_migracion_id ON public.sivel2_sjr_difmigracion_migracion USING btree (migracion_id);
 
 
 --
@@ -10087,6 +10234,14 @@ ALTER TABLE ONLY public.cor1440_gen_caracterizacionpersona
 
 ALTER TABLE ONLY public.cor1440_gen_actorsocial_efecto
     ADD CONSTRAINT fk_rails_12f7139ec8 FOREIGN KEY (actorsocial_id) REFERENCES public.sip_actorsocial(id);
+
+
+--
+-- Name: sivel2_sjr_difmigracion_migracion fk_rails_1554d38441; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sivel2_sjr_difmigracion_migracion
+    ADD CONSTRAINT fk_rails_1554d38441 FOREIGN KEY (difmigracion_id) REFERENCES public.dificultadmigracion(id);
 
 
 --
@@ -11322,6 +11477,14 @@ ALTER TABLE ONLY public.sip_actorsocial
 
 
 --
+-- Name: sivel2_sjr_agremigracion_migracion fk_rails_e86a1e3ca3; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sivel2_sjr_agremigracion_migracion
+    ADD CONSTRAINT fk_rails_e86a1e3ca3 FOREIGN KEY (migracion_id) REFERENCES public.sivel2_sjr_migracion(id);
+
+
+--
 -- Name: cor1440_gen_actividad_valorcampotind fk_rails_e8cd697f5d; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -11351,6 +11514,14 @@ ALTER TABLE ONLY public.cor1440_gen_actividad_actorsocial
 
 ALTER TABLE ONLY public.sivel2_sjr_ayudaestado_derecho
     ADD CONSTRAINT fk_rails_eec7d2ed5d FOREIGN KEY (derecho_id) REFERENCES public.sivel2_sjr_derecho(id);
+
+
+--
+-- Name: sivel2_sjr_difmigracion_migracion fk_rails_ef83297098; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sivel2_sjr_difmigracion_migracion
+    ADD CONSTRAINT fk_rails_ef83297098 FOREIGN KEY (migracion_id) REFERENCES public.sivel2_sjr_migracion(id);
 
 
 --
@@ -11423,6 +11594,14 @@ ALTER TABLE ONLY public.cor1440_gen_actividadpf
 
 ALTER TABLE ONLY public.sivel2_sjr_migracion
     ADD CONSTRAINT fk_rails_fa38ef778b FOREIGN KEY (causamigracion_id) REFERENCES public.causamigracion(id);
+
+
+--
+-- Name: sivel2_sjr_agremigracion_migracion fk_rails_faf51c7755; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sivel2_sjr_agremigracion_migracion
+    ADD CONSTRAINT fk_rails_faf51c7755 FOREIGN KEY (agremigracion_id) REFERENCES public.agresionmigracion(id);
 
 
 --
@@ -12521,6 +12700,13 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200720005020'),
 ('20200720013144'),
 ('20200721221535'),
+('20200721223028'),
+('20200721231340'),
+('20200721231722'),
+('20200721233547'),
+('20200722023954'),
+('20200722024432'),
+('20200722032255'),
 ('20200722210144'),
 ('20200723133542');
 

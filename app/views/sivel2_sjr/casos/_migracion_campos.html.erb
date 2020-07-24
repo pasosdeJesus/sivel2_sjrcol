@@ -151,6 +151,15 @@
       </div>
     </div>
     <div class="row">
+      <div class="col-md-6">
+        <%= f.input :ubifamilia,
+          label: "¿Dónde se encuentra su familia?",
+          input_html: {
+            value: f.object.ubifamilia ? f.object.ubifamilia : ''
+          } %>
+      </div>
+    </div>
+    <div class="row">
       <div class="col-md-12">
         Llegada
       </div>

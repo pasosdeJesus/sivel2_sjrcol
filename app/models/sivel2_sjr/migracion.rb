@@ -70,7 +70,6 @@ class Sivel2Sjr::Migracion < ActiveRecord::Base
     class_name: 'Sivel2Sjr::Statusmigratorio', 
     foreign_key: "statusmigratorio_id", 
     optional: true
-
-
+  
   validates :fechasalida, presence: true
 end

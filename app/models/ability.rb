@@ -75,6 +75,7 @@ class Ability < Sivel2Sjr::Ability
     ['Sip', 'tipoanexo'],
     ['Sip', 'tipoactorsocial'],
     ['', 'agresionmigracion'],
+    ['', 'causaagresion'],
     ['', 'causamigracion'],
     ['', 'dificultadmigracion'],
     ['', 'discapacidad'],

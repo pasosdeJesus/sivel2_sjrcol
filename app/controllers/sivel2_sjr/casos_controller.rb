@@ -177,7 +177,8 @@ module Sivel2Sjr
           :ubifamilia,
           :valor_pago,
           :viadeingreso_id,
-          :_destroy
+          :_destroy,
+          :dificultadmigracion_ids => []
         ],
       ]
     end

@@ -158,6 +158,21 @@
             value: f.object.ubifamilia ? f.object.ubifamilia : ''
           } %>
       </div>
+      <div class="col-md-6">
+        ¿Tuvo algún accidente o dificultad en la migración?
+        <%= f.association :dificultadmigracion,
+          collection: Dificultadmigracion.habilitados,
+          label_method: :nombre,
+          value_method: :id,
+          label: false,
+          include_blank: false,
+          input_html: {
+            "data-toggle" => 'tooltip',
+            'data-placeholder' => "Accidentes o dificultades...",
+            multiple: true,
+            class: 'chosen-select'
+          } %>
+      </div>
     </div>
     <div class="row">
       <div class="col-md-12">

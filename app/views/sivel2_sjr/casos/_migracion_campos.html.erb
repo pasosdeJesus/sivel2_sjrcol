@@ -191,6 +191,11 @@
           } %>
       </div>
       <div class="col-md-6">
+        <%= f.input :perpetradoresagresion,
+          label: "Presuntos perpetradores de la agresión",
+          input_html: {
+            value: f.object.perpetradoresagresion ? f.object.perpetradoresagresion : ''
+          } %>
         Presuntas causas de la agresión
         <%= f.association :causaagresion,
           collection: Causaagresion.habilitados,

@@ -163,6 +163,7 @@ module Sivel2Sjr
           :migracontactopre_id,
           :observacionesref,
           :otracausa,
+          :perpetradoresagresion,
           :pagoingreso_id,
           :pep,
           :perfilmigracion_id,

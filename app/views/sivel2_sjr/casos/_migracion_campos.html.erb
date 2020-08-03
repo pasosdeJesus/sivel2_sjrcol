@@ -189,6 +189,17 @@
             multiple: true,
             class: 'chosen-select'
           } %>
+        <% if f.object && f.object.agresionmigracion_ids && 
+            f.object.agresionmigracion_ids.include?(13) %>
+          <% estilotraagresion = 'display: block' %>
+        <% else %>
+          <% estilotraagresion = 'display: none' %>
+        <% end %>
+        <div class="otra_agresionmigracion" style="<%= estilotraagresion %>">
+          <%= f.input :otraagresion, 
+            label: "Otra, ¿Cuál?"
+          %> 
+        </div>
       </div>
       <div class="col-md-6">
         Presuntas causas de la agresión

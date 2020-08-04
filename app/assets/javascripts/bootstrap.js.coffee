@@ -24,6 +24,7 @@ $(document).on('change', 'select[id^=caso_migracion_attributes_][id$=pagoingreso
   else
    div_detalles.css("display", "none")
 )
+
 # En listado de asistencia permite autocompletar nombres
 $(document).on('focusin',
 'input[id^=actividad_asistencia_attributes_]'+

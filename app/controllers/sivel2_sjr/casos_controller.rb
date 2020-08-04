@@ -155,6 +155,7 @@ module Sivel2Sjr
           :fechaNpi,
           :fechaPep,
           :fechasalida,
+          :fechaendestino,
           :id,
           :llegada_clase_id,
           :llegada_departamento_id,

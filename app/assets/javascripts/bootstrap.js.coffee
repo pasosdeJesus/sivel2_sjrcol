@@ -78,6 +78,15 @@ $(document).on('change', 'select[id^=caso_migracion_attributes_][id$=agresionmig
    div_otra.css("display", "block")
   else
    div_otra.css("display", "none")
+
+# En migración, si cambia fecha se calcula el tiempo en el país
+$(document).on('change', 'input[id^=caso_migracion_attributes_][id$=_fechallegada]', (e) ->
+  fechallegada = new Date($(this).val())
+  fechahoy = new Date()
+  dif = fechahoy - fechallegada;
+  dias = Math.round(dif / 86400000);
+  spandias = $(this).parent().parent().parent().next().find(".tiempoenpais")
+  spandias.text("Tiempo en el país: "+  dias + " días")
 )
 
 # En listado de asistencia permite autocompletar nombres

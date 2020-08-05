@@ -24,6 +24,18 @@ $(document).on('change', 'select[id^=caso_migracion_attributes_][id$=pagoingreso
   else
    div_detalles.css("display", "none")
 )
+
+$(document).on('change', 'select[id^=caso_migracion_attributes_][id$=causaagrpais_ids]', (e) ->
+  res = $(this).val()
+  id_causaagresion = $(this).attr('id')
+  div_otra = $('#' + id_causaagresion).parent().next()
+  if (res.includes('8'))
+   div_otra.css("display", "block")
+  else
+   div_otra.css("display", "none")
+)
+
+
 # En listado de asistencia permite autocompletar nombres
 $(document).on('focusin',
 'input[id^=actividad_asistencia_attributes_]'+

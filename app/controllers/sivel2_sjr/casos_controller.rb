@@ -180,6 +180,7 @@ module Sivel2Sjr
           :_destroy,
           :agresionmigracion_ids => [],
           :causaagresion_ids => [],
+          :causaagrpais_ids => [],
           :dificultadmigracion_ids => []
         ],
       ]

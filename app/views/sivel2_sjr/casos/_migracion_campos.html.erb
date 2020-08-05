@@ -381,6 +381,25 @@
           } %>
       </div>
     </div> <!-- row -->
+    <div class="row">
+      <div class="offset-md-0 col-md-6">
+      </div>
+      <div class="offset-md-0 col-md-6">
+        Presuntas causas de la agresión
+        <%= f.association :causaagrpais,
+          collection: Causaagresion.habilitados,
+          label_method: :nombre,
+          value_method: :id,
+          label: false,
+          include_blank: false,
+          input_html: {
+            "data-toggle" => 'tooltip',
+            'data-placeholder' => "Presuntas causas...",
+            multiple: true,
+            class: 'chosen-select'
+          } %>
+      </div>
+    </div> <!-- row -->
 
     <% ecamposPep = (f.object.statusmigratorio &&
       (f.object.statusmigratorio_id == 1 || 

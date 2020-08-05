@@ -381,6 +381,24 @@
           } %>
       </div>
     </div> <!-- row -->
+    
+    <div class="row">
+      <div class="col-md-6">
+        ¿Usted o algun integrante de su familia sufrió alguna agresión en este país?
+        <%= f.association :agresionenpais,
+          collection: Agresionmigracion.habilitados,
+          label_method: :nombre,
+          value_method: :id,
+          label: false,
+          include_blank: false,
+          input_html: {
+            "data-toggle" => 'tooltip',
+            'data-placeholder' => "Agresiones...",
+            multiple: true,
+            class: 'chosen-select'
+          } %>
+      </div>
+    </div>
 
     <% ecamposPep = (f.object.statusmigratorio &&
       (f.object.statusmigratorio_id == 1 || 

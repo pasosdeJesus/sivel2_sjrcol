@@ -25,16 +25,6 @@ $(document).on('change', 'select[id^=caso_migracion_attributes_][id$=pagoingreso
    div_detalles.css("display", "none")
 )
 
-# En formulario de caso-migracion si cuenta con PEP es si, muestra tipo pep
-$(document).on('change', 'select[id^=caso_migracion_attributes_][id$=pep]', (e) ->
-  res = $(this).val()
-  id_pep = $(this).attr('id')
-  div_tipo = $('#' + id_pep).parent().next()
-  if (res.includes('8'))
-    div_tipo.css("display", "block")
-  else
-    div_tipo.css("display", "none")
-)
 # En listado de asistencia permite autocompletar nombres
 $(document).on('focusin',
 'input[id^=actividad_asistencia_attributes_]'+

@@ -405,18 +405,6 @@
                 class: 'chosen-select' 
               },
               selected: f.object.pep ? 1 : 0 %>
-            <% if f.object && f.object.pep && 
-                f.object.pep == 1 %>
-              <% estilotipopep = 'display: block' %>
-            <% else %>
-              <% estilotipopep = 'display: none' %>
-            <% end %>
-            <div class="tipopep" style="<%= estilotipopep %>">
-              <%= f.input :tipopep, 
-                label: "Tipo de PEP",
-                input_html: {
-                  value: f.object.pep ? f.object.pep : ''
-                } %>
           </div>
         </div>
       </div>
@@ -436,8 +424,15 @@
             "data-toggle" => 'tooltip'
           } %>
       </div>
+      <div class="offset-md-0 col-md-3" style=<%= pepest %>>
+          <%= f.input :tipopep, 
+            label: "Tipo de PEP",
+            input_html: {
+              value: f.object.tipopep ? f.object.tipopep : ''
+            } %>
+      </div>
     </div> 
-    
+
     <div class="row">
       <div class="offset-md-0 col-md-6">
         <div class="row">

@@ -175,11 +175,15 @@ document.addEventListener('turbolinks:load', function() {
       pid = evento.target.getAttribute('id').split('_')
       var ped = $('#caso_migracion_attributes_'+pid[3]+
         '_fechaPep').parents()[1]
+      var tip = $('#caso_migracion_attributes_'+pid[3]+
+        '_tipopep').parents()[1]
       var seleccionado = evento.target.value.substring(event.target.selectionStart, event.target.selectionEnd)
       if (seleccionado != 1) {
         ped.style.display = 'none'
+        tip.style.display = 'none'
       } else {
         ped.style.display = ''
+        tip.style.display = ''
       }
     })
 

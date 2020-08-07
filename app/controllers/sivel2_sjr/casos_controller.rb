@@ -144,6 +144,7 @@ module Sivel2Sjr
       [
         :migracion_attributes => [
           :actor_pago,
+          :autoridadrefugio_id,
           :causaRefugio_id,
           :causamigracion_id,
           :concepto_pago,

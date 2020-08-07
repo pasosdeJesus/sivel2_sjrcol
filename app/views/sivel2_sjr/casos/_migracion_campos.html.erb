@@ -494,6 +494,23 @@
     </div>  
 
     <div class="row">
+      <div class="col-md-6">
+      </div>
+      <div class="col-md-6">
+        Autoridad ante la cual declaró refugio
+        <%= f.association :autoridadrefugio,
+          collection: Autoridadrefugio.habilitados,
+          label_method: :nombre,
+          value_method: :id,
+          label: false,
+          input_html: {
+            "data-toggle" => 'tooltip',
+            'data-placeholder' => "Autoridad...",
+            class: 'chosen-select' 
+          } %>
+      </div>
+    </div>  
+    <div class="row">
       <div class="offset-md-0 col-md-12">
         <label class="form-check-label">
           Observaciones

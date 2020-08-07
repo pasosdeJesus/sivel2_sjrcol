@@ -82,6 +82,7 @@ class Ability < Sivel2Sjr::Ability
     ['', 'espaciopart'],
     ['', 'migracontactopre'],
     ['', 'perfilmigracion'],
+    ['', 'tipoproteccion'],
     ['', 'trivalentepositiva'],
     ['', 'viadeingreso']
   ]

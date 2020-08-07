@@ -81,6 +81,8 @@ class Sivel2Sjr::Migracion < ActiveRecord::Base
     class_name: 'Sivel2Sjr::Statusmigratorio', 
     foreign_key: "statusmigratorio_id", 
     optional: true
+  belongs_to :tipoproteccion,
+    class_name: 'Tipoproteccion', foreign_key: "tipoproteccion_id", optional: true
   
   validates :fechasalida, presence: true
 end

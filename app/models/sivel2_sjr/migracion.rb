@@ -7,6 +7,12 @@ class Sivel2Sjr::Migracion < ActiveRecord::Base
     association_foreign_key: 'agremigracion_id',
     join_table: 'sivel2_sjr_agremigracion_migracion'
 
+  has_and_belongs_to_many :agresionenpais, 
+    class_name: 'Agresionmigracion',
+    foreign_key: :migracion_id, 
+    association_foreign_key: 'agreenpais_id',
+    join_table: 'sivel2_sjr_agreenpais_migracion'
+
   has_and_belongs_to_many :causaagresion, 
     class_name: 'Causaagresion',
     foreign_key: :migracion_id, 

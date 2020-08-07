@@ -44,17 +44,20 @@ document.addEventListener('change',
         '_destino_municipio_id').parentElement;
       var cd = document.getElementById('caso_migracion_attributes_'+m[1]+
         '_destino_clase_id').parentElement;
-      debugger
+      var fd = document.getElementById('caso_migracion_attributes_'+m[1]+
+        '_fechaendestino').parentElement;
       if (event.target.checked) {
         pd.style.display = 'none'
         dd.style.display = 'none'
         md.style.display = 'none'
         cd.style.display = 'none'
+        fd.style.display = 'none'
       } else {
         pd.style.display = ''
         dd.style.display = ''
         md.style.display = ''
         cd.style.display = ''
+        fd.style.display = ''
       }
       
     }

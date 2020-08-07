@@ -164,6 +164,7 @@ module Sivel2Sjr
           :migracontactopre_id,
           :observacionesref,
           :otracausa,
+          :otraautoridad,
           :pagoingreso_id,
           :pep,
           :perfilmigracion_id,

@@ -508,6 +508,15 @@
             'data-placeholder' => "Autoridad...",
             class: 'chosen-select' 
           } %>
+        <% autotraest = f.object.autoridadrefugio && f.object.autoridadrefugio_id == 5 ? 
+          '' : 'display:none' %>
+        <div style=<%= autotraest %>>
+          <%= f.input :otraautoridad, 
+            label: "Otra, ¿Cuál?",
+            input_html: {
+              value: f.object.otraautoridad ? f.object.otraautoridad : ''
+            } %>
+        </div>
       </div>
     </div>  
     <div class="row">

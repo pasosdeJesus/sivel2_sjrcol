@@ -164,6 +164,7 @@ module Sivel2Sjr
           :observacionesref,
           :otraagresion,
           :otracausa,
+          :otracausaagresion,
           :pagoingreso_id,
           :pep,
           :perfilmigracion_id,

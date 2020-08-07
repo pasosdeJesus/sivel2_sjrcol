@@ -215,6 +215,17 @@
             multiple: true,
             class: 'chosen-select'
           } %>
+        <% if f.object && f.object.causaagresion_ids && 
+            f.object.causaagresion_ids.include?(8) %>
+          <% estilotracausaagresion = 'display: block' %>
+        <% else %>
+          <% estilotracausaagresion = 'display: none' %>
+        <% end %>
+        <div class="otra_agresionmigracion" style="<%= estilotracausaagresion %>">
+          <%= f.input :otracausaagresion, 
+            label: "¿Cúal otra presunta causa de agresión?"
+          %> 
+      </div>
       </div>
     </div>
     <div class="row">

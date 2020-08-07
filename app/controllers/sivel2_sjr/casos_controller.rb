@@ -165,6 +165,7 @@ module Sivel2Sjr
           :observacionesref,
           :otraagresion,
           :otracausa,
+          :otracausagrpais,
           :perpeagresenpais,
           :perpetradoresagresion,
           :otracausaagresion,
@@ -186,6 +187,7 @@ module Sivel2Sjr
           :agresionmigracion_ids => [],
           :agresionenpais_ids => [],
           :causaagresion_ids => [],
+          :causaagrpais_ids => [],
           :dificultadmigracion_ids => []
         ],
       ]

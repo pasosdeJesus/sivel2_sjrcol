@@ -36,6 +36,17 @@ $(document).on('change', 'select[id^=caso_migracion_attributes_][id$=pagoingreso
    div_detalles.css("display", "none")
 )
 
+# En formulario de caso-migración si en causa agresión en país  es Otra agrega respuesta abierta
+$(document).on('change', 'select[id^=caso_migracion_attributes_][id$=causaagrpais_ids]', (e) ->
+  res = $(this).val()
+  id_causaagresion = $(this).attr('id')
+  div_otra = $('#' + id_causaagresion).parent().next()
+  if (res.includes('8'))
+    div_otra.css("display", "block")
+  else
+   div_otra.css("display", "none")
+)
+
 # En formulario de caso-migración si en agresión durante la migración es Otra agrega respuesta abierta
 $(document).on('change', 'select[id^=caso_migracion_attributes_][id$=agresionmigracion_ids]', (e) ->
   res = $(this).val()

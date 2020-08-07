@@ -425,7 +425,6 @@
           } %>
       </div>
     </div> <!-- row -->
-    
     <div class="row">
       <div class="col-md-6">
         ¿Usted o algun integrante de su familia sufrió alguna agresión en este país?
@@ -442,11 +441,6 @@
             class: 'chosen-select'
           } %>
       </div>
-    </div>
-
-    <div class="row">
-      <div class="offset-md-0 col-md-6">
-      </div>
       <div class="offset-md-0 col-md-6">
         <%= f.input :perpeagresenpais,
           label: "Presuntos perpetradores de la agresión",
@@ -455,6 +449,42 @@
           } %>
       </div>
     </div> <!-- row -->
+
+    <div class="row">
+      <div class="offset-md-0 col-md-6">    
+      </div>
+      <div class="offset-md-0 col-md-6">
+        Presuntas causas de la agresión
+        <%= f.association :causaagrpais,
+          collection: Causaagresion.habilitados,
+            'data-placeholder' => "Presuntas causas...",
+            multiple: true,
+            class: 'chosen-select'
+          } %>
+        <% if f.object && f.object.causaagrpais_ids && 
+            f.object.causaagrpais_ids.include?(8) %>
+          <% estilotracagpais = 'display: block' %>
+        <% else %>
+          <% estilotracagpais = 'display: none' %>
+        <% end %>
+      </div>
+    </div> <!-- row -->
+    
+    <div class="row">
+      <div class="offset-md-0 col-md-6">    
+      </div>
+      <div class="offset-md-0 col-md-6">
+        <div class="otra_agresionmigracion" style="<%= estilotracagpais %>">
+          <%= f.input :otracausagrpais, 
+            label: "¿Cúal otra presunta causa de agresión?",
+            input_html: {
+              value: f.object.otracausagrpais ? f.object.otracausagrpais : ''
+          } %>
+        </div>
+      </div>
+    </div> <!-- row -->
+
+    
     <% ecamposPep = (f.object.statusmigratorio &&
       (f.object.statusmigratorio_id == 1 || 
        f.object.statusmigratorio_id == 5 ||

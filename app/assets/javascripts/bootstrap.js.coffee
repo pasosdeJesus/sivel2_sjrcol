@@ -35,6 +35,7 @@ $(document).on('change', 'select[id^=caso_migracion_attributes_][id$=pagoingreso
   else
    div_detalles.css("display", "none")
 )
+
 # En formulario de caso-migración si en agresión durante la migración es Otra agrega respuesta abierta
 $(document).on('change', 'select[id^=caso_migracion_attributes_][id$=agresionmigracion_ids]', (e) ->
   res = $(this).val()
@@ -45,6 +46,7 @@ $(document).on('change', 'select[id^=caso_migracion_attributes_][id$=agresionmig
   else
    div_otra.css("display", "none")
 )
+
 # En listado de asistencia permite autocompletar nombres
 $(document).on('focusin',
 'input[id^=actividad_asistencia_attributes_]'+

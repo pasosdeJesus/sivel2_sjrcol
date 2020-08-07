@@ -322,6 +322,23 @@
           f.object.perfilmigracion_id != 2 ? 
           'display:none' : '' %>
       </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-3">
+        <%= f.input :fechaendestino, 
+          as: :string, 
+          label: false,
+          wrapper_html: {
+            style: edest
+          },
+          input_html: {
+            value: f.object.fechaendestino ? f.object.fechaendestino : '',
+            placeholder: 'Fecha en Destino',
+            "data-behaviour" => "datepicker",
+            "data-toggle" => 'tooltip'
+          } %>
+      </div>
       <div class="col-md-3">
         <%= f.association :destino_pais,
           collection: Sip::Pais.habilitados,

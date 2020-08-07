@@ -52,6 +52,8 @@ class Sivel2Sjr::Migracion < ActiveRecord::Base
   belongs_to :llegada_clase, 
     class_name: 'Sip::Clase', foreign_key: "llegada_clase_id", optional: true
 
+  belongs_to :miembrofamiliar,
+    class_name: 'Miembrofamiliar', foreign_key: "miembrofamiliar_id", optional: true
   belongs_to :migracontactopre,
     class_name: '::Migracontactopre', foreign_key: "migracontactopre_id", 
     optional: true

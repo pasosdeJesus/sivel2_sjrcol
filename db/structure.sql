@@ -6364,7 +6364,9 @@ CREATE TABLE public.sivel2_sjr_migracion (
     perpetradoresagresion character varying,
     fechaendestino date,
     perpeagresenpais character varying,
-    otracausagrpais character varying
+    otracausagrpais character varying,
+    tipopep character varying,
+    otronpi character varying
 );
 
 
@@ -12889,6 +12891,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200805193758'),
 ('20200805195426'),
 ('20200805201200'),
-('20200805212533');
+('20200805212533'),
+('20200805220557'),
+('20200806202150');
 
 

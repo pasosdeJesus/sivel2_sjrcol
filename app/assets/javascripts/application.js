@@ -195,7 +195,7 @@ document.addEventListener('turbolinks:load', function() {
     '[id^=caso_migracion_attributes_][id$=_proteccion_id]', 
     function (evento) {
       pid = evento.target.getAttribute('id').split('_')
-      var seleccionado = +evento.target.value.substring(event.target.selectionStart, event.target.selectionEnd)
+      var seleccionado = +evento.target.value //.substring(event.target.selectionStart, event.target.selectionEnd)
       var ped = $('#caso_migracion_attributes_'+pid[3]+
         '_fechaNpi').parents()[1]
       var otra = $('#caso_migracion_attributes_'+pid[3]+

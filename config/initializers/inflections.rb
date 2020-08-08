@@ -32,6 +32,7 @@ ActiveSupport::Inflector.inflections do |inflect|
 	inflect.irregular 'espaciopart', 'espaciospart'
 	inflect.irregular 'lineaactorsocial', 'lineasactorsocial'
 	inflect.irregular 'motivosjr', 'motivossjr'
+	inflect.irregular 'miembrofamiliar', 'miembrosfamiliar'
 	inflect.irregular 'migracontactopre', 'migracontactospre'
 	inflect.irregular 'perfilmigracion', 'perfilesmigracion'
 	inflect.irregular 'trivalentepositiva', 'trivalentespositiva'

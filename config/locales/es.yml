@@ -84,6 +84,9 @@ es:
       "espaciopart":
         Espaciopart: Espacio de participación o red
         Espaciospart: Espacios de participación o redes
+      "miembrofamiliar":
+        Miembrofamiliar: Miembro del grupo familiar incluidos en refugio
+        Miembrosfamiliar: Miembros del grupo familiar incluidos en refugio
       "migracontactopre":
         Migracontactopre: Contacto previo con Colombia
         Migracontactospre: Contactos previos con Colombia

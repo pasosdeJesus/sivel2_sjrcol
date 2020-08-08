@@ -647,7 +647,28 @@
               class: 'chosen-select' 
             } %>
         </div>
-
+        <div class="offset-md-0 col-md-6">
+          Miembros del grupo familiar incluidos en refugio
+          <%= f.association :miembrofamiliar,
+            collection: Miembrofamiliar.habilitados,
+            label_method: :nombre,
+            value_method: :id,
+            label: false,
+            input_html: {
+              "data-toggle" => 'tooltip',
+              'data-placeholder' => "Miembros familiares...",
+              class: 'chosen-select' 
+            } %>
+          <% miemest = f.object.miembrofamiliar && f.object.miembrofamiliar_id == 6 ? 
+            '' : 'display:none' %>
+          <div style=<%= miemest %>>
+            <%= f.input :otromiembro, 
+              label: "Otros, ¿Cuál?",
+              input_html: {
+                value: f.object.otromiembro ? f.object.otromiembro : ''
+              } %>
+          </div>
+        </div>
       </div>  <!-- row -->
 
     </div> <!-- sec_refugio-->

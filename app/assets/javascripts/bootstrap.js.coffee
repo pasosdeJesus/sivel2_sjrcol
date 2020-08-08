@@ -14,6 +14,17 @@ $(document).on('change', 'select[id^=caso_migracion_attributes_][id$=causamigrac
    div_otracausa.css("display", "none")
 )
 
+# En formulario de caso-migracion si elige otro miembro familiar, muestra campo para especificarla
+$(document).on('change', 'select[id^=caso_migracion_attributes_][id$=miembrofamiliar_id]', (e) ->
+  res = $(this).val()
+  id_miembro = $(this).attr('id') 
+  div_otracausa = $('#' + id_miembro).parent().next()
+  if (res == '6')
+    div_otracausa.css("display", "block")
+  else
+    div_otracausa.css("display", "none")
+)
+
 # En formulario de caso-migracion si elige otra autoridad ante la cual declarar, muestra campo para especificarla
 $(document).on('change', 'select[id^=caso_migracion_attributes_][id$=autoridadrefugio_id]', (e) ->
   res = $(this).val()

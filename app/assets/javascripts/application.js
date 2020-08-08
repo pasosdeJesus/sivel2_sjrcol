@@ -141,16 +141,20 @@ document.addEventListener('turbolinks:load', function() {
         '_destino_municipio_id').parentElement
       var cd = document.getElementById('caso_migracion_attributes_'+pid[3]+
         '_destino_clase_id').parentElement
+      var fd = document.getElementById('caso_migracion_attributes_'+pid[3]+
+        '_fechaendestino').parentElement
       if (+evento.target.value != 2) {
         pd.style.display = 'none'
         dd.style.display = 'none'
         md.style.display = 'none'
         cd.style.display = 'none'
+        fd.style.display = 'none'
       } else {
         pd.style.display = ''
         dd.style.display = ''
         md.style.display = ''
         cd.style.display = ''
+        fd.style.display = ''
       }
     }
   )
@@ -175,11 +179,15 @@ document.addEventListener('turbolinks:load', function() {
       pid = evento.target.getAttribute('id').split('_')
       var ped = $('#caso_migracion_attributes_'+pid[3]+
         '_fechaPep').parents()[1]
+      var tip = $('#caso_migracion_attributes_'+pid[3]+
+        '_tipopep').parents()[1]
       var seleccionado = evento.target.value.substring(event.target.selectionStart, event.target.selectionEnd)
       if (seleccionado != 1) {
         ped.style.display = 'none'
+        tip.style.display = 'none'
       } else {
         ped.style.display = ''
+        tip.style.display = ''
       }
     })
 

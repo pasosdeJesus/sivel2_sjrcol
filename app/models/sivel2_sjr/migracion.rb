@@ -31,6 +31,8 @@ class Sivel2Sjr::Migracion < ActiveRecord::Base
     association_foreign_key: 'difmigracion_id',
     join_table: 'sivel2_sjr_difmigracion_migracion'
   
+  belongs_to :autoridadrefugio,
+    class_name: 'Autoridadrefugio', foreign_key: "autoridadrefugio_id", optional: true
   belongs_to :caso,
     class_name: 'Sivel2Gen::Caso', foreign_key: "caso_id"
 

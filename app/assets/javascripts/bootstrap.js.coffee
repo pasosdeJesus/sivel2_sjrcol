@@ -14,6 +14,17 @@ $(document).on('change', 'select[id^=caso_migracion_attributes_][id$=causamigrac
    div_otracausa.css("display", "none")
 )
 
+# En formulario de caso-migracion si elige otra autoridad ante la cual declarar, muestra campo para especificarla
+$(document).on('change', 'select[id^=caso_migracion_attributes_][id$=autoridadrefugio_id]', (e) ->
+  res = $(this).val()
+  id_auto = $(this).attr('id') 
+  div_otracausa = $('#' + id_auto).parent().next()
+  if (res == '5')
+   div_otracausa.css("display", "block")
+  else
+   div_otracausa.css("display", "none")
+)
+
 # En formulario de caso-migración si en causa de la agresión es Otra agrega respuesta abierta
 $(document).on('change', 'select[id^=caso_migracion_attributes_][id$=causaagresion_ids]', (e) ->
   res = $(this).val()

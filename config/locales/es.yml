@@ -90,6 +90,9 @@ es:
       "perfilmigracion":
         Perfilmigracion: Perfil de migración
         Perfilesmigracion: Perfiles de migración
+      "tipoproteccion":
+        Tipoproteccion: Tipo de protección en refugio
+        Tiposproteccion: Tipos de protección en refugio
       "trivalentepositiva":
         Trivalentepositiva: Trivalente Positiva
         Trivalentespositiva: Trivalentes Positiva

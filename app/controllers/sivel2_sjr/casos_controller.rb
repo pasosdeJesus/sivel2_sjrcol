@@ -184,6 +184,7 @@ module Sivel2Sjr
           :se_establece_en_sitio_llegada,
           :statusmigratorio_id,
           :tipopep,
+          :tipoproteccion_id,
           :ubifamilia,
           :valor_pago,
           :viadeingreso_id,

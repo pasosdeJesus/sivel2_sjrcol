@@ -618,8 +618,18 @@
     </div>
 
     <div class="row">
-      <div class="col-md-6">
-      </div>
+      <div class="offset-md-0 col-md-3">
+        Tipo de protección en refugio
+        <%= f.association :tipoproteccion,
+          collection: Tipoproteccion.habilitados,
+          label_method: :nombre,
+          value_method: :id,
+          label: false,
+          input_html: {
+            "data-toggle" => 'tooltip',
+            'data-placeholder' => "Tipo de protección...",
+            class: 'chosen-select' 
+          } %>
       <div class="col-md-6">
         Autoridad ante la cual declaró refugio
         <%= f.association :autoridadrefugio,

@@ -7,18 +7,32 @@ class Sivel2Sjr::Migracion < ActiveRecord::Base
     association_foreign_key: 'agremigracion_id',
     join_table: 'sivel2_sjr_agremigracion_migracion'
 
+  has_and_belongs_to_many :agresionenpais, 
+    class_name: 'Agresionmigracion',
+    foreign_key: :migracion_id, 
+    association_foreign_key: 'agreenpais_id',
+    join_table: 'sivel2_sjr_agreenpais_migracion'
+
   has_and_belongs_to_many :causaagresion, 
     class_name: 'Causaagresion',
     foreign_key: :migracion_id, 
     association_foreign_key: 'causaagresion_id',
     join_table: 'sivel2_sjr_causaagresion_migracion'
 
+  has_and_belongs_to_many :causaagrpais, 
+    class_name: 'Causaagresion',
+    foreign_key: :migracion_id, 
+    association_foreign_key: 'causaagrpais_id',
+    join_table: 'sivel2_sjr_causaagrpais_migracion'
+  
   has_and_belongs_to_many :dificultadmigracion, 
     class_name: 'Dificultadmigracion',
     foreign_key: :migracion_id, 
     association_foreign_key: 'difmigracion_id',
     join_table: 'sivel2_sjr_difmigracion_migracion'
   
+  belongs_to :autoridadrefugio,
+    class_name: 'Autoridadrefugio', foreign_key: "autoridadrefugio_id", optional: true
   belongs_to :caso,
     class_name: 'Sivel2Gen::Caso', foreign_key: "caso_id"
 

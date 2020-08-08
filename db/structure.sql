@@ -296,6 +296,40 @@ CREATE TABLE public.ar_internal_metadata (
 
 
 --
+-- Name: autoridadrefugio; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.autoridadrefugio (
+    id bigint NOT NULL,
+    nombre character varying(500) NOT NULL,
+    observaciones character varying(5000),
+    fechacreacion date NOT NULL,
+    fechadeshabilitacion date,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: autoridadrefugio_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.autoridadrefugio_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: autoridadrefugio_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.autoridadrefugio_id_seq OWNED BY public.autoridadrefugio.id;
+
+
+--
 -- Name: caso_etiqueta_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -6366,7 +6400,10 @@ CREATE TABLE public.sivel2_sjr_migracion (
     perpeagresenpais character varying,
     otracausagrpais character varying,
     tipopep character varying,
-    otronpi character varying
+    otronpi character varying,
+    autoridadrefugio_id integer,
+    otraautoridad character varying,
+    tipoproteccion_id integer
 );
 
 
@@ -6724,6 +6761,40 @@ CREATE TABLE public.taccion (
 
 
 --
+-- Name: tipoproteccion; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.tipoproteccion (
+    id bigint NOT NULL,
+    nombre character varying(500) NOT NULL,
+    observaciones character varying(5000),
+    fechacreacion date NOT NULL,
+    fechadeshabilitacion date,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: tipoproteccion_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.tipoproteccion_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: tipoproteccion_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.tipoproteccion_id_seq OWNED BY public.tipoproteccion.id;
+
+
+--
 -- Name: tproceso_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -6839,6 +6910,13 @@ CREATE MATERIALIZED VIEW public.vvictimasoundexesp AS
 --
 
 ALTER TABLE ONLY public.agresionmigracion ALTER COLUMN id SET DEFAULT nextval('public.agresionmigracion_id_seq'::regclass);
+
+
+--
+-- Name: autoridadrefugio id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.autoridadrefugio ALTER COLUMN id SET DEFAULT nextval('public.autoridadrefugio_id_seq'::regclass);
 
 
 --
@@ -7437,6 +7515,13 @@ ALTER TABLE ONLY public.sivel2_sjr_statusmigratorio ALTER COLUMN id SET DEFAULT 
 
 
 --
+-- Name: tipoproteccion id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.tipoproteccion ALTER COLUMN id SET DEFAULT nextval('public.tipoproteccion_id_seq'::regclass);
+
+
+--
 -- Name: trivalentepositiva id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -7552,6 +7637,14 @@ ALTER TABLE ONLY public.sivel2_sjr_aslegal
 
 ALTER TABLE ONLY public.sivel2_sjr_aslegal_respuesta
     ADD CONSTRAINT aslegal_respuesta_pkey PRIMARY KEY (id_respuesta, id_aslegal);
+
+
+--
+-- Name: autoridadrefugio autoridadrefugio_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.autoridadrefugio
+    ADD CONSTRAINT autoridadrefugio_pkey PRIMARY KEY (id);
 
 
 --
@@ -8992,6 +9085,14 @@ ALTER TABLE ONLY public.sip_tclase
 
 ALTER TABLE ONLY public.sivel2_sjr_tipodesp
     ADD CONSTRAINT tipodesp_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: tipoproteccion tipoproteccion_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.tipoproteccion
+    ADD CONSTRAINT tipoproteccion_pkey PRIMARY KEY (id);
 
 
 --
@@ -11325,6 +11426,14 @@ ALTER TABLE ONLY public.sivel2_sjr_migracion
 
 
 --
+-- Name: sivel2_sjr_migracion fk_rails_af31a06cec; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sivel2_sjr_migracion
+    ADD CONSTRAINT fk_rails_af31a06cec FOREIGN KEY (tipoproteccion_id) REFERENCES public.tipoproteccion(id);
+
+
+--
 -- Name: sivel2_gen_combatiente fk_rails_af43e915a6; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -11474,6 +11583,14 @@ ALTER TABLE ONLY public.usuario
 
 ALTER TABLE ONLY public.cor1440_gen_actividad_sip_anexo
     ADD CONSTRAINT fk_rails_cc9d44f9de FOREIGN KEY (actividad_id) REFERENCES public.cor1440_gen_actividad(id);
+
+
+--
+-- Name: sivel2_sjr_migracion fk_rails_cd52a78f0b; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sivel2_sjr_migracion
+    ADD CONSTRAINT fk_rails_cd52a78f0b FOREIGN KEY (autoridadrefugio_id) REFERENCES public.autoridadrefugio(id);
 
 
 --
@@ -12893,6 +13010,13 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200805201200'),
 ('20200805212533'),
 ('20200805220557'),
-('20200806202150');
+('20200806202150'),
+('20200807044641'),
+('20200807135014'),
+('20200807143159'),
+('20200807150834'),
+('20200807161748'),
+('20200807163322'),
+('20200807163808');
 
 

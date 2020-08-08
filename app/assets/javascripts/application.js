@@ -198,10 +198,17 @@ document.addEventListener('turbolinks:load', function() {
       var seleccionado = +evento.target.value.substring(event.target.selectionStart, event.target.selectionEnd)
       var ped = $('#caso_migracion_attributes_'+pid[3]+
         '_fechaNpi').parents()[1]
+      var otra = $('#caso_migracion_attributes_'+pid[3]+
+        '_otronpi').parents()[1]
       if (seleccionado != 8) {
         ped.style.display = 'none'
       } else {
         ped.style.display = ''
+      }
+      if (seleccionado != 7) {
+        otra.style.display = 'none'
+      } else {
+        otra.style.display = ''
       }
     })
 

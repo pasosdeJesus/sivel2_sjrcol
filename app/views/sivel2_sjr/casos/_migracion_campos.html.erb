@@ -558,12 +558,26 @@
               }
             %>
         </div>
+        <% npiotroest = f.object.proteccion && f.object.proteccion_id == 7 ? 
+        '' : 'display:none' %>
+        <div class="offset-md-0 col-md-6" style=<%= npiotroest %>>
+            <%= f.input :otronpi, 
+              label: "Otro, ¿Cuál?",
+              input_html: {
+                value: f.object.otronpi ? f.object.otronpi : ''
+              } %>
         </div>
-      </div>
+          </div>
+        </div>
+    </div>  
       
       <% npiest = f.object.proteccion && f.object.proteccion_id == 8 ? 
         '' : 'display:none' %>
+    <div class="row">
       <div class="offset-md-0 col-md-3 datosNpi" style=<%= npiest %>>
+        <div>
+          REFUGIO
+        </div>
         <div>
           Fecha de declaración:
         </div>
@@ -600,9 +614,8 @@
             'data-placeholder' => "Causa del refugio...",
             class: 'chosen-select' 
           } %>
-
+      </div>
     </div>
-    </div>  
 
     <div class="row">
       <div class="offset-md-0 col-md-12">

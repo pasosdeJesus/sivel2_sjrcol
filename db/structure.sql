@@ -2811,6 +2811,40 @@ CREATE SEQUENCE public.mecanismoder_seq
 
 
 --
+-- Name: miembrofamiliar; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.miembrofamiliar (
+    id bigint NOT NULL,
+    nombre character varying(500) NOT NULL,
+    observaciones character varying(5000),
+    fechacreacion date NOT NULL,
+    fechadeshabilitacion date,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: miembrofamiliar_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.miembrofamiliar_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: miembrofamiliar_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.miembrofamiliar_id_seq OWNED BY public.miembrofamiliar.id;
+
+
+--
 -- Name: migracontactopre; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -6403,7 +6437,9 @@ CREATE TABLE public.sivel2_sjr_migracion (
     otronpi character varying,
     autoridadrefugio_id integer,
     otraautoridad character varying,
-    tipoproteccion_id integer
+    tipoproteccion_id integer,
+    miembrofamiliar_id integer,
+    otromiembro character varying
 );
 
 
@@ -7225,6 +7261,13 @@ ALTER TABLE ONLY public.heb412_gen_plantillahcm ALTER COLUMN id SET DEFAULT next
 --
 
 ALTER TABLE ONLY public.heb412_gen_plantillahcr ALTER COLUMN id SET DEFAULT nextval('public.heb412_gen_plantillahcr_id_seq'::regclass);
+
+
+--
+-- Name: miembrofamiliar id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.miembrofamiliar ALTER COLUMN id SET DEFAULT nextval('public.miembrofamiliar_id_seq'::regclass);
 
 
 --
@@ -8285,6 +8328,14 @@ ALTER TABLE ONLY public.sivel2_gen_maternidad
 
 ALTER TABLE ONLY public.sivel2_sjr_mecanismoder
     ADD CONSTRAINT mecanismoder_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: miembrofamiliar miembrofamiliar_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.miembrofamiliar
+    ADD CONSTRAINT miembrofamiliar_pkey PRIMARY KEY (id);
 
 
 --
@@ -11362,6 +11413,14 @@ ALTER TABLE ONLY public.sivel2_sjr_migracion
 
 
 --
+-- Name: sivel2_sjr_migracion fk_rails_9d5a5e57b1; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sivel2_sjr_migracion
+    ADD CONSTRAINT fk_rails_9d5a5e57b1 FOREIGN KEY (miembrofamiliar_id) REFERENCES public.miembrofamiliar(id);
+
+
+--
 -- Name: sip_actorsocial_sectoractor fk_rails_9f61a364e0; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -13017,6 +13076,10 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200807150834'),
 ('20200807161748'),
 ('20200807163322'),
-('20200807163808');
+('20200807163808'),
+('20200807165756'),
+('20200807165932'),
+('20200807170745'),
+('20200807174136');
 
 

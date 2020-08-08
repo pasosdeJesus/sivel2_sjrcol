@@ -296,6 +296,40 @@ CREATE TABLE public.ar_internal_metadata (
 
 
 --
+-- Name: autoridadrefugio; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.autoridadrefugio (
+    id bigint NOT NULL,
+    nombre character varying(500) NOT NULL,
+    observaciones character varying(5000),
+    fechacreacion date NOT NULL,
+    fechadeshabilitacion date,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: autoridadrefugio_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.autoridadrefugio_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: autoridadrefugio_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.autoridadrefugio_id_seq OWNED BY public.autoridadrefugio.id;
+
+
+--
 -- Name: caso_etiqueta_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -5902,6 +5936,16 @@ CREATE TABLE public.sivel2_sjr_actualizacionbase (
 
 
 --
+-- Name: sivel2_sjr_agreenpais_migracion; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.sivel2_sjr_agreenpais_migracion (
+    agreenpais_id integer,
+    migracion_id integer
+);
+
+
+--
 -- Name: sivel2_sjr_agremigracion_migracion; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -6009,6 +6053,16 @@ CREATE TABLE public.sivel2_sjr_categoria_desplazamiento (
 
 CREATE TABLE public.sivel2_sjr_causaagresion_migracion (
     causaagresion_id integer,
+    migracion_id integer
+);
+
+
+--
+-- Name: sivel2_sjr_causaagrpais_migracion; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.sivel2_sjr_causaagrpais_migracion (
+    causaagrpais_id integer,
     migracion_id integer
 );
 
@@ -6338,7 +6392,18 @@ CREATE TABLE public.sivel2_sjr_migracion (
     concepto_pago character varying DEFAULT ''::character varying,
     actor_pago character varying DEFAULT ''::character varying,
     otracausa character varying,
-    ubifamilia character varying
+    ubifamilia character varying,
+    otraagresion character varying,
+    otracausaagresion character varying,
+    perpetradoresagresion character varying,
+    fechaendestino date,
+    perpeagresenpais character varying,
+    otracausagrpais character varying,
+    tipopep character varying,
+    otronpi character varying,
+    autoridadrefugio_id integer,
+    otraautoridad character varying,
+    tipoproteccion_id integer
 );
 
 
@@ -6696,6 +6761,40 @@ CREATE TABLE public.taccion (
 
 
 --
+-- Name: tipoproteccion; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.tipoproteccion (
+    id bigint NOT NULL,
+    nombre character varying(500) NOT NULL,
+    observaciones character varying(5000),
+    fechacreacion date NOT NULL,
+    fechadeshabilitacion date,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: tipoproteccion_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.tipoproteccion_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: tipoproteccion_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.tipoproteccion_id_seq OWNED BY public.tipoproteccion.id;
+
+
+--
 -- Name: tproceso_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -6811,6 +6910,13 @@ CREATE MATERIALIZED VIEW public.vvictimasoundexesp AS
 --
 
 ALTER TABLE ONLY public.agresionmigracion ALTER COLUMN id SET DEFAULT nextval('public.agresionmigracion_id_seq'::regclass);
+
+
+--
+-- Name: autoridadrefugio id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.autoridadrefugio ALTER COLUMN id SET DEFAULT nextval('public.autoridadrefugio_id_seq'::regclass);
 
 
 --
@@ -7409,6 +7515,13 @@ ALTER TABLE ONLY public.sivel2_sjr_statusmigratorio ALTER COLUMN id SET DEFAULT 
 
 
 --
+-- Name: tipoproteccion id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.tipoproteccion ALTER COLUMN id SET DEFAULT nextval('public.tipoproteccion_id_seq'::regclass);
+
+
+--
 -- Name: trivalentepositiva id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -7524,6 +7637,14 @@ ALTER TABLE ONLY public.sivel2_sjr_aslegal
 
 ALTER TABLE ONLY public.sivel2_sjr_aslegal_respuesta
     ADD CONSTRAINT aslegal_respuesta_pkey PRIMARY KEY (id_respuesta, id_aslegal);
+
+
+--
+-- Name: autoridadrefugio autoridadrefugio_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.autoridadrefugio
+    ADD CONSTRAINT autoridadrefugio_pkey PRIMARY KEY (id);
 
 
 --
@@ -8967,6 +9088,14 @@ ALTER TABLE ONLY public.sivel2_sjr_tipodesp
 
 
 --
+-- Name: tipoproteccion tipoproteccion_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.tipoproteccion
+    ADD CONSTRAINT tipoproteccion_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: tproceso tproceso_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -9267,6 +9396,20 @@ CREATE INDEX index_sivel2_gen_sectorsocialsec_victima_on_victima_id ON public.si
 
 
 --
+-- Name: index_sivel2_sjr_agreenpais_migracion_on_agreenpais_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_sivel2_sjr_agreenpais_migracion_on_agreenpais_id ON public.sivel2_sjr_agreenpais_migracion USING btree (agreenpais_id);
+
+
+--
+-- Name: index_sivel2_sjr_agreenpais_migracion_on_migracion_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_sivel2_sjr_agreenpais_migracion_on_migracion_id ON public.sivel2_sjr_agreenpais_migracion USING btree (migracion_id);
+
+
+--
 -- Name: index_sivel2_sjr_agremigracion_migracion_on_agremigracion_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9299,6 +9442,20 @@ CREATE INDEX index_sivel2_sjr_causaagresion_migracion_on_causaagresion_id ON pub
 --
 
 CREATE INDEX index_sivel2_sjr_causaagresion_migracion_on_migracion_id ON public.sivel2_sjr_causaagresion_migracion USING btree (migracion_id);
+
+
+--
+-- Name: index_sivel2_sjr_causaagrpais_migracion_on_causaagrpais_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_sivel2_sjr_causaagrpais_migracion_on_causaagrpais_id ON public.sivel2_sjr_causaagrpais_migracion USING btree (causaagrpais_id);
+
+
+--
+-- Name: index_sivel2_sjr_causaagrpais_migracion_on_migracion_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_sivel2_sjr_causaagrpais_migracion_on_migracion_id ON public.sivel2_sjr_causaagrpais_migracion USING btree (migracion_id);
 
 
 --
@@ -10429,6 +10586,14 @@ ALTER TABLE ONLY public.cor1440_gen_campotind
 
 
 --
+-- Name: sivel2_sjr_causaagrpais_migracion fk_rails_29273b3f7a; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sivel2_sjr_causaagrpais_migracion
+    ADD CONSTRAINT fk_rails_29273b3f7a FOREIGN KEY (migracion_id) REFERENCES public.sivel2_sjr_migracion(id);
+
+
+--
 -- Name: cor1440_gen_informe fk_rails_294895347e; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10810,6 +10975,22 @@ ALTER TABLE ONLY public.sip_actorsocial
 
 ALTER TABLE ONLY public.sivel2_sjr_progestado_derecho
     ADD CONSTRAINT fk_rails_5b37b8c7e9 FOREIGN KEY (derecho_id) REFERENCES public.sivel2_sjr_derecho(id);
+
+
+--
+-- Name: sivel2_sjr_agreenpais_migracion fk_rails_5ca3db2b82; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sivel2_sjr_agreenpais_migracion
+    ADD CONSTRAINT fk_rails_5ca3db2b82 FOREIGN KEY (migracion_id) REFERENCES public.sivel2_sjr_migracion(id);
+
+
+--
+-- Name: sivel2_sjr_agreenpais_migracion fk_rails_6218990f83; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sivel2_sjr_agreenpais_migracion
+    ADD CONSTRAINT fk_rails_6218990f83 FOREIGN KEY (agreenpais_id) REFERENCES public.agresionmigracion(id);
 
 
 --
@@ -11229,11 +11410,27 @@ ALTER TABLE ONLY public.cor1440_gen_beneficiariopf
 
 
 --
+-- Name: sivel2_sjr_causaagrpais_migracion fk_rails_acb340fd32; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sivel2_sjr_causaagrpais_migracion
+    ADD CONSTRAINT fk_rails_acb340fd32 FOREIGN KEY (causaagrpais_id) REFERENCES public.causaagresion(id);
+
+
+--
 -- Name: sivel2_sjr_migracion fk_rails_ae90834e27; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.sivel2_sjr_migracion
     ADD CONSTRAINT fk_rails_ae90834e27 FOREIGN KEY (destino_departamento_id) REFERENCES public.sip_departamento(id);
+
+
+--
+-- Name: sivel2_sjr_migracion fk_rails_af31a06cec; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sivel2_sjr_migracion
+    ADD CONSTRAINT fk_rails_af31a06cec FOREIGN KEY (tipoproteccion_id) REFERENCES public.tipoproteccion(id);
 
 
 --
@@ -11386,6 +11583,14 @@ ALTER TABLE ONLY public.usuario
 
 ALTER TABLE ONLY public.cor1440_gen_actividad_sip_anexo
     ADD CONSTRAINT fk_rails_cc9d44f9de FOREIGN KEY (actividad_id) REFERENCES public.cor1440_gen_actividad(id);
+
+
+--
+-- Name: sivel2_sjr_migracion fk_rails_cd52a78f0b; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sivel2_sjr_migracion
+    ADD CONSTRAINT fk_rails_cd52a78f0b FOREIGN KEY (autoridadrefugio_id) REFERENCES public.autoridadrefugio(id);
 
 
 --
@@ -12794,6 +12999,24 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200723133542'),
 ('20200727021707'),
 ('20200802112451'),
-('20200802121601');
+('20200802121601'),
+('20200803202253'),
+('20200803210025'),
+('20200803213643'),
+('20200804154120'),
+('20200804205521'),
+('20200805193758'),
+('20200805195426'),
+('20200805201200'),
+('20200805212533'),
+('20200805220557'),
+('20200806202150'),
+('20200807044641'),
+('20200807135014'),
+('20200807143159'),
+('20200807150834'),
+('20200807161748'),
+('20200807163322'),
+('20200807163808');
 
 

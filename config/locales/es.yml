@@ -43,9 +43,12 @@ es:
     proyectos: Áreas de Actividad
   activerecord:
     attributes:
-      "agresionmigracion":
+      "agresionmigracion": 
         Agresionmigracion: Agresion durante la migración
         Agresionesmigracion: Agresiones durante la migración
+      "autoridadrefugio": 
+        Autoridadrefugio: Autoridad ante la cual declarar refugio
+        Autoridadesrefugio: Autoridades ante las cuales declarar refugio
       "sivel2_gen/anexo_victima":
         tipoanexo: Tipo de anexo
         tipoanexo_id: Tipo de anexo
@@ -90,6 +93,9 @@ es:
       "perfilmigracion":
         Perfilmigracion: Perfil de migración
         Perfilesmigracion: Perfiles de migración
+      "tipoproteccion":
+        Tipoproteccion: Tipo de protección en refugio
+        Tiposproteccion: Tipos de protección en refugio
       "trivalentepositiva":
         Trivalentepositiva: Trivalente Positiva
         Trivalentespositiva: Trivalentes Positiva

@@ -25,6 +25,28 @@ $(document).on('change', 'select[id^=caso_migracion_attributes_][id$=miembrofami
     div_otracausa.css("display", "none")
 )
 
+# En formulario de caso-migracion si elige otra autoridad ante la cual declarar, muestra campo para especificarla
+$(document).on('change', 'select[id^=caso_migracion_attributes_][id$=autoridadrefugio_id]', (e) ->
+  res = $(this).val()
+  id_auto = $(this).attr('id') 
+  div_otracausa = $('#' + id_auto).parent().next()
+  if (res == '5')
+   div_otracausa.css("display", "block")
+  else
+   div_otracausa.css("display", "none")
+)
+
+# En formulario de caso-migración si en causa de la agresión es Otra agrega respuesta abierta
+$(document).on('change', 'select[id^=caso_migracion_attributes_][id$=causaagresion_ids]', (e) ->
+  res = $(this).val()
+  id_causaagresion = $(this).attr('id')
+  div_otra = $('#' + id_causaagresion).parent().next()
+  if (res.includes('8'))
+   div_otra.css("display", "block")
+  else
+   div_otra.css("display", "none")
+)
+
 # En formulario de caso-migracion si pagó por ingreso a colombia muestra campos de detalles
 $(document).on('change', 'select[id^=caso_migracion_attributes_][id$=pagoingreso_id]', (e) ->
   res = $(this).val()
@@ -35,6 +57,29 @@ $(document).on('change', 'select[id^=caso_migracion_attributes_][id$=pagoingreso
   else
    div_detalles.css("display", "none")
 )
+
+# En formulario de caso-migración si en causa agresión en país  es Otra agrega respuesta abierta
+$(document).on('change', 'select[id^=caso_migracion_attributes_][id$=causaagrpais_ids]', (e) ->
+  res = $(this).val()
+  id_causaagresion = $(this).attr('id')
+  div_otra = $('#' + id_causaagresion).parent().next()
+  if (res.includes('8'))
+    div_otra.css("display", "block")
+  else
+   div_otra.css("display", "none")
+)
+
+# En formulario de caso-migración si en agresión durante la migración es Otra agrega respuesta abierta
+$(document).on('change', 'select[id^=caso_migracion_attributes_][id$=agresionmigracion_ids]', (e) ->
+  res = $(this).val()
+  id_agresion = $(this).attr('id')
+  div_otra = $('#' + id_agresion).parent().next()
+  if (res.includes('13'))
+   div_otra.css("display", "block")
+  else
+   div_otra.css("display", "none")
+)
+
 # En listado de asistencia permite autocompletar nombres
 $(document).on('focusin',
 'input[id^=actividad_asistencia_attributes_]'+

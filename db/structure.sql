@@ -5902,6 +5902,16 @@ CREATE TABLE public.sivel2_sjr_actualizacionbase (
 
 
 --
+-- Name: sivel2_sjr_agreenpais_migracion; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.sivel2_sjr_agreenpais_migracion (
+    agreenpais_id integer,
+    migracion_id integer
+);
+
+
+--
 -- Name: sivel2_sjr_agremigracion_migracion; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -6009,6 +6019,16 @@ CREATE TABLE public.sivel2_sjr_categoria_desplazamiento (
 
 CREATE TABLE public.sivel2_sjr_causaagresion_migracion (
     causaagresion_id integer,
+    migracion_id integer
+);
+
+
+--
+-- Name: sivel2_sjr_causaagrpais_migracion; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.sivel2_sjr_causaagrpais_migracion (
+    causaagrpais_id integer,
     migracion_id integer
 );
 
@@ -6338,7 +6358,13 @@ CREATE TABLE public.sivel2_sjr_migracion (
     concepto_pago character varying DEFAULT ''::character varying,
     actor_pago character varying DEFAULT ''::character varying,
     otracausa character varying,
-    ubifamilia character varying
+    ubifamilia character varying,
+    otraagresion character varying,
+    otracausaagresion character varying,
+    perpetradoresagresion character varying,
+    fechaendestino date,
+    perpeagresenpais character varying,
+    otracausagrpais character varying
 );
 
 
@@ -9267,6 +9293,20 @@ CREATE INDEX index_sivel2_gen_sectorsocialsec_victima_on_victima_id ON public.si
 
 
 --
+-- Name: index_sivel2_sjr_agreenpais_migracion_on_agreenpais_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_sivel2_sjr_agreenpais_migracion_on_agreenpais_id ON public.sivel2_sjr_agreenpais_migracion USING btree (agreenpais_id);
+
+
+--
+-- Name: index_sivel2_sjr_agreenpais_migracion_on_migracion_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_sivel2_sjr_agreenpais_migracion_on_migracion_id ON public.sivel2_sjr_agreenpais_migracion USING btree (migracion_id);
+
+
+--
 -- Name: index_sivel2_sjr_agremigracion_migracion_on_agremigracion_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9299,6 +9339,20 @@ CREATE INDEX index_sivel2_sjr_causaagresion_migracion_on_causaagresion_id ON pub
 --
 
 CREATE INDEX index_sivel2_sjr_causaagresion_migracion_on_migracion_id ON public.sivel2_sjr_causaagresion_migracion USING btree (migracion_id);
+
+
+--
+-- Name: index_sivel2_sjr_causaagrpais_migracion_on_causaagrpais_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_sivel2_sjr_causaagrpais_migracion_on_causaagrpais_id ON public.sivel2_sjr_causaagrpais_migracion USING btree (causaagrpais_id);
+
+
+--
+-- Name: index_sivel2_sjr_causaagrpais_migracion_on_migracion_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_sivel2_sjr_causaagrpais_migracion_on_migracion_id ON public.sivel2_sjr_causaagrpais_migracion USING btree (migracion_id);
 
 
 --
@@ -10429,6 +10483,14 @@ ALTER TABLE ONLY public.cor1440_gen_campotind
 
 
 --
+-- Name: sivel2_sjr_causaagrpais_migracion fk_rails_29273b3f7a; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sivel2_sjr_causaagrpais_migracion
+    ADD CONSTRAINT fk_rails_29273b3f7a FOREIGN KEY (migracion_id) REFERENCES public.sivel2_sjr_migracion(id);
+
+
+--
 -- Name: cor1440_gen_informe fk_rails_294895347e; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10810,6 +10872,22 @@ ALTER TABLE ONLY public.sip_actorsocial
 
 ALTER TABLE ONLY public.sivel2_sjr_progestado_derecho
     ADD CONSTRAINT fk_rails_5b37b8c7e9 FOREIGN KEY (derecho_id) REFERENCES public.sivel2_sjr_derecho(id);
+
+
+--
+-- Name: sivel2_sjr_agreenpais_migracion fk_rails_5ca3db2b82; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sivel2_sjr_agreenpais_migracion
+    ADD CONSTRAINT fk_rails_5ca3db2b82 FOREIGN KEY (migracion_id) REFERENCES public.sivel2_sjr_migracion(id);
+
+
+--
+-- Name: sivel2_sjr_agreenpais_migracion fk_rails_6218990f83; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sivel2_sjr_agreenpais_migracion
+    ADD CONSTRAINT fk_rails_6218990f83 FOREIGN KEY (agreenpais_id) REFERENCES public.agresionmigracion(id);
 
 
 --
@@ -11226,6 +11304,14 @@ ALTER TABLE ONLY public.cor1440_gen_actividad_respuestafor
 
 ALTER TABLE ONLY public.cor1440_gen_beneficiariopf
     ADD CONSTRAINT fk_rails_ac70e973ee FOREIGN KEY (proyectofinanciero_id) REFERENCES public.cor1440_gen_proyectofinanciero(id);
+
+
+--
+-- Name: sivel2_sjr_causaagrpais_migracion fk_rails_acb340fd32; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sivel2_sjr_causaagrpais_migracion
+    ADD CONSTRAINT fk_rails_acb340fd32 FOREIGN KEY (causaagrpais_id) REFERENCES public.causaagresion(id);
 
 
 --
@@ -12794,6 +12880,15 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200723133542'),
 ('20200727021707'),
 ('20200802112451'),
-('20200802121601');
+('20200802121601'),
+('20200803202253'),
+('20200803210025'),
+('20200803213643'),
+('20200804154120'),
+('20200804205521'),
+('20200805193758'),
+('20200805195426'),
+('20200805201200'),
+('20200805212533');
 
 

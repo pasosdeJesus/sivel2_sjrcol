@@ -189,8 +189,24 @@
             multiple: true,
             class: 'chosen-select'
           } %>
+        <% if f.object && f.object.agresionmigracion_ids && 
+            f.object.agresionmigracion_ids.include?(13) %>
+          <% estilotraagresion = 'display: block' %>
+        <% else %>
+          <% estilotraagresion = 'display: none' %>
+        <% end %>
+        <div class="otra_agresionmigracion" style="<%= estilotraagresion %>">
+          <%= f.input :otraagresion, 
+            label: "¿Cuál otra agresión?"
+          %> 
+        </div>
       </div>
       <div class="col-md-6">
+        <%= f.input :perpetradoresagresion,
+          label: "Presuntos perpetradores de la agresión",
+          input_html: {
+            value: f.object.perpetradoresagresion ? f.object.perpetradoresagresion : ''
+          } %>
         Presuntas causas de la agresión
         <%= f.association :causaagresion,
           collection: Causaagresion.habilitados,
@@ -204,6 +220,17 @@
             multiple: true,
             class: 'chosen-select'
           } %>
+        <% if f.object && f.object.causaagresion_ids && 
+            f.object.causaagresion_ids.include?(8) %>
+          <% estilotracausaagresion = 'display: block' %>
+        <% else %>
+          <% estilotracausaagresion = 'display: none' %>
+        <% end %>
+        <div class="otra_agresionmigracion" style="<%= estilotracausaagresion %>">
+          <%= f.input :otracausaagresion, 
+            label: "¿Cúal otra presunta causa de agresión?"
+          %> 
+      </div>
       </div>
     </div>
     <div class="row">
@@ -295,6 +322,23 @@
           f.object.perfilmigracion_id != 2 ? 
           'display:none' : '' %>
       </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-3">
+        <%= f.input :fechaendestino, 
+          as: :string, 
+          label: false,
+          wrapper_html: {
+            style: edest
+          },
+          input_html: {
+            value: f.object.fechaendestino ? f.object.fechaendestino : '',
+            placeholder: 'Fecha en Destino',
+            "data-behaviour" => "datepicker",
+            "data-toggle" => 'tooltip'
+          } %>
+      </div>
       <div class="col-md-3">
         <%= f.association :destino_pais,
           collection: Sip::Pais.habilitados,
@@ -381,7 +425,67 @@
           } %>
       </div>
     </div> <!-- row -->
+    <div class="row">
+      <div class="col-md-6">
+        ¿Usted o algun integrante de su familia sufrió alguna agresión en este país?
+        <%= f.association :agresionenpais,
+          collection: Agresionmigracion.habilitados,
+          label_method: :nombre,
+          value_method: :id,
+          label: false,
+          include_blank: false,
+          input_html: {
+            "data-toggle" => 'tooltip',
+            'data-placeholder' => "Agresiones...",
+            multiple: true,
+            class: 'chosen-select'
+          } %>
+      </div>
+      <div class="offset-md-0 col-md-6">
+        <%= f.input :perpeagresenpais,
+          label: "Presuntos perpetradores de la agresión",
+          input_html: {
+            value: f.object.perpeagresenpais ? f.object.perpeagresenpais : ''
+          } %>
+      </div>
+    </div> <!-- row -->
 
+    <div class="row">
+      <div class="offset-md-0 col-md-6">    
+      </div>
+      <div class="offset-md-0 col-md-6">
+        Presuntas causas de la agresión
+        <%= f.association :causaagrpais,
+          collection: Causaagresion.habilitados,
+          label_method: :nombre,
+          value_method: :id,
+          label: false,
+          include_blank: false,
+          input_html: {
+            "data-toggle" => 'tooltip',
+            'data-placeholder' => "Presuntas causas...",
+            multiple: true,
+            class: 'chosen-select'
+          } %>
+        <% if f.object && f.object.causaagrpais_ids && 
+            f.object.causaagrpais_ids.include?(8) %>
+          <% estilotracagpais = 'display: block' %>
+        <% else %>
+          <% estilotracagpais = 'display: none' %>
+        <% end %>
+        <div class="otra_causaagrpais" style="<%= estilotracagpais %>">
+          <%= f.input :otracausagrpais, 
+            label: "¿Cúal otra presunta causa de agresión?",
+            input_html: {
+              value: f.object.otracausagrpais ? f.object.otracausagrpais : ''
+          } %>
+        </div>
+
+
+      </div>
+    </div> <!-- row -->
+    
+    
     <% ecamposPep = (f.object.statusmigratorio &&
       (f.object.statusmigratorio_id == 1 || 
        f.object.statusmigratorio_id == 5 ||

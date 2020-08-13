@@ -1,4 +1,4 @@
-<%= f.simple_fields_for :migracion do |migracion| %>
+<%= f.simple_fields_for :migracion, f.object.migracion.order(:id) do |migracion| %>
   <%= render 'migracion_campos', f: migracion %>
 <% end %>
 <div class="links">

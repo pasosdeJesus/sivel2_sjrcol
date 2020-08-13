@@ -74,11 +74,19 @@ class Ability < Sivel2Sjr::Ability
     ['Sip', 'lineaactorsocial'],
     ['Sip', 'tipoanexo'],
     ['Sip', 'tipoactorsocial'],
+    ['', 'agresionmigracion'],
+    ['', 'autoridadrefugio'],
+    ['', 'causaagresion'],
+    ['', 'causamigracion'],
+    ['', 'dificultadmigracion'],
     ['', 'discapacidad'],
     ['', 'espaciopart'],
+    ['', 'miembrofamiliar'],
     ['', 'migracontactopre'],
     ['', 'perfilmigracion'],
-    ['', 'trivalentepositiva']
+    ['', 'tipoproteccion'],
+    ['', 'trivalentepositiva'],
+    ['', 'viadeingreso']
   ]
   
   def tablasbasicas 
@@ -99,7 +107,8 @@ class Ability < Sivel2Sjr::Ability
         ['Sivel2Gen', 'region'],
         ['Sivel2Gen', 'sectorsocial'],
         ['Sivel2Gen', 'vinculoestado'],
-        ['Sivel2Sjr', 'idioma']
+        ['Sivel2Sjr', 'idioma'],
+        ['Sivel2Sjr', 'clasifdesps']
       ]
   end
 

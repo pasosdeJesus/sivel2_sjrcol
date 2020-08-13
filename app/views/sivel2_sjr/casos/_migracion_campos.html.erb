@@ -70,6 +70,169 @@
           } %>
       </div>
     </div>
+
+    <div class="row">
+      <div class="col-md-6">
+         Vía de Ingreso
+        <%= f.association :viadeingreso,
+          collection: Viadeingreso.habilitados,
+          label_method: :nombre,
+          value_method: :id,
+          label: false,
+          input_html: {
+            "data-toggle" => 'tooltip',
+            'data-placeholder' => "Vía de ingerso...",
+            class: 'chosen-select' 
+          } %>
+      </div>
+      <div class="col-md-6">
+        Causa de Migración
+        <%= f.association :causamigracion,
+          collection: Causamigracion.habilitados,
+          label_method: :nombre,
+          value_method: :id,
+          label: false,
+          input_html: {
+            "data-toggle" => 'tooltip',
+            'data-placeholder' => "Causa de la migración...",
+            class: 'chosen-select' 
+          } %>
+        <% if f.object && f.object.causamigracion_id && 
+            f.object.causamigracion_id == 11 %>
+          <% estiloracausa = 'display: block' %>
+        <% else %>
+          <% estilotracausa = 'display: none' %>
+        <% end %>
+        <div class="otra_causamigracion" style="<%= estilotracausa %>">
+          <%= f.input :otracausa, 
+            label: "Otra, ¿Cuál?"
+          %> 
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        ¿Pagó por el ingreso a Colombia?
+        <%= f.association :pagoingreso,
+          collection: Sip::Trivalente.habilitados,
+          label_method: :nombre,
+          value_method: :id,
+          label: false,
+          input_html: {
+            "data-toggle" => 'tooltip',
+            class: 'chosen-select' 
+          } %>
+      </div>
+      <div class="col-md-6">
+        <% if f.object && f.object.pagoingreso_id && 
+            f.object.pagoingreso_id == 2 %>
+          <% estilodetpago = 'display: block' %>
+        <% else %>
+          <% estilodetpago = 'display: none' %>
+        <% end %>
+        <div class="detalles_pago" style="<%= estilodetpago %>">
+          <label class="form-check-label">
+            Valor (en pesos)
+          </label>
+          <%= f.input :valor_pago, 
+            label: false %>
+          <label class="form-check-label">
+            Concepto
+          </label>
+          <%= f.input :concepto_pago,
+            label: false %>
+          <label class="form-check-label">
+            Actor que cobró
+          </label>
+          <%= f.input :actor_pago,
+            label: false %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <%= f.input :ubifamilia,
+          label: "¿Dónde se encuentra su familia?",
+          input_html: {
+            value: f.object.ubifamilia ? f.object.ubifamilia : ''
+          } %>
+      </div>
+      <div class="col-md-6">
+        ¿Tuvo algún accidente o dificultad en la migración?
+        <%= f.association :dificultadmigracion,
+          collection: Dificultadmigracion.habilitados,
+          label_method: :nombre,
+          value_method: :id,
+          label: false,
+          include_blank: false,
+          input_html: {
+            "data-toggle" => 'tooltip',
+            'data-placeholder' => "Accidentes o dificultades...",
+            multiple: true,
+            class: 'chosen-select'
+          } %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        ¿Enfrentó alguna agresión durante la migración?
+        <%= f.association :agresionmigracion,
+          collection: Agresionmigracion.habilitados,
+          label_method: :nombre,
+          value_method: :id,
+          label: false,
+          include_blank: false,
+          input_html: {
+            "data-toggle" => 'tooltip',
+            'data-placeholder' => "Agresiones durante la migración...",
+            multiple: true,
+            class: 'chosen-select'
+          } %>
+        <% if f.object && f.object.agresionmigracion_ids && 
+            f.object.agresionmigracion_ids.include?(13) %>
+          <% estilotraagresion = 'display: block' %>
+        <% else %>
+          <% estilotraagresion = 'display: none' %>
+        <% end %>
+        <div class="otra_agresionmigracion" style="<%= estilotraagresion %>">
+          <%= f.input :otraagresion, 
+            label: "¿Cuál otra agresión?"
+          %> 
+        </div>
+      </div>
+      <div class="col-md-6">
+        <%= f.input :perpetradoresagresion,
+          label: "Presuntos perpetradores de la agresión",
+          input_html: {
+            value: f.object.perpetradoresagresion ? f.object.perpetradoresagresion : ''
+          } %>
+        Presuntas causas de la agresión
+        <%= f.association :causaagresion,
+          collection: Causaagresion.habilitados,
+          label_method: :nombre,
+          value_method: :id,
+          label: false,
+          include_blank: false,
+          input_html: {
+            "data-toggle" => 'tooltip',
+            'data-placeholder' => "Presuntas causas...",
+            multiple: true,
+            class: 'chosen-select'
+          } %>
+        <% if f.object && f.object.causaagresion_ids && 
+            f.object.causaagresion_ids.include?(8) %>
+          <% estilotracausaagresion = 'display: block' %>
+        <% else %>
+          <% estilotracausaagresion = 'display: none' %>
+        <% end %>
+        <div class="otra_agresionmigracion" style="<%= estilotracausaagresion %>">
+          <%= f.input :otracausaagresion, 
+            label: "¿Cúal otra presunta causa de agresión?"
+          %> 
+      </div>
+      </div>
+    </div>
     <div class="row">
       <div class="col-md-12">
         Llegada
@@ -159,6 +322,23 @@
           f.object.perfilmigracion_id != 2 ? 
           'display:none' : '' %>
       </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-3">
+        <%= f.input :fechaendestino, 
+          as: :string, 
+          label: false,
+          wrapper_html: {
+            style: edest
+          },
+          input_html: {
+            value: f.object.fechaendestino ? f.object.fechaendestino : '',
+            placeholder: 'Fecha en Destino',
+            "data-behaviour" => "datepicker",
+            "data-toggle" => 'tooltip'
+          } %>
+      </div>
       <div class="col-md-3">
         <%= f.association :destino_pais,
           collection: Sip::Pais.habilitados,
@@ -245,7 +425,67 @@
           } %>
       </div>
     </div> <!-- row -->
+    <div class="row">
+      <div class="col-md-6">
+        ¿Usted o algun integrante de su familia sufrió alguna agresión en este país?
+        <%= f.association :agresionenpais,
+          collection: Agresionmigracion.habilitados,
+          label_method: :nombre,
+          value_method: :id,
+          label: false,
+          include_blank: false,
+          input_html: {
+            "data-toggle" => 'tooltip',
+            'data-placeholder' => "Agresiones...",
+            multiple: true,
+            class: 'chosen-select'
+          } %>
+      </div>
+      <div class="offset-md-0 col-md-6">
+        <%= f.input :perpeagresenpais,
+          label: "Presuntos perpetradores de la agresión",
+          input_html: {
+            value: f.object.perpeagresenpais ? f.object.perpeagresenpais : ''
+          } %>
+      </div>
+    </div> <!-- row -->
 
+    <div class="row">
+      <div class="offset-md-0 col-md-6">    
+      </div>
+      <div class="offset-md-0 col-md-6">
+        Presuntas causas de la agresión
+        <%= f.association :causaagrpais,
+          collection: Causaagresion.habilitados,
+          label_method: :nombre,
+          value_method: :id,
+          label: false,
+          include_blank: false,
+          input_html: {
+            "data-toggle" => 'tooltip',
+            'data-placeholder' => "Presuntas causas...",
+            multiple: true,
+            class: 'chosen-select'
+          } %>
+        <% if f.object && f.object.causaagrpais_ids && 
+            f.object.causaagrpais_ids.include?(8) %>
+          <% estilotracagpais = 'display: block' %>
+        <% else %>
+          <% estilotracagpais = 'display: none' %>
+        <% end %>
+        <div class="otra_causaagrpais" style="<%= estilotracagpais %>">
+          <%= f.input :otracausagrpais, 
+            label: "¿Cúal otra presunta causa de agresión?",
+            input_html: {
+              value: f.object.otracausagrpais ? f.object.otracausagrpais : ''
+          } %>
+        </div>
+
+
+      </div>
+    </div> <!-- row -->
+    
+    
     <% ecamposPep = (f.object.statusmigratorio &&
       (f.object.statusmigratorio_id == 1 || 
        f.object.statusmigratorio_id == 5 ||
@@ -288,39 +528,51 @@
             "data-toggle" => 'tooltip'
           } %>
       </div>
+      <div class="offset-md-0 col-md-3" style=<%= pepest %>>
+          <%= f.input :tipopep, 
+            label: "Tipo de PEP",
+            input_html: {
+              value: f.object.tipopep ? f.object.tipopep : ''
+            } %>
+      </div>
     </div> 
-    
+
     <div class="row">
       <div class="offset-md-0 col-md-6">
-        <div class="row">
-          <div class="offset-md-0 col-md-8">
-            <label class="form-check-label" for="riesgoApatridia">
-              Persona con NPI
-            </label>  
-          </div>
-          <div class="offset-md-0 col-md-4">
-            <%= f.input :proteccion_id,
-              collection: Sivel2Sjr::Proteccion.habilitados,
-              label_method: :nombre,
-              value_method: :id,
-              label: false,
-              input_html: {
-                "data-toggle" => 'tooltip',
-                "title" => 'Elegir de la lista el Nivel Protección Internacional que requiere el solicitante',
-                class: 'chosen-select' 
-              }
-            %>
-        </div>
-        </div>
+        <label class="form-check-label" for="riesgoApatridia">
+          Persona con NPI
+        </label>  
+        <%= f.input :proteccion_id,
+          collection: Sivel2Sjr::Proteccion.habilitados,
+          label_method: :nombre,
+          value_method: :id,
+          label: false,
+          input_html: {
+            "data-toggle" => 'tooltip',
+            "title" => 'Elegir de la lista el Nivel Protección Internacional que requiere el solicitante',
+            class: 'chosen-select' 
+          } %>
       </div>
-      
-      <% npiest = f.object.proteccion && f.object.proteccion_id == 8 ? 
+      <% npiotroest = f.object.proteccion && f.object.proteccion_id == 7 ? 
         '' : 'display:none' %>
-      <div class="offset-md-0 col-md-3 datosNpi" style=<%= npiest %>>
-        <div>
+      <div class="col-md-6" style=<%= npiotroest %>>
+        <%= f.input :otronpi, 
+          label: "Otro, ¿Cuál?",
+          input_html: {
+            value: f.object.otronpi ? f.object.otronpi : ''
+          } %>
+      </div>
+    </div>   <!--row -->
+      
+    <% npiest = f.object.proteccion && 
+      (f.object.proteccion_id == 8 || f.object.proteccion_id == 1) ? 
+      '' : 'display:none' %>
+    <div class='sec_refugio' style='<%= npiest %>'>
+      REFUGIO
+      <div class="row">
+        <div class="col-md-6 datosNpi">
           Fecha de declaración:
-        </div>
-        <%= f.input :fechaNpi, 
+          <%= f.input :fechaNpi, 
           as: :string, 
           label: false,
           input_html: { 
@@ -329,19 +581,44 @@
             "data-behaviour" => "datepicker",
             "data-toggle" => 'tooltip'
           } %>
-        <div>
-          Número de salvoconducto:
         </div>
-        <%= f.input :salvoNpi,
+        <div class="col-md-6">
+          Autoridad ante la cual declaró refugio
+          <%= f.association :autoridadrefugio,
+            collection: Autoridadrefugio.habilitados,
+            label_method: :nombre,
+            value_method: :id,
+            label: false,
+            input_html: {
+              "data-toggle" => 'tooltip',
+              'data-placeholder' => "Autoridad...",
+              class: 'chosen-select' 
+            } %>
+          <% autotraest = f.object.autoridadrefugio && f.object.autoridadrefugio_id == 5 ? 
+            '' : 'display:none' %>
+          <div style=<%= autotraest %>>
+            <%= f.input :otraautoridad, 
+              label: "Otra, ¿Cuál?",
+              input_html: {
+                value: f.object.otraautoridad ? f.object.otraautoridad : ''
+              } %>
+          </div>
+        </div>
+      </div> <!-- row -->
+
+      <div class="row">
+        <div class="col-md-6">
+          Número de salvoconducto:
+          <%= f.input :salvoNpi,
           as: :string,
           label: false,
           input_html: {
             value: f.object.salvoNpi ? f.object.salvoNpi : '',
           } %>
-        <div>
-          Causa del refugio:
         </div>
-        <%= f.association :causaRefugio, 
+        <div class="col-md-6">
+          Causa del refugio:
+          <%= f.association :causaRefugio, 
           collection: Sivel2Gen::Categoria.habilitados.
           where(supracategoria_id: [200,201,202]),
           label: false,
@@ -353,9 +630,48 @@
             'data-placeholder' => "Causa del refugio...",
             class: 'chosen-select' 
           } %>
+        </div>
+      </div> <!-- row -->
 
-    </div>
-    </div>  
+      <div class="row">
+        <div class="col-md-6">
+          Tipo de protección en refugio
+          <%= f.association :tipoproteccion,
+            collection: Tipoproteccion.habilitados,
+            label_method: :nombre,
+            value_method: :id,
+            label: false,
+            input_html: {
+              "data-toggle" => 'tooltip',
+              'data-placeholder' => "Tipo de protección...",
+              class: 'chosen-select' 
+            } %>
+        </div>
+        <div class="offset-md-0 col-md-6">
+          Miembros del grupo familiar incluidos en refugio
+          <%= f.association :miembrofamiliar,
+            collection: Miembrofamiliar.habilitados,
+            label_method: :nombre,
+            value_method: :id,
+            label: false,
+            input_html: {
+              "data-toggle" => 'tooltip',
+              'data-placeholder' => "Miembros familiares...",
+              class: 'chosen-select' 
+            } %>
+          <% miemest = f.object.miembrofamiliar && f.object.miembrofamiliar_id == 6 ? 
+            '' : 'display:none' %>
+          <div style=<%= miemest %>>
+            <%= f.input :otromiembro, 
+              label: "Otros, ¿Cuál?",
+              input_html: {
+                value: f.object.otromiembro ? f.object.otromiembro : ''
+              } %>
+          </div>
+        </div>
+      </div>  <!-- row -->
+
+    </div> <!-- sec_refugio-->
 
     <div class="row">
       <div class="offset-md-0 col-md-12">
@@ -371,7 +687,7 @@
           }
         %>
       </div>
-    </div>
+    </div> <!-- row -->
 
     <%= link_to_remove_association "Eliminar Migracion", f, 
       {class: 'btn-danger', :'data-existing' => 'true'} 

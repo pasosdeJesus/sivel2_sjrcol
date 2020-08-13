@@ -3,6 +3,83 @@ jQuery ->
   $("a[rel~=tooltip], .has-tooltip").tooltip()
 
 
+# En formulario de caso-migracion si elige otra causa muestra campo para especificarla
+$(document).on('change', 'select[id^=caso_migracion_attributes_][id$=causamigracion_id]', (e) ->
+  res = $(this).val()
+  id_causa = $(this).attr('id') 
+  div_otracausa = $('#' + id_causa).parent().next()
+  if (res == '11')
+   div_otracausa.css("display", "block")
+  else
+   div_otracausa.css("display", "none")
+)
+
+# En formulario de caso-migracion si elige otro miembro familiar, muestra campo para especificarla
+$(document).on('change', 'select[id^=caso_migracion_attributes_][id$=miembrofamiliar_id]', (e) ->
+  res = $(this).val()
+  id_miembro = $(this).attr('id') 
+  div_otracausa = $('#' + id_miembro).parent().next()
+  if (res == '6')
+    div_otracausa.css("display", "block")
+  else
+    div_otracausa.css("display", "none")
+)
+
+# En formulario de caso-migracion si elige otra autoridad ante la cual declarar, muestra campo para especificarla
+$(document).on('change', 'select[id^=caso_migracion_attributes_][id$=autoridadrefugio_id]', (e) ->
+  res = $(this).val()
+  id_auto = $(this).attr('id') 
+  div_otracausa = $('#' + id_auto).parent().next()
+  if (res == '5')
+   div_otracausa.css("display", "block")
+  else
+   div_otracausa.css("display", "none")
+)
+
+# En formulario de caso-migración si en causa de la agresión es Otra agrega respuesta abierta
+$(document).on('change', 'select[id^=caso_migracion_attributes_][id$=causaagresion_ids]', (e) ->
+  res = $(this).val()
+  id_causaagresion = $(this).attr('id')
+  div_otra = $('#' + id_causaagresion).parent().next()
+  if (res.includes('8'))
+   div_otra.css("display", "block")
+  else
+   div_otra.css("display", "none")
+)
+
+# En formulario de caso-migracion si pagó por ingreso a colombia muestra campos de detalles
+$(document).on('change', 'select[id^=caso_migracion_attributes_][id$=pagoingreso_id]', (e) ->
+  res = $(this).val()
+  id_pago = $(this).attr('id').replace('pagoingreso_id', 'valor_pago')  
+  div_detalles = $('#' + id_pago).closest('.detalles_pago')
+  if (res == '2')
+   div_detalles.css("display", "block")
+  else
+   div_detalles.css("display", "none")
+)
+
+# En formulario de caso-migración si en causa agresión en país  es Otra agrega respuesta abierta
+$(document).on('change', 'select[id^=caso_migracion_attributes_][id$=causaagrpais_ids]', (e) ->
+  res = $(this).val()
+  id_causaagresion = $(this).attr('id')
+  div_otra = $('#' + id_causaagresion).parent().next()
+  if (res.includes('8'))
+    div_otra.css("display", "block")
+  else
+   div_otra.css("display", "none")
+)
+
+# En formulario de caso-migración si en agresión durante la migración es Otra agrega respuesta abierta
+$(document).on('change', 'select[id^=caso_migracion_attributes_][id$=agresionmigracion_ids]', (e) ->
+  res = $(this).val()
+  id_agresion = $(this).attr('id')
+  div_otra = $('#' + id_agresion).parent().next()
+  if (res.includes('13'))
+   div_otra.css("display", "block")
+  else
+   div_otra.css("display", "none")
+)
+
 # En listado de asistencia permite autocompletar nombres
 $(document).on('focusin',
 'input[id^=actividad_asistencia_attributes_]'+
@@ -30,11 +107,13 @@ $(document).on('focusin',
     if pe[0] != pl[0] 
       cl = "TRANSFRONTERIZO"
     else
-      cl = "ENTRE DEPARTAMENTOS"
+      cl = "INTERDEPARTAMENTAL"
       if pe.length > 1 && pl.length > 1 && pe[1] == pl[1]
-        cl = " ENTRE MUNCIPIOS DEL MISMO DEPARTAMENTO"
+        cl = "INTERMUNICIPAL"
         if pe.length > 2 && pl.length > 2 && pe[2] == pl[2]
           cl = "DENTRO DE UN MUNICIPIO"
+          if pe.length == 4 && pl.length == 4 && pe[3] == pl[3]
+            cl = "INTRAURBANO"
   ue = "RURAL"
   if pe.length == 4
     ue = "URBANO"

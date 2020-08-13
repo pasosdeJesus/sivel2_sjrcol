@@ -43,6 +43,12 @@ es:
     proyectos: Áreas de Actividad
   activerecord:
     attributes:
+      "agresionmigracion": 
+        Agresionmigracion: Agresion durante la migración
+        Agresionesmigracion: Agresiones durante la migración
+      "autoridadrefugio": 
+        Autoridadrefugio: Autoridad ante la cual declarar refugio
+        Autoridadesrefugio: Autoridades ante las cuales declarar refugio
       "sivel2_gen/anexo_victima":
         tipoanexo: Tipo de anexo
         tipoanexo_id: Tipo de anexo
@@ -78,15 +84,33 @@ es:
       "espaciopart":
         Espaciopart: Espacio de participación o red
         Espaciospart: Espacios de participación o redes
+      "miembrofamiliar":
+        Miembrofamiliar: Miembro del grupo familiar incluidos en refugio
+        Miembrosfamiliar: Miembros del grupo familiar incluidos en refugio
       "migracontactopre":
         Migracontactopre: Contacto previo con Colombia
         Migracontactospre: Contactos previos con Colombia
       "perfilmigracion":
         Perfilmigracion: Perfil de migración
         Perfilesmigracion: Perfiles de migración
+      "tipoproteccion":
+        Tipoproteccion: Tipo de protección en refugio
+        Tiposproteccion: Tipos de protección en refugio
       "trivalentepositiva":
         Trivalentepositiva: Trivalente Positiva
         Trivalentespositiva: Trivalentes Positiva
+      "causaagresion":
+        Causaagresion: Causa de la agresión
+        Causasagresion: Causas de la agresion
+      "causamigracion":
+        Causamigracion: Causa de migración
+        Causasmigracion: Causas de migración
+      "dificultadmigracion":
+        Dificultadmigracion: Accidente o Dificultad en la migración
+        Dificultadesmigracion: Accidentes o Dificultades en la migración
+      "viadeingreso":
+        Viadeingreso: Vía de ingreso
+        Viasdeingreso: Vías de ingreso
       "sal7711_gen/articulo": 
         texto: Resumen
         fuenteprensa: Fuente de prensa

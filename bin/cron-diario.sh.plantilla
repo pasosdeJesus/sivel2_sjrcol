@@ -1,0 +1,6 @@
+#!/bin/sh
+# Sugerido ejecutar  a diario (por ejemplo en /etc/daily.local)
+# su -l miusuario -c "(cd /var/www/htdocs/sivel2_sjrcol; date ; bin/cron-diario.sh) >> /var/www/htdocs/sivel2_sjrcol/log/alertas.bitacora 2>&1" 
+
+
+SMTP_MAQ=correo.miservidor.org SMTP_PUERTO=465 SMTP_DOMINIO=miservidor.org SMTP_USUARIO=sjrc SMTP_CLAVE=ClaveSjr bin/rails runner -e development scripts/a_diario_runner.rb

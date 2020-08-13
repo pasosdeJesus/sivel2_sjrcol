@@ -5,6 +5,10 @@ module Cor1440Gen
 
     include Sivel2Sjr::Concerns::Controllers::MindicadorespfController
 
+    before_action :set_mindicadorpf, 
+      only: [:show, :edit, :update, :destroy]
+    load_and_authorize_resource class: Cor1440Gen::Mindicadorpf
+
     # PRM2020 R1I3 Número de personas (pueden ser repetidas)
     # Número de beneficiarios (contactos + familiares) en casos de 
     # actividades con acción jurídica'

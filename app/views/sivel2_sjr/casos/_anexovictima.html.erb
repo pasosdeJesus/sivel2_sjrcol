@@ -1,9 +1,13 @@
-<%= f.simple_fields_for :anexo_victima do |anexo| %>
-  <%= render 'anexo_caso_campos', :f => anexo %>
+<% opnom = consentimiento ? "="  : "<>" %>
+<%= f.simple_fields_for :anexo_victima,
+  f.object.anexo_victima.where("tipoanexo_id IN (SELECT id FROM sip_tipoanexo WHERE nombre #{opnom} ?)", 'CONSENTIMIENTO DE DATOS') do |anexo| %>
+  <%= render partial: 'anexo_caso_campos', locals: {:f => anexo,
+  consentimiento: consentimiento } %>
 <% end %>
 <div class="links">
   <%= link_to_add_association 'Añadir Anexo', f, :anexo_victima, 
      partial: 'anexo_caso_campos',
+     render_options:  {locals: { consentimiento: consentimiento }},
      :class => 'btn-primary' 
   %>
 </div>

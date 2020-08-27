@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: a1b9178ddd0ff5a2852a57890881a1a96eb0f647
+  revision: bd67c5cffedd010a260e7b830675b2d4d50b8fe5
   specs:
     cor1440_gen (1.0b3)
       devise
@@ -13,7 +13,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 3db8a6c9d7dcad6afccf42fc92eb46d9bac14721
+  revision: 07fc8cb5d28718150f848ee5438a3e636b3dc304
   specs:
     heb412_gen (1.0.b6)
       mr519_gen
@@ -23,7 +23,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/mr519_gen.git
-  revision: 4c6a84360390814fa5b46714b8e4ec9f65d3aae9
+  revision: e046cb75e36f62d5d24644ac383e4390efb68955
   specs:
     mr519_gen (0.2.0)
       rails (~> 6.0.0.rc1, >= 6.0.0.rc1)
@@ -31,7 +31,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: 9317380e637f880bd5336410e050cf474dc103d9
+  revision: 405b369bfb793fde575c8c0d995b6ccf40754b1f
   specs:
     sal7711_gen (1.0.b3)
       rails
@@ -39,7 +39,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: e1cc7b775d009854bae44d64d2df46bda19ea5f2
+  revision: 91c629b9846d3070138ca8891b125127e9764b16
   specs:
     sal7711_web (1.0.a3)
       rails
@@ -47,7 +47,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: c635b831b71390b77816cda48a21276313bc0a8a
+  revision: 017d3ee2e9b7b0deed82ba05111147020613b279
   specs:
     sip (2.0.b10)
       cancancan
@@ -65,7 +65,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 437f3f20078264e3742a4169628e71254805f823
+  revision: 3e8494b3524383f57ce49583e8c83a87421939de
   specs:
     sivel2_gen (2.0b11)
       devise
@@ -74,7 +74,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: f5356ee479d0ed82263320e0f262e7bd67844cda
+  revision: a5188067b62cee7f0334fd491f728161d7216826
   specs:
     sivel2_sjr (2.0b10)
       rails
@@ -189,7 +189,7 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
-    devise-i18n (1.9.1)
+    devise-i18n (1.9.2)
       devise (>= 4.7.1)
     docile (1.3.2)
     erubi (1.9.0)
@@ -209,7 +209,7 @@ GEM
       railties (>= 3.2.16)
     kgio (2.11.3)
     libxml-ruby (3.2.0)
-    loofah (2.6.0)
+    loofah (2.7.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.7.1)

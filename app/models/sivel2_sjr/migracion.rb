@@ -1,6 +1,7 @@
 # encoding: UTF-8
 
 class Sivel2Sjr::Migracion < ActiveRecord::Base
+  attr_accessor :tiempoenpais
   has_and_belongs_to_many :agresionmigracion, 
     class_name: 'Agresionmigracion',
     foreign_key: :migracion_id, 
@@ -101,4 +102,15 @@ class Sivel2Sjr::Migracion < ActiveRecord::Base
     class_name: 'Tipoproteccion', foreign_key: "tipoproteccion_id", optional: true
   
   validates :fechasalida, presence: true
+  
+  def tiempoenpais
+    if self.id && self.fechallegada
+      fechallegada = self.fechallegada.to_datetime
+      hoy = Date.today
+      dias = hoy -fechallegada
+      return dias.to_i
+    end
+    return ''
+  end
+
 end

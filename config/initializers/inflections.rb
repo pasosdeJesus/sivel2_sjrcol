@@ -37,6 +37,7 @@ ActiveSupport::Inflector.inflections do |inflect|
 	inflect.irregular 'perfilmigracion', 'perfilesmigracion'
 	inflect.irregular 'trivalentepositiva', 'trivalentespositiva'
 	inflect.irregular 'progestado', 'progsestado'
+	inflect.irregular 'sectorgifmm', 'sectoresgifmm'
 	inflect.irregular 'tipoactorsocial', 'tiposactorsocial'
 	inflect.irregular 'tipoanexo', 'tiposanexo'
 	inflect.irregular 'tipoproteccion', 'tiposproteccion'

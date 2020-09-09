@@ -93,6 +93,9 @@ es:
       "perfilmigracion":
         Perfilmigracion: Perfil de migración
         Perfilesmigracion: Perfiles de migración
+      "sectorgifmm":
+        Sectorgifmm: Sector GIFMM
+        Sectoresgifmm: Sectores GIFMM
       "tipoproteccion":
         Tipoproteccion: Tipo de protección en refugio
         Tiposproteccion: Tipos de protección en refugio

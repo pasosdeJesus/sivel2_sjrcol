@@ -3,6 +3,9 @@ jQuery ->
   $("a[rel~=tooltip], .has-tooltip").tooltip()
 
 
+# En formulario de actividad si escoge Plan Estratégico y Asistencia humanitaria se despliega nueva sección con tabla de detalles financieros
+$(document).on('change', 'select[id^=actividad_actividad_proyectofinanciero_attributes][id$=_proyectofinanciero_id]', (e) ->
+)
 # En formulario de caso-migracion si elige otra causa muestra campo para especificarla
 $(document).on('change', 'select[id^=caso_migracion_attributes_][id$=causamigracion_id]', (e) ->
   res = $(this).val()
@@ -185,4 +188,22 @@ document.addEventListener('turbolinks:load', () ->
   if items_victimas.length > 0
     for item in [0 .. items_victimas.length-1]
       agregar_colapsables_cocoon('victima', item)
+)
+
+$(document).on('change', 'select[id^=actividad_actividad_proyectofinanciero_attributes_][id$=actividadpf_ids]', (e, res) ->
+  val = $(this).val()
+  div_detallefinanciero = $("#detallefinanciero")
+  if val.includes("116")
+    div_detallefinanciero.css("display", "block")
+  else
+    div_detallefinanciero.css("display", "none")
+)
+
+$(document).on('cocoon:before-remove', '#actividad_proyectofinanciero', (e, objetivo) ->
+  $(this).find("select").each( (d) ->
+    div_detallefinanciero = $("#detallefinanciero")
+    valor = $(this).val()
+    if valor.includes("116")
+      div_detallefinanciero.css("display", "none")
+  )
 )

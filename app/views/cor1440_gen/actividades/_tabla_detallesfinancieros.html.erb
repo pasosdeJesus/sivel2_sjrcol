@@ -1,0 +1,24 @@
+<% proyectos = @registro.proyectofinanciero.pluck(:id) %>
+<% tipos = @registro.actividadpf.pluck(:id) %>
+<% if proyectos.include? (10) and tipos.include? (116) %>
+  <% estdetalle = "display: block" %>
+<% else %>
+  <% estdetalle = "display: none" %>
+<% end %>
+<div id="detallefinanciero" style=<% estdetalle %> >
+  <table>
+    <tr>
+      <th>Convenio y Actividad de Convenio</th>
+      <th>Unidad</th>
+      <th>Cantidad</th>
+      <th>Valor unitario</th>
+      <th>Valor tota</th>
+      <th>Mecanismo de entrega</th>
+      <th>Modalidad de entrega</th>
+      <th>Tipo de transferencia</th>
+      <th>Frecuencia de la entrega</th>
+      <th>Número de meses de la asistencia</th>
+      <th>Número de esta asistencia</th>
+    </tr>
+  </table>
+</div>

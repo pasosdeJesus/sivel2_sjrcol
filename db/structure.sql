@@ -75,12 +75,12 @@ CREATE FUNCTION public.completa_obs(obs character varying, nuevaobs character va
 CREATE FUNCTION public.municipioubicacion(integer) RETURNS character varying
     LANGUAGE sql
     AS $_$
-        SELECT (SELECT nombre FROM public.sip_pais WHERE id=ubicacion.id_pais) 
-            || COALESCE((SELECT '/' || nombre FROM public.sip_departamento 
+        SELECT (SELECT nombre FROM sip_pais WHERE id=ubicacion.id_pais) 
+            || COALESCE((SELECT '/' || nombre FROM sip_departamento 
             WHERE sip_departamento.id = ubicacion.id_departamento),'') 
-            || COALESCE((SELECT '/' || nombre FROM public.sip_municipio 
+            || COALESCE((SELECT '/' || nombre FROM sip_municipio 
             WHERE sip_municipio.id = ubicacion.id_municipio),'') 
-            FROM public.sip_ubicacion AS ubicacion 
+            FROM sip_ubicacion AS ubicacion 
             WHERE ubicacion.id=$1;
       $_$;
 
@@ -393,12 +393,12 @@ ALTER SEQUENCE public.causaagresion_id_seq OWNED BY public.causaagresion.id;
 
 CREATE TABLE public.causamigracion (
     id bigint NOT NULL,
-    nombre character varying(500) NOT NULL,
+    nombre character varying(500),
     observaciones character varying(5000),
-    fechacreacion date NOT NULL,
+    fechacreacion date,
     fechadeshabilitacion date,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
 );
 
 
@@ -1025,6 +1025,16 @@ ALTER SEQUENCE public.cor1440_gen_actividad_proyecto_id_seq OWNED BY public.cor1
 
 
 --
+-- Name: cor1440_gen_actividad_proyectofinanciero; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.cor1440_gen_actividad_proyectofinanciero (
+    actividad_id integer NOT NULL,
+    proyectofinanciero_id integer NOT NULL
+);
+
+
+--
 -- Name: cor1440_gen_actividad_proyectofinanciero_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -1034,17 +1044,6 @@ CREATE SEQUENCE public.cor1440_gen_actividad_proyectofinanciero_id_seq
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
-
-
---
--- Name: cor1440_gen_actividad_proyectofinanciero; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.cor1440_gen_actividad_proyectofinanciero (
-    actividad_id integer NOT NULL,
-    proyectofinanciero_id integer NOT NULL,
-    id integer DEFAULT nextval('public.cor1440_gen_actividad_proyectofinanciero_id_seq'::regclass) NOT NULL
-);
 
 
 --
@@ -4350,46 +4349,6 @@ CREATE TABLE public.sip_tsitio (
 
 
 --
--- Name: sip_ubicacionpre; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.sip_ubicacionpre (
-    id bigint NOT NULL,
-    nombre character varying(2000) NOT NULL COLLATE public.es_co_utf_8,
-    pais_id integer,
-    departamento_id integer,
-    municipio_id integer,
-    clase_id integer,
-    lugar character varying(500),
-    sitio character varying(500),
-    tsitio_id integer,
-    latitud double precision,
-    longitud double precision,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: sip_ubicacionpre_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE public.sip_ubicacionpre_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: sip_ubicacionpre_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE public.sip_ubicacionpre_id_seq OWNED BY public.sip_ubicacionpre.id;
-
-
---
 -- Name: sivel2_gen_actividadoficio_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -5346,9 +5305,7 @@ CREATE MATERIALIZED VIEW public.sivel2_gen_consexpcaso AS
      JOIN public.sivel2_gen_victima vcontacto ON (((vcontacto.id_persona = contacto.id) AND (vcontacto.id_caso = caso.id))))
      LEFT JOIN public.sivel2_gen_etnia etnia ON ((vcontacto.id_etnia = etnia.id)))
      LEFT JOIN public.sivel2_sjr_ultimaatencion ultimaatencion ON ((ultimaatencion.id_caso = caso.id)))
-  WHERE (conscaso.caso_id IN ( SELECT sivel2_gen_conscaso.caso_id
-           FROM public.sivel2_gen_conscaso
-          WHERE (sivel2_gen_conscaso.caso_id = 264)))
+  WHERE (true = false)
   WITH NO DATA;
 
 
@@ -6347,38 +6304,16 @@ ALTER SEQUENCE public.sivel2_sjr_comosupo_id_seq OWNED BY public.sivel2_sjr_como
 --
 
 CREATE MATERIALIZED VIEW public.sivel2_sjr_consactividadcaso AS
- SELECT ((ac.actividad_id * 500000) + persona.id) AS id,
-    ac.casosjr_id AS caso_id,
+ SELECT ac.casosjr_id AS caso_id,
     ac.actividad_id,
-    victima.id AS victima_id,
-        CASE
-            WHEN (casosjr.contacto_id = persona.id) THEN 1
-            ELSE 0
-        END AS es_contacto,
     actividad.fecha AS actividad_fecha,
-    ( SELECT sip_oficina.nombre
-           FROM public.sip_oficina
-          WHERE (sip_oficina.id = actividad.oficina_id)
-         LIMIT 1) AS actividad_oficina,
-    ( SELECT usuario.nusuario
-           FROM public.usuario
-          WHERE (usuario.id = actividad.usuario_id)
-         LIMIT 1) AS actividad_responsable,
-    array_to_string(ARRAY( SELECT cor1440_gen_proyectofinanciero.nombre
-           FROM public.cor1440_gen_proyectofinanciero
-          WHERE (cor1440_gen_proyectofinanciero.id IN ( SELECT apf.proyectofinanciero_id
-                   FROM public.cor1440_gen_actividad_proyectofinanciero apf
-                  WHERE (apf.actividad_id = actividad.id)))), ','::text) AS actividad_convenios,
+    victima.id AS victima_id,
     persona.id AS persona_id,
     persona.nombres AS persona_nombres,
-    persona.apellidos AS persona_apellidos,
-    caso.memo AS caso_memo,
-    casosjr.fecharec AS caso_fecharec
-   FROM ((((((public.sivel2_sjr_actividad_casosjr ac
+    persona.apellidos AS persona_apellidos
+   FROM ((((public.sivel2_sjr_actividad_casosjr ac
      JOIN public.cor1440_gen_actividad actividad ON ((ac.actividad_id = actividad.id)))
-     JOIN public.sip_oficina oficinaac ON ((oficinaac.id = actividad.oficina_id)))
      JOIN public.sivel2_gen_caso caso ON ((caso.id = ac.casosjr_id)))
-     JOIN public.sivel2_sjr_casosjr casosjr ON ((casosjr.id_caso = ac.casosjr_id)))
      JOIN public.sivel2_gen_victima victima ON ((victima.id_caso = caso.id)))
      JOIN public.sip_persona persona ON ((persona.id = victima.id_persona)))
   WITH NO DATA;
@@ -6596,14 +6531,15 @@ CREATE TABLE public.sivel2_sjr_migracion (
     "salvoNpi" character varying(127),
     "fechaNpi" date,
     "causaRefugio_id" integer,
-    observacionesref character varying(5000),
+    "causaRefugio" character varying,
     proteccion_id integer,
+    observacionesref character varying(5000),
     viadeingreso_id integer,
     causamigracion_id integer,
-    pagoingreso_id integer DEFAULT 1,
-    valor_pago integer,
-    concepto_pago character varying DEFAULT ''::character varying,
-    actor_pago character varying DEFAULT ''::character varying,
+    pagoingreso_id integer,
+    valor_pago character varying,
+    concepto_pago character varying,
+    actor_pago character varying,
     otracausa character varying,
     ubifamilia character varying,
     otraagresion character varying,
@@ -7109,12 +7045,12 @@ ALTER SEQUENCE public.unidadayuda_id_seq OWNED BY public.unidadayuda.id;
 
 CREATE TABLE public.viadeingreso (
     id bigint NOT NULL,
-    nombre character varying(500) NOT NULL,
+    nombre character varying(500),
     observaciones character varying(5000),
-    fechacreacion date NOT NULL,
+    fechacreacion date,
     fechadeshabilitacion date,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
 );
 
 
@@ -7701,13 +7637,6 @@ ALTER TABLE ONLY public.sip_trivalente ALTER COLUMN id SET DEFAULT nextval('publ
 
 
 --
--- Name: sip_ubicacionpre id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.sip_ubicacionpre ALTER COLUMN id SET DEFAULT nextval('public.sip_ubicacionpre_id_seq'::regclass);
-
-
---
 -- Name: sivel2_gen_anexo_victima id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -8079,22 +8008,6 @@ ALTER TABLE ONLY public.sivel2_gen_contexto
 
 ALTER TABLE ONLY public.cor1440_gen_actividad_proyecto
     ADD CONSTRAINT cor1440_gen_actividad_proyecto_pkey PRIMARY KEY (id);
-
-
---
--- Name: cor1440_gen_actividad_proyectofinanciero cor1440_gen_actividad_proyectofinanciero_id_key; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.cor1440_gen_actividad_proyectofinanciero
-    ADD CONSTRAINT cor1440_gen_actividad_proyectofinanciero_id_key UNIQUE (id);
-
-
---
--- Name: cor1440_gen_actividad_proyectofinanciero cor1440_gen_actividad_proyectofinanciero_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.cor1440_gen_actividad_proyectofinanciero
-    ADD CONSTRAINT cor1440_gen_actividad_proyectofinanciero_pkey PRIMARY KEY (id);
 
 
 --
@@ -9119,14 +9032,6 @@ ALTER TABLE ONLY public.sip_tipoanexo
 
 ALTER TABLE ONLY public.sip_trivalente
     ADD CONSTRAINT sip_trivalente_pkey PRIMARY KEY (id);
-
-
---
--- Name: sip_ubicacionpre sip_ubicacionpre_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.sip_ubicacionpre
-    ADD CONSTRAINT sip_ubicacionpre_pkey PRIMARY KEY (id);
 
 
 --
@@ -11028,14 +10933,6 @@ ALTER TABLE ONLY public.sip_datosbio
 
 
 --
--- Name: sip_ubicacionpre fk_rails_2e86701dfb; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.sip_ubicacionpre
-    ADD CONSTRAINT fk_rails_2e86701dfb FOREIGN KEY (departamento_id) REFERENCES public.sip_departamento(id);
-
-
---
 -- Name: cor1440_gen_valorcampoact fk_rails_3060a94455; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -11137,14 +11034,6 @@ ALTER TABLE ONLY public.sivel2_sjr_motivosjr_derecho
 
 ALTER TABLE ONLY public.sivel2_gen_caso_respuestafor
     ADD CONSTRAINT fk_rails_3aa0de8b93 FOREIGN KEY (caso_id) REFERENCES public.sivel2_gen_caso(id);
-
-
---
--- Name: sip_ubicacionpre fk_rails_3b59c12090; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.sip_ubicacionpre
-    ADD CONSTRAINT fk_rails_3b59c12090 FOREIGN KEY (clase_id) REFERENCES public.sip_clase(id);
 
 
 --
@@ -11924,14 +11813,6 @@ ALTER TABLE ONLY public.cor1440_gen_informe
 
 
 --
--- Name: sip_ubicacionpre fk_rails_c08a606417; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.sip_ubicacionpre
-    ADD CONSTRAINT fk_rails_c08a606417 FOREIGN KEY (municipio_id) REFERENCES public.sip_municipio(id);
-
-
---
 -- Name: cor1440_gen_datointermedioti_pmindicadorpf fk_rails_c5ec912cc3; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -11953,14 +11834,6 @@ ALTER TABLE ONLY public.cor1440_gen_actividadpf
 
 ALTER TABLE ONLY public.cor1440_gen_proyectofinanciero_usuario
     ADD CONSTRAINT fk_rails_c6f8d7af05 FOREIGN KEY (proyectofinanciero_id) REFERENCES public.cor1440_gen_proyectofinanciero(id);
-
-
---
--- Name: sip_ubicacionpre fk_rails_c8024a90df; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.sip_ubicacionpre
-    ADD CONSTRAINT fk_rails_c8024a90df FOREIGN KEY (tsitio_id) REFERENCES public.sip_tsitio(id);
 
 
 --
@@ -12181,6 +12054,17 @@ ALTER TABLE ONLY public.sivel2_sjr_agremigracion_migracion
 
 --
 -- Name: cor1440_gen_actividadpf fk_rails_e876f1b705; Type: FK CONSTRAINT; Schema: public; Owner: -
+<<<<<<< HEAD
+--
+
+ALTER TABLE ONLY public.cor1440_gen_actividadpf
+    ADD CONSTRAINT fk_rails_e876f1b705 FOREIGN KEY (indicadorgifmm_id) REFERENCES public.indicadorgifmm(id);
+
+
+--
+-- Name: cor1440_gen_actividad_valorcampotind fk_rails_e8cd697f5d; Type: FK CONSTRAINT; Schema: public; Owner: -
+=======
+>>>>>>> fc75a3d... crea y llena tabla basica mecanismo de entrega
 --
 
 ALTER TABLE ONLY public.cor1440_gen_actividadpf
@@ -12193,14 +12077,6 @@ ALTER TABLE ONLY public.cor1440_gen_actividadpf
 
 ALTER TABLE ONLY public.cor1440_gen_actividad_valorcampotind
     ADD CONSTRAINT fk_rails_e8cd697f5d FOREIGN KEY (actividad_id) REFERENCES public.cor1440_gen_actividad(id);
-
-
---
--- Name: sip_ubicacionpre fk_rails_eba8cc9124; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.sip_ubicacionpre
-    ADD CONSTRAINT fk_rails_eba8cc9124 FOREIGN KEY (pais_id) REFERENCES public.sip_pais(id);
 
 
 --
@@ -13328,13 +13204,24 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20191205202150'),
 ('20191205204511'),
 ('20191206154511'),
+('20191206160131'),
+('20191206161605'),
+('20191206165746'),
+('20191206170518'),
 ('20191208225117'),
 ('20191208225311'),
 ('20191208225358'),
 ('20191208225448'),
+('20191208230414'),
+('20191208230533'),
+('20191208231121'),
+('20191208231731'),
+('20191208234420'),
 ('20191208234821'),
 ('20191208234911'),
 ('20191208235017'),
+('20191209004930'),
+('20191209005146'),
 ('20191209005851'),
 ('20191219011910'),
 ('20191219143243'),
@@ -13342,11 +13229,15 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200104131841'),
 ('20200104144303'),
 ('20200105154040'),
+('20200106131708'),
 ('20200106141436'),
 ('20200106144215'),
 ('20200108153919'),
+('20200108154229'),
 ('20200109003105'),
+('20200111155824'),
 ('20200113091017'),
+('20200114141313'),
 ('20200115120347'),
 ('20200115121715'),
 ('20200116003807'),

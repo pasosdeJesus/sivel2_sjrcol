@@ -7354,7 +7354,10 @@ ALTER TABLE ONLY public.indicadorgifmm ALTER COLUMN id SET DEFAULT nextval('publ
 --
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> fc75a3d... crea y llena tabla basica mecanismo de entrega
 =======
 >>>>>>> fc75a3d... crea y llena tabla basica mecanismo de entrega
 -- Name: mecanismodeentrega id; Type: DEFAULT; Schema: public; Owner: -
@@ -7365,6 +7368,9 @@ ALTER TABLE ONLY public.mecanismodeentrega ALTER COLUMN id SET DEFAULT nextval('
 
 --
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> fc75a3d... crea y llena tabla basica mecanismo de entrega
+=======
 >>>>>>> fc75a3d... crea y llena tabla basica mecanismo de entrega
 =======
 >>>>>>> fc75a3d... crea y llena tabla basica mecanismo de entrega

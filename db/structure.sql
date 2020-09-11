@@ -7352,6 +7352,16 @@ ALTER TABLE ONLY public.indicadorgifmm ALTER COLUMN id SET DEFAULT nextval('publ
 
 
 --
+<<<<<<< HEAD
+=======
+-- Name: mecanismodeentrega id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.mecanismodeentrega ALTER COLUMN id SET DEFAULT nextval('public.mecanismodeentrega_id_seq'::regclass);
+
+
+--
+>>>>>>> fc75a3d... crea y llena tabla basica mecanismo de entrega
 -- Name: miembrofamiliar id; Type: DEFAULT; Schema: public; Owner: -
 --
 

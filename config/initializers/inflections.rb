@@ -36,6 +36,7 @@ ActiveSupport::Inflector.inflections do |inflect|
         inflect.irregular 'mecanismodeentrega', 'mecanismosdeentrega'
 	inflect.irregular 'miembrofamiliar', 'miembrosfamiliar'
 	inflect.irregular 'migracontactopre', 'migracontactospre'
+	inflect.irregular 'modalidadentrega', 'modalidadesentrega'
 	inflect.irregular 'perfilmigracion', 'perfilesmigracion'
 	inflect.irregular 'trivalentepositiva', 'trivalentespositiva'
 	inflect.irregular 'progestado', 'progsestado'

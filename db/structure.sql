@@ -2506,6 +2506,40 @@ CREATE SEQUENCE public.fotra_seq
 
 
 --
+-- Name: frecuenciaentrega; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.frecuenciaentrega (
+    id bigint NOT NULL,
+    nombre character varying(500) NOT NULL COLLATE public.es_co_utf_8,
+    observaciones character varying(5000),
+    fechacreacion date NOT NULL,
+    fechadeshabilitacion date,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: frecuenciaentrega_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.frecuenciaentrega_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: frecuenciaentrega_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.frecuenciaentrega_id_seq OWNED BY public.frecuenciaentrega.id;
+
+
+--
 -- Name: heb412_gen_campohc; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -6946,6 +6980,40 @@ ALTER SEQUENCE public.tipoproteccion_id_seq OWNED BY public.tipoproteccion.id;
 
 
 --
+-- Name: tipotransferencia; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.tipotransferencia (
+    id bigint NOT NULL,
+    nombre character varying(500) NOT NULL COLLATE public.es_co_utf_8,
+    observaciones character varying(5000),
+    fechacreacion date NOT NULL,
+    fechadeshabilitacion date,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: tipotransferencia_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.tipotransferencia_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: tipotransferencia_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.tipotransferencia_id_seq OWNED BY public.tipotransferencia.id;
+
+
+--
 -- Name: tproceso_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -7357,6 +7425,13 @@ ALTER TABLE ONLY public.espaciopart ALTER COLUMN id SET DEFAULT nextval('public.
 
 
 --
+-- Name: frecuenciaentrega id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.frecuenciaentrega ALTER COLUMN id SET DEFAULT nextval('public.frecuenciaentrega_id_seq'::regclass);
+
+
+--
 -- Name: heb412_gen_campohc id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -7739,6 +7814,13 @@ ALTER TABLE ONLY public.sivel2_sjr_statusmigratorio ALTER COLUMN id SET DEFAULT 
 --
 
 ALTER TABLE ONLY public.tipoproteccion ALTER COLUMN id SET DEFAULT nextval('public.tipoproteccion_id_seq'::regclass);
+
+
+--
+-- Name: tipotransferencia id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.tipotransferencia ALTER COLUMN id SET DEFAULT nextval('public.tipotransferencia_id_seq'::regclass);
 
 
 --
@@ -8368,6 +8450,14 @@ ALTER TABLE ONLY public.sivel2_gen_filiacion
 
 ALTER TABLE ONLY public.sivel2_gen_fotra
     ADD CONSTRAINT fotra_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: frecuenciaentrega frecuenciaentrega_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.frecuenciaentrega
+    ADD CONSTRAINT frecuenciaentrega_pkey PRIMARY KEY (id);
 
 
 --
@@ -9344,6 +9434,14 @@ ALTER TABLE ONLY public.sivel2_sjr_tipodesp
 
 ALTER TABLE ONLY public.tipoproteccion
     ADD CONSTRAINT tipoproteccion_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: tipotransferencia tipotransferencia_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.tipotransferencia
+    ADD CONSTRAINT tipotransferencia_pkey PRIMARY KEY (id);
 
 
 --
@@ -13346,6 +13444,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200912142918'),
 ('20200912143241'),
 ('20200912160618'),
-('20200912161253');
-
-
+('20200912161253'),
+('20200912170233'),
+('20200912171009'),
+('20200912174723'),
+('20200912192204');

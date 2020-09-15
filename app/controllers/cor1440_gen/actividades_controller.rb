@@ -98,6 +98,88 @@ module Cor1440Gen
     def atributos_form
       atributos_show - [:id]
     end
+    
+    
+    def lista_params_cor1440_gen
+      [ 
+        :actividad,
+        :fecha_localizada, 
+        :lugar,
+        :nombre, 
+        :objetivo,  
+        :observaciones, 
+        :oficina_id, 
+        :proyecto, 
+        :resultado,
+        :usuario_id,
+        :actividad_sip_anexo_attributes => [
+          :id,
+          :id_actividad, 
+          :_destroy,
+          :sip_anexo_attributes => [
+            :id, :descripcion, :adjunto, :_destroy
+          ]
+        ],
+        :actividadarea_ids => [],
+        :actividad_proyectofinanciero_attributes => [
+          :id, :proyectofinanciero_id, :_destroy,
+          :actividadpf_ids => []
+        ],
+        :actividad_rangoedadac_attributes => [
+          :id, :rangoedadac_id, :fl, :fr, :ml, :mr, :s, :_destroy 
+        ],
+        :actividadtipo_ids => [],
+        :actorsocial_ids => [],
+        :asistencia_attributes => [
+          :actorsocial_id,
+          :externo,
+          :id,
+          :rangoedadac_id,
+          :perfilactorsocial_id,
+          :_destroy,
+          :persona_attributes => [
+            :apellidos, 
+            :id, 
+            :nombres, 
+            :numerodocumento, 
+            :sexo, 
+            :tdocumento_id,
+            :anionac,
+            :mesnac,
+            :dianac
+          ]
+        ],
+        :detallefinanciero_attributes => [
+          'proyectofinanciero_id',
+          'actividadpf_id',
+          'unidadayuda_id',
+          'cantidad',
+          'valorunitario',
+          'valortotal',
+          'mecanismodeentrega_id',
+          'modalidadentrega_id',
+          'tipotransferencia_id',
+          'frecuenciaentrega_id',
+          'numeromeses',
+          'numeroasistencia'
+        ],
+        :respuestafor_attributes => [
+          :id,
+          "valorcampo_attributes" => [
+            :valor,
+            :campo_id,
+            :id 
+          ] + 
+          [:valor_ids => []]
+        ],
+        :proyecto_ids => [],
+        :proyectofinanciero_ids => [],
+        :proyectofinanciero_attributes => [
+
+        ],
+        :usuario_ids => []
+      ]
+    end
 
     # Encabezado comun para HTML y PDF (primeras filas)
     def encabezado_comun

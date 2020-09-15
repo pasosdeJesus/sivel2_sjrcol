@@ -1,0 +1,26 @@
+<div class='row'>
+  <div class='col-sm-2'>
+    <label for="actividad_actividadareas">
+      <%= @actividad.class.human_attribute_name(:actividadareas) %>
+    </label>
+  </div>
+  <div class='col-sm-4'>
+    <%= render partial: 'campo_actividadareas', 
+      locals: {f: f, con_label: false} %>
+  </div>
+
+  <div class='col-sm-2'>
+    <label for="actividad_descripcion">
+      <%= @actividad.class.human_attribute_name(:objetivo) %>
+    </label>
+  </div>
+  <div class='col-sm-4'>
+    <%= f.input_field :objetivo %>
+  </div>
+</div>
+<div class='row'>
+  <div class='col-sm-12'>
+    <%= render partial: 'tabla_detallesfinancieros', 
+      locals: {f: f, con_label: false} %>
+  </div>
+</div>

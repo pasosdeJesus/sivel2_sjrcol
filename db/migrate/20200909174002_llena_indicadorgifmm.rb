@@ -211,7 +211,7 @@ class LlenaIndicadorgifmm < ActiveRecord::Migration[6.0]
         VALUES( 104, 21, '# de herramientas, directrices y modelos proporcionados para apoyar la adaptación de la prestación de servicios especializados VBG.', null, '2020-09-08', null, '2020-09-08', '2020-09-08');
       INSERT INTO public.indicadorgifmm (id, sectorgifmm_id, nombre, observaciones, fechacreacion, fechadeshabilitacion, created_at, updated_at)
         VALUES( 105, 21, '# de vías de referencia de VBG actualizadas regularmente', null, '2020-09-08', null, '2020-09-08', '2020-09-08');
-      SELECT setval('public.indicadorgifmm_id_seq', 100);
+      SELECT setval('public.indicadorgifmm_id_seq', 200);
     SQL
   end
 

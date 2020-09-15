@@ -84,6 +84,7 @@ class Ability < Sivel2Sjr::Ability
     ['', 'miembrofamiliar'],
     ['', 'migracontactopre'],
     ['', 'perfilmigracion'],
+    ['', 'sectorgifmm'],
     ['', 'tipoproteccion'],
     ['', 'trivalentepositiva'],
     ['', 'viadeingreso']

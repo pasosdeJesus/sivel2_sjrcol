@@ -80,6 +80,19 @@ $(document).on('change', 'select[id^=caso_migracion_attributes_][id$=agresionmig
    div_otra.css("display", "none")
 )
 
+# En migración, si cambia fecha se calcula el tiempo en el país
+$(document).on('change', 'input[id^=caso_migracion_attributes_][id$=_fechallegada]', (e) ->
+  input_dias = $('input[id^=caso_migracion_attributes_][id$=_tiempoenpais]')
+  divtiempoenpais = $(this).parent().parent().parent().next().find($(".div_tiempo"))
+  tiempoenpais = $(this).parent().parent().parent().next().find(input_dias)
+  divtiempoenpais.css("display", "block")
+  fechallegada = new Date($(this).val())
+  fechahoy = new Date()
+  dif = fechahoy - fechallegada;
+  dias = Math.round(dif / 86400000);
+  tiempoenpais.val(dias)
+)
+
 # En listado de asistencia permite autocompletar nombres
 $(document).on('focusin',
 'input[id^=actividad_asistencia_attributes_]'+

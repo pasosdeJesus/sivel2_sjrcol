@@ -85,6 +85,7 @@ class Ability < Sivel2Sjr::Ability
     ['', 'mecanismodeentrega'],
     ['', 'miembrofamiliar'],
     ['', 'migracontactopre'],
+    ['', 'modalidadentrega'],
     ['', 'perfilmigracion'],
     ['', 'sectorgifmm'],
     ['', 'tipoproteccion'],

@@ -102,6 +102,9 @@ es:
       "migracontactopre":
         Migracontactopre: Contacto previo con Colombia
         Migracontactospre: Contactos previos con Colombia
+      "modalidadentrega":
+        Modalidadentrega: Modalidad de Entrega
+        Modalidadesentrega: Modalidades de Entrega
       "perfilmigracion":
         Perfilmigracion: Perfil de migración
         Perfilesmigracion: Perfiles de migración

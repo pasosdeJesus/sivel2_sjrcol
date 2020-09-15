@@ -27,8 +27,8 @@ class SectorgifmmTest < ActiveSupport::TestCase
 
   test "existente" do
     skip
-    sectorgifmm = ::Sectorgifmm.where(id: 0).take
-    assert_equal(sectorgifmm.nombre, "SIN INFORMACIÓN")
+    sectorgifmm = ::Sectorgifmm.where(id: 1).take
+    assert_equal(sectorgifmm.nombre, "Agua_y_saneamiento")
   end
 
 end

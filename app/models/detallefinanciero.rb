@@ -8,16 +8,13 @@ class Detallefinanciero < ActiveRecord::Base
   validates :numeroasistencia, :numericality => { greater_than_or_equal_to: 0 }
 
   belongs_to :actividad, foreign_key: 'actividad_id',
-    validate: true, dependent: :destroy, 
-    class_name: 'Cor1440Gen::Actividad'
+    validate: true, class_name: 'Cor1440Gen::Actividad'
 
   belongs_to :proyectofinanciero, foreign_key: 'proyectofinanciero_id', 
-    validate: true, dependent: :destroy, 
-    class_name: 'Cor1440Gen::Proyectofinanciero'
+    validate: true, class_name: 'Cor1440Gen::Proyectofinanciero'
   
   belongs_to :actividadpf, foreign_key: 'actividadpf_id', 
-    validate: true, dependent: :destroy, 
-    class_name: 'Cor1440Gen::Actividadpf'
+    validate: true, class_name: 'Cor1440Gen::Actividadpf'
   
   belongs_to :unidadayuda, foreign_key: 'unidadayuda_id', 
     validate: true, dependent: :destroy, 

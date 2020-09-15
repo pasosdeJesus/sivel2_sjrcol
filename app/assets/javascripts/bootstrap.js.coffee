@@ -309,7 +309,7 @@ $(document).on('cocoon:after-insert', '#filas_detallefinanciero', (e, objetivo) 
   )
   paramspf = {id: pfs}
   root = window
-  sip_funcion_1p_tras_AJAX('proyectosfinancieros.json?filtro[busid]=' + pfs.join(",") + '&filtro[busnombre]=&filtro[busfinanciador_ids]=&filtro[busfechainicioini]=&filtro[busfechainiciofin]=&filtro[busfechacierreini]=&filtro[busfechacierrefin]=&filtro[busoficina_ids]=&filtro[busproyecto_ids]=&filtro[buscompromisos]=&filtro[busobservaciones]=&filtrar=Filtrar&filtro[disgenera]=', paramspf, 
+  sip_funcion_1p_tras_AJAX('proyectosfinancieros.json?filtro[busid]=' + pfs.join(","), paramspf, 
     actualiza_pf_op, objetivo, 
     'con Convenios Financiados', root)
 )

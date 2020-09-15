@@ -33,6 +33,7 @@ ActiveSupport::Inflector.inflections do |inflect|
         inflect.irregular 'indicadorgifmm', 'indicadoresgifmm'
 	inflect.irregular 'lineaactorsocial', 'lineasactorsocial'
 	inflect.irregular 'motivosjr', 'motivossjr'
+        inflect.irregular 'mecanismodeentrega', 'mecanismosdeentrega'
 	inflect.irregular 'miembrofamiliar', 'miembrosfamiliar'
 	inflect.irregular 'migracontactopre', 'migracontactospre'
 	inflect.irregular 'perfilmigracion', 'perfilesmigracion'

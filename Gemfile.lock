@@ -336,7 +336,6 @@ GEM
       railties (>= 3.0)
     ttfunk (1.6.2.1)
     twitter_cldr (6.1.0)
-    twitter_cldr (6.0.2)
       camertron-eprun
       cldr-plurals-runtime-rb (~> 1.0)
       tzinfo

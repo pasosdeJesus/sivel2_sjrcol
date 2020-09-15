@@ -89,6 +89,7 @@ class Ability < Sivel2Sjr::Ability
     ['', 'perfilmigracion'],
     ['', 'sectorgifmm'],
     ['', 'tipoproteccion'],
+    ['', 'tipotransferencia'],
     ['', 'trivalentepositiva'],
     ['', 'unidadayuda'],
     ['', 'viadeingreso']

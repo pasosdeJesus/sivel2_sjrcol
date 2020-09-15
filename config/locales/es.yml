@@ -114,6 +114,9 @@ es:
       "tipoproteccion":
         Tipoproteccion: Tipo de protección en refugio
         Tiposproteccion: Tipos de protección en refugio
+      "tipotransferencia":
+        Tipotransferencia: Tipo de Transferencia
+        Tipostransferencia: Tipos de Transferencia
       "trivalentepositiva":
         Trivalentepositiva: Trivalente Positiva
         Trivalentespositiva: Trivalentes Positiva

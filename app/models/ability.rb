@@ -81,6 +81,7 @@ class Ability < Sivel2Sjr::Ability
     ['', 'dificultadmigracion'],
     ['', 'discapacidad'],
     ['', 'espaciopart'],
+    ['', 'indicadorgifmm'],
     ['', 'miembrofamiliar'],
     ['', 'migracontactopre'],
     ['', 'perfilmigracion'],

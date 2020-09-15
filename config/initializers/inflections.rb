@@ -30,6 +30,7 @@ ActiveSupport::Inflector.inflections do |inflect|
 	inflect.irregular 'dificultadmigracion', 'dificultadesmigracion'
 	inflect.irregular 'discapacidad', 'discapacidades'
 	inflect.irregular 'espaciopart', 'espaciospart'
+        inflect.irregular 'indicadorgifmm', 'indicadoresgifmm'
 	inflect.irregular 'lineaactorsocial', 'lineasactorsocial'
 	inflect.irregular 'motivosjr', 'motivossjr'
 	inflect.irregular 'miembrofamiliar', 'miembrosfamiliar'

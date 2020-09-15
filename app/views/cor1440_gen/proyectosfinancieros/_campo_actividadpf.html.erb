@@ -1,0 +1,36 @@
+<p></p>
+<div class="panel panel-default">
+  <div class="panel-heading">Actividades de marco lógico</div>
+  <div class="panel-body">
+    <div class="div-actividadespf">
+      <table border=1 width="100%">
+        <thead>
+          <tr>
+            <th>Ref. Resultado</th>
+            <th width="10%">Código</th>
+            <th>Tipo</th>
+            <th>Actividad</th>
+            <th>Descripción</th>
+            <th>Indicador GIFMM</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="actividadespf">
+          <%= f.simple_fields_for :actividadpf, 
+            f.object.actividadpf.order(:id) do |o| %>
+            <%= render 'actividadpf_campos', f:  o %>
+          <% end %>
+        </tbody>
+      </table>
+      <div class="links">
+        <%= link_to_add_association 'Agregar actividad', f, :actividadpf, {
+          :"data-association-insertion-node" => "tbody#actividadespf", 
+          :"data-association-insertion-method" => "append", 
+          partial: 'actividadpf_campos',
+          class: 'btn-primary', 
+          "data-ajax" => cor1440_gen.new_actividadespf_url,
+          "data-ajaxdata" => "proyectofinanciero_id" } %>
+      </div> <!-- links -->
+    </div> <!-- .div-actividadespf -->
+  </div> <!-- panel-body -->
+</div> <!-- panel -->

@@ -93,6 +93,9 @@ es:
         Indicadoresgifmm: Indicadores GIFMM
         Sectorgifmm: Sector GIFMM
         Sectoresgifmm: Sectores GIFMM
+      "frecuenciaentrega":
+        Frecuenciaentrega: Frecuancia de Entrega
+        Frecuenciasentrega: Frecuencias de Entrega
       "mecanismodeentrega":
         Mecanismodeentrega: Mecanismo de Entrega
         Mecanismosdeentrega: Mecanismos de Entrega

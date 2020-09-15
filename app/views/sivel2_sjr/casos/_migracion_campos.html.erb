@@ -303,7 +303,18 @@
           } %>
       </div>
     </div>
-
+    <% tiempoestilo = f.object.tiempoenpais == "" ? 
+      'display:none' : '' %>
+    <div class="row">
+      <div class="col-md-6 div_tiempo" style="<%= tiempoestilo %>">
+        <%= f.input :tiempoenpais,
+          label: "Tiempo en País:",
+          readonly: true,
+          input_html: {
+            class: 'tiempoenpais'
+          } %>
+      </div>
+    </div>
     <div>
         Perfil de migración
     </div>

@@ -66,6 +66,8 @@ es:
       "cor1440_gen/actividadtipo":
         Actividadtipo: Tipo de actividad de convenio financiado
         Actividadtipos: Tipos de actividad de convenio financiado
+      "cor1440_gen/financiador":
+        nombregifmm: Nombre GIFMM
       "cor1440_gen/proyecto":
         financiador_ids: Financiador
         Proyecto: Área de Actividad

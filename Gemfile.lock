@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: bd67c5cffedd010a260e7b830675b2d4d50b8fe5
+  revision: a820bb9a8dc5748cfaba5ea60d4ce0e003da5c6c
   specs:
     cor1440_gen (1.0b3)
       devise
@@ -13,7 +13,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 07fc8cb5d28718150f848ee5438a3e636b3dc304
+  revision: 4ab21ac2aea4afa1f18a0074e3ca93fd473a836f
   specs:
     heb412_gen (1.0.b6)
       mr519_gen
@@ -23,7 +23,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/mr519_gen.git
-  revision: e046cb75e36f62d5d24644ac383e4390efb68955
+  revision: 899ca17f22f0a08e8e4b2c3270f4ffeecf5c10b3
   specs:
     mr519_gen (0.2.0)
       rails (~> 6.0.0.rc1, >= 6.0.0.rc1)
@@ -31,7 +31,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: 405b369bfb793fde575c8c0d995b6ccf40754b1f
+  revision: 5f63d87967e64186df327ec7353fe4bb08181388
   specs:
     sal7711_gen (1.0.b3)
       rails
@@ -39,38 +39,15 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: 91c629b9846d3070138ca8891b125127e9764b16
+  revision: eb652edbcf3724deef66ca96b7feb55aa201d6ec
   specs:
     sal7711_web (1.0.a3)
       rails
       sal7711_gen
 
 GIT
-  remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 3e8494b3524383f57ce49583e8c83a87421939de
-  specs:
-    sivel2_gen (2.0b11)
-      devise
-      jquery-rails
-      rails
-
-GIT
-  remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: a5188067b62cee7f0334fd491f728161d7216826
-  specs:
-    sivel2_sjr (2.0b10)
-      rails
-      sivel2_gen
-
-GIT
-  remote: https://github.com/vtamara/cocoon.git
-  revision: 088c8d9dcce7f51cf3a968398047eaac7a37718b
-  branch: new_id_with_ajax
-  specs:
-    cocoon (1.2.11)
-
-PATH
-  remote: ../sip
+  remote: https://github.com/pasosdeJesus/sip.git
+  revision: ee8dd84ccf4077a098161323ade783487c226eda
   specs:
     sip (2.0.b10)
       cancancan
@@ -86,59 +63,83 @@ PATH
       twitter_cldr
       will_paginate
 
+GIT
+  remote: https://github.com/pasosdeJesus/sivel2_gen.git
+  revision: c10ba89c55b7bbc5e503f779ad7117a77b09d64a
+  specs:
+    sivel2_gen (2.0b12)
+      devise
+      jquery-rails
+      rails
+
+GIT
+  remote: https://github.com/pasosdeJesus/sivel2_sjr.git
+  revision: 8c223f7c10f7b9f07ba68fd0e51fe156f3ffa170
+  specs:
+    sivel2_sjr (2.0b10)
+      rails
+      sivel2_gen
+
+GIT
+  remote: https://github.com/vtamara/cocoon.git
+  revision: 088c8d9dcce7f51cf3a968398047eaac7a37718b
+  branch: new_id_with_ajax
+  specs:
+    cocoon (1.2.11)
+
 GEM
   remote: https://rubygems.org/
   specs:
-    actioncable (6.0.3.2)
-      actionpack (= 6.0.3.2)
+    actioncable (6.0.3.3)
+      actionpack (= 6.0.3.3)
       nio4r (~> 2.0)
       websocket-driver (>= 0.6.1)
-    actionmailbox (6.0.3.2)
-      actionpack (= 6.0.3.2)
-      activejob (= 6.0.3.2)
-      activerecord (= 6.0.3.2)
-      activestorage (= 6.0.3.2)
-      activesupport (= 6.0.3.2)
+    actionmailbox (6.0.3.3)
+      actionpack (= 6.0.3.3)
+      activejob (= 6.0.3.3)
+      activerecord (= 6.0.3.3)
+      activestorage (= 6.0.3.3)
+      activesupport (= 6.0.3.3)
       mail (>= 2.7.1)
-    actionmailer (6.0.3.2)
-      actionpack (= 6.0.3.2)
-      actionview (= 6.0.3.2)
-      activejob (= 6.0.3.2)
+    actionmailer (6.0.3.3)
+      actionpack (= 6.0.3.3)
+      actionview (= 6.0.3.3)
+      activejob (= 6.0.3.3)
       mail (~> 2.5, >= 2.5.4)
       rails-dom-testing (~> 2.0)
-    actionpack (6.0.3.2)
-      actionview (= 6.0.3.2)
-      activesupport (= 6.0.3.2)
+    actionpack (6.0.3.3)
+      actionview (= 6.0.3.3)
+      activesupport (= 6.0.3.3)
       rack (~> 2.0, >= 2.0.8)
       rack-test (>= 0.6.3)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.0, >= 1.2.0)
-    actiontext (6.0.3.2)
-      actionpack (= 6.0.3.2)
-      activerecord (= 6.0.3.2)
-      activestorage (= 6.0.3.2)
-      activesupport (= 6.0.3.2)
+    actiontext (6.0.3.3)
+      actionpack (= 6.0.3.3)
+      activerecord (= 6.0.3.3)
+      activestorage (= 6.0.3.3)
+      activesupport (= 6.0.3.3)
       nokogiri (>= 1.8.5)
-    actionview (6.0.3.2)
-      activesupport (= 6.0.3.2)
+    actionview (6.0.3.3)
+      activesupport (= 6.0.3.3)
       builder (~> 3.1)
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.1, >= 1.2.0)
-    activejob (6.0.3.2)
-      activesupport (= 6.0.3.2)
+    activejob (6.0.3.3)
+      activesupport (= 6.0.3.3)
       globalid (>= 0.3.6)
-    activemodel (6.0.3.2)
-      activesupport (= 6.0.3.2)
-    activerecord (6.0.3.2)
-      activemodel (= 6.0.3.2)
-      activesupport (= 6.0.3.2)
-    activestorage (6.0.3.2)
-      actionpack (= 6.0.3.2)
-      activejob (= 6.0.3.2)
-      activerecord (= 6.0.3.2)
+    activemodel (6.0.3.3)
+      activesupport (= 6.0.3.3)
+    activerecord (6.0.3.3)
+      activemodel (= 6.0.3.3)
+      activesupport (= 6.0.3.3)
+    activestorage (6.0.3.3)
+      actionpack (= 6.0.3.3)
+      activejob (= 6.0.3.3)
+      activerecord (= 6.0.3.3)
       marcel (~> 0.3.1)
-    activesupport (6.0.3.2)
+    activesupport (6.0.3.3)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 0.7, < 2)
       minitest (~> 5.1)
@@ -147,7 +148,7 @@ GEM
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
     andand (1.3.3)
-    bcrypt (3.1.15)
+    bcrypt (3.1.16)
     bindex (0.8.1)
     bootsnap (1.4.8)
       msgpack (~> 1.0)
@@ -198,7 +199,7 @@ GEM
       activesupport (>= 4.2.0)
     i18n (1.8.5)
       concurrent-ruby (~> 1.0)
-    jbuilder (2.10.0)
+    jbuilder (2.10.1)
       activesupport (>= 5.0.0)
     jquery-rails (4.4.0)
       rails-dom-testing (>= 1, < 3)
@@ -222,9 +223,9 @@ GEM
     mimemagic (0.3.5)
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
-    minitest (5.14.1)
+    minitest (5.14.2)
     msgpack (1.3.3)
-    nio4r (2.5.2)
+    nio4r (2.5.3)
     nokogiri (1.10.10)
       mini_portile2 (~> 2.4.0)
     odf-report (0.7.2)
@@ -252,28 +253,28 @@ GEM
     prawnto_2 (0.3.0)
       prawn (>= 1.0.0)
       rails (>= 3.2)
-    public_suffix (4.0.5)
-    puma (4.3.5)
+    public_suffix (4.0.6)
+    puma (4.3.6)
       nio4r (~> 2.0)
     rack (2.2.3)
     rack-proxy (0.6.5)
       rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
-    rails (6.0.3.2)
-      actioncable (= 6.0.3.2)
-      actionmailbox (= 6.0.3.2)
-      actionmailer (= 6.0.3.2)
-      actionpack (= 6.0.3.2)
-      actiontext (= 6.0.3.2)
-      actionview (= 6.0.3.2)
-      activejob (= 6.0.3.2)
-      activemodel (= 6.0.3.2)
-      activerecord (= 6.0.3.2)
-      activestorage (= 6.0.3.2)
-      activesupport (= 6.0.3.2)
+    rails (6.0.3.3)
+      actioncable (= 6.0.3.3)
+      actionmailbox (= 6.0.3.3)
+      actionmailer (= 6.0.3.3)
+      actionpack (= 6.0.3.3)
+      actiontext (= 6.0.3.3)
+      actionview (= 6.0.3.3)
+      activejob (= 6.0.3.3)
+      activemodel (= 6.0.3.3)
+      activerecord (= 6.0.3.3)
+      activestorage (= 6.0.3.3)
+      activesupport (= 6.0.3.3)
       bundler (>= 1.3.0)
-      railties (= 6.0.3.2)
+      railties (= 6.0.3.3)
       sprockets-rails (>= 2.0.0)
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
@@ -283,9 +284,9 @@ GEM
     rails-i18n (6.0.0)
       i18n (>= 0.7, < 2)
       railties (>= 6.0.0, < 7)
-    railties (6.0.3.2)
-      actionpack (= 6.0.3.2)
-      activesupport (= 6.0.3.2)
+    railties (6.0.3.3)
+      actionpack (= 6.0.3.3)
+      activesupport (= 6.0.3.3)
       method_source
       rake (>= 0.8.7)
       thor (>= 0.20.3, < 2.0)
@@ -322,7 +323,7 @@ GEM
     sprockets (4.0.2)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
-    sprockets-rails (3.2.1)
+    sprockets-rails (3.2.2)
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
@@ -340,11 +341,11 @@ GEM
       tzinfo
     tzinfo (1.2.7)
       thread_safe (~> 0.1)
-    unicorn (5.6.0)
+    unicorn (5.7.0)
       kgio (~> 2.6)
       raindrops (~> 0.7)
-    warden (1.2.8)
-      rack (>= 2.0.6)
+    warden (1.2.9)
+      rack (>= 2.0.9)
     web-console (4.0.4)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)

@@ -16,7 +16,9 @@ module Sip
         if consNomubi.length > 0
           consNomubi+= ":*"
         end
-        where = " to_tsvector('spanish', unaccent(ubicacionpre.nombre)) " +
+        # Usamos la funcion f_unaccent definida con el indice
+        # en db/migrate/20200916022934_indice_ubicacionpre.rb
+        where = " to_tsvector('spanish', f_unaccent(ubicacionpre.nombre)) " +
           "@@ to_tsquery('spanish', '#{consNomubi}')";
 
         cons = "SELECT TRIM(nombre) AS value, id AS id " +

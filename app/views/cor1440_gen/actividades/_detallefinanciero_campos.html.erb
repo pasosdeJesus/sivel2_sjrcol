@@ -8,8 +8,9 @@
       input_html: {style: "width: 8em"},
       label: false
     %>
+
     <% if f.object.proyectofinanciero_id %>
-      <% colact = Cor1440Gen::Actividadpf.where(proyectofinanciero_id: f.object.proyectofinanciero.map(&:id)) %>
+      <% colact = Cor1440Gen::Actividadpf.where(proyectofinanciero_id: f.object.proyectofinanciero.id) %>
     <% else %>
       <% colact = Cor1440Gen::Actividadpf.all %>
     <% end %>

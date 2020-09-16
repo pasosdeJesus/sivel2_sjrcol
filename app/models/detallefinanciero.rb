@@ -17,24 +17,19 @@ class Detallefinanciero < ActiveRecord::Base
     validate: true, class_name: 'Cor1440Gen::Actividadpf'
   
   belongs_to :unidadayuda, foreign_key: 'unidadayuda_id', 
-    validate: true, dependent: :destroy, 
-    class_name: 'Unidadayuda'
+    validate: true, class_name: 'Unidadayuda'
   
   belongs_to :mecanismodeentrega, foreign_key: 'mecanismodeentrega_id', 
-    validate: true, dependent: :destroy, 
-    class_name: 'Mecanismodeentrega'
+    validate: true, class_name: 'Mecanismodeentrega'
   
   belongs_to :modalidadentrega, foreign_key: 'modalidadentrega_id', 
-    validate: true, dependent: :destroy, 
-    class_name: 'Modalidadentrega'
+    validate: true, class_name: 'Modalidadentrega'
   
   belongs_to :tipotransferencia, foreign_key: 'tipotransferencia_id', 
-    validate: true, dependent: :destroy, 
-    class_name: 'Tipotransferencia'
+    validate: true, class_name: 'Tipotransferencia'
   
   belongs_to :frecuenciaentrega, foreign_key: 'frecuenciaentrega_id', 
-    validate: true, dependent: :destroy, 
-    class_name: 'Frecuenciaentrega'
+    validate: true, class_name: 'Frecuenciaentrega'
 end                                              
                                                  
                                                  

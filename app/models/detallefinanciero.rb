@@ -1,5 +1,7 @@
 # encoding: UTF-8
 class Detallefinanciero < ActiveRecord::Base
+  
+  attr_accessor :proyectoyactividadpf
 
   validates :cantidad, :numericality => { greater_than_or_equal_to: 0 }
   validates :valorunitario, :numericality => { greater_than_or_equal_to: 0 }

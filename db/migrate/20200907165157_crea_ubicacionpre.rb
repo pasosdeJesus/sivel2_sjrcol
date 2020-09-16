@@ -32,7 +32,7 @@ class CreaUbicacionpre < ActiveRecord::Migration[6.0]
     execute <<-SQL
       INSERT INTO sip_ubicacionpre (nombre, pais_id, departamento_id,
         latitud, longitud, created_at, updated_at)
-        (SELECT p.nombre || ' / ' || d.nombre, p.id, d.id, 
+        (SELECT d.nombre || ' / ' || p.nombre, p.id, d.id, 
         d.latitud, d.longitud, NOW(), NOW()
         FROM sip_departamento AS d 
         JOIN sip_pais AS p ON d.id_pais=p.id);
@@ -40,7 +40,7 @@ class CreaUbicacionpre < ActiveRecord::Migration[6.0]
     execute <<-SQL
       INSERT INTO sip_ubicacionpre (nombre, pais_id, departamento_id,
         municipio_id, latitud, longitud, created_at, updated_at)
-        (SELECT p.nombre || ' / ' || d.nombre || ' / ' || m.nombre, 
+        (SELECT m.nombre || ' / ' || d.nombre || ' / ' || p.nombre, 
         p.id, d.id, m.id, m.latitud, m.longitud, NOW(), NOW()
         FROM sip_pais AS p
         JOIN sip_departamento AS d  ON d.id_pais=p.id
@@ -51,8 +51,8 @@ class CreaUbicacionpre < ActiveRecord::Migration[6.0]
       INSERT INTO sip_ubicacionpre (nombre, pais_id, departamento_id,
         municipio_id, clase_id, latitud, longitud, 
         created_at, updated_at)
-        (SELECT p.nombre || ' / ' || d.nombre || ' / ' || m.nombre || ' / '
-        || c.nombre, p.id, d.id, m.id, c.id, c.latitud, c.longitud, 
+        (SELECT c.nombre || ' / ' || m.nombre || ' / ' || d.nombre || ' / '
+        || p.nombre, p.id, d.id, m.id, c.id, c.latitud, c.longitud, 
         NOW(), NOW()
         FROM sip_pais AS p
         JOIN sip_departamento AS d  ON d.id_pais=p.id

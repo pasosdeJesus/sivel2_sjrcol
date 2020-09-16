@@ -4,6 +4,40 @@ module Sip
     before_action :set_persona, only: [:show, :edit, :update, :destroy]
     load_and_authorize_resource class: Sip::Persona
 
+    def clase
+      "Sip::Ubicacionpre"
+    end
+
+    def genclase
+      return 'F'
+    end
+
+    def atributos_index
+      [ :id, 
+        :nombre,
+        :pais,
+        :departamento,
+        :municipio,
+        :clase,
+        :lugar,
+        :sitio,
+        :tsitio,
+        :latitud,
+        :longitud
+      ]
+    end
+
+    def atributos_show
+      atributos_index - [:habilitado] + 
+        [:fechadeshabilitacion_localizada]
+    end
+
+    def atributos_form
+      a = atributos_show - [:id]
+      a[a.index(:grupoper_id)] = :grupoper
+      return a
+    end
+
 
     def index(c = nil)
       if c == nil
@@ -33,6 +67,18 @@ module Sip
       else
         super(c)
       end
+    end
+
+
+    def set_ubicacionpre
+      @ubicacionpre = Sip::Ubicacionpre.find(params[:id])
+      @registro = @ubicacionpre
+    end
+
+    def ubicacionpre_params
+      params.require(:ubicacionpre).permit(
+        atributos_form 
+      ) 
     end
 
 

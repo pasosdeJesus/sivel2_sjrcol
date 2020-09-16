@@ -50,7 +50,7 @@ Rails.application.routes.draw do
     as: :caso_fichapdf
 
   get '/ubicacionespre' => 'sip/ubicacionespre#index',
-	as: :ubicacionespre
+    as: :ubicacionespre
 
   root "sip/hogar#index"
 

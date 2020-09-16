@@ -1,5 +1,8 @@
 module Sip
   class Ubicacionpre < ActiveRecord::Base
+      include Sip::Modelo
+
+      self.table_name = 'sip_ubicacionpre'
 
       belongs_to :pais, class_name: "Sip::Pais",
         foreign_key: "pais_id", validate: true, optional: true

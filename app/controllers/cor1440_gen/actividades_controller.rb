@@ -193,7 +193,22 @@ module Cor1440Gen
     end
 
     def lista_params
-      lista_params_cor1440_gen + [:ubicacionpre_id]
+      lista_params_cor1440_gen + [:ubicacionpre_id] + [ 
+        :detallefinanciero_attributes => [
+          'proyectofinanciero_id',
+          'actividadpf_id',
+          'unidadayuda_id',
+          'cantidad',
+          'valorunitario',
+          'valortotal',
+          'mecanismodeentrega_id',
+          'modalidadentrega_id',
+          'tipotransferencia_id',
+          'frecuenciaentrega_id',
+          'numeromeses',
+          'numeroasistencia'
+        ]
+      ]
     end
 
   end

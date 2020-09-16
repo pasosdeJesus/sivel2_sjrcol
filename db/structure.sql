@@ -2378,6 +2378,49 @@ CREATE TABLE public.despacho (
 
 
 --
+-- Name: detallefinanciero; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.detallefinanciero (
+    id bigint NOT NULL,
+    actividad_id integer NOT NULL,
+    proyectofinanciero_id integer NOT NULL,
+    actividadpf_id integer NOT NULL,
+    unidadayuda_id integer NOT NULL,
+    cantidad integer NOT NULL,
+    valorunitario integer NOT NULL,
+    valortotal integer NOT NULL,
+    mecanismodeentrega_id integer NOT NULL,
+    modalidadentrega_id integer NOT NULL,
+    tipotransferencia_id integer NOT NULL,
+    frecuenciaentrega_id integer NOT NULL,
+    numeromeses integer NOT NULL,
+    numeroasistencia integer NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: detallefinanciero_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.detallefinanciero_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: detallefinanciero_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.detallefinanciero_id_seq OWNED BY public.detallefinanciero.id;
+
+
+--
 -- Name: dificultadmigracion; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -7157,10 +7200,10 @@ CREATE TABLE public.unidadayuda (
     id bigint NOT NULL,
     nombre character varying(500) NOT NULL COLLATE public.es_co_utf_8,
     observaciones character varying(5000),
-    fechacreacion date,
+    fechacreacion date NOT NULL,
     fechadeshabilitacion date,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
 );
 
 
@@ -7477,6 +7520,13 @@ ALTER TABLE ONLY public.cor1440_gen_valorcampoact ALTER COLUMN id SET DEFAULT ne
 --
 
 ALTER TABLE ONLY public.cor1440_gen_valorcampotind ALTER COLUMN id SET DEFAULT nextval('public.cor1440_gen_valorcampotind_id_seq'::regclass);
+
+
+--
+-- Name: detallefinanciero id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.detallefinanciero ALTER COLUMN id SET DEFAULT nextval('public.detallefinanciero_id_seq'::regclass);
 
 
 --
@@ -8469,6 +8519,14 @@ ALTER TABLE ONLY public.sivel2_sjr_desplazamiento
 
 ALTER TABLE ONLY public.sivel2_sjr_desplazamiento
     ADD CONSTRAINT desplazamiento_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: detallefinanciero detallefinanciero_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.detallefinanciero
+    ADD CONSTRAINT detallefinanciero_pkey PRIMARY KEY (id);
 
 
 --
@@ -10913,6 +10971,14 @@ ALTER TABLE ONLY public.cor1440_gen_financiador_proyectofinanciero
 
 
 --
+-- Name: detallefinanciero fk_rails_0d386dedcf; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.detallefinanciero
+    ADD CONSTRAINT fk_rails_0d386dedcf FOREIGN KEY (actividad_id) REFERENCES public.cor1440_gen_actividad(id);
+
+
+--
 -- Name: cor1440_gen_mindicadorpf fk_rails_0fbac6136b; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -11489,6 +11555,14 @@ ALTER TABLE ONLY public.sivel2_sjr_agreenpais_migracion
 
 
 --
+-- Name: detallefinanciero fk_rails_61118f6437; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.detallefinanciero
+    ADD CONSTRAINT fk_rails_61118f6437 FOREIGN KEY (mecanismodeentrega_id) REFERENCES public.mecanismodeentrega(id);
+
+
+--
 -- Name: sivel2_sjr_agreenpais_migracion fk_rails_6218990f83; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -11809,6 +11883,14 @@ ALTER TABLE ONLY public.sal7711_gen_articulo
 
 
 --
+-- Name: detallefinanciero fk_rails_90682521dc; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.detallefinanciero
+    ADD CONSTRAINT fk_rails_90682521dc FOREIGN KEY (actividadpf_id) REFERENCES public.cor1440_gen_actividadpf(id);
+
+
+--
 -- Name: sivel2_sjr_ayudasjr_derecho fk_rails_9102b1afd0; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -11822,6 +11904,14 @@ ALTER TABLE ONLY public.sivel2_sjr_ayudasjr_derecho
 
 ALTER TABLE ONLY public.sip_departamento
     ADD CONSTRAINT fk_rails_92093de1a1 FOREIGN KEY (id_pais) REFERENCES public.sip_pais(id);
+
+
+--
+-- Name: detallefinanciero fk_rails_9482642f4e; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.detallefinanciero
+    ADD CONSTRAINT fk_rails_9482642f4e FOREIGN KEY (tipotransferencia_id) REFERENCES public.tipotransferencia(id);
 
 
 --
@@ -11878,6 +11968,14 @@ ALTER TABLE ONLY public.sivel2_sjr_migracion
 
 ALTER TABLE ONLY public.sip_actorsocial_sectoractor
     ADD CONSTRAINT fk_rails_9f61a364e0 FOREIGN KEY (sectoractor_id) REFERENCES public.sip_sectoractor(id);
+
+
+--
+-- Name: detallefinanciero fk_rails_9fb84e623b; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.detallefinanciero
+    ADD CONSTRAINT fk_rails_9fb84e623b FOREIGN KEY (proyectofinanciero_id) REFERENCES public.cor1440_gen_proyectofinanciero(id);
 
 
 --
@@ -11953,6 +12051,14 @@ ALTER TABLE ONLY public.sivel2_gen_combatiente
 
 
 --
+-- Name: detallefinanciero fk_rails_b092affa22; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.detallefinanciero
+    ADD CONSTRAINT fk_rails_b092affa22 FOREIGN KEY (modalidadentrega_id) REFERENCES public.modalidadentrega(id);
+
+
+--
 -- Name: sivel2_sjr_actividad_casosjr fk_rails_b2461f538f; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -11974,6 +12080,14 @@ ALTER TABLE ONLY public.sivel2_sjr_casosjr
 
 ALTER TABLE ONLY public.sip_datosbio
     ADD CONSTRAINT fk_rails_b4903b3da7 FOREIGN KEY (res_municipio_id) REFERENCES public.sip_municipio(id);
+
+
+--
+-- Name: detallefinanciero fk_rails_b4cc8107b9; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.detallefinanciero
+    ADD CONSTRAINT fk_rails_b4cc8107b9 FOREIGN KEY (frecuenciaentrega_id) REFERENCES public.frecuenciaentrega(id);
 
 
 --
@@ -12390,6 +12504,14 @@ ALTER TABLE ONLY public.cor1440_gen_datointermedioti
 
 ALTER TABLE ONLY public.sivel2_gen_antecedente_combatiente
     ADD CONSTRAINT fk_rails_f305297325 FOREIGN KEY (id_combatiente) REFERENCES public.sivel2_gen_combatiente(id);
+
+
+--
+-- Name: detallefinanciero fk_rails_f41da17421; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.detallefinanciero
+    ADD CONSTRAINT fk_rails_f41da17421 FOREIGN KEY (unidadayuda_id) REFERENCES public.unidadayuda(id);
 
 
 --
@@ -13585,6 +13707,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200912171009'),
 ('20200912174723'),
 ('20200912192204'),
+('20200912201532'),
 ('20200915215739'),
 ('20200916022934');
 

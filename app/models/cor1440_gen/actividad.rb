@@ -11,7 +11,7 @@ module Cor1440Gen
 
     attr_accessor :ubicacionpre_texto
 
-    def ubicaconpre_texto
+    def ubicacionpre_texto
       if self.ubicacionpre
         self.ubicacionpre.nombre
       else

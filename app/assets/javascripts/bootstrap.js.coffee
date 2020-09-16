@@ -5,41 +5,19 @@ jQuery ->
 
 # Elije ubicacionpre en autocompletación
 # Tras autocompletar disparar el evento sip:autocompletada-ubicacionpre
-@sip_autocompleta_ubicacionpre = (etiqueta, id, divcp, root) ->
+@sip_autocompleta_ubicacionpre = (etiqueta, id, ubipre, root) ->
   sip_arregla_puntomontaje(root)
-  cs = id.split(";")
-  id_persona = cs[0]
-  pl = []
-  ini = 0
-  for i in [0..cs.length] by 1
-     t = parseInt(cs[i])
-     pl[i] = etiqueta.substring(ini, ini + t)
-     ini = ini + t + 1
-  # pl[1] cnom, pl[2] es cape, pl[3] es cdoc
-  d = "&id_persona=" + id_persona
-  a = root.puntomontaje + 'personas/datos'
-  $.ajax(url: a, data: d, dataType: "json").fail( (jqXHR, texto) ->
-    alert("Error con ajax " + texto)
-  ).done( (e, r) ->
-    #debugger
-    divcp.find('[id^=actividad_asistencia_attributes][id$=persona_attributes_id]').val(e.id)
-    divcp.find('[id^=actividad_asistencia_attributes][id$=persona_attributes_nombres]').val(e.nombres)
-    divcp.find('[id^=actividad_asistencia_attributes][id$=persona_attributes_apellidos]').val(e.apellidos)
-    divcp.find('[id^=actividad_asistencia_attributes][id$=persona_attributes_sexo]').val(e.sexo)
-    divcp.find('[id^=actividad_asistencia_attributes][id$=persona_attributes_tdocumento]').val(e.tdocumento)
-    divcp.find('[id^=actividad_asistencia_attributes][id$=persona_attributes_numerodocumento]').val(e.numerodocumento)
-    divcp.find('[id^=actividad_asistencia_attributes][id$=persona_attributes_anionac]').val(e.anionac)
-    divcp.find('[id^=actividad_asistencia_attributes][id$=persona_attributes_mesnac]').val(e.mesnac)
-    divcp.find('[id^=actividad_asistencia_attributes][id$=persona_attributes_dianac]').val(e.dianac)
-    #if typeof jrs_recalcula_poblacion == 'function'
-    #  jrs_recalcula_poblacion()
-    $(document).trigger("cor1440gen:autocompletado-asistente")
-    return
-  )
+  #cs = id.split(";")
+  #ubicacionpre_id = cs[0]
+  #debugger
+  ubipre.find('[id$=ubicacionpre_id]').val(id)
+  ubipre.find('[id$=ubicacionpre_texto]').val(etiqueta)
+  $(document).trigger("sip:autocompletada-ubicacionpre")
   return
 
+
 # Busca ubicacionpre por nombre pais, nombre dep, nombre mun, nombre clase
-# s es objeto con foco donde se busca persona
+# s es objeto con foco donde se busca ubicacionpre
 @sip_busca_ubicacionpre = (s) ->
   root = window
   sip_arregla_puntomontaje(root)
@@ -47,24 +25,37 @@ jQuery ->
   v = $("#" + cnom).data('autocompleta')
   if (v != 1 && v != "no") 
     $("#" + cnom).data('autocompleta', 1)
-    divcp = s.closest('.nested-fields')
-    if (typeof divcp == 'undefined')
-      alert('No se ubico .nested-fields')
+    # Buscamos un div con clase div_ubicacionpre dentro del cual
+    # están tanto el campo ubicacionpre_id como el campo
+    # ubicacionpre_texto 
+    ubipre = s.closest('.div_ubicacionpre')
+    if (typeof ubipre == 'undefined')
+      alert('No se ubico .div_ubicacionpre')
       return
-    idaa = divcp.parent().find('.actividad_asistencia_id').find('input').val()
-    if (typeof idaa == 'undefined')
-      alert('No se ubico actividad_asistencia_id')
+    if $(ubipre).find("[id$='ubicacionpre_id']").length != 1
+      alert('Dentro de .div_ubicacionpre no se ubicó ubicacionpre_id')
       return
+    if $(ubipre).find("[id$='ubicacionpre_texto']").length != 1
+      alert('Dentro de .div_ubicacionpre no se ubicó ubicacionpre_texto')
+      return
+
     $("#" + cnom).autocomplete({
-      source: root.puntomontaje + "personas.json",
+      source: root.puntomontaje + "ubicacionespre.json",
       minLength: 2,
       select: ( event, ui ) -> 
         if (ui.item) 
-          cor1440_gen_autocompleta_asistente(ui.item.value, ui.item.id, divcp, root)
+          sip_autocompleta_ubicacionpre(ui.item.value, ui.item.id, ubipre, root)
           event.stopPropagation()
           event.preventDefault()
     })
   return
+
+
+# En listado de asistencia permite autocompletar nombres
+$(document).on('focusin',
+  'input[id^=actividad_ubicacionpre_texto]', (e) -> 
+   sip_busca_ubicacionpre($(this))
+)
 
 # En formulario de actividad si escoge Plan Estratégico y Asistencia humanitaria se despliega nueva sección con tabla de detalles financieros
 $(document).on('change', 'select[id^=actividad_actividad_proyectofinanciero_attributes][id$=_proyectofinanciero_id]', (e) ->

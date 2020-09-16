@@ -172,5 +172,9 @@ module Cor1440Gen
       @contar_pfid = 10  # Plan Estrategico 1
     end
 
+    def lista_params
+      lista_params_cor1440_gen + [:ubicacionpre_id]
+    end
+
   end
 end

@@ -941,7 +941,8 @@ CREATE TABLE public.cor1440_gen_actividad (
     oficina_id integer NOT NULL,
     rangoedadac_id integer,
     usuario_id integer NOT NULL,
-    lugar character varying(500)
+    lugar character varying(500),
+    ubicacionpre_id integer
 );
 
 
@@ -10846,6 +10847,14 @@ ALTER TABLE ONLY public.cor1440_gen_actividad_actividadpf
 
 
 --
+-- Name: cor1440_gen_actividad fk_rails_0a032e5445; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.cor1440_gen_actividad
+    ADD CONSTRAINT fk_rails_0a032e5445 FOREIGN KEY (ubicacionpre_id) REFERENCES public.sip_ubicacionpre(id);
+
+
+--
 -- Name: sivel2_sjr_migracion fk_rails_0a1617c74d; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -13557,6 +13566,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200912170233'),
 ('20200912171009'),
 ('20200912174723'),
-('20200912192204');
+('20200912192204'),
+('20200915215739');
 
 

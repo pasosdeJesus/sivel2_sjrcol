@@ -5,7 +5,20 @@ require 'sivel2_sjr/concerns/models/actividad'
 module Cor1440Gen
   class Actividad < ActiveRecord::Base
     include Sivel2Sjr::Concerns::Models::Actividad
-    
+
+    belongs_to :ubicacionpre, class_name: '::Sip::Ubicacionpre',
+      foreign_key: 'ubicacionpre_id'
+
+    attr_accessor :ubicacionpre_texto
+
+    def ubicaconpre_texto
+      if self.ubicacionpre
+        self.ubicacionpre.nombre
+      else
+        ''
+      end
+    end
+
     def presenta(atr)
       case atr.to_s
       when 'ubicacion'

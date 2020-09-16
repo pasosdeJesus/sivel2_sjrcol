@@ -26,7 +26,7 @@ Rails.application.routes.draw do
     as: :actos_agregar
   get "/actos/eliminar" => 'sivel2_sjr/actos#eliminar',
     as: :actos_eliminar
- 
+
   get "/conteos/accionesjuridicas" => 'sivel2_sjr/conteos#accionesjuridicas', 
     as: :conteos_accionesjuridicas
   get "/conteos/desplazamientos" => 'sivel2_sjr/conteos#desplazamientos', 
@@ -48,6 +48,9 @@ Rails.application.routes.draw do
 
   get "/casos/:id/fichapdf" => "sivel2_sjr/casos#fichapdf",
     as: :caso_fichapdf
+
+  get '/ubicacionespre' => 'sip/ubicacionespre#index',
+	as: :ubicacionespre
 
   root "sip/hogar#index"
 

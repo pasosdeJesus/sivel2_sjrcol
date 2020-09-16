@@ -278,6 +278,7 @@ $(document).on('cocoon:before-remove', '#actividad_proyectofinanciero', (e, obje
 $(document).on('change', 'input[id^=actividad_detallefinanciero_attributes_][id$=_numeromeses]', (e, res) ->
   total = +$(this).val()
   numeroasistencia = $(this).parent().parent().next().find("select")
+  $(numeroasistencia).empty()
   opciones=''
   opciones+='<option value='+i+'>'+i+'</option>' for i in [1..total]
   $(numeroasistencia).append(opciones)

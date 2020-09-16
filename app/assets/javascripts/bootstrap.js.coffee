@@ -275,4 +275,67 @@ $(document).on('cocoon:before-remove', '#actividad_proyectofinanciero', (e, obje
   )
 )
 
+$(document).on('change', 'input[id^=actividad_detallefinanciero_attributes_][id$=_numeromeses]', (e, res) ->
+  total = +$(this).val()
+  numeroasistencia = $(this).parent().parent().next().find("select")
+  opciones=''
+  opciones+='<option value='+i+'>'+i+'</option>' for i in [1..total]
+  $(numeroasistencia).append(opciones)
+)
 
+$(document).on('change', 'input[id^=actividad_detallefinanciero_attributes][id$=_cantidad]', (e, res) ->
+  cantidad = +$(this).val()
+  valor_unitario = $(this).parent().parent().next().find("input")
+  total = cantidad * +valor_unitario.val()
+  input_total = $(this).parent().parent().next().next().find("input")
+  $(input_total).val(total)
+)
+
+$(document).on('change', 'input[id^=actividad_detallefinanciero_attributes][id$=_valorunitario]', (e, res) ->
+  valor_unitario = +$(this).val()
+  cantidad = $(this).parent().parent().prev().find("input")
+  total = +cantidad.val() * valor_unitario
+  input_total = $(this).parent().parent().next().find("input")
+  $(input_total).val(total)
+)
+
+$(document).on('cocoon:after-insert', '#filas_detallefinanciero', (e, objetivo) ->
+  $('.chosen-select').chosen()
+  pfs = []
+  $('[id^=actividad_actividad_proyectofinanciero_attributes][id$=_proyectofinanciero_id]').each( (o) ->
+    v = $(this).val()
+    if (v != "")
+      pfs.push(+v)
+  )
+  paramspf = {id: pfs}
+  root = window
+  sip_funcion_1p_tras_AJAX('proyectosfinancieros.json?filtro[busid]=' + pfs.join(","), paramspf, 
+    actualiza_pf_op, objetivo, 
+    'con Convenios Financiados', root)
+)
+
+@actualiza_pf_op = (root, resp, objetivo) ->
+  otrospfid = []
+  objetivo.siblings().not(':hidden').find('select').each(() -> 
+    otrospfid.push(+this.value)
+  )
+  nuevasop = []
+  resp.forEach((r) -> 
+    if !otrospfid.includes(+r.id)
+      nuevasop.push({'id': +r.id, 'nombre': r.nombre})
+  )
+  mipf = objetivo.find('select[id$=_proyectofinanciero_id]').attr('id')
+  sip_remplaza_opciones_select(mipf, nuevasop, true, 'id', 'nombre', true)
+  $('#' + mipf).val('')
+  $('#' + mipf).trigger('chosen:updated')
+
+$(document).on('change', 'select[id^=actividad_detallefinanciero_attributes_][id$=proyectofinanciero_id]', (e, res) ->
+  $(e.target).attr('disabled', true)
+  $(e.target).trigger('chosen:updated')
+  idac = $(e.target).parent().siblings().find('select[id$=actividadpf_ids]').attr('id')
+  root = window
+  params = { pfl: [+$(this).val()]}
+  sip_llena_select_con_AJAX2('actividadespf', params, 
+    idac, 'con Actividades de convenio ' + $(this).val(), root,
+    'id', 'nombre', null)
+)

@@ -8,6 +8,12 @@ module Cor1440Gen
 
     belongs_to :ubicacionpre, class_name: '::Sip::Ubicacionpre',
       foreign_key: 'ubicacionpre_id'
+    has_many :detallefinanciero, dependent: :delete_all,
+      class_name: 'Detallefinanciero',
+      foreign_key: 'actividad_id'
+    accepts_nested_attributes_for :detallefinanciero,
+      allow_destroy: true, reject_if: :all_blank
+
 
     attr_accessor :ubicacionpre_texto
 
@@ -18,7 +24,7 @@ module Cor1440Gen
         ''
       end
     end
-
+    
     def presenta(atr)
       case atr.to_s
       when 'ubicacion'

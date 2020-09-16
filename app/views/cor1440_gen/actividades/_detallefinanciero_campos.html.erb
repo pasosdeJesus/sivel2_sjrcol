@@ -1,0 +1,114 @@
+<tr class='nested-fields'>
+  <td>
+    <% f.object.actividad_id = @registro.id%>
+    <%= f.association :proyectofinanciero,
+      collection: Cor1440Gen::Proyectofinanciero.all,
+      label_method: :nombre,
+      value_method: :id,
+      input_html: {style: "width: 8em"},
+      label: false
+    %>
+
+    <% if f.object.proyectofinanciero_id %>
+      <% colact = Cor1440Gen::Actividadpf.where(proyectofinanciero_id: f.object.proyectofinanciero.id) %>
+    <% else %>
+      <% colact = Cor1440Gen::Actividadpf.all %>
+    <% end %>
+    <%= f.association :actividadpf,
+      collection: colact,
+      label_method: :titulo,
+      value_method: :id,
+      input_html: {style: "width: 8em"},
+      label: false
+    %>
+  </td>
+  <td>
+    <%= f.association :unidadayuda,
+      collection: Unidadayuda.habilitados,
+      label_method: :nombre,
+      value_method: :id,
+      input_html: {style: "width: 8em"},
+      label: false
+    %>
+  </td>
+  <td>
+    <%= f.input :cantidad,
+      label: false,
+      input_html: {style: "width: 8em"}
+    %>
+  </td>
+  <td>
+    <%= f.input :valorunitario,
+      label: false,
+      input_html: {style: "width: 8em"}
+    %>
+  </td>
+  <td>
+    <%= f.input :valortotal,
+      label: false,
+      readonly: true,
+      input_html: {style: "width: 8em"}
+    %>
+  </td>  
+  <td>
+    <%= f.association :mecanismodeentrega,
+      collection: Mecanismodeentrega.habilitados,
+      label_method: :nombre,
+      value_method: :id,
+      input_html: {style: "width: 8em"},
+      label: false
+    %>
+  </td> 
+  <td>
+    <%= f.association :modalidadentrega,
+      collection: Modalidadentrega.habilitados,
+      label_method: :nombre,
+      value_method: :id,
+      input_html: {style: "width: 8em"},
+      label: false
+    %>
+  </td> 
+  <td>
+    <%= f.association :tipotransferencia,
+      collection: Tipotransferencia.habilitados,
+      label_method: :nombre,
+      value_method: :id,
+      input_html: {style: "width: 8em"},
+      label: false
+    %>
+  </td>
+  <td>
+    <%= f.association :frecuenciaentrega,
+      collection: Frecuenciaentrega.habilitados,
+      label_method: :nombre,
+      value_method: :id,
+      input_html: {style: "width: 8em"},
+      label: false
+    %>
+  </td>
+  <td>
+    <%= f.input :numeromeses,
+      label: false,
+      input_html: {style: "width: 8em"}
+    %>
+  </td>
+  <td>
+    <% if f.object.numeromeses %>
+      <% tot = f.object.numeromeses %>
+      <% col = 1..tot %>
+    <% else %>
+      <% col = [] %>
+    <% end %>
+    <%= f.input :numeroasistencia,
+      label: false, 
+      as: :select,
+      collection: col,
+      input_html: {style: "width: 8em"}
+    %>
+  </td>
+  <td>
+    <%= link_to_remove_association "Eliminar", f, 
+      :class => 'btn-danger' 
+    %>
+  </td>
+</tr>

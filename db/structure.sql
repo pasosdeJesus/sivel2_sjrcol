@@ -7157,10 +7157,10 @@ CREATE TABLE public.unidadayuda (
     id bigint NOT NULL,
     nombre character varying(500) NOT NULL COLLATE public.es_co_utf_8,
     observaciones character varying(5000),
-    fechacreacion date NOT NULL,
+    fechacreacion date,
     fechadeshabilitacion date,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
 );
 
 

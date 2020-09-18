@@ -28,7 +28,7 @@ module Cor1440Gen
     # Retorna el primero
     def busca_indicador_gifmm
         idig = nil
-        proyetofinanciero.find do |p| 
+        proyectofinanciero.find do |p| 
           p.actividadpf.find do |a|
             if a.indicadorgifmm_id
               idig = a.indicadorgifmm.id
@@ -41,11 +41,11 @@ module Cor1440Gen
         idig
     end
 
-    def cuenta_victimas_condicion(cond) 
+    def cuenta_victimas_condicion
       cuenta = 0
       casosjr.each do |c|
         c.caso.victima.each do |v|
-          if (cond.call(v))
+          if (yield(v))
             cuenta += 1
           end
         end
@@ -61,8 +61,8 @@ module Cor1440Gen
 
 
       when 'covid19'
-        covid19 = proyectofinanciero.exist {|p|
-          p.actividadpf.exists {|a|
+        covid19 = proyectofinanciero.exists? {|p|
+          p.actividadpf.exists? {|a|
             a.nombre.includes?('COVID')
           }
         }
@@ -91,31 +91,31 @@ module Cor1440Gen
         end
 
       when 'num_afrodescendientes'
-        cuenta_victimas_condicion( lambda(v) {
+        cuenta_victimas_condicion {|v|
           v.etnia.nombre  == 'AFRODESCENDIENTE' || 
           v.etnia.nombre == 'NEGRO'
-        })
+        }
 
       when 'num_indigenas'
-        cuenta_victimas_condicion( lambda(v) {
+        cuenta_victimas_condicion { |v|
           v.etnia.nombre  != 'AFRODESCENDIENTE' &&
           v.etnia.nombre != 'NEGRO' &&
           v.etnia.nombre != 'ROM' &&
           v.etnia.nombre != 'MESTIZO' &&
           v.etnia.nombre != 'SIN INFORMACIÓN'
-        })
+        }
 
       when 'num_lgbti'
-        cuenta_victimas_condicion( lambda(v) {
+        cuenta_victimas_condicion { |v|
           v.orientacionsexual != 'H'
-        })
+        }
 
       when 'num_otra_etnia'
-        cuenta_victimas_condicion( lambda(v) {
+        cuenta_victimas_condicion { |v|
           v.etnia.nombre == 'ROM' ||
           v.etnia.nombre == 'MESTIZO' ||
           v.etnia.nombre == 'SIN INFORMACIÓN'
-        })
+        }
 
       when 'mes'
         if fecha
@@ -167,16 +167,13 @@ module Cor1440Gen
         'SJR-COL'
 
       when 'socio_principal'
-        if proyectofinanciero && proyectofinanciero.financiador
-          if proyectofinanciero.financiador.nombregifmm &&
-            proyectofinanciero.financiador.nombregifmm != ''
-            proyectofinanciero.financiador.nombregifmm 
-          else
-            proyectofinanciero.financiador.nombre
+        sp = ''
+        proyectofinanciero.find do |p| 
+          if p.financiador && p.financiador.count > 0 && sp == ''
+            sp = p.financiador[0].nombre
           end
-        else
-          ''
         end
+        sp
 
       when 'tipo_implementacion'
         'Indirecta'

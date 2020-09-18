@@ -1,7 +1,5 @@
 # encoding: UTF-8
 class Detallefinanciero < ActiveRecord::Base
-  
-  attr_accessor :proyectoyactividadpf
 
   validates :cantidad, :numericality => { greater_than_or_equal_to: 0 }
   validates :valorunitario, :numericality => { greater_than_or_equal_to: 0 }
@@ -32,6 +30,25 @@ class Detallefinanciero < ActiveRecord::Base
   
   belongs_to :frecuenciaentrega, foreign_key: 'frecuenciaentrega_id', 
     validate: true, class_name: 'Frecuenciaentrega'
+  
+  attr_accessor :convenioactividad
+
+  def convenioactividad=(valor)
+    convenio = Cor1440Gen::Proyectofinanciero.where(nombre: valor.split(" - ")[0])
+    actividadpf = Cor1440Gen::Actividadpf.where(titulo: valor.split(" - ")[1])
+    self.proyectofinanciero_id = convenio[0].id
+    self.actividadpf_id = actividadpf[0].id
+  end
+  
+  def convenioactividad
+    if self.proyectofinanciero_id and self.actividadpf_id
+      convenio = Cor1440Gen::Proyectofinanciero.find(self.proyectofinanciero_id).nombre
+      actividadpf = Cor1440Gen::Actividadpf.find(self.actividadpf_id).titulo
+      return convenio + ' - ' + actividadpf
+    else
+      return ''
+    end
+  end
 end                                              
                                                  
                                                  

@@ -319,7 +319,7 @@ $(document).on('cocoon:after-insert', '#filas_detallefinanciero', (e, objetivo) 
   nombres = resp.map((e) => e.nombre) 
   mipfapf = objetivo.find('select[id$=_proyectoyactividadpf] option')
   mipfapf.each( (o) ->
-    if nombres.includes(mipfapf[o].text.split("-")[0])
+    if nombres.includes(mipfapf[o].text.split(" - ")[0])
       nuevasop.push(mipfapf[o])
   )
   otrospfid = []
@@ -328,15 +328,11 @@ $(document).on('cocoon:after-insert', '#filas_detallefinanciero', (e, objetivo) 
   )
   miselect = objetivo.find('select[id$=_proyectoyactividadpf]')
   miselectid = objetivo.find('select[id$=_proyectoyactividadpf]').attr('id')
-  $miselect.empty()
-  $.each(nuevasop, (key,value) ->
-    $miselect.append($("<option></option>")
-     .attr("value", value).text(key))
+  $(miselect).empty()
+  $(nuevasop).each( (o) ->
+    $(miselect).append($("<option></option>")
+     .attr("value", nuevasop[o].value).text(nuevasop[o].text))
   )
   $('#' + miselectid).val('')
   $('#' + miselectid).trigger('chosen:updated')
 
-$(document).on('change', 'select[id^=actividad_detallefinanciero_attributes_][id$=proyectoyactividadpf]', (e, res) ->
-  $(e.target).attr('disabled', true)
-  $(e.target).trigger('chosen:updated')
-)

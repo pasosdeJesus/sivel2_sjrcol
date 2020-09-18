@@ -99,26 +99,6 @@ module Cor1440Gen
       atributos_show - [:id]
     end
     
-    def lista_params
-      lista_params_cor1440_gen +
-      [ 
-        :detallefinanciero_attributes => [
-          'proyectofinanciero_id',
-          'actividadpf_id',
-          'unidadayuda_id',
-          'cantidad',
-          'valorunitario',
-          'valortotal',
-          'mecanismodeentrega_id',
-          'modalidadentrega_id',
-          'tipotransferencia_id',
-          'frecuenciaentrega_id',
-          'numeromeses',
-          'numeroasistencia'
-        ]
-      ]
-    end
-    
     # Encabezado comun para HTML y PDF (primeras filas)
     def encabezado_comun
       return [ Cor1440Gen::Actividad.human_attribute_name(:id), 
@@ -193,10 +173,9 @@ module Cor1440Gen
     end
 
     def lista_params
-      lista_params_cor1440_gen + [:ubicacionpre_id] + [ 
+      lista_params_sivel2_sjr + [:ubicacionpre_id] + [ 
         :detallefinanciero_attributes => [
-          'proyectofinanciero_id',
-          'actividadpf_id',
+          'convenioactividad',
           'unidadayuda_id',
           'cantidad',
           'valorunitario',
@@ -206,9 +185,14 @@ module Cor1440Gen
           'tipotransferencia_id',
           'frecuenciaentrega_id',
           'numeromeses',
-          'numeroasistencia'
+          'numeroasistencia',
+          '_destroy'
         ]
       ]
+    end
+
+    def actividad_params
+      params.require(:actividad).permit(lista_params)
     end
 
   end

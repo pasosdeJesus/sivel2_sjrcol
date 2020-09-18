@@ -12,7 +12,7 @@ module Cor1440Gen
     
     def presenta_detallefinanciero_pfacpf
       pf = Cor1440Gen::Proyectofinanciero.find(proyectofinanciero_id).nombre
-      "#{pf}-#{titulo}"
+      "#{pf} - #{titulo}"
     end
 
   end

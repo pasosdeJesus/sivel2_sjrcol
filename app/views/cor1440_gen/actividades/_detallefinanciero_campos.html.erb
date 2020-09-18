@@ -6,10 +6,11 @@
     <% else %>
       <% colact = Cor1440Gen::Actividadpf.all %>
     <% end %>
-    <%= f.input :proyectoyactividadpf,
+    <%= f.input :convenioactividad,
       collection: colact,
       label_method: lambda { |t| t.presenta_detallefinanciero_pfacpf},
-      value_method: :id,
+      value_method: lambda { |t| t.presenta_detallefinanciero_pfacpf},
+      value: lambda { |t| t.presenta_detallefinanciero_pfacpf},
       input_html: {style: "width: 8em"},
       label: false
     %>

@@ -5,11 +5,135 @@ require 'sivel2_sjr/concerns/models/actividad'
 module Cor1440Gen
   class Actividad < ActiveRecord::Base
     include Sivel2Sjr::Concerns::Models::Actividad
-    
+
+    belongs_to :ubicacionpre, class_name: '::Sip::Ubicacionpre',
+      foreign_key: 'ubicacionpre_id'
+    has_many :detallefinanciero, dependent: :delete_all,
+      class_name: 'Detallefinanciero',
+      foreign_key: 'actividad_id'
+    accepts_nested_attributes_for :detallefinanciero,
+      allow_destroy: true, reject_if: :all_blank
+
+
+    attr_accessor :ubicacionpre_texto
+
+    def ubicacionpre_texto
+      if self.ubicacionpre
+        self.ubicacionpre.nombre
+      else
+        ''
+      end
+    end
+
+    # Retorna el primero
+    def busca_indicador_gifmm
+        idig = nil
+        proyetofinanciero.find do |p| 
+          p.actividadpf.find do |a|
+            if a.indicadorgifmm_id
+              idig = a.indicadorgifmm.id
+              true
+            else
+              false
+            end
+          end
+        end
+        idig
+    end
+
+    def cuenta_victimas_condicion(cond) 
+      cuenta = 0
+      casosjr.each do |c|
+        c.caso.victima.each do |v|
+          if (cond.call(v))
+            cuenta += 1
+          end
+        end
+      end
+      cuenta
+    end
+
+
     def presenta(atr)
       case atr.to_s
-      when 'ubicacion'
-        lugar
+      when 'beneficiarios_com_acogida'
+        self.asistencia.select{|a| a.perfilactorsocial_id == 13}.count
+
+
+      when 'covid19'
+        covid19 = proyectofinanciero.exist {|p|
+          p.actividadpf.exists {|a|
+            a.nombre.includes?('COVID')
+          }
+        }
+        if covid19
+          'Si'
+        else
+          ''
+        end
+
+      when 'estado'
+        'Completado'
+
+      when 'departamento'
+        if ubicacionpre && ubicacionpre.departamento
+          ubicacionpre.departamento.nombre
+        else
+          ''
+        end
+
+      when 'indicador_gifmm'
+        idig = self.busca_indicador_gifmm
+        if idig != nil
+          ::Indicadorgifmm.find(idig).nombre
+        else
+          ''
+        end
+
+      when 'num_afrodescendientes'
+        cuenta_victimas_condicion( lambda(v) {
+          v.etnia.nombre  == 'AFRODESCENDIENTE' || 
+          v.etnia.nombre == 'NEGRO'
+        })
+
+      when 'num_indigenas'
+        cuenta_victimas_condicion( lambda(v) {
+          v.etnia.nombre  != 'AFRODESCENDIENTE' &&
+          v.etnia.nombre != 'NEGRO' &&
+          v.etnia.nombre != 'ROM' &&
+          v.etnia.nombre != 'MESTIZO' &&
+          v.etnia.nombre != 'SIN INFORMACIÓN'
+        })
+
+      when 'num_lgbti'
+        cuenta_victimas_condicion( lambda(v) {
+          v.orientacionsexual != 'H'
+        })
+
+      when 'num_otra_etnia'
+        cuenta_victimas_condicion( lambda(v) {
+          v.etnia.nombre == 'ROM' ||
+          v.etnia.nombre == 'MESTIZO' ||
+          v.etnia.nombre == 'SIN INFORMACIÓN'
+        })
+
+      when 'mes'
+        if fecha
+          fecha.month
+        else
+          ''
+        end
+
+
+      when 'municipio'
+        if ubicacionpre && ubicacionpre.municipio
+          ubicacionpre.municipio.nombre
+        else
+          ''
+        end
+
+      when 'parte_rmrp'
+        'SI'
 
       when 'poblacion_hombres'
         actividad_rangoedadac.inject(0) { |memo, r|
@@ -30,6 +154,35 @@ module Cor1440Gen
           memo += r.s ? r.s : 0
           memo
         }
+
+      when 'sector_gifmm'
+        idig = self.busca_indicador_gifmm
+        if idig != nil
+          ::Indicadorgifmm.find(idig).sectorgifmm.nombre
+        else
+          ''
+        end
+
+      when 'socio_implementador'
+        'SJR-COL'
+
+      when 'socio_principal'
+        if proyectofinanciero && proyectofinanciero.financiador
+          if proyectofinanciero.financiador.nombregifmm &&
+            proyectofinanciero.financiador.nombregifmm != ''
+            proyectofinanciero.financiador.nombregifmm 
+          else
+            proyectofinanciero.financiador.nombre
+          end
+        else
+          ''
+        end
+
+      when 'tipo_implementacion'
+        'Indirecta'
+
+      when 'ubicacion'
+        lugar
 
       else
         presenta_actividad(atr)

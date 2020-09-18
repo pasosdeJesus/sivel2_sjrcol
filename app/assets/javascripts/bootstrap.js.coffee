@@ -3,6 +3,60 @@ jQuery ->
   $("a[rel~=tooltip], .has-tooltip").tooltip()
 
 
+# Elije ubicacionpre en autocompletación
+# Tras autocompletar disparar el evento sip:autocompletada-ubicacionpre
+@sip_autocompleta_ubicacionpre = (etiqueta, id, ubipre, root) ->
+  sip_arregla_puntomontaje(root)
+  #cs = id.split(";")
+  #ubicacionpre_id = cs[0]
+  #debugger
+  ubipre.find('[id$=ubicacionpre_id]').val(id)
+  ubipre.find('[id$=ubicacionpre_texto]').val(etiqueta)
+  $(document).trigger("sip:autocompletada-ubicacionpre")
+  return
+
+
+# Busca ubicacionpre por nombre pais, nombre dep, nombre mun, nombre clase
+# s es objeto con foco donde se busca ubicacionpre
+@sip_busca_ubicacionpre = (s) ->
+  root = window
+  sip_arregla_puntomontaje(root)
+  cnom = s.attr('id')
+  v = $("#" + cnom).data('autocompleta')
+  if (v != 1 && v != "no") 
+    $("#" + cnom).data('autocompleta', 1)
+    # Buscamos un div con clase div_ubicacionpre dentro del cual
+    # están tanto el campo ubicacionpre_id como el campo
+    # ubicacionpre_texto 
+    ubipre = s.closest('.div_ubicacionpre')
+    if (typeof ubipre == 'undefined')
+      alert('No se ubico .div_ubicacionpre')
+      return
+    if $(ubipre).find("[id$='ubicacionpre_id']").length != 1
+      alert('Dentro de .div_ubicacionpre no se ubicó ubicacionpre_id')
+      return
+    if $(ubipre).find("[id$='ubicacionpre_texto']").length != 1
+      alert('Dentro de .div_ubicacionpre no se ubicó ubicacionpre_texto')
+      return
+
+    $("#" + cnom).autocomplete({
+      source: root.puntomontaje + "ubicacionespre.json",
+      minLength: 2,
+      select: ( event, ui ) -> 
+        if (ui.item) 
+          sip_autocompleta_ubicacionpre(ui.item.value, ui.item.id, ubipre, root)
+          event.stopPropagation()
+          event.preventDefault()
+    })
+  return
+
+
+# En listado de asistencia permite autocompletar nombres
+$(document).on('focusin',
+  'input[id^=actividad_ubicacionpre_texto]', (e) -> 
+   sip_busca_ubicacionpre($(this))
+)
+
 # En formulario de actividad si escoge Plan Estratégico y Asistencia humanitaria se despliega nueva sección con tabla de detalles financieros
 $(document).on('change', 'select[id^=actividad_actividad_proyectofinanciero_attributes][id$=_proyectofinanciero_id]', (e) ->
 )
@@ -219,4 +273,69 @@ $(document).on('cocoon:before-remove', '#actividad_proyectofinanciero', (e, obje
     if valor.includes("116")
       div_detallefinanciero.css("display", "none")
   )
+)
+
+$(document).on('change', 'input[id^=actividad_detallefinanciero_attributes_][id$=_numeromeses]', (e, res) ->
+  total = +$(this).val()
+  numeroasistencia = $(this).parent().parent().next().find("select")
+  opciones=''
+  opciones+='<option value='+i+'>'+i+'</option>' for i in [1..total]
+  $(numeroasistencia).append(opciones)
+)
+
+$(document).on('change', 'input[id^=actividad_detallefinanciero_attributes][id$=_cantidad]', (e, res) ->
+  cantidad = +$(this).val()
+  valor_unitario = $(this).parent().parent().next().find("input")
+  total = cantidad * +valor_unitario.val()
+  input_total = $(this).parent().parent().next().next().find("input")
+  $(input_total).val(total)
+)
+
+$(document).on('change', 'input[id^=actividad_detallefinanciero_attributes][id$=_valorunitario]', (e, res) ->
+  valor_unitario = +$(this).val()
+  cantidad = $(this).parent().parent().prev().find("input")
+  total = +cantidad.val() * valor_unitario
+  input_total = $(this).parent().parent().next().find("input")
+  $(input_total).val(total)
+)
+
+$(document).on('cocoon:after-insert', '#filas_detallefinanciero', (e, objetivo) ->
+  $('.chosen-select').chosen()
+  pfs = []
+  $('[id^=actividad_actividad_proyectofinanciero_attributes][id$=_proyectofinanciero_id]').each( (o) ->
+    v = $(this).val()
+    if (v != "")
+      pfs.push(+v)
+  )
+  paramspf = {id: pfs}
+  root = window
+  sip_funcion_1p_tras_AJAX('proyectosfinancieros.json?filtro[busid]=' + pfs.join(","), paramspf, 
+    actualiza_pf_op, objetivo, 
+    'con Convenios Financiados', root)
+)
+
+@actualiza_pf_op = (root, resp, objetivo) ->
+  otrospfid = []
+  objetivo.siblings().not(':hidden').find('select').each(() -> 
+    otrospfid.push(+this.value)
+  )
+  nuevasop = []
+  resp.forEach((r) -> 
+    if !otrospfid.includes(+r.id)
+      nuevasop.push({'id': +r.id, 'nombre': r.nombre})
+  )
+  mipf = objetivo.find('select[id$=_proyectofinanciero_id]').attr('id')
+  sip_remplaza_opciones_select(mipf, nuevasop, true, 'id', 'nombre', true)
+  $('#' + mipf).val('')
+  $('#' + mipf).trigger('chosen:updated')
+
+$(document).on('change', 'select[id^=actividad_detallefinanciero_attributes_][id$=proyectofinanciero_id]', (e, res) ->
+  $(e.target).attr('disabled', true)
+  $(e.target).trigger('chosen:updated')
+  idac = $(e.target).parent().siblings().find('select[id$=actividadpf_ids]').attr('id')
+  root = window
+  params = { pfl: [+$(this).val()]}
+  sip_llena_select_con_AJAX2('actividadespf', params, 
+    idac, 'con Actividades de convenio ' + $(this).val(), root,
+    'id', 'nombre', null)
 )

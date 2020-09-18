@@ -1,17 +1,4 @@
 GIT
-  remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: 3886625d22416ff2f112cd168bb6fa31720efd7d
-  specs:
-    cor1440_gen (1.0b3)
-      devise
-      heb412_gen
-      jquery-rails
-      mr519_gen
-      paperclip
-      rails
-      sip
-
-GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
   revision: 48178c5c55e4b2605fc209953d2d51538c075788
   specs:
@@ -74,7 +61,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 61ef0702000bca088628f2a777a9beaeb7b6eb26
+  revision: e75b871b09d9caa70ec40dd22d8b5c2c00d57367
   specs:
     sivel2_sjr (2.0b10)
       rails
@@ -86,6 +73,18 @@ GIT
   branch: new_id_with_ajax
   specs:
     cocoon (1.2.11)
+
+PATH
+  remote: ../cor1440_gen
+  specs:
+    cor1440_gen (1.0b3)
+      devise
+      heb412_gen
+      jquery-rails
+      mr519_gen
+      paperclip
+      rails
+      sip
 
 GEM
   remote: https://rubygems.org/
@@ -155,6 +154,7 @@ GEM
     bootstrap-datepicker-rails (1.9.0.1)
       railties (>= 3.0)
     builder (3.2.4)
+    byebug (11.1.3)
     camertron-eprun (1.1.1)
     cancancan (3.1.0)
     capybara (3.33.0)
@@ -225,7 +225,7 @@ GEM
     mini_portile2 (2.4.0)
     minitest (5.14.2)
     msgpack (1.3.3)
-    nio4r (2.5.3)
+    nio4r (2.5.4)
     nokogiri (1.10.10)
       mini_portile2 (~> 2.4.0)
     odf-report (0.7.2)
@@ -371,6 +371,7 @@ DEPENDENCIES
   bcrypt
   bootsnap (>= 1.1.0)
   bootstrap-datepicker-rails
+  byebug
   cancancan
   capybara
   chartkick

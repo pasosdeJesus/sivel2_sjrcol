@@ -46,6 +46,7 @@ ActiveSupport::Inflector.inflections do |inflect|
 	inflect.irregular 'tipoanexo', 'tiposanexo'
 	inflect.irregular 'tipoproteccion', 'tiposproteccion'
 	inflect.irregular 'tipotransferencia', 'tipostransferencia'
+	inflect.irregular 'ubicacionpre', 'ubicacionespre'
 	inflect.irregular 'unidadayuda', 'unidadesayuda'
 	inflect.irregular 'viadeingreso', 'viasdeingreso'
 	inflect.irregular 'agresionmigracion', 'agresionesmigracion'

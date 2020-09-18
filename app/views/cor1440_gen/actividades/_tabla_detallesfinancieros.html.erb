@@ -1,24 +1,41 @@
 <% proyectos = @registro.proyectofinanciero.pluck(:id) %>
 <% tipos = @registro.actividadpf.pluck(:id) %>
 <% if proyectos.include? (10) and tipos.include? (116) %>
-  <% estdetalle = "display: block" %>
+  <% estdetalle = "display: block; overflow-x: scroll;" %>
 <% else %>
-  <% estdetalle = "display: none" %>
+  <% estdetalle = "display: none; overflow-x: scroll;" %>
 <% end %>
-<div id="detallefinanciero" style=<% estdetalle %> >
-  <table>
-    <tr>
-      <th>Convenio y Actividad de Convenio</th>
-      <th>Unidad</th>
-      <th>Cantidad</th>
-      <th>Valor unitario</th>
-      <th>Valor tota</th>
-      <th>Mecanismo de entrega</th>
-      <th>Modalidad de entrega</th>
-      <th>Tipo de transferencia</th>
-      <th>Frecuencia de la entrega</th>
-      <th>Número de meses de la asistencia</th>
-      <th>Número de esta asistencia</th>
-    </tr>
+<div id="detallefinanciero" class="panel-body table-responsivei" style="<%= estdetalle %>" >
+  <table class="table table-bordered table-sm">
+    <thead class="thead-light">
+      <tr>
+        <th>Convenio y Actividad de Convenio</th>
+        <th>Unidad</th>
+        <th>Cantidad</th>
+        <th>Valor unitario</th>
+        <th>Valor total</th>
+        <th>Mecanismo de entrega</th>
+        <th>Modalidad de entrega</th>
+        <th>Tipo de transferencia</th>
+        <th>Frecuencia de la entrega</th>
+        <th>Número de meses de la asistencia</th>
+        <th>Número de esta asistencia</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody id="filas_detallefinanciero">
+      <%= f.simple_fields_for :detallefinanciero do |f| %>
+        <%= render 'detallefinanciero_campos', :f => f %>
+      <% end %>
+    </tbody>
   </table>
+</div>
+<div class="links">
+  <%= link_to_add_association 'Añadir Detalle Financiero', f, 
+    :detallefinanciero,
+    partial: 'cor1440_gen/actividades/detallefinanciero_campos',
+    "data-association-insertion-node": "tbody#filas_detallefinanciero", 
+    "data-association-insertion-method": "append", 
+    class: 'btn-primary'
+  %>
 </div>

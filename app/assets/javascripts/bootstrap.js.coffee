@@ -312,31 +312,28 @@ $(document).on('cocoon:after-insert', '#filas_detallefinanciero', (e, objetivo) 
   root = window
   sip_funcion_1p_tras_AJAX('proyectosfinancieros.json?filtro[busid]=' + pfs.join(","), paramspf, 
     actualiza_pf_op, objetivo, 
-    'con Convenios Financiados', root)
+    'con Convenios Financiados', root) 
 )
 
 @actualiza_pf_op = (root, resp, objetivo) ->
+  nuevasop = []
+  nombres = resp.map((e) => e.nombre) 
+  mipfapf = objetivo.find('select[id$=_proyectoyactividadpf] option')
+  mipfapf.each( (o) ->
+    if nombres.includes(mipfapf[o].text.split(" - ")[0])
+      nuevasop.push(mipfapf[o])
+  )
   otrospfid = []
   objetivo.siblings().not(':hidden').find('select').each(() -> 
     otrospfid.push(+this.value)
   )
-  nuevasop = []
-  resp.forEach((r) -> 
-    if !otrospfid.includes(+r.id)
-      nuevasop.push({'id': +r.id, 'nombre': r.nombre})
+  miselect = objetivo.find('select[id$=_proyectoyactividadpf]')
+  miselectid = objetivo.find('select[id$=_proyectoyactividadpf]').attr('id')
+  $(miselect).empty()
+  $(nuevasop).each( (o) ->
+    $(miselect).append($("<option></option>")
+     .attr("value", nuevasop[o].value).text(nuevasop[o].text))
   )
-  mipf = objetivo.find('select[id$=_proyectofinanciero_id]').attr('id')
-  sip_remplaza_opciones_select(mipf, nuevasop, true, 'id', 'nombre', true)
-  $('#' + mipf).val('')
-  $('#' + mipf).trigger('chosen:updated')
+  $('#' + miselectid).val('')
+  $('#' + miselectid).trigger('chosen:updated')
 
-$(document).on('change', 'select[id^=actividad_detallefinanciero_attributes_][id$=proyectofinanciero_id]', (e, res) ->
-  $(e.target).attr('disabled', true)
-  $(e.target).trigger('chosen:updated')
-  idac = $(e.target).parent().siblings().find('select[id$=actividadpf_ids]').attr('id')
-  root = window
-  params = { pfl: [+$(this).val()]}
-  sip_llena_select_con_AJAX2('actividadespf', params, 
-    idac, 'con Actividades de convenio ' + $(this).val(), root,
-    'id', 'nombre', null)
-)

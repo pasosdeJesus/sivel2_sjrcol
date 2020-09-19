@@ -9,5 +9,11 @@ module Cor1440Gen
     belongs_to :indicadorgifmm, foreign_key: 'indicadorgifmm_id',
       optional: true, dependent: :destroy,
       class_name: 'Indicadorgifmm'
+    
+    def presenta_detallefinanciero_pfacpf
+      pf = Cor1440Gen::Proyectofinanciero.find(proyectofinanciero_id).nombre
+      "#{pf} - #{titulo}"
+    end
+
   end
 end

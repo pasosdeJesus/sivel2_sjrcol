@@ -29,13 +29,13 @@
       <% end %>
     </tbody>
   </table>
-</div>
-<div class="links">
-  <%= link_to_add_association 'Añadir Detalle Financiero', f, 
-    :detallefinanciero,
-    partial: 'cor1440_gen/actividades/detallefinanciero_campos',
-    "data-association-insertion-node": "tbody#filas_detallefinanciero", 
-    "data-association-insertion-method": "append", 
-    class: 'btn-primary'
-  %>
+  <div class="links">
+    <%= link_to_add_association 'Añadir Detalle Financiero', f, 
+      :detallefinanciero,
+      partial: 'cor1440_gen/actividades/detallefinanciero_campos',
+      "data-association-insertion-node": "tbody#filas_detallefinanciero", 
+      "data-association-insertion-method": "append", 
+      class: 'btn-primary'
+    %>
+  </div>
 </div>

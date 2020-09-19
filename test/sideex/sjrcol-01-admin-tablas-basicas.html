@@ -1314,6 +1314,8 @@
 	<td>link=Financiadores<datalist><option>link=Financiadores</option></datalist></td>
 	<td></td>
 </tr>
+<tr><td>clickAt</td><td>xpath=(//a[contains(text(),'Nuevo')])[2]<datalist><option>xpath=(//a[contains(text(),'Nuevo')])[2]</option><option>//a[contains(@href, '/admin/financiadores/nueva')]</option><option>//div[2]/a</option></datalist></td><td>34,14</td>
+</tr>
 <tr><td>assertText</td><td>css=h1<datalist><option>css=h1</option><option>//h1</option></datalist></td><td>Nuevo Financiador</td>
 </tr>
 <tr>
@@ -2934,9 +2936,7 @@
 	<td>link=Tipos de Violencia<datalist><option>link=Tipos de Violencia</option></datalist></td>
 	<td></td>
 </tr>
-<tr><td>clickAt</td><td>xpath=(//a[contains(text(),'Nuevo')])[2]<datalist><option>xpath=(//a[contains(text(),'Nuevo')])[2]</option><option>//a[contains(@href, '/admin/tviolencias/nueva')]</option><option>//div/a</option></datalist></td><td>33,21</td>
-</tr>
-<tr><td>assertText</td><td>css=h1<datalist><option>css=h1</option><option>//h1</option></datalist></td><td>Nuevo Tipo de Violencia</td>
+<tr><td>clickAt</td><td>css=a.btn.btn-primary<datalist><option>css=a.btn.btn-primary</option><option>xpath=(//a[contains(text(),'Nuevo')])[2]</option><option>//a[contains(@href, '/admin/tviolencias/nueva')]</option><option>//div/div/a</option></datalist></td><td>32,28</td>
 </tr>
 <tr>
 	<td>type</td>

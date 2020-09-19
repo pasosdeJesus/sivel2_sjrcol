@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 48178c5c55e4b2605fc209953d2d51538c075788
+  revision: 75c4035a26e931973c4fa5a72ab7136cf11b8754
   specs:
     heb412_gen (1.0.b6)
       mr519_gen
@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/mr519_gen.git
-  revision: e802ca7c0921504c721e1a161e5661e8df3cc8ed
+  revision: 3941567101d7540278b84cd5496680c7a4c25613
   specs:
     mr519_gen (0.2.0)
       rails (~> 6.0.0.rc1, >= 6.0.0.rc1)
@@ -18,7 +18,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: 1e581b924a52e294ae13c2626c51b284f72d5b92
+  revision: 6277e99abbed2815e31a627fd41f9cb351acebcf
   specs:
     sal7711_gen (1.0.b3)
       rails
@@ -26,7 +26,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: 3041c322b395e33296f050cd7405ef99cd6dc67f
+  revision: ee3e43c74c77a8ab0b50b88fdeaadc6fc3a9dca1
   specs:
     sal7711_web (1.0.a3)
       rails
@@ -34,7 +34,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 9c5a38146058e55a03db9591a8860af877903d1d
+  revision: f8363ea2ed1beb9e3dedf170ada4fcfd00e883cd
   specs:
     sip (2.0.b10)
       cancancan
@@ -52,7 +52,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 3fbf16626f109c11bd15f3f2a36147a3f6411a10
+  revision: 8ad6a69f5ddc49d94867d5116f7440f8c9d620fa
   specs:
     sivel2_gen (2.0b12)
       devise
@@ -61,7 +61,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: e75b871b09d9caa70ec40dd22d8b5c2c00d57367
+  revision: 2af14e10a9fc0ff0d638d127844fcb38467347c3
   specs:
     sivel2_sjr (2.0b10)
       rails
@@ -254,7 +254,7 @@ GEM
       prawn (>= 1.0.0)
       rails (>= 3.2)
     public_suffix (4.0.6)
-    puma (4.3.6)
+    puma (5.0.0)
       nio4r (~> 2.0)
     rack (2.2.3)
     rack-proxy (0.6.5)

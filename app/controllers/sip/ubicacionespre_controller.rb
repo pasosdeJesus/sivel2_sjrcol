@@ -41,7 +41,7 @@ module Sip
 
     def index(c = nil)
       if c == nil
-        c = Sip::Persona.all
+        c = Sip::Ubicacionpre.all
       end
       if params[:term]
         term = Sip::Ubicacion.connection.quote_string(params[:term])

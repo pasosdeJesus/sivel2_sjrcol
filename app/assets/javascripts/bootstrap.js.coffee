@@ -258,9 +258,13 @@ document.addEventListener('turbolinks:load', () ->
 )
 
 $(document).on('change', 'select[id^=actividad_actividad_proyectofinanciero_attributes_][id$=actividadpf_ids]', (e, res) ->
-  val = $(this).val()
+  actividadespf = []
+  $('select[id^=actividad_actividad_proyectofinanciero_attributes_][id$=actividadpf_ids]').each( () ->
+    val = $(this).val()
+    actividadespf = $.merge(actividadespf, val)
+  )
   div_detallefinanciero = $("#detallefinanciero")
-  if val.includes("116")
+  if actividadespf.includes("116")
     div_detallefinanciero.css("display", "block")
   else
     div_detallefinanciero.css("display", "none")
@@ -302,33 +306,27 @@ $(document).on('change', 'input[id^=actividad_detallefinanciero_attributes][id$=
 
 $(document).on('cocoon:after-insert', '#filas_detallefinanciero', (e, objetivo) ->
   $('.chosen-select').chosen()
-  pfs = []
-  $('[id^=actividad_actividad_proyectofinanciero_attributes][id$=_proyectofinanciero_id]').each( (o) ->
-    v = $(this).val()
-    if (v != "")
-      pfs.push(+v)
+  apfs = []
+  $('[id^=actividad_actividad_proyectofinanciero_attributes][id$=_actividadpf_ids] option:selected').each( (o) ->
+    v = $(this).text()
+    pf = $(this).parent().parent().parent().prev().find('select[id$=_proyectofinanciero_id] option:selected').text()
+    apf_sincod = v.substr(v.indexOf(' ')+1)
+    if (pf != "" && apf_sincod !="")
+      valor = pf + " - " + apf_sincod
+      apfs.push(valor)
   )
-  paramspf = {id: pfs}
-  root = window
-  sip_funcion_1p_tras_AJAX('proyectosfinancieros.json?filtro[busid]=' + pfs.join(","), paramspf, 
-    actualiza_pf_op, objetivo, 
-    'con Convenios Financiados', root) 
-)
-
-@actualiza_pf_op = (root, resp, objetivo) ->
   nuevasop = []
-  nombres = resp.map((e) => e.nombre) 
-  mipfapf = objetivo.find('select[id$=_proyectoyactividadpf] option')
+  mipfapf = objetivo.find('select[id$=_convenioactividad] option')
   mipfapf.each( (o) ->
-    if nombres.includes(mipfapf[o].text.split(" - ")[0])
+    if apfs.includes(mipfapf[o].text)
       nuevasop.push(mipfapf[o])
   )
   otrospfid = []
   objetivo.siblings().not(':hidden').find('select').each(() -> 
     otrospfid.push(+this.value)
   )
-  miselect = objetivo.find('select[id$=_proyectoyactividadpf]')
-  miselectid = objetivo.find('select[id$=_proyectoyactividadpf]').attr('id')
+  miselect = objetivo.find('select[id$=_convenioactividad]')
+  miselectid = objetivo.find('select[id$=_convenioactividad]').attr('id')
   $(miselect).empty()
   $(nuevasop).each( (o) ->
     $(miselect).append($("<option></option>")
@@ -336,4 +334,12 @@ $(document).on('cocoon:after-insert', '#filas_detallefinanciero', (e, objetivo) 
   )
   $('#' + miselectid).val('')
   $('#' + miselectid).trigger('chosen:updated')
+)
 
+$(document).on('change', 'select[id^=actividad_detallefinanciero_attributes_][id$=convenioactividad]', (e, res) ->
+  $(e.target).attr('disabled', true)
+  $(e.target).trigger('chosen:updated')
+  idac = $(e.target).parent().siblings().find('select[id$=convenioactividad]').attr('id')
+  root = window
+  params = { pfl: [+$(this).val()]}
+)

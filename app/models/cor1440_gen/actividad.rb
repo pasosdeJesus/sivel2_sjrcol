@@ -35,20 +35,23 @@ module Cor1440Gen
       end
     end
 
+    # PRESENTACIÓN DE INFORMACIÓN
+
+
     # Retorna el primero
     def busca_indicador_gifmm
-        idig = nil
-        proyectofinanciero.find do |p| 
-          p.actividadpf.find do |a|
-            if a.indicadorgifmm_id
-              idig = a.indicadorgifmm.id
-              true
-            else
-              false
-            end
+      idig = nil
+      proyectofinanciero.find do |p| 
+        p.actividadpf.find do |a|
+          if a.indicadorgifmm_id
+            idig = a.indicadorgifmm.id
+            true
+          else
+            false
           end
         end
-        idig
+      end
+      idig
     end
 
     def cuenta_victimas_condicion
@@ -63,21 +66,36 @@ module Cor1440Gen
       cuenta
     end
 
-  def socio_principal
-    sp = ''
-    proyectofinanciero.find do |p| 
-      if p.financiador && p.financiador.count > 0 && sp == ''
-        if p.financiador[0].nombregifmm
-          sp = p.financiador[0].nombregifmm
-        else
-          sp = p.financiador[0].nombre
+    def socio_principal
+      sp = ''
+      proyectofinanciero.find do |p| 
+        if p.financiador && p.financiador.count > 0 && sp == ''
+          if p.financiador[0].nombregifmm
+            sp = p.financiador[0].nombregifmm
+          else
+            sp = p.financiador[0].nombre
+          end
         end
       end
+      sp
     end
-    sp
-  end
 
-
+    def poblacion
+      p1 = poblacion_cor1440_gen
+      p2 = 0
+      idp_casos = casosjr.map {|c|
+        d.caso.victima.map(&:id_persona)
+      }.flatten.uniq
+      idp_asistentes = asistencia.map(&:persona_id)
+      idp = idp_casos + idp_asistentes
+      idp.uniq!
+      p2 += idp.count
+      if p1 >= p2
+        p1.to_s
+      else
+        "#{p1} pero se esperaba al menos #{p2}"
+      end
+    end
 
     def presenta(atr)
       case atr.to_s
@@ -148,7 +166,6 @@ module Cor1440Gen
         else
           ''
         end
-
 
       when 'municipio'
         if ubicacionpre && ubicacionpre.municipio

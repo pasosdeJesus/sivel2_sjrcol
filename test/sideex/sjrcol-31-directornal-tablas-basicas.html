@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 	<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
-	<title>sjrcol-01-admin-tablas-basicas</title>
+	<title>sjrcol-31-directornal-tablas-basicas</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
@@ -1294,55 +1294,6 @@
 	<td></td>
 </tr>
 <tr><td>assertText</td><td>css=h1<datalist><option>css=h1</option><option>//h1</option></datalist></td><td>Etnias</td>
-</tr>
-</tbody></table>
-<table cellpadding="1" cellspacing="1" border="1">
-<thead>
-<tr><td rowspan="1" colspan="3">tabla-financiadores</td></tr>
-</thead>
-<tbody>
-<tr>
-	<td>click</td>
-	<td>link=Administrar<datalist><option>link=Administrar</option></datalist></td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Tablas Básicas<datalist><option>link=Tablas Básicas</option></datalist></td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Financiadores<datalist><option>link=Financiadores</option></datalist></td>
-	<td></td>
-</tr>
-<tr><td>clickAt</td><td>xpath=(//a[contains(text(),'Nuevo')])[2]<datalist><option>xpath=(//a[contains(text(),'Nuevo')])[2]</option><option>//a[contains(@href, '/admin/financiadores/nueva')]</option><option>//div[2]/a</option></datalist></td><td>34,14</td>
-</tr>
-<tr><td>assertText</td><td>css=h1<datalist><option>css=h1</option><option>//h1</option></datalist></td><td>Nuevo Financiador</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=financiador_nombre<datalist><option>id=financiador_nombre</option></datalist></td>
-	<td>aaa</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=financiador_observaciones<datalist><option>id=financiador_observaciones</option></datalist></td>
-	<td>bbb</td>
-</tr>
-<tr>
-	<td>clickAt</td>
-	<td>name=commit<datalist><option>name=commit</option></datalist></td>
-	<td></td>
-</tr>
-<tr><td>chooseOkOnNextConfirmation</td><td><datalist><option></option></datalist></td><td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Eliminar<datalist><option>link=Eliminar</option></datalist></td>
-	<td></td>
-</tr>
-<tr><td>assertText</td><td>css=h1<datalist><option>css=h1</option><option>//h1</option></datalist></td><td>Financiadores</td>
 </tr>
 </tbody></table>
 <table cellpadding="1" cellspacing="1" border="1">
@@ -2771,9 +2722,9 @@
 </tr>
 <tr><td>type</td><td>id=tipoindicador_nombre<datalist><option>id=tipoindicador_nombre</option><option>name=tipoindicador[nombre]</option><option>css=#tipoindicador_nombre</option><option>//input[@id='tipoindicador_nombre']</option><option>//form[@id='edit_tipoindicador_101']/div[2]/input</option><option>//div[2]/input</option></datalist></td><td>aas</td>
 </tr>
-<tr><td>select</td><td>id=tipoindicador_medircon<datalist><option>id=tipoindicador_medircon</option><option>name=tipoindicador[medircon]</option><option>css=#tipoindicador_medircon</option><option>//select[@id='tipoindicador_medircon']</option><option>//form[@id='edit_tipoindicador_101']/div[3]/select</option><option>//select</option></datalist></td><td>label=Avances en efecto</td>
+<tr><td>select</td><td>id=tipoindicador_medircon<datalist><option>id=tipoindicador_medircon</option><option>name=tipoindicador[medircon]</option><option>css=#tipoindicador_medircon</option><option>//select[@id='tipoindicador_medircon']</option><option>//form[@id='edit_tipoindicador_130']/div[3]/select</option><option>//select</option></datalist></td><td>label=Efectos</td>
 </tr>
-<tr><td>clickAt</td><td>id=tipoindicador_medircon<datalist><option>id=tipoindicador_medircon</option><option>name=tipoindicador[medircon]</option><option>css=#tipoindicador_medircon</option><option>//select[@id='tipoindicador_medircon']</option><option>//form[@id='edit_tipoindicador_101']/div[3]/select</option><option>//select</option></datalist></td><td>-83,-199</td>
+<tr><td>clickAt</td><td>id=tipoindicador_medircon<datalist><option>id=tipoindicador_medircon</option><option>name=tipoindicador[medircon]</option><option>css=#tipoindicador_medircon</option><option>//select[@id='tipoindicador_medircon']</option><option>//form[@id='edit_tipoindicador_130']/div[3]/select</option><option>//select</option></datalist></td><td>-98,-201</td>
 </tr>
 <tr><td>clickAt</td><td>id=tipoindicador_esptipometa<datalist><option>id=tipoindicador_esptipometa</option><option>name=tipoindicador[esptipometa]</option><option>css=#tipoindicador_esptipometa</option><option>//input[@id='tipoindicador_esptipometa']</option><option>//form[@id='edit_tipoindicador_101']/div[4]/input</option><option>//div[4]/input</option></datalist></td><td>68,20</td>
 </tr>
@@ -3066,6 +3017,55 @@
 <tr><td>clickAt</td><td>link=Eliminar<datalist><option>link=Eliminar</option><option>css=a.btn.btn-danger</option><option>//a[contains(text(),'Eliminar')]</option><option>xpath=(//a[contains(@href, '/admin/viasdeingreso/101')])[2]</option><option>//div[4]/a</option></datalist></td><td>26,25</td>
 </tr>
 <tr><td>assertText</td><td>css=h1<datalist><option>css=h1</option><option>//h1</option></datalist></td><td>Vías de ingreso</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">tabla-financiadores</td></tr>
+</thead>
+<tbody>
+<tr>
+	<td>click</td>
+	<td>link=Administrar<datalist><option>link=Administrar</option></datalist></td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Tablas Básicas<datalist><option>link=Tablas Básicas</option></datalist></td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Financiadores<datalist><option>link=Financiadores</option></datalist></td>
+	<td></td>
+</tr>
+<tr><td>clickAt</td><td>xpath=(//a[contains(text(),'Nuevo')])[2]<datalist><option>xpath=(//a[contains(text(),'Nuevo')])[2]</option><option>//a[contains(@href, '/admin/financiadores/nueva')]</option><option>//div[2]/a</option></datalist></td><td>34,14</td>
+</tr>
+<tr><td>assertText</td><td>css=h1<datalist><option>css=h1</option><option>//h1</option></datalist></td><td>Nuevo Financiador</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=financiador_nombre<datalist><option>id=financiador_nombre</option></datalist></td>
+	<td>aaa</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=financiador_observaciones<datalist><option>id=financiador_observaciones</option></datalist></td>
+	<td>bbb</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>name=commit<datalist><option>name=commit</option></datalist></td>
+	<td></td>
+</tr>
+<tr><td>chooseOkOnNextConfirmation</td><td><datalist><option></option></datalist></td><td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Eliminar<datalist><option>link=Eliminar</option></datalist></td>
+	<td></td>
+</tr>
+<tr><td>assertText</td><td>css=h1<datalist><option>css=h1</option><option>//h1</option></datalist></td><td>Financiadores</td>
 </tr>
 </tbody></table>
 </body>

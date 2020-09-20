@@ -1,23 +1,16 @@
 <tr class='nested-fields'>
   <td>
     <% f.object.actividad_id = @registro.id%>
-    <%= f.association :proyectofinanciero,
-      collection: Cor1440Gen::Proyectofinanciero.all,
-      label_method: :nombre,
-      value_method: :id,
-      input_html: {style: "width: 8em"},
-      label: false
-    %>
-
     <% if f.object.proyectofinanciero_id %>
-      <% colact = Cor1440Gen::Actividadpf.where(proyectofinanciero_id: f.object.proyectofinanciero.id) %>
+      <% colact = Cor1440Gen::Actividadpf.where(proyectofinanciero_id: f.object.proyectofinanciero_id) %>
     <% else %>
       <% colact = Cor1440Gen::Actividadpf.all %>
     <% end %>
-    <%= f.association :actividadpf,
+    <%= f.input :convenioactividad,
       collection: colact,
-      label_method: :titulo,
-      value_method: :id,
+      label_method: lambda { |t| t.presenta_detallefinanciero_pfacpf},
+      value_method: lambda { |t| t.presenta_detallefinanciero_pfacpf},
+      value: lambda { |t| t.presenta_detallefinanciero_pfacpf},
       input_html: {style: "width: 8em"},
       label: false
     %>

@@ -51,6 +51,8 @@ Rails.application.routes.draw do
 
   get '/ubicacionespre' => 'sip/ubicacionespre#index',
     as: :ubicacionespre
+  get '/ubicacionespre_mundep' => 'sip/ubicacionespre#mundep',
+    as: :ubicacionespre_mundep
 
   root "sip/hogar#index"
 

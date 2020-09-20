@@ -39,6 +39,35 @@ module Sip
     end
 
 
+    def mundep
+      if params[:term]
+        term = Sip::Ubicacion.connection.quote_string(params[:term])
+        consNomubi = term.downcase.strip #sin_tildes
+        consNomubi.gsub!(/ +/, ":* & ")
+        if consNomubi.length > 0
+          consNomubi+= ":*"
+        end
+        # Usamos la funcion f_unaccent definida con el indice
+        # en db/migrate/20200916022934_indice_ubicacionpre.rb
+        where = " to_tsvector('spanish', " +
+          "f_unaccent(ubicacionpre.nombre_sin_pais)) " +
+          "@@ to_tsquery('spanish', '#{consNomubi}')";
+
+        cons = "SELECT TRIM(nombre_sin_pais) AS value, id AS id " +
+          "FROM public.sip_ubicacionpre AS ubicacionpre " +
+          "WHERE #{where} AND pais_id=170 " +
+          "AND clase_id IS NULL AND departamento_id IS NOT NULL " +
+          " ORDER BY 1";
+
+        r = ActiveRecord::Base.connection.select_all cons
+        respond_to do |format|
+          format.json { render :json, inline: r.to_json }
+          format.html { render inline: 'No responde con parametro term' }
+        end
+      end
+    end
+
+
     def index(c = nil)
       if c == nil
         c = Sip::Ubicacionpre.all

@@ -16,10 +16,20 @@ module Cor1440Gen
 
 
     attr_accessor :ubicacionpre_texto
+    attr_accessor :ubicacionpre_mundep_texto
 
     def ubicacionpre_texto
       if self.ubicacionpre
         self.ubicacionpre.nombre
+      else
+        ''
+      end
+    end
+
+
+    def ubicacionpre_mundep_texto
+      if self.ubicacionpre
+        self.ubicacionpre.nombre_sin_pais
       else
         ''
       end

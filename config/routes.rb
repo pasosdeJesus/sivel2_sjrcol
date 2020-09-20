@@ -54,6 +54,9 @@ Rails.application.routes.draw do
   get '/ubicacionespre_mundep' => 'sip/ubicacionespre#mundep',
     as: :ubicacionespre_mundep
 
+  get '/actividadespf/:id' => 'cor1440_gen/actividadespf#show',
+    as: :show_actividadespf
+
   root "sip/hogar#index"
 
   mount Sivel2Sjr::Engine, at: "/", as: 'sivel2_sjr'

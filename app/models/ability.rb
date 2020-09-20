@@ -322,6 +322,7 @@ class Ability < Sivel2Sjr::Ability
       when Ability::ROLANALIPRENSA
         can :manage, Cor1440Gen::Actividad, oficina_id: [1, usuario.oficina_id]
         can [:read, :new], Cor1440Gen::Actividad
+        can [:read, :new], Cor1440Gen::Actividadpf
         can :read, Cor1440Gen::Informe
         can :read, Cor1440Gen::Proyectofinanciero
         
@@ -333,6 +334,7 @@ class Ability < Sivel2Sjr::Ability
       when Ability::ROLSIST
 
         can [:new, :read], Cor1440Gen::Actividad
+        can [:new, :read], Cor1440Gen::Actividadpf
         can :manage, Cor1440Gen::Actividad, oficina_id: [1, usuario.oficina_id]
         can :read, Cor1440Gen::Proyectofinanciero
 
@@ -353,6 +355,7 @@ class Ability < Sivel2Sjr::Ability
 
         can :manage, Cor1440Gen::Actividad, oficina_id: [1, usuario.oficina_id]
         can [:read, :new], Cor1440Gen::Actividad
+        can [:read, :new], Cor1440Gen::Actividadpf
         can :read, Cor1440Gen::Informe
         can :index, Cor1440Gen::Mindicadorpf
         can :read, Cor1440Gen::Proyectofinanciero
@@ -374,6 +377,7 @@ class Ability < Sivel2Sjr::Ability
       when Ability::ROLCOOR
         can :manage, Cor1440Gen::Informe
         can [:read, :new], Cor1440Gen::Actividad
+        can [:read, :new], Cor1440Gen::Actividadpf
         can :manage, Cor1440Gen::Actividad, oficina_id: [1, usuario.oficina_id]
         can :read, Cor1440Gen::Proyectofinanciero
 
@@ -393,6 +397,7 @@ class Ability < Sivel2Sjr::Ability
 
       when Ability::ROLADMIN, Ability::ROLDIR
         can :manage, Cor1440Gen::Actividad
+        can :manage, Cor1440Gen::Actividadpf
         can :manage, Cor1440Gen::Informe
         can :manage, Cor1440Gen::Mindicadorpf
         can :manage, Cor1440Gen::Proyectofinanciero

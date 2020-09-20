@@ -4455,7 +4455,8 @@ CREATE TABLE public.sip_ubicacionpre (
     latitud double precision,
     longitud double precision,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    nombre_sin_pais character varying(500)
 );
 
 
@@ -13709,6 +13710,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200912192204'),
 ('20200912201532'),
 ('20200915215739'),
-('20200916022934');
+('20200916022934'),
+('20200919003430');
 
 

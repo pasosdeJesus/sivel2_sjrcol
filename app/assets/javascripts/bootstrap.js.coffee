@@ -12,7 +12,43 @@ jQuery ->
   #debugger
   ubipre.find('[id$=ubicacionpre_id]').val(id)
   ubipre.find('[id$=ubicacionpre_texto]').val(etiqueta)
+  ubipre.find('[id$=ubicacionpre_mundep_texto]').val(etiqueta)
   $(document).trigger("sip:autocompletada-ubicacionpre")
+  return
+
+
+# Busca ubicacionpre por nombre de municipio o departamento en Colombia
+# s es objeto con foco donde se busca ubicacionpre
+@sip_busca_ubicacionpre_mundep = (s) ->
+  root = window
+  sip_arregla_puntomontaje(root)
+  cnom = s.attr('id')
+  v = $("#" + cnom).data('autocompleta')
+  if (v != 1 && v != "no") 
+    $("#" + cnom).data('autocompleta', 1)
+    # Buscamos un div con clase div_ubicacionpre dentro del cual
+    # están tanto el campo ubicacionpre_id como el campo
+    # ubicacionpre_mundep_texto 
+    ubipre = s.closest('.div_ubicacionpre')
+    if (typeof ubipre == 'undefined')
+      alert('No se ubico .div_ubicacionpre')
+      return
+    if $(ubipre).find("[id$='ubicacionpre_id']").length != 1
+      alert('Dentro de .div_ubicacionpre no se ubicó ubicacionpre_id')
+      return
+    if $(ubipre).find("[id$='ubicacionpre_mundep_texto']").length != 1
+      alert('Dentro de .div_ubicacionpre no se ubicó ubicacionpre_mundep_texto')
+      return
+
+    $("#" + cnom).autocomplete({
+      source: root.puntomontaje + "ubicacionespre_mundep.json",
+      minLength: 2,
+      select: ( event, ui ) -> 
+        if (ui.item) 
+          sip_autocompleta_ubicacionpre(ui.item.value, ui.item.id, ubipre, root)
+          event.stopPropagation()
+          event.preventDefault()
+    })
   return
 
 
@@ -53,8 +89,8 @@ jQuery ->
 
 # En listado de asistencia permite autocompletar nombres
 $(document).on('focusin',
-  'input[id^=actividad_ubicacionpre_texto]', (e) -> 
-   sip_busca_ubicacionpre($(this))
+  'input[id^=actividad_ubicacionpre_mundep_texto]', (e) -> 
+   sip_busca_ubicacionpre_mundep($(this))
 )
 
 # En formulario de actividad si escoge Plan Estratégico y Asistencia humanitaria se despliega nueva sección con tabla de detalles financieros

@@ -7,7 +7,7 @@ module Cor1440Gen
     include Sivel2Sjr::Concerns::Models::Actividad
 
     belongs_to :ubicacionpre, class_name: '::Sip::Ubicacionpre',
-      foreign_key: 'ubicacionpre_id'
+      foreign_key: 'ubicacionpre_id', optional: true
     has_many :detallefinanciero, dependent: :delete_all,
       class_name: 'Detallefinanciero',
       foreign_key: 'actividad_id'
@@ -63,6 +63,21 @@ module Cor1440Gen
       cuenta
     end
 
+  def socio_principal
+    sp = ''
+    proyectofinanciero.find do |p| 
+      if p.financiador && p.financiador.count > 0 && sp == ''
+        if p.financiador[0].nombregifmm
+          sp = p.financiador[0].nombregifmm
+        else
+          sp = p.financiador[0].nombre
+        end
+      end
+    end
+    sp
+  end
+
+
 
     def presenta(atr)
       case atr.to_s
@@ -83,7 +98,7 @@ module Cor1440Gen
         end
 
       when 'estado'
-        'Completado'
+        'En proceso'
 
       when 'departamento'
         if ubicacionpre && ubicacionpre.departamento
@@ -129,7 +144,7 @@ module Cor1440Gen
 
       when 'mes'
         if fecha
-          fecha.month
+          Sip::FormatoFechaHelper::MESES[fecha.month]
         else
           ''
         end
@@ -174,19 +189,18 @@ module Cor1440Gen
         end
 
       when 'socio_implementador'
-        'SJR-COL'
-
-      when 'socio_principal'
-        sp = ''
-        proyectofinanciero.find do |p| 
-          if p.financiador && p.financiador.count > 0 && sp == ''
-            sp = p.financiador[0].nombre
-          end
+        if socio_principal == 'SJR-COL'
+          ''
+        else
+          'SJR-COL'
         end
-        sp
 
       when 'tipo_implementacion'
-        'Indirecta'
+        if socio_principal == 'SJR-COL'
+          'Directa'
+        else
+          'Indirecta'
+        end
 
       when 'ubicacion'
         lugar

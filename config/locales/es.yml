@@ -55,7 +55,8 @@ es:
         tipoanexo: Tipo de anexo
         tipoanexo_id: Tipo de anexo
       "cor1440_gen/actividad":
-        fecha: Fecha inicial
+        nombre: 'Nombre (*)'
+        fecha: 'Fecha inicial (*)'
         lugar: Ubicación
         poblacionmujeres: 'Población Mujeres'
         poblacionhombres: 'Población Hombres'

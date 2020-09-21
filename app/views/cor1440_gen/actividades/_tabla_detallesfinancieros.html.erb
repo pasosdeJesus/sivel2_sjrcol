@@ -1,6 +1,5 @@
-<% proyectos = @registro.proyectofinanciero.pluck(:id) %>
-<% tipos = @registro.actividadpf.pluck(:id) %>
-<% if proyectos.include? (10) and tipos.include? (116) %>
+<% tipos = @registro.actividadpf.pluck(:actividadtipo_id) %>
+<% if tipos.include? (129) %>
   <% estdetalle = "display: block; overflow-x: scroll;" %>
 <% else %>
   <% estdetalle = "display: none; overflow-x: scroll;" %>

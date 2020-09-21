@@ -12,6 +12,7 @@
       value_method: lambda { |t| t.presenta_detallefinanciero_pfacpf},
       value: lambda { |t| t.presenta_detallefinanciero_pfacpf},
       input_html: {style: "width: 8em"},
+      disabled: f.object.actividadpf_id ? true : false,
       label: false
     %>
   </td>

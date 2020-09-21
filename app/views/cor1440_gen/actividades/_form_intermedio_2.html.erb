@@ -1,0 +1,16 @@
+<div class='row'>
+  <div class='col-sm-12'>
+    <%= render partial: 'tabla_detallesfinancieros', 
+      locals: {f: f, con_label: false} %>
+  </div>
+</div>
+<div class='row'>
+  <div class='col-sm-2'>
+    <label for="actividad_resultado">
+      <%= @actividad.class.human_attribute_name(:resultado) %>
+    </label>
+  </div>
+  <div class='col-sm-10'>
+    <%= f.input_field :resultado%>
+  </div>
+</div>

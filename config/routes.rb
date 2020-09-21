@@ -56,6 +56,9 @@ Rails.application.routes.draw do
 
   get '/actividadespf/:id' => 'cor1440_gen/actividadespf#show',
     as: :show_actividadespf
+  
+  get '/actividadespflistado' => 'cor1440_gen/actividadespf#index',
+    as: :index_actividadespf
 
   root "sip/hogar#index"
 

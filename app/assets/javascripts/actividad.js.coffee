@@ -112,28 +112,55 @@ $(document).on('focusin',
   cor1440_gen_busca_asistente($(this))
 )
 
+@filtra_actividadespf_tipo_accionhum = (apfs_ids) ->
+  root = window
+  f_actividadespf = 'filtro[busid]=' + apfs_ids.join(",")
+  f_tipo = 'filtro[busactividadtipo_id]=129'
+  buscatipoactividad = (e, resp) ->
+    div_detallefinanciero = $("#detallefinanciero")
+    if resp.length > 0
+      div_detallefinanciero.css("display", "block")
+    else
+      div_detallefinanciero.css("display", "none")
+  sip_ajax_recibe_json(root, 'actividadespflistado.json?' + f_actividadespf + '&' + f_tipo, null, buscatipoactividad)
 
-$(document).on('change', 'select[id^=actividad_actividad_proyectofinanciero_attributes_][id$=actividadpf_ids]', (e, res) ->
+@valida_visibilidad_detallefinanciero = () ->
   actividadespf = []
   $('select[id^=actividad_actividad_proyectofinanciero_attributes_][id$=actividadpf_ids]').each( () ->
     val = $(this).val()
     actividadespf = $.merge(actividadespf, val)
   )
-  div_detallefinanciero = $("#detallefinanciero")
-  if actividadespf.includes("116")
-    div_detallefinanciero.css("display", "block")
-  else
-    div_detallefinanciero.css("display", "none")
+  filtra_actividadespf_tipo_accionhum(actividadespf)
+
+$(document).on('change', 'select[id^=actividad_actividad_proyectofinanciero_attributes_][id$=actividadpf_ids]', (e, res) ->
+  valida_visibilidad_detallefinanciero()
+  #actualiza_opciones_convenioactividad()
 )
 
 $(document).on('cocoon:before-remove', '#actividad_proyectofinanciero', (e, objetivo) ->
-  $(this).find("select").each( (d) ->
-    div_detallefinanciero = $("#detallefinanciero")
-    valor = $(this).val()
-    if valor.includes("116")
-      div_detallefinanciero.css("display", "none")
-  )
+  valida_visibilidad_detallefinanciero()
+  #actualiza_opciones_convenioactividad()
 )
+
+@actualiza_opciones_convenioactividad = () ->
+  apfs = calcula_pfapf_seleccionadas()
+  $('select[id^=actividad_detallefinanciero_attributes_][id$=convenioactividad]').each((o) ->
+    miselect = $(this)
+    miselectid = $(this).attr('id')
+    nuevasop = []
+    misopciones = this.options
+    $(misopciones).each( (o) ->
+      if apfs.includes($(this).text())
+        nuevasop.push($(this))
+    )
+    miselect.empty()
+    $(nuevasop).each( (o) ->
+      miselect.append($("<option></option>")
+       .attr("value", nuevasop[o].value).text(nuevasop[o].text))
+    )
+    $('#' + miselectid).val('')
+    $('#' + miselectid).trigger('chosen:updated')
+  )
 
 $(document).on('change', 'input[id^=actividad_detallefinanciero_attributes_][id$=_numeromeses]', (e, res) ->
   total = +$(this).val()
@@ -160,8 +187,7 @@ $(document).on('change', 'input[id^=actividad_detallefinanciero_attributes][id$=
   $(input_total).val(total)
 )
 
-$(document).on('cocoon:after-insert', '#filas_detallefinanciero', (e, objetivo) ->
-  $('.chosen-select').chosen()
+@calcula_pfapf_seleccionadas = () ->
   apfs = []
   $('[id^=actividad_actividad_proyectofinanciero_attributes][id$=_actividadpf_ids] option:selected').each( (o) ->
     v = $(this).text()
@@ -171,6 +197,11 @@ $(document).on('cocoon:after-insert', '#filas_detallefinanciero', (e, objetivo) 
       valor = pf + " - " + apf_sincod
       apfs.push(valor)
   )
+  return apfs
+  
+$(document).on('cocoon:after-insert', '#filas_detallefinanciero', (e, objetivo) ->
+  $('.chosen-select').chosen()
+  apfs = calcula_pfapf_seleccionadas()
   nuevasop = []
   mipfapf = objetivo.find('select[id$=_convenioactividad] option')
   mipfapf.each( (o) ->
@@ -199,3 +230,5 @@ $(document).on('change', 'select[id^=actividad_detallefinanciero_attributes_][id
   root = window
   params = { pfl: [+$(this).val()]}
 )
+
+

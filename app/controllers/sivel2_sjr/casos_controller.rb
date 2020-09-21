@@ -121,7 +121,7 @@ module Sivel2Sjr
     end
 
     def otros_params_victimasjr 
-      [ :actualtrabajando ]
+      [ :actualtrabajando, :discapacidad_id ]
     end
 
     def otros_params_victima

@@ -173,7 +173,7 @@ module Cor1440Gen
     end
 
     def lista_params
-      lista_params_sivel2_sjr + [:ubicacionpre_id] + [ 
+      lista_params_sivel2_sjr + [:ubicacionpre_id, :covid] + [ 
         :detallefinanciero_attributes => [
           'convenioactividad',
           'unidadayuda_id',

@@ -14,6 +14,9 @@ module Cor1440Gen
       pf = Cor1440Gen::Proyectofinanciero.find(proyectofinanciero_id).nombre
       "#{pf} - #{titulo}"
     end
-
+    
+    scope :filtro_actividadtipo_id, lambda { |t|
+        where(actividadtipo_id: t)
+    }
   end
 end

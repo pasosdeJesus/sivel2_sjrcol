@@ -84,7 +84,7 @@ module Cor1440Gen
       p1 = poblacion_cor1440_gen
       p2 = 0
       idp_casos = casosjr.map {|c|
-        d.caso.victima.map(&:id_persona)
+        c.caso.victima.map(&:id_persona)
       }.flatten.uniq
       idp_asistentes = asistencia.map(&:persona_id)
       idp = idp_casos + idp_asistentes
@@ -96,6 +96,24 @@ module Cor1440Gen
         "#{p1} pero se esperaba al menos #{p2}"
       end
     end
+
+    def poblacion_nueva
+      p = 0
+      idp_casos = casosjr.select {|c|
+        c.caso.fecha.at_beginning_of_month >= self.fecha.at_beginning_of_month
+      }.map {|c|
+        c.caso.victima.map(&:id_persona)
+      }.flatten.uniq
+      idp_asistentes = asistencia.select {|a| 
+        Sivel2Gen::Victima.where(id_persona: a.persona_id).count > 0 &&
+          Sivel2Gen::Victima.where(id_persona: a.persona_id).take.caso.
+          fecha.at_beginning_of_month >= self.fecha.at_beginning_of_month
+      }.map(&:persona_id)
+      idp = idp_casos + idp_asistentes
+      idp.uniq!
+      return idp.count
+    end
+
 
     def presenta(atr)
       case atr.to_s

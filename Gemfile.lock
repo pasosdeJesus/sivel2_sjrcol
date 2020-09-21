@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: 78be08bfc61e31c3e7b0ba21b6cf4caf409f4422
+  revision: 7c37356bf05fd1b4701a45d8f51a3a45a3cec471
   specs:
     cor1440_gen (1.0b3)
       devise
@@ -74,7 +74,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 2af14e10a9fc0ff0d638d127844fcb38467347c3
+  revision: c319af4d9400bb5331e1413bd01105bbc24eb3c2
   specs:
     sivel2_sjr (2.0b10)
       rails
@@ -183,7 +183,7 @@ GEM
     colorize (0.8.1)
     concurrent-ruby (1.1.7)
     crass (1.0.6)
-    devise (4.7.2)
+    devise (4.7.3)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 4.1.0)
@@ -293,7 +293,7 @@ GEM
     raindrops (0.19.1)
     rake (13.0.1)
     redcarpet (3.5.0)
-    regexp_parser (1.7.1)
+    regexp_parser (1.8.0)
     responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)

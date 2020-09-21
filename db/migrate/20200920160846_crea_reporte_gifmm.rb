@@ -55,7 +55,7 @@ class CreaReporteGifmm < ActiveRecord::Migration[6.0]
       INSERT INTO public.heb412_gen_campoplantillahcm (id, plantillahcm_id, nombrecampo, columna) VALUES (477, 43, 'observaciones', 'AW');
       INSERT INTO public.heb412_gen_campoplantillahcm (id, plantillahcm_id, nombrecampo, columna) VALUES (478, 43, 'id', 'AX');
       --479 AY
-      --AZ
+      --480 AZ
     SQL
   end
 

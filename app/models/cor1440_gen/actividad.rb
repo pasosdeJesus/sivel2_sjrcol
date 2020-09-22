@@ -66,6 +66,142 @@ module Cor1440Gen
       cuenta
     end
 
+    # Auxiliar que retorna listado de identificaciones de personas de 
+    # las víctimas del listado de casos que cumplan una condición
+    def personas_victimas_condicion
+      ids = []
+      self.casosjr.each do |c|
+        c.caso.victima.each do |v|
+          if (yield(v))
+            ids << v.id_persona
+          end
+        end
+      end
+      ids
+    end
+
+    # Auxiliar que retorna listado de identificaciones de personas del
+    # listado de asistentes que cumplan una condición
+    def personas_asistentes_condicion
+      ids = []
+      self.asistencia.each do |a| 
+        if (yield(a))
+          ids << a.persona_id
+        end
+      end
+      ids
+    end
+
+    def poblacion_ids
+      idp = personas_victimas_condicion {|v| true}
+      idp += personas_asistentes_condicion {|a| true}
+      idp.uniq!
+      idp.join(",")
+    end
+
+    def poblacion
+      p1 = poblacion_cor1440_gen
+      p2 = poblacion_ids.split(",").count
+      if p1 >= p2
+        p1.to_s
+      else
+        "#{p1} pero se esperaban al menos #{p2}"
+      end
+    end
+
+    def poblacion_nuevos_ids
+      idp = casosjr.select {|c|
+        c.caso.fecha.at_beginning_of_month >= self.fecha.at_beginning_of_month
+      }.map {|c|
+        c.caso.victima.map(&:id_persona)
+      }.flatten.uniq
+      idp += personas_asistentes_condicion {|a| 
+        Sivel2Gen::Victima.where(id_persona: a.persona_id).count > 0 &&
+          Sivel2Gen::Victima.where(id_persona: a.persona_id).take.caso.fecha.
+            at_beginning_of_month >= self.fecha.at_beginning_of_month
+      }
+      idp.uniq!
+      idp.join(",")
+    end
+
+
+    def poblacion_nuevos
+      poblacion_nuevos_ids.split(",").count
+    end
+
+    def poblacion_colombianos_retornados_ids
+      idcol = Sip::Pais.where(nombre: 'COLOMBIA').take.id
+      idp = casosjr.select {|c|
+        c.caso.migracion.count > 0
+      }.map {|c|
+        c.caso.victima.select {|v|
+          v.persona &&
+            (v.persona.nacionalde == idcol || v.persona.id_pais == idcol)
+        }.map(&:id_persona)
+      }.flatten.uniq
+
+      idp += personas_asistentes_condicion {|a| 
+        Sivel2Gen::Victima.where(id_persona: a.persona_id).count > 0 &&
+          Sivel2Gen::Victima.where(id_persona: a.persona_id).take.
+            caso.migracion.count > 0 &&
+            (a.persona.nacionalde == idcol || a.persona.id_pais == idcol)
+      }
+      idp.uniq!
+      idp.join(",")
+
+    end
+
+    def poblacion_colombianos_retornados
+      poblacion_colombianos_retornados_ids.split(",").count
+    end
+
+
+    # Retorna listado de ids de personas de casos y asistencia
+    # cuyo perfil de migración tenga nombre nomperfil
+    def poblacion_perfil_migracion_ids(nomperfil)
+      idp = casosjr.select {|c|
+        c.caso.migracion.count > 0 &&
+          c.caso.migracion[0].perfilmigracion &&
+          c.caso.migracion[0].perfilmigracion.nombre == nomperfil
+      }.map {|c|
+        c.caso.victima.map(&:id_persona)
+      }.flatten.uniq
+
+      idp += personas_asistentes_condicion {|a| 
+        a.perfilactorsocial &&
+          a.perfilactorsocial.nombre == nomperfil
+      }
+      idp.uniq!
+      idp.join(",")
+    end
+
+   
+    def poblacion_pendulares_ids
+      poblacion_perfil_migracion_ids('PENDULAR')
+    end
+
+    def poblacion_pendulares
+      poblacion_pendulares_ids.split(",").count
+    end
+
+
+    def poblacion_transito_ids
+      poblacion_perfil_migracion_ids('EN TRÁNSITO')
+    end
+
+    def poblacion_transito
+      poblacion_transito_ids.split(",").count
+    end
+
+    def poblacion_vocacion_permanencia_ids
+      poblacion_perfil_migracion_ids('CON VOCACIÓN DE PERMANENCIA')
+    end
+
+    def poblacion_vocacion_permanencia
+      poblacion_vocacion_permanencia_ids.split(",").count
+    end
+
+
     def socio_principal
       sp = ''
       proyectofinanciero.find do |p| 
@@ -80,39 +216,7 @@ module Cor1440Gen
       sp
     end
 
-    def poblacion
-      p1 = poblacion_cor1440_gen
-      p2 = 0
-      idp_casos = casosjr.map {|c|
-        c.caso.victima.map(&:id_persona)
-      }.flatten.uniq
-      idp_asistentes = asistencia.map(&:persona_id)
-      idp = idp_casos + idp_asistentes
-      idp.uniq!
-      p2 += idp.count
-      if p1 >= p2
-        p1.to_s
-      else
-        "#{p1} pero se esperaba al menos #{p2}"
-      end
-    end
 
-    def poblacion_nueva
-      p = 0
-      idp_casos = casosjr.select {|c|
-        c.caso.fecha.at_beginning_of_month >= self.fecha.at_beginning_of_month
-      }.map {|c|
-        c.caso.victima.map(&:id_persona)
-      }.flatten.uniq
-      idp_asistentes = asistencia.select {|a| 
-        Sivel2Gen::Victima.where(id_persona: a.persona_id).count > 0 &&
-          Sivel2Gen::Victima.where(id_persona: a.persona_id).take.caso.
-          fecha.at_beginning_of_month >= self.fecha.at_beginning_of_month
-      }.map(&:persona_id)
-      idp = idp_casos + idp_asistentes
-      idp.uniq!
-      return idp.count
-    end
 
 
     def presenta(atr)

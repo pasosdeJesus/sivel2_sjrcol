@@ -34,10 +34,17 @@ class Detallefinanciero < ActiveRecord::Base
   attr_accessor :convenioactividad
 
   def convenioactividad=(valor)
-    convenio = Cor1440Gen::Proyectofinanciero.where(nombre: valor.split(" - ")[0])
-    actividadpf = Cor1440Gen::Actividadpf.where(titulo: valor.split(" - ")[1])
-    self.proyectofinanciero_id = convenio[0].id
-    self.actividadpf_id = actividadpf[0].id
+    convenio = Cor1440Gen::Proyectofinanciero.where(
+      nombre: valor.split(" - ")[0])
+    actividadpf = Cor1440Gen::Actividadpf.where(
+      "titulo LIKE '%' || ? || '%'", valor.split(" - ")[1].strip)
+    if convenio.count == 1 && actividadpf.count == 1
+      self.proyectofinanciero_id = convenio[0].id
+      self.actividadpf_id = actividadpf[0].id
+    else
+      puts "** No se identificó convenio '#{convenio}' con " + 
+        "actividadpf '#{actividadpf}'";
+    end
   end
   
   def convenioactividad

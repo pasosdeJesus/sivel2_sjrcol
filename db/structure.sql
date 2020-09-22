@@ -598,7 +598,8 @@ CREATE TABLE public.sivel2_sjr_victimasjr (
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     id_victima integer NOT NULL,
-    actualtrabajando boolean
+    actualtrabajando boolean,
+    discapacidad_id integer
 );
 
 
@@ -11349,6 +11350,14 @@ ALTER TABLE ONLY public.sivel2_gen_caso_respuestafor
 
 
 --
+-- Name: sivel2_sjr_victimasjr fk_rails_4005fe5a7e; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sivel2_sjr_victimasjr
+    ADD CONSTRAINT fk_rails_4005fe5a7e FOREIGN KEY (discapacidad_id) REFERENCES public.discapacidad(id);
+
+
+--
 -- Name: sivel2_sjr_migracion fk_rails_40371f9525; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -13715,6 +13724,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200919003430'),
 ('20200920160846'),
 ('20200920180233'),
-('20200921170159');
+('20200921170159'),
+('20200921174602'),
+('20200921210411');
 
 

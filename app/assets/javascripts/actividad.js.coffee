@@ -132,15 +132,6 @@ $(document).on('focusin',
   )
   filtra_actividadespf_tipo_accionhum(actividadespf)
 
-$(document).on('change', 'select[id^=actividad_actividad_proyectofinanciero_attributes_][id$=actividadpf_ids]', (e, res) ->
-  valida_visibilidad_detallefinanciero()
-  actualiza_opciones_convenioactividad()
-)
-
-$(document).on('cocoon:after-remove', '#actividad_proyectofinanciero', (e, objetivo) ->
-  valida_visibilidad_detallefinanciero()
-  actualiza_opciones_convenioactividad()
-)
 
 @actualiza_opciones_convenioactividad = () ->
   apfs_inicial = calcula_pfapf_seleccionadas()
@@ -151,7 +142,7 @@ $(document).on('cocoon:after-remove', '#actividad_proyectofinanciero', (e, objet
   )
   apfs = apfs_inicial.filter((item) => !excluidos.includes(item))
   $('select[id^=actividad_detallefinanciero_attributes_][id$=convenioactividad]').each((o) ->
-    if $(this).val() == ""
+    if $(this).val() == "" || $(this).val() == null
       miselect = $(this)
       miselectid = $(this).attr('id')
       nuevasop = apfs
@@ -176,6 +167,16 @@ $(document).on('cocoon:after-remove', '#actividad_proyectofinanciero', (e, objet
   )
   return apfs
   
+$(document).on('change', 'select[id^=actividad_actividad_proyectofinanciero_attributes_][id$=actividadpf_ids]', (e, res) ->
+  valida_visibilidad_detallefinanciero()
+  actualiza_opciones_convenioactividad()
+)
+
+$(document).on('cocoon:after-remove', '#actividad_proyectofinanciero', (e, objetivo) ->
+  valida_visibilidad_detallefinanciero()
+  actualiza_opciones_convenioactividad()
+)
+
 $(document).on('cocoon:after-insert', '#filas_detallefinanciero', (e, objetivo) ->
   $('.chosen-select').chosen()
   actualiza_opciones_convenioactividad()
@@ -185,6 +186,7 @@ $(document).on('change', 'select[id^=actividad_detallefinanciero_attributes_][id
   $(e.target).attr('disabled', true)
   $(e.target).trigger('chosen:updated')
 )
+
 $(document).on('change', 'input[id^=actividad_detallefinanciero_attributes_][id$=_numeromeses]', (e, res) ->
   total = +$(this).val()
   numeroasistencia = $(this).parent().parent().next().find("select")

@@ -953,7 +953,8 @@ CREATE TABLE public.cor1440_gen_actividad (
     rangoedadac_id integer,
     usuario_id integer NOT NULL,
     lugar character varying(500),
-    ubicacionpre_id integer
+    ubicacionpre_id integer,
+    covid boolean
 );
 
 
@@ -13713,6 +13714,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200916022934'),
 ('20200919003430'),
 ('20200920160846'),
-('20200920180233');
+('20200920180233'),
+('20200921170159');
 
 

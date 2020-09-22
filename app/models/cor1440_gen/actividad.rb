@@ -122,15 +122,10 @@ module Cor1440Gen
 
 
       when 'covid19'
-        covid19 = proyectofinanciero.exists? {|p|
-          p.actividadpf.exists? {|a|
-            a.nombre.includes?('COVID')
-          }
-        }
-        if covid19
+        if self.covid
           'Si'
         else
-          ''
+          'No'
         end
 
       when 'estado'

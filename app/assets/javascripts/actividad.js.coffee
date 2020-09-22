@@ -169,7 +169,7 @@ $(document).on('cocoon:after-remove', '#actividad_proyectofinanciero', (e, objet
   $('[id^=actividad_actividad_proyectofinanciero_attributes][id$=_actividadpf_ids] option:selected').each( (o) ->
     v = $(this).text()
     pf = $(this).parent().parent().parent().prev().find('select[id$=_proyectofinanciero_id] option:selected').text()
-    apf_sincod = v.substr(v.indexOf(' ')+1)
+    apf_sincod = v.substr(v.indexOf(': ')+1)
     if (pf != "" && pf != "PLAN ESTRATÉGICO 1" && apf_sincod != "")
       valor = pf + " - " + apf_sincod
       apfs.push(valor)

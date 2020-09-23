@@ -216,8 +216,119 @@ module Cor1440Gen
       sp
     end
 
+    def  poblacion_r_g(sexo, num)
+      idp = personas_victimas_condicion {|v| 
+        if v.persona.sexo == sexo
+          e = Sivel2Gen::RangoedadHelper.edad_de_fechanac_fecha(
+            v.persona.anionac, v.persona.mesnac, v.persona.dianac,
+            fecha.year, fecha.month, fecha. day)
+          r = Sivel2Gen::RangoedadHelper.buscar_rango_edad(
+            e, 'Cor1440Gen::Rangoedadac')
+          r == num
+        else
+          false
+        end
+      }
+      idp += personas_asistentes_condicion {|a| 
+        if a.persona.sexo == sexo
+          e = Sivel2Gen::RangoedadHelper.edad_de_fechanac_fecha(
+            a.persona.anionac, a.persona.mesnac, a.persona.dianac,
+            fecha.year, fecha.month, fecha. day)
+          r = Sivel2Gen::RangoedadHelper.buscar_rango_edad(
+            e, 'Cor1440Gen::Rangoedadac')
+          r == num
+        else
+          false
+        end
+      }
+      idp.uniq!
+      idp.join(",")
+    end
+
+    def poblacion_mujeres_r_g_ids(num)
+      poblacion_r_g('F', num)
+    end
+
+    def poblacion_hombres_r_g_ids(num)
+      poblacion_r_g('M', num)
+    end
+
+    def poblacion_sinsexo_g_ids(num)
+      poblacion_r_g('S', num)
+    end
 
 
+    def poblacion_gen_infijo(infijo, num = nil)
+      puts "** OJO poblacion_gen_infijo(infijo = #{infijo}, num = #{num})"
+      if num.nil?
+        p1 = send("poblacion_#{infijo}_solore")
+        p2 = send("poblacion_#{infijo}_ids").split(",").count
+      else
+        p1 = send("poblacion_#{infijo}_solore", num)
+        p2 = send("poblacion_#{infijo}_ids", num).split(",").count
+      end
+      if p1 >= p2
+        p1.to_s
+      else
+        "#{p1} pero se esperaban al menos #{p2}"
+      end
+    end
+
+    def poblacion_hombres_adultos_ids
+      l = poblacion_hombres_r_g_ids(4).split(",") +
+        poblacion_hombres_r_g_ids(5).split(",") +
+        poblacion_hombres_r_g_ids(6).split(",")
+      l.join(",")
+    end
+
+    def poblacion_hombres_r_g_4_5_ids
+      l = poblacion_hombres_r_g_ids(4).split(",") + 
+        poblacion_hombres_r_g_ids(5).split(",")
+      l.join(",")
+    end
+
+    def poblacion_mujeres_adultas_ids
+      l = poblacion_mujeres_r_g_ids(4).split(",") +
+        poblacion_mujeres_r_g_ids(5).split(",") +
+        poblacion_mujeres_r_g_ids(6).split(",")
+      l.join(",")
+    end
+
+    def poblacion_mujeres_r_g_4_5_ids
+      l = poblacion_mujeres_r_g_ids(4).split(",") + poblacion_mujeres_r_g_ids(5).split(",")
+      l.join(",")
+    end
+
+    def poblacion_ninas_adolescentes_y_se_ids
+      l = poblacion_mujeres_r_g_ids(1).split(",") +
+        poblacion_mujeres_r_g_ids(2).split(",") +
+        poblacion_mujeres_r_g_ids(3).split(",") +
+        poblacion_mujeres_r_g_ids(7).split(",")
+      l.join(",")
+    end
+
+    def poblacion_ninos_adolescentes_y_se_ids
+      l = poblacion_hombres_r_g_ids(1).split(",") +
+        poblacion_hombres_r_g_ids(2).split(",") +
+        poblacion_hombres_r_g_ids(3).split(",") +
+        poblacion_hombres_r_g_ids(7).split(",")
+      l.join(",")
+    end
+
+    def poblacion_sinsexo_adultos_ids
+      l = poblacion_sinsexo_g_ids(4).split(",") +
+        poblacion_sinsexo_g_ids(5).split(",") +
+        poblacion_sinsexo_g_ids(6).split(",")
+      l.join(",")
+    end
+
+    def poblacion_sinsexo_menores_ids
+      l = poblacion_sinsexo_g_ids(1).split(",") +
+        poblacion_sinsexo_g_ids(2).split(",") +
+        poblacion_sinsexo_g_ids(3).split(",") +
+        poblacion_sinsexo_g_ids(7).split(",")
+      l.join(",")
+    end
 
     def presenta(atr)
       case atr.to_s
@@ -250,10 +361,30 @@ module Cor1440Gen
           ''
         end
 
+      when 'mes'
+        if fecha
+          Sip::FormatoFechaHelper::MESES[fecha.month]
+        else
+          ''
+        end
+
+      when 'municipio'
+        if ubicacionpre && ubicacionpre.municipio
+          ubicacionpre.municipio.nombre
+        else
+          ''
+        end
+
+
       when 'num_afrodescendientes'
         cuenta_victimas_condicion {|v|
           v.etnia.nombre  == 'AFRODESCENDIENTE' || 
           v.etnia.nombre == 'NEGRO'
+        }
+
+      when 'num_con_discapacidad'
+        cuenta_victimas_condicion { |v|
+          v.discapacidad && v.discapacidad.nombre != 'NINGUNA'
         }
 
       when 'num_indigenas'
@@ -277,42 +408,153 @@ module Cor1440Gen
           v.etnia.nombre == 'SIN INFORMACIÓN'
         }
 
-      when 'mes'
-        if fecha
-          Sip::FormatoFechaHelper::MESES[fecha.month]
-        else
-          ''
-        end
-
-      when 'municipio'
-        if ubicacionpre && ubicacionpre.municipio
-          ubicacionpre.municipio.nombre
-        else
-          ''
-        end
-
       when 'parte_rmrp'
         'SI'
 
-      when 'poblacion_hombres'
-        actividad_rangoedadac.inject(0) { |memo, r|
-          memo += r.mr ? r.mr : 0
-          memo += r.ml ? r.ml : 0
-          memo
-        }
+      when 'poblacion_hombres_adultos'
+        p1 = poblacion_hombres_r_g_solore(4) +
+          poblacion_hombres_r_g_solore(5) + poblacion_hombres_r_g_solore(6)
+        p2 = poblacion_hombres_adultos_ids.split(",").count
+        if p1 >= p2
+          p1.to_s
+        else
+          "#{p1} pero se esperaban al menos #{p2}"
+        end
 
-      when 'poblacion_mujeres'
+      when 'poblacion_hombres_l'
+        poblacion_gen_infijo('hombres_l')
+
+      when 'poblacion_hombres_l_r'
         actividad_rangoedadac.inject(0) { |memo, r|
           memo += r.fl ? r.fl : 0
           memo += r.fr ? r.fr : 0
           memo
         }
 
-      when 'poblacion_sin_sexo'
+      when /^poblacion_hombres_l_g[0-9]*$/
+        g = atr[21..-1].to_i
+        poblacion_gen_infijo('hombres_l_g', g)
+
+      when 'poblacion_hombres_r'
+        poblacion_gen_infijo('hombres_r')
+
+      when /^poblacion_hombres_r_g[0-9]*$/
+        g = atr[21..-1].to_i
+        poblacion_gen_infijo('hombres_r_g', g)
+
+      when /^poblacion_hombres_r_g[0-9]*_ids$/
+        g = atr[21..-4].to_i
+        poblacion_hombres_r_g_ids(g)
+
+      when /^poblacion_hombres_r_g_4_5*$/
+        p1 = poblacion_hombres_r_g_solore(4)+poblacion_hombres_r_g_solore(5)
+        p2 = poblacion_hombres_r_g_4_5_ids.split(",").count
+        if p1 >= p2
+          p1.to_s
+        else
+          "#{p1} pero se esperaban al menos #{p2}"
+        end
+
+      when 'poblacion_mujeres_adultas'
+        p1 = poblacion_mujeres_r_g_solore(4) +
+          poblacion_mujeres_r_g_solore(5) + poblacion_mujeres_r_g_solore(6)
+        p2 = poblacion_mujeres_adultas_ids.split(",").count
+        if p1 >= p2
+          p1.to_s
+        else
+          "#{p1} pero se esperaban al menos #{p2}"
+        end
+
+      when 'poblacion_mujeres_l'
+        poblacion_gen_infijo('mujeres_l')
+
+      when 'poblacion_mujeres_l_r'
         actividad_rangoedadac.inject(0) { |memo, r|
-          memo += r.s ? r.s : 0
+          memo += r.fl ? r.fl : 0
+          memo += r.fr ? r.fr : 0
           memo
         }
+
+      when 'poblacion_mujeres_r'
+        poblacion_gen_infijo('mujeres_r')
+
+      when /^poblacion_mujeres_l_g[0-9]*$/
+        g = atr[21..-1].to_i
+        poblacion_gen_infijo('mujeres_l_g', g)
+
+      when /^poblacion_mujeres_r_g[0-9]*$/
+        g = atr[21..-1].to_i
+        poblacion_gen_infijo('mujeres_r_g', g)
+
+      when /^poblacion_mujeres_r_g[0-9]*_ids$/
+        g = atr[21..-4].to_i
+        poblacion_mujeres_r_g_ids(g)
+
+      when /^poblacion_mujeres_r_g_4_5*$/
+        p1 = poblacion_mujeres_r_g_solore(4)+poblacion_mujeres_r_g_solore(5)
+        p2 = poblacion_mujeres_r_g_4_5_ids.split(",").count
+        if p1 >= p2
+          p1.to_s
+        else
+          "#{p1} pero se esperaban al menos #{p2}"
+        end
+
+      when 'poblacion_niñas_adolescentes_y_se'
+        p1 = poblacion_mujeres_r_g_solore(1) +
+          poblacion_mujeres_r_g_solore(2) + poblacion_mujeres_r_g_solore(3) +
+          poblacion_mujeres_r_g_solore(7)
+        p2 = poblacion_ninas_adolescentes_y_se_ids.split(",").count
+        if p1 >= p2
+          p1.to_s
+        else
+          "#{p1} pero se esperaban al menos #{p2}"
+        end
+
+      when 'poblacion_niñas_adolescentes_y_se_ids'
+        poblacion_ninas_adolescentes_y_se_ids
+
+      when 'poblacion_niños_adolescentes_y_se'
+        p1 = poblacion_hombres_r_g_solore(1) +
+          poblacion_hombres_r_g_solore(2) + poblacion_hombres_r_g_solore(3) +
+          poblacion_hombres_r_g_solore(7)
+        p2 = poblacion_ninos_adolescentes_y_se_ids.split(",").count
+        if p1 >= p2
+          p1.to_s
+        else
+          "#{p1} pero se esperaban al menos #{p2}"
+        end
+
+      when 'poblacion_niños_adolescentes_y_se_ids'
+        poblacion_ninos_adolescentes_y_se_ids.split(",").count
+
+
+      when 'poblacion_sinsexo'
+        poblacion_gen_infijo('sinsexo')
+
+      when 'poblacion_sinsexo_adultos'
+        p1 = poblacion_sinsexo_g_solore(4) +
+          poblacion_sinsexo_g_solore(5) + poblacion_sinsexo_g_solore(6)
+        p2 = poblacion_sinsexo_adultos_ids.split(",").count
+        if p1 >= p2
+          p1.to_s
+        else
+          "#{p1} pero se esperaban al menos #{p2}"
+        end
+
+      when 'poblacion_sinsexo_menores'
+        p1 = poblacion_sinsexo_g_solore(1) +
+          poblacion_sinsexo_g_solore(2) + poblacion_sinsexo_g_solore(3) +
+          poblacion_sinsexo_g_solore(7)
+        p2 = poblacion_sinsexo_menores_ids.split(",").count
+        if p1 >= p2
+          p1.to_s
+        else
+          "#{p1} pero se esperaban al menos #{p2}"
+        end
+
+      when /^poblacion_sinsexo_g[0-9]*$/
+        g = atr[21..-1].to_i
+        poblacion_gen_infijo('sinsexo_g', g)
 
       when 'sector_gifmm'
         idig = self.busca_indicador_gifmm

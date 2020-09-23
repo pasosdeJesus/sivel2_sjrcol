@@ -69,12 +69,12 @@ class CompletaGifmm < ActiveRecord::Migration[6.0]
         SET nombrecampo='poblacion_hombres_r_g1' WHERE id = 465; --AK
       
       UPDATE public.heb412_gen_campoplantillahcm 
-        SET nombrecampo='poblacion_hombres_r_g5' WHERE id = 469; --AQ
+        SET nombrecampo='poblacion_hombres_r_g5' WHERE id = 469; 
 
       UPDATE public.heb412_gen_campoplantillahcm 
         SET nombrecampo='poblacion_menores_sin_sexo' WHERE id = 470; --AP
       UPDATE public.heb412_gen_campoplantillahcm 
-        SET nombrecampo='poblacion_adultos_sin_sexo' WHERE id = 471; --AP
+        SET nombrecampo='poblacion_adultos_sin_sexo' WHERE id = 471; --AQ
 
       INSERT INTO public.heb412_gen_campoplantillahcm 
         (id, plantillahcm_id, nombrecampo,columna) VALUES 

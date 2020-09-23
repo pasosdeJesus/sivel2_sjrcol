@@ -385,7 +385,6 @@ module Cor1440Gen
       when 'beneficiarios_com_acogida'
         self.asistencia.select{|a| a.perfilactorsocial_id == 13}.count
 
-
       when 'covid19'
         if self.covid
           'Si'

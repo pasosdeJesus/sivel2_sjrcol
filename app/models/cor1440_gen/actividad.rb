@@ -54,6 +54,56 @@ module Cor1440Gen
       idig
     end
 
+
+    def detalleah_unidad
+      detallefinanciero && detallefinanciero[0].unidadayuda ?
+        detallefinanciero[0].unidadayuda.nombre :
+        ''
+    end
+
+    def detalleah_cantidad
+      detallefinanciero && detallefinanciero[0].cantidad ?
+      detallefinanciero[0].cantidad.to_s :
+        ''
+    end
+
+    def detalleah_modalidad
+      detallefinanciero && detallefinanciero[0].modalidadentrega ?
+      detallefinanciero[0].modalidadentrega.nombre :
+        ''
+    end
+
+    def detalleah_tipo_transferencia
+      detallefinanciero && detallefinanciero[0].tipotransferencia ?
+      detallefinanciero[0].tipotransferencia.nombre :
+        ''
+    end
+
+    def detalleah_mecanismo_entrega
+      detallefinanciero && detallefinanciero[0].mecanismodeentrega ?
+      detallefinanciero[0].mecanismodeentrega.nombre :
+        ''
+    end
+
+    def detalleah_frecuencia_entrega
+      detallefinanciero && detallefinanciero[0].frecuenciaentrega ?
+      detallefinanciero[0].frecuenciaentrega.nombre :
+        ''
+    end
+
+    def detalleah_monto_por_persona
+      detallefinanciero && detallefinanciero[0].valortotal ?
+      detallefinanciero[0].valortotal :
+        ''
+    end
+
+    def detalleah_numero_meses_cobertura
+      detallefinanciero && detallefinanciero[0].numeromeses ?
+      detallefinanciero[0].numeromeses :
+        ''
+    end
+
+
     def cuenta_victimas_condicion
       cuenta = 0
       casosjr.each do |c|
@@ -384,9 +434,30 @@ module Cor1440Gen
 
       when 'num_con_discapacidad'
         cuenta_victimas_condicion { |v|
-          v.discapacidad && v.discapacidad.nombre != 'NINGUNA'
+          vs = Sivel2Sjr::Victimasjr.where(id_victima: v.id)
+          vs.count > 0 && vs.take.discapacidad &&
+            vs.take.discapacidad && vs.take.discapacidad.nombre != 'NINGUNA'
         }
 
+      when 'num_con_discapacidad_ids'
+        idp = personas_victimas_condicion { |v|
+          vs = Sivel2Sjr::Victimasjr.where(id_victima: v.id)
+          vs.count > 0 && vs.take.discapacidad &&
+            vs.take.discapacidad && vs.take.discapacidad.nombre != 'NINGUNA'
+        }
+        idp += personas_asistentes_condicion {|a|
+          if Sivel2Gen::Victima.where(id_persona: a.persona_id).count > 0
+            v = Sivel2Gen::Victima.where(id_persona: a.persona_id).take
+            vs = Sivel2Sjr::Victimasjr.where(id_victima: v.id)
+            vs.count > 0 && vs.take.discapacidad &&
+              vs.take.discapacidad && vs.take.discapacidad.nombre != 'NINGUNA'
+          else
+            false
+          end
+        }
+        idp.uniq!
+        idp.join(",")
+ 
       when 'num_indigenas'
         cuenta_victimas_condicion { |v|
           v.etnia.nombre  != 'AFRODESCENDIENTE' &&

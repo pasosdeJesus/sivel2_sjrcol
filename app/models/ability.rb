@@ -225,6 +225,7 @@ class Ability < Sivel2Sjr::Ability
           'nombre', 
           'num_afrodescendientes',
           'num_con_discapacidad',
+          'num_con_discapacidad_ids',
           'num_indigenas',
           'num_lgbti',
           'num_otra_etnia',

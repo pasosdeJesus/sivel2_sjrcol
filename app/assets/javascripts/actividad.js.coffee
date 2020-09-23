@@ -162,7 +162,7 @@ $(document).on('focusin',
     pf = $(this).parent().parent().parent().prev().find('select[id$=_proyectofinanciero_id] option:selected').text()
     apf_sincod = v.substr(v.indexOf(': ')+1)
     if (pf != "" && pf != "PLAN ESTRATÉGICO 1" && apf_sincod != "")
-      valor = pf + " - " + apf_sincod
+      valor = pf + " -" + apf_sincod
       apfs.push(valor)
   )
   return apfs

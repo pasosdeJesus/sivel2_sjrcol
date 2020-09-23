@@ -56,49 +56,49 @@ module Cor1440Gen
 
 
     def detalleah_unidad
-      detallefinanciero && detallefinanciero[0].unidadayuda ?
+      detallefinanciero.count > 0 && detallefinanciero[0].unidadayuda ?
         detallefinanciero[0].unidadayuda.nombre :
         ''
     end
 
     def detalleah_cantidad
-      detallefinanciero && detallefinanciero[0].cantidad ?
+      detallefinanciero.count > 0 && detallefinanciero[0].cantidad ?
       detallefinanciero[0].cantidad.to_s :
         ''
     end
 
     def detalleah_modalidad
-      detallefinanciero && detallefinanciero[0].modalidadentrega ?
+      detallefinanciero.count > 0 && detallefinanciero[0].modalidadentrega ?
       detallefinanciero[0].modalidadentrega.nombre :
         ''
     end
 
     def detalleah_tipo_transferencia
-      detallefinanciero && detallefinanciero[0].tipotransferencia ?
+      detallefinanciero.count > 0 && detallefinanciero[0].tipotransferencia ?
       detallefinanciero[0].tipotransferencia.nombre :
         ''
     end
 
     def detalleah_mecanismo_entrega
-      detallefinanciero && detallefinanciero[0].mecanismodeentrega ?
+      detallefinanciero.count > 0 && detallefinanciero[0].mecanismodeentrega ?
       detallefinanciero[0].mecanismodeentrega.nombre :
         ''
     end
 
     def detalleah_frecuencia_entrega
-      detallefinanciero && detallefinanciero[0].frecuenciaentrega ?
+      detallefinanciero.count > 0 && detallefinanciero[0].frecuenciaentrega ?
       detallefinanciero[0].frecuenciaentrega.nombre :
         ''
     end
 
     def detalleah_monto_por_persona
-      detallefinanciero && detallefinanciero[0].valortotal ?
+      detallefinanciero.count > 0 && detallefinanciero[0].valortotal ?
       detallefinanciero[0].valortotal :
         ''
     end
 
     def detalleah_numero_meses_cobertura
-      detallefinanciero && detallefinanciero[0].numeromeses ?
+      detallefinanciero.count > 0 && detallefinanciero[0].numeromeses ?
       detallefinanciero[0].numeromeses :
         ''
     end

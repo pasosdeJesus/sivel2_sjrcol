@@ -1,36 +1,43 @@
 # encoding: UTF-8
 class Detallefinanciero < ActiveRecord::Base
 
+  belongs_to :actividad, foreign_key: 'actividad_id',
+    validate: true, class_name: 'Cor1440Gen::Actividad'
+
+  belongs_to :proyectofinanciero, foreign_key: 'proyectofinanciero_id', 
+    validate: true, class_name: 'Cor1440Gen::Proyectofinanciero'
+
+  belongs_to :actividadpf, foreign_key: 'actividadpf_id', 
+    validate: true, class_name: 'Cor1440Gen::Actividadpf'
+
+  belongs_to :unidadayuda, foreign_key: 'unidadayuda_id', 
+    validate: true, class_name: 'Unidadayuda'
+
+  belongs_to :mecanismodeentrega, foreign_key: 'mecanismodeentrega_id', 
+    validate: true, class_name: 'Mecanismodeentrega'
+
+  belongs_to :modalidadentrega, foreign_key: 'modalidadentrega_id', 
+    validate: true, class_name: 'Modalidadentrega'
+
+  belongs_to :tipotransferencia, foreign_key: 'tipotransferencia_id', 
+    validate: true, class_name: 'Tipotransferencia'
+
+  belongs_to :frecuenciaentrega, foreign_key: 'frecuenciaentrega_id', 
+    validate: true, class_name: 'Frecuenciaentrega'
+
   validates :cantidad, :numericality => { greater_than_or_equal_to: 0 }
   validates :valorunitario, :numericality => { greater_than_or_equal_to: 0 }
   validates :valortotal, :numericality => { greater_than_or_equal_to: 0 }
   validates :numeromeses, :numericality => { greater_than_or_equal_to: 0 }
   validates :numeroasistencia, :numericality => { greater_than_or_equal_to: 0 }
 
-  belongs_to :actividad, foreign_key: 'actividad_id',
-    validate: true, class_name: 'Cor1440Gen::Actividad'
 
-  belongs_to :proyectofinanciero, foreign_key: 'proyectofinanciero_id', 
-    validate: true, class_name: 'Cor1440Gen::Proyectofinanciero'
-  
-  belongs_to :actividadpf, foreign_key: 'actividadpf_id', 
-    validate: true, class_name: 'Cor1440Gen::Actividadpf'
-  
-  belongs_to :unidadayuda, foreign_key: 'unidadayuda_id', 
-    validate: true, class_name: 'Unidadayuda'
-  
-  belongs_to :mecanismodeentrega, foreign_key: 'mecanismodeentrega_id', 
-    validate: true, class_name: 'Mecanismodeentrega'
-  
-  belongs_to :modalidadentrega, foreign_key: 'modalidadentrega_id', 
-    validate: true, class_name: 'Modalidadentrega'
-  
-  belongs_to :tipotransferencia, foreign_key: 'tipotransferencia_id', 
-    validate: true, class_name: 'Tipotransferencia'
-  
-  belongs_to :frecuenciaentrega, foreign_key: 'frecuenciaentrega_id', 
-    validate: true, class_name: 'Frecuenciaentrega'
-  
+  validates :actividadpf, uniqueness: {
+    scope: :actividad,
+    message: 'En talba detalle financiero no puede repetir ' +
+      'actividad de marco lógico'
+  }
+
   attr_accessor :convenioactividad
 
   def convenioactividad=(valor)
@@ -38,12 +45,16 @@ class Detallefinanciero < ActiveRecord::Base
       nombre: valor.split(" - ")[0])
     actividadpf = Cor1440Gen::Actividadpf.where(
       "titulo LIKE '%' || ? || '%'", valor.split(" - ")[1].strip)
-    if convenio.count == 1 && actividadpf.count == 1
-      self.proyectofinanciero_id = convenio[0].id
-      self.actividadpf_id = actividadpf[0].id
+    if convenio.count == 1 && actividadpf.count == 1 
+      if self.proyectofinanciero_id.nil? && self.actividadpf_id.nil?
+        # Solo necesitan establecerse para nuevos detallesfinancieros
+        # los existentes ya vienen con esos campos llenos
+        self.proyectofinanciero_id = convenio[0].id
+        self.actividadpf_id = actividadpf[0].id
+      end
     else
-      puts "** No se identificó convenio '#{convenio}' con " + 
-        "actividadpf '#{actividadpf}'";
+      puts "** No se identificó convenio '#{convenio[0].id}' con " + 
+        "actividadpf '#{actividadpf[0].id}'";
     end
   end
   

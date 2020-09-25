@@ -175,17 +175,18 @@ module Cor1440Gen
     def lista_params
       lista_params_sivel2_sjr + [:ubicacionpre_id, :covid] + [ 
         :detallefinanciero_attributes => [
-          'convenioactividad',
-          'unidadayuda_id',
           'cantidad',
-          'valorunitario',
-          'valortotal',
+          'convenioactividad',
+          'frecuenciaentrega_id',
+          'id',
           'mecanismodeentrega_id',
           'modalidadentrega_id',
-          'tipotransferencia_id',
-          'frecuenciaentrega_id',
           'numeromeses',
           'numeroasistencia',
+          'tipotransferencia_id',
+          'unidadayuda_id',
+          'valorunitario',
+          'valortotal',
           '_destroy'
         ]
       ]

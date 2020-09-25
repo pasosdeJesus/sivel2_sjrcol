@@ -1,10 +1,8 @@
 <tr class='nested-fields'>
   <td>
-    <% f.object.actividad_id = @registro.id%>
+    <% colact = nil %>
     <% if f.object.proyectofinanciero_id %>
       <% colact = Cor1440Gen::Actividadpf.where(proyectofinanciero_id: f.object.proyectofinanciero_id) %>
-    <% else %>
-      <% colact = Cor1440Gen::Actividadpf.all %>
     <% end %>
     <%= f.input :convenioactividad,
       collection: colact,
@@ -101,6 +99,7 @@
     %>
   </td>
   <td>
+    <%= f.input :id, as: :hidden %>
     <%= link_to_remove_association "Eliminar", f, 
       :class => 'btn-danger' 
     %>

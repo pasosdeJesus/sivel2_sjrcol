@@ -1,6 +1,6 @@
 <tr class='nested-fields'>
   <td>
-    <% colact = nil %>
+    <% colact = [] %>
     <% if f.object.proyectofinanciero_id %>
       <% colact = Cor1440Gen::Actividadpf.where(proyectofinanciero_id: f.object.proyectofinanciero_id) %>
     <% end %>

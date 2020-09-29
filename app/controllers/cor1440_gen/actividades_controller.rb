@@ -182,7 +182,8 @@ module Cor1440Gen
           'mecanismodeentrega_id',
           'modalidadentrega_id',
           'numeromeses',
-          'numeroasistencia',
+          'numeroasistencia'
+        ] + [ :persona_ids => [] ] + [
           'tipotransferencia_id',
           'unidadayuda_id',
           'valorunitario',

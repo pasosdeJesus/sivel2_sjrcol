@@ -1,4 +1,3 @@
-# encoding: UTF-8
 class Detallefinanciero < ActiveRecord::Base
 
   belongs_to :actividad, foreign_key: 'actividad_id',
@@ -24,6 +23,12 @@ class Detallefinanciero < ActiveRecord::Base
 
   belongs_to :frecuenciaentrega, foreign_key: 'frecuenciaentrega_id', 
     validate: true, class_name: 'Frecuenciaentrega'
+
+  has_many :detallefinanciero_persona, dependent: :delete_all,
+    class_name: '::DetallefinancieroPersona',
+    foreign_key: 'detallefinanciero_id'
+  has_many :persona,
+    class_name: 'Sip::Persona', through: 'detallefinanciero_persona'
 
   validates :cantidad, :numericality => { greater_than_or_equal_to: 0 }
   validates :valorunitario, :numericality => { greater_than_or_equal_to: 0 }
@@ -67,10 +72,5 @@ class Detallefinanciero < ActiveRecord::Base
       return ''
     end
   end
-end                                              
-                                                 
-                                                 
-                                                 
-                                                 
-                                                 
-                                                 
+
+end

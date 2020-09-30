@@ -65,6 +65,11 @@ class Detallefinanciero < ActiveRecord::Base
   attr_accessor :convenioactividad
 
   def convenioactividad=(valor)
+    if valor.nil? || valor.split(" - ").count < 2
+      self.proyectofinanciero_id = nil
+      self.actividadpf_id = nil
+      return
+    end
     convenio = Cor1440Gen::Proyectofinanciero.where(
       nombre: valor.split(" - ")[0])
     actividadpf = Cor1440Gen::Actividadpf.where(

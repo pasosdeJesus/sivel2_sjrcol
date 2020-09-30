@@ -2386,18 +2386,18 @@ CREATE TABLE public.despacho (
 CREATE TABLE public.detallefinanciero (
     id bigint NOT NULL,
     actividad_id integer NOT NULL,
-    proyectofinanciero_id integer NOT NULL,
-    actividadpf_id integer NOT NULL,
-    unidadayuda_id integer NOT NULL,
-    cantidad integer NOT NULL,
-    valorunitario integer NOT NULL,
-    valortotal integer NOT NULL,
-    mecanismodeentrega_id integer NOT NULL,
-    modalidadentrega_id integer NOT NULL,
-    tipotransferencia_id integer NOT NULL,
-    frecuenciaentrega_id integer NOT NULL,
-    numeromeses integer NOT NULL,
-    numeroasistencia integer NOT NULL,
+    proyectofinanciero_id integer,
+    actividadpf_id integer,
+    unidadayuda_id integer,
+    cantidad integer,
+    valorunitario integer,
+    valortotal integer,
+    mecanismodeentrega_id integer,
+    modalidadentrega_id integer,
+    tipotransferencia_id integer,
+    frecuenciaentrega_id integer,
+    numeromeses integer,
+    numeroasistencia integer,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
@@ -13757,6 +13757,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200922083809'),
 ('20200923120201'),
 ('20200929021041'),
-('20200930034317');
+('20200930034317'),
+('20200930091134');
 
 

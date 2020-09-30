@@ -27,6 +27,7 @@ ActiveSupport::Inflector.inflections do |inflect|
 	inflect.irregular 'migracion', 'migraciones'
 	inflect.irregular 'causaagresion', 'causasagresion'
 	inflect.irregular 'causamigracion', 'causasmigracion'
+	inflect.irregular 'detallefinanciero', 'detallesfinancieros'
 	inflect.irregular 'dificultadmigracion', 'dificultadesmigracion'
 	inflect.irregular 'discapacidad', 'discapacidades'
 	inflect.irregular 'espaciopart', 'espaciospart'

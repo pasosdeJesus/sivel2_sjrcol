@@ -60,6 +60,8 @@ Rails.application.routes.draw do
   get '/actividadespflistado' => 'cor1440_gen/actividadespf#index',
     as: :index_actividadespf
 
+  get '/detallesfinancieros/nuevo' => 'detallesfinancieros#nuevo'
+
   root "sip/hogar#index"
 
   mount Sivel2Sjr::Engine, at: "/", as: 'sivel2_sjr'

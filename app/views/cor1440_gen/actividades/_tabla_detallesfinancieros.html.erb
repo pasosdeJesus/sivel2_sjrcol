@@ -1,3 +1,4 @@
+<input id='actividad_id' type='hidden' value='<%= f.object.id %>' %>
 <% tipos = @registro.actividadpf.pluck(:actividadtipo_id) %>
 <% if tipos.include? (129) %>
   <% estdetalle = "display: block; overflow-x: scroll;" %>
@@ -35,6 +36,10 @@
       partial: 'cor1440_gen/actividades/detallefinanciero_campos',
       "data-association-insertion-node": "tbody#filas_detallefinanciero", 
       "data-association-insertion-method": "append", 
+      'data-ajax' => File.join(
+        Rails.configuration.relative_url_root, 'detallesfinancieros/nuevo'
+      ),
+      'data-ajaxdata' => 'actividad_id',
       class: 'btn-primary'
     %>
   </div>

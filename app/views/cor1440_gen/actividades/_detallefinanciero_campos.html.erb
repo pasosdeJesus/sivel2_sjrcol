@@ -11,7 +11,27 @@
       value: lambda { |t| t.presenta_detallefinanciero_pfacpf},
       input_html: {style: "width: 8em"},
       disabled: f.object.actividadpf_id ? true : false,
-      label: false
+      label: false,
+      html_input: {
+        class: 'chosen-select'
+      }
+    %>
+  </td>
+  <td>
+    <% idp = [] %>
+    <% if f.object.actividad %>
+       <% idp = f.object.actividad.casosjr.map {  |c| c.caso.victima.map(&:id_persona) }.flatten %>
+       <% idp += f.object.actividad.asistencia.map(&:persona_id) %>
+       <% idp.uniq! %>
+    <% end %>
+    <% colper = Sip::Persona.where(id: idp) %>
+    <%= f.association :persona,
+      collection: colper,
+      label_method: :presenta_nombre,
+      label: false,
+      html_input: {
+        class: 'chosen-select'
+      }
     %>
   </td>
   <td>
@@ -20,7 +40,10 @@
       label_method: :nombre,
       value_method: :id,
       input_html: {style: "width: 8em"},
-      label: false
+      label: false,
+      html_input: {
+        class: 'chosen-select'
+      }
     %>
   </td>
   <td>
@@ -48,7 +71,10 @@
       label_method: :nombre,
       value_method: :id,
       input_html: {style: "width: 8em"},
-      label: false
+      label: false,
+      html_input: {
+        class: 'chosen-select'
+      }
     %>
   </td> 
   <td>
@@ -57,7 +83,10 @@
       label_method: :nombre,
       value_method: :id,
       input_html: {style: "width: 8em"},
-      label: false
+      label: false,
+      html_input: {
+        class: 'chosen-select'
+      }
     %>
   </td> 
   <td>
@@ -66,7 +95,10 @@
       label_method: :nombre,
       value_method: :id,
       input_html: {style: "width: 8em"},
-      label: false
+      label: false,
+      html_input: {
+        class: 'chosen-select'
+      }
     %>
   </td>
   <td>
@@ -75,7 +107,10 @@
       label_method: :nombre,
       value_method: :id,
       input_html: {style: "width: 8em"},
-      label: false
+      label: false,
+      html_input: {
+        class: 'chosen-select'
+      }
     %>
   </td>
   <td>
@@ -95,7 +130,9 @@
       label: false, 
       as: :select,
       collection: col,
-      input_html: {style: "width: 8em"}
+      input_html: {
+        style: "width: 8em",
+      }
     %>
   </td>
   <td>

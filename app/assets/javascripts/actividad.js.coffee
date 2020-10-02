@@ -135,12 +135,7 @@ $(document).on('focusin',
 
 @actualiza_opciones_convenioactividad = () ->
   apfs_inicial = calcula_pfapf_seleccionadas()
-  excluidos = []
-  $('select[id^=actividad_detallefinanciero_attributes_][id$=convenioactividad] option:selected').each((o) ->
-    if $(this).text() != ""
-      excluidos.push($(this).text())
-  )
-  apfs = apfs_inicial.filter((item) => !excluidos.includes(item))
+  apfs = apfs_inicial
   $('select[id^=actividad_detallefinanciero_attributes_][id$=convenioactividad]').each((o) ->
     if $(this).val() == "" || $(this).val() == null
       miselect = $(this)

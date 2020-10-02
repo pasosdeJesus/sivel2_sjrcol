@@ -55,13 +55,6 @@ class Detallefinanciero < ActiveRecord::Base
   validates :numeromeses, :numericality => { greater_than_or_equal_to: 0 }
   validates :numeroasistencia, :numericality => { greater_than_or_equal_to: 0 }
 
-
-  validates :actividadpf, uniqueness: {
-    scope: :actividad,
-    message: 'En talba detalle financiero no puede repetir ' +
-      'actividad de marco lógico'
-  }
-
   attr_accessor :convenioactividad
 
   def convenioactividad=(valor)

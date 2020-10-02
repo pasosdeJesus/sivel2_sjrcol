@@ -35,6 +35,21 @@ module Cor1440Gen
       end
     end
 
+    validate :valida_beneficiarios
+    def valida_beneficiarios
+      pact = []
+      self.detallefinanciero.map{
+        |t| t.persona_ids.map{ |per| 
+          if t.actividadpf_id
+            pact.push([per, t.actividadpf_id])
+          end
+        }
+      }
+      if pact.length != pact.uniq.length
+        errors.add(:persona, "En Detalle Financiero no se puden repetir personas si la actividad de Marco lógico es la misma") 
+      end 
+    end 
+
     # PRESENTACIÓN DE INFORMACIÓN
 
 

@@ -66,7 +66,8 @@ module Sivel2Sjr
       authorize! :read, Sip::Persona
       res = []
       if params && params['caso_ids']
-        params['caso_ids'].each do |cc|
+        puts "params es #{params.inspect}"
+        params['caso_ids'].split(',').each do |cc|
           nc = cc.to_i
           if Sivel2Gen::Caso.where(id: nc).count == 0
             resp_error("No se encontró caso #{nc}")

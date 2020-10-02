@@ -235,6 +235,7 @@ $(document).on('change', 'input[id^=actividad_detallefinanciero_attributes][id$=
 
   # Procesamos personas en casos que recibimos
   posbenef = []
+  console.log('El resultado res es: ', res)
   for p in res
       n = jrs_persona_presenta_nombre(p.nombres, p.apellidos, p.tdocumento_sigla, p.numerodocumento)
       posbenef.push({id: p.persona_id, nombre: n})
@@ -245,7 +246,7 @@ $(document).on('change', 'input[id^=actividad_detallefinanciero_attributes][id$=
       personaid = $(this).parent().parent().find("[id$=_persona_attributes_id]").val()
       nombres = $(this).parent().parent().find("[id$=_nombres]").val()
       apellidos = $(this).parent().parent().find("[id$=_apellidos]").val()
-      tdocumento_sigla = $(this).parent().parent().find("[id$=_tdocumento_id]").val()
+      tdocumento_sigla = $(this).parent().parent().find("[id$=_tdocumento_id]").children('option:selected').text()
       numerodocumento = $(this).parent().parent().find("[id$=_numerodocumento]").val()
       n = jrs_persona_presenta_nombre(nombres, apellidos, tdocumento_sigla, numerodocumento)
       posbenef.push({id: personaid, nombre: n})
@@ -282,29 +283,50 @@ $(document).on('change', 'input[id^=actividad_detallefinanciero_attributes][id$=
       casoid = $(this).parent().parent().find("a").first().text()
       cids.push(casoid)
   )
-  sip_ajax_recibe_json(window, 'personas_casos', {caso_ids: cids},
+  console.log('El arreglo cids es:', cids)
+  console.log(cids)
+  sip_ajax_recibe_json(window, 'personas_casos', {caso_ids: cids.join(',')},
     jrs_refresca_posibles_beneficiarios_casos_asistentes)
 
 
+# En actividad tras cambiar nombres de asistente refrescar beneficiario posibles
 $(document).on('change', '[id^=actividad_asistencia_attributes][id$=_nombres]', (e, objetivo) ->
   jrs_refresca_posibles_beneficiarios_casos()
 )
 
+# En actividad tras cambiar apellidos de asistente refrescar beneficiario posibles
 $(document).on('change', '[id^=actividad_asistencia_attributes][id$=_apellidos]', (e, objetivo) ->
   jrs_refresca_posibles_beneficiarios_casos()
 )
 
+# En actividad tras cambiar tipo de documento refrescar beneficiario posibles
 $(document).on('change', '[id^=actividad_asistencia_attributes][id$=_tdocumento_id]', (e, objetivo) ->
   jrs_refresca_posibles_beneficiarios_casos()
 )
 
+# Tras cambiar número de documento refrescar beneficiario posibles
 $(document).on('change', '[id^=actividad_asistencia_attributes][id$=_numerodocumento]', (e, objetivo) ->
   jrs_refresca_posibles_beneficiarios_casos()
 )
 
-@jrs_recalcula_poblacion = () ->
-  cor1440_gen_recalcula_poblacion(jrs_agrega_beneficiarios_casos)
+# Tras eliminar caso beneficiario refrescar beneficiarios posibles
+$(document).on('cocoon:after-remove', '#actividad_casosjr', (e, papa) ->
   jrs_refresca_posibles_beneficiarios_casos()
+)
 
+# Tras eliminar asistente refrescar beneficiarios posibles
+$(document).on('cocoon:after-remove', '#asistencia', (e, papa) ->
+  jrs_refresca_posibles_beneficiarios_casos()
+)
+
+# Tras autocompletar asistente refrescar beneficiarios posibles
+$(document).on('cor1440gen:autocompletado-asistente', (e, papa) ->
+  jrs_refresca_posibles_beneficiarios_casos()
+)
+
+# Tras autocompletar caso beneficiario refrescar beneficiarios posibles
+$(document).on('sivel2sjr:autocompletado-contactoactividad', (e, papa) ->
+  jrs_refresca_posibles_beneficiarios_casos()
+)
 
 

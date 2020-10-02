@@ -1,9 +1,9 @@
 <input id='actividad_id' type='hidden' value='<%= f.object.id %>' %>
 <% tipos = @registro.actividadpf.pluck(:actividadtipo_id) %>
 <% if tipos.include? (129) %>
-  <% estdetalle = "display: block; overflow-x: scroll;" %>
+  <% estdetalle = "display: block; overflow-x: scroll; min-height: 320px;" %>
 <% else %>
-  <% estdetalle = "display: none; overflow-x: scroll;" %>
+  <% estdetalle = "display: none; overflow-x: scroll; min-height: 320px;" %>
 <% end %>
 <div id="detallefinanciero" class="panel-body table-responsivei" style="<%= estdetalle %>" >
   <table class="table table-bordered table-sm">

@@ -1,3 +1,35 @@
 tbody#actividad_proyectofinanciero tr:first-child td:last-child {
   display: none;
 }
+
+.actividad_detallefinanciero_persona .chosen-results {
+  max-height: 120px;
+}
+
+.actividad_asistencia_persona_nombres input {
+  width: 8em;
+}
+
+.actividad_asistencia_persona_apellidos input {
+  width: 8em;
+}
+
+.actividad_asistencia_persona_tdocumento_id select {
+  width: 5em;
+}
+
+.actividad_asistencia_persona_numerodocumento select {
+  width: 6em;
+}
+
+.actividad_asistencia_persona_anionac select {
+  width: 5em;
+}
+
+.actividad_asistencia_persona_mesnac select {
+  width: 4em;
+}
+
+.actividad_asistencia_persona_dianac select {
+  width: 4em;
+}

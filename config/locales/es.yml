@@ -41,6 +41,8 @@ es:
     actividadareas: Subáreas de Actividades
     proyecto: Área de Actividad
     proyectos: Áreas de Actividad
+    sectorgifmm: Sector GIFMM
+    sectorgifmm_id: Sector GIFMM
   activerecord:
     attributes:
       "agresionmigracion": 
@@ -53,7 +55,9 @@ es:
         tipoanexo: Tipo de anexo
         tipoanexo_id: Tipo de anexo
       "cor1440_gen/actividad":
-        fecha: Fecha inicial
+        nombre: 'Nombre (*)'
+        fecha_localizada: 'Fecha (*)'
+        lugar: Ubicación
         poblacionmujeres: 'Población Mujeres'
         poblacionhombres: 'Población Hombres'
         proyectofinanciero: 'Convenio financiado'
@@ -64,6 +68,8 @@ es:
       "cor1440_gen/actividadtipo":
         Actividadtipo: Tipo de actividad de convenio financiado
         Actividadtipos: Tipos de actividad de convenio financiado
+      "cor1440_gen/financiador":
+        nombregifmm: Nombre GIFMM
       "cor1440_gen/proyecto":
         financiador_ids: Financiador
         Proyecto: Área de Actividad
@@ -84,21 +90,44 @@ es:
       "espaciopart":
         Espaciopart: Espacio de participación o red
         Espaciospart: Espacios de participación o redes
+      "indicadorgifmm":
+        Indicadorgifmm: Indicador GIFMM
+        Indicadoresgifmm: Indicadores GIFMM
+        Sectorgifmm: Sector GIFMM
+        Sectoresgifmm: Sectores GIFMM
+      "frecuenciaentrega":
+        Frecuenciaentrega: Frecuancia de Entrega
+        Frecuenciasentrega: Frecuencias de Entrega
+      "mecanismodeentrega":
+        Mecanismodeentrega: Mecanismo de Entrega
+        Mecanismosdeentrega: Mecanismos de Entrega
       "miembrofamiliar":
         Miembrofamiliar: Miembro del grupo familiar incluidos en refugio
         Miembrosfamiliar: Miembros del grupo familiar incluidos en refugio
       "migracontactopre":
         Migracontactopre: Contacto previo con Colombia
         Migracontactospre: Contactos previos con Colombia
+      "modalidadentrega":
+        Modalidadentrega: Modalidad de Entrega
+        Modalidadesentrega: Modalidades de Entrega
       "perfilmigracion":
         Perfilmigracion: Perfil de migración
         Perfilesmigracion: Perfiles de migración
+      "sectorgifmm":
+        Sectorgifmm: Sector GIFMM
+        Sectoresgifmm: Sectores GIFMM
       "tipoproteccion":
         Tipoproteccion: Tipo de protección en refugio
         Tiposproteccion: Tipos de protección en refugio
+      "tipotransferencia":
+        Tipotransferencia: Tipo de Transferencia
+        Tipostransferencia: Tipos de Transferencia
       "trivalentepositiva":
         Trivalentepositiva: Trivalente Positiva
         Trivalentespositiva: Trivalentes Positiva
+      "unidadayuda":
+        Unidadayuda: Unidad de Ayuda
+        Unidadesayuda: Unidades de Ayuda
       "causaagresion":
         Causaagresion: Causa de la agresión
         Causasagresion: Causas de la agresion

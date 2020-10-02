@@ -48,6 +48,53 @@ module Sivel2Sjr
     def asegura_camposdinamicos(registro, current_usuario_id)
     end
 
+
+    # Responde con mensaje de error
+    def resp_error(m)
+      respond_to do |format|
+        format.html { 
+          render inline: m
+        }
+        format.json { 
+          render json: m, status: :unprocessable_entity 
+        }
+      end
+    end
+
+    # Fución API que retorna personas de un caso
+    def personas_casos
+      authorize! :read, Sip::Persona
+      res = []
+      if params && params['caso_ids']
+        puts "params es #{params.inspect}"
+        params['caso_ids'].split(',').each do |cc|
+          nc = cc.to_i
+          if Sivel2Gen::Caso.where(id: nc).count == 0
+            resp_error("No se encontró caso #{nc}")
+            return
+          end
+          c = Sivel2Gen::Caso.find(nc)
+          c.persona.each do |p|
+            res.push({
+              persona_id: p.id,
+              nombres: p.nombres,
+              apellidos: p.apellidos,
+              tdocumento_sigla: p.tdocumento ? p.tdocumento.sigla : '',
+              numerodocumento: p.numerodocumento
+            })
+          end
+        end
+      end
+
+      resj = res.to_json
+      respond_to do |format|
+        format.js { render text: resj }
+        format.json { render json: resj, status: :created }
+        format.html { render inline: resj }
+      end
+
+    end
+
     def filtrar_ca(conscaso)
       if current_usuario && current_usuario.rol == Ability::ROLINV
         aeu = current_usuario.etiqueta_usuario.map { |eu| eu.etiqueta_id }
@@ -121,7 +168,7 @@ module Sivel2Sjr
     end
 
     def otros_params_victimasjr 
-      [ :actualtrabajando ]
+      [ :actualtrabajando, :discapacidad_id ]
     end
 
     def otros_params_victima

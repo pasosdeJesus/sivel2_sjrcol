@@ -26,10 +26,10 @@
       <%= p.input :id, as: :hidden %>
       <% ph = 'N'
       ac = {'data-autocompleta' => 'no',
-             style: 'width: 9em' }
+             style: 'width: 6em' }
       if (!p.object.numerodocumento || p.object.numerodocumento == 'N' || p.object.numerodocumento == '')
         ph = 'Buscar'
-        ac = { style: 'width: 9em' }
+        ac = { style: 'width: 6em' }
       end %>
       <%= p.input :numerodocumento, placeholder: ph,
         input_html: ac,
@@ -44,17 +44,17 @@
     </td>
     <td>
       <%= p.input :anionac, 
-        input_html: { style: 'width: 9em' },
+        input_html: { style: 'width: 5em' },
         label: false %>
     </td>
     <td>
       <%= p.input :mesnac, 
-        input_html: { style: 'width: 9em' },
+        input_html: { style: 'width: 4em' },
         label: false %>
     </td>
     <td>
       <%= p.input :dianac, 
-        input_html: { style: 'width: 9em' },
+        input_html: { style: 'width: 4em' },
         label: false %>
     </td>
   <% end %>
@@ -63,7 +63,8 @@
       collection: Sip::Actorsocial.all,
       label_method: :presenta_nombre,
       value_method: :id,
-      label: false
+      label: false,
+      input_html: { style: 'width: 6em' }
     %>
   </td>
   <td>
@@ -71,7 +72,7 @@
       collection: Sip::Perfilactorsocial.habilitados,
       label_method: :nombre,
       value_method: :id,
-      input_html: { style: 'width: 10em' },
+      input_html: { style: 'width: 6em' },
       label: false
     %>
   </td>

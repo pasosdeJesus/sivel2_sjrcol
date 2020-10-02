@@ -69,6 +69,17 @@ CREATE FUNCTION public.completa_obs(obs character varying, nuevaobs character va
 
 
 --
+-- Name: f_unaccent(text); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION public.f_unaccent(text) RETURNS text
+    LANGUAGE sql IMMUTABLE
+    AS $_$
+      SELECT public.unaccent('public.unaccent', $1)  
+      $_$;
+
+
+--
 -- Name: municipioubicacion(integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
@@ -518,7 +529,7 @@ CREATE TABLE public.sivel2_gen_victima (
     updated_at timestamp without time zone,
     id integer DEFAULT nextval('public.victima_seq'::regclass) NOT NULL,
     CONSTRAINT victima_hijos_check CHECK (((hijos IS NULL) OR ((hijos >= 0) AND (hijos <= 100)))),
-    CONSTRAINT victima_orientacionsexual_check CHECK (((orientacionsexual = 'L'::bpchar) OR (orientacionsexual = 'G'::bpchar) OR (orientacionsexual = 'B'::bpchar) OR (orientacionsexual = 'T'::bpchar) OR (orientacionsexual = 'H'::bpchar) OR (orientacionsexual = 'S'::bpchar)))
+    CONSTRAINT victima_orientacionsexual_check CHECK (((orientacionsexual = 'L'::bpchar) OR (orientacionsexual = 'G'::bpchar) OR (orientacionsexual = 'B'::bpchar) OR (orientacionsexual = 'T'::bpchar) OR (orientacionsexual = 'H'::bpchar) OR (orientacionsexual = 'S'::bpchar) OR (orientacionsexual = 'I'::bpchar)))
 );
 
 
@@ -587,7 +598,8 @@ CREATE TABLE public.sivel2_sjr_victimasjr (
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     id_victima integer NOT NULL,
-    actualtrabajando boolean
+    actualtrabajando boolean,
+    discapacidad_id integer
 );
 
 
@@ -941,7 +953,9 @@ CREATE TABLE public.cor1440_gen_actividad (
     oficina_id integer NOT NULL,
     rangoedadac_id integer,
     usuario_id integer NOT NULL,
-    lugar character varying(500)
+    lugar character varying(500),
+    ubicacionpre_id integer,
+    covid boolean
 );
 
 
@@ -1234,7 +1248,8 @@ CREATE TABLE public.cor1440_gen_actividadpf (
     titulo character varying(255),
     descripcion character varying(5000),
     resultadopf_id integer,
-    actividadtipo_id integer
+    actividadtipo_id integer,
+    indicadorgifmm_id integer
 );
 
 
@@ -1647,7 +1662,8 @@ CREATE TABLE public.cor1440_gen_financiador (
     fechacreacion date,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    nombregifmm character varying(256)
 );
 
 
@@ -2364,6 +2380,59 @@ CREATE TABLE public.despacho (
 
 
 --
+-- Name: detallefinanciero; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.detallefinanciero (
+    id bigint NOT NULL,
+    actividad_id integer NOT NULL,
+    proyectofinanciero_id integer,
+    actividadpf_id integer,
+    unidadayuda_id integer,
+    cantidad integer,
+    valorunitario integer,
+    valortotal integer,
+    mecanismodeentrega_id integer,
+    modalidadentrega_id integer,
+    tipotransferencia_id integer,
+    frecuenciaentrega_id integer,
+    numeromeses integer,
+    numeroasistencia integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: detallefinanciero_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.detallefinanciero_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: detallefinanciero_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.detallefinanciero_id_seq OWNED BY public.detallefinanciero.id;
+
+
+--
+-- Name: detallefinanciero_persona; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.detallefinanciero_persona (
+    detallefinanciero_id integer NOT NULL,
+    persona_id integer
+);
+
+
+--
 -- Name: dificultadmigracion; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -2502,6 +2571,40 @@ CREATE SEQUENCE public.fotra_seq
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
+
+
+--
+-- Name: frecuenciaentrega; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.frecuenciaentrega (
+    id bigint NOT NULL,
+    nombre character varying(500) NOT NULL COLLATE public.es_co_utf_8,
+    observaciones character varying(5000),
+    fechacreacion date NOT NULL,
+    fechadeshabilitacion date,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: frecuenciaentrega_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.frecuenciaentrega_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: frecuenciaentrega_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.frecuenciaentrega_id_seq OWNED BY public.frecuenciaentrega.id;
 
 
 --
@@ -2787,6 +2890,41 @@ ALTER SEQUENCE public.heb412_gen_plantillahcr_id_seq OWNED BY public.heb412_gen_
 
 
 --
+-- Name: indicadorgifmm; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.indicadorgifmm (
+    id bigint NOT NULL,
+    nombre character varying(500) NOT NULL COLLATE public.es_co_utf_8,
+    sectorgifmm_id integer NOT NULL,
+    observaciones character varying(5000),
+    fechacreacion date NOT NULL,
+    fechadeshabilitacion date,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: indicadorgifmm_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.indicadorgifmm_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: indicadorgifmm_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.indicadorgifmm_id_seq OWNED BY public.indicadorgifmm.id;
+
+
+--
 -- Name: instanciader_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -2796,6 +2934,40 @@ CREATE SEQUENCE public.instanciader_seq
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
+
+
+--
+-- Name: mecanismodeentrega; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.mecanismodeentrega (
+    id bigint NOT NULL,
+    nombre character varying(500) NOT NULL COLLATE public.es_co_utf_8,
+    observaciones character varying(5000),
+    fechacreacion date NOT NULL,
+    fechadeshabilitacion date,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: mecanismodeentrega_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.mecanismodeentrega_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: mecanismodeentrega_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.mecanismodeentrega_id_seq OWNED BY public.mecanismodeentrega.id;
 
 
 --
@@ -2876,6 +3048,40 @@ CREATE SEQUENCE public.migracontactopre_id_seq
 --
 
 ALTER SEQUENCE public.migracontactopre_id_seq OWNED BY public.migracontactopre.id;
+
+
+--
+-- Name: modalidadentrega; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.modalidadentrega (
+    id bigint NOT NULL,
+    nombre character varying(500) NOT NULL COLLATE public.es_co_utf_8,
+    observaciones character varying(5000),
+    fechacreacion date NOT NULL,
+    fechadeshabilitacion date,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: modalidadentrega_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.modalidadentrega_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: modalidadentrega_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.modalidadentrega_id_seq OWNED BY public.modalidadentrega.id;
 
 
 --
@@ -3055,6 +3261,41 @@ CREATE SEQUENCE public.mr519_gen_opcioncs_id_seq
 --
 
 ALTER SEQUENCE public.mr519_gen_opcioncs_id_seq OWNED BY public.mr519_gen_opcioncs.id;
+
+
+--
+-- Name: mr519_gen_planencuesta; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.mr519_gen_planencuesta (
+    id bigint NOT NULL,
+    fechaini date,
+    fechafin date,
+    formulario_id integer,
+    plantillacorreoinv_id integer,
+    adurl character varying(32),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: mr519_gen_planencuesta_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.mr519_gen_planencuesta_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: mr519_gen_planencuesta_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.mr519_gen_planencuesta_id_seq OWNED BY public.mr519_gen_planencuesta.id;
 
 
 --
@@ -3364,6 +3605,40 @@ CREATE TABLE public.schema_migrations (
     created_at timestamp without time zone,
     updated_at timestamp without time zone
 );
+
+
+--
+-- Name: sectorgifmm; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.sectorgifmm (
+    id bigint NOT NULL,
+    nombre character varying(500) NOT NULL COLLATE public.es_co_utf_8,
+    observaciones character varying(5000),
+    fechacreacion date NOT NULL,
+    fechadeshabilitacion date,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: sectorgifmm_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.sectorgifmm_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: sectorgifmm_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.sectorgifmm_id_seq OWNED BY public.sectorgifmm.id;
 
 
 --
@@ -4208,6 +4483,47 @@ CREATE TABLE public.sip_tsitio (
     observaciones character varying(5000) COLLATE public.es_co_utf_8,
     CONSTRAINT tsitio_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
+
+
+--
+-- Name: sip_ubicacionpre; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.sip_ubicacionpre (
+    id bigint NOT NULL,
+    nombre character varying(2000) NOT NULL COLLATE public.es_co_utf_8,
+    pais_id integer,
+    departamento_id integer,
+    municipio_id integer,
+    clase_id integer,
+    lugar character varying(500),
+    sitio character varying(500),
+    tsitio_id integer,
+    latitud double precision,
+    longitud double precision,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    nombre_sin_pais character varying(500)
+);
+
+
+--
+-- Name: sip_ubicacionpre_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.sip_ubicacionpre_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: sip_ubicacionpre_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.sip_ubicacionpre_id_seq OWNED BY public.sip_ubicacionpre.id;
 
 
 --
@@ -6831,6 +7147,40 @@ ALTER SEQUENCE public.tipoproteccion_id_seq OWNED BY public.tipoproteccion.id;
 
 
 --
+-- Name: tipotransferencia; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.tipotransferencia (
+    id bigint NOT NULL,
+    nombre character varying(500) NOT NULL COLLATE public.es_co_utf_8,
+    observaciones character varying(5000),
+    fechacreacion date NOT NULL,
+    fechadeshabilitacion date,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: tipotransferencia_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.tipotransferencia_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: tipotransferencia_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.tipotransferencia_id_seq OWNED BY public.tipotransferencia.id;
+
+
+--
 -- Name: tproceso_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -6888,6 +7238,40 @@ CREATE SEQUENCE public.trivalentepositiva_id_seq
 --
 
 ALTER SEQUENCE public.trivalentepositiva_id_seq OWNED BY public.trivalentepositiva.id;
+
+
+--
+-- Name: unidadayuda; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.unidadayuda (
+    id bigint NOT NULL,
+    nombre character varying(500) NOT NULL COLLATE public.es_co_utf_8,
+    observaciones character varying(5000),
+    fechacreacion date NOT NULL,
+    fechadeshabilitacion date,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: unidadayuda_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.unidadayuda_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: unidadayuda_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.unidadayuda_id_seq OWNED BY public.unidadayuda.id;
 
 
 --
@@ -7187,6 +7571,13 @@ ALTER TABLE ONLY public.cor1440_gen_valorcampotind ALTER COLUMN id SET DEFAULT n
 
 
 --
+-- Name: detallefinanciero id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.detallefinanciero ALTER COLUMN id SET DEFAULT nextval('public.detallefinanciero_id_seq'::regclass);
+
+
+--
 -- Name: dificultadmigracion id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -7205,6 +7596,13 @@ ALTER TABLE ONLY public.discapacidad ALTER COLUMN id SET DEFAULT nextval('public
 --
 
 ALTER TABLE ONLY public.espaciopart ALTER COLUMN id SET DEFAULT nextval('public.espaciopart_id_seq'::regclass);
+
+
+--
+-- Name: frecuenciaentrega id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.frecuenciaentrega ALTER COLUMN id SET DEFAULT nextval('public.frecuenciaentrega_id_seq'::regclass);
 
 
 --
@@ -7264,6 +7662,20 @@ ALTER TABLE ONLY public.heb412_gen_plantillahcr ALTER COLUMN id SET DEFAULT next
 
 
 --
+-- Name: indicadorgifmm id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.indicadorgifmm ALTER COLUMN id SET DEFAULT nextval('public.indicadorgifmm_id_seq'::regclass);
+
+
+--
+-- Name: mecanismodeentrega id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.mecanismodeentrega ALTER COLUMN id SET DEFAULT nextval('public.mecanismodeentrega_id_seq'::regclass);
+
+
+--
 -- Name: miembrofamiliar id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -7275,6 +7687,13 @@ ALTER TABLE ONLY public.miembrofamiliar ALTER COLUMN id SET DEFAULT nextval('pub
 --
 
 ALTER TABLE ONLY public.migracontactopre ALTER COLUMN id SET DEFAULT nextval('public.migracontactopre_id_seq'::regclass);
+
+
+--
+-- Name: modalidadentrega id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.modalidadentrega ALTER COLUMN id SET DEFAULT nextval('public.modalidadentrega_id_seq'::regclass);
 
 
 --
@@ -7310,6 +7729,13 @@ ALTER TABLE ONLY public.mr519_gen_formulario ALTER COLUMN id SET DEFAULT nextval
 --
 
 ALTER TABLE ONLY public.mr519_gen_opcioncs ALTER COLUMN id SET DEFAULT nextval('public.mr519_gen_opcioncs_id_seq'::regclass);
+
+
+--
+-- Name: mr519_gen_planencuesta id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.mr519_gen_planencuesta ALTER COLUMN id SET DEFAULT nextval('public.mr519_gen_planencuesta_id_seq'::regclass);
 
 
 --
@@ -7352,6 +7778,13 @@ ALTER TABLE ONLY public.sal7711_gen_bitacora ALTER COLUMN id SET DEFAULT nextval
 --
 
 ALTER TABLE ONLY public.sal7711_gen_categoriaprensa ALTER COLUMN id SET DEFAULT nextval('public.sal7711_gen_categoriaprensa_id_seq'::regclass);
+
+
+--
+-- Name: sectorgifmm id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sectorgifmm ALTER COLUMN id SET DEFAULT nextval('public.sectorgifmm_id_seq'::regclass);
 
 
 --
@@ -7460,6 +7893,13 @@ ALTER TABLE ONLY public.sip_trivalente ALTER COLUMN id SET DEFAULT nextval('publ
 
 
 --
+-- Name: sip_ubicacionpre id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sip_ubicacionpre ALTER COLUMN id SET DEFAULT nextval('public.sip_ubicacionpre_id_seq'::regclass);
+
+
+--
 -- Name: sivel2_gen_anexo_victima id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -7565,10 +8005,24 @@ ALTER TABLE ONLY public.tipoproteccion ALTER COLUMN id SET DEFAULT nextval('publ
 
 
 --
+-- Name: tipotransferencia id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.tipotransferencia ALTER COLUMN id SET DEFAULT nextval('public.tipotransferencia_id_seq'::regclass);
+
+
+--
 -- Name: trivalentepositiva id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.trivalentepositiva ALTER COLUMN id SET DEFAULT nextval('public.trivalentepositiva_id_seq'::regclass);
+
+
+--
+-- Name: unidadayuda id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.unidadayuda ALTER COLUMN id SET DEFAULT nextval('public.unidadayuda_id_seq'::regclass);
 
 
 --
@@ -8123,6 +8577,14 @@ ALTER TABLE ONLY public.sivel2_sjr_desplazamiento
 
 
 --
+-- Name: detallefinanciero detallefinanciero_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.detallefinanciero
+    ADD CONSTRAINT detallefinanciero_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: dificultadmigracion dificultadmigracion_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8200,6 +8662,14 @@ ALTER TABLE ONLY public.sivel2_gen_filiacion
 
 ALTER TABLE ONLY public.sivel2_gen_fotra
     ADD CONSTRAINT fotra_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: frecuenciaentrega frecuenciaentrega_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.frecuenciaentrega
+    ADD CONSTRAINT frecuenciaentrega_pkey PRIMARY KEY (id);
 
 
 --
@@ -8299,6 +8769,14 @@ ALTER TABLE ONLY public.sivel2_sjr_inclusion
 
 
 --
+-- Name: indicadorgifmm indicadorgifmm_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.indicadorgifmm
+    ADD CONSTRAINT indicadorgifmm_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: sivel2_sjr_instanciader instanciader_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8323,6 +8801,14 @@ ALTER TABLE ONLY public.sivel2_gen_maternidad
 
 
 --
+-- Name: mecanismodeentrega mecanismodeentrega_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.mecanismodeentrega
+    ADD CONSTRAINT mecanismodeentrega_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: sivel2_sjr_mecanismoder mecanismoder_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8344,6 +8830,14 @@ ALTER TABLE ONLY public.miembrofamiliar
 
 ALTER TABLE ONLY public.migracontactopre
     ADD CONSTRAINT migracontactopre_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: modalidadentrega modalidadentrega_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.modalidadentrega
+    ADD CONSTRAINT modalidadentrega_pkey PRIMARY KEY (id);
 
 
 --
@@ -8416,6 +8910,14 @@ ALTER TABLE ONLY public.mr519_gen_formulario
 
 ALTER TABLE ONLY public.mr519_gen_opcioncs
     ADD CONSTRAINT mr519_gen_opcioncs_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: mr519_gen_planencuesta mr519_gen_planencuesta_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.mr519_gen_planencuesta
+    ADD CONSTRAINT mr519_gen_planencuesta_pkey PRIMARY KEY (id);
 
 
 --
@@ -8616,6 +9118,14 @@ ALTER TABLE ONLY public.sal7711_gen_bitacora
 
 ALTER TABLE ONLY public.sal7711_gen_categoriaprensa
     ADD CONSTRAINT sal7711_gen_categoriaprensa_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: sectorgifmm sectorgifmm_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sectorgifmm
+    ADD CONSTRAINT sectorgifmm_pkey PRIMARY KEY (id);
 
 
 --
@@ -8832,6 +9342,14 @@ ALTER TABLE ONLY public.sip_tipoanexo
 
 ALTER TABLE ONLY public.sip_trivalente
     ADD CONSTRAINT sip_trivalente_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: sip_ubicacionpre sip_ubicacionpre_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sip_ubicacionpre
+    ADD CONSTRAINT sip_ubicacionpre_pkey PRIMARY KEY (id);
 
 
 --
@@ -9147,6 +9665,14 @@ ALTER TABLE ONLY public.tipoproteccion
 
 
 --
+-- Name: tipotransferencia tipotransferencia_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.tipotransferencia
+    ADD CONSTRAINT tipotransferencia_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: tproceso tproceso_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -9192,6 +9718,14 @@ ALTER TABLE ONLY public.sivel2_gen_tviolencia
 
 ALTER TABLE ONLY public.sip_ubicacion
     ADD CONSTRAINT ubicacion_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: unidadayuda unidadayuda_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.unidadayuda
+    ADD CONSTRAINT unidadayuda_pkey PRIMARY KEY (id);
 
 
 --
@@ -9675,6 +10209,13 @@ CREATE INDEX indice_sivel2_sjr_respuesta_on_fechaatencion ON public.sivel2_sjr_r
 --
 
 CREATE INDEX sip_busca_mundep ON public.sip_mundep USING gin (mundep);
+
+
+--
+-- Name: sip_nombre_ubicacionpre_b; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX sip_nombre_ubicacionpre_b ON public.sip_ubicacionpre USING gin (to_tsvector('spanish'::regconfig, public.f_unaccent((nombre)::text)));
 
 
 --
@@ -10445,6 +10986,14 @@ ALTER TABLE ONLY public.cor1440_gen_actividad_actividadpf
 
 
 --
+-- Name: cor1440_gen_actividad fk_rails_0a032e5445; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.cor1440_gen_actividad
+    ADD CONSTRAINT fk_rails_0a032e5445 FOREIGN KEY (ubicacionpre_id) REFERENCES public.sip_ubicacionpre(id);
+
+
+--
 -- Name: sivel2_sjr_migracion fk_rails_0a1617c74d; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10482,6 +11031,14 @@ ALTER TABLE ONLY public.cor1440_gen_efecto_respuestafor
 
 ALTER TABLE ONLY public.cor1440_gen_financiador_proyectofinanciero
     ADD CONSTRAINT fk_rails_0cd09d688c FOREIGN KEY (financiador_id) REFERENCES public.cor1440_gen_financiador(id);
+
+
+--
+-- Name: detallefinanciero fk_rails_0d386dedcf; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.detallefinanciero
+    ADD CONSTRAINT fk_rails_0d386dedcf FOREIGN KEY (actividad_id) REFERENCES public.cor1440_gen_actividad(id);
 
 
 --
@@ -10621,6 +11178,14 @@ ALTER TABLE ONLY public.cor1440_gen_caracterizacionpersona
 
 
 --
+-- Name: indicadorgifmm fk_rails_25ad72ab6f; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.indicadorgifmm
+    ADD CONSTRAINT fk_rails_25ad72ab6f FOREIGN KEY (sectorgifmm_id) REFERENCES public.sectorgifmm(id);
+
+
+--
 -- Name: cor1440_gen_anexo_proyectofinanciero fk_rails_26e56f96f9; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10714,6 +11279,14 @@ ALTER TABLE ONLY public.heb412_gen_doc
 
 ALTER TABLE ONLY public.sip_datosbio
     ADD CONSTRAINT fk_rails_2e6e7eebbe FOREIGN KEY (persona_id) REFERENCES public.sip_persona(id);
+
+
+--
+-- Name: sip_ubicacionpre fk_rails_2e86701dfb; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sip_ubicacionpre
+    ADD CONSTRAINT fk_rails_2e86701dfb FOREIGN KEY (departamento_id) REFERENCES public.sip_departamento(id);
 
 
 --
@@ -10821,11 +11394,27 @@ ALTER TABLE ONLY public.sivel2_gen_caso_respuestafor
 
 
 --
+-- Name: sip_ubicacionpre fk_rails_3b59c12090; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sip_ubicacionpre
+    ADD CONSTRAINT fk_rails_3b59c12090 FOREIGN KEY (clase_id) REFERENCES public.sip_clase(id);
+
+
+--
 -- Name: sivel2_gen_caso_respuestafor fk_rails_3fd971983e; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.sivel2_gen_caso_respuestafor
     ADD CONSTRAINT fk_rails_3fd971983e FOREIGN KEY (respuestafor_id) REFERENCES public.mr519_gen_respuestafor(id);
+
+
+--
+-- Name: sivel2_sjr_victimasjr fk_rails_4005fe5a7e; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sivel2_sjr_victimasjr
+    ADD CONSTRAINT fk_rails_4005fe5a7e FOREIGN KEY (discapacidad_id) REFERENCES public.discapacidad(id);
 
 
 --
@@ -11037,6 +11626,14 @@ ALTER TABLE ONLY public.sivel2_sjr_agreenpais_migracion
 
 
 --
+-- Name: detallefinanciero fk_rails_61118f6437; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.detallefinanciero
+    ADD CONSTRAINT fk_rails_61118f6437 FOREIGN KEY (mecanismodeentrega_id) REFERENCES public.mecanismodeentrega(id);
+
+
+--
 -- Name: sivel2_sjr_agreenpais_migracion fk_rails_6218990f83; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -11170,6 +11767,14 @@ ALTER TABLE ONLY public.cor1440_gen_pmindicadorpf
 
 ALTER TABLE ONLY public.sivel2_sjr_migracion
     ADD CONSTRAINT fk_rails_70b4c24bbe FOREIGN KEY ("causaRefugio_id") REFERENCES public.sivel2_gen_categoria(id);
+
+
+--
+-- Name: detallefinanciero_persona fk_rails_7240771312; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.detallefinanciero_persona
+    ADD CONSTRAINT fk_rails_7240771312 FOREIGN KEY (detallefinanciero_id) REFERENCES public.detallefinanciero(id);
 
 
 --
@@ -11357,6 +11962,14 @@ ALTER TABLE ONLY public.sal7711_gen_articulo
 
 
 --
+-- Name: detallefinanciero fk_rails_90682521dc; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.detallefinanciero
+    ADD CONSTRAINT fk_rails_90682521dc FOREIGN KEY (actividadpf_id) REFERENCES public.cor1440_gen_actividadpf(id);
+
+
+--
 -- Name: sivel2_sjr_ayudasjr_derecho fk_rails_9102b1afd0; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -11370,6 +11983,14 @@ ALTER TABLE ONLY public.sivel2_sjr_ayudasjr_derecho
 
 ALTER TABLE ONLY public.sip_departamento
     ADD CONSTRAINT fk_rails_92093de1a1 FOREIGN KEY (id_pais) REFERENCES public.sip_pais(id);
+
+
+--
+-- Name: detallefinanciero fk_rails_9482642f4e; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.detallefinanciero
+    ADD CONSTRAINT fk_rails_9482642f4e FOREIGN KEY (tipotransferencia_id) REFERENCES public.tipotransferencia(id);
 
 
 --
@@ -11426,6 +12047,14 @@ ALTER TABLE ONLY public.sivel2_sjr_migracion
 
 ALTER TABLE ONLY public.sip_actorsocial_sectoractor
     ADD CONSTRAINT fk_rails_9f61a364e0 FOREIGN KEY (sectoractor_id) REFERENCES public.sip_sectoractor(id);
+
+
+--
+-- Name: detallefinanciero fk_rails_9fb84e623b; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.detallefinanciero
+    ADD CONSTRAINT fk_rails_9fb84e623b FOREIGN KEY (proyectofinanciero_id) REFERENCES public.cor1440_gen_proyectofinanciero(id);
 
 
 --
@@ -11501,6 +12130,14 @@ ALTER TABLE ONLY public.sivel2_gen_combatiente
 
 
 --
+-- Name: detallefinanciero fk_rails_b092affa22; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.detallefinanciero
+    ADD CONSTRAINT fk_rails_b092affa22 FOREIGN KEY (modalidadentrega_id) REFERENCES public.modalidadentrega(id);
+
+
+--
 -- Name: sivel2_sjr_actividad_casosjr fk_rails_b2461f538f; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -11522,6 +12159,14 @@ ALTER TABLE ONLY public.sivel2_sjr_casosjr
 
 ALTER TABLE ONLY public.sip_datosbio
     ADD CONSTRAINT fk_rails_b4903b3da7 FOREIGN KEY (res_municipio_id) REFERENCES public.sip_municipio(id);
+
+
+--
+-- Name: detallefinanciero fk_rails_b4cc8107b9; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.detallefinanciero
+    ADD CONSTRAINT fk_rails_b4cc8107b9 FOREIGN KEY (frecuenciaentrega_id) REFERENCES public.frecuenciaentrega(id);
 
 
 --
@@ -11597,6 +12242,14 @@ ALTER TABLE ONLY public.cor1440_gen_informe
 
 
 --
+-- Name: sip_ubicacionpre fk_rails_c08a606417; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sip_ubicacionpre
+    ADD CONSTRAINT fk_rails_c08a606417 FOREIGN KEY (municipio_id) REFERENCES public.sip_municipio(id);
+
+
+--
 -- Name: cor1440_gen_datointermedioti_pmindicadorpf fk_rails_c5ec912cc3; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -11618,6 +12271,14 @@ ALTER TABLE ONLY public.cor1440_gen_actividadpf
 
 ALTER TABLE ONLY public.cor1440_gen_proyectofinanciero_usuario
     ADD CONSTRAINT fk_rails_c6f8d7af05 FOREIGN KEY (proyectofinanciero_id) REFERENCES public.cor1440_gen_proyectofinanciero(id);
+
+
+--
+-- Name: sip_ubicacionpre fk_rails_c8024a90df; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sip_ubicacionpre
+    ADD CONSTRAINT fk_rails_c8024a90df FOREIGN KEY (tsitio_id) REFERENCES public.sip_tsitio(id);
 
 
 --
@@ -11837,11 +12498,27 @@ ALTER TABLE ONLY public.sivel2_sjr_agremigracion_migracion
 
 
 --
+-- Name: cor1440_gen_actividadpf fk_rails_e876f1b705; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.cor1440_gen_actividadpf
+    ADD CONSTRAINT fk_rails_e876f1b705 FOREIGN KEY (indicadorgifmm_id) REFERENCES public.indicadorgifmm(id);
+
+
+--
 -- Name: cor1440_gen_actividad_valorcampotind fk_rails_e8cd697f5d; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.cor1440_gen_actividad_valorcampotind
     ADD CONSTRAINT fk_rails_e8cd697f5d FOREIGN KEY (actividad_id) REFERENCES public.cor1440_gen_actividad(id);
+
+
+--
+-- Name: sip_ubicacionpre fk_rails_eba8cc9124; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sip_ubicacionpre
+    ADD CONSTRAINT fk_rails_eba8cc9124 FOREIGN KEY (pais_id) REFERENCES public.sip_pais(id);
 
 
 --
@@ -11877,6 +12554,14 @@ ALTER TABLE ONLY public.sip_actorsocial_sectoractor
 
 
 --
+-- Name: detallefinanciero_persona fk_rails_f0b14a6b6b; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.detallefinanciero_persona
+    ADD CONSTRAINT fk_rails_f0b14a6b6b FOREIGN KEY (persona_id) REFERENCES public.sip_persona(id);
+
+
+--
 -- Name: sivel2_gen_combatiente fk_rails_f0cf2a7bec; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -11906,6 +12591,14 @@ ALTER TABLE ONLY public.cor1440_gen_datointermedioti
 
 ALTER TABLE ONLY public.sivel2_gen_antecedente_combatiente
     ADD CONSTRAINT fk_rails_f305297325 FOREIGN KEY (id_combatiente) REFERENCES public.sivel2_gen_combatiente(id);
+
+
+--
+-- Name: detallefinanciero fk_rails_f41da17421; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.detallefinanciero
+    ADD CONSTRAINT fk_rails_f41da17421 FOREIGN KEY (unidadayuda_id) REFERENCES public.unidadayuda(id);
 
 
 --
@@ -13080,6 +13773,42 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200807165756'),
 ('20200807165932'),
 ('20200807170745'),
-('20200807174136');
+('20200807174136'),
+('20200810164753'),
+('20200907165157'),
+('20200907174303'),
+('20200907215858'),
+('20200909015730'),
+('20200909025016'),
+('20200909045238'),
+('20200909174002'),
+('20200909232515'),
+('20200910134003'),
+('20200911213718'),
+('20200911215955'),
+('20200912142918'),
+('20200912143241'),
+('20200912160618'),
+('20200912161253'),
+('20200912170233'),
+('20200912171009'),
+('20200912174723'),
+('20200912192204'),
+('20200912201532'),
+('20200915215739'),
+('20200916022934'),
+('20200916181414'),
+('20200919003430'),
+('20200920160846'),
+('20200920180233'),
+('20200921123831'),
+('20200921170159'),
+('20200921174602'),
+('20200921210411'),
+('20200922083809'),
+('20200923120201'),
+('20200929021041'),
+('20200930034317'),
+('20200930091134');
 
 

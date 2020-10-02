@@ -1,0 +1,144 @@
+<tr class='nested-fields'>
+  <td>
+    <% colact = [] %>
+    <% if f.object.proyectofinanciero_id %>
+      <% colact = Cor1440Gen::Actividadpf.where(proyectofinanciero_id: f.object.proyectofinanciero_id) %>
+    <% end %>
+    <%= f.input :convenioactividad,
+      collection: colact,
+      label_method: lambda { |t| t.presenta_detallefinanciero_pfacpf_abrev},
+      value_method: lambda { |t| t.presenta_detallefinanciero_pfacpf},
+      value: lambda { |t| t.presenta_detallefinanciero_pfacpf},
+      wrapper_html: {style: "width: 12em"},
+      disabled: f.object.actividadpf_id ? true : false,
+      label: false,
+      input_html: {
+        class: 'chosen-select'
+      }
+    %>
+  </td>
+  <td>
+    <% idp = [] %>
+    <% if f.object.actividad %>
+       <% idp = f.object.actividad.casosjr.map {  |c| c.caso.victima.map(&:id_persona) }.flatten %>
+       <% idp += f.object.actividad.asistencia.map(&:persona_id) %>
+       <% idp.uniq! %>
+    <% end %>
+    <% colper = Sip::Persona.where(id: idp).order(
+      'upper(nombres)', 'upper(apellidos)') %>
+    <%= f.association :persona,
+      collection: colper,
+      label_method: :presenta_nombre,
+      label: false,
+      wrapper_html: {style: "width: 12em"},
+      input_html: {
+        class: 'chosen-select'
+      }
+    %>
+  </td>
+  <td>
+    <%= f.association :unidadayuda,
+      collection: Unidadayuda.habilitados,
+      label_method: :nombre,
+      value_method: :id,
+      label: false,
+      wrapper_html: {style: "width: 8em"},
+      input_html: {
+        class: 'chosen-select'
+      }
+    %>
+  </td>
+  <td>
+    <%= f.input :cantidad,
+      label: false,
+      wrapper_html: {style: "width: 4em"}
+    %>
+  </td>
+  <td>
+    <%= f.input :valorunitario,
+      label: false,
+      wrapper_html: {style: "width: 6em"}
+    %>
+  </td>
+  <td>
+    <%= f.input :valortotal,
+      label: false,
+      readonly: true,
+      wrapper_html: {style: "width: 8em"}
+    %>
+  </td>  
+  <td>
+    <%= f.association :mecanismodeentrega,
+      collection: Mecanismodeentrega.habilitados,
+      label_method: :nombre,
+      value_method: :id,
+      wrapper_html: {style: "width: 8em"},
+      label: false,
+      input_html: {
+        class: 'chosen-select'
+      }
+    %>
+  </td> 
+  <td>
+    <%= f.association :modalidadentrega,
+      collection: Modalidadentrega.habilitados,
+      label_method: :nombre,
+      value_method: :id,
+      wrapper_html: {style: "width: 8em"},
+      label: false,
+      input_html: {
+        class: 'chosen-select'
+      }
+    %>
+  </td> 
+  <td>
+    <%= f.association :tipotransferencia,
+      collection: Tipotransferencia.habilitados,
+      label_method: :nombre,
+      value_method: :id,
+      wrapper_html: {style: "width: 8em"},
+      label: false,
+      input_html: {
+        class: 'chosen-select'
+      }
+    %>
+  </td>
+  <td>
+    <%= f.association :frecuenciaentrega,
+      collection: Frecuenciaentrega.habilitados,
+      label_method: :nombre,
+      value_method: :id,
+      wrapper_html: {style: "width: 8em"},
+      label: false,
+      input_html: {
+        class: 'chosen-select'
+      }
+    %>
+  </td>
+  <td>
+    <%= f.input :numeromeses,
+      label: false,
+      wrapper_html: {style: "width: 4em"}
+    %>
+  </td>
+  <td>
+    <% if f.object.numeromeses %>
+      <% tot = f.object.numeromeses %>
+      <% col = 1..tot %>
+    <% else %>
+      <% col = [] %>
+    <% end %>
+    <%= f.input :numeroasistencia,
+      label: false, 
+      as: :select,
+      collection: col,
+      wrapper_html: {style: "width: 4em"}
+    %>
+  </td>
+  <td>
+    <%= f.input :id, as: :hidden %>
+    <%= link_to_remove_association "Eliminar", f, 
+      :class => 'btn-danger' 
+    %>
+  </td>
+</tr>

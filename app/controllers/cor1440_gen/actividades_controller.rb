@@ -98,24 +98,24 @@ module Cor1440Gen
     def atributos_form
       atributos_show - [:id]
     end
-
+    
     # Encabezado comun para HTML y PDF (primeras filas)
-    def encabezado_comun
-      return [ Cor1440Gen::Actividad.human_attribute_name(:id), 
-               @actividades.human_attribute_name(:fecha),
-               @actividades.human_attribute_name(:oficina),
-               @actividades.human_attribute_name(:responsable),
-               @actividades.human_attribute_name(:nombre),
-               @actividades.human_attribute_name(:actividadtipos),
-               @actividades.human_attribute_name(:proyectos),
-               @actividades.human_attribute_name(:actividadareas),
-               @actividades.human_attribute_name(:proyectosfinancieros),
-               @actividades.human_attribute_name(:objetivo),
-               @actividades.human_attribute_name(:lugar),
-              @actividades.human_attribute_name(:poblacionmujeres),
-               @actividades.human_attribute_name(:poblacionhombres)
-      ]
-    end
+#    def encabezado_comun
+#      return [ Cor1440Gen::Actividad.human_attribute_name(:id), 
+#               @actividades.human_attribute_name(:fecha),
+#               @actividades.human_attribute_name(:oficina),
+#               @actividades.human_attribute_name(:responsable),
+#               @actividades.human_attribute_name(:nombre),
+#               @actividades.human_attribute_name(:actividadtipos),
+#               @actividades.human_attribute_name(:proyectos),
+#               @actividades.human_attribute_name(:actividadareas),
+#               @actividades.human_attribute_name(:proyectosfinancieros),
+#               @actividades.human_attribute_name(:objetivo),
+#               @actividades.human_attribute_name(:lugar),
+#              @actividades.human_attribute_name(:poblacionmujeres),
+#               @actividades.human_attribute_name(:poblacionhombres)
+#      ]
+#    end
 
     # Elementos de la presentacion de una actividad
     def atributos_presenta
@@ -140,36 +140,158 @@ module Cor1440Gen
       render layout: 'application'
     end
 
-    def fila_comun(actividad)
-      pobf = actividad.actividad_rangoedadac.map { |i| 
-        (i.fl ? i.fl : 0) + (i.fr ? i.fr : 0)
-      } 
-      pobm = actividad.actividad_rangoedadac.map { |i| 
-        (i.ml ? i.ml : 0) + (i.mr ? i.mr : 0)
-      } 
-
-      return [actividad.id,
-              actividad.fecha , 
-              actividad.oficina ? actividad.oficina.nombre : "",
-              actividad.responsable ? actividad.responsable.nusuario : "",
-              actividad.nombre ? actividad.nombre : "",
-              actividad.actividadtipo.inject("") { |memo, i| 
-                (memo == "" ? "" : memo + "; ") + i.nombre },
-              actividad.proyecto.inject("") { |memo, i| 
-                  (memo == "" ? "" : memo + "; ") + i.nombre },
-              actividad.actividadareas.inject("") { |memo, i| 
-                    (memo == "" ? "" : memo + "; ") + i.nombre },
-              actividad.proyectofinanciero.inject("") { |memo, i| 
-                      (memo == "" ? "" : memo + "; ") + i.nombre },
-              actividad.objetivo, 
-              actividad.lugar, 
-              pobf.reduce(:+),
-              pobm.reduce(:+)
-      ]
-    end
+#    def fila_comun(actividad)
+#      pobf = actividad.actividad_rangoedadac.map { |i| 
+#        (i.fl ? i.fl : 0) + (i.fr ? i.fr : 0)
+#      } 
+#      pobm = actividad.actividad_rangoedadac.map { |i| 
+#        (i.ml ? i.ml : 0) + (i.mr ? i.mr : 0)
+#      } 
+#
+#      return [actividad.id,
+#              actividad.fecha , 
+#              actividad.oficina ? actividad.oficina.nombre : "",
+#              actividad.responsable ? actividad.responsable.nusuario : "",
+#              actividad.nombre ? actividad.nombre : "",
+#              actividad.actividadtipo.inject("") { |memo, i| 
+#                (memo == "" ? "" : memo + "; ") + i.nombre },
+#              actividad.proyecto.inject("") { |memo, i| 
+#                  (memo == "" ? "" : memo + "; ") + i.nombre },
+#              actividad.actividadareas.inject("") { |memo, i| 
+#                    (memo == "" ? "" : memo + "; ") + i.nombre },
+#              actividad.proyectofinanciero.inject("") { |memo, i| 
+#                      (memo == "" ? "" : memo + "; ") + i.nombre },
+#              actividad.objetivo, 
+#              actividad.lugar, 
+#              pobf.reduce(:+),
+#              pobm.reduce(:+)
+#      ]
+#    end
 
     def filtra_contar_control_acceso
       @contar_pfid = 10  # Plan Estrategico 1
+    end
+
+    # Sobrecarga de modelos_controller para sanear parámetros
+    # Pero usaremos para sanear datos cuando hay nuevas
+    # filas en listado de asistencia
+    def filtra_contenido_params
+      if !params || !params[:actividad] || 
+          !params[:actividad][:asistencia_attributes]
+        return
+      end
+      params[:actividad][:asistencia_attributes].each do |l, v|
+        if Cor1440Gen::Asistencia.where(id: v[:id].to_i).count == 0 ||
+            !v[:persona_attributes] || 
+            !v[:persona_attributes][:id] || v[:persona_attributes][:id] == '' ||
+            Sip::Persona.where(id: v[:persona_attributes][:id].to_i).count == 0
+          next
+        end
+        asi = Cor1440Gen::Asistencia.find(v[:id].to_i)
+        #Solo esto al eliminar asistencia que existia produce:
+        #Couldn't find Cor1440Gen::Asistencia with ID=84 for Cor1440Gen::Actividad with ID=287
+        #if v['_destroy'] == "1" 
+        #  asi.destroy
+        #  next
+        #end
+        per = Sip::Persona.find(v[:persona_attributes][:id].to_i)
+        if asi.persona_id != per.id && per.nombres = 'N' && per.apellidos = 'N'
+          # Era nueva asistencia cuya nueva persona se remplazó tras 
+          # autocompletar. Dejar asignada la remplazada y borrar la vacia
+          op = asi.persona
+          asi.persona_id = per.id
+          asi.save
+          op.destroy
+        end
+      end
+    end
+
+    # Responde con mensaje de error
+    def resp_error(m)
+      respond_to do |format|
+        format.html { 
+          render inline: m
+        }
+        format.json { 
+          render json: m, status: :unprocessable_entity 
+        }
+      end
+    end
+
+    # Responde a requerimiento AJAX generado por cocoon creando una
+    # nueva persona como nuevo asistente para la actividad que recibe 
+    # por parámetro  params[:actividad_id].  
+    # Pone valores simples en los campos requeridos
+    # Como crea personas que podrían ser remplazadas por otras por 
+    # autocompletación debería ejecutarse con periodicidad un proceso que
+    # elimine todas las personas de nombres N, apellidos N, sexo N, que
+    # no este en listado de asistencia ni en casos
+    def nueva_asistencia
+      authorize! :new, Sip::Persona
+      if params[:actividad_id].nil?
+        resp_error 'Falta parámetro actividad_id'
+        return
+      end
+      puts "** cuenta: " +Cor1440Gen::Actividad.where(id: params[:actividad_id].to_i).count.to_s
+      if Cor1440Gen::Actividad.where(id: params[:actividad_id].to_i).count == 0
+        reps_error 'No se encontró actividad ' + 
+          params[:actividad_id].to_i.to_s
+        return
+      end
+      act = Cor1440Gen::Actividad.find(params[:actividad_id].to_i)
+      @persona = Sip::Persona.create(
+        nombres: 'N',
+        apellidos: 'N',
+        sexo: 'S'
+      )
+      if !@persona.save
+        resp_error 'No pudo crear persona' 
+        return
+      end
+      @asistencia = Cor1440Gen::Asistencia.create(
+        actividad_id: act.id,
+        persona_id: @persona.id
+      )
+      if !@asistencia.save
+        resp_error 'No pudo crear asistencia' 
+        @persona.destroy
+        return
+      end
+      res = {
+        'asistencia': @asistencia.id.to_s,
+        'persona': @persona.id.to_s
+      }.to_json
+      respond_to do |format|
+        format.js { render text: res }
+        format.json { render json: res,
+                      status: :created }
+        format.html { render inline: res }
+      end
+    end # def nueva_asistencia
+
+    def lista_params
+      lista_params_sivel2_sjr + [:ubicacionpre_id, :covid] + [ 
+        :detallefinanciero_attributes => [
+          'cantidad',
+          'convenioactividad',
+          'frecuenciaentrega_id',
+          'id',
+          'mecanismodeentrega_id',
+          'modalidadentrega_id',
+          'numeromeses',
+          'numeroasistencia'
+        ] + [persona_ids: []] + [
+          'tipotransferencia_id',
+          'unidadayuda_id',
+          'valorunitario',
+          'valortotal',
+          '_destroy'
+        ]
+      ]
+    end
+
+    def actividad_params
+      params.require(:actividad).permit(lista_params)
     end
 
   end

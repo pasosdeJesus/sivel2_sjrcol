@@ -81,11 +81,18 @@ class Ability < Sivel2Sjr::Ability
     ['', 'dificultadmigracion'],
     ['', 'discapacidad'],
     ['', 'espaciopart'],
+    ['', 'indicadorgifmm'],
+    ['', 'frecuenciaentrega'],
+    ['', 'mecanismodeentrega'],
     ['', 'miembrofamiliar'],
     ['', 'migracontactopre'],
+    ['', 'modalidadentrega'],
     ['', 'perfilmigracion'],
+    ['', 'sectorgifmm'],
     ['', 'tipoproteccion'],
+    ['', 'tipotransferencia'],
     ['', 'trivalentepositiva'],
+    ['', 'unidadayuda'],
     ['', 'viadeingreso']
   ]
   
@@ -137,24 +144,7 @@ class Ability < Sivel2Sjr::Ability
   CAMPOS_PLANTILLAS_PROPIAS = { 
     'Caso' => { 
       campos: [
-        :caso_id,
-        :fecharecepcion,
         :asesor,
-        :oficina,
-        :fechadespemb,
-        :expulsion,
-        :llegada,
-        :descripcion,
-        :ultimaatencion_mes,
-        :ultimaatencion_fecha,
-        :contacto,
-        :contacto_nombres,
-        :contacto_apellidos,
-        :contacto_identificacion,
-        :contacto_sexo,
-        :contacto_etnia,
-        :contacto_edad_ultimaatencion,
-        :contacto_rangoedad_ultimaatencion,
         :beneficiarios_0_5,
         :beneficiarios_6_12,
         :beneficiarios_13_17,
@@ -167,31 +157,190 @@ class Ability < Sivel2Sjr::Ability
         :beneficiarias_18_26,
         :beneficiarias_27_59,
         :beneficiarias_60_,
+        :beneficiarias_mujeres_adultas,
+        :beneficiarias_ninas_adolescentes,
+        :caso_id,
+        :contacto,
+        :contacto_nombres,
+        :contacto_apellidos,
+        :contacto_identificacion,
+        :contacto_sexo,
+        :contacto_etnia,
+        :contacto_edad_ultimaatencion,
+        :contacto_rangoedad_ultimaatencion,
+        :descripcion,
+        :expulsion,
+        :fechadespemb,
+        :fecharecepcion,
+        :llegada,
+        :memo1612,
+        :oficina,
+        :presponsables, 
+        :tipificacion,
+        :ubicaciones, 
+        :ultimaatencion_mes,
+        :ultimaatencion_fecha,
         :ultimaatencion_derechosvul,
         :ultimaatencion_as_humanitaria,
         :ultimaatencion_as_juridica,
         :ultimaatencion_descripcion_at,
-        :tipificacion,
-        :victimas, 
-        :ubicaciones, 
-        :presponsables, 
-        :memo1612
+        :victimas,
       ],
       controlador: 'Sivel2Sjr::CasosController',
         ruta: '/casos'
+    },
+    'Actividad' => { 
+      campos: [
+        Cor1440Gen::Actividad.human_attribute_name(
+          :actividadareas).downcase.gsub(' ', '_'), 
+        Cor1440Gen::Actividad.human_attribute_name(
+          :actividadpf).downcase.gsub(' ', '_'), 
+          'actualizacion',
+          'anexo_1_desc',
+          'anexo_2_desc',
+          'anexo_3_desc',
+          'anexo_4_desc',
+          'anexo_5_desc',
+          'campos_dinamicos', 
+          'corresponsables', 
+          'covid19',
+          'creacion', 
+          'departamento',
+          'detalleah_unidad',
+          'detalleah_cantidad',
+          'detalleah_modalidad',
+          'detalleah_tipo_transferencia',
+          'detalleah_mecanismo_entrega',
+          'detalleah_frecuencia_entrega',
+          'detalleah_monto_por_persona',
+          'detalleah_numero_meses_cobertura',
+          'estado',
+          'fecha', 
+          'fecha_localizada', 
+          'id', 
+          'indicador_gifmm', 
+          'lugar', 
+          'mes', 
+          'municipio', 
+          'nombre', 
+          'num_afrodescendientes',
+          'num_con_discapacidad',
+          'num_con_discapacidad_ids',
+          'num_indigenas',
+          'num_lgbti',
+          'num_otra_etnia',
+          'objetivo', 
+          'observaciones', 
+          'objetivo_convenio_financiero',
+          'oficina', 
+          'parte_rmrp',
+          'poblacion',
+          'poblacion_ids',
+          'poblacion_adultos',
+          'poblacion_colombianos_retornados',
+          'poblacion_colombianos_retornados_ids',
+          'poblacion_com_acogida',
+          'poblacion_hombres_adultos',
+          'poblacion_hombres_adultos_ids',
+          'poblacion_hombres_l',
+          'poblacion_hombres_r',
+          'poblacion_hombres_l_g1',
+          'poblacion_hombres_l_g2',
+          'poblacion_hombres_l_g3',
+          'poblacion_hombres_l_g4',
+          'poblacion_hombres_l_g5',
+          'poblacion_hombres_l_g6',
+          'poblacion_hombres_l_g7',
+          'poblacion_hombres_r_g1',
+          'poblacion_hombres_r_g1_ids',
+          'poblacion_hombres_r_g2',
+          'poblacion_hombres_r_g2_ids',
+          'poblacion_hombres_r_g3',
+          'poblacion_hombres_r_g3_ids',
+          'poblacion_hombres_r_g4',
+          'poblacion_hombres_r_g4_ids',
+          'poblacion_hombres_r_g5',
+          'poblacion_hombres_r_g5_ids',
+          'poblacion_hombres_r_g_4_5',
+          'poblacion_hombres_r_g_4_5_ids',
+          'poblacion_hombres_r_g6',
+          'poblacion_hombres_r_g6_ids',
+          'poblacion_hombres_r_g7',
+          'poblacion_hombres_r_g7_ids',
+          'poblacion_sinsexo_adultos',
+          'poblacion_sinsexo_adultos_ids',
+          'poblacion_sinsexo_menores',
+          'poblacion_sinsexo_menores_ids',
+          'poblacion_mujeres_adultas',
+          'poblacion_mujeres_adultas_ids',
+          'poblacion_mujeres_l',
+          'poblacion_mujeres_l_g1',
+          'poblacion_mujeres_l_g2',
+          'poblacion_mujeres_l_g3',
+          'poblacion_mujeres_l_g4',
+          'poblacion_mujeres_l_g5',
+          'poblacion_mujeres_l_g6',
+          'poblacion_mujeres_l_g7',
+          'poblacion_mujeres_r',
+          'poblacion_mujeres_r_g1',
+          'poblacion_mujeres_r_g1_ids',
+          'poblacion_mujeres_r_g2',
+          'poblacion_mujeres_r_g2_ids',
+          'poblacion_mujeres_r_g3',
+          'poblacion_mujeres_r_g3_ids',
+          'poblacion_mujeres_r_g4',
+          'poblacion_mujeres_r_g4_ids',
+          'poblacion_mujeres_r_g5',
+          'poblacion_mujeres_r_g5_ids',
+          'poblacion_mujeres_r_g6',
+          'poblacion_mujeres_r_g6_ids',
+          'poblacion_mujeres_r_g7',
+          'poblacion_mujeres_r_g7_ids',
+          'poblacion_mujeres_r_g_4_5',
+          'poblacion_mujeres_r_g_4_5_ids',
+          'poblacion_mujeres_r_g_1_2_7',
+          'poblacion_mujeres_r_g_1_2_7_ids',
+          'poblacion_niños_adolescentes_y_se',
+          'poblacion_niños_adolescentes_y_se_ids',
+          'poblacion_niñas_adolescentes_y_se',
+          'poblacion_niñas_adolescentes_y_se_ids',
+          'poblacion_nuevos',
+          'poblacion_nuevos_ids',
+          'poblacion_pendulares',
+          'poblacion_pendulares_ids',
+          'poblacion_sinsexo',
+          'poblacion_sinsexo_g1',
+          'poblacion_sinsexo_g1_ids',
+          'poblacion_sinsexo_g2',
+          'poblacion_sinsexo_g2_ids',
+          'poblacion_sinsexo_g3',
+          'poblacion_sinsexo_g3_ids',
+          'poblacion_sinsexo_g4',
+          'poblacion_sinsexo_g4_ids',
+          'poblacion_sinsexo_g5',
+          'poblacion_sinsexo_g5_ids',
+          'poblacion_sinsexo_g6',
+          'poblacion_sinsexo_g6_ids',
+          'poblacion_sinsexo_g7',
+          'poblacion_sinsexo_g7_ids',
+          'poblacion_transito',
+          'poblacion_transito_ids',
+          'poblacion_vocacion_permanencia',
+          'poblacion_vocacion_permanencia_ids',
+          Cor1440Gen::Actividad.human_attribute_name(
+            :proyectofinanciero).downcase.gsub(' ', '_'), 
+          Cor1440Gen::Actividad.human_attribute_name(
+            :proyectos).downcase.gsub(' ', '_'), 
+          'responsable', 
+          'resultado', 
+          'sector_gifmm',
+          'socio_implementador', 
+          'socio_principal', 
+          'tipo_implementacion', 
+      ],
+      controlador: 'Cor1440Gen::ActividadesController',
+      ruta: '/actividades'
     }
-#    'Actividad' => { 
-#      campos: [
-#        'id', 'nombre', 'fecha', 'lugar', 'oficina', 
-#        'tipos_de_actividad', 'convenios_financieros', 'areas', 'subareas', 
-#        'responsable', 'corresponsables', 'objetivo', 
-#        'resultado', 'poblacionmujeres', 'poblacionhombres', 'poblacion',
-#        'observaciones', 
-#        'creacion', 'actualizacion'
-#      ],
-#      controlador: 'Cor1440Gen::ActividadesController',
-#      ruta: '/actividades'
-#    }
 
   }
 
@@ -241,6 +390,7 @@ class Ability < Sivel2Sjr::Ability
       when Ability::ROLANALIPRENSA
         can :manage, Cor1440Gen::Actividad, oficina_id: [1, usuario.oficina_id]
         can [:read, :new], Cor1440Gen::Actividad
+        can [:read, :new], Cor1440Gen::Actividadpf
         can :read, Cor1440Gen::Informe
         can :read, Cor1440Gen::Proyectofinanciero
         
@@ -252,6 +402,7 @@ class Ability < Sivel2Sjr::Ability
       when Ability::ROLSIST
 
         can [:new, :read], Cor1440Gen::Actividad
+        can [:new, :read], Cor1440Gen::Actividadpf
         can :manage, Cor1440Gen::Actividad, oficina_id: [1, usuario.oficina_id]
         can :read, Cor1440Gen::Proyectofinanciero
         can [:index, :read], Cor1440Gen::Rangoedadac
@@ -273,6 +424,7 @@ class Ability < Sivel2Sjr::Ability
 
         can :manage, Cor1440Gen::Actividad, oficina_id: [1, usuario.oficina_id]
         can [:read, :new], Cor1440Gen::Actividad
+        can [:read, :new], Cor1440Gen::Actividadpf
         can :read, Cor1440Gen::Informe
         can :index, Cor1440Gen::Mindicadorpf
         can :read, Cor1440Gen::Proyectofinanciero
@@ -295,6 +447,7 @@ class Ability < Sivel2Sjr::Ability
       when Ability::ROLCOOR
         can :manage, Cor1440Gen::Informe
         can [:read, :new], Cor1440Gen::Actividad
+        can [:read, :new], Cor1440Gen::Actividadpf
         can :manage, Cor1440Gen::Actividad, oficina_id: [1, usuario.oficina_id]
         can :read, Cor1440Gen::Proyectofinanciero
         can [:index, :read], Cor1440Gen::Rangoedadac
@@ -315,6 +468,7 @@ class Ability < Sivel2Sjr::Ability
 
       when Ability::ROLADMIN, Ability::ROLDIR
         can :manage, Cor1440Gen::Actividad
+        can :manage, Cor1440Gen::Actividadpf
         can :manage, Cor1440Gen::Informe
         can :manage, Cor1440Gen::Mindicadorpf
         can :manage, Cor1440Gen::Proyectofinanciero

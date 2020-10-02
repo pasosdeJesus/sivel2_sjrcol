@@ -58,7 +58,6 @@
               cor1440_gen.proyectosfinancieros_path, desplegable: true %>
             <%= opcion_menu "Medición de indicadores de resultado", 
               cor1440_gen.mindicadorespf_path, desplegable: true %>
-            <%= opcion_menu "Informes", cor1440_gen.informes_path, desplegable: true %>
           <% end %>
           <% if can? :read, Sip::Actorsocial then %>
             <%= opcion_menu "Actores sociales", sip.actoressociales_path, desplegable: true %>

@@ -26,7 +26,7 @@ Rails.application.routes.draw do
     as: :actos_agregar
   get "/actos/eliminar" => 'sivel2_sjr/actos#eliminar',
     as: :actos_eliminar
- 
+
   get "/conteos/accionesjuridicas" => 'sivel2_sjr/conteos#accionesjuridicas', 
     as: :conteos_accionesjuridicas
   get "/conteos/desplazamientos" => 'sivel2_sjr/conteos#desplazamientos', 
@@ -48,6 +48,26 @@ Rails.application.routes.draw do
 
   get "/casos/:id/fichapdf" => "sivel2_sjr/casos#fichapdf",
     as: :caso_fichapdf
+
+  get '/personas_casos' => 'sivel2_sjr/casos#personas_casos',
+    as: :personas_casos
+
+  get '/ubicacionespre' => 'sip/ubicacionespre#index',
+    as: :ubicacionespre
+  get '/ubicacionespre_mundep' => 'sip/ubicacionespre#mundep',
+    as: :ubicacionespre_mundep
+
+  get '/actividadespf/:id' => 'cor1440_gen/actividadespf#show',
+    as: :show_actividadespf
+  
+  get '/actividadespflistado' => 'cor1440_gen/actividadespf#index',
+    as: :index_actividadespf
+
+  get '/asistencia/nueva' => 'cor1440_gen/actividades#nueva_asistencia',
+    as: :nueva_asistencia
+
+  get '/detallesfinancieros/nuevo' => 'detallesfinancieros#nuevo'
+  
 
   root "sip/hogar#index"
 

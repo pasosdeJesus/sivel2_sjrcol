@@ -9,10 +9,10 @@
       label_method: lambda { |t| t.presenta_detallefinanciero_pfacpf},
       value_method: lambda { |t| t.presenta_detallefinanciero_pfacpf},
       value: lambda { |t| t.presenta_detallefinanciero_pfacpf},
-      input_html: {style: "width: 8em"},
+      wrapper_html: {style: "width: 12em"},
       disabled: f.object.actividadpf_id ? true : false,
       label: false,
-      html_input: {
+      input_html: {
         class: 'chosen-select'
       }
     %>
@@ -29,7 +29,8 @@
       collection: colper,
       label_method: :presenta_nombre,
       label: false,
-      html_input: {
+      wrapper_html: {style: "width: 12em"},
+      input_html: {
         class: 'chosen-select'
       }
     %>
@@ -39,9 +40,9 @@
       collection: Unidadayuda.habilitados,
       label_method: :nombre,
       value_method: :id,
-      input_html: {style: "width: 8em"},
       label: false,
-      html_input: {
+      wrapper_html: {style: "width: 8em"},
+      input_html: {
         class: 'chosen-select'
       }
     %>
@@ -49,20 +50,20 @@
   <td>
     <%= f.input :cantidad,
       label: false,
-      input_html: {style: "width: 8em"}
+      wrapper_html: {style: "width: 4em"}
     %>
   </td>
   <td>
     <%= f.input :valorunitario,
       label: false,
-      input_html: {style: "width: 8em"}
+      wrapper_html: {style: "width: 6em"}
     %>
   </td>
   <td>
     <%= f.input :valortotal,
       label: false,
       readonly: true,
-      input_html: {style: "width: 8em"}
+      wrapper_html: {style: "width: 8em"}
     %>
   </td>  
   <td>
@@ -70,9 +71,9 @@
       collection: Mecanismodeentrega.habilitados,
       label_method: :nombre,
       value_method: :id,
-      input_html: {style: "width: 8em"},
+      wrapper_html: {style: "width: 8em"},
       label: false,
-      html_input: {
+      input_html: {
         class: 'chosen-select'
       }
     %>
@@ -82,9 +83,9 @@
       collection: Modalidadentrega.habilitados,
       label_method: :nombre,
       value_method: :id,
-      input_html: {style: "width: 8em"},
+      wrapper_html: {style: "width: 8em"},
       label: false,
-      html_input: {
+      input_html: {
         class: 'chosen-select'
       }
     %>
@@ -94,9 +95,9 @@
       collection: Tipotransferencia.habilitados,
       label_method: :nombre,
       value_method: :id,
-      input_html: {style: "width: 8em"},
+      wrapper_html: {style: "width: 8em"},
       label: false,
-      html_input: {
+      input_html: {
         class: 'chosen-select'
       }
     %>
@@ -106,9 +107,9 @@
       collection: Frecuenciaentrega.habilitados,
       label_method: :nombre,
       value_method: :id,
-      input_html: {style: "width: 8em"},
+      wrapper_html: {style: "width: 8em"},
       label: false,
-      html_input: {
+      input_html: {
         class: 'chosen-select'
       }
     %>
@@ -116,7 +117,7 @@
   <td>
     <%= f.input :numeromeses,
       label: false,
-      input_html: {style: "width: 8em"}
+      wrapper_html: {style: "width: 4em"}
     %>
   </td>
   <td>
@@ -130,9 +131,7 @@
       label: false, 
       as: :select,
       collection: col,
-      input_html: {
-        style: "width: 8em",
-      }
+      wrapper_html: {style: "width: 4em"}
     %>
   </td>
   <td>

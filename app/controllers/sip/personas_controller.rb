@@ -24,6 +24,7 @@ module Sip
       return a
     end
 
+
     def lista_params
       atributos_form + [
         :id_pais,

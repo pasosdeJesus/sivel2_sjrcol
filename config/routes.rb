@@ -60,7 +60,11 @@ Rails.application.routes.draw do
   get '/actividadespflistado' => 'cor1440_gen/actividadespf#index',
     as: :index_actividadespf
 
+  get '/asistencia/nueva' => 'cor1440_gen/actividades#nueva_asistencia',
+    as: :nueva_asistencia
+
   get '/detallesfinancieros/nuevo' => 'detallesfinancieros#nuevo'
+  
 
   root "sip/hogar#index"
 

@@ -12,7 +12,10 @@ module Cor1440Gen
     
     def presenta_detallefinanciero_pfacpf
       pf = Cor1440Gen::Proyectofinanciero.find(proyectofinanciero_id).nombre
-      "#{pf} - #{titulo}"
+      if pf.length > 6
+        pf = pf[..5] + "..." 
+      end
+      return "#{pf} - #{titulo}"
     end
     
     scope :filtro_actividadtipo_id, lambda { |t|

@@ -90,18 +90,23 @@
         class: 'chosen-select'
       }
     %>
-  </td> 
-  <td>
-    <%= f.association :tipotransferencia,
-      collection: Tipotransferencia.habilitados,
-      label_method: :nombre,
-      value_method: :id,
-      wrapper_html: {style: "width: 8em"},
-      label: false,
-      input_html: {
-        class: 'chosen-select'
-      }
-    %>
+    <% if f.object.tipotransferencia_id %>
+      <% estipo = "display: block" %>
+    <% else %>
+      <% estipo = "display: none" %>
+    <% end %>
+    <div style="<%= estipo %>"> 
+      <%= f.association :tipotransferencia,
+        collection: Tipotransferencia.habilitados,
+        label_method: :nombre,
+        value_method: :id,
+        wrapper_html: {style: "width: 8em"},
+        label: "Tipo de Transferencia",
+        input_html: {
+          class: 'chosen-select'
+        }
+      %>
+    </div>
   </td>
   <td>
     <%= f.association :frecuenciaentrega,

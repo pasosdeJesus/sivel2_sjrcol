@@ -6,7 +6,7 @@
     <% end %>
     <%= f.input :convenioactividad,
       collection: colact,
-      label_method: lambda { |t| t.presenta_detallefinanciero_pfacpf},
+      label_method: lambda { |t| t.presenta_detallefinanciero_pfacpf_abrev},
       value_method: lambda { |t| t.presenta_detallefinanciero_pfacpf},
       value: lambda { |t| t.presenta_detallefinanciero_pfacpf},
       wrapper_html: {style: "width: 12em"},

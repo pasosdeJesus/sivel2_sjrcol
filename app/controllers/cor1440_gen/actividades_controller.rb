@@ -188,6 +188,12 @@ module Cor1440Gen
           next
         end
         asi = Cor1440Gen::Asistencia.find(v[:id].to_i)
+        #Solo esto al eliminar asistencia que existia produce:
+        #Couldn't find Cor1440Gen::Asistencia with ID=84 for Cor1440Gen::Actividad with ID=287
+        #if v['_destroy'] == "1" 
+        #  asi.destroy
+        #  next
+        #end
         per = Sip::Persona.find(v[:persona_attributes][:id].to_i)
         if asi.persona_id != per.id && per.nombres = 'N' && per.apellidos = 'N'
           # Era nueva asistencia cuya nueva persona se remplazó tras 

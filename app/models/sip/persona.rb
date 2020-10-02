@@ -28,6 +28,8 @@ module Sip
       self.dianac = p[2].to_i
     end
 
+    # Debe corresponder con la funcion @jrs_persona_presenta_nombre de 
+    # app/assets/javascripts/actividad.js.coffee
     def presenta_nombre
       ip = numerodocumento ? numerodocumento : ''
       if tdocumento && tdocumento.sigla

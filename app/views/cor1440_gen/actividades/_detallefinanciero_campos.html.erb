@@ -24,7 +24,8 @@
        <% idp += f.object.actividad.asistencia.map(&:persona_id) %>
        <% idp.uniq! %>
     <% end %>
-    <% colper = Sip::Persona.where(id: idp) %>
+    <% colper = Sip::Persona.where(id: idp).order(
+      'upper(nombres)', 'upper(apellidos)') %>
     <%= f.association :persona,
       collection: colper,
       label_method: :presenta_nombre,

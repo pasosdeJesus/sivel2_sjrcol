@@ -49,6 +49,9 @@ Rails.application.routes.draw do
   get "/casos/:id/fichapdf" => "sivel2_sjr/casos#fichapdf",
     as: :caso_fichapdf
 
+  get '/personas_casos' => 'sivel2_sjr/casos#personas_casos',
+    as: :personas_casos
+
   get '/ubicacionespre' => 'sip/ubicacionespre#index',
     as: :ubicacionespre
   get '/ubicacionespre_mundep' => 'sip/ubicacionespre#mundep',

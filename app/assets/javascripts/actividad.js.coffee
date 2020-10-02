@@ -191,8 +191,8 @@ $(document).on('change', 'input[id^=actividad_detallefinanciero_attributes_][id$
   total = +$(this).val()
   numeroasistencia = $(this).parent().parent().next().find("select")
   $(numeroasistencia).empty()
-  opciones=''
-  opciones+='<option value='+i+'>'+i+'</option>' for i in [1..total]
+  opciones = ''
+  opciones += '<option value='+i+'>'+i+'</option>' for i in [1..total]
   $(numeroasistencia).append(opciones)
 )
 
@@ -211,3 +211,100 @@ $(document).on('change', 'input[id^=actividad_detallefinanciero_attributes][id$=
   input_total = $(this).parent().parent().next().find("input")
   $(input_total).val(total)
 )
+
+
+#
+#  ACTUALIZA DINAMICAMENTE BENEFICIARIO(S) DIRECTO(S) EN DETALLEFINANCIERO
+#
+
+
+@jrs_persona_presenta_nombre = (nombres, apellidos, tdocumento_sigla = null, numerodocumento = null) ->
+  ip = ''
+  if typeof numerodocumento != 'undefined'  && numerodocumento != ''
+    ip = numerodocumento
+  if typeof tdocumento_sigla != 'undefined' && tdocumento_sigla != ''
+    ip = tdocumento_sigla + ":" + ip
+  r = nombres + " " + apellidos + " (" + ip + ")"
+  r
+
+@jrs_refresca_posibles_beneficiarios_casos_asistentes = (root, res) ->
+  # Recorre listado de casos (sin _destroy) y recorre listado de 
+  # asistentes (sin _destroy) para recolectar personas y de cada una 
+  # lo necesario para presentarlas en columna Beneficiario(s) Directo(s)
+  # del detall financiero
+
+  # Procesamos personas en casos que recibimos
+  posbenef = []
+  for p in res
+      n = jrs_persona_presenta_nombre(p.nombres, p.apellidos, p.tdocumento_sigla, p.numerodocumento)
+      posbenef.push({id: p.persona_id, nombre: n})
+
+  $('[id^=actividad_asistencia_attributes][id$=__destroy]').each((i,v) ->
+    # excluye asistentes destruidos
+    if $(this).val() != "1"
+      personaid = $(this).parent().parent().find("[id$=_persona_attributes_id]").val()
+      nombres = $(this).parent().parent().find("[id$=_nombres]").val()
+      apellidos = $(this).parent().parent().find("[id$=_apellidos]").val()
+      tdocumento_sigla = $(this).parent().parent().find("[id$=_tdocumento_id]").val()
+      numerodocumento = $(this).parent().parent().find("[id$=_numerodocumento]").val()
+      n = jrs_persona_presenta_nombre(nombres, apellidos, tdocumento_sigla, numerodocumento)
+      posbenef.push({id: personaid, nombre: n})
+  )
+
+  posbenef.sort((a, b) ->
+    na = a.nombre.toUpperCase()
+    nb = b.nombre.toUpperCase()
+    if na < nb
+      -1
+    else if na > nb
+      1
+    else
+      0
+  )
+
+  posbenefu = posbenef.filter( (valor, indice, self) ->
+    self.indexOf(valor) == indice
+  )
+  # Aquí modificamos los campos beneficiario_directo
+  $('[id^=actividad_detallefinanciero_attributes_][id$=__destroy]').each((i,v) ->
+    # Excluye filas de detalle destruidas
+    if $(this).val() != "1"
+      idpi = $(this).parent().parent().find("[id$=_persona_ids]").attr('id');
+      sip_remplaza_opciones_select(idpi, posbenefu, true);
+  )
+
+
+@jrs_refresca_posibles_beneficiarios_casos = () ->
+  cids = []
+  $('[id^=actividad_actividad_casosjr_][id$=__destroy]').each((i,v) ->
+    # excluye casos destruidos
+    if $(this).val() != "1"
+      casoid = $(this).parent().parent().find("a").first().text()
+      cids.push(casoid)
+  )
+  sip_ajax_recibe_json(window, 'personas_casos', {caso_ids: cids},
+    jrs_refresca_posibles_beneficiarios_casos_asistentes)
+
+
+$(document).on('change', '[id^=actividad_asistencia_attributes][id$=_nombres]', (e, objetivo) ->
+  jrs_refresca_posibles_beneficiarios_casos()
+)
+
+$(document).on('change', '[id^=actividad_asistencia_attributes][id$=_apellidos]', (e, objetivo) ->
+  jrs_refresca_posibles_beneficiarios_casos()
+)
+
+$(document).on('change', '[id^=actividad_asistencia_attributes][id$=_tdocumento_id]', (e, objetivo) ->
+  jrs_refresca_posibles_beneficiarios_casos()
+)
+
+$(document).on('change', '[id^=actividad_asistencia_attributes][id$=_numerodocumento]', (e, objetivo) ->
+  jrs_refresca_posibles_beneficiarios_casos()
+)
+
+@jrs_recalcula_poblacion = () ->
+  cor1440_gen_recalcula_poblacion(jrs_agrega_beneficiarios_casos)
+  jrs_refresca_posibles_beneficiarios_casos()
+
+
+

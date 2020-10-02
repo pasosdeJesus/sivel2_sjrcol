@@ -134,17 +134,19 @@ $(document).on('focusin',
 
 
 @actualiza_opciones_convenioactividad = () ->
-  apfs_inicial = calcula_pfapf_seleccionadas()
-  apfs = apfs_inicial
+  apfs_total = calcula_pfapf_seleccionadas()
+  apfs = apfs_total[0]
+  apfs_abreviadas = apfs_total[1]
   $('select[id^=actividad_detallefinanciero_attributes_][id$=convenioactividad]').each((o) ->
     if $(this).val() == "" || $(this).val() == null
       miselect = $(this)
       miselectid = $(this).attr('id')
       nuevasop = apfs
+      nuevasop_text = apfs_abreviadas
       miselect.empty()
       $(nuevasop).each( (o) ->
         miselect.append($("<option></option>")
-         .attr("value", nuevasop[o]).text(nuevasop[o]))
+         .attr("value", nuevasop[o]).text(nuevasop_text[o]))
       )
       $('#' + miselectid).val('')
       $('#' + miselectid).trigger('chosen:updated')
@@ -152,15 +154,21 @@ $(document).on('focusin',
 
 @calcula_pfapf_seleccionadas = () ->
   apfs = []
+  apfs_abreviadas = []
   $('[id^=actividad_actividad_proyectofinanciero_attributes][id$=_actividadpf_ids] option:selected').each( (o) ->
     v = $(this).text()
     pf = $(this).parent().parent().parent().prev().find('select[id$=_proyectofinanciero_id] option:selected').text()
     apf_sincod = v.substr(v.indexOf(': ')+1)
     if (pf != "" && pf != "PLAN ESTRATÉGICO 1" && apf_sincod != "")
       valor = pf + " -" + apf_sincod
+      if (pf.length > 6)
+        valor_abre = pf.substring(0, 5) + "..." + " -" + apf_sincod
+      else
+        valor_abre = valor
       apfs.push(valor)
+      apfs_abreviadas.push(valor_abre)
   )
-  return apfs
+  return [apfs, apfs_abreviadas]
   
 $(document).on('change', 'select[id^=actividad_actividad_proyectofinanciero_attributes_][id$=actividadpf_ids]', (e, res) ->
   valida_visibilidad_detallefinanciero()

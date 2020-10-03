@@ -12,32 +12,31 @@ class Detallefinanciero < ActiveRecord::Base
 
   belongs_to :actividadpf, 
     foreign_key: 'actividadpf_id', 
-    validate: true, 
     class_name: 'Cor1440Gen::Actividadpf'
 
   belongs_to :unidadayuda, 
-    foreign_key: 'unidadayuda_id', 
-    validate: true, 
+    foreign_key: 'unidadayuda_id',
+    optional: true,
     class_name: 'Unidadayuda'
 
   belongs_to :mecanismodeentrega, 
     foreign_key: 'mecanismodeentrega_id', 
-    validate: true, 
+    optional: true,
     class_name: 'Mecanismodeentrega'
 
   belongs_to :modalidadentrega, 
     foreign_key: 'modalidadentrega_id', 
-    validate: true, 
+    optional: true,
     class_name: 'Modalidadentrega'
 
   belongs_to :tipotransferencia, 
     foreign_key: 'tipotransferencia_id', 
-    validate: true, 
+    optional: true,
     class_name: 'Tipotransferencia'
 
   belongs_to :frecuenciaentrega, 
     foreign_key: 'frecuenciaentrega_id', 
-    validate: true, 
+    optional: true,
     class_name: 'Frecuenciaentrega'
 
   has_many :detallefinanciero_persona, 
@@ -49,11 +48,16 @@ class Detallefinanciero < ActiveRecord::Base
     class_name: 'Sip::Persona', 
     through: 'detallefinanciero_persona'
 
-  validates :cantidad, :numericality => { greater_than_or_equal_to: 0 }
-  validates :valorunitario, :numericality => { greater_than_or_equal_to: 0 }
-  validates :valortotal, :numericality => { greater_than_or_equal_to: 0 }
-  validates :numeromeses, :numericality => { greater_than_or_equal_to: 0 }
-  validates :numeroasistencia, :numericality => { greater_than_or_equal_to: 0 }
+  validates :cantidad, :numericality => { greater_than_or_equal_to: 0 }, 
+    :allow_nil => true
+  validates :valorunitario, :numericality => { greater_than_or_equal_to: 0 },
+    :allow_nil => true
+  validates :valortotal, :numericality => { greater_than_or_equal_to: 0 },
+    :allow_nil => true
+  validates :numeromeses, :numericality => { greater_than_or_equal_to: 0 },
+    :allow_nil => true
+  validates :numeroasistencia, :numericality => { greater_than_or_equal_to: 0 },
+    :allow_nil => true
 
   attr_accessor :convenioactividad
 

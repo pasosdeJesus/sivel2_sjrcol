@@ -189,6 +189,14 @@ $(document).on('change', 'select[id^=actividad_detallefinanciero_attributes_][id
   $(e.target).attr('disabled', true)
   $(e.target).trigger('chosen:updated')
 )
+$(document).on('change', 'select[id^=actividad_detallefinanciero_attributes_][id$=_modalidadentrega_id]', (e, res) ->
+  valor = +$(this).val()
+  tipotrans = $(this).parent().next()
+  if valor != 1
+    tipotrans.css('display', 'block')
+  else
+    tipotrans.css('display', 'none')
+)
 
 $(document).on('change', 'input[id^=actividad_detallefinanciero_attributes_][id$=_numeromeses]', (e, res) ->
   total = +$(this).val()

@@ -90,7 +90,7 @@
         class: 'chosen-select'
       }
     %>
-    <% if f.object.tipotransferencia_id %>
+    <% if f.object && f.object.modalidadentrega && f.object.modalidadentrega_id != 1 %>
       <% estipo = "display: block" %>
     <% else %>
       <% estipo = "display: none" %>

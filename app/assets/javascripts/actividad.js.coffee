@@ -189,6 +189,14 @@ $(document).on('change', 'select[id^=actividad_detallefinanciero_attributes_][id
   $(e.target).attr('disabled', true)
   $(e.target).trigger('chosen:updated')
 )
+$(document).on('change', 'select[id^=actividad_detallefinanciero_attributes_][id$=_modalidadentrega_id]', (e, res) ->
+  valor = +$(this).val()
+  tipotrans = $(this).parent().next()
+  if valor != 1
+    tipotrans.css('display', 'block')
+  else
+    tipotrans.css('display', 'none')
+)
 
 $(document).on('change', 'input[id^=actividad_detallefinanciero_attributes_][id$=_numeromeses]', (e, res) ->
   total = +$(this).val()
@@ -199,22 +207,26 @@ $(document).on('change', 'input[id^=actividad_detallefinanciero_attributes_][id$
   $(numeroasistencia).append(opciones)
 )
 
+@recalcular_detallefinanciero_valortotal = (fila) ->
+  cantidad = +fila.find('input[id^=actividad_detallefinanciero_attributes][id$=_cantidad]').val()
+  valorunitario = +fila.find('input[id^=actividad_detallefinanciero_attributes][id$=_valorunitario]').val()
+  numbenef = 0
+  if typeof fila.find('select[id^=actividad_detallefinanciero_attributes][id$=_persona_ids]').val() == 'object'
+    numbenef = fila.find('select[id^=actividad_detallefinanciero_attributes][id$=_persona_ids]').val().length
+  total = cantidad * valorunitario * numbenef
+  fila.find('input[id^=actividad_detallefinanciero_attributes][id$=_valortotal]').val(total)
+
 $(document).on('change', 'input[id^=actividad_detallefinanciero_attributes][id$=_cantidad]', (e, res) ->
-  cantidad = +$(this).val()
-  valor_unitario = $(this).parent().parent().next().find("input")
-  total = cantidad * +valor_unitario.val()
-  input_total = $(this).parent().parent().next().next().find("input")
-  $(input_total).val(total)
+  recalcular_detallefinanciero_valortotal($(this).parent().parent().parent())
 )
 
 $(document).on('change', 'input[id^=actividad_detallefinanciero_attributes][id$=_valorunitario]', (e, res) ->
-  valor_unitario = +$(this).val()
-  cantidad = $(this).parent().parent().prev().find("input")
-  total = +cantidad.val() * valor_unitario
-  input_total = $(this).parent().parent().next().find("input")
-  $(input_total).val(total)
+  recalcular_detallefinanciero_valortotal($(this).parent().parent().parent())
 )
 
+$(document).on('change', 'select[id^=actividad_detallefinanciero_attributes][id$=_persona_ids]', (e, res) ->
+  recalcular_detallefinanciero_valortotal($(this).parent().parent().parent())
+)
 
 #
 #  ACTUALIZA DINAMICAMENTE BENEFICIARIO(S) DIRECTO(S) EN DETALLEFINANCIERO
@@ -329,6 +341,7 @@ $(document).on('cor1440gen:autocompletado-asistente', (e, papa) ->
 
 # Tras autocompletar caso beneficiario refrescar beneficiarios posibles
 $(document).on('sivel2sjr:autocompletado-contactoactividad', (e, papa) ->
+  console.log('entro por evento autocompletado-contactoactividad')
   jrs_refresca_posibles_beneficiarios_casos()
 )
 

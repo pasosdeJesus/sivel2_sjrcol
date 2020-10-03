@@ -207,22 +207,26 @@ $(document).on('change', 'input[id^=actividad_detallefinanciero_attributes_][id$
   $(numeroasistencia).append(opciones)
 )
 
+@recalcular_detallefinanciero_valortotal = (fila) ->
+  cantidad = +fila.find('input[id^=actividad_detallefinanciero_attributes][id$=_cantidad]').val()
+  valorunitario = +fila.find('input[id^=actividad_detallefinanciero_attributes][id$=_valorunitario]').val()
+  numbenef = 0
+  if typeof fila.find('select[id^=actividad_detallefinanciero_attributes][id$=_persona_ids]').val() == 'object'
+    numbenef = fila.find('select[id^=actividad_detallefinanciero_attributes][id$=_persona_ids]').val().length
+  total = cantidad * valorunitario * numbenef
+  fila.find('input[id^=actividad_detallefinanciero_attributes][id$=_valortotal]').val(total)
+
 $(document).on('change', 'input[id^=actividad_detallefinanciero_attributes][id$=_cantidad]', (e, res) ->
-  cantidad = +$(this).val()
-  valor_unitario = $(this).parent().parent().next().find("input")
-  total = cantidad * +valor_unitario.val()
-  input_total = $(this).parent().parent().next().next().find("input")
-  $(input_total).val(total)
+  recalcular_detallefinanciero_valortotal($(this).parent().parent().parent())
 )
 
 $(document).on('change', 'input[id^=actividad_detallefinanciero_attributes][id$=_valorunitario]', (e, res) ->
-  valor_unitario = +$(this).val()
-  cantidad = $(this).parent().parent().prev().find("input")
-  total = +cantidad.val() * valor_unitario
-  input_total = $(this).parent().parent().next().find("input")
-  $(input_total).val(total)
+  recalcular_detallefinanciero_valortotal($(this).parent().parent().parent())
 )
 
+$(document).on('change', 'select[id^=actividad_detallefinanciero_attributes][id$=_persona_ids]', (e, res) ->
+  recalcular_detallefinanciero_valortotal($(this).parent().parent().parent())
+)
 
 #
 #  ACTUALIZA DINAMICAMENTE BENEFICIARIO(S) DIRECTO(S) EN DETALLEFINANCIERO

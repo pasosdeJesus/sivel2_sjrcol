@@ -329,6 +329,7 @@ $(document).on('cor1440gen:autocompletado-asistente', (e, papa) ->
 
 # Tras autocompletar caso beneficiario refrescar beneficiarios posibles
 $(document).on('sivel2sjr:autocompletado-contactoactividad', (e, papa) ->
+  console.log('entro por evento autocompletado-contactoactividad')
   jrs_refresca_posibles_beneficiarios_casos()
 )
 

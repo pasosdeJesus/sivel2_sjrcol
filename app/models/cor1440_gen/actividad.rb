@@ -36,6 +36,18 @@ module Cor1440Gen
     end
 
     validate :valida_beneficiarios
+    validate :no_asistentes_repetidos
+
+    def no_asistentes_repetidos
+      asistentes = []
+      beneficiarios = []
+      self.asistencia.map{ |as| asistentes.push(as.persona_id) }
+      self.actividad_casosjr.map{|ben| beneficiarios.push(ben.casosjr.contacto_id) }
+      if (asistentes & beneficiarios).length > 0
+        errors.add(:asistencia, "Se encuentran personas duplicada en asistencia y en caso") 
+      end
+    end
+
     def valida_beneficiarios
       pact = []
       self.detallefinanciero.map{

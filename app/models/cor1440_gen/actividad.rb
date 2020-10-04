@@ -44,7 +44,12 @@ module Cor1440Gen
       self.asistencia.map{ |as| asistentes.push(as.persona_id) }
       self.actividad_casosjr.map{|ben| beneficiarios.push(ben.casosjr.contacto_id) }
       if (asistentes & beneficiarios).length > 0
-        errors.add(:asistencia, "Se encuentran personas duplicada en asistencia y en caso") 
+        repetidos = Sip::Persona.find(asistentes & beneficiarios).map{
+          |n| n.nombres + " " + n.apellidos + 
+            " en listado de asistencia y en caso " + 
+            Sivel2Sjr::Casosjr.where(contacto_id: n.id).pluck(:id_caso)[0].to_s
+        }
+        errors.add(:asistencia, "Personas repetidas entre listado de casos y asistencia: " + repetidos.join(", ")) 
       end
     end
 

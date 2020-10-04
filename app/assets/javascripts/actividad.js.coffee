@@ -183,6 +183,8 @@ $(document).on('cocoon:after-remove', '#actividad_proyectofinanciero', (e, objet
 $(document).on('cocoon:after-insert', '#filas_detallefinanciero', (e, objetivo) ->
   $('.chosen-select').chosen()
   actualiza_opciones_convenioactividad()
+  # Tras agregar fila a detalle financiero refrescar beneficiarios posibles
+  jrs_refresca_posibles_beneficiarios_casos()
  )
 
 $(document).on('change', 'select[id^=actividad_detallefinanciero_attributes_][id$=convenioactividad]', (e, res) ->
@@ -344,5 +346,7 @@ $(document).on('sivel2sjr:autocompletado-contactoactividad', (e, papa) ->
   console.log('entro por evento autocompletado-contactoactividad')
   jrs_refresca_posibles_beneficiarios_casos()
 )
+
+
 
 

@@ -36,7 +36,7 @@ module Cor1440Gen
     end
 
     validate :valida_beneficiarios
-    validate :no_asistentes_repetidos
+    #validate :no_asistentes_repetidos
 
 # Mejorar
 #    def no_asistentes_repetidos

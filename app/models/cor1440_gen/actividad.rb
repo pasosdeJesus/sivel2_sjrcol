@@ -36,22 +36,23 @@ module Cor1440Gen
     end
 
     validate :valida_beneficiarios
-    validate :no_asistentes_repetidos
+    #validate :no_asistentes_repetidos
 
-    def no_asistentes_repetidos
-      asistentes = []
-      beneficiarios = []
-      self.asistencia.map{ |as| asistentes.push(as.persona_id) }
-      self.actividad_casosjr.map{|ben| beneficiarios.push(ben.casosjr.contacto_id) }
-      if (asistentes & beneficiarios).length > 0
-        repetidos = Sip::Persona.find(asistentes & beneficiarios).map{
-          |n| n.nombres + " " + n.apellidos + 
-            " en listado de asistencia y en caso " + 
-            Sivel2Sjr::Casosjr.where(contacto_id: n.id).pluck(:id_caso)[0].to_s
-        }
-        errors.add(:asistencia, "Personas repetidas entre listado de casos y asistencia: " + repetidos.join(", ")) 
-      end
-    end
+# Mejorar
+#    def no_asistentes_repetidos
+#      asistentes = []
+#      beneficiarios = []
+#      self.asistencia.map{ |as| asistentes.push(as.persona_id) }
+#      self.actividad_casosjr.map{|ben| beneficiarios.push(ben.casosjr.contacto_id) }
+#      if (asistentes & beneficiarios).length > 0
+#        repetidos = Sip::Persona.find(asistentes & beneficiarios).map{
+#          |n| n.nombres + " " + n.apellidos + 
+#            " en listado de asistencia y en caso " + 
+#            Sivel2Sjr::Casosjr.where(contacto_id: n.id).pluck(:id_caso)[0].to_s
+#        }
+#        errors.add(:asistencia, "Personas repetidas entre listado de casos y asistencia: " + repetidos.join(", ")) 
+#      end
+#    end
 
     def valida_beneficiarios
       pact = []

@@ -20,9 +20,13 @@
   <td>
     <% idp = [] %>
     <% if f.object.actividad %>
-       <% idp = f.object.actividad.casosjr.map {  |c| c.caso.victima.map(&:id_persona) }.flatten %>
-       <% idp += f.object.actividad.asistencia.map(&:persona_id) %>
-       <% idp.uniq! %>
+      <% if f.object.actividad.casosjr %>
+        <% idp = f.object.actividad.casosjr.map {  |c| c.caso.victima.map(&:id_persona) }.flatten %>
+      <% end %>
+      <% if f.object.actividad.asistencia %>
+        <% idp += f.object.actividad.asistencia.map(&:persona_id) %>
+      <% end %>
+      <% idp.uniq! %>
     <% end %>
     <% colper = Sip::Persona.where(id: idp).order(
       'upper(nombres)', 'upper(apellidos)') %>

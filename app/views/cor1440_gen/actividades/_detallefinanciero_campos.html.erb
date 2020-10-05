@@ -4,7 +4,7 @@
     <% if @registro.actividadpf_ids.length > 0 %>
       <% pe = Cor1440Gen::Actividadpf.where(proyectofinanciero_id: 10).pluck(:id) %>
       <% actpfs = @registro.actividadpf_ids - pe%>
-      <% colact = Cor1440Gen::Actividadpf.find(actpfs) %>
+      <% colact = Cor1440Gen::Actividadpf.where(id: actpfs) %>
     <% end %>
     <%= f.input :convenioactividad,
       collection: colact,

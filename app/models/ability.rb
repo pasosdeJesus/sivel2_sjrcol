@@ -364,7 +364,11 @@ class Ability < Sivel2Sjr::Ability
 
     can :contar, Sivel2Gen::Caso
     can :buscar, Sivel2Gen::Caso
+    can :busca, Sivel2Gen::Caso
     can :lista, Sivel2Gen::Caso
+    can :personas_casos, Sivel2Gen::Caso
+    can :poblacion_sexo_rangoedadac, Sivel2Gen::Caso
+
     can :nuevo, Sivel2Gen::Presponsable
     can :nuevo, Sivel2Gen::Victima
 

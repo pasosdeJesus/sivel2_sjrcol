@@ -9,7 +9,7 @@ module Sivel2Sjr
     include Sivel2Sjr::Concerns::Controllers::CasosController
 
     before_action :set_caso, only: [:show, :edit, :update, :destroy],
-      exclude: [:poblacion_sexo_rangoedadac]
+      exclude: [:poblacion_sexo_rangoedadac, :personas_casos]
     load_and_authorize_resource class: Sivel2Gen::Caso
 
     def vistas_manejadas

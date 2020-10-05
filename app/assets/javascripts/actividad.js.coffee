@@ -302,8 +302,18 @@ $(document).on('change', 'select[id^=actividad_detallefinanciero_attributes][id$
   )
   console.log('El arreglo cids es:', cids)
   console.log(cids)
-  sip_ajax_recibe_json(window, 'personas_casos', {caso_ids: cids.join(',')},
-    jrs_refresca_posibles_beneficiarios_casos_asistentes)
+  root = window
+  rutac = root.puntomontaje + 'personas_casos' + '.json'
+  $.ajax({
+    url: rutac, 
+    data: {caso_ids: cids.join(',')},
+    dataType: 'json',
+    method: 'GET'
+  }).fail( (jqXHR, texto) ->
+    alert('Error - ' + texto )
+  ).done( (e, r) ->
+    jrs_refresca_posibles_beneficiarios_casos_asistentes(root, e)
+  )
 
 
 # En actividad tras cambiar nombres de asistente refrescar beneficiario posibles
@@ -347,6 +357,11 @@ $(document).on('sivel2sjr:autocompletado-contactoactividad', (e, papa) ->
   jrs_refresca_posibles_beneficiarios_casos()
 )
 
+
+# En caso de que ocurra un error de valida
+$(document).on('focusin', '.actividad_detallefinanciero_persona', (e, papa) ->
+  jrs_refresca_posibles_beneficiarios_casos()
+)
 
 
 

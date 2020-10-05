@@ -1,8 +1,10 @@
 <tr class='nested-fields'>
   <td>
     <% colact = [] %>
-    <% if f.object.proyectofinanciero_id %>
-      <% colact = Cor1440Gen::Actividadpf.where(proyectofinanciero_id: f.object.proyectofinanciero_id) %>
+    <% if @registro.actividadpf_ids.length > 0 %>
+      <% pe = Cor1440Gen::Actividadpf.where(proyectofinanciero_id: 10).pluck(:id) %>
+      <% actpfs = @registro.actividadpf_ids - pe%>
+      <% colact = Cor1440Gen::Actividadpf.find(actpfs) %>
     <% end %>
     <%= f.input :convenioactividad,
       collection: colact,

@@ -37,19 +37,38 @@ module Cor1440Gen
 
     validate :valida_beneficiarios
     validate :no_asistentes_repetidos
+    validate :no_casos_repetidos
 
     def no_asistentes_repetidos
       asistentes = []
-      beneficiarios = []
+      victimas = []
       self.asistencia.map{ |as| asistentes.push(as.persona_id) }
-      self.actividad_casosjr.map{|ben| beneficiarios.push(ben.casosjr.contacto_id) }
-      if (asistentes & beneficiarios).length > 0
-        repetidos = Sip::Persona.find(asistentes & beneficiarios).map{
+      self.actividad_casosjr.map{|cas| victimas.push(Sivel2Gen::Victima.where(id_caso: cas.casosjr.id_caso).pluck(:id_persona))}
+      if (asistentes & victimas.flatten).length > 0
+        repetidos = Sip::Persona.where(id: asistentes & victimas.flatten).map{
           |n| n.nombres + " " + n.apellidos + 
             " en listado de asistencia y en caso " + 
             Sivel2Sjr::Casosjr.where(contacto_id: n.id).pluck(:id_caso)[0].to_s
         }
-        errors.add(:asistencia, "Personas repetidas entre listado de casos y asistencia: " + repetidos.join(", ")) 
+        errors.add(:asistencia, "Personas repetidas entre listado de casos (contacto o familiares) y asistencia: " + repetidos.join(", ")) 
+      end
+      if asistentes.length != asistentes.uniq.length
+        asrepetidos = []
+        asrepetidos.push(asistentes.detect{ |e| asistentes.count(e) > 1 })
+        nombres =  Sip::Persona.where(id: asrepetidos).map{
+          |n| n.nombres + " " + n.apellidos
+        }
+        errors.add(:asistencia, "En listado de asistencia se encuentra repetido: " + nombres.join(", ")) 
+      end 
+    end
+
+    def no_casos_repetidos
+      casos = []
+      casrepetidos = []
+      self.actividad_casosjr.map{|caso| casos.push(caso.casosjr.id_caso)}
+      if casos.length != casos.uniq.length
+        casrepetidos.push(casos.detect{ |e| casos.count(e) > 1 })
+        errors.add(:casosjr, "En listado de casos se encuentran repetidos los casos con id(s): " + casrepetidos.join(", ")) 
       end
     end
 

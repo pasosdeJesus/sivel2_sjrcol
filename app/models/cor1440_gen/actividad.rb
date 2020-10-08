@@ -89,17 +89,21 @@ module Cor1440Gen
     # PRESENTACIÓN DE INFORMACIÓN
 
 
-    # Retorna el primero
+    # Retorna el del primer proyecto y de la primera actividad o nil 
     def busca_indicador_gifmm
       idig = nil
       proyectofinanciero.find do |p| 
-        p.actividadpf.find do |a|
-          if a.indicadorgifmm_id
-            idig = a.indicadorgifmm.id
-            true
-          else
-            false
+        if !p.nombre.start_with?('PLAN ESTRATEGICO')
+          self.actividadpf.where(proyectofinanciero_id: p.id).find do |a|
+            if a.indicadorgifmm_id
+              idig = a.indicadorgifmm.id
+              true
+            else
+              false
+            end
           end
+        else
+          false
         end
       end
       idig
@@ -113,9 +117,11 @@ module Cor1440Gen
     end
 
     def detalleah_cantidad
-      detallefinanciero.count > 0 && detallefinanciero[0].cantidad ?
-      detallefinanciero[0].cantidad.to_s :
+      r = detallefinanciero.count > 0 && detallefinanciero[0].unidadayuda &&
+      detallefinanciero[0].cantidad && detallefinanciero[0].persona_ids ?
+      detallefinanciero[0].cantidad*detallefinanciero[0].persona_ids.count :
         ''
+      r.to_s
     end
 
     def detalleah_modalidad
@@ -143,9 +149,11 @@ module Cor1440Gen
     end
 
     def detalleah_monto_por_persona
-      detallefinanciero.count > 0 && detallefinanciero[0].valortotal ?
-      detallefinanciero[0].valortotal :
+      r = detallefinanciero.count > 0 && detallefinanciero[0].valorunitario &&
+      detallefinanciero[0].cantidad && detallefinanciero[0].valorunitario ?
+      detallefinanciero[0].cantidad*detallefinanciero[0].valorunitario :
         ''
+      r.to_s
     end
 
     def detalleah_numero_meses_cobertura

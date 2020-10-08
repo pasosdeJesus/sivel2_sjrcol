@@ -467,6 +467,14 @@ module Cor1440Gen
           ''
         end
 
+      when 'departamento_altas_bajas'
+        if ubicacionpre && ubicacionpre.departamento
+          ubicacionpre.departamento.nombre.capitalize
+        else
+          ''
+        end
+
+
       when 'indicador_gifmm'
         idig = self.busca_indicador_gifmm
         if idig != nil
@@ -488,6 +496,14 @@ module Cor1440Gen
         else
           ''
         end
+
+      when 'municipio_altas_bajas'
+        if ubicacionpre && ubicacionpre.municipio
+          ubicacionpre.municipio.nombre.capitalize
+        else
+          ''
+        end
+
 
 
       when 'num_afrodescendientes'
@@ -700,14 +716,14 @@ module Cor1440Gen
         end
 
       when 'socio_implementador'
-        if socio_principal == 'SJR-COL'
+        if socio_principal == 'SJR Col'
           ''
         else
-          'SJR-COL'
+          'SJR Col'
         end
 
       when 'tipo_implementacion'
-        if socio_principal == 'SJR-COL'
+        if socio_principal == 'SJR Col'
           'Directa'
         else
           'Indirecta'

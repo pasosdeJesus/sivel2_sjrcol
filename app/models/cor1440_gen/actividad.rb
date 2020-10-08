@@ -469,7 +469,7 @@ module Cor1440Gen
 
       when 'departamento_altas_bajas'
         if ubicacionpre && ubicacionpre.departamento
-          ubicacionpre.departamento.nombre.capitalize
+          ubicacionpre.departamento.nombre.altas_bajas
         else
           ''
         end
@@ -499,7 +499,7 @@ module Cor1440Gen
 
       when 'municipio_altas_bajas'
         if ubicacionpre && ubicacionpre.municipio
-          ubicacionpre.municipio.nombre.capitalize
+          ubicacionpre.municipio.nombre.altas_bajas
         else
           ''
         end

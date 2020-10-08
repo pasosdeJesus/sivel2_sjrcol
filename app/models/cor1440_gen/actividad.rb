@@ -474,6 +474,12 @@ module Cor1440Gen
           ''
         end
 
+      when 'departamento_gifmm'
+        if ubicacionpre && ubicacionpre.departamento
+          GifmmHelper::departamento_gifmm(ubicacionpre.departamento.nombre)
+        else
+          ''
+        end
 
       when 'indicador_gifmm'
         idig = self.busca_indicador_gifmm
@@ -504,7 +510,12 @@ module Cor1440Gen
           ''
         end
 
-
+      when 'municipio_gifmm'
+        if ubicacionpre && ubicacionpre.departamento
+          GifmmHelper::municipio_gifmm(ubicacionpre.departamento.nombre)
+        else
+          ''
+        end
 
       when 'num_afrodescendientes'
         cuenta_victimas_condicion {|v|
@@ -560,7 +571,7 @@ module Cor1440Gen
         }
 
       when 'parte_rmrp'
-        'SI'
+        'Si'
 
       when 'poblacion_hombres_adultos'
         p1 = poblacion_hombres_r_g_solore(4) +

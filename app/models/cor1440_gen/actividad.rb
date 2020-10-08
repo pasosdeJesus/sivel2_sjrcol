@@ -361,14 +361,20 @@ module Cor1440Gen
 
     def poblacion_gen_infijo(infijo, num = nil)
       puts "** OJO poblacion_gen_infijo(infijo = #{infijo}, num = #{num})"
+      p1 = nil
+      p2 = nil
       if num.nil?
         p1 = send("poblacion_#{infijo}_solore")
-        p2 = send("poblacion_#{infijo}_ids").split(",").count
+        if respond_to?("poblacion_#{infijo}_ids")
+          p2 = send("poblacion_#{infijo}_ids").split(",").count
+        end
       else
         p1 = send("poblacion_#{infijo}_solore", num)
-        p2 = send("poblacion_#{infijo}_ids", num).split(",").count
+        if respond_to?("poblacion_#{infijo}_ids")
+          p2 = send("poblacion_#{infijo}_ids", num).split(",").count
+        end
       end
-      if p1 >= p2
+      if p2.nil? || p1 >= p2
         p1.to_s
       else
         "#{p1} pero se esperaban al menos #{p2}"

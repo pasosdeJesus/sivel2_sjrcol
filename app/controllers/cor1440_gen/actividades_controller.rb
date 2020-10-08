@@ -180,6 +180,8 @@ module Cor1440Gen
           !params[:actividad][:asistencia_attributes]
         return
       end
+
+      # Deben eliminarse asistentes creados con AJAX
       porelim = []
       params[:actividad][:asistencia_attributes].each do |l, v|
         if Cor1440Gen::Asistencia.where(id: v[:id].to_i).count == 0 ||
@@ -191,7 +193,7 @@ module Cor1440Gen
         asi = Cor1440Gen::Asistencia.find(v[:id].to_i)
         #Solo esto al eliminar asistencia que existia produce:
         #Couldn't find Cor1440Gen::Asistencia with ID=84 for Cor1440Gen::Actividad with ID=287
-        if v['_destroy'] == "1" 
+        if v['_destroy'] == "1" || v['_destroy'] == "true"
           asi.actividad.asistencia_ids -= [asi.id]
           asi.actividad.save(validate: false)
           asi.destroy
@@ -212,6 +214,25 @@ module Cor1440Gen
       end
       porelim.each do |l|
         params[:actividad][:asistencia_attributes].delete(l)
+      end
+
+      # Deben eliminarse detalles financieros creados con AJAX
+      porelimd = []
+      params[:actividad][:detallefinanciero_attributes].each do |l, v|
+        det = ::Detallefinanciero.find(v[:id].to_i)
+        if v['_destroy'] == "1" || v['_destroy'] == "true"
+          det.persona_ids = []
+          det.actividad.detallefinanciero_ids -= [det.id]
+          det.actividad.save(validate: false)
+          det.destroy
+          # Quitar de los parámetros
+          porelimd.push(l)  
+          next
+        end
+      end
+
+      porelimd.each do |l|
+        params[:actividad][:detallefinanciero_attributes].delete(l)
       end
 
     end

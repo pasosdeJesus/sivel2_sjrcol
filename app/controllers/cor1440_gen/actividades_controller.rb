@@ -218,16 +218,18 @@ module Cor1440Gen
 
       # Deben eliminarse detalles financieros creados con AJAX
       porelimd = []
-      params[:actividad][:detallefinanciero_attributes].each do |l, v|
-        det = ::Detallefinanciero.find(v[:id].to_i)
-        if v['_destroy'] == "1" || v['_destroy'] == "true"
-          det.persona_ids = []
-          det.actividad.detallefinanciero_ids -= [det.id]
-          det.actividad.save(validate: false)
-          det.destroy
-          # Quitar de los parámetros
-          porelimd.push(l)  
-          next
+      if params[:actividad][:detallefinanciero_attributes]
+        params[:actividad][:detallefinanciero_attributes].each do |l, v|
+          det = ::Detallefinanciero.find(v[:id].to_i)
+          if v['_destroy'] == "1" || v['_destroy'] == "true"
+            det.persona_ids = []
+            det.actividad.detallefinanciero_ids -= [det.id]
+            det.actividad.save(validate: false)
+            det.destroy
+            # Quitar de los parámetros
+            porelimd.push(l)  
+            next
+          end
         end
       end
 

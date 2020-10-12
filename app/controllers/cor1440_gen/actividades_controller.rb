@@ -176,49 +176,50 @@ module Cor1440Gen
     # Pero usaremos para sanear datos cuando hay nuevas
     # filas en listado de asistencia
     def filtra_contenido_params
-      if !params || !params[:actividad] || 
-          !params[:actividad][:asistencia_attributes]
+      if !params || !params[:actividad] 
         return
       end
 
       # Deben eliminarse asistentes creados con AJAX
-      porelim = []
-      params[:actividad][:asistencia_attributes].each do |l, v|
-        if Cor1440Gen::Asistencia.where(id: v[:id].to_i).count == 0 ||
-            !v[:persona_attributes] || 
-            !v[:persona_attributes][:id] || v[:persona_attributes][:id] == '' ||
-            Sip::Persona.where(id: v[:persona_attributes][:id].to_i).count == 0
-          next
+      if params[:actividad][:asistencia_attributes]
+        porelim = []
+        params[:actividad][:asistencia_attributes].each do |l, v|
+          if Cor1440Gen::Asistencia.where(id: v[:id].to_i).count == 0 ||
+              !v[:persona_attributes] || 
+              !v[:persona_attributes][:id] || v[:persona_attributes][:id] == '' ||
+              Sip::Persona.where(id: v[:persona_attributes][:id].to_i).count == 0
+            next
+          end
+          asi = Cor1440Gen::Asistencia.find(v[:id].to_i)
+          #Solo esto al eliminar asistencia que existia produce:
+          #Couldn't find Cor1440Gen::Asistencia with ID=84 for Cor1440Gen::Actividad with ID=287
+          if v['_destroy'] == "1" || v['_destroy'] == "true"
+            asi.actividad.asistencia_ids -= [asi.id]
+            asi.actividad.save(validate: false)
+            asi.destroy
+            # Quitar de los parámetros
+            porelim.push(l)  
+            next
+          end
+          per = Sip::Persona.find(v[:persona_attributes][:id].to_i)
+          if asi.persona_id != per.id && asi.persona.nombres == 'N' && 
+              asi.persona.apellidos == 'N'
+            # Era nueva asistencia cuya nueva persona se remplazó tras 
+            # autocompletar. Dejar asignada la remplazada y borrar la vacia
+            op = asi.persona
+            asi.persona_id = per.id
+            asi.save
+            op.destroy
+          end
         end
-        asi = Cor1440Gen::Asistencia.find(v[:id].to_i)
-        #Solo esto al eliminar asistencia que existia produce:
-        #Couldn't find Cor1440Gen::Asistencia with ID=84 for Cor1440Gen::Actividad with ID=287
-        if v['_destroy'] == "1" || v['_destroy'] == "true"
-          asi.actividad.asistencia_ids -= [asi.id]
-          asi.actividad.save(validate: false)
-          asi.destroy
-          # Quitar de los parámetros
-          porelim.push(l)  
-          next
+        porelim.each do |l|
+          params[:actividad][:asistencia_attributes].delete(l)
         end
-        per = Sip::Persona.find(v[:persona_attributes][:id].to_i)
-        if asi.persona_id != per.id && asi.persona.nombres == 'N' && 
-            asi.persona.apellidos == 'N'
-          # Era nueva asistencia cuya nueva persona se remplazó tras 
-          # autocompletar. Dejar asignada la remplazada y borrar la vacia
-          op = asi.persona
-          asi.persona_id = per.id
-          asi.save
-          op.destroy
-        end
-      end
-      porelim.each do |l|
-        params[:actividad][:asistencia_attributes].delete(l)
       end
 
       # Deben eliminarse detalles financieros creados con AJAX
-      porelimd = []
       if params[:actividad][:detallefinanciero_attributes]
+        porelimd = []
         params[:actividad][:detallefinanciero_attributes].each do |l, v|
           det = ::Detallefinanciero.find(v[:id].to_i)
           if v['_destroy'] == "1" || v['_destroy'] == "true"
@@ -228,14 +229,13 @@ module Cor1440Gen
             det.destroy
             # Quitar de los parámetros
             porelimd.push(l)  
-            next
           end
+        end
+        porelimd.each do |l|
+          params[:actividad][:detallefinanciero_attributes].delete(l)
         end
       end
 
-      porelimd.each do |l|
-        params[:actividad][:detallefinanciero_attributes].delete(l)
-      end
 
     end
 

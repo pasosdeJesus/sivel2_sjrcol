@@ -339,7 +339,7 @@ module Cor1440Gen
         end
       }
       idp += personas_asistentes_condicion {|a| 
-        if a.persona.sexo == sexo
+        if a.persona && a.persona.sexo == sexo
           e = Sivel2Gen::RangoedadHelper.edad_de_fechanac_fecha(
             a.persona.anionac, a.persona.mesnac, a.persona.dianac,
             fecha.year, fecha.month, fecha. day)

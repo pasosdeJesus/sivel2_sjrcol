@@ -45,6 +45,8 @@
       <% if can? :read, Cor1440Gen::Actividad then %>
         <%= despliega_abajo "Actividades" do %>
           <%= opcion_menu "Listado", cor1440_gen.actividades_path, desplegable: true %>
+          <%= opcion_menu "Reporte GIFMM detallado", main_app.consgifmm_path, 
+            desplegable: true %>
           <%= opcion_menu "Conteo por actividad de marco lógico", 
             cor1440_gen.contar_actividades_path, desplegable: true %>
           <%= opcion_menu "Conteo por beneficiario y actividad de marco lógico", 

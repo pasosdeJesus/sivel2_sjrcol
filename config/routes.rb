@@ -69,6 +69,9 @@ Rails.application.routes.draw do
   get '/asistencia/nueva' => 'cor1440_gen/actividades#nueva_asistencia',
     as: :nueva_asistencia
 
+  get '/consgifmm' => 'consgifmm#index',
+    as: :consgifmm
+
   get '/detallesfinancieros/nuevo' => 'detallesfinancieros#nuevo'
   
 

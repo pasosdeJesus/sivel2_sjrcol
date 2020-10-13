@@ -54,6 +54,8 @@ es:
       "sivel2_gen/anexo_victima":
         tipoanexo: Tipo de anexo
         tipoanexo_id: Tipo de anexo
+      "consgifmm":
+        Consactividadcaso: Reporte GIFMM detallado
       "cor1440_gen/actividad":
         nombre: 'Nombre (*)'
         fecha_localizada: 'Fecha (*)'

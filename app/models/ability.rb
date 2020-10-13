@@ -11,11 +11,11 @@ class Ability < Sivel2Sjr::Ability
   ROLANALIPRENSA  = 7
 
   ROLES = [
-    ["Administrador", ROLADMIN], 
-    ["Invitado Nacional", ROLINV], 
-    ["Director Nacional", ROLDIR], 
-    ["Coordinador oficina", ROLCOOR], 
-    ["Analista", ROLANALI], 
+    ["Administrador", ROLADMIN],
+    ["Invitado Nacional", ROLINV],
+    ["Director Nacional", ROLDIR],
+    ["Coordinador oficina", ROLCOOR],
+    ["Analista", ROLANALI],
     ["Sistematizador", ROLSIST],
     ["Analista de Prensa", ROLANALIPRENSA]
   ]
@@ -25,22 +25,22 @@ class Ability < Sivel2Sjr::Ability
     'Admministrar casos de todas las oficinas. ' +
     'Administrar actividades de todas las oficinas. ' +
     'Administrar artículos de prensa. ' +
-    'Administrar usuarios. ' + 
+    'Administrar usuarios. ' +
     'Administrar documentos en nube. ' +
     'Administrar tablas básicas. ', #ROLADMIN
 
     'Realizar conteos de casos. ' +
     'Buscar casos y ver casos con etiqueta de compartidos. ' +
     'Buscar y ver artículos de prensa.' , # ROLINV
- 
+
     'Realizar conteos de casos. ' +
     'Admministrar casos de todas las oficinas. ' +
     'Administrar actividades de todas las oficinas. ' +
     'Administrar artículos de prensa. ' +
-    'Administrar usuarios. ' + 
+    'Administrar usuarios. ' +
     'Administrar documentos en nube. ' +
     'Administrar tablas básicas. ', #ROLDIR
- 
+
     'Realizar conteos de casos. ' +
     'Ver casos de todas las oficinas, crear casos, editar los de su oficina y poner etiquetas de compartir. ' +
     'Ver actividades e informes de actividades de todas las oficinas y editar los de su oficina. ' +
@@ -69,7 +69,7 @@ class Ability < Sivel2Sjr::Ability
 
   BASICAS_PROPIAS =  [
     ['Sivel2Sjr', 'accionjuridica'],
-    ['Sivel2Sjr', 'motivosjr'], 
+    ['Sivel2Sjr', 'motivosjr'],
     ['Sivel2Sjr', 'regimensalud'],
     ['Sip', 'lineaactorsocial'],
     ['Sip', 'tipoanexo'],
@@ -95,13 +95,13 @@ class Ability < Sivel2Sjr::Ability
     ['', 'unidadayuda'],
     ['', 'viadeingreso']
   ]
-  
-  def tablasbasicas 
-    Sip::Ability::BASICAS_PROPIAS + 
+
+  def tablasbasicas
+    Sip::Ability::BASICAS_PROPIAS +
       Cor1440Gen::Ability::BASICAS_PROPIAS +
-      Sal7711Gen::Ability::BASICAS_PROPIAS + 
-      Sivel2Gen::Ability::BASICAS_PROPIAS + 
-      Sivel2Sjr::Ability::BASICAS_PROPIAS + 
+      Sal7711Gen::Ability::BASICAS_PROPIAS +
+      Sivel2Gen::Ability::BASICAS_PROPIAS +
+      Sivel2Sjr::Ability::BASICAS_PROPIAS +
       BASICAS_PROPIAS - [
         ['Sip', 'grupo'],
         ['Sip', 'perfilactorsocial'],
@@ -119,30 +119,30 @@ class Ability < Sivel2Sjr::Ability
       ]
   end
 
-  def basicas_id_noauto 
+  def basicas_id_noauto
     Sip::Ability::BASICAS_ID_NOAUTO +
-      Sivel2Gen::Ability::BASICAS_ID_NOAUTO 
+      Sivel2Gen::Ability::BASICAS_ID_NOAUTO
   end
 
-  def nobasicas_indice_seq_con_id 
+  def nobasicas_indice_seq_con_id
     Sip::Ability::NOBASICAS_INDSEQID +
-      Sivel2Gen::Ability::NOBASICAS_INDSEQID 
+      Sivel2Gen::Ability::NOBASICAS_INDSEQID
   end
 
-  def tablasbasicas_prio 
+  def tablasbasicas_prio
     Sip::Ability::BASICAS_PRIO +
       Sivel2Gen::Ability::BASICAS_PRIO +
       Sivel2Sjr::Ability::BASICAS_PRIO
   end
 
   if !ActiveRecord::Base.connection.data_source_exists?(
-      'sivel2_gen_consexpcaso') && 
+      'sivel2_gen_consexpcaso') &&
      ActiveRecord::Base.connection.data_source_exists?('sivel2_gen_caso')
     Sivel2Gen::Consexpcaso.crea_consexpcaso(nil)
   end
 
-  CAMPOS_PLANTILLAS_PROPIAS = { 
-    'Caso' => { 
+  CAMPOS_PLANTILLAS_PROPIAS = {
+    'Caso' => {
       campos: [
         :asesor,
         :beneficiarios_0_5,
@@ -175,9 +175,9 @@ class Ability < Sivel2Sjr::Ability
         :llegada,
         :memo1612,
         :oficina,
-        :presponsables, 
+        :presponsables,
         :tipificacion,
-        :ubicaciones, 
+        :ubicaciones,
         :ultimaatencion_mes,
         :ultimaatencion_fecha,
         :ultimaatencion_derechosvul,
@@ -189,22 +189,22 @@ class Ability < Sivel2Sjr::Ability
       controlador: 'Sivel2Sjr::CasosController',
         ruta: '/casos'
     },
-    'Actividad' => { 
+    'Actividad' => {
       campos: [
         Cor1440Gen::Actividad.human_attribute_name(
-          :actividadareas).downcase.gsub(' ', '_'), 
+          :actividadareas).downcase.gsub(' ', '_'),
         Cor1440Gen::Actividad.human_attribute_name(
-          :actividadpf).downcase.gsub(' ', '_'), 
+          :actividadpf).downcase.gsub(' ', '_'),
           'actualizacion',
           'anexo_1_desc',
           'anexo_2_desc',
           'anexo_3_desc',
           'anexo_4_desc',
           'anexo_5_desc',
-          'campos_dinamicos', 
-          'corresponsables', 
+          'campos_dinamicos',
+          'corresponsables',
           'covid19',
-          'creacion', 
+          'creacion',
           'departamento',
           'departamento_altas_bajas',
           'departamento_gifmm',
@@ -217,26 +217,26 @@ class Ability < Sivel2Sjr::Ability
           'detalleah_monto_por_persona',
           'detalleah_numero_meses_cobertura',
           'estado',
-          'fecha', 
-          'fecha_localizada', 
-          'id', 
-          'indicador_gifmm', 
-          'lugar', 
-          'mes', 
-          'municipio', 
-          'municipio_altas_bajas', 
-          'municipio_gifmm', 
-          'nombre', 
+          'fecha',
+          'fecha_localizada',
+          'id',
+          'indicador_gifmm',
+          'lugar',
+          'mes',
+          'municipio',
+          'municipio_altas_bajas',
+          'municipio_gifmm',
+          'nombre',
           'num_afrodescendientes',
           'num_con_discapacidad',
           'num_con_discapacidad_ids',
           'num_indigenas',
           'num_lgbti',
           'num_otra_etnia',
-          'objetivo', 
-          'observaciones', 
+          'objetivo',
+          'observaciones',
           'objetivo_convenio_financiero',
-          'oficina', 
+          'oficina',
           'parte_rmrp',
           'poblacion',
           'poblacion_ids',
@@ -332,19 +332,152 @@ class Ability < Sivel2Sjr::Ability
           'poblacion_vocacion_permanencia',
           'poblacion_vocacion_permanencia_ids',
           Cor1440Gen::Actividad.human_attribute_name(
-            :proyectofinanciero).downcase.gsub(' ', '_'), 
+            :proyectofinanciero).downcase.gsub(' ', '_'),
           Cor1440Gen::Actividad.human_attribute_name(
-            :proyectos).downcase.gsub(' ', '_'), 
-          'responsable', 
-          'resultado', 
+            :proyectos).downcase.gsub(' ', '_'),
+          'responsable',
+          'resultado',
           'sector_gifmm',
-          'socio_implementador', 
-          'socio_principal', 
-          'tipo_implementacion', 
+          'socio_implementador',
+          'socio_principal',
+          'tipo_implementacion',
       ],
       controlador: 'Cor1440Gen::ActividadesController',
       ruta: '/actividades'
+    },
+    'Consgifmm' => {
+      campos: [
+          'actividadmarcologico_nombre',
+        Cor1440Gen::Actividad.human_attribute_name(
+          :actividadpf).downcase.gsub(' ', '_'),
+          'conveniofinanciado_nombre',
+          'covid19',
+          'departamento_gifmm',
+          'detalleah_unidad',
+          'detalleah_cantidad',
+          'detalleah_modalidad',
+          'detalleah_tipo_transferencia',
+          'detalleah_mecanismo_entrega',
+          'detalleah_frecuencia_entrega',
+          'detalleah_monto_por_persona',
+          'detalleah_numero_meses_cobertura',
+          'fecha',
+          'id',
+          'indicador_gifmm',
+          'mes',
+          'municipio_gifmm',
+          'num_afrodescendientes',
+          'num_con_discapacidad',
+          'num_con_discapacidad_ids',
+          'num_indigenas',
+          'num_lgbti',
+          'num_otra_etnia',
+          'actividad_objetivo',
+          'actividad_observaciones',
+          'oficina',
+          'parte_rmrp',
+          'poblacion_adultos',
+          'poblacion_colombianos_retornados',
+          'poblacion_colombianos_retornados_ids',
+          'poblacion_com_acogida',
+          'poblacion_hombres_adultos',
+          'poblacion_hombres_adultos_ids',
+          'poblacion_hombres_l',
+          'poblacion_hombres_r',
+          'poblacion_hombres_l_g1',
+          'poblacion_hombres_l_g2',
+          'poblacion_hombres_l_g3',
+          'poblacion_hombres_l_g4',
+          'poblacion_hombres_l_g5',
+          'poblacion_hombres_l_g6',
+          'poblacion_hombres_l_g7',
+          'poblacion_hombres_r_g1',
+          'poblacion_hombres_r_g1_ids',
+          'poblacion_hombres_r_g2',
+          'poblacion_hombres_r_g2_ids',
+          'poblacion_hombres_r_g3',
+          'poblacion_hombres_r_g3_ids',
+          'poblacion_hombres_r_g4',
+          'poblacion_hombres_r_g4_ids',
+          'poblacion_hombres_r_g5',
+          'poblacion_hombres_r_g5_ids',
+          'poblacion_hombres_r_g_4_5',
+          'poblacion_hombres_r_g_4_5_ids',
+          'poblacion_hombres_r_g6',
+          'poblacion_hombres_r_g6_ids',
+          'poblacion_hombres_r_g7',
+          'poblacion_hombres_r_g7_ids',
+          'poblacion_sinsexo_adultos',
+          'poblacion_sinsexo_adultos_ids',
+          'poblacion_sinsexo_menores',
+          'poblacion_sinsexo_menores_ids',
+          'poblacion_mujeres_adultas',
+          'poblacion_mujeres_adultas_ids',
+          'poblacion_mujeres_l',
+          'poblacion_mujeres_l_g1',
+          'poblacion_mujeres_l_g2',
+          'poblacion_mujeres_l_g3',
+          'poblacion_mujeres_l_g4',
+          'poblacion_mujeres_l_g5',
+          'poblacion_mujeres_l_g6',
+          'poblacion_mujeres_l_g7',
+          'poblacion_mujeres_r',
+          'poblacion_mujeres_r_g1',
+          'poblacion_mujeres_r_g1_ids',
+          'poblacion_mujeres_r_g2',
+          'poblacion_mujeres_r_g2_ids',
+          'poblacion_mujeres_r_g3',
+          'poblacion_mujeres_r_g3_ids',
+          'poblacion_mujeres_r_g4',
+          'poblacion_mujeres_r_g4_ids',
+          'poblacion_mujeres_r_g5',
+          'poblacion_mujeres_r_g5_ids',
+          'poblacion_mujeres_r_g6',
+          'poblacion_mujeres_r_g6_ids',
+          'poblacion_mujeres_r_g7',
+          'poblacion_mujeres_r_g7_ids',
+          'poblacion_mujeres_r_g_4_5',
+          'poblacion_mujeres_r_g_4_5_ids',
+          'poblacion_mujeres_r_g_1_2_7',
+          'poblacion_mujeres_r_g_1_2_7_ids',
+          'poblacion_niños_adolescentes_y_se',
+          'poblacion_niños_adolescentes_y_se_ids',
+          'poblacion_niñas_adolescentes_y_se',
+          'poblacion_niñas_adolescentes_y_se_ids',
+          'poblacion_nuevos',
+          'poblacion_nuevos_ids',
+          'poblacion_pendulares',
+          'poblacion_pendulares_ids',
+          'poblacion_sinsexo',
+          'poblacion_sinsexo_g1',
+          'poblacion_sinsexo_g1_ids',
+          'poblacion_sinsexo_g2',
+          'poblacion_sinsexo_g2_ids',
+          'poblacion_sinsexo_g3',
+          'poblacion_sinsexo_g3_ids',
+          'poblacion_sinsexo_g4',
+          'poblacion_sinsexo_g4_ids',
+          'poblacion_sinsexo_g5',
+          'poblacion_sinsexo_g5_ids',
+          'poblacion_sinsexo_g6',
+          'poblacion_sinsexo_g6_ids',
+          'poblacion_sinsexo_g7',
+          'poblacion_sinsexo_g7_ids',
+          'poblacion_transito',
+          'poblacion_transito_ids',
+          'poblacion_vocacion_permanencia',
+          'poblacion_vocacion_permanencia_ids',
+          Cor1440Gen::Actividad.human_attribute_name(
+            :proyectofinanciero).downcase.gsub(' ', '_'),
+          'sector_gifmm',
+          'socio_implementador',
+          'socio_principal',
+          'tipo_implementacion',
+      ],
+      controlador: '::Consgifmm',
+      ruta: '/consgifmm'
     }
+
 
   }
 
@@ -360,7 +493,7 @@ class Ability < Sivel2Sjr::Ability
     if !usuario || usuario.fechadeshabilitacion
       return
     end
-    can :read, Sal7711Gen::Categoriaprensa      
+    can :read, Sal7711Gen::Categoriaprensa
 
     can :descarga_anexo, Sip::Anexo
     can :contar, Sip::Ubicacion
@@ -382,17 +515,17 @@ class Ability < Sivel2Sjr::Ability
 
     if !usuario.nil? && !usuario.rol.nil? then
       can :read, Sal7711Gen::Articulo
-      
+
       can :read, Sip::Persona
-      
+
       can :read, Heb412Gen::Plantilladoc
       can :read, Heb412Gen::Plantillahcm
       can :read, Heb412Gen::Plantillahcr
 
-      case usuario.rol 
+      case usuario.rol
       when Ability::ROLINV
         #cannot :buscar, Sivel2Gen::Caso
-        can [:read, :index], Sivel2Gen::Caso, 
+        can [:read, :index], Sivel2Gen::Caso,
           etiqueta: { id: usuario.etiqueta.map(&:id) }
 
       when Ability::ROLANALIPRENSA
@@ -401,7 +534,7 @@ class Ability < Sivel2Sjr::Ability
         can [:read, :new], Cor1440Gen::Actividadpf
         can :read, Cor1440Gen::Informe
         can :read, Cor1440Gen::Proyectofinanciero
-        
+
         can :read, Heb412Gen::Doc
         can :create, Heb412Gen::Doc
 
@@ -422,11 +555,12 @@ class Ability < Sivel2Sjr::Ability
 
         can :manage, Sivel2Gen::Acto
         can :read, Sivel2Gen::Caso, casosjr: { oficina_id: usuario.oficina_id }
-        can [:update, :create, :destroy], Sivel2Gen::Caso, 
+        can [:update, :create, :destroy], Sivel2Gen::Caso,
           casosjr: { asesor: usuario.id, oficina_id:usuario.oficina_id }
-        can :new, Sivel2Gen::Caso 
-        
+        can :new, Sivel2Gen::Caso
+
         can :read, Sivel2Sjr::Consactividadcaso
+        can :read, ::Consgifmm
 
       when Ability::ROLANALI
 
@@ -448,10 +582,11 @@ class Ability < Sivel2Sjr::Ability
         can :manage, Sivel2Gen::Acto
         can :read, Sivel2Gen::Caso
         can :new, Sivel2Gen::Caso
-        can [:update, :create, :destroy, :edit], Sivel2Gen::Caso, 
+        can [:update, :create, :destroy, :edit], Sivel2Gen::Caso,
           casosjr: { oficina_id: usuario.oficina_id }
 
         can :read, Sivel2Sjr::Consactividadcaso
+        can :read, ::Consgifmm
       when Ability::ROLCOOR
         can :manage, Cor1440Gen::Informe
         can [:read, :new], Cor1440Gen::Actividad
@@ -469,10 +604,11 @@ class Ability < Sivel2Sjr::Ability
         can :manage, Sivel2Gen::Acto
         can :read, Sivel2Gen::Caso
         can :new, Sivel2Gen::Caso
-        can [:update, :create, :destroy, :poneretcomp], Sivel2Gen::Caso, 
+        can [:update, :create, :destroy, :poneretcomp], Sivel2Gen::Caso,
           casosjr: { oficina_id: usuario.oficina_id }
 
         can :read, Sivel2Sjr::Consactividadcaso
+        can :read, ::Consgifmm
 
       when Ability::ROLADMIN, Ability::ROLDIR
         can :manage, Cor1440Gen::Actividad
@@ -499,6 +635,7 @@ class Ability < Sivel2Sjr::Ability
         can :manage, Sivel2Gen::Acto
 
         can :read, Sivel2Sjr::Consactividadcaso
+        can :read, ::Consgifmm
 
         can :manage, Usuario
         can :manage, :tablasbasicas

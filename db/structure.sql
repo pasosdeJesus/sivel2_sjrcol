@@ -960,111 +960,6 @@ CREATE TABLE public.cor1440_gen_actividad (
 
 
 --
--- Name: cor1440_gen_actividadpf; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.cor1440_gen_actividadpf (
-    id integer NOT NULL,
-    proyectofinanciero_id integer,
-    nombrecorto character varying(15),
-    titulo character varying(255),
-    descripcion character varying(5000),
-    resultadopf_id integer,
-    actividadtipo_id integer,
-    indicadorgifmm_id integer
-);
-
-
---
--- Name: cor1440_gen_proyectofinanciero; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.cor1440_gen_proyectofinanciero (
-    id integer NOT NULL,
-    nombre character varying(1000),
-    observaciones character varying(5000),
-    fechainicio date,
-    fechacierre date,
-    responsable_id integer,
-    fechacreacion date,
-    fechadeshabilitacion date,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone,
-    compromisos character varying(5000),
-    monto integer
-);
-
-
---
--- Name: detallefinanciero; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.detallefinanciero (
-    id bigint NOT NULL,
-    actividad_id integer NOT NULL,
-    proyectofinanciero_id integer,
-    actividadpf_id integer,
-    unidadayuda_id integer,
-    cantidad integer,
-    valorunitario integer,
-    valortotal integer,
-    mecanismodeentrega_id integer,
-    modalidadentrega_id integer,
-    tipotransferencia_id integer,
-    frecuenciaentrega_id integer,
-    numeromeses integer,
-    numeroasistencia integer,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: detallefinanciero_persona; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.detallefinanciero_persona (
-    detallefinanciero_id integer NOT NULL,
-    persona_id integer
-);
-
-
---
--- Name: consgifmm; Type: MATERIALIZED VIEW; Schema: public; Owner: -
---
-
-CREATE MATERIALIZED VIEW public.consgifmm AS
- SELECT detallefinanciero.id,
-    detallefinanciero.actividad_id,
-    detallefinanciero.proyectofinanciero_id,
-    detallefinanciero.actividadpf_id,
-    detallefinanciero.unidadayuda_id,
-    detallefinanciero.cantidad,
-    detallefinanciero.valorunitario,
-    detallefinanciero.valortotal,
-    detallefinanciero.mecanismodeentrega_id,
-    detallefinanciero.modalidadentrega_id,
-    detallefinanciero.tipotransferencia_id,
-    detallefinanciero.frecuenciaentrega_id,
-    detallefinanciero.numeromeses,
-    detallefinanciero.numeroasistencia,
-    ARRAY( SELECT detallefinanciero_persona.persona_id
-           FROM public.detallefinanciero_persona
-          WHERE (detallefinanciero_persona.detallefinanciero_id = detallefinanciero.id)) AS persona_ids,
-    cor1440_gen_actividad.objetivo AS actividad_objetivo,
-    cor1440_gen_actividad.fecha AS actividad_fecha,
-    ( SELECT cor1440_gen_proyectofinanciero.nombre
-           FROM public.cor1440_gen_proyectofinanciero
-          WHERE (detallefinanciero.proyectofinanciero_id = cor1440_gen_proyectofinanciero.id)) AS conveniofinanciado_nombre,
-    ( SELECT cor1440_gen_actividad.nombre
-           FROM public.cor1440_gen_actividadpf
-          WHERE (detallefinanciero.actividadpf_id = cor1440_gen_actividadpf.id)) AS actividadmarcologico_nombre
-   FROM (public.detallefinanciero
-     JOIN public.cor1440_gen_actividad ON ((detallefinanciero.actividad_id = cor1440_gen_actividad.id)))
-  WITH NO DATA;
-
-
---
 -- Name: cor1440_gen_actividad_actividadpf; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1340,6 +1235,22 @@ CREATE SEQUENCE public.cor1440_gen_actividadareas_actividad_id_seq
 --
 
 ALTER SEQUENCE public.cor1440_gen_actividadareas_actividad_id_seq OWNED BY public.cor1440_gen_actividadareas_actividad.id;
+
+
+--
+-- Name: cor1440_gen_actividadpf; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.cor1440_gen_actividadpf (
+    id integer NOT NULL,
+    proyectofinanciero_id integer,
+    nombrecorto character varying(15),
+    titulo character varying(255),
+    descripcion character varying(5000),
+    resultadopf_id integer,
+    actividadtipo_id integer,
+    indicadorgifmm_id integer
+);
 
 
 --
@@ -2056,6 +1967,26 @@ CREATE TABLE public.cor1440_gen_proyecto_proyectofinanciero (
 
 
 --
+-- Name: cor1440_gen_proyectofinanciero; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.cor1440_gen_proyectofinanciero (
+    id integer NOT NULL,
+    nombre character varying(1000),
+    observaciones character varying(5000),
+    fechainicio date,
+    fechacierre date,
+    responsable_id integer,
+    fechacreacion date,
+    fechadeshabilitacion date,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    compromisos character varying(5000),
+    monto integer
+);
+
+
+--
 -- Name: cor1440_gen_proyectofinanciero_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -2449,6 +2380,30 @@ CREATE TABLE public.despacho (
 
 
 --
+-- Name: detallefinanciero; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.detallefinanciero (
+    id bigint NOT NULL,
+    actividad_id integer NOT NULL,
+    proyectofinanciero_id integer,
+    actividadpf_id integer,
+    unidadayuda_id integer,
+    cantidad integer,
+    valorunitario integer,
+    valortotal integer,
+    mecanismodeentrega_id integer,
+    modalidadentrega_id integer,
+    tipotransferencia_id integer,
+    frecuenciaentrega_id integer,
+    numeromeses integer,
+    numeroasistencia integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
 -- Name: detallefinanciero_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -2465,6 +2420,16 @@ CREATE SEQUENCE public.detallefinanciero_id_seq
 --
 
 ALTER SEQUENCE public.detallefinanciero_id_seq OWNED BY public.detallefinanciero.id;
+
+
+--
+-- Name: detallefinanciero_persona; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.detallefinanciero_persona (
+    detallefinanciero_id integer NOT NULL,
+    persona_id integer
+);
 
 
 --
@@ -5520,7 +5485,7 @@ CREATE MATERIALIZED VIEW public.sivel2_gen_consexpcaso AS
      LEFT JOIN public.sivel2_sjr_ultimaatencion ultimaatencion ON ((ultimaatencion.id_caso = caso.id)))
   WHERE (conscaso.caso_id IN ( SELECT sivel2_gen_conscaso.caso_id
            FROM public.sivel2_gen_conscaso
-          WHERE (sivel2_gen_conscaso.caso_id = 264)))
+          WHERE (sivel2_gen_conscaso.caso_id = 793)))
   WITH NO DATA;
 
 
@@ -5769,30 +5734,6 @@ CREATE TABLE public.sivel2_gen_iglesia (
     observaciones character varying(5000),
     CONSTRAINT iglesia_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
-
-
---
--- Name: sivel2_gen_iniciador; Type: VIEW; Schema: public; Owner: -
---
-
-CREATE VIEW public.sivel2_gen_iniciador AS
- SELECT s3.id_caso,
-    s3.fechainicio,
-    s3.id_usuario,
-    usuario.nusuario
-   FROM public.usuario,
-    ( SELECT s2.id_caso,
-            s2.fechainicio,
-            min(s2.id_usuario) AS id_usuario
-           FROM public.sivel2_gen_caso_usuario s2,
-            ( SELECT f1.id_caso,
-                    min(f1.fechainicio) AS m
-                   FROM public.sivel2_gen_caso_usuario f1
-                  GROUP BY f1.id_caso) c
-          WHERE ((s2.id_caso = c.id_caso) AND (s2.fechainicio = c.m))
-          GROUP BY s2.id_caso, s2.fechainicio
-          ORDER BY s2.id_caso, s2.fechainicio) s3
-  WHERE (usuario.id = s3.id_usuario);
 
 
 --

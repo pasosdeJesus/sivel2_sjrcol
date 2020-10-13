@@ -94,4 +94,7 @@ class Detallefinanciero < ActiveRecord::Base
     end
   end
 
+  def presenta_nombre
+    id
+  end
 end

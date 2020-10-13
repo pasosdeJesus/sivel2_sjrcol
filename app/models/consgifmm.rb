@@ -422,20 +422,22 @@ class Consgifmm < ActiveRecord::Base
     end
   end
 
-#  scope :filtro_actividad_fechaini, lambda { |f|
-#    where('actividad_fecha >= ?', f)
-#  }
-#
-#  scope :filtro_actividad_fechafin, lambda { |f|
-#    where('actividad_fecha <= ?', f)
-#  }
-#
-#  scope :filtro_actividad_proyectofinanciero, lambda { |pf|
+  scope :filtro_fechaini, lambda { |f|
+    byebug
+    where('fecha >= ?', f)
+  }
+
+  scope :filtro_fechafin, lambda { |f|
+    byebug
+    where('fecha <= ?', f)
+  }
+
+#  scope :filtro_proyectofinanciero, lambda { |pf|
 #    where('actividad_id IN (SELECT actividad_id ' +
 #          'FROM  cor1440_gen_actividad_proyectofinanciero WHERE ' +
 #          'proyectofinanciero_id=?)', pf)
 #  }
-#
+
   CONSULTA='consgifmm'
 
   def self.interpreta_ordenar_por(campo)

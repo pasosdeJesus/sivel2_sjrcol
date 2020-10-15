@@ -337,7 +337,7 @@ class Ability < Sivel2Sjr::Ability
           'num_indigenas',
           'num_lgbti',
           'num_otra_etnia',
-          'actividad_objetivo',
+          'objetivo',
           'actividad_observaciones',
           'oficina',
           'parte_rmrp',

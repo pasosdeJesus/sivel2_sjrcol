@@ -80,25 +80,33 @@ class Consgifmm < ActiveRecord::Base
   end
 
   def detalleah_tipo_transferencia
-    detallefinanciero.tipotransferencia ?
+    detallefinanciero.modalidadentrega &&
+      detallefinanciero.modalidadentrega.nombre == 'Transferencia' &&
+      detallefinanciero.tipotransferencia ?
       detallefinanciero.tipotransferencia.nombre :
       ''
   end
 
   def detalleah_mecanismo_entrega
-    detallefinanciero.mecanismodeentrega ?
+    detallefinanciero.modalidadentrega &&
+      detallefinanciero.modalidadentrega.nombre == 'Transferencia' &&
+      detallefinanciero.mecanismodeentrega ?
       detallefinanciero.mecanismodeentrega.nombre :
       ''
   end
 
   def detalleah_frecuencia_entrega
-    detallefinanciero.frecuenciaentrega ?
+    detallefinanciero.modalidadentrega &&
+      detallefinanciero.modalidadentrega.nombre == 'Transferencia' &&
+      detallefinanciero.frecuenciaentrega ?
       detallefinanciero.frecuenciaentrega.nombre :
       ''
   end
 
   def detalleah_monto_por_persona
-    r = detallefinanciero.valorunitario &&
+    detallefinanciero.modalidadentrega &&
+      detallefinanciero.modalidadentrega.nombre == 'Transferencia' &&
+      r = detallefinanciero.valorunitario &&
       detallefinanciero.cantidad && detallefinanciero.valorunitario ?
       detallefinanciero.cantidad*detallefinanciero.valorunitario :
       ''
@@ -106,7 +114,9 @@ class Consgifmm < ActiveRecord::Base
   end
 
   def detalleah_numero_meses_cobertura
-    detallefinanciero.numeromeses ?
+    detallefinanciero.modalidadentrega &&
+      detallefinanciero.modalidadentrega.nombre == 'Transferencia' &&
+      detallefinanciero.numeromeses ?
       detallefinanciero.numeromeses :
       ''
   end
@@ -437,10 +447,13 @@ class Consgifmm < ActiveRecord::Base
       case atr.to_sym
       when :actividad_nombre
         self.actividad.nombre
+
       when :actividad_id
         self.actividad_id
+
       when :actividad_fecha_mes
         self.actividad.fecha ? self.actividad.fecha.month : ''
+
       when :actividad_proyectofinanciero
         self.actividad.proyectofinanciero ? 
           self.actividad.proyectofinanciero.map(&:nombre).join('; ') : ''
@@ -450,34 +463,12 @@ class Consgifmm < ActiveRecord::Base
         'En proceso'
 
       when :mes
-        if actividad.fecha
-          Sip::FormatoFechaHelper::MESES[actividad.fecha.month]
-        else
-          ''
-        end
+        actividad.fecha ? 
+          Sip::FormatoFechaHelper::MESES[actividad.fecha.month] : ''
 
-      when :persona_edad_en_atencion
-        Sivel2Gen::RangoedadHelper::edad_de_fechanac_fecha(
-          self.persona.anionac,
-          self.persona.mesnac,
-          self.persona.dianac,
-          self.actividad.fecha.year,
-          self.actividad.fecha.month,
-          self.actividad.fecha.day
-        )
-      when :persona_etnia
-        self.victima.etnia ? self.victima.etnia.nombre : ''
-      when :persona_id
-        self.persona.id
-      when :persona_numerodocumento
-        self.persona.numerodocumento
-      when :persona_sexo
-        Sip::Persona.find(self.persona_id).sexo
-      when :persona_tipodocumento
-        self.persona.tdocumento ? self.persona.tdocumento.sigla : ''
-      when :victima_maternidad
-        self.victimasjr.maternidad ? self.victimasjr.maternidad.nombre :
-          ''
+      when :objetivo
+        actividad.objetivo ? actividad.objetivo : ''
+
       when :sector_gifmm
         idig = self.busca_indicador_gifmm
         if idig != nil

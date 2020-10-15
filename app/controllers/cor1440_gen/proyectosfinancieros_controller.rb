@@ -11,6 +11,30 @@ module Cor1440Gen
       only: [:new, :create, :destroy, :edit, :update, :index, :show,
              :objetivospf]
 
+    def filtra_contenido_params
+      if !params || !params[:proyectofinanciero] 
+        return
+      end
+
+      # Deben eliminarse actividadespf creadas con AJAX
+      if params[:proyectofinanciero][:actividadpf_attributes]
+        porelimd = []
+        params[:proyectofinanciero][:actividadpf_attributes].each do |l, vel|
+          apf = Cor1440Gen::Actividadpf.find(vel[:id].to_i)
+          if vel['_destroy'] == "1" || vel['_destroy'] == "true"
+            apf.resultadopf_id = ""
+            apf.actividadtipo_id = ""
+            apf.destroy
+            # Quitar de los parámetros
+            porelimd.push(l)  
+          end
+        end
+        porelimd.each do |l|
+          params[:proyectofinanciero][:actividadpf_attributes].delete(l)
+        end
+      end
+
+    end
      def proyectofinanciero_params_cor1440_gen
        atributos_form + [:responsable_id] + [ 
          :actividadpf_attributes =>  [

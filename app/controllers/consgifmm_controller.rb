@@ -5,11 +5,31 @@ class ConsgifmmController < Heb412Gen::ModelosController
   end
 
   def atributos_index
-    [:id,
-     :conveniofinanciado_nombre,
-     :actividadmarcologico_nombre,
-     :objetivo,
-     :fecha
+    [
+      :actividad_id,
+      :fecha,
+      :objetivo,
+      :conveniofinanciado_nombre,
+      :actividadmarcologico_nombre,
+      :socio_principal,
+      :tipo_implementacion,
+      :socio_implementador,
+      :departamento_gifmm,
+      :municipio_gifmm,
+      :mes,
+      :estado,
+      :parte_rmrp,
+      :covid19,
+      :sector_gifmm,
+      :indicador_gifmm,
+      :detalleah_unidad,
+      :detalleah_cantidad,
+      :detalleah_modalidad,
+      :detalleah_tipo_transferencia,
+      :detalleah_mecanismo_entrega,
+      :detalleah_frecuencia_entrega,
+      :detalleah_monto_por_persona,
+      :detalleah_numero_meses_cobertura
     ]
   end
 
@@ -21,7 +41,7 @@ class ConsgifmmController < Heb412Gen::ModelosController
 
     #@actipos = Cor1440Gen::Actividadtipo.where(
     #  id: apf.pluck(:actividadtipo_id)).pluck(:id, :nombre)
-    c.reorder([:actividad_fecha, :actividad_id])
+    c.reorder([:fecha, :actividad_id])
   end 
 
   def vistas_manejadas

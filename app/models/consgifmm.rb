@@ -22,10 +22,33 @@ class Consgifmm < ActiveRecord::Base
     foreign_key: 'actividad_id'
 
 
+
   # Retorna el del primer proyecto y de la primera actividad o nil 
   def busca_indicador_gifmm
     actividadpf.indicadorgifmm_id
   end
+
+  def cuenta_victimas_condicion
+    cuenta = 0
+    self.actividad.casosjr.each do |c|
+      c.caso.victima.each do |v|
+        if (yield(v))
+          cuenta += 1
+        end
+      end
+    end
+    cuenta
+  end
+
+
+  def departamento_gifmm
+    if actividad.ubicacionpre && actividad.ubicacionpre.departamento
+      GifmmHelper::departamento_gifmm(actividad.ubicacionpre.departamento.nombre)
+    else
+      ''
+    end
+  end
+
 
 
   def detalleah_unidad
@@ -84,20 +107,24 @@ class Consgifmm < ActiveRecord::Base
       ''
   end
 
-
-  def cuenta_victimas_condicion
-    cuenta = 0
-    self.actividad.casosjr.each do |c|
-      c.caso.victima.each do |v|
-        if (yield(v))
-          cuenta += 1
-        end
-      end
+  def indicador_gifmm
+    idig = self.busca_indicador_gifmm
+    if idig != nil
+      ::Indicadorgifmm.find(idig).nombre
+    else
+      ''
     end
-    cuenta
   end
 
-  # Auxiliar que retorna listado de identificaciones de personas de 
+  def municipio_gifmm
+    if actividad.ubicacionpre && actividad.ubicacionpre.municipio
+      GifmmHelper::municipio_gifmm(actividad.ubicacionpre.municipio.nombre)
+    else
+      ''
+    end
+  end
+
+    # Auxiliar que retorna listado de identificaciones de personas de 
   # las víctimas del listado de casos que cumplan una condición
   def personas_victimas_condicion
     ids = []
@@ -353,6 +380,30 @@ class Consgifmm < ActiveRecord::Base
     l.join(",")
   end
 
+  def sector_gifmm
+    idig = self.busca_indicador_gifmm
+    if idig != nil
+      ::Indicadorgifmm.find(idig).sectorgifmm.nombre
+    else
+      ''
+    end
+  end
+
+  def socio_principal
+    sp = ''
+    if proyectofinanciero && proyectofinanciero.financiador &&
+        proyectofinanciero.financiador.count > 0
+      if proyectofinanciero.financiador[0].nombregifmm &&
+          proyectofinanciero.financiador[0].nombregifmm.strip != ''
+        sp = proyectofinanciero.financiador[0].nombregifmm
+      else
+        sp = proyectofinanciero.financiador[0].nombre
+      end
+    end
+    sp
+  end
+
+
   def presenta(atr)
     puts "** ::Consgiffm.rb atr=#{atr}"
     m =/^edad_([^_]*)_r_(.*)/.match(atr.to_s)
@@ -390,6 +441,17 @@ class Consgifmm < ActiveRecord::Base
         self.actividad.proyectofinanciero ? 
           self.actividad.proyectofinanciero.map(&:nombre).join('; ') : ''
 
+
+      when :estado
+        'En proceso'
+
+      when :mes
+        if actividad.fecha
+          Sip::FormatoFechaHelper::MESES[actividad.fecha.month]
+        else
+          ''
+        end
+
       when :persona_edad_en_atencion
         Sivel2Gen::RangoedadHelper::edad_de_fechanac_fecha(
           self.persona.anionac,
@@ -412,6 +474,31 @@ class Consgifmm < ActiveRecord::Base
       when :victima_maternidad
         self.victimasjr.maternidad ? self.victimasjr.maternidad.nombre :
           ''
+      when :sector_gifmm
+        idig = self.busca_indicador_gifmm
+        if idig != nil
+          ::Indicadorgifmm.find(idig).sectorgifmm.nombre
+        else
+          ''
+        end
+
+      when :socio_implementador
+        if socio_principal == 'SJR Col'
+          ''
+        else
+          'SJR Col'
+        end
+
+      when :tipo_implementacion
+        if socio_principal == 'SJR Col'
+          'Directa'
+        else
+          'Indirecta'
+        end
+
+      when :ubicacion
+        lugar
+
       else
         if respond_to?(atr)
           send(atr)
@@ -422,13 +509,15 @@ class Consgifmm < ActiveRecord::Base
     end
   end
 
+  scope :filtro_actividad_id, lambda { |ida|
+    where(actividad_id: ida.to_i)
+  }
+
   scope :filtro_fechaini, lambda { |f|
-    byebug
     where('fecha >= ?', f)
   }
 
   scope :filtro_fechafin, lambda { |f|
-    byebug
     where('fecha <= ?', f)
   }
 
@@ -480,7 +569,7 @@ class Consgifmm < ActiveRecord::Base
             ARRAY(SELECT persona_id FROM detallefinanciero_persona WHERE
               detallefinanciero_persona.detallefinanciero_id=detallefinanciero.id) AS persona_ids,
             cor1440_gen_actividad.objetivo AS actividad_objetivo,
-            cor1440_gen_actividad.fecha AS actividad_fecha,
+            cor1440_gen_actividad.fecha AS fecha,
             (SELECT nombre FROM cor1440_gen_proyectofinanciero WHERE
               detallefinanciero.proyectofinanciero_id=cor1440_gen_proyectofinanciero.id) 
               AS conveniofinanciado_nombre,

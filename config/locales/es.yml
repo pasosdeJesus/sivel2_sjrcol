@@ -56,6 +56,21 @@ es:
         tipoanexo_id: Tipo de anexo
       "consgifmm":
         Consactividadcaso: Reporte GIFMM detallado
+        actividadmarcologico_nombre: Actividad de marco lógico
+        conveniofinanciado_nombre: Convenio Financiado
+        departamento_gifmm: Departamento
+        detalleah_unidad: Unidad
+        detalleah_cantidad: Cantidad
+        detalleah_modalidad: Modalidad
+        detalleah_tipo_transferencia: Tipo de transferencia
+        detalleah_mecanismo_entrega: Mecanismo de entrega
+        detalleah_frecuencia_entrega: Frecuencia de entrega
+        detalleah_monto_por_persona: Monto por persona
+        detalleah_numero_meses_cobertura: Número de meses de cobertura
+        indicador_gifmm: Indicador GIFMM
+        municipio_gifmm: Municipio
+        sector_gifmm: Sector GIFMM
+        parte_rmrp: Parte RMRP
       "cor1440_gen/actividad":
         nombre: 'Nombre (*)'
         fecha_localizada: 'Fecha (*)'

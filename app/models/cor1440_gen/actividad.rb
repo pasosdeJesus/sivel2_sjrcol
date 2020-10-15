@@ -88,81 +88,6 @@ module Cor1440Gen
 
     # PRESENTACIÓN DE INFORMACIÓN
 
-
-    # Retorna el del primer proyecto y de la primera actividad o nil 
-    def busca_indicador_gifmm
-      idig = nil
-      proyectofinanciero.find do |p| 
-        if !p.nombre.start_with?('PLAN ESTRATEGICO')
-          self.actividadpf.where(proyectofinanciero_id: p.id).find do |a|
-            if a.indicadorgifmm_id
-              idig = a.indicadorgifmm.id
-              true
-            else
-              false
-            end
-          end
-        else
-          false
-        end
-      end
-      idig
-    end
-
-
-    def detalleah_unidad
-      detallefinanciero.count > 0 && detallefinanciero[0].unidadayuda ?
-        detallefinanciero[0].unidadayuda.nombre :
-        ''
-    end
-
-    def detalleah_cantidad
-      r = detallefinanciero.count > 0 && detallefinanciero[0].unidadayuda &&
-      detallefinanciero[0].cantidad && detallefinanciero[0].persona_ids ?
-      detallefinanciero[0].cantidad*detallefinanciero[0].persona_ids.count :
-        ''
-      r.to_s
-    end
-
-    def detalleah_modalidad
-      detallefinanciero.count > 0 && detallefinanciero[0].modalidadentrega ?
-      detallefinanciero[0].modalidadentrega.nombre :
-        ''
-    end
-
-    def detalleah_tipo_transferencia
-      detallefinanciero.count > 0 && detallefinanciero[0].tipotransferencia ?
-      detallefinanciero[0].tipotransferencia.nombre :
-        ''
-    end
-
-    def detalleah_mecanismo_entrega
-      detallefinanciero.count > 0 && detallefinanciero[0].mecanismodeentrega ?
-      detallefinanciero[0].mecanismodeentrega.nombre :
-        ''
-    end
-
-    def detalleah_frecuencia_entrega
-      detallefinanciero.count > 0 && detallefinanciero[0].frecuenciaentrega ?
-      detallefinanciero[0].frecuenciaentrega.nombre :
-        ''
-    end
-
-    def detalleah_monto_por_persona
-      r = detallefinanciero.count > 0 && detallefinanciero[0].valorunitario &&
-      detallefinanciero[0].cantidad && detallefinanciero[0].valorunitario ?
-      detallefinanciero[0].cantidad*detallefinanciero[0].valorunitario :
-        ''
-      r.to_s
-    end
-
-    def detalleah_numero_meses_cobertura
-      detallefinanciero.count > 0 && detallefinanciero[0].numeromeses ?
-      detallefinanciero[0].numeromeses :
-        ''
-    end
-
-
     def cuenta_victimas_condicion
       cuenta = 0
       casosjr.each do |c|
@@ -311,20 +236,6 @@ module Cor1440Gen
     end
 
 
-    def socio_principal
-      sp = ''
-      proyectofinanciero.find do |p| 
-        if p.financiador && p.financiador.count > 0 && sp == ''
-          if p.financiador[0].nombregifmm
-            sp = p.financiador[0].nombregifmm
-          else
-            sp = p.financiador[0].nombre
-          end
-        end
-      end
-      sp
-    end
-
     def  poblacion_r_g(sexo, num)
       idp = personas_victimas_condicion {|v| 
         if v.persona.sexo == sexo
@@ -457,9 +368,6 @@ module Cor1440Gen
           'No'
         end
 
-      when 'estado'
-        'En proceso'
-
       when 'departamento'
         if ubicacionpre && ubicacionpre.departamento
           ubicacionpre.departamento.nombre
@@ -470,21 +378,6 @@ module Cor1440Gen
       when 'departamento_altas_bajas'
         if ubicacionpre && ubicacionpre.departamento
           ubicacionpre.departamento.nombre.altas_bajas
-        else
-          ''
-        end
-
-      when 'departamento_gifmm'
-        if ubicacionpre && ubicacionpre.departamento
-          GifmmHelper::departamento_gifmm(ubicacionpre.departamento.nombre)
-        else
-          ''
-        end
-
-      when 'indicador_gifmm'
-        idig = self.busca_indicador_gifmm
-        if idig != nil
-          ::Indicadorgifmm.find(idig).nombre
         else
           ''
         end
@@ -510,12 +403,6 @@ module Cor1440Gen
           ''
         end
 
-      when 'municipio_gifmm'
-        if ubicacionpre && ubicacionpre.departamento
-          GifmmHelper::municipio_gifmm(ubicacionpre.departamento.nombre)
-        else
-          ''
-        end
 
       when 'num_afrodescendientes'
         cuenta_victimas_condicion {|v|
@@ -717,31 +604,6 @@ module Cor1440Gen
       when /^poblacion_sinsexo_g[0-9]*$/
         g = atr[21..-1].to_i
         poblacion_gen_infijo('sinsexo_g', g)
-
-      when 'sector_gifmm'
-        idig = self.busca_indicador_gifmm
-        if idig != nil
-          ::Indicadorgifmm.find(idig).sectorgifmm.nombre
-        else
-          ''
-        end
-
-      when 'socio_implementador'
-        if socio_principal == 'SJR Col'
-          ''
-        else
-          'SJR Col'
-        end
-
-      when 'tipo_implementacion'
-        if socio_principal == 'SJR Col'
-          'Directa'
-        else
-          'Indirecta'
-        end
-
-      when 'ubicacion'
-        lugar
 
       else
         presenta_actividad(atr)

@@ -1,1 +1,7 @@
-<%= f.input :busactividad_id, label: false, as: :integer %>
+<%= f.input :busactividad_id, 
+  label: false, 
+  as: :integer,
+  input_html: {
+    value: Sip::ModeloHelper::poromision(params, :busactividad_id)
+  }
+%>

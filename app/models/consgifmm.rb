@@ -25,7 +25,11 @@ class Consgifmm < ActiveRecord::Base
 
   # Retorna el del primer proyecto y de la primera actividad o nil 
   def busca_indicador_gifmm
-    actividadpf.indicadorgifmm_id
+    if actividadpf
+      actividadpf.indicadorgifmm_id
+    else
+      nil
+    end
   end
 
   def cuenta_victimas_condicion

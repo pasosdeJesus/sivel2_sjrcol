@@ -89,8 +89,12 @@ $(document).on('focusin',
    sip_busca_ubicacionpre_mundep($(this))
 )
 
-# En formulario de actividad si escoge Plan Estratégico y Asistencia humanitaria se despliega nueva sección con tabla de detalles financieros
+# En formulario de actividad si escoge Plan Estratégico se elimina el boton eliminar mde la fila
 $(document).on('change', 'select[id^=actividad_actividad_proyectofinanciero_attributes][id$=_proyectofinanciero_id]', (e) ->
+  if $(this).val() == "10"
+    $($(this).parent().parent().siblings()[1]).css("display", "none")
+  else
+    $($(this).parent().parent().siblings()[1]).css("display", "block")
 )
 # En formulario de caso-migracion si elige otra causa muestra campo para especificarla
 $(document).on('change', 'select[id^=caso_migracion_attributes_][id$=causamigracion_id]', (e) ->

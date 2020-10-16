@@ -1,7 +1,3 @@
-tbody#actividad_proyectofinanciero tr:first-child td:last-child {
-  display: none;
-}
-
 .actividad_detallefinanciero_persona .chosen-results {
   max-height: 120px;
 }

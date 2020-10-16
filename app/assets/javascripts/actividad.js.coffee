@@ -175,6 +175,13 @@ $(document).on('change', 'select[id^=actividad_actividad_proyectofinanciero_attr
   actualiza_opciones_convenioactividad()
 )
 
+$(document).on('cocoon:after-insert', '#actividad_proyectofinanciero', (e, objetivo) ->
+  if objetivo.children()[0].children[1].children[0].selectedOptions[0].text != "PLAN ESTRATÉGICO 1"
+    $(objetivo.children()[2]).css("display", "block")
+  else
+    $(objetivo.children()[2]).css("display", "none")
+)
+
 $(document).on('cocoon:after-remove', '#actividad_proyectofinanciero', (e, objetivo) ->
   valida_visibilidad_detallefinanciero()
   actualiza_opciones_convenioactividad()

@@ -1,0 +1,58 @@
+<tr class='nested-fields'>
+  <% if ac.object.fecha %>
+    <% fr = ac.object.fecha %>
+  <% else %>
+    <% fr = Time.now.strftime('%Y-%m-%d') %>
+  <% end %>
+  <%  lp1 = Cor1440Gen::Proyectofinanciero.where(
+    "fechainicio <= ? AND (? <= fechacierre OR fechacierre IS NULL)", 
+    fr, fr) %>
+  <% ids1 = lp1.pluck(:id) %>
+  <% ids2 = ac.object.proyectofinanciero.pluck(:id) %>
+  <% # Si es uno nuevo excluimos los ya elegidos %>
+  <% ids = ids1 | ids2 %>
+  <% col = Cor1440Gen::Proyectofinanciero.where(id: ids) %>
+  <td>
+    <%= f.input :id, as: :hidden %>
+
+    <% vdis = false %>
+    <% if f.object.proyectofinanciero_id %>
+      <% vdis = true %>
+    <% end %>
+    <%= f.input :proyectofinanciero_id,
+      collection: col,
+      label: false,
+      label_method: :nombre, 
+      disabled: vdis,
+      value_method: :id,
+      selected: f.object.proyectofinanciero_id,
+      input_html: { 
+        "title" => 'Los proyectos presentados son los vigentes en la fecha de la actividad (cambie la fecha para actualizar estas opciones)',
+        class: 'chosen-select' 
+      }
+    %>
+  </td>
+  <td>
+    <%= f.association :actividadpf, 
+      collection: ::Cor1440Gen::Actividadpf.
+      where( proyectofinanciero_id: f.object.proyectofinanciero_id),
+      label_method: lambda { |t| t.presenta_nombre},
+      value_method: :id,
+      label: false,
+      selected: f.object.actividadpf_ids, 
+      input_html: { 
+        class: 'chosen-select' 
+      } 
+    %>
+  </td>
+  <% if @registro.actividad_proyectofinanciero[0].proyectofinanciero_id == 10 %>
+    <% elestilo = "display: none" %>
+  <% else%>
+    <% elestilo = "display: block" %>
+  <% end%>
+  <td style="<%= elestilo %>">
+    <%= link_to_remove_association "Eliminar", f, 
+      :class => 'btn-danger' 
+    %>
+  </td>
+</tr>

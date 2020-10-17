@@ -1,0 +1,59 @@
+<div class="panel-group" id="acordeon_dfids">
+  <div class="panel panel-default" id="panel_dfids">
+    <div class="panel-heading">
+      <div class="panel-title" style='text-align: center'>
+        <a data-toggle="collapse" data-target="#colapsa_dfids" href="#colapsa_dfids">
+          Expandir / colapsar
+        </a>
+      </div> <!-- panel-title -->
+    </div> <!-- panel-heading -->
+
+    <div id="colapsa_dfids" class="panel-collapse collapse">
+      <div class="panel-body table-responsive" style="overflow-x:scroll;">
+        <table class='table table-bordered table-sm'>
+          <thead class='thead-light'>
+            <tr>
+              <th>DF</th>
+              <th>Actividad</th>
+              <th style='min-width: 6em'>Fecha</th>
+              <th>Nombre</th>
+              <th>
+                <%= Cor1440Gen::Actividad.human_attribute_name(:proyectofinanciero) %>
+              </th>
+              <th>Unidad</th>
+              <th>Valor promedio por persona por unidad</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @registro.detallefinanciero.order(:actividad_id).each do |d| %>
+              <tr>
+                <td><%= d.id %></td>
+                <td>
+                  <%= link_to(
+                    d.actividad_id, 
+                    cor1440_gen.actividad_path(d.actividad_id), 
+                    target: '_blank') %>
+                </td>
+                <td>
+                  <%= d.actividad.fecha %>
+                </td>
+                <td>
+                  <%= d.actividad.nombre %>
+                </td>
+                <td>
+                  <%= d.actividad.proyectofinanciero.map(&:nombre).join("; ") %>
+                </td>
+                <td>
+                  <%= d.unidadayuda ? d.unidadayuda.nombre : '' %>
+                </td>
+                <td>
+                  <%= d.valorunitario %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div> 
+    </div>
+  </div>
+</div>

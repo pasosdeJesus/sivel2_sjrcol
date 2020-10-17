@@ -7,10 +7,20 @@ module Sip
   class Persona < ActiveRecord::Base
     include Sip::Modelo
     include Sivel2Sjr::Concerns::Models::Persona
-  
+ 
+    has_many :detallefinanciero_persona,
+      dependent: :delete_all,
+      class_name: '::DetallefinancieroPersona',
+      foreign_key: 'persona_id'
+
+    has_many :detallefinanciero,
+      class_name: '::Detallefinanciero', 
+      through: 'detallefinanciero_persona'
+
     has_one :datosbio, class_name: 'Sip::Datosbio', 
       foreign_key: 'persona_id', dependent: :delete
     accepts_nested_attributes_for :datosbio, reject_if: :all_blank
+
     validates :numerodocumento, :allow_blank => true, uniqueness: {message: "Documento de identidad ya registrado"}
 
     attr_accessor :fechanac

@@ -7,21 +7,22 @@ module Sip
 
     include Sivel2Sjr::Concerns::Controllers::PersonasController
 
+    def atributos_show
+      atributos_show_sivel2_sjr + [
+        :detallefinanciero_ids
+      ]
+    end
+
+    def atributos_index
+      atributos_index_sivel2_sjr  + [
+        :detallefinanciero_ids
+      ]
+    end 
+
     def atributos_form
-      if @registro && @registro.datosbio.nil?
-        @datosbio = Sip::Datosbio.new()
-        @datosbio.tipocotizante = 'B'
-        @datosbio.fecharecoleccion = Date.today()
-        @datosbio.save!
-        @registro.datosbio =  @datosbio
-      end
-      a = atributos_show - [:id] +
-        [:datosbio, :proyectofinanciero_ids, :caracterizaciones]
-      p = a.index(:fechanac)
-      a[p] = :anionac
-      a.insert(p, :mesnac)
-      a.insert(p, :dianac)
-      return a
+      atributos_form_sivel2_sjr - [
+        :detallefinanciero_ids
+      ]
     end
 
     def lista_params
@@ -32,34 +33,36 @@ module Sip
         :id_clase,
         :tdocumento_id,
         :numerodocumento
-      ] + [
-        :datosbio_attributes => [
-          :afiliadoarl,
-          :anioaprobacion,
-          :correo,
-          :cvulnerabilidad_id,
-          :res_departamento_id,
-          :direccionres,
-          :otradiscapacidad,
-          :eps,
-          :discapacidad_id,
-          :escolaridad_id,
-          :espaciopart_id,
-          :fechaingespaciopp,
-          :mayores60acargo,
-          :menores12acargo,
-          :res_municipio_id,
-          :nivelsisben,
-          :nombreespaciopp,
-          :personashogar,
-          :telefono,
-          :veredares,
-          :sistemapensional,
-          :subsidioestado,
-          :telefono,
-          :tipocotizante
-        ]
-      ] + [
+      ] +
+#     [
+#       :datosbio_attributes => [
+#         :afiliadoarl,
+#         :anioaprobacion,
+#         :correo,
+#         :cvulnerabilidad_id,
+#         :res_departamento_id,
+#         :direccionres,
+#         :otradiscapacidad,
+#         :eps,
+#         :discapacidad_id,
+#         :escolaridad_id,
+#         :espaciopart_id,
+#         :fechaingespaciopp,
+#         :mayores60acargo,
+#         :menores12acargo,
+#         :res_municipio_id,
+#         :nivelsisben,
+#         :nombreespaciopp,
+#         :personashogar,
+#         :telefono,
+#         :veredares,
+#         :sistemapensional,
+#         :subsidioestado,
+#         :telefono,
+#         :tipocotizante
+#       ]
+#      ] + 
+      [
         "caracterizacionpersona_attributes" =>
         [ :id,
           "respuestafor_attributes" => [

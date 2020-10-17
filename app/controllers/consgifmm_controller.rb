@@ -29,7 +29,10 @@ class ConsgifmmController < Heb412Gen::ModelosController
       :detalleah_mecanismo_entrega,
       :detalleah_frecuencia_entrega,
       :detalleah_monto_por_persona,
-      :detalleah_numero_meses_cobertura
+      :detalleah_numero_meses_cobertura,
+      :beneficiarios_enlaces,
+      :beneficiarios_nuevos_mes_enlaces,
+      :beneficiarios_nuevos_vocacion_permanencia_enlaces
     ]
   end
 

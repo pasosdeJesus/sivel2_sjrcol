@@ -194,6 +194,8 @@ es:
       "sip/lineaactorsocial":
         Lineaactorsocial: Línea de trabajo del actor social
         Lineasactorsocial: Línea de trabajo del actor social
+      "sip/persona":
+        detallefinanciero_ids: Detalles financieros en los que aparece
       "sip/sectoractor":
         Sectoractor: Población relacionada con actor social
         Sectoresactores: Poblaciones relacionadas con actor social

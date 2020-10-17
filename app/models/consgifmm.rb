@@ -17,11 +17,6 @@ class Consgifmm < ActiveRecord::Base
     class_name: 'Cor1440Gen::Actividad', 
     foreign_key: 'actividad_id'
 
-  has_many :poblacion,
-    class_name: 'detallefinanciero_persona', 
-    foreign_key: 'actividad_id'
-
-
 
   # Retorna el del primer proyecto y de la primera actividad o nil 
   def busca_indicador_gifmm
@@ -164,41 +159,94 @@ class Consgifmm < ActiveRecord::Base
     ids
   end
 
-  def poblacion_ids
-    idp = personas_victimas_condicion {|v| true}
-    idp += personas_asistentes_condicion {|a| true}
-    idp.uniq!
-    idp.join(",")
+  def beneficiarios_ids
+    r = self.persona_ids.uniq
+    r.join(',')
   end
 
-  def poblacion
-    p1 = actividad.poblacion_cor1440_gen
-    p2 = poblacion_ids.split(",").count
-    if p1 >= p2
-      p1.to_s
-    else
-      "#{p1} pero se esperaban al menos #{p2}"
+
+  def beneficiarios
+    beneficiarios_ids.split(',').count
+  end
+
+  def beneficiarios_enlaces
+    beneficiarios_ids.split(',').map {|i|
+      r="<a href='#{Rails.application.routes.url_helpers.sip_path + 
+      'personas/' + i.to_s}' target='_blank'>#{i.to_s}</a>"
+      r.html_safe
+    }.join(", ".html_safe).html_safe
+  end
+
+  def beneficiarios_nuevos_mes_ids
+    idp = beneficiarios_ids.split(',').select {|pid|
+      Sip::Persona.find(pid.to_i).actividad.all? {|a|
+        a.fecha.year > actividad.fecha.year ||
+          (a.fecha.year == actividad.fecha.year && 
+           a.fecha.month >= actividad.fecha.month)
+      }
+    }
+#    idp = actividad.casosjr.select {|c|
+#      c.caso.fecha.at_beginning_of_month >= self.actividad.fecha.at_beginning_of_month
+#    }.map {|c|
+#      c.caso.victima.map(&:id_persona)
+#    }.flatten.uniq
+#    idp += personas_asistentes_condicion {|a| 
+#      Sivel2Gen::Victima.where(id_persona: a.persona_id).count > 0 &&
+#        Sivel2Gen::Victima.where(id_persona: a.persona_id).take.caso.fecha.
+#        at_beginning_of_month >= self.actividad.fecha.at_beginning_of_month
+#    }
+#    idp.uniq!
+    idp.uniq.join(",")
+  end
+
+
+  def beneficiarios_nuevos_mes
+    beneficiarios_nuevos_mes_ids.split(",").count
+  end
+
+
+  # Auxiliar que retorna listado de identificaciones de personas del
+  # listado de asistentes que cumplan una condición
+  def beneficiarios_asistentes_condicion_l
+    ids = []
+    self.actividad.asistencia.each do |a| 
+      if (yield(a))
+        ids << a.persona_id
+      end
     end
+    ids.uniq
   end
 
-  def poblacion_nuevos_ids
+
+  # Retorna listado de ids de personas de casos y asistencia
+  # cuyo perfil de migración tenga nombre nomperfil
+  def beneficiarios_perfil_migracion_ids(nomperfil)
     idp = actividad.casosjr.select {|c|
-      c.caso.fecha.at_beginning_of_month >= self.actividad.fecha.at_beginning_of_month
+      c.caso.migracion.count > 0 &&
+        c.caso.migracion[0].perfilmigracion &&
+        c.caso.migracion[0].perfilmigracion.nombre == nomperfil
     }.map {|c|
       c.caso.victima.map(&:id_persona)
     }.flatten.uniq
-    idp += personas_asistentes_condicion {|a| 
-      Sivel2Gen::Victima.where(id_persona: a.persona_id).count > 0 &&
-        Sivel2Gen::Victima.where(id_persona: a.persona_id).take.caso.fecha.
-        at_beginning_of_month >= self.actividad.fecha.at_beginning_of_month
+
+    idp += beneficiarios_asistentes_condicion_l {|a| 
+      a.perfilactorsocial &&
+        a.perfilactorsocial.nombre == nomperfil
     }
     idp.uniq!
     idp.join(",")
   end
 
+  def beneficiarios_nuevos_vocacion_permanencia_ids
+    idv = beneficiarios_perfil_migracion_ids('CON VOCACIÓN DE PERMANENCIA').
+      split(',')
+    idn = beneficiarios_nuevos_mes_ids.split(',')
+    idp = idv & idn
+    idp.uniq.join(',')
+  end
 
-  def poblacion_nuevos
-    poblacion_nuevos_ids.split(",").count
+  def beneficiarios_nuevos_vocacion_permanencia
+    beneficiarios_nuevos_vocacion_permanencia_ids.split(",").count
   end
 
   def poblacion_colombianos_retornados_ids
@@ -263,14 +311,6 @@ class Consgifmm < ActiveRecord::Base
 
   def poblacion_transito
     poblacion_transito_ids.split(",").count
-  end
-
-  def poblacion_vocacion_permanencia_ids
-    poblacion_perfil_migracion_ids('CON VOCACIÓN DE PERMANENCIA')
-  end
-
-  def poblacion_vocacion_permanencia
-    poblacion_vocacion_permanencia_ids.split(",").count
   end
 
 
@@ -420,89 +460,76 @@ class Consgifmm < ActiveRecord::Base
 
   def presenta(atr)
     puts "** ::Consgiffm.rb atr=#{atr}"
-    m =/^edad_([^_]*)_r_(.*)/.match(atr.to_s)
-    if (m && ((m[1] == 'mujer' && self.persona.sexo == 'F') ||
-        (m[1] == 'hombre' && self.persona.sexo == 'M') ||
-        (m[1] == 'sin' && self.persona.sexo == 'S'))) then
-      edad = Sivel2Gen::RangoedadHelper::edad_de_fechanac_fecha(
-        self.persona.anionac,
-        self.persona.mesnac,
-        self.persona.dianac,
-        self.actividad.fecha.year,
-        self.actividad.fecha.month,
-        self.actividad.fecha.day
-      )
-      if (m[2] == '0_5' && 0 <= edad && edad <= 5) ||
-          (m[2] == '6_12' && 6 <= edad && edad <= 12) ||
-          (m[2] == '13_17' && 13 <= edad && edad <= 17) ||
-          (m[2] == '18_26' && 18 <= edad && edad <= 26) ||
-          (m[2] == '27_59' && 27 <= edad && edad <= 59) ||
-          (m[2] == '60_' && 60 <= edad) ||
-          (m[2] == 'SIN' && edad == -1) then
-        1
+
+    m =/^beneficiarios_(.*)_enlaces$/.match(atr.to_s)
+    if m && respond_to?("beneficiarios_#{m[1]}_ids")
+      bids = send("beneficiarios_#{m[1]}_ids").split(',')
+      return bids.map {|i|
+        r="<a href='#{Rails.application.routes.url_helpers.sip_path + 
+        'personas/' + i.to_s}' target='_blank'>#{i.to_s}</a>"
+        r.html_safe
+      }.join(", ".html_safe).html_safe
+    end
+
+    case atr.to_sym
+    when :actividad_nombre
+      self.actividad.nombre
+
+    when :actividad_id
+      self.actividad_id
+
+    when :actividad_fecha_mes
+      self.actividad.fecha ? self.actividad.fecha.month : ''
+
+    when :actividad_proyectofinanciero
+      self.actividad.proyectofinanciero ? 
+        self.actividad.proyectofinanciero.map(&:nombre).join('; ') : ''
+
+
+    when :estado
+      'En proceso'
+
+    when :mes
+      actividad.fecha ? 
+        Sip::FormatoFechaHelper::MESES[actividad.fecha.month] : ''
+
+    when :objetivo
+      actividad.objetivo ? actividad.objetivo : ''
+
+    when :sector_gifmm
+      idig = self.busca_indicador_gifmm
+      if idig != nil
+        ::Indicadorgifmm.find(idig).sectorgifmm.nombre
       else
         ''
       end
-    else
-      case atr.to_sym
-      when :actividad_nombre
-        self.actividad.nombre
 
-      when :actividad_id
-        self.actividad_id
-
-      when :actividad_fecha_mes
-        self.actividad.fecha ? self.actividad.fecha.month : ''
-
-      when :actividad_proyectofinanciero
-        self.actividad.proyectofinanciero ? 
-          self.actividad.proyectofinanciero.map(&:nombre).join('; ') : ''
-
-
-      when :estado
-        'En proceso'
-
-      when :mes
-        actividad.fecha ? 
-          Sip::FormatoFechaHelper::MESES[actividad.fecha.month] : ''
-
-      when :objetivo
-        actividad.objetivo ? actividad.objetivo : ''
-
-      when :sector_gifmm
-        idig = self.busca_indicador_gifmm
-        if idig != nil
-          ::Indicadorgifmm.find(idig).sectorgifmm.nombre
-        else
-          ''
-        end
-
-      when :socio_implementador
-        if socio_principal == 'SJR Col'
-          ''
-        else
-          'SJR Col'
-        end
-
-      when :tipo_implementacion
-        if socio_principal == 'SJR Col'
-          'Directa'
-        else
-          'Indirecta'
-        end
-
-      when :ubicacion
-        lugar
-
+    when :socio_implementador
+      if socio_principal == 'SJR Col'
+        ''
       else
-        if respond_to?(atr)
-          send(atr)
-        else
-          self.actividad.presenta(atr)
-        end
+        'SJR Col'
       end
-    end
-  end
+
+    when :tipo_implementacion
+      if socio_principal == 'SJR Col'
+        'Directa'
+      else
+        'Indirecta'
+      end
+
+    when :ubicacion
+      lugar
+
+    else
+      if respond_to?(atr)
+        send(atr)
+      else
+        self.actividad.presenta(atr)
+      end
+    end #case
+
+  end # presenta
 
   scope :filtro_actividad_id, lambda { |ida|
     where(actividad_id: ida.to_i)

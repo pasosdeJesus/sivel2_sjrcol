@@ -116,7 +116,9 @@ end
 
 
 group :development do
-  
+
+  gem 'rails-erd'
+
   gem 'web-console' # Consola irb en páginas 
 
 end

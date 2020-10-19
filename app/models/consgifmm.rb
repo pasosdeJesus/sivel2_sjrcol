@@ -179,12 +179,21 @@ class Consgifmm < ActiveRecord::Base
 
   def beneficiarios_nuevos_mes_ids
     idp = beneficiarios_ids.split(',').select {|pid|
-      Sip::Persona.find(pid.to_i).actividad.all? {|a|
+      p = Sip::Persona.find(pid.to_i)
+      p.actividad.all? {|a|
         a.fecha.year > actividad.fecha.year ||
           (a.fecha.year == actividad.fecha.year && 
            a.fecha.month >= actividad.fecha.month)
+      } &&
+      p.victima.all? {|v|
+        v.caso.casosjr.actividad.all? {|a|
+          a.fecha.year > actividad.fecha.year ||
+            (a.fecha.year == actividad.fecha.year && 
+             a.fecha.month >= actividad.fecha.month)
+        }
       }
     }
+
 #    idp = actividad.casosjr.select {|c|
 #      c.caso.fecha.at_beginning_of_month >= self.actividad.fecha.at_beginning_of_month
 #    }.map {|c|

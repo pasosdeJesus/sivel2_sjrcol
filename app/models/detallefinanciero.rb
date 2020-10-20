@@ -70,6 +70,8 @@ class Detallefinanciero < ActiveRecord::Base
     convenio = Cor1440Gen::Proyectofinanciero.where(
       nombre: valor.split(" - ")[0])
     actividadpf = Cor1440Gen::Actividadpf.where(
+      proyectofinanciero_id: convenio[0].id)
+      .where(
       "titulo LIKE '%' || ? || '%'", valor.split(" - ")[1].strip)
     if convenio.count == 1 && actividadpf.count == 1 
       if self.proyectofinanciero_id.nil? && self.actividadpf_id.nil?

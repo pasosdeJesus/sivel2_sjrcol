@@ -160,7 +160,7 @@ class Consgifmm < ActiveRecord::Base
   end
 
   def beneficiarios_ids
-    r = self.persona_ids.uniq
+    r = self.persona_ids.sort.uniq
     r.join(',')
   end
 
@@ -205,7 +205,7 @@ class Consgifmm < ActiveRecord::Base
 #        at_beginning_of_month >= self.actividad.fecha.at_beginning_of_month
 #    }
 #    idp.uniq!
-    idp.uniq.join(",")
+    idp.sort.uniq.join(",")
   end
 
 
@@ -227,15 +227,19 @@ class Consgifmm < ActiveRecord::Base
   end
 
 
-  # Retorna listado de ids de personas de casos y asistencia
-  # cuyo perfil de migración tenga nombre nomperfil
-  def beneficiarios_perfil_migracion_ids(nomperfil)
+  # Retorna listado de ids de personas en casos de la actividad o asistencia
+  # cuyo perfil de migración tenga nombre nomperfil bien en 
+  # un caso en el que no esté desagregado, o bien antes de
+  # la fecha de la actividad.
+  def beneficiarios_perfilmigracion_ids(nomperfil)
     idp = actividad.casosjr.select {|c|
       c.caso.migracion.count > 0 &&
         c.caso.migracion[0].perfilmigracion &&
         c.caso.migracion[0].perfilmigracion.nombre == nomperfil
     }.map {|c|
-      c.caso.victima.map(&:id_persona)
+      c.caso.victima.select {|v|
+        v.victimasjr.fechadesagregacion.nil?
+      }.map(&:id_persona)
     }.flatten.uniq
 
     idp += beneficiarios_asistentes_condicion_l {|a| 
@@ -246,12 +250,42 @@ class Consgifmm < ActiveRecord::Base
     idp.join(",")
   end
 
-  def beneficiarios_nuevos_vocacion_permanencia_ids
-    idv = beneficiarios_perfil_migracion_ids('CON VOCACIÓN DE PERMANENCIA').
-      split(',')
+  def beneficiarios_nuevos_en_transito_ids
     idn = beneficiarios_nuevos_mes_ids.split(',')
-    idp = idv & idn
-    idp.uniq.join(',')
+    finmes = actividad.fecha.end_of_month
+    idv = idn.select {|ip|
+      GifmmHelper::perfilmigracion_de_beneficiario(ip, finmes) == 
+        'EN TRÁNSITO'
+    }
+    idv.sort.join(',')
+  end
+
+  def beneficiarios_nuevos_en_transito
+    beneficiarios_nuevos_en_transito_ids.split(",").count
+  end
+
+  def beneficiarios_nuevos_pendulares_ids
+    idn = beneficiarios_nuevos_mes_ids.split(',')
+    finmes = actividad.fecha.end_of_month
+    idv = idn.select {|ip|
+      GifmmHelper::perfilmigracion_de_beneficiario(ip, finmes) == 
+        'PENDULAR'
+    }
+    idv.sort.join(',')
+  end
+
+  def beneficiarios_nuevos_pendulares
+    beneficiarios_nuevos_pendulares_ids.split(",").count
+  end
+
+  def beneficiarios_nuevos_vocacion_permanencia_ids
+    idn = beneficiarios_nuevos_mes_ids.split(',')
+    finmes = actividad.fecha.end_of_month
+    idv = idn.select {|ip|
+      GifmmHelper::perfilmigracion_de_beneficiario(ip, finmes) == 
+        'CON VOCACIÓN DE PERMANENCIA'
+    }
+    idv.sort.join(',')
   end
 
   def beneficiarios_nuevos_vocacion_permanencia
@@ -277,17 +311,15 @@ class Consgifmm < ActiveRecord::Base
     }
     idp.uniq!
     idp.join(",")
-
   end
 
   def poblacion_colombianos_retornados
     poblacion_colombianos_retornados_ids.split(",").count
   end
 
-
   # Retorna listado de ids de personas de casos y asistencia
   # cuyo perfil de migración tenga nombre nomperfil
-  def poblacion_perfil_migracion_ids(nomperfil)
+  def poblacion_perfilmigracion_ids(nomperfil)
     idp = actividad.casosjr.select {|c|
       c.caso.migracion.count > 0 &&
         c.caso.migracion[0].perfilmigracion &&
@@ -304,23 +336,6 @@ class Consgifmm < ActiveRecord::Base
     idp.join(",")
   end
 
-
-  def poblacion_pendulares_ids
-    poblacion_perfil_migracion_ids('PENDULAR')
-  end
-
-  def poblacion_pendulares
-    poblacion_pendulares_ids.split(",").count
-  end
-
-
-  def poblacion_transito_ids
-    poblacion_perfil_migracion_ids('EN TRÁNSITO')
-  end
-
-  def poblacion_transito
-    poblacion_transito_ids.split(",").count
-  end
 
 
   def  poblacion_r_g(sexo, num)

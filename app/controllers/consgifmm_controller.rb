@@ -32,7 +32,9 @@ class ConsgifmmController < Heb412Gen::ModelosController
       :detalleah_numero_meses_cobertura,
       :beneficiarios_enlaces,
       :beneficiarios_nuevos_mes_enlaces,
-      :beneficiarios_nuevos_vocacion_permanencia_enlaces
+      :beneficiarios_nuevos_vocacion_permanencia_enlaces,
+      :beneficiarios_nuevos_en_transito_enlaces,
+      :beneficiarios_nuevos_pendulares_enlaces
     ]
   end
 

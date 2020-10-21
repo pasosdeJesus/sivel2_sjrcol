@@ -43,14 +43,20 @@ module Cor1440Gen
       asistentes = []
       victimas = []
       self.asistencia.map{ |as| asistentes.push(as.persona_id) }
-      self.actividad_casosjr.map{|cas| victimas.push(Sivel2Gen::Victima.where(id_caso: cas.casosjr.id_caso).pluck(:id_persona))}
+      self.actividad_casosjr.map{|cas| 
+        victimas.push(Sivel2Gen::Victima.where(id_caso: cas.casosjr.id_caso).
+                      pluck(:id_persona))
+      }
       if (asistentes & victimas.flatten).length > 0
         repetidos = Sip::Persona.where(id: asistentes & victimas.flatten).map{
           |n| n.nombres + " " + n.apellidos + 
             " en listado de asistencia y en caso " + 
-            Sivel2Sjr::Casosjr.where(contacto_id: n.id).pluck(:id_caso)[0].to_s
+            Sivel2Sjr::Casosjr.where(contacto_id: n.id).
+            pluck(:id_caso)[0].to_s
         }
-        errors.add(:asistencia, "Personas repetidas entre listado de casos (contacto o familiares) y asistencia: " + repetidos.join(", ")) 
+        errors.add(
+          :asistencia, "Personas repetidas entre listado de casos " +
+          "(contacto o familiares) y asistencia: " + repetidos.join(", ")) 
       end
       if asistentes.length != asistentes.uniq.length
         asrepetidos = []
@@ -58,7 +64,8 @@ module Cor1440Gen
         nombres =  Sip::Persona.where(id: asrepetidos).map{
           |n| n.nombres + " " + n.apellidos
         }
-        errors.add(:asistencia, "En listado de asistencia se encuentra repetido: " + nombres.join(", ")) 
+        errors.add(:asistencia, "En listado de asistencia se encuentra " +
+                   "repetido: " + nombres.join(", ")) 
       end 
     end
 
@@ -68,7 +75,10 @@ module Cor1440Gen
       self.actividad_casosjr.map{|caso| casos.push(caso.casosjr.id_caso)}
       if casos.length != casos.uniq.length
         casrepetidos.push(casos.detect{ |e| casos.count(e) > 1 })
-        errors.add(:casosjr, "En listado de casos se encuentran repetidos los casos con id(s): " + casrepetidos.join(", ")) 
+        errors.add(
+          :casosjr, 
+          "En listado de casos se encuentran repetidos los casos con id(s): " +
+          casrepetidos.join(", ")) 
       end
     end
 
@@ -82,7 +92,8 @@ module Cor1440Gen
         }
       }
       if pact.length != pact.uniq.length
-        errors.add(:persona, "En Detalle Financiero no se puden repetir personas si la actividad de Marco lógico es la misma") 
+        errors.add(:persona, "En Detalle Financiero no se puden repetir " +
+                   "personas si la actividad de Marco lógico es la misma") 
       end 
     end 
 
@@ -321,7 +332,8 @@ module Cor1440Gen
     end
 
     def poblacion_mujeres_r_g_4_5_ids
-      l = poblacion_mujeres_r_g_ids(4).split(",") + poblacion_mujeres_r_g_ids(5).split(",")
+      l = poblacion_mujeres_r_g_ids(4).split(",") + 
+        poblacion_mujeres_r_g_ids(5).split(",")
       l.join(",")
     end
 

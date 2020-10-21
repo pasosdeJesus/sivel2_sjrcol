@@ -1,45 +1,47 @@
-<input id='actividad_id' type='hidden' value='<%= f.object.id %>' %>
-<% tipos = @registro.actividadpf.pluck(:actividadtipo_id) %>
-<% if tipos.include? (129) %>
-  <% estdetalle = "display: block; overflow-x: scroll; min-height: 320px;" %>
-<% else %>
-  <% estdetalle = "display: none; overflow-x: scroll; min-height: 320px;" %>
-<% end %>
-<div id="detallefinanciero" class="panel-body table-responsivei" style="<%= estdetalle %>" >
-  <table class="table table-bordered table-sm">
-    <thead class="thead-light">
-      <tr>
-        <th>Convenio y Actividad de Marco Lógico</th>
-        <th>Beneficiario(s) Directo(s)</th>
-        <th>Unidad</th>
-        <th>Cantidad por Beneficiario</th>
-        <th>Valor unitario promedio por Beneficiario</th>
-        <th>Valor total</th>
-        <th>Mecanismo de entrega</th>
-        <th>Modalidad de entrega</th>
-        <th>Frecuencia de la entrega</th>
-        <th>Número total de entrega de asistencias</th>
-        <th>Número de esta asistencia</th>
-        <th>Acciones</th>
-      </tr>
-    </thead>
-    <tbody id="filas_detallefinanciero">
-      <%= f.simple_fields_for :detallefinanciero do |f| %>
-        <%= render 'detallefinanciero_campos', :f => f %>
-      <% end %>
-    </tbody>
-  </table>
-  <div class="links">
-    <%= link_to_add_association 'Añadir Detalle Financiero', f, 
-      :detallefinanciero,
-      partial: 'cor1440_gen/actividades/detallefinanciero_campos',
-      "data-association-insertion-node": "tbody#filas_detallefinanciero", 
-      "data-association-insertion-method": "append", 
-      'data-ajax' => File.join(
-        Rails.configuration.relative_url_root, 'detallesfinancieros/nuevo'
-      ),
-      'data-ajaxdata' => 'actividad_id',
-      class: 'btn-primary'
-    %>
+<% if current_usuario.rol == Ability::ROLADMIN %>
+  <input id='actividad_id' type='hidden' value='<%= f.object.id %>' %>
+  <% tipos = @registro.actividadpf.pluck(:actividadtipo_id) %>
+  <% if tipos.include? (129) %>
+    <% estdetalle = "display: block; overflow-x: scroll; min-height: 320px;" %>
+  <% else %>
+    <% estdetalle = "display: none; overflow-x: scroll; min-height: 320px;" %>
+  <% end %>
+  <div id="detallefinanciero" class="panel-body table-responsivei" style="<%= estdetalle %>" >
+    <table class="table table-bordered table-sm">
+      <thead class="thead-light">
+        <tr>
+          <th>Convenio y Actividad de Marco Lógico</th>
+          <th>Beneficiario(s) Directo(s)</th>
+          <th>Unidad</th>
+          <th>Cantidad por Beneficiario</th>
+          <th>Valor unitario promedio por Beneficiario</th>
+          <th>Valor total</th>
+          <th>Mecanismo de entrega</th>
+          <th>Modalidad de entrega</th>
+          <th>Frecuencia de la entrega</th>
+          <th>Número total de entrega de asistencias</th>
+          <th>Número de esta asistencia</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody id="filas_detallefinanciero">
+        <%= f.simple_fields_for :detallefinanciero do |f| %>
+          <%= render 'detallefinanciero_campos', :f => f %>
+        <% end %>
+      </tbody>
+    </table>
+    <div class="links">
+      <%= link_to_add_association 'Añadir Detalle Financiero', f, 
+        :detallefinanciero,
+        partial: 'cor1440_gen/actividades/detallefinanciero_campos',
+        "data-association-insertion-node": "tbody#filas_detallefinanciero", 
+        "data-association-insertion-method": "append", 
+        'data-ajax' => File.join(
+          Rails.configuration.relative_url_root, 'detallesfinancieros/nuevo'
+        ),
+        'data-ajaxdata' => 'actividad_id',
+        class: 'btn-primary'
+      %>
+    </div>
   </div>
-</div>
+<% end %>

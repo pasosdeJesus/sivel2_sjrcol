@@ -35,7 +35,30 @@ class ConsgifmmController < Heb412Gen::ModelosController
       :beneficiarios_nuevos_vocacion_permanencia_enlaces,
       :beneficiarios_nuevos_en_transito_enlaces,
       :beneficiarios_nuevos_pendulares_enlaces,
-      :beneficiarios_nuevos_colombianos_retornado_enlaces
+      :beneficiarios_nuevos_colombianos_retornados_enlaces,
+      :beneficiarios_nuevos_comunidades_de_acogida_enlaces,
+      :beneficiarias_nuevas_niñas_adolescentes_y_se_enlaces,
+      :beneficiarias_nuevas_mujeres_adultas_enlaces,
+      :beneficiarias_nuevas_mujeres_0_5_enlaces,
+      :beneficiarias_nuevas_mujeres_6_12_enlaces,
+      :beneficiarias_nuevas_mujeres_13_17_enlaces,
+      :beneficiarias_nuevas_mujeres_18_59_enlaces,
+      :beneficiarias_nuevas_mujeres_60_o_mas_enlaces,
+      :beneficiarios_nuevos_niños_adolescentes_y_se_enlaces,
+      :beneficiarios_nuevos_hombres_adultos_enlaces,
+      :beneficiarios_nuevos_hombres_0_5_enlaces,
+      :beneficiarios_nuevos_hombres_6_12_enlaces,
+      :beneficiarios_nuevos_hombres_13_17_enlaces,
+      :beneficiarios_nuevos_hombres_18_59_enlaces,
+      :beneficiarios_nuevos_hombres_60_o_mas_enlaces,
+      :beneficiarios_nuevos_sinsexo_menores_y_se_enlaces,
+      :beneficiarios_nuevos_sinsexo_adultos_enlaces,
+      :beneficiarios_nuevos_lgbti_enlaces,
+      :beneficiarios_nuevos_con_discapacidad_enlaces,
+      :beneficiarios_nuevos_afrodescendientes_enlaces,
+      :beneficiarios_nuevos_indigenas_enlaces,
+      :beneficiarios_nuevos_otra_etnia_enlaces,
+      :actividad_observaciones
     ]
   end
 

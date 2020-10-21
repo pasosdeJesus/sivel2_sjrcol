@@ -62,5 +62,25 @@ module GifmmHelper
     return ''
   end
 
+  
+  # Recibe Sip::Persona y fecha hasta la cual mirar casos
+  # para determinar y retornar cadena con su etnia
+  # más reciente hasta esa fecha en casos de los que no haya
+  # sido desagregado.
+  # Si no encuentra etnia retorna ''
+  def self.etnia_de_beneficiario(p, fecha)
+    r = ''
+    ce = p.caso.order('fecha DESC').find { |c|
+      v = c.victima.where(id_persona: p.id).take
+      (v.victimasjr.fechadesagregacion.nil? || 
+       v.victimasjr.fechadesagregacion > fecha) &&
+      v.etnia
+    }
+    if ce
+      r = ce.victima.where(id_persona: p.id).take.etnia.nombre
+    end
+    r
+  end
+
 
 end

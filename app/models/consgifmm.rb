@@ -133,7 +133,8 @@ class Consgifmm < ActiveRecord::Base
     end
   end
 
-    # Auxiliar que retorna listado de identificaciones de personas de 
+
+  # Auxiliar que retorna listado de identificaciones de personas de 
   # las víctimas del listado de casos que cumplan una condición
   def personas_victimas_condicion
     ids = []
@@ -147,6 +148,7 @@ class Consgifmm < ActiveRecord::Base
     ids
   end
 
+
   # Auxiliar que retorna listado de identificaciones de personas del
   # listado de asistentes que cumplan una condición
   def personas_asistentes_condicion
@@ -159,23 +161,12 @@ class Consgifmm < ActiveRecord::Base
     ids
   end
 
+
   def beneficiarios_ids
     r = self.persona_ids.sort.uniq
     r.join(',')
   end
 
-
-  def beneficiarios
-    beneficiarios_ids.split(',').count
-  end
-
-  def beneficiarios_enlaces
-    beneficiarios_ids.split(',').map {|i|
-      r="<a href='#{Rails.application.routes.url_helpers.sip_path + 
-      'personas/' + i.to_s}' target='_blank'>#{i.to_s}</a>"
-      r.html_safe
-    }.join(", ".html_safe).html_safe
-  end
 
   def beneficiarios_nuevos_mes_ids
     idp = beneficiarios_ids.split(',').select {|pid|
@@ -194,45 +185,29 @@ class Consgifmm < ActiveRecord::Base
       }
     }
 
-#    idp = actividad.casosjr.select {|c|
-#      c.caso.fecha.at_beginning_of_month >= self.actividad.fecha.at_beginning_of_month
-#    }.map {|c|
-#      c.caso.victima.map(&:id_persona)
-#    }.flatten.uniq
-#    idp += personas_asistentes_condicion {|a| 
-#      Sivel2Gen::Victima.where(id_persona: a.persona_id).count > 0 &&
-#        Sivel2Gen::Victima.where(id_persona: a.persona_id).take.caso.fecha.
-#        at_beginning_of_month >= self.actividad.fecha.at_beginning_of_month
-#    }
-#    idp.uniq!
     idp.sort.uniq.join(",")
   end
 
 
-  def beneficiarios_nuevos_mes
-    beneficiarios_nuevos_mes_ids.split(",").count
-  end
-
-
-  # Auxiliar que retorna listado de identificaciones de personas del
-  # listado de asistentes que cumplan una condición
-  def beneficiarios_asistentes_condicion_l
-    ids = []
-    self.actividad.asistencia.each do |a| 
-      if (yield(a))
-        ids << a.persona_id
-      end
-    end
-    ids.uniq
-  end
-  def beneficiarios_nuevos_colombianos_retornados_ids
+  # Auxiliar que retorna listado de identificaciones de entre
+  # los beneficiarios nuevos que cumplan una condición sobre
+  # la persona (recibida como bloque)
+  def beneficiarios_nuevos_condicion_ids
     idn = beneficiarios_nuevos_mes_ids.split(',')
-    finmes = actividad.fecha.end_of_month
-    idcol = Sip::Pais.where(nombre: 'COLOMBIA').take.id
     idv = idn.select {|ip|
       p = Sip::Persona.find(ip)
-      (p.nacionalde == idcol || v.persona.id_pais == idcol) &&
-        ip.victima.any? { |v|
+      yield(p)
+    }
+    idv.sort.join(',')
+  end
+
+
+  def beneficiarios_nuevos_colombianos_retornados_ids
+    finmes = actividad.fecha.end_of_month
+    idcol = Sip::Pais.where(nombre: 'COLOMBIA').take.id
+    return beneficiarios_nuevos_condicion_ids {|p|
+      (p.nacionalde == idcol || p.id_pais == idcol) &&
+        p.victima.any? { |v|
         (v.victimasjr.fechadesagregacion.nil? ||
          v.victimasjr.fechadesagregacion <= finmes) &&
         v.caso.migracion.count > 0 &&
@@ -240,240 +215,194 @@ class Consgifmm < ActiveRecord::Base
         (v.persona.nacionalde == idcol || v.persona.id_pais == idcol)
       }
     }
-    idv.sort.join(',')
   end
 
-  def beneficiarios_nuevos_colombianos_retornados
-    beneficiarios_nuevos_colombianos_retornados_ids.split(",").count
-  end
 
-  # Retorna listado de ids de personas en casos de la actividad o asistencia
-  # cuyo perfil de migración tenga nombre nomperfil bien en 
-  # un caso en el que no esté desagregado, o bien antes de
-  # la fecha de la actividad.
-  def beneficiarios_perfilmigracion_ids(nomperfil)
-    idp = actividad.casosjr.select {|c|
-      c.caso.migracion.count > 0 &&
-        c.caso.migracion[0].perfilmigracion &&
-        c.caso.migracion[0].perfilmigracion.nombre == nomperfil
-    }.map {|c|
-      c.caso.victima.select {|v|
-        v.victimasjr.fechadesagregacion.nil?
-      }.map(&:id_persona)
-    }.flatten.uniq
-
-    idp += beneficiarios_asistentes_condicion_l {|a| 
-      a.perfilactorsocial &&
-        a.perfilactorsocial.nombre == nomperfil
+  def beneficiarios_nuevos_comunidades_de_acogida_ids
+    finmes = actividad.fecha.end_of_month
+    return beneficiarios_nuevos_condicion_ids {|p|
+      p.asistencia.any? {|as|
+        as.actividad.fecha <= finmes &&
+          as.perfilactorsocial && 
+          as.perfilactorsocial.nombre == 'COMUNIDAD DE ACOGIDA'
+      }
     }
-    idp.uniq!
-    idp.join(",")
   end
+
 
   def beneficiarios_nuevos_en_transito_ids
-    idn = beneficiarios_nuevos_mes_ids.split(',')
     finmes = actividad.fecha.end_of_month
-    idv = idn.select {|ip|
-      GifmmHelper::perfilmigracion_de_beneficiario(ip, finmes) == 
+    return beneficiarios_nuevos_condicion_ids {|p|
+      GifmmHelper::perfilmigracion_de_beneficiario(p.id, finmes) == 
         'EN TRÁNSITO'
     }
-    idv.sort.join(',')
   end
 
-  def beneficiarios_nuevos_en_transito
-    beneficiarios_nuevos_en_transito_ids.split(",").count
+
+  # Retorna ids de beneficiarios nuevos del sexo dado
+  # y una edad entre edadini o edadinf (pueden ser nil para indicar no limite).
+  # Si con_edad es false ademas retorna aquellos cuya edad
+  # sea desconocida
+  def beneficiarios_nuevos_condicion_sexo_edad_ids(sexo, edadini, edadfin,
+                                                  con_edad = true)
+    finmes = actividad.fecha.end_of_month
+    return beneficiarios_nuevos_condicion_ids {|p|
+      e = Sivel2Gen::RangoedadHelper::edad_de_fechanac_fecha(
+          p.anionac, p.mesnac, p.dianac,
+          finmes.year, finmes.month, finmes.day)
+      p.sexo == sexo && 
+        (!con_edad || p.anionac) &&
+        (edadini.nil? || e >= edadini) &&
+        (edadfin.nil? || e <= edadfin)
+    }
   end
+
+  def beneficiarias_nuevas_mujeres_adultas_ids
+    beneficiarios_nuevos_condicion_sexo_edad_ids('F', 18, nil)
+  end
+
+  def beneficiarias_nuevas_mujeres_0_5_ids
+    beneficiarios_nuevos_condicion_sexo_edad_ids('F', 0, 5)
+  end
+
+  def beneficiarias_nuevas_mujeres_6_12_ids
+    beneficiarios_nuevos_condicion_sexo_edad_ids('F', 6, 12)
+  end
+
+  def beneficiarias_nuevas_mujeres_13_17_ids
+    beneficiarios_nuevos_condicion_sexo_edad_ids('F', 13, 17)
+  end
+
+  def beneficiarias_nuevas_mujeres_18_59_ids
+    beneficiarios_nuevos_condicion_sexo_edad_ids('F', 18, 59)
+  end
+
+  def beneficiarias_nuevas_mujeres_60_o_mas_ids
+    beneficiarios_nuevos_condicion_sexo_edad_ids('F', 60, nil)
+  end
+
+  def beneficiarios_nuevos_ninos_adolescentes_y_se_ids
+    beneficiarios_nuevos_condicion_sexo_edad_ids('M', nil, 17, false)
+  end
+
+  def beneficiarios_nuevos_hombres_adultos_ids
+    beneficiarios_nuevos_condicion_sexo_edad_ids('M', 18, nil)
+  end
+
+  def beneficiarios_nuevos_hombres_0_5_ids
+    beneficiarios_nuevos_condicion_sexo_edad_ids('M', 0, 5)
+  end
+
+  def beneficiarios_nuevos_hombres_6_12_ids
+    beneficiarios_nuevos_condicion_sexo_edad_ids('M', 6, 12)
+  end
+
+  def beneficiarios_nuevos_hombres_13_17_ids
+    beneficiarios_nuevos_condicion_sexo_edad_ids('M', 13, 17)
+  end
+
+  def beneficiarios_nuevos_hombres_18_59_ids
+    beneficiarios_nuevos_condicion_sexo_edad_ids('M', 18, 59)
+  end
+
+  def beneficiarios_nuevos_hombres_60_o_mas_ids
+    beneficiarios_nuevos_condicion_sexo_edad_ids('M', 60, nil)
+  end
+
+  def beneficiarios_nuevos_sinsexo_adultos_ids
+    beneficiarios_nuevos_condicion_sexo_edad_ids('S', 60, nil)
+  end
+
+  def beneficiarios_nuevos_sinsexo_menores_y_se_ids
+    beneficiarios_nuevos_condicion_sexo_edad_ids('S', nil, 17, false)
+  end
+
+  def beneficiarios_nuevos_lgbti_ids
+    finmes = actividad.fecha.end_of_month
+    return beneficiarios_nuevos_condicion_ids {|p|
+      p.victima.any? { |v| 
+        (v.victimasjr.fechadesagregacion.nil? ||
+         v.victimasjr.fechadesagregacion <= finmes) &&
+        v.orientacionsexual != 'H'
+      }
+    }
+  end
+
+  def beneficiarios_nuevos_con_discapacidad_ids
+    finmes = actividad.fecha.end_of_month
+    return beneficiarios_nuevos_condicion_ids {|p|
+      p.victima.any? { |v| 
+        (v.victimasjr.fechadesagregacion.nil? ||
+         v.victimasjr.fechadesagregacion <= finmes) &&
+        v.victimasjr.discapacidad &&
+        v.victimasjr.discapacidad.nombre != 'NINGUNA'
+      }
+    }
+  end
+
+  def beneficiarios_nuevos_afrodescendientes_ids
+    finmes = actividad.fecha.end_of_month
+    return beneficiarios_nuevos_condicion_ids {|p|
+      e = GifmmHelper::etnia_de_beneficiario(p, finmes)
+      e == 'AFRODESCENDIENTE' || 
+        e == 'NEGRO'
+    }
+  end
+
+  def beneficiarios_nuevos_indigenas_ids
+    finmes = actividad.fecha.end_of_month
+    return beneficiarios_nuevos_condicion_ids {|p|
+      e = GifmmHelper::etnia_de_beneficiario(p, finmes)
+      e != 'AFRODESCENDIENTE' &&
+        e != 'NEGRO' &&
+        e != 'ROM' &&
+        e != 'MESTIZO' &&
+        e != 'SIN INFORMACIÓN' &&
+        e != ''
+    }
+  end
+
+  def beneficiarios_nuevos_otra_etnia_ids
+    finmes = actividad.fecha.end_of_month
+    return beneficiarios_nuevos_condicion_ids {|p|
+      e = GifmmHelper::etnia_de_beneficiario(p, finmes)
+      e == 'ROM' ||
+         e == 'MESTIZO' ||
+         e == 'SIN INFORMACIÓN' ||
+         e == ''
+    }
+  end
+
+  def beneficiarias_nuevas_ninas_adolescentes_y_se_ids
+    finmes = actividad.fecha.end_of_month
+    return beneficiarios_nuevos_condicion_ids {|p|
+      p.sexo == 'F' &&
+      (p.anionac.nil? ||
+        Sivel2Gen::RangoedadHelper::edad_de_fechanac_fecha(
+          p.anionac, p.mesnac, p.dianac,
+          finmes.year, finmes.month, finmes.day) < 18
+      )
+    }
+  end
+
 
   def beneficiarios_nuevos_pendulares_ids
-    idn = beneficiarios_nuevos_mes_ids.split(',')
     finmes = actividad.fecha.end_of_month
-    idv = idn.select {|ip|
-      GifmmHelper::perfilmigracion_de_beneficiario(ip, finmes) == 
+    return beneficiarios_nuevos_condicion_ids {|p|
+      GifmmHelper::perfilmigracion_de_beneficiario(p.id, finmes) == 
         'PENDULAR'
     }
-    idv.sort.join(',')
   end
 
-  def beneficiarios_nuevos_pendulares
-    beneficiarios_nuevos_pendulares_ids.split(",").count
-  end
 
   def beneficiarios_nuevos_vocacion_permanencia_ids
-    idn = beneficiarios_nuevos_mes_ids.split(',')
     finmes = actividad.fecha.end_of_month
-    idv = idn.select {|ip|
-      GifmmHelper::perfilmigracion_de_beneficiario(ip, finmes) == 
+    return beneficiarios_nuevos_condicion_ids {|p|
+      GifmmHelper::perfilmigracion_de_beneficiario(p.id, finmes) == 
         'CON VOCACIÓN DE PERMANENCIA'
     }
-    idv.sort.join(',')
   end
 
-
-  def poblacion_colombianos_retornados_ids
-    idcol = Sip::Pais.where(nombre: 'COLOMBIA').take.id
-    idp = actividad.casosjr.select {|c|
-      c.caso.migracion.count > 0
-    }.map {|c|
-      c.caso.victima.select {|v|
-        v.persona &&
-          (v.persona.nacionalde == idcol || v.persona.id_pais == idcol)
-      }.map(&:id_persona)
-    }.flatten.uniq
-
-    idp += personas_asistentes_condicion {|a| 
-      Sivel2Gen::Victima.where(id_persona: a.persona_id).count > 0 &&
-        Sivel2Gen::Victima.where(id_persona: a.persona_id).take.
-        caso.migracion.count > 0 &&
-        (a.persona.nacionalde == idcol || a.persona.id_pais == idcol)
-    }
-    idp.uniq!
-    idp.join(",")
-  end
-
-  def poblacion_colombianos_retornados
-    poblacion_colombianos_retornados_ids.split(",").count
-  end
-
-  # Retorna listado de ids de personas de casos y asistencia
-  # cuyo perfil de migración tenga nombre nomperfil
-  def poblacion_perfilmigracion_ids(nomperfil)
-    idp = actividad.casosjr.select {|c|
-      c.caso.migracion.count > 0 &&
-        c.caso.migracion[0].perfilmigracion &&
-        c.caso.migracion[0].perfilmigracion.nombre == nomperfil
-    }.map {|c|
-      c.caso.victima.map(&:id_persona)
-    }.flatten.uniq
-
-    idp += personas_asistentes_condicion {|a| 
-      a.perfilactorsocial &&
-        a.perfilactorsocial.nombre == nomperfil
-    }
-    idp.uniq!
-    idp.join(",")
-  end
-
-
-
-  def  poblacion_r_g(sexo, num)
-    idp = personas_victimas_condicion {|v| 
-      if v.persona.sexo == sexo
-        e = Sivel2Gen::RangoedadHelper.edad_de_fechanac_fecha(
-          v.persona.anionac, v.persona.mesnac, v.persona.dianac,
-          actividad.fecha.year, actividad.fecha.month, actividad.fecha. day)
-        r = Sivel2Gen::RangoedadHelper.buscar_rango_edad(
-          e, 'Cor1440Gen::Rangoedadac')
-        r == num
-      else
-        false
-      end
-    }
-    idp += personas_asistentes_condicion {|a| 
-      if a.persona && a.persona.sexo == sexo
-        e = Sivel2Gen::RangoedadHelper.edad_de_fechanac_fecha(
-          a.persona.anionac, a.persona.mesnac, a.persona.dianac,
-          actividad.fecha.year, actividad.fecha.month, actividad.fecha. day)
-        r = Sivel2Gen::RangoedadHelper.buscar_rango_edad(
-          e, 'Cor1440Gen::Rangoedadac')
-        r == num
-      else
-        false
-      end
-    }
-    idp.uniq!
-    idp.join(",")
-  end
-
-  def poblacion_mujeres_r_g_ids(num)
-    poblacion_r_g('F', num)
-  end
-
-  def poblacion_hombres_r_g_ids(num)
-    poblacion_r_g('M', num)
-  end
-
-  def poblacion_sinsexo_g_ids(num)
-    poblacion_r_g('S', num)
-  end
-
-
-  def poblacion_gen_infijo(infijo, num = nil)
-    puts "** OJO poblacion_gen_infijo(infijo = #{infijo}, num = #{num})"
-    p1 = nil
-    p2 = nil
-    if num.nil?
-      p1 = send("poblacion_#{infijo}_solore")
-      if respond_to?("poblacion_#{infijo}_ids")
-        p2 = send("poblacion_#{infijo}_ids").split(",").count
-      end
-    else
-      p1 = send("poblacion_#{infijo}_solore", num)
-      if respond_to?("poblacion_#{infijo}_ids")
-        p2 = send("poblacion_#{infijo}_ids", num).split(",").count
-      end
-    end
-    if p2.nil? || p1 >= p2
-      p1.to_s
-    else
-      "#{p1} pero se esperaban al menos #{p2}"
-    end
-  end
-
-  def poblacion_hombres_adultos_ids
-    l = poblacion_hombres_r_g_ids(4).split(",") +
-      poblacion_hombres_r_g_ids(5).split(",") +
-      poblacion_hombres_r_g_ids(6).split(",")
-    l.join(",")
-  end
-
-  def poblacion_hombres_r_g_4_5_ids
-    l = poblacion_hombres_r_g_ids(4).split(",") + 
-      poblacion_hombres_r_g_ids(5).split(",")
-    l.join(",")
-  end
-
-  def poblacion_mujeres_adultas_ids
-    l = poblacion_mujeres_r_g_ids(4).split(",") +
-      poblacion_mujeres_r_g_ids(5).split(",") +
-      poblacion_mujeres_r_g_ids(6).split(",")
-    l.join(",")
-  end
-
-  def poblacion_mujeres_r_g_4_5_ids
-    l = poblacion_mujeres_r_g_ids(4).split(",") + poblacion_mujeres_r_g_ids(5).split(",")
-    l.join(",")
-  end
-
-  def poblacion_ninas_adolescentes_y_se_ids
-    l = poblacion_mujeres_r_g_ids(1).split(",") +
-      poblacion_mujeres_r_g_ids(2).split(",") +
-      poblacion_mujeres_r_g_ids(3).split(",") +
-      poblacion_mujeres_r_g_ids(7).split(",")
-    l.join(",")
-  end
-
-  def poblacion_ninos_adolescentes_y_se_ids
-    l = poblacion_hombres_r_g_ids(1).split(",") +
-      poblacion_hombres_r_g_ids(2).split(",") +
-      poblacion_hombres_r_g_ids(3).split(",") +
-      poblacion_hombres_r_g_ids(7).split(",")
-    l.join(",")
-  end
-
-  def poblacion_sinsexo_adultos_ids
-    l = poblacion_sinsexo_g_ids(4).split(",") +
-      poblacion_sinsexo_g_ids(5).split(",") +
-      poblacion_sinsexo_g_ids(6).split(",")
-    l.join(",")
-  end
-
-  def poblacion_sinsexo_menores_ids
-    l = poblacion_sinsexo_g_ids(1).split(",") +
-      poblacion_sinsexo_g_ids(2).split(",") +
-      poblacion_sinsexo_g_ids(3).split(",") +
-      poblacion_sinsexo_g_ids(7).split(",")
-    l.join(",")
-  end
 
   def sector_gifmm
     idig = self.busca_indicador_gifmm
@@ -500,20 +429,23 @@ class Consgifmm < ActiveRecord::Base
 
 
   def presenta(atr)
-    puts "** ::Consgiffm.rb atr=#{atr}"
+    puts "** ::Consgiffm.rb atr=#{atr.to_s.parameterize}"
+    #if /^beneficiarias/.match(atr.to_s)
+    #  byebug
+    #end
 
-    if respond_to?("#{atr.to_s}")
-      return send("#{atr.to_s}")
+    if respond_to?("#{atr.to_s.parameterize}")
+      return send("#{atr.to_s.parameterize}")
     end
 
-    if respond_to?("#{atr.to_s}_ids")
-      ids = send("#{atr.to_s}_ids")
+    if respond_to?("#{atr.to_s.parameterize}_ids")
+      ids = send("#{atr.to_s.parameterize}_ids")
       return ids.split(",").count
     end
 
-    m =/^beneficiarios_(.*)_enlaces$/.match(atr.to_s)
-    if m && respond_to?("beneficiarios_#{m[1]}_ids")
-      bids = send("beneficiarios_#{m[1]}_ids").split(',')
+    m =/^beneficiari(.*)enlaces$/.match(atr.to_s)
+    if m && respond_to?("beneficiari#{m[1].parameterize}ids")
+      bids = send("beneficiari#{m[1].parameterize}ids").split(',')
       return bids.map {|i|
         r="<a href='#{Rails.application.routes.url_helpers.sip_path + 
         'personas/' + i.to_s}' target='_blank'>#{i.to_s}</a>"
@@ -521,22 +453,25 @@ class Consgifmm < ActiveRecord::Base
       }.join(", ".html_safe).html_safe
     end
 
-
-
     case atr.to_sym
-    when :actividad_nombre
-      self.actividad.nombre
+    when :actividad_fecha_mes
+      self.actividad.fecha ? self.actividad.fecha.month : ''
 
     when :actividad_id
       self.actividad_id
 
-    when :actividad_fecha_mes
-      self.actividad.fecha ? self.actividad.fecha.month : ''
+    when :actividad_nombre
+      self.actividad.nombre
+
+    when :actividad_observaciones
+      self.actividad.observaciones
 
     when :actividad_proyectofinanciero
       self.actividad.proyectofinanciero ? 
         self.actividad.proyectofinanciero.map(&:nombre).join('; ') : ''
 
+    when :actividad_responsable
+      self.actividad.responsable.nusuario
 
     when :estado
       'En proceso'

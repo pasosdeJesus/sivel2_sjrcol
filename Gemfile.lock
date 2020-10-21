@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: 104842100d0054188b81ccfd4b1bffeaa3a1bd5a
+  revision: be42c9b8bd68f33f439c657e18b6005151b8a308
   specs:
     cor1440_gen (1.0b3)
       devise
@@ -13,7 +13,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 6db4d566f8c8edcdc8731dc0bfaae6e6768c1910
+  revision: f99d0462705aabaad694a9c797996e42bd55fdb1
   specs:
     heb412_gen (1.0.b6)
       mr519_gen
@@ -23,7 +23,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/mr519_gen.git
-  revision: 0091242996d5fd081b8c082649b368084938e6b5
+  revision: 61f5313d81090ef1564a0feb2917e46cccb548d5
   specs:
     mr519_gen (0.2.0)
       rails (~> 6.0.0.rc1, >= 6.0.0.rc1)
@@ -31,7 +31,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: 63716f4f3a0476e10dca00e7a51e71c130771ad5
+  revision: b0802621c4131b2eb5f058e0d69f5482135606b5
   specs:
     sal7711_gen (1.0.b3)
       rails
@@ -39,7 +39,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: cdb02f866f4097e284bd1cfa42c8dbc0c11fcd25
+  revision: e084cfbb962f1b77755e027124dd219499e8aa05
   specs:
     sal7711_web (1.0.a3)
       rails
@@ -47,7 +47,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 8f2e1460797f590b2f0cd6be38f9be2d699bd564
+  revision: 37e27db2922c848718732ce54b88415c015ddd4b
   specs:
     sip (2.0.b10)
       cancancan
@@ -65,7 +65,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 9c89a80d0cdc0c82ae731106a67d9ae9ba39cb9e
+  revision: 49e629398a81d7ab8ff2f2ca6e205e1dfeb896bd
   specs:
     sivel2_gen (2.0b13)
       devise
@@ -74,7 +74,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: c2d223dbe03e47d7d54f80aca154354bebce25b2
+  revision: d5767eee466320bdc74b950722e5d8d8cfee4234
   specs:
     sivel2_sjr (2.0b10)
       rails
@@ -165,7 +165,7 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (~> 1.5)
       xpath (~> 3.2)
-    chartkick (3.4.1)
+    chartkick (3.4.2)
     childprocess (3.0.0)
     choice (0.2.0)
     chosen-rails (1.9.0)

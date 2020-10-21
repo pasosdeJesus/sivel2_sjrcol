@@ -34,7 +34,8 @@ class ConsgifmmController < Heb412Gen::ModelosController
       :beneficiarios_nuevos_mes_enlaces,
       :beneficiarios_nuevos_vocacion_permanencia_enlaces,
       :beneficiarios_nuevos_en_transito_enlaces,
-      :beneficiarios_nuevos_pendulares_enlaces
+      :beneficiarios_nuevos_pendulares_enlaces,
+      :beneficiarios_nuevos_colombianos_retornado_enlaces
     ]
   end
 

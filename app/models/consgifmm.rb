@@ -225,7 +225,27 @@ class Consgifmm < ActiveRecord::Base
     end
     ids.uniq
   end
+  def beneficiarios_nuevos_colombianos_retornados_ids
+    idn = beneficiarios_nuevos_mes_ids.split(',')
+    finmes = actividad.fecha.end_of_month
+    idcol = Sip::Pais.where(nombre: 'COLOMBIA').take.id
+    idv = idn.select {|ip|
+      p = Sip::Persona.find(ip)
+      (p.nacionalde == idcol || v.persona.id_pais == idcol) &&
+        ip.victima.any? { |v|
+        (v.victimasjr.fechadesagregacion.nil? ||
+         v.victimasjr.fechadesagregacion <= finmes) &&
+        v.caso.migracion.count > 0 &&
+        v.persona &&
+        (v.persona.nacionalde == idcol || v.persona.id_pais == idcol)
+      }
+    }
+    idv.sort.join(',')
+  end
 
+  def beneficiarios_nuevos_colombianos_retornados
+    beneficiarios_nuevos_colombianos_retornados_ids.split(",").count
+  end
 
   # Retorna listado de ids de personas en casos de la actividad o asistencia
   # cuyo perfil de migración tenga nombre nomperfil bien en 
@@ -288,9 +308,6 @@ class Consgifmm < ActiveRecord::Base
     idv.sort.join(',')
   end
 
-  def beneficiarios_nuevos_vocacion_permanencia
-    beneficiarios_nuevos_vocacion_permanencia_ids.split(",").count
-  end
 
   def poblacion_colombianos_retornados_ids
     idcol = Sip::Pais.where(nombre: 'COLOMBIA').take.id
@@ -485,6 +502,15 @@ class Consgifmm < ActiveRecord::Base
   def presenta(atr)
     puts "** ::Consgiffm.rb atr=#{atr}"
 
+    if respond_to?("#{atr.to_s}")
+      return send("#{atr.to_s}")
+    end
+
+    if respond_to?("#{atr.to_s}_ids")
+      ids = send("#{atr.to_s}_ids")
+      return ids.split(",").count
+    end
+
     m =/^beneficiarios_(.*)_enlaces$/.match(atr.to_s)
     if m && respond_to?("beneficiarios_#{m[1]}_ids")
       bids = send("beneficiarios_#{m[1]}_ids").split(',')
@@ -494,6 +520,8 @@ class Consgifmm < ActiveRecord::Base
         r.html_safe
       }.join(", ".html_safe).html_safe
     end
+
+
 
     case atr.to_sym
     when :actividad_nombre
@@ -546,11 +574,7 @@ class Consgifmm < ActiveRecord::Base
       lugar
 
     else
-      if respond_to?(atr)
-        send(atr)
-      else
-        self.actividad.presenta(atr)
-      end
+      self.actividad.presenta(atr)
     end #case
 
   end # presenta

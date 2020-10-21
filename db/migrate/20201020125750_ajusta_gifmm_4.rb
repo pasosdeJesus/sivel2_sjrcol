@@ -1,6 +1,4 @@
 class AjustaGifmm4 < ActiveRecord::Migration[6.0]
-
-class AjustaGifmm3 < ActiveRecord::Migration[6.0]
   def up
     execute <<-SQL
       UPDATE heb412_gen_campoplantillahcm SET
@@ -22,5 +20,4 @@ class AjustaGifmm3 < ActiveRecord::Migration[6.0]
         WHERE id=454;
     SQL
   end
-end
 end

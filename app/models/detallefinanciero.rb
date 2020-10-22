@@ -74,12 +74,8 @@ class Detallefinanciero < ActiveRecord::Base
       .where(
       "titulo LIKE '%' || ? || '%'", valor.split(" - ")[1].strip)
     if convenio.count == 1 && actividadpf.count == 1 
-      if self.proyectofinanciero_id.nil? && self.actividadpf_id.nil?
-        # Solo necesitan establecerse para nuevos detallesfinancieros
-        # los existentes ya vienen con esos campos llenos
-        self.proyectofinanciero_id = convenio[0].id
-        self.actividadpf_id = actividadpf[0].id
-      end
+      self.proyectofinanciero_id = convenio[0].id
+      self.actividadpf_id = actividadpf[0].id
     else
       puts "** No se identificó convenio '#{convenio[0].id}' con " + 
         "actividadpf '#{actividadpf[0].id}'";

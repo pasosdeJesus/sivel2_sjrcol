@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: be42c9b8bd68f33f439c657e18b6005151b8a308
+  revision: 616dac98d64cbb366313560bb6cfcbe10b0a664c
   specs:
     cor1440_gen (1.0b3)
       devise
@@ -13,7 +13,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: f99d0462705aabaad694a9c797996e42bd55fdb1
+  revision: c6ee14c2a5d3c6d94f55cca9b33f2145b24e3297
   specs:
     heb412_gen (1.0.b6)
       mr519_gen
@@ -23,7 +23,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/mr519_gen.git
-  revision: 61f5313d81090ef1564a0feb2917e46cccb548d5
+  revision: da83ac538a69bf4e2520985f7e16a9a17a513877
   specs:
     mr519_gen (0.2.0)
       rails (~> 6.0.0.rc1, >= 6.0.0.rc1)
@@ -31,7 +31,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: b0802621c4131b2eb5f058e0d69f5482135606b5
+  revision: dd145cbe88b7e74146409dc92b78db383ced2140
   specs:
     sal7711_gen (1.0.b3)
       rails
@@ -39,7 +39,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: e084cfbb962f1b77755e027124dd219499e8aa05
+  revision: cd384fbe0be13ab99f1ac19870a4295a2d3bc96d
   specs:
     sal7711_web (1.0.a3)
       rails
@@ -47,7 +47,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 37e27db2922c848718732ce54b88415c015ddd4b
+  revision: 78cb44e701aba2f608219d30d8e7c230d02bb93a
   specs:
     sip (2.0.b10)
       cancancan
@@ -65,7 +65,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 49e629398a81d7ab8ff2f2ca6e205e1dfeb896bd
+  revision: d5b8a5714fe7b776e6c24d7c204363d996422d84
   specs:
     sivel2_gen (2.0b13)
       devise
@@ -74,7 +74,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: d5767eee466320bdc74b950722e5d8d8cfee4234
+  revision: 49d2fdbdaa2cac2ca4d7d785f875eaf7484cffa1
   specs:
     sivel2_sjr (2.0b10)
       rails
@@ -150,7 +150,7 @@ GEM
     andand (1.3.3)
     bcrypt (3.1.16)
     bindex (0.8.1)
-    bootsnap (1.4.8)
+    bootsnap (1.4.9)
       msgpack (~> 1.0)
     bootstrap-datepicker-rails (1.9.0.1)
       railties (>= 3.0)
@@ -257,7 +257,7 @@ GEM
       prawn (>= 1.0.0)
       rails (>= 3.2)
     public_suffix (4.0.6)
-    puma (5.0.2)
+    puma (5.0.3)
       nio4r (~> 2.0)
     rack (2.2.3)
     rack-proxy (0.6.5)

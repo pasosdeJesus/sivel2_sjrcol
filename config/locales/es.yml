@@ -74,11 +74,12 @@ es:
       "cor1440_gen/actividad":
         nombre: 'Nombre (*)'
         fecha_localizada: 'Fecha (*)'
-        lugar: Ubicación
-        poblacionmujeres: 'Población Mujeres'
-        poblacionhombres: 'Población Hombres'
-        proyectofinanciero: 'Convenio financiado'
-        proyectosfinancieros: 'Convenios financiados'
+        lugar: Lugar
+        poblacionmujeres: Población Mujeres
+        poblacionhombres: Población Hombres
+        proyectofinanciero: Convenio financiado
+        proyectosfinancieros: Convenios financiados
+        ubicacionpre: Depto / Municipio
       "cor1440_gen/actividadarea":
         actividadarea: Subárea de Actividad
         Actividadareas: Subáreas de Actividad

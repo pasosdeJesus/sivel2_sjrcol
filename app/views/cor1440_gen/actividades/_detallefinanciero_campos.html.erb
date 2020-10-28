@@ -56,13 +56,15 @@
   <td>
     <%= f.input :cantidad,
       label: false,
-      wrapper_html: {style: "width: 4em"}
+      wrapper_html: {style: "width: 4em"},
+      input_html: {min: 0}
     %>
   </td>
   <td>
     <%= f.input :valorunitario,
       label: false,
-      wrapper_html: {style: "width: 6em"}
+      wrapper_html: {style: "width: 6em"},
+      input_html: {min: 0}
     %>
   </td>
   <td>
@@ -128,7 +130,8 @@
   <td>
     <%= f.input :numeromeses,
       label: false,
-      wrapper_html: {style: "width: 4em"}
+      wrapper_html: {style: "width: 4em"},
+      input_html: {min: 0}
     %>
   </td>
   <td>

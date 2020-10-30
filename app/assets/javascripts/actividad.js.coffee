@@ -222,18 +222,19 @@ $(document).on('change', 'input[id^=actividad_detallefinanciero_attributes_][id$
 
 @recalcular_detallefinanciero_valortotal = (fila) ->
   cantidad = +fila.find('input[id^=actividad_detallefinanciero_attributes][id$=_cantidad]').val()
-  valorunitario = +fila.find('input[id^=actividad_detallefinanciero_attributes][id$=_valorunitario]').val()
+  total = +fila.find('input[id^=actividad_detallefinanciero_attributes][id$=_valortotal]').val()
   numbenef = 0
   if typeof fila.find('select[id^=actividad_detallefinanciero_attributes][id$=_persona_ids]').val() == 'object'
     numbenef = fila.find('select[id^=actividad_detallefinanciero_attributes][id$=_persona_ids]').val().length
-  total = cantidad * valorunitario * numbenef
-  fila.find('input[id^=actividad_detallefinanciero_attributes][id$=_valortotal]').val(total)
+  if (cantidad * numbenef) != 0
+    valorunitario = total / (cantidad * numbenef)
+    fila.find('input[id^=actividad_detallefinanciero_attributes][id$=_valorunitario]').val(valorunitario)
 
 $(document).on('change', 'input[id^=actividad_detallefinanciero_attributes][id$=_cantidad]', (e, res) ->
   recalcular_detallefinanciero_valortotal($(this).parent().parent().parent())
 )
 
-$(document).on('change', 'input[id^=actividad_detallefinanciero_attributes][id$=_valorunitario]', (e, res) ->
+$(document).on('change', 'input[id^=actividad_detallefinanciero_attributes][id$=_valortotal]', (e, res) ->
   recalcular_detallefinanciero_valortotal($(this).parent().parent().parent())
 )
 

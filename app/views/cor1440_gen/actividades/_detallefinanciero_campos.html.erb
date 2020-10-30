@@ -56,13 +56,6 @@
   <td>
     <%= f.input :cantidad,
       label: false,
-      wrapper_html: {style: "width: 4em"},
-      input_html: {min: 0}
-    %>
-  </td>
-  <td>
-    <%= f.input :valorunitario,
-      label: false,
       wrapper_html: {style: "width: 6em"},
       input_html: {min: 0}
     %>
@@ -70,10 +63,25 @@
   <td>
     <%= f.input :valortotal,
       label: false,
-      readonly: true,
-      wrapper_html: {style: "width: 8em"}
+      wrapper_html: {
+        style: "width: 8em"
+      },
+      input_html: {
+        min: 0,
+        'data-toggle': "tooltip",
+        'data-placement': "bottom",
+        'title': "Use el punto únicamente para decimales"
+      }
     %>
-  </td>  
+  </td>
+  <td>
+    <%= f.input :valorunitario,
+      label: false,
+      readonly: true,
+      wrapper_html: {style: "width: 6em"},
+      input_html: {min: 0}
+    %>
+  </td>
   <td>
     <%= f.association :mecanismodeentrega,
       collection: Mecanismodeentrega.habilitados,

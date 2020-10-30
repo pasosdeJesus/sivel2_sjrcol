@@ -227,7 +227,7 @@ $(document).on('change', 'input[id^=actividad_detallefinanciero_attributes_][id$
   if typeof fila.find('select[id^=actividad_detallefinanciero_attributes][id$=_persona_ids]').val() == 'object'
     numbenef = fila.find('select[id^=actividad_detallefinanciero_attributes][id$=_persona_ids]').val().length
   if (cantidad * numbenef) != 0
-    valorunitario = total / (cantidad * numbenef)
+    valorunitario = Math.round(total / (cantidad * numbenef))
     fila.find('input[id^=actividad_detallefinanciero_attributes][id$=_valorunitario]').val(valorunitario)
 
 $(document).on('change', 'input[id^=actividad_detallefinanciero_attributes][id$=_cantidad]', (e, res) ->

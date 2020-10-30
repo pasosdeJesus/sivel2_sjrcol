@@ -64,13 +64,16 @@
     <%= f.input :valortotal,
       label: false,
       wrapper_html: {
-        style: "width: 8em",
+        style: "width: 8em"
+      },
+      input_html: {
+        min: 0,
         'data-toggle': "tooltip",
         'data-placement': "bottom",
         'title': "Use el punto únicamente para decimales"
       }
     %>
-  </td>  
+  </td>
   <td>
     <%= f.input :valorunitario,
       label: false,

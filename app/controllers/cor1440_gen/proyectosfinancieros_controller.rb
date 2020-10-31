@@ -10,7 +10,14 @@ module Cor1440Gen
     load_and_authorize_resource  class: Cor1440Gen::Proyectofinanciero,
       only: [:new, :create, :destroy, :edit, :update, :index, :show,
              :objetivospf]
-
+    def destroy
+      pmindicadorespf = Cor1440Gen::Pmindicadorpf.where(mindicadorpf_id: @registro.mindicadorpf.ids).ids
+      pmindicadorespf.each do |idpm|
+        Cor1440Gen::DatointermediotiPmindicadorpf.where(pmindicadorpf_id: idpm).destroy_all
+      end
+      authorize! :destroy, @registro
+      super("", false)
+    end
     def filtra_contenido_params
       if !params || !params[:proyectofinanciero] 
         return

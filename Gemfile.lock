@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: 23431a956cd53c8720d5586645ccade856097d08
+  revision: eb8173b2dad219f6c2cd956c96c68ce115e861ed
   specs:
     cor1440_gen (1.0b3)
       devise
@@ -74,7 +74,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 0db2d4bd309fef2ab085526d863481f8efa8269d
+  revision: e2964acb1a9679abdb1d450a1e95b61fd0555018
   specs:
     sivel2_sjr (2.0b10)
       rails

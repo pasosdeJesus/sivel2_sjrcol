@@ -15,9 +15,6 @@ class UsuariosController < Sip::ModelosController
     #render layout: '/application'
   end
  
-  def create
-    byebug
-  end
   def atributos_index
     [ :id,
       :nusuario,

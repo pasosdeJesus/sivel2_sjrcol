@@ -1,3 +1,8 @@
+# No envia formulario con enter
+$(window).on('keyup keypress', (e) ->
+  if e.keyCode == 13
+    return false;
+)
 # En listado de asistencia permite autocompletar nombres
 $(document).on('focusin',
   'input[id^=actividad_ubicacionpre_mundep_texto]', (e) -> 

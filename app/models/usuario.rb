@@ -8,7 +8,7 @@ class Usuario < ActiveRecord::Base
     #logger.debug self.to_yaml
     # Si fecha de contrato es posterior a hoy no puede autenticarse
     hoy = Date.today
-    super && fincontrato > hoy
+    super && (!fincontrato || fincontrato < hoy)
   end
 end
 

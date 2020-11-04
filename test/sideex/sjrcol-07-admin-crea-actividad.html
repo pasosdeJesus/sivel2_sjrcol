@@ -34,7 +34,7 @@
 </tbody></table>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">actividad-ubicacion</td></tr>
+<tr><td rowspan="1" colspan="3">actividad-departamento-municipio</td></tr>
 </thead>
 <tbody>
 <tr><td>clickAt</td><td>link=Editar<datalist><option>link=Editar</option><option>//a[contains(text(),'Editar')]</option><option>//a[contains(@href, '/actividades/1092/edita')]</option><option>//a[2]</option></datalist></td><td>38,17</td>
@@ -52,6 +52,22 @@
 <tr><td>clickAt</td><td>id=ui-id-2<datalist><option>id=ui-id-2</option><option>css=#ui-id-2</option><option>//div[@id='ui-id-2']</option><option>//ul[@id='ui-id-1']/li/div</option><option>//body/ul/li/div</option></datalist></td><td>81,15</td>
 </tr>
 <tr><td>clickAt</td><td>name=commit<datalist><option>name=commit</option><option>css=input[name="commit"]</option><option>//input[@name='commit']</option><option>//form[@id='edit_actividad_1090']/div/div[13]/input</option><option>//div[13]/input</option></datalist></td><td>83,14</td>
+</tr>
+<tr><td>assertText</td><td>css=h1<datalist><option>css=h1</option><option>//h1</option></datalist></td><td>Actividad</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">actividad-lugar</td></tr>
+</thead>
+<tbody>
+<tr><td>clickAt</td><td>link=Editar<datalist><option>link=Editar</option><option>//a[contains(text(),'Editar')]</option><option>//a[contains(@href, '/actividades/703/edita')]</option><option>//div/div/a[2]</option></datalist></td><td>31,23</td>
+</tr>
+<tr><td>clickAt</td><td>id=actividad_lugar<datalist><option>id=actividad_lugar</option><option>name=actividad[lugar]</option><option>css=#actividad_lugar</option><option>//input[@id='actividad_lugar']</option><option>//form[@id='edit_actividad_703']/div/div[3]/div[4]/div/input</option><option>//div[4]/div/input</option></datalist></td><td>52,26</td>
+</tr>
+<tr><td>type</td><td>id=actividad_lugar<datalist><option>id=actividad_lugar</option><option>name=actividad[lugar]</option><option>css=#actividad_lugar</option><option>//input[@id='actividad_lugar']</option><option>//form[@id='edit_actividad_703']/div/div[3]/div[4]/div/input</option><option>//div[4]/div/input</option></datalist></td><td>en la plaza</td>
+</tr>
+<tr><td>clickAt</td><td>name=commit<datalist><option>name=commit</option><option>css=input[name="commit"]</option><option>//input[@name='commit']</option><option>//form[@id='edit_actividad_703']/div/div[18]/input</option><option>//div[18]/input</option></datalist></td><td>107,20</td>
 </tr>
 <tr><td>assertText</td><td>css=h1<datalist><option>css=h1</option><option>//h1</option></datalist></td><td>Actividad</td>
 </tr>
@@ -437,9 +453,9 @@
 </tr>
 <tr><td>runScript</td><td>$('.chosen-select').removeAttr('style'); $('.chosen-container').remove(); $('.chosen-select').removeClass('chosen-select')<datalist><option>$('.chosen-select').removeAttr('style'); $('.chosen-container').remove(); $('.chosen-select').removeClass('chosen-select')</option></datalist></td><td></td>
 </tr>
-<tr><td>addSelection</td><td>//td[2]/div/select<datalist><option>id=actividad_actividad_proyectofinanciero_attributes_0_actividadpf_ids</option><option>css=#actividad_actividad_proyectofinanciero_attributes_0_actividadpf_ids</option><option>//select[@id='actividad_actividad_proyectofinanciero_attributes_0_actividadpf_ids']</option><option>//tbody[@id='actividad_proyectofinanciero']/tr/td[2]/div/select</option><option>//td[2]/div/select</option></datalist></td><td>label=O1I02A2: Entrega de ayuda humanitaria para la regularización migratoria</td>
+<tr><td>addSelection</td><td>//tr[2]/td[2]/div/select<datalist><option>id=actividad_actividad_proyectofinanciero_attributes_1_actividadpf_ids</option><option>css=#actividad_actividad_proyectofinanciero_attributes_1_actividadpf_ids</option><option>//select[@id='actividad_actividad_proyectofinanciero_attributes_1_actividadpf_ids']</option><option>//tbody[@id='actividad_proyectofinanciero']/tr[2]/td[2]/div/select</option><option>//tr[2]/td[2]/div/select</option></datalist></td><td>label=O1I02A2: Entrega de ayuda humanitaria para la regularización migratoria</td>
 </tr>
-<tr><td>clickAt</td><td>css=option[value="255"]<datalist><option>css=option[value="255"]</option><option>//option[@value='255']</option><option>//select[@id='actividad_actividad_proyectofinanciero_attributes_0_actividadpf_ids']/option[2]</option><option>//td[2]/div/select/option[2]</option></datalist></td><td>159,15</td>
+<tr><td>clickAt</td><td>css=option[value="255"]<datalist><option>css=option[value="255"]</option><option>//option[@value='255']</option><option>//select[@id='actividad_actividad_proyectofinanciero_attributes_1_actividadpf_ids']/option[2]</option><option>//tr[2]/td[2]/div/select/option[2]</option></datalist></td><td>130,4</td>
 </tr>
 <tr><td>clickAt</td><td>name=commit<datalist><option>name=commit</option><option>css=input[name="commit"]</option><option>//input[@name='commit']</option><option>//div[@id='acordeonlc']/div[8]/input</option><option>//div[8]/input</option></datalist></td><td>105,22</td>
 </tr>

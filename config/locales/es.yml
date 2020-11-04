@@ -51,9 +51,16 @@ es:
       "autoridadrefugio": 
         Autoridadrefugio: Autoridad ante la cual declarar refugio
         Autoridadesrefugio: Autoridades ante las cuales declarar refugio
-      "sivel2_gen/anexo_victima":
-        tipoanexo: Tipo de anexo
-        tipoanexo_id: Tipo de anexo
+      "causaagresion":
+        Causaagresion: Causa de la agresión
+        Causasagresion: Causas de la agresion
+      "causamigracion":
+        Causamigracion: Causa de migración
+        Causasmigracion: Causas de migración
+      "dificultadmigracion":
+        Dificultadmigracion: Accidente o Dificultad en la migración
+        Dificultadesmigracion: Accidentes o Dificultades en la migración
+
       "consgifmm":
         Consactividadcaso: Reporte GIFMM detallado
         actividadmarcologico_nombre: Actividad de marco lógico
@@ -131,36 +138,12 @@ es:
       "perfilmigracion":
         Perfilmigracion: Perfil de migración
         Perfilesmigracion: Perfiles de migración
-      "sectorgifmm":
-        Sectorgifmm: Sector GIFMM
-        Sectoresgifmm: Sectores GIFMM
-      "tipoproteccion":
-        Tipoproteccion: Tipo de protección en refugio
-        Tiposproteccion: Tipos de protección en refugio
-      "tipotransferencia":
-        Tipotransferencia: Tipo de Transferencia
-        Tipostransferencia: Tipos de Transferencia
-      "trivalentepositiva":
-        Trivalentepositiva: Trivalente Positiva
-        Trivalentespositiva: Trivalentes Positiva
-      "unidadayuda":
-        Unidadayuda: Unidad de Ayuda
-        Unidadesayuda: Unidades de Ayuda
-      "causaagresion":
-        Causaagresion: Causa de la agresión
-        Causasagresion: Causas de la agresion
-      "causamigracion":
-        Causamigracion: Causa de migración
-        Causasmigracion: Causas de migración
-      "dificultadmigracion":
-        Dificultadmigracion: Accidente o Dificultad en la migración
-        Dificultadesmigracion: Accidentes o Dificultades en la migración
-      "viadeingreso":
-        Viadeingreso: Vía de ingreso
-        Viasdeingreso: Vías de ingreso
       "sal7711_gen/articulo": 
         texto: Resumen
         fuenteprensa: Fuente de prensa
+      "sectorgifmm":
+        Sectorgifmm: Sector GIFMM
+        Sectoresgifmm: Sectores GIFMM
       "sip/actorsocial":
         tipoactorsocial: Tipo
         tipoactorsocial_id: Tipo
@@ -208,6 +191,9 @@ es:
         Tiposanexo: Tipos de anexo
       "sip/ubicacion":
         Ubicacion: Ubicación
+      "sivel2_gen/anexo_victima":
+        tipoanexo: Tipo de anexo
+        tipoanexo_id: Tipo de anexo
       "sivel2_gen/caso": 
         fecha: F. Desp. Emblemático o Migración
         expulsion: Sitio Expulsión Emb.
@@ -287,4 +273,21 @@ es:
         turno: Turno próxima prorroga
         verifcper: Verificación compromisos persona
         verifcsjr: Verificación compromisos JRS
+      "tipoproteccion":
+        Tipoproteccion: Tipo de protección en refugio
+        Tiposproteccion: Tipos de protección en refugio
+      "tipotransferencia":
+        Tipotransferencia: Tipo de Transferencia
+        Tipostransferencia: Tipos de Transferencia
+      "trivalentepositiva":
+        Trivalentepositiva: Trivalente Positiva
+        Trivalentespositiva: Trivalentes Positiva
+      "unidadayuda":
+        Unidadayuda: Unidad de Ayuda
+        Unidadesayuda: Unidades de Ayuda
+      "usuario":
+        fincontrato: Fecha de terminación de contrato
+      "viadeingreso":
+        Viadeingreso: Vía de ingreso
+        Viasdeingreso: Vías de ingreso
 

@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: 23431a956cd53c8720d5586645ccade856097d08
+  revision: 27b47529afa21110712d416996158a61b4f09d37
   specs:
     cor1440_gen (1.0b3)
       devise
@@ -47,7 +47,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 3050aa4f2c5ac4ca0e3908ce3fa56a8fe5e80a34
+  revision: afa971564f0cf78777a5dffad411f5bd8e559336
   specs:
     sip (2.0.b10)
       cancancan
@@ -65,7 +65,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 32a831c24a4b9f0a9edad7dab741c5fc84663451
+  revision: fa5fe7ed6dfbd41c369a94e35be3669070783f1d
   specs:
     sivel2_gen (2.0b13)
       devise
@@ -74,7 +74,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 0db2d4bd309fef2ab085526d863481f8efa8269d
+  revision: ccd95ccbb6f8bbf945517ac49bc626bf2b36e244
   specs:
     sivel2_sjr (2.0b10)
       rails
@@ -150,7 +150,7 @@ GEM
     andand (1.3.3)
     bcrypt (3.1.16)
     bindex (0.8.1)
-    bootsnap (1.4.9)
+    bootsnap (1.5.0)
       msgpack (~> 1.0)
     bootstrap-datepicker-rails (1.9.0.1)
       railties (>= 3.0)

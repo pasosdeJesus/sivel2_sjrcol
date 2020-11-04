@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: eb8173b2dad219f6c2cd956c96c68ce115e861ed
+  revision: 27b47529afa21110712d416996158a61b4f09d37
   specs:
     cor1440_gen (1.0b3)
       devise
@@ -46,6 +46,24 @@ GIT
       sal7711_gen
 
 GIT
+  remote: https://github.com/pasosdeJesus/sip.git
+  revision: afa971564f0cf78777a5dffad411f5bd8e559336
+  specs:
+    sip (2.0.b10)
+      cancancan
+      chosen-rails
+      devise
+      devise-i18n
+      jquery-ui-rails
+      minitest
+      paperclip
+      rails
+      rails-i18n
+      simple_form
+      twitter_cldr
+      will_paginate
+
+GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
   revision: fa5fe7ed6dfbd41c369a94e35be3669070783f1d
   specs:
@@ -68,23 +86,6 @@ GIT
   branch: new_id_with_ajax
   specs:
     cocoon (1.2.11)
-
-PATH
-  remote: ../sip
-  specs:
-    sip (2.0.b10)
-      cancancan
-      chosen-rails
-      devise
-      devise-i18n
-      jquery-ui-rails
-      minitest
-      paperclip
-      rails
-      rails-i18n
-      simple_form
-      twitter_cldr
-      will_paginate
 
 GEM
   remote: https://rubygems.org/

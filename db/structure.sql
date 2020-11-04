@@ -5072,6 +5072,7 @@ CREATE TABLE public.usuario (
     updated_at timestamp without time zone,
     oficina_id integer,
     tema_id integer,
+    fincontrato date,
     CONSTRAINT usuario_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion))),
     CONSTRAINT usuario_rol_check CHECK ((rol >= 1))
 );
@@ -13851,6 +13852,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20201016122053'),
 ('20201020125750'),
 ('20201021104257'),
-('20201030102713');
+('20201030102713'),
+('20201031182132');
 
 

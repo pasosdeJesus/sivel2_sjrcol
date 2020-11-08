@@ -13,7 +13,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: c1d0f1e756281b296efb3361fd47f07e190a884b
+  revision: fddaac74a12f08fd8351244f59bb9f6c2a4eebb9
   specs:
     heb412_gen (1.0.b6)
       mr519_gen
@@ -23,7 +23,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/mr519_gen.git
-  revision: 9fe4cf9a62a253aee8a8b85e1db90423cc1ecc6c
+  revision: 75074ac82382a4b10c1313443d52d28ebeb30871
   specs:
     mr519_gen (0.2.0)
       rails (~> 6.0.0.rc1, >= 6.0.0.rc1)
@@ -31,7 +31,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: e5ce71589027abf670e67797fd920d0fcd7f1b1b
+  revision: 9c55b1ef875f630b464c6c6c3e87665528f195ef
   specs:
     sal7711_gen (1.0.b3)
       rails
@@ -39,7 +39,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: 9151066a8e916a188805fd1cd528f1f88348e08d
+  revision: 7f970b8bfbc242cbd3925aadd3fd893af32fa17b
   specs:
     sal7711_web (1.0.a3)
       rails
@@ -47,7 +47,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: afa971564f0cf78777a5dffad411f5bd8e559336
+  revision: e9fea25b32b41665f8e4c6c258004ab4cefd132e
   specs:
     sip (2.0.b10)
       cancancan
@@ -65,7 +65,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: fa5fe7ed6dfbd41c369a94e35be3669070783f1d
+  revision: 25eb230a3ae4a5e1743bbadc1e56093930a2410e
   specs:
     sivel2_gen (2.0b13)
       devise
@@ -74,7 +74,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: ccd95ccbb6f8bbf945517ac49bc626bf2b36e244
+  revision: f2e0633829de1ca8a7867ab6f6beb2caf8d8e041
   specs:
     sivel2_sjr (2.0b10)
       rails
@@ -210,7 +210,7 @@ GEM
       railties (>= 3.2.16)
     json (2.3.1)
     kgio (2.11.3)
-    libxml-ruby (3.2.0)
+    libxml-ruby (3.2.1)
     loofah (2.7.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -221,7 +221,7 @@ GEM
     method_source (1.0.0)
     mime-types (3.3.1)
       mime-types-data (~> 3.2015)
-    mime-types-data (3.2020.0512)
+    mime-types-data (3.2020.1104)
     mimemagic (0.3.5)
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
@@ -357,7 +357,7 @@ GEM
       raindrops (~> 0.7)
     warden (1.2.9)
       rack (>= 2.0.9)
-    web-console (4.0.4)
+    web-console (4.1.0)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
       bindex (>= 0.4.0)

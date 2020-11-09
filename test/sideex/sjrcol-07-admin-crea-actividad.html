@@ -11,11 +11,11 @@
 <tr><td rowspan="1" colspan="3">actividad-fecha-nombre</td></tr>
 </thead>
 <tbody>
-<tr><td>clickAt</td><td>id=navbarDropdownActividades<datalist><option>id=navbarDropdownActividades</option><option>link=Actividades</option><option>css=#navbarDropdownActividades</option><option>//a[contains(text(),'Actividades')]</option><option>//a[@id='navbarDropdownActividades']</option><option>//div[@id='navbarSupportedContent']/ul/li[3]/a</option><option>xpath=(//a[contains(@href, '#')])[3]</option><option>//li[3]/a</option></datalist></td><td>54,20</td>
+<tr><td>clickAt</td><td>id=navbarDropdownActividades<datalist><option>id=navbarDropdownActividades</option><option>link=Actividades</option><option>css=#navbarDropdownActividades</option><option>//a[contains(text(),'Actividades')]</option><option>//a[@id='navbarDropdownActividades']</option><option>//div[@id='navbarSupportedContent']/ul/li[3]/a</option><option>xpath=(//a[contains(@href, '#')])[3]</option><option>//li[3]/a</option></datalist></td><td>32,20</td>
 </tr>
-<tr><td>clickAt</td><td>css=div.dropdown-menu.show &gt; a.dropdown-item<datalist><option>css=div.dropdown-menu.show &gt; a.dropdown-item</option><option>xpath=(//a[contains(text(),'Listado')])[2]</option><option>//div[@id='navbarSupportedContent']/ul/li[3]/div/a</option><option>//a[contains(@href, '/actividades')]</option><option>//li[3]/div/a</option></datalist></td><td>72,23</td>
+<tr><td>clickAt</td><td>xpath=(//a[contains(text(),'Listado')])[2]<datalist><option>css=div.dropdown-menu.show &gt; a.dropdown-item</option><option>xpath=(//a[contains(text(),'Listado')])[2]</option><option>//div[@id='navbarSupportedContent']/ul/li[3]/div/a</option><option>//a[contains(@href, '/actividades')]</option><option>//li[3]/div/a</option></datalist></td><td>55,12</td>
 </tr>
-<tr><td>clickAt</td><td>css=a.btn.btn-primary<datalist><option>css=a.btn.btn-primary</option><option>xpath=(//a[contains(text(),'Nueva')])[2]</option><option>xpath=(//a[contains(@href, '/actividades/nueva')])[2]</option><option>//div/div/a</option></datalist></td><td>51,15</td>
+<tr><td>clickAt</td><td>//a[contains(@href, '/actividades/nueva')]<datalist><option>link=Nueva</option><option>css=a.btn.btn-primary</option><option>//a[contains(text(),'Nueva')]</option><option>//a[contains(@href, '/actividades/nueva')]</option><option>//div/div/a</option></datalist></td><td>43,25</td>
 </tr>
 <tr><td>clickAt</td><td>id=actividad_fecha_localizada<datalist><option>id=actividad_fecha_localizada</option><option>name=actividad[fecha_localizada]</option><option>css=#actividad_fecha_localizada</option><option>//input[@id='actividad_fecha_localizada']</option><option>//form[@id='edit_actividad_472']/div/div[2]/div[2]/input</option><option>//div[2]/input</option></datalist></td><td>104,16</td>
 </tr>
@@ -449,11 +449,15 @@
 <tbody>
 <tr><td>clickAt</td><td>link=Editar<datalist><option>link=Editar</option><option>//a[contains(text(),'Editar')]</option><option>//a[contains(@href, '/actividades/395/edita')]</option><option>//div/div/a[2]</option></datalist></td><td>38,14</td>
 </tr>
-<tr><td>runScript</td><td>$('.chosen-select').removeAttr('style'); $('.chosen-container').remove(); $('.chosen-select').removeClass('chosen-select')<datalist><option>$('.chosen-select').removeAttr('style'); $('.chosen-container').remove(); $('.chosen-select').removeClass('chosen-select')</option></datalist></td><td></td>
+<tr><td>assertText</td><td>css=div.col-sm-1 &gt; label<datalist><option>css=div.col-sm-1 &gt; label</option><option>//form[@id='edit_actividad_732']/div/div[3]/div/label</option><option>//div[3]/div/label</option></datalist></td><td>Depto / Municipio</td>
 </tr>
 <tr><td>runScript</td><td>$('.chosen-select').removeAttr('style'); $('.chosen-container').remove(); $('.chosen-select').removeClass('chosen-select')<datalist><option>$('.chosen-select').removeAttr('style'); $('.chosen-container').remove(); $('.chosen-select').removeClass('chosen-select')</option></datalist></td><td></td>
 </tr>
-<tr><td>addSelection</td><td>//tr[2]/td[2]/div/select<datalist><option>id=actividad_actividad_proyectofinanciero_attributes_1_actividadpf_ids</option><option>css=#actividad_actividad_proyectofinanciero_attributes_1_actividadpf_ids</option><option>//select[@id='actividad_actividad_proyectofinanciero_attributes_1_actividadpf_ids']</option><option>//tbody[@id='actividad_proyectofinanciero']/tr[2]/td[2]/div/select</option><option>//tr[2]/td[2]/div/select</option></datalist></td><td>label=O1I02A2: Entrega de ayuda humanitaria para la regularización migratoria</td>
+<tr><td>pause</td><td>500<datalist><option>500</option></datalist></td><td></td>
+</tr>
+<tr><td>runScript</td><td>$('.chosen-select').removeAttr('style'); $('.chosen-container').remove(); $('.chosen-select').removeClass('chosen-select')<datalist><option>$('.chosen-select').removeAttr('style'); $('.chosen-container').remove(); $('.chosen-select').removeClass('chosen-select')</option></datalist></td><td></td>
+</tr>
+<tr><td>addSelection</td><td>//select[option[contains(text(), 'O1I02A2')]]<datalist><option>id=actividad_actividad_proyectofinanciero_attributes_1_actividadpf_ids</option><option>css=#actividad_actividad_proyectofinanciero_attributes_1_actividadpf_ids</option><option>//select[@id='actividad_actividad_proyectofinanciero_attributes_1_actividadpf_ids']</option><option>//tbody[@id='actividad_proyectofinanciero']/tr[2]/td[2]/div/select</option><option>//tr[2]/td[2]/div/select</option><option>//select[option[contains(text(), 'O1I02A2')]]</option></datalist></td><td>label=O1I02A2: Entrega de ayuda humanitaria para la regularización migratoria</td>
 </tr>
 <tr><td>clickAt</td><td>css=option[value="255"]<datalist><option>css=option[value="255"]</option><option>//option[@value='255']</option><option>//select[@id='actividad_actividad_proyectofinanciero_attributes_1_actividadpf_ids']/option[2]</option><option>//tr[2]/td[2]/div/select/option[2]</option></datalist></td><td>130,4</td>
 </tr>

@@ -1,5 +1,5 @@
+<input id='actividad_id' type='hidden' value='<%= f.object.id %>' %>
 <% if current_usuario.rol == Ability::ROLADMIN %>
-  <input id='actividad_id' type='hidden' value='<%= f.object.id %>' %>
   <% tipos = @registro.actividadpf.pluck(:actividadtipo_id) %>
   <% if tipos.include? (129) %>
     <% estdetalle = "display: block; overflow-x: scroll; min-height: 320px;" %>

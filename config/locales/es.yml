@@ -127,9 +127,11 @@ es:
         Actoressociales: Organizaciones Sociales
         Consactividadcaso: Actividades con Caso
         Consgifmm: GIFMM
+        Personas: Beneficiarios
         Proyectos: Convenios Financiados
       "heb412_gen/plantillahcr":
         Actorsocial: Organización Social
+        Persona: Beneficiario
         Proyecto: Convenio Financiado
       "mecanismodeentrega":
         Mecanismodeentrega: Mecanismo de Entrega

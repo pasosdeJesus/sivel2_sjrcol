@@ -13,7 +13,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: fddaac74a12f08fd8351244f59bb9f6c2a4eebb9
+  revision: 96f329edb2a061d2ef466c8b7c7a09e479e76602
   specs:
     heb412_gen (1.0.b6)
       mr519_gen
@@ -74,7 +74,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: f2e0633829de1ca8a7867ab6f6beb2caf8d8e041
+  revision: 5fe1c2a553a94ce8d377d6a1a4985733f296de1e
   specs:
     sivel2_sjr (2.0b10)
       rails
@@ -150,7 +150,7 @@ GEM
     andand (1.3.3)
     bcrypt (3.1.16)
     bindex (0.8.1)
-    bootsnap (1.5.0)
+    bootsnap (1.5.1)
       msgpack (~> 1.0)
     bootstrap-datepicker-rails (1.9.0.1)
       railties (>= 3.0)

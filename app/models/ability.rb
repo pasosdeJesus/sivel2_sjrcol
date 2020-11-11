@@ -313,6 +313,7 @@ class Ability < Sivel2Sjr::Ability
       ruta: '/actividades'
     },
     'Consgifmm' => {
+      solo_multiple: true,
       campos: [
           'actividad_id',
           'actividad_observaciones',

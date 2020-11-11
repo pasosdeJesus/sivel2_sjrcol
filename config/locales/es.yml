@@ -123,6 +123,14 @@ es:
       "frecuenciaentrega":
         Frecuenciaentrega: Frecuancia de Entrega
         Frecuenciasentrega: Frecuencias de Entrega
+      "heb412_gen/plantillahcm":
+        Actoressociales: Organizaciones Sociales
+        Consactividadcaso: Actividades con Caso
+        Consgifmm: GIFMM
+        Proyectos: Convenios Financiados
+      "heb412_gen/plantillahcr":
+        Actorsocial: Organización Social
+        Proyecto: Convenio Financiado
       "mecanismodeentrega":
         Mecanismodeentrega: Mecanismo de Entrega
         Mecanismosdeentrega: Mecanismos de Entrega

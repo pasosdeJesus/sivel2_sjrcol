@@ -20,8 +20,9 @@ module Sip
     end 
 
     def atributos_form
-      atributos_form_sivel2_sjr - [
+      a = atributos_form_sivel2_sjr - [
         :detallefinanciero_ids]
+      return a
     end
 
     def lista_params

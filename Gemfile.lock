@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: 1dde654f3bfe0cf945f9e54475120bc7b5c94036
+  revision: ab1567b10a5509427ac56e1dc6bea5a4f177110a
   specs:
     cor1440_gen (1.0b3)
       devise
@@ -13,7 +13,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: a0a4be161fc5096add632f6bfa975ec3d20e8cc3
+  revision: 199a287c2a0db3647a0939cb53425b26631bedb2
   specs:
     heb412_gen (1.0.b6)
       mr519_gen
@@ -23,7 +23,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/mr519_gen.git
-  revision: 2c6df84e87715940e0873c3dbc2a04befd0a6089
+  revision: d3bb8223589e21ed87f875295bfb82da5f3c8872
   specs:
     mr519_gen (0.2.0)
       rails (~> 6.0.0.rc1, >= 6.0.0.rc1)
@@ -31,7 +31,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: be2d07789cd61628bdc2158fe089c086e8bb0dee
+  revision: 8bf49eb71e85e10c668459bb3a0fc8de6610d58a
   specs:
     sal7711_gen (1.0.b3)
       rails
@@ -39,7 +39,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: 7501e7c6b4e66a5343f46066adf10ca87c918753
+  revision: 4c49379e2f90f3d0e0d460641b98b9fa78087544
   specs:
     sal7711_web (1.0.a3)
       rails
@@ -47,7 +47,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 6c59ad428ea9d241c0fd6d5e8314ecc85fdd267e
+  revision: 1a43a4a8b15e88608caebe1d3d5a1b92d4ed43c1
   specs:
     sip (2.0.b10)
       cancancan
@@ -65,7 +65,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: f038554749dce996f58ea154d44fd59846620340
+  revision: ff872d2c417ad429acd2d2853cb59f26f7d7e573
   specs:
     sivel2_gen (2.0b13)
       devise
@@ -74,7 +74,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 5117df7535f2b98568efa61052a9563446ce702f
+  revision: 85b6372486a850f623020bcbcd284fbad7c72051
   specs:
     sivel2_sjr (2.0b10)
       rails
@@ -193,7 +193,7 @@ GEM
     devise-i18n (1.9.2)
       devise (>= 4.7.1)
     docile (1.3.2)
-    erubi (1.9.0)
+    erubi (1.10.0)
     execjs (2.7.0)
     ffi (1.13.1)
     globalid (0.4.2)

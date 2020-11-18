@@ -61,7 +61,7 @@
               cor1440_gen.mindicadorespf_path, desplegable: true %>
           <% end %>
           <% if can? :read, Sip::Actorsocial then %>
-            <%= opcion_menu "Actores sociales", sip.actoressociales_path, desplegable: true %>
+            <%= opcion_menu "Organizaciones sociales", sip.actoressociales_path, desplegable: true %>
           <% end %>
           <% if can? :read, Sip::Persona then %>
             <%= opcion_menu "Beneficiarios", sip.personas_path, desplegable: true %>

@@ -159,7 +159,8 @@ es:
         tipoactorsocial_id: Tipo
         sectoractor: Población relacionada
         sectoresactores: Poblaciones relacionadas
-        sectoractor_ids: Población relacionada
+        sectoractor_ids: Población(es) relacionada(s)
+        "{:sectoractor_ids=>[]}": Población(es) relacionada(s)
         lineaactorsocial: Línea de trabajo
         lineaactorsocial_id: Línea de trabajo
       "sip/datosbio":

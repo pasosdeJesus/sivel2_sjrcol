@@ -5066,20 +5066,7 @@ CREATE VIEW public.sivel2_sjr_ultimaatencion AS
   WHERE ((respuesta.id_caso, respuesta.fechaatencion) IN ( SELECT sivel2_sjr_respuesta.id_caso,
             max(sivel2_sjr_respuesta.fechaatencion) AS max
            FROM public.sivel2_sjr_respuesta
-          GROUP BY sivel2_sjr_respuesta.id_caso))
-UNION
- SELECT casosjr.id_caso,
-    a.id,
-    a.fecha AS fechaatencion,
-    ''::character varying AS descatencion,
-    ''::character varying AS detallemotivo,
-    ''::character varying AS detalleal,
-    ''::character varying AS detallear,
-    public.sip_edad_de_fechanac_fecharef(contacto.anionac, contacto.mesnac, contacto.dianac, (date_part('year'::text, a.fecha))::integer, (date_part('month'::text, a.fecha))::integer, (date_part('day'::text, a.fecha))::integer) AS contacto_edad
-   FROM (((public.sivel2_sjr_actividad_casosjr ac
-     JOIN public.cor1440_gen_actividad a ON ((ac.actividad_id = a.id)))
-     JOIN public.sivel2_sjr_casosjr casosjr ON ((ac.casosjr_id = casosjr.id_caso)))
-     JOIN public.sip_persona contacto ON ((contacto.id = casosjr.contacto_id)));
+          GROUP BY sivel2_sjr_respuesta.id_caso));
 
 
 --
@@ -5572,7 +5559,12 @@ CREATE MATERIALIZED VIEW public.sivel2_gen_consexpcaso AS
      JOIN public.sivel2_gen_victima vcontacto ON (((vcontacto.id_persona = contacto.id) AND (vcontacto.id_caso = caso.id))))
      LEFT JOIN public.sivel2_gen_etnia etnia ON ((vcontacto.id_etnia = etnia.id)))
      LEFT JOIN public.sivel2_sjr_ultimaatencion ultimaatencion ON ((ultimaatencion.id_caso = caso.id)))
-  WHERE (true = false)
+  WHERE (conscaso.caso_id IN ( SELECT sivel2_gen_conscaso.caso_id
+           FROM (public.sivel2_gen_conscaso
+             JOIN public.sivel2_sjr_casosjr ON ((sivel2_sjr_casosjr.id_caso = sivel2_gen_conscaso.caso_id)))
+          WHERE (sivel2_sjr_casosjr.oficina_id = 4)
+          ORDER BY sivel2_gen_conscaso.fecharec DESC, sivel2_gen_conscaso.caso_id))
+  ORDER BY conscaso.fecha, conscaso.caso_id
   WITH NO DATA;
 
 
@@ -11158,6 +11150,14 @@ ALTER TABLE ONLY public.cor1440_gen_actorsocial_efecto
 
 
 --
+-- Name: cor1440_gen_actividad_rangoedadac fk_rails_1366d14fb8; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.cor1440_gen_actividad_rangoedadac
+    ADD CONSTRAINT fk_rails_1366d14fb8 FOREIGN KEY (rangoedadac_id) REFERENCES public.cor1440_gen_rangoedadac(id);
+
+
+--
 -- Name: sivel2_sjr_difmigracion_migracion fk_rails_1554d38441; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -11363,6 +11363,14 @@ ALTER TABLE ONLY public.sip_datosbio
 
 ALTER TABLE ONLY public.sip_ubicacionpre
     ADD CONSTRAINT fk_rails_2e86701dfb FOREIGN KEY (departamento_id) REFERENCES public.sip_departamento(id);
+
+
+--
+-- Name: cor1440_gen_actividad_rangoedadac fk_rails_2f8fe7fdca; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.cor1440_gen_actividad_rangoedadac
+    ADD CONSTRAINT fk_rails_2f8fe7fdca FOREIGN KEY (actividad_id) REFERENCES public.cor1440_gen_actividad(id);
 
 
 --
@@ -13895,6 +13903,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20201030102713'),
 ('20201031182132'),
 ('20201119110342'),
-('20201119125643');
+('20201119125643'),
+('20201121162913');
 
 

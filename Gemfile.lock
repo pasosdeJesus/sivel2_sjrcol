@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: 28de4d1e7f1abc848c8ba83d1151c72908692670
+  revision: c7f0b9d431bcd4e251b9a8b5a626c5cc44238b38
   branch: sincoord
   specs:
     cor1440_gen (1.0b3)
@@ -48,7 +48,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 6766e1d80065f9c3a15bbf43239b7545f1aae157
+  revision: ee97fbc5f1610217414b8e1969556a98964f4825
   specs:
     sip (2.0.b10)
       cancancan
@@ -66,7 +66,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 2e6a3766fc3ea97a0cc45af6755022e6b7157741
+  revision: 4de09e8e90345d0c2c76728d6cce89129aab8bed
   specs:
     sivel2_gen (2.0b13)
       devise
@@ -173,7 +173,7 @@ GEM
       coffee-rails (>= 3.2)
       railties (>= 3.0)
       sassc-rails (>= 2.1.2)
-    cldr-plurals-runtime-rb (1.0.1)
+    cldr-plurals-runtime-rb (1.1.0)
     climate_control (0.2.0)
     coffee-rails (5.0.0)
       coffee-script (>= 2.2.0)

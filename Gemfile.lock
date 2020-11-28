@@ -1,7 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: 63e347ac17dc93a1213c334f26e3f52cdfeb38e4
-  branch: sincoord
+  revision: 63ffb64affb2bee9c5f5be5395a1cdebfba9bd97
   specs:
     cor1440_gen (1.0b3)
       devise
@@ -47,8 +46,23 @@ GIT
       sal7711_gen
 
 GIT
-  remote: https://github.com/pasosdeJesus/sip.git
-  revision: 1f339551a513c049900634a1bd382a494e7d889a
+  remote: https://github.com/pasosdeJesus/sivel2_gen.git
+  revision: ad215a5638c10c0f2a5d5746d8a88bf28fc71d8e
+  specs:
+    sivel2_gen (2.0b13)
+      devise
+      jquery-rails
+      rails
+
+GIT
+  remote: https://github.com/vtamara/cocoon.git
+  revision: 9f1892403c3dbdb8f7d457a06f237ff58e7dfb07
+  branch: new_id_with_ajax
+  specs:
+    cocoon (1.2.11)
+
+PATH
+  remote: ../sip
   specs:
     sip (2.0.b10)
       cancancan
@@ -64,29 +78,12 @@ GIT
       twitter_cldr
       will_paginate
 
-GIT
-  remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: ad215a5638c10c0f2a5d5746d8a88bf28fc71d8e
-  specs:
-    sivel2_gen (2.0b13)
-      devise
-      jquery-rails
-      rails
-
-GIT
-  remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 611e3bfae402bd490b53ba7799f190ae6e46d078
+PATH
+  remote: ../sivel2_sjr
   specs:
     sivel2_sjr (2.0b10)
       rails
       sivel2_gen
-
-GIT
-  remote: https://github.com/vtamara/cocoon.git
-  revision: 9f1892403c3dbdb8f7d457a06f237ff58e7dfb07
-  branch: new_id_with_ajax
-  specs:
-    cocoon (1.2.11)
 
 GEM
   remote: https://rubygems.org/
@@ -374,7 +371,7 @@ GEM
     will_paginate (3.3.0)
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    zeitwerk (2.4.1)
+    zeitwerk (2.4.2)
 
 PLATFORMS
   ruby

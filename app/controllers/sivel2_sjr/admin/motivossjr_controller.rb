@@ -15,6 +15,13 @@ module Sivel2Sjr
           ["observaciones", "fechacreacion", "fechadeshabilitacion"] 
       end
 
+      def new
+        new_gen
+        @registro.nombre = 'N '+Time.now.to_i.to_s
+        @registro.save!(validate: false)
+        redirect_to sivel2_sjr.edit_admin_motivosjr_path(@registro)
+      end
+
       # Use callbacks to share common setup or constraints between actions.
       def set_motivosjr
         @basica = Sivel2Sjr::Motivosjr.find(params[:id])

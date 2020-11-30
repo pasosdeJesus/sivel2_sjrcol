@@ -71,8 +71,8 @@ gem 'will_paginate' # Listados en páginas
 # lógico y no alfabetico como las gemas anteriores) 
 
 gem 'sip', # Motor generico
-  #git: 'https://github.com/pasosdeJesus/sip.git'
-  path: '../sip'
+  git: 'https://github.com/pasosdeJesus/sip.git'
+  #path: '../sip'
 
 gem 'mr519_gen', # Motor de gestion de formularios y encuestas
   git: 'https://github.com/pasosdeJesus/mr519_gen.git'
@@ -104,8 +104,8 @@ gem 'sivel2_gen',
 
 # Motor de SIVeL 2 - SJR
 gem 'sivel2_sjr', 
-  #git: 'https://github.com/pasosdeJesus/sivel2_sjr.git'
-  path: '../sivel2_sjr'
+  git: 'https://github.com/pasosdeJesus/sivel2_sjr.git'
+  #path: '../sivel2_sjr'
 
 group :development, :test do
 

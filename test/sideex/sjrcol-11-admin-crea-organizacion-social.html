@@ -3,17 +3,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 	<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
-	<title>sjrcol-12-admin-crea-actor-social</title>
+	<title>sjrcol-11-admin-crea-organizacion-social</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">actor-social-nombre-tipo</td></tr>
+<tr><td rowspan="1" colspan="3">organizacion-social-nombre-tipo</td></tr>
 </thead>
 <tbody>
 <tr><td>clickAt</td><td>link=Actividades<datalist><option>link=Actividades</option><option>//a[contains(text(),'Actividades')]</option><option>xpath=(//a[contains(@href, '#')])[3]</option><option>//li[3]/a</option></datalist></td><td>39,15</td>
 </tr>
-<tr><td>clickAt</td><td>link=Actores sociales<datalist><option>link=Actores sociales</option><option>//a[contains(text(),'Actores sociales')]</option><option>//a[contains(@href, '/actoressociales')]</option><option>//li[3]/ul/li[5]/a</option></datalist></td><td>97,15</td>
+<tr><td>clickAt</td><td>link=Organizaciones sociales<datalist><option>link=Organizaciones sociales</option><option>//a[contains(text(),'Organizaciones sociales')]</option><option>//div[@id='navbarSupportedContent']/ul/li[3]/div/a[8]</option><option>//a[contains(@href, '/actoressociales')]</option><option>//a[8]</option></datalist></td><td>105,19</td>
 </tr>
 <tr><td>clickAt</td><td>css=a.btn.btn-primary<datalist><option>css=a.btn.btn-primary</option><option>xpath=(//a[contains(text(),'Nuevo')])[2]</option><option>//a[contains(@href, '/actoressociales/nuevo')]</option><option>//div[2]/a</option></datalist></td><td>28,21</td>
 </tr>
@@ -34,7 +34,7 @@
 </tbody></table>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">actor-social-anotaciones</td></tr>
+<tr><td rowspan="1" colspan="3">organizacion-social-anotaciones</td></tr>
 </thead>
 <tbody>
 <tr><td>clickAt</td><td>link=Editar<datalist><option>link=Editar</option><option>//a[contains(text(),'Editar')]</option><option>//a[contains(@href, '/actoressociales/6/edita')]</option><option>//a[2]</option></datalist></td><td>42,19</td>
@@ -52,7 +52,43 @@
 </tbody></table>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">actor-social-email</td></tr>
+<tr><td rowspan="1" colspan="3">organizacion-social-poblaciones-relacionadas</td></tr>
+</thead>
+<tbody>
+<tr><td>clickAt</td><td>link=Editar<datalist><option>link=Editar</option><option>//a[contains(text(),'Editar')]</option><option>//a[contains(@href, '/actoressociales/38/edita')]</option><option>//div/div/a[2]</option></datalist></td><td>41,16</td>
+</tr>
+<tr><td>runScript</td><td>$('.chosen-select').removeAttr('style'); $('.chosen-container').remove(); $('.chosen-select').removeClass('chosen-select')<datalist><option>$('.chosen-select').removeAttr('style'); $('.chosen-container').remove(); $('.chosen-select').removeClass('chosen-select')</option></datalist></td><td></td>
+</tr>
+<tr><td>addSelection</td><td>id=actorsocial_sectoractor_ids<datalist><option>id=actorsocial_sectoractor_ids</option><option>css=#actorsocial_sectoractor_ids</option><option>//select[@id='actorsocial_sectoractor_ids']</option><option>//form[@id='edit_actorsocial_43']/div[5]/select</option><option>//div[5]/select</option></datalist></td><td>label=ESTUDIANTES</td>
+</tr>
+<tr><td>clickAt</td><td>css=option[value="102"]<datalist><option>css=option[value="102"]</option><option>//option[@value='102']</option><option>//select[@id='actorsocial_sectoractor_ids']/option</option><option>//div[5]/select/option</option></datalist></td><td>69,6</td>
+</tr>
+<tr><td>clickAt</td><td>name=commit<datalist><option>name=commit</option><option>css=input[name="commit"]</option><option>//input[@name='commit']</option><option>//form[@id='edit_actorsocial_43']/div[17]/input</option><option>//div[17]/input</option></datalist></td><td>55,25</td>
+</tr>
+<tr><td>clickAt</td><td>css=h1<datalist><option>css=h1</option><option>//h1</option></datalist></td><td>Organización social</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">organizacion-social-linea-de-trabajo</td></tr>
+</thead>
+<tbody>
+<tr><td>clickAt</td><td>link=Editar<datalist><option>link=Editar</option><option>//a[contains(text(),'Editar')]</option><option>//a[contains(@href, '/actoressociales/6/edita')]</option><option>//a[2]</option></datalist></td><td>41,20</td>
+</tr>
+<tr><td>runScript</td><td>$('.chosen-select').removeAttr('style'); $('.chosen-container').remove(); $('.chosen-select').removeClass('chosen-select')<datalist><option>$('.chosen-select').removeAttr('style'); $('.chosen-container').remove(); $('.chosen-select').removeClass('chosen-select')</option></datalist></td><td></td>
+</tr>
+<tr><td>select</td><td>id=actorsocial_lineaactorsocial_id<datalist><option>id=actorsocial_lineaactorsocial_id</option><option>name=actorsocial[lineaactorsocial_id]</option><option>css=#actorsocial_lineaactorsocial_id</option><option>//select[@id='actorsocial_lineaactorsocial_id']</option><option>//form[@id='edit_actorsocial_38']/div[6]/select</option><option>//div[6]/select</option></datalist></td><td>label=CAPACITACIÓN</td>
+</tr>
+<tr><td>clickAt</td><td>id=actorsocial_lineaactorsocial_id<datalist><option>id=actorsocial_lineaactorsocial_id</option><option>name=actorsocial[lineaactorsocial_id]</option><option>css=#actorsocial_lineaactorsocial_id</option><option>//select[@id='actorsocial_lineaactorsocial_id']</option><option>//form[@id='edit_actorsocial_38']/div[6]/select</option><option>//div[6]/select</option></datalist></td><td>-90,-323</td>
+</tr>
+<tr><td>clickAt</td><td>name=commit<datalist><option>name=commit</option><option>css=input[name="commit"]</option><option>//input[@name='commit']</option><option>//form[@id='edit_actorsocial_38']/div[17]/input</option><option>//div[17]/input</option></datalist></td><td>53,31</td>
+</tr>
+<tr><td>clickAt</td><td>css=h1<datalist><option>css=h1</option><option>//h1</option></datalist></td><td>Organización social</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">organizacion-social-email</td></tr>
 </thead>
 <tbody>
 <tr><td>clickAt</td><td>link=Editar<datalist><option>link=Editar</option><option>//a[contains(text(),'Editar')]</option><option>//a[contains(@href, '/actoressociales/6/edita')]</option><option>//a[2]</option></datalist></td><td>45,25</td>
@@ -72,7 +108,7 @@
 </tbody></table>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">actor-social-web</td></tr>
+<tr><td rowspan="1" colspan="3">organizacion-social-web</td></tr>
 </thead>
 <tbody>
 <tr><td>clickAt</td><td>link=Editar<datalist><option>link=Editar</option><option>//a[contains(text(),'Editar')]</option><option>//a[contains(@href, '/actoressociales/6/edita')]</option><option>//a[2]</option></datalist></td><td>41,17</td>
@@ -88,7 +124,7 @@
 </tbody></table>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">actor-social-telefono</td></tr>
+<tr><td rowspan="1" colspan="3">organizacion-social-telefono</td></tr>
 </thead>
 <tbody>
 <tr><td>clickAt</td><td>link=Editar<datalist><option>link=Editar</option><option>//a[contains(text(),'Editar')]</option><option>//a[contains(@href, '/actoressociales/6/edita')]</option><option>//a[2]</option></datalist></td><td>30,9</td>
@@ -104,7 +140,7 @@
 </tbody></table>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">actor-social-fax</td></tr>
+<tr><td rowspan="1" colspan="3">organizacion-social-fax</td></tr>
 </thead>
 <tbody>
 <tr><td>clickAt</td><td>link=Editar<datalist><option>link=Editar</option><option>//a[contains(text(),'Editar')]</option><option>//a[contains(@href, '/actoressociales/6/edita')]</option><option>//a[2]</option></datalist></td><td>16,22</td>
@@ -120,7 +156,7 @@
 </tbody></table>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">actor-social-pais</td></tr>
+<tr><td rowspan="1" colspan="3">organizacion-social-pais</td></tr>
 </thead>
 <tbody>
 <tr><td>clickAt</td><td>link=Editar<datalist><option>link=Editar</option><option>//a[contains(text(),'Editar')]</option><option>//a[contains(@href, '/actoressociales/6/edita')]</option><option>//a[2]</option></datalist></td><td>32,15</td>
@@ -136,7 +172,7 @@
 </tbody></table>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">actor-social-departamento</td></tr>
+<tr><td rowspan="1" colspan="3">organizacion-social-departamento</td></tr>
 </thead>
 <tbody>
 <tr><td>clickAt</td><td>link=Editar<datalist><option>link=Editar</option><option>//a[contains(text(),'Editar')]</option><option>//a[contains(@href, '/actoressociales/6/edita')]</option><option>//a[2]</option></datalist></td><td>36,17</td>
@@ -158,7 +194,7 @@
 </tbody></table>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">actor-social-municipio</td></tr>
+<tr><td rowspan="1" colspan="3">organizacion-social-municipio</td></tr>
 </thead>
 <tbody>
 <tr><td>clickAt</td><td>link=Editar<datalist><option>link=Editar</option><option>//a[contains(text(),'Editar')]</option><option>//a[contains(@href, '/actoressociales/6/edita')]</option><option>//a[2]</option></datalist></td><td>25,16</td>
@@ -180,7 +216,7 @@
 </tbody></table>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">actor-social-direccion</td></tr>
+<tr><td rowspan="1" colspan="3">organizacion-social-direccion</td></tr>
 </thead>
 <tbody>
 <tr><td>clickAt</td><td>link=Editar<datalist><option>link=Editar</option><option>//a[contains(text(),'Editar')]</option><option>//a[contains(@href, '/actoressociales/6/edita')]</option><option>//a[2]</option></datalist></td><td>22,20</td>
@@ -196,43 +232,7 @@
 </tbody></table>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">actor-social-linea-de-trabajo</td></tr>
-</thead>
-<tbody>
-<tr><td>clickAt</td><td>link=Editar<datalist><option>link=Editar</option><option>//a[contains(text(),'Editar')]</option><option>//a[contains(@href, '/actoressociales/6/edita')]</option><option>//a[2]</option></datalist></td><td>41,20</td>
-</tr>
-<tr><td>runScript</td><td>$('.chosen-select').removeAttr('style'); $('.chosen-container').remove(); $('.chosen-select').removeClass('chosen-select')<datalist><option>$('.chosen-select').removeAttr('style'); $('.chosen-container').remove(); $('.chosen-select').removeClass('chosen-select')</option></datalist></td><td></td>
-</tr>
-<tr><td>select</td><td>id=actorsocial_lineaactorsocial_id<datalist><option>id=actorsocial_lineaactorsocial_id</option><option>name=actorsocial[lineaactorsocial_id]</option><option>css=#actorsocial_lineaactorsocial_id</option><option>//select[@id='actorsocial_lineaactorsocial_id']</option><option>//form[@id='edit_actorsocial_38']/div[6]/select</option><option>//div[6]/select</option></datalist></td><td>label=CAPACITACIÓN</td>
-</tr>
-<tr><td>clickAt</td><td>id=actorsocial_lineaactorsocial_id<datalist><option>id=actorsocial_lineaactorsocial_id</option><option>name=actorsocial[lineaactorsocial_id]</option><option>css=#actorsocial_lineaactorsocial_id</option><option>//select[@id='actorsocial_lineaactorsocial_id']</option><option>//form[@id='edit_actorsocial_38']/div[6]/select</option><option>//div[6]/select</option></datalist></td><td>-90,-323</td>
-</tr>
-<tr><td>clickAt</td><td>name=commit<datalist><option>name=commit</option><option>css=input[name="commit"]</option><option>//input[@name='commit']</option><option>//form[@id='edit_actorsocial_38']/div[17]/input</option><option>//div[17]/input</option></datalist></td><td>53,31</td>
-</tr>
-<tr><td>clickAt</td><td>css=h1<datalist><option>css=h1</option><option>//h1</option></datalist></td><td>Organización social</td>
-</tr>
-</tbody></table>
-<table cellpadding="1" cellspacing="1" border="1">
-<thead>
-<tr><td rowspan="1" colspan="3">actor-social-poblacion-relacionada</td></tr>
-</thead>
-<tbody>
-<tr><td>clickAt</td><td>link=Editar<datalist><option>link=Editar</option><option>//a[contains(text(),'Editar')]</option><option>//a[contains(@href, '/actoressociales/38/edita')]</option><option>//div/div/a[2]</option></datalist></td><td>41,16</td>
-</tr>
-<tr><td>runScript</td><td>$('.chosen-select').removeAttr('style'); $('.chosen-container').remove(); $('.chosen-select').removeClass('chosen-select')<datalist><option>$('.chosen-select').removeAttr('style'); $('.chosen-container').remove(); $('.chosen-select').removeClass('chosen-select')</option></datalist></td><td></td>
-</tr>
-<tr><td>addSelection</td><td>id=actorsocial_sectoractor_ids<datalist><option>id=actorsocial_sectoractor_ids</option><option>css=#actorsocial_sectoractor_ids</option><option>//select[@id='actorsocial_sectoractor_ids']</option><option>//form[@id='edit_actorsocial_43']/div[5]/select</option><option>//div[5]/select</option></datalist></td><td>label=ESTUDIANTES</td>
-</tr>
-<tr><td>clickAt</td><td>css=option[value="102"]<datalist><option>css=option[value="102"]</option><option>//option[@value='102']</option><option>//select[@id='actorsocial_sectoractor_ids']/option</option><option>//div[5]/select/option</option></datalist></td><td>69,6</td>
-</tr>
-<tr><td>clickAt</td><td>name=commit<datalist><option>name=commit</option><option>css=input[name="commit"]</option><option>//input[@name='commit']</option><option>//form[@id='edit_actorsocial_43']/div[17]/input</option><option>//div[17]/input</option></datalist></td><td>55,25</td>
-</tr>
-<tr><td>clickAt</td><td>css=h1<datalist><option>css=h1</option><option>//h1</option></datalist></td><td>Organización social</td>
-</tr>
-</tbody></table>
-<table cellpadding="1" cellspacing="1" border="1">
-<thead>
-<tr><td rowspan="1" colspan="3">actor-social-nit</td></tr>
+<tr><td rowspan="1" colspan="3">organizacion-social-nit</td></tr>
 </thead>
 <tbody>
 <tr><td>clickAt</td><td>link=Editar<datalist><option>link=Editar</option><option>//a[contains(text(),'Editar')]</option><option>//a[contains(@href, '/actoressociales/6/edita')]</option><option>//a[2]</option></datalist></td><td>25,15</td>

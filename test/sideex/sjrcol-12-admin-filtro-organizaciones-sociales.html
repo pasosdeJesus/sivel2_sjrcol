@@ -3,17 +3,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 	<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
-	<title>sjrcol-13-admin-filtro-actores-sociales</title>
+	<title>sjrcol-12-admin-filtro-organizaciones-sociales</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">actor-social-filtro-id </td></tr>
+<tr><td rowspan="1" colspan="3">organizacion-social-filtro-id </td></tr>
 </thead>
 <tbody>
 <tr><td>clickAt</td><td>link=Actividades<datalist><option>link=Actividades</option><option>//a[contains(text(),'Actividades')]</option><option>xpath=(//a[contains(@href, '#')])[3]</option><option>//li[3]/a</option></datalist></td><td>54,15</td>
 </tr>
-<tr><td>clickAt</td><td>link=Actores sociales<datalist><option>link=Actores sociales</option><option>css=li.active &gt; a</option><option>//a[contains(text(),'Actores sociales')]</option><option>//a[contains(@href, '/actoressociales')]</option><option>//li[3]/ul/li[5]/a</option></datalist></td><td>77,20</td>
+<tr><td>clickAt</td><td>link=Organizaciones sociales<datalist><option>link=Organizaciones sociales</option><option>//a[contains(text(),'Organizaciones sociales')]</option><option>//div[@id='navbarSupportedContent']/ul/li[3]/div/a[8]</option><option>//a[contains(@href, '/actoressociales')]</option><option>//a[8]</option></datalist></td><td>135,12</td>
 </tr>
 <tr><td>clickAt</td><td>id=filtro_busid<datalist><option>id=filtro_busid</option><option>name=filtro[busid]</option><option>css=#filtro_busid</option><option>//input[@id='filtro_busid']</option><option>//div/input</option></datalist></td><td>38,22</td>
 </tr>
@@ -34,7 +34,7 @@
 </tbody></table>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">actor-social-filtro-nombre</td></tr>
+<tr><td rowspan="1" colspan="3">organizacion-social-filtro-nombre</td></tr>
 </thead>
 <tbody>
 <tr><td>clickAt</td><td>css=b<datalist><option>css=b</option><option>//div[@id='filtro_busgrupoper_id_chosen']/a/div/b</option><option>//b</option></datalist></td><td>11,12</td>
@@ -60,7 +60,7 @@
 </tbody></table>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">actor-social-filtro-sector</td></tr>
+<tr><td rowspan="1" colspan="3">organizacion-social-filtro-poblaciones-relacionadas</td></tr>
 </thead>
 <tbody>
 <tr><td>runScript</td><td>$('.chosen-select').removeAttr('style'); $('.chosen-container').remove(); $('.chosen-select').removeClass('chosen-select')<datalist><option>$('.chosen-select').removeAttr('style'); $('.chosen-container').remove(); $('.chosen-select').removeClass('chosen-select')</option></datalist></td><td></td>
@@ -82,7 +82,7 @@
 </tbody></table>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">actor-social-filtro-habilitado</td></tr>
+<tr><td rowspan="1" colspan="3">organizacion-social-filtro-habilitado</td></tr>
 </thead>
 <tbody>
 <tr><td>clickAt</td><td>css=#filtro_bushabilitado_chosen &gt; a.chosen-single &gt; div &gt; b<datalist><option>css=#filtro_bushabilitado_chosen &gt; a.chosen-single &gt; div &gt; b</option><option>//div[@id='filtro_bushabilitado_chosen']/a/div/b</option><option>//td[15]/div/div/a/div/b</option></datalist></td><td>9,12</td>

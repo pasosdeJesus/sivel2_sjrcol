@@ -7,6 +7,10 @@ module Cor1440Gen
     
     include Cor1440Gen::Concerns::Controllers::ProyectosfinancierosController
 
+    before_action :set_proyectofinanciero,
+      only: [:show, :edit, :update, :destroy]
+    skip_before_action :set_proyectofinanciero, only: [:validar]
+
     load_and_authorize_resource  class: Cor1440Gen::Proyectofinanciero,
       only: [:new, :create, :destroy, :edit, :update, :index, :show,
              :objetivospf]

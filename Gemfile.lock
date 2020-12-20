@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: 5851c840ce1b8ad0dd871d28efec3e219f0cdd67
+  revision: 1d34b3adc7fe53868362b1d0afddd4bc72309b5c
   specs:
     cor1440_gen (1.0b3)
       devise
@@ -13,7 +13,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 0506ef7da698201b453e6be64077d432a1491ca5
+  revision: 34d16c2bc7fb656f08ad826c2eabed7105ddcec2
   specs:
     heb412_gen (1.0.b6)
       mr519_gen
@@ -23,7 +23,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/mr519_gen.git
-  revision: 2d1f55b1456af9e71efe6c0bb4ab043890dfb341
+  revision: b33f738d233af31b1d7c46a0dfb3221c87fff446
   specs:
     mr519_gen (0.2.0)
       rails (~> 6.0.0.rc1, >= 6.0.0.rc1)
@@ -31,7 +31,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: ecf3a51124b9c933d1c2a9b46730ab0b5b4c9231
+  revision: b6e128bcf741cdcb9b8b8d3cc41aa8440ecc5431
   specs:
     sal7711_gen (1.0.b3)
       rails
@@ -39,7 +39,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: bf881f4dd83695555e04beaf4e3b1456b98de475
+  revision: ba18f06d2d8d99240248cd823dfa08095618e598
   specs:
     sal7711_web (1.0.a3)
       rails
@@ -47,7 +47,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: ace94b574d5467191b6e44125219e9c29727f8eb
+  revision: e19d3ccbd8f15987441bc38f7967bb8ad8be5834
   specs:
     sip (2.0.b10)
       cancancan
@@ -65,7 +65,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: f6a18d7f5973c7a5231b1d7a6ef5b7408bb3dfdd
+  revision: 18472a932bd84cdaac3106db78ea1e63d154635e
   specs:
     sivel2_gen (2.0b13)
       devise
@@ -74,7 +74,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 678cf5209cea230834b797eb8256aeddcc1df4f5
+  revision: 8998cd43fc2a22ea6e7b9b79cd2efe115dfd0099
   specs:
     sivel2_sjr (2.0b10)
       rails
@@ -156,7 +156,7 @@ GEM
       railties (>= 3.0)
     builder (3.2.4)
     camertron-eprun (1.1.1)
-    cancancan (3.1.0)
+    cancancan (3.2.0)
     capybara (3.34.0)
       addressable
       mini_mime (>= 0.1.3)
@@ -192,10 +192,10 @@ GEM
       warden (~> 1.2.3)
     devise-i18n (1.9.2)
       devise (>= 4.7.1)
-    docile (1.3.2)
+    docile (1.3.3)
     erubi (1.10.0)
     execjs (2.7.0)
-    ffi (1.13.1)
+    ffi (1.14.1)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     i18n (1.8.5)
@@ -208,7 +208,7 @@ GEM
       thor (>= 0.14, < 2.0)
     jquery-ui-rails (6.0.1)
       railties (>= 3.2.16)
-    json (2.3.1)
+    json (2.4.1)
     kgio (2.11.3)
     libxml-ruby (3.2.1)
     loofah (2.8.0)
@@ -256,7 +256,7 @@ GEM
       prawn (>= 1.0.0)
       rails (>= 3.2)
     public_suffix (4.0.6)
-    puma (5.1.0)
+    puma (5.1.1)
       nio4r (~> 2.0)
     rack (2.2.3)
     rack-proxy (0.6.5)
@@ -298,8 +298,8 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.20.3, < 2.0)
     raindrops (0.19.1)
-    rake (13.0.1)
-    redcarpet (3.5.0)
+    rake (13.0.2)
+    redcarpet (3.5.1)
     regexp_parser (1.8.2)
     responders (3.0.1)
       actionpack (>= 5.0)
@@ -350,7 +350,7 @@ GEM
       camertron-eprun
       cldr-plurals-runtime-rb (~> 1.1)
       tzinfo
-    tzinfo (1.2.8)
+    tzinfo (1.2.9)
       thread_safe (~> 0.1)
     unicorn (5.7.0)
       kgio (~> 2.6)

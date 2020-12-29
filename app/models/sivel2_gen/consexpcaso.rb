@@ -154,6 +154,43 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
             ultimaatencion.id_caso = caso.id
       "
   end
+
+  def presenta(atr)
+    casosjr = Sivel2Sjr::Casosjr.find(caso_id)
+    contacto =  Sip::Persona.find(casosjr.contacto_id)
+    case atr.to_s
+    when 'contacto_anionac'
+      contacto.anionac
+    when 'contacto_mesnac'
+      contacto.mesnac
+    when 'contacto_dianac'
+      contacto.dianac
+    when 'contacto_tdocumento'
+      contacto.tdocumento
+    when 'contacto_numerodocumento'
+      contacto.numerodocumento
+    when 'contacto_tdocumento'
+      contacto.tdocumento.nombre
+    when 'contacto_pais'
+      contacto.pais.nombre
+    when 'contacto_departamento'
+      contacto.departamento.nombre
+    when 'contacto_municipio'
+      contacto.municipio.nombre
+    when 'contacto_clase'
+      contacto.clase.nombre
+    when 'telefono'
+      casosjr.telefono
+    when 'direccion'
+      casosjr.direccion
+    else
+      if respond_to?(atr)
+        send(atr)
+      else
+        "Atributo no definido #{atr}"
+      end
+    end
+  end
   
   def self.porsjrc
     "porsjrc"

@@ -2351,11 +2351,11 @@ CREATE SEQUENCE public.respuesta_seq
 
 
 --
--- Name: sivel2_sjr_ayudaestado_respuesta; Type: TABLE; Schema: public; Owner: -
+-- Name: sivel2_sjr_ayudasjr_respuesta; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE public.sivel2_sjr_ayudaestado_respuesta (
-    id_ayudaestado integer DEFAULT 0 NOT NULL,
+CREATE TABLE public.sivel2_sjr_ayudasjr_respuesta (
+    id_ayudasjr integer DEFAULT 0 NOT NULL,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     id_respuesta integer NOT NULL
@@ -2413,12 +2413,12 @@ CREATE VIEW public.cres1 AS
  SELECT caso.id AS id_caso,
     respuesta.fechaatencion,
     casosjr.oficina_id,
-    ayudaestado_respuesta.id_ayudaestado
+    ayudasjr_respuesta.id_ayudasjr
    FROM public.sivel2_gen_caso caso,
     public.sivel2_sjr_casosjr casosjr,
     public.sivel2_sjr_respuesta respuesta,
-    public.sivel2_sjr_ayudaestado_respuesta ayudaestado_respuesta
-  WHERE ((caso.id = casosjr.id_caso) AND (caso.id = respuesta.id_caso) AND (respuesta.id = ayudaestado_respuesta.id_respuesta));
+    public.sivel2_sjr_ayudasjr_respuesta ayudasjr_respuesta
+  WHERE ((caso.id = casosjr.id_caso) AND (caso.id = respuesta.id_caso) AND (respuesta.id = ayudasjr_respuesta.id_respuesta));
 
 
 --
@@ -2454,6 +2454,18 @@ CREATE VIEW public.cvp1 AS
 CREATE TABLE public.sivel2_sjr_ayudaestado_derecho (
     ayudaestado_id integer,
     derecho_id integer
+);
+
+
+--
+-- Name: sivel2_sjr_ayudaestado_respuesta; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.sivel2_sjr_ayudaestado_respuesta (
+    id_ayudaestado integer DEFAULT 0 NOT NULL,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    id_respuesta integer NOT NULL
 );
 
 
@@ -2592,29 +2604,6 @@ CREATE SEQUENCE public.discapacidad_id_seq
 --
 
 ALTER SEQUENCE public.discapacidad_id_seq OWNED BY public.discapacidad.id;
-
-
---
--- Name: sivel2_sjr_actividad_casosjr; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.sivel2_sjr_actividad_casosjr (
-    id bigint NOT NULL,
-    actividad_id integer,
-    casosjr_id integer
-);
-
-
---
--- Name: ej; Type: VIEW; Schema: public; Owner: -
---
-
-CREATE VIEW public.ej AS
- SELECT sivel2_sjr_respuesta.id_caso
-   FROM public.sivel2_sjr_respuesta
-UNION
- SELECT sivel2_sjr_actividad_casosjr.casosjr_id AS id_caso
-   FROM public.sivel2_sjr_actividad_casosjr;
 
 
 --
@@ -5094,7 +5083,14 @@ CREATE VIEW public.sivel2_sjr_ultimaatencion AS
     respuesta.detallemotivo,
     respuesta.detalleal,
     respuesta.detallear,
-    public.sip_edad_de_fechanac_fecharef(contacto.anionac, contacto.mesnac, contacto.dianac, (date_part('year'::text, respuesta.fechaatencion))::integer, (date_part('month'::text, respuesta.fechaatencion))::integer, (date_part('day'::text, respuesta.fechaatencion))::integer) AS contacto_edad
+        CASE
+            WHEN (contacto.anionac IS NULL) THEN NULL::integer
+            WHEN ((contacto.mesnac IS NULL) OR (contacto.dianac IS NULL)) THEN ((date_part('year'::text, respuesta.fechaatencion) - (contacto.anionac)::double precision))::integer
+            WHEN ((contacto.mesnac)::double precision < date_part('month'::text, respuesta.fechaatencion)) THEN ((date_part('year'::text, respuesta.fechaatencion) - (contacto.anionac)::double precision))::integer
+            WHEN ((contacto.mesnac)::double precision > date_part('month'::text, respuesta.fechaatencion)) THEN (((date_part('year'::text, respuesta.fechaatencion) - (contacto.anionac)::double precision) - (1)::double precision))::integer
+            WHEN ((contacto.dianac)::double precision > date_part('day'::text, respuesta.fechaatencion)) THEN (((date_part('year'::text, respuesta.fechaatencion) - (contacto.anionac)::double precision) - (1)::double precision))::integer
+            ELSE ((date_part('year'::text, respuesta.fechaatencion) - (contacto.anionac)::double precision))::integer
+        END AS contacto_edad
    FROM ((public.sivel2_sjr_respuesta respuesta
      JOIN public.sivel2_sjr_casosjr casosjr ON ((respuesta.id_caso = casosjr.id_caso)))
      JOIN public.sip_persona contacto ON ((contacto.id = casosjr.contacto_id)))
@@ -5393,18 +5389,6 @@ CREATE TABLE public.sivel2_sjr_ayudasjr (
     updated_at timestamp without time zone,
     observaciones character varying(5000),
     CONSTRAINT ayudasjr_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
-);
-
-
---
--- Name: sivel2_sjr_ayudasjr_respuesta; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.sivel2_sjr_ayudasjr_respuesta (
-    id_ayudasjr integer DEFAULT 0 NOT NULL,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone,
-    id_respuesta integer NOT NULL
 );
 
 
@@ -5850,30 +5834,6 @@ CREATE TABLE public.sivel2_gen_iglesia (
     observaciones character varying(5000),
     CONSTRAINT iglesia_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
-
-
---
--- Name: sivel2_gen_iniciador; Type: VIEW; Schema: public; Owner: -
---
-
-CREATE VIEW public.sivel2_gen_iniciador AS
- SELECT s3.id_caso,
-    s3.fechainicio,
-    s3.id_usuario,
-    usuario.nusuario
-   FROM public.usuario,
-    ( SELECT s2.id_caso,
-            s2.fechainicio,
-            min(s2.id_usuario) AS id_usuario
-           FROM public.sivel2_gen_caso_usuario s2,
-            ( SELECT f1.id_caso,
-                    min(f1.fechainicio) AS m
-                   FROM public.sivel2_gen_caso_usuario f1
-                  GROUP BY f1.id_caso) c
-          WHERE ((s2.id_caso = c.id_caso) AND (s2.fechainicio = c.m))
-          GROUP BY s2.id_caso, s2.fechainicio
-          ORDER BY s2.id_caso, s2.fechainicio) s3
-  WHERE (usuario.id = s3.id_usuario);
 
 
 --
@@ -6352,6 +6312,17 @@ CREATE TABLE public.sivel2_sjr_acreditacion (
     updated_at timestamp without time zone,
     observaciones character varying(5000),
     CONSTRAINT acreditacion_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
+);
+
+
+--
+-- Name: sivel2_sjr_actividad_casosjr; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.sivel2_sjr_actividad_casosjr (
+    id bigint NOT NULL,
+    actividad_id integer,
+    casosjr_id integer
 );
 
 
@@ -14002,7 +13973,6 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20201021104257'),
 ('20201030102713'),
 ('20201031182132'),
-('20201119110342'),
 ('20201119125643'),
 ('20201121162913'),
 ('20201130020715'),

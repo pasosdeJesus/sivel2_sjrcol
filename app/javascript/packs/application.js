@@ -16,8 +16,12 @@
 // const imagePath = (name) => images(name, true)
 console.log('Hola Mundo desde Webpacker')
 
-require('@rails/ujs').start()   // Javascript no intrusivo segun rails
-require('turbolinks').start()   // Acelera carga de paginas
+
+import Rails from "@rails/ujs"
+import Turbolinks from "turbolinks"
+
+Rails.start()
+Turbolinks.start()
 
 import {$, jQuery} from 'jquery';
 import 'popper.js'              // Dialogos emergentes usados por bootstrap

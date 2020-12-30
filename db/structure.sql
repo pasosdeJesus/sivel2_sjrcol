@@ -9620,6 +9620,14 @@ ALTER TABLE ONLY public.sip_sectoractor
 
 
 --
+-- Name: sip_tdocumento sip_tdocumento_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sip_tdocumento
+    ADD CONSTRAINT sip_tdocumento_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: sip_tema sip_tema_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -13815,6 +13823,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20201130020715'),
 ('20201201015501'),
 ('20201205041350'),
-('20201214215209');
+('20201214215209'),
+('20201230210601');
 
 

@@ -127,6 +127,20 @@ module Cor1440Gen
       @contar_pfid = 10  # Plan Estrategico 1
     end
 
+
+    # Restringe más para conteo por beneficiario
+    def filtra_contarb_actividad_por_parametros(contarb_actividad)
+      @contarb_oficinaid = nil
+      if params && params[:filtro] && params[:filtro][:oficina_id] && 
+          params[:filtro][:oficina_id] != ''
+        @contarb_oficinaid = params[:filtro][:oficina_id].to_i
+        contarb_actividad.where('cor1440_gen_actividad.oficina_id=?',
+                                @contarb_oficinaid)
+      else
+        contarb_actividad
+      end
+    end
+
     # Sobrecarga de modelos_controller para sanear parámetros
     # Pero usaremos para sanear datos cuando hay nuevas
     # filas en listado de asistencia

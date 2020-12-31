@@ -161,7 +161,7 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
     victimac = Sivel2Gen::Victima.where(id_persona: contacto.id)[0]
     victimasjrc = Sivel2Sjr::Victimasjr.where(id_victima: victimac.id)[0]
     case atr.to_s
-    when 'conacto_anionac'
+    when 'contacto_anionac'
       contacto.anionac
     when 'contacto_mesnac'
       contacto.mesnac

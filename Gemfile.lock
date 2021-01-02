@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: 5cc158f0ca891989216c56f1bd39fda4a5eb3394
+  revision: 74558bf1cf956f24890982a65e8bff99f79989e0
   specs:
     cor1440_gen (1.0b3)
       devise
@@ -13,7 +13,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 3a2bbfc35f9a244c6b2a7533159a18159eb9b48c
+  revision: 9a35e0fd642a7d410e318cf3a0d2b115e55de137
   specs:
     heb412_gen (1.0.b6)
       mr519_gen
@@ -23,7 +23,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/mr519_gen.git
-  revision: eccc7e6dbb17e462fa1be834ecccaf679906dc20
+  revision: ed453f82e65107874faa6b0b79fc93e49ca2483f
   specs:
     mr519_gen (0.2.0)
       rails
@@ -31,7 +31,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: 342d1d09bceacd2a5c54124cce089cdc55d76872
+  revision: c8cd2277d563c198dcb6457d2633ad2aae40d1aa
   specs:
     sal7711_gen (1.0.b3)
       rails
@@ -39,7 +39,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: 16fb364f8ba702287674a21d96551fdfc88d25e5
+  revision: 57642a642ce09faf3a49b1af612143338f483aba
   specs:
     sal7711_web (1.0.a3)
       rails
@@ -47,7 +47,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 705cdf550ad5b9604615dbda11130176cc69a28c
+  revision: df9f85a77adf6076effad5a48588cb4e6967237b
   specs:
     sip (2.0.b10)
       cancancan
@@ -65,7 +65,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: d43970873cb95805168a2a736d55c656572e6489
+  revision: 949b3797ba0d5eff22a7df04ce9e4f75b6aae591
   specs:
     sivel2_gen (2.0b13)
       devise
@@ -246,15 +246,15 @@ GEM
       mime-types
       mimemagic (~> 0.3.0)
       terrapin (~> 0.6.0)
-    pdf-core (0.8.1)
+    pdf-core (0.9.0)
     pg (1.2.3)
     pick-a-color-rails (0.0.1)
       jquery-rails
       railties (>= 3.0)
       tiny-color-rails
-    prawn (2.3.0)
-      pdf-core (~> 0.8.1)
-      ttfunk (~> 1.6)
+    prawn (2.4.0)
+      pdf-core (~> 0.9.0)
+      ttfunk (~> 1.7)
     prawn-table (0.2.2)
       prawn (>= 1.3.0, < 3.0.0)
     prawnto_2 (0.3.1)

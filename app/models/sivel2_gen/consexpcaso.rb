@@ -160,6 +160,68 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
     contacto =  Sip::Persona.find(casosjr.contacto_id)
     victimac = Sivel2Gen::Victima.where(id_persona: contacto.id)[0]
     victimasjrc = Sivel2Sjr::Victimasjr.where(id_victima: victimac.id)[0]
+    ## 5 Victimas
+    cpersonasimple = [
+         'nombres', 'apellidos', 'sexo', 'anionac', 'mesnac', 'dianac',
+         'numerodocumento']
+    cpersonadoble = ['tdocumento', 'pais', 'departamento', 'municipio', 'clase']
+    cvictimasimple = [ 'orientacionsexual']
+    cvictimadoble = [ 'etnia', 'profesion', 'organizacion', 
+                      'filiacion', 'vinculoestado']
+    cvictimasjrbool = [
+         'cabezafamilia', 'tienesisben', 'asisteescuela',
+         'actualtrabajando']
+    cvictimasjrdoble = [
+         'maternidad', 'estadocivil', 'discapacidad', 'rolfamilia', 
+         'regimensalud', 'escolaridad']
+    ccasosjr = ['comosupo', 'consentimientosjr', 'consentimientobd']
+    especiales = ['actividadoficio', 'numeroanexos', 'numeroanexosconsen']
+
+    m = /familiar(.*)$/.match(atr.to_s)
+    if m
+      numero = m[1].split("_")[0]
+      campo = m[1].split("_")[1]
+      victimasf = Sivel2Gen::Victima.where(id_caso: caso_id).where.not(id_persona: contacto.id)
+      if !victimasf.empty?
+        victimaf = victimasf[numero.to_i-1]
+        if victimaf
+          personaf = Sip::Persona.find(victimaf.id_persona)
+          victimasjrf = Sivel2Sjr::Victimasjr.where(id_victima: victimaf.id)[0]
+          if cpersonasimple.include? campo
+            return personaf.send(campo)
+          end
+          if cpersonadoble.include? campo
+            return personaf.send(campo).nombre if personaf.send(campo)
+          end
+          if cvictimasimple.include? campo
+            return victimaf.send(campo)
+          end
+          if cvictimadoble.include? campo
+            return victimaf.send(campo).nombre if victimaf.send(campo)
+          end
+          if cvictimasjrdoble.include? campo
+            return victimasjrf.send(campo).nombre if victimasjrf.send(campo)
+          end
+          if cvictimasjrbool.include? campo
+            if victimasjrf.send(campo)
+              return "Si"
+            else 
+              return victimasjrf.send(campo).nil? ? "No responde" : "No"
+            end
+          end
+          if especiales.include? campo
+            case campo.to_s
+            when 'actividadoficio'
+              return Sivel2Gen::Actividadoficio.find(victimasjrf.id_actividadoficio).nombre if victimasjrf.id_actividadoficio
+            when 'numeroanexos'
+              return Sivel2Gen::AnexoVictima.where(victima_id: victimaf.id).where.not(tipoanexo_id: 11).count.to_s
+            when 'numeroanexosconsen'
+              return Sivel2Gen::AnexoVictima.where(victima_id: victimaf.id, tipoanexo_id: 11).count.to_s
+            end
+          end
+        end
+      end
+    end
     case atr.to_s
     when 'contacto_anionac'
       contacto.anionac
@@ -219,9 +281,9 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
       else 
         victimasjrc.asisteescuela.nil? ? "No responde" : "No"
       end
-    when 'contacto_nivelescolar'
+    when 'contacto_escolaridad'
       victimasjrc.escolaridad.nombre
-    when 'contacto_trabajaactualmente'
+    when 'contacto_actualtrabajando'
       if victimasjrc.actualtrabajando
         "Si"
       else 

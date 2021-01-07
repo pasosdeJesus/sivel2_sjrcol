@@ -154,6 +154,103 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
             ultimaatencion.id_caso = caso.id
       "
   end
+
+  def presenta(atr)
+    casosjr = Sivel2Sjr::Casosjr.find(caso_id)
+    contacto =  Sip::Persona.find(casosjr.contacto_id)
+    victimac = Sivel2Gen::Victima.where(id_persona: contacto.id)[0]
+    victimasjrc = Sivel2Sjr::Victimasjr.where(id_victima: victimac.id)[0]
+    case atr.to_s
+    when 'contacto_anionac'
+      contacto.anionac
+    when 'contacto_mesnac'
+      contacto.mesnac
+    when 'contacto_dianac'
+      contacto.dianac
+    when 'contacto_tdocumento'
+      contacto.tdocumento.nombre if contacto.tdocumento
+    when 'contacto_numerodocumento'
+      contacto.numerodocumento
+    when 'contacto_pais'
+      contacto.pais.nombre if contacto.pais
+    when 'contacto_departamento'
+      contacto.departamento.nombre if contacto.departamento
+    when 'contacto_municipio'
+      contacto.municipio.nombre if contacto.municipio
+    when 'contacto_clase'
+      contacto.clase.nombre if contacto.clase
+    when 'telefono'
+      casosjr.telefono
+    when 'direccion'
+      casosjr.direccion
+    when 'contacto_numeroanexos'
+      Sivel2Gen::AnexoVictima.where(victima_id: victimac.id).where.not(tipoanexo_id: 11).count.to_s
+    when 'contacto_numeroanexosconsen'
+      Sivel2Gen::AnexoVictima.where(victima_id: victimac.id, tipoanexo_id: 11).count.to_s
+    when 'contacto_etnia'
+      victimac.etnia.nombre
+    when 'contacto_orientacionsexual'
+      victimac.orientacionsexual
+    when 'contacto_maternidad'
+      victimasjrc.maternidad.nombre
+    when 'contacto_estadocivil'
+      victimasjrc.estadocivil.nombre
+    when 'contacto_discapacidad'
+      victimasjrc.discapacidad.nombre
+    when 'contacto_cabezafamilia'
+      if victimasjrc.cabezafamilia
+        "Si"
+      else 
+        victimasjrc.cabezafamilia.nil? ? "No responde" : "No"
+      end
+    when 'contacto_rolfamilia'
+      victimasjrc.rolfamilia.nombre
+    when 'contacto_tienesisben'
+      if victimasjrc.tienesisben
+        "Si"
+      else 
+        victimasjrc.tienesisben.nil? ? "No responde" : "No"
+      end
+    when 'contacto_regimensalud'
+      victimasjrc.regimensalud.nombre
+    when 'contacto_asisteescuela'
+      if victimasjrc.asisteescuela
+        "Si"
+      else 
+        victimasjrc.asisteescuela.nil? ? "No responde" : "No"
+      end
+    when 'contacto_nivelescolar'
+      victimasjrc.escolaridad.nombre
+    when 'contacto_trabajaactualmente'
+      if victimasjrc.actualtrabajando
+        "Si"
+      else 
+        victimasjrc.actualtrabajando.nil? ? "No responde" : "No"
+      end
+    when 'contacto_profesion'
+      victimac.profesion.nombre
+    when 'contacto_actividadoficio'
+      Sivel2Gen::Actividadoficio.find(victimasjrc.id_actividadoficio).nombre
+    when 'contacto_filiacion'
+      victimac.filiacion.nombre
+    when 'contacto_organizacion'
+      victimac.organizacion.nombre
+    when 'contacto_vinculoestado'
+      victimac.vinculoestado.nombre
+    when 'contacto_comosupo'
+      casosjr.comosupo.nombre
+    when 'contacto_consentimientosjr'
+      casosjr.concentimientosjr ? "Si" : "No"
+    when 'contacto_consentimientobd'
+      casosjr.concentimientobd ? "Si" : "No"
+    else
+      if respond_to?(atr)
+        send(atr)
+      else
+        "Atributo no definido #{atr}"
+      end
+    end
+  end
   
   def self.porsjrc
     "porsjrc"

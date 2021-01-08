@@ -182,7 +182,23 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
         return ''
       end
     end
-    
+    ## Migración del caso
+    migra_simples = ::Ability::CAMPOS_MIGRA_SIMPLES
+    migra_rela = ::Ability::CAMPOS_MIGRA_RELA
+    migra_multi = ::Ability::CAMPOS_MIGRA_MULTI
+    migracion = Sivel2Sjr::Migracion.where(caso_id: caso_id)[0]
+    if migracion
+      if migra_simples.include? atr.to_s
+        return migracion.send(atr.to_s) if migracion.send(atr.to_s)
+      end
+      if migra_rela.include? atr.to_s
+        return migracion.send(atr.to_s).nil? ? "No aplica o nulo" : migracion.send(atr.to_s).nombre
+      end
+      if migra_multi.include? atr.to_s
+        return migracion.send(atr.to_s).pluck(:nombre).join(", ") 
+      end
+    end
+     
     ## 5 Victimas
     cpersonasimple = [
          'nombres', 'apellidos', 'sexo', 'anionac', 'mesnac', 'dianac',

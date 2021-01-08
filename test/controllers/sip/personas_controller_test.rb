@@ -36,7 +36,6 @@ module Sip
     }
 
     test 'Crea una persona y la elimina' do
-      skip
       assert_difference('Sip::Persona.count') do
         post sip.personas_url, params: { persona: PRUEBA_PERSONA }
       end
@@ -47,7 +46,6 @@ module Sip
     end
 
     test 'no debería crear beneficiario sin numero de documento' do
-      skip
       assert_no_difference('Sip::Persona.count') do
         post sip.personas_url, params: { persona: PRUEBA_PERSONA_SINDOC }
       end

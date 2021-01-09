@@ -141,9 +141,55 @@ class Ability < Sivel2Sjr::Ability
     Sivel2Gen::Consexpcaso.crea_consexpcaso(nil)
   end
 
+  prefijos_personas_campos = ['contacto', 'familiar1', 'familiar2', 
+                             'familiar3', 'familiar4', 'familiar5']
+  campos_personavic = [
+       'nombres',
+       'actividadoficio',
+       'actualtrabajando',
+       'apellidos',
+       'asisteescuela',
+       'anionac',
+       'cabezafamilia',
+       'dianac',
+       'discapacidad',
+       'estadocivil',
+       'escolaridad',
+       'filiacion',
+       'identificacion',
+       'pais',
+       'departamento',
+       'municipio',
+       'clase',
+       'mesnac',
+       'maternidad',
+       'numerodocumento',
+       'numeroanexos',
+       'numeroanexosconsen',
+       'organizacion',
+       'profesion',
+       'regimensalud',
+       'sexo',
+       'etnia',
+       'edad_ultimaatencion',
+       'orientacionsexual',
+       'rangoedad_ultimaatencion',
+       'rolfamilia',
+       'tdocumento',
+       'tienesisben',
+       'vinculoestado'
+  ]
+  campos_personas_casos = []
+  prefijos_personas_campos.each do |pp| 
+    campos_personavic.each do |campo| 
+      campos_personas_casos.push((pp + '_' + campo).to_sym)
+    end
+  end
   CAMPOS_PLANTILLAS_PROPIAS = {
     'Caso' => {
-      campos: [
+      campos: 
+        campos_personas_casos +
+        [
         :asesor,
         :beneficiarias_0_5,
         :beneficiarias_6_12,
@@ -158,44 +204,10 @@ class Ability < Sivel2Sjr::Ability
         :beneficiarios_27_59,
         :beneficiarios_60_,
         :caso_id,
-        :contacto,
-        :contacto_nombres,
-        :contacto_actividadoficio,
-        :contacto_apellidos,
-        :contacto_asisteescuela,
-        :contacto_anionac,
-        :contacto_cabezafamilia,
         :contacto_comosupo,
         :contacto_consentimientosjr,
         :contacto_consentimientobd,
-        :contacto_dianac,
-        :contacto_discapacidad,
-        :contacto_estadocivil,
-        :contacto_filiacion,
-        :contacto_identificacion,
-        :contacto_pais,
-        :contacto_departamento,
-        :contacto_municipio,
-        :contacto_clase,
-        :contacto_mesnac,
-        :contacto_maternidad,
-        :contacto_nivelescolar,
-        :contacto_numerodocumento,
-        :contacto_numeroanexos,
-        :contacto_numeroanexosconsen,
-        :contacto_organizacion,
-        :contacto_profesion,
-        :contacto_regimensalud,
-        :contacto_sexo,
-        :contacto_trabajaactualmente,
-        :contacto_etnia,
-        :contacto_edad_ultimaatencion,
-        :contacto_orientacionsexual,
-        :contacto_rangoedad_ultimaatencion,
-        :contacto_rolfamilia,
-        :contacto_tdocumento,
-        :contacto_tienesisben,
-        :contacto_vinculoestado,
+        :contacto,
         :descripcion,
         :direccion,
         :expulsion,
@@ -215,7 +227,7 @@ class Ability < Sivel2Sjr::Ability
         :ultimaatencion_as_humanitaria,
         :ultimaatencion_as_juridica,
         :ultimaatencion_descripcion_at,
-        :victimas,
+        :victimas
       ],
       controlador: 'Sivel2Sjr::CasosController',
         ruta: '/casos'

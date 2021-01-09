@@ -40,19 +40,6 @@ class Consgifmm < ActiveRecord::Base
   end
 
 
-  def departamento_gifmm
-    if actividad.ubicacionpre && actividad.ubicacionpre.departamento && 
-        Depgifmm.where(
-        id: actividad.ubicacionpre.departamento.id_deplocal
-      ).exists?
-      Depgifmm.find(actividad.ubicacionpre.departamento.id_deplocal).nombre
-    else
-      ''
-    end
-  end
-
-
-
   def detalleah_unidad
     if detallefinanciero.nil?
       byebug
@@ -126,17 +113,6 @@ class Consgifmm < ActiveRecord::Base
     else
       ''
     end
-  end
-
-  def municipio_gifmm
-    if actividad.ubicacionpre && actividad.ubicacionpre.municipio
-      cmun = actividad.ubicacionpre.departamento.id_deplocal*1000 +
-        actividad.ubicacionpre.municipio.id_munlocal 
-      if Mungifmm.where(id: cmun).exists?
-        return Mungifmm.find(cmun).nombre
-      end
-    end
-    return ''
   end
 
 
@@ -581,14 +557,29 @@ class Consgifmm < ActiveRecord::Base
               detallefinanciero_persona.detallefinanciero_id=detallefinanciero.id) AS persona_ids,
             cor1440_gen_actividad.objetivo AS actividad_objetivo,
             cor1440_gen_actividad.fecha AS fecha,
-            (SELECT nombre FROM cor1440_gen_proyectofinanciero WHERE
+            (SELECT cor1440_gen_proyectofinanciero.nombre 
+              FROM cor1440_gen_proyectofinanciero WHERE
               detallefinanciero.proyectofinanciero_id=cor1440_gen_proyectofinanciero.id) 
               AS conveniofinanciado_nombre,
-            (SELECT nombre FROM cor1440_gen_actividadpf WHERE
+            (SELECT cor1440_gen_actividadpf.titulo
+              FROM cor1440_gen_actividadpf WHERE
               detallefinanciero.actividadpf_id=cor1440_gen_actividadpf.id) 
-              AS actividadmarcologico_nombre
+              AS actividadmarcologico_nombre,
+            depgifmm.nombre AS departamento_gifmm,
+            mungifmm.nombre AS municipio_gifmm
             FROM detallefinanciero JOIN cor1440_gen_actividad ON
               detallefinanciero.actividad_id=cor1440_gen_actividad.id
+            LEFT JOIN sip_ubicacionpre ON
+              cor1440_gen_actividad.ubicacionpre_id=sip_ubicacionpre.id
+            LEFT JOIN sip_departamento ON
+              sip_ubicacionpre.departamento_id=sip_departamento.id
+            LEFT JOIN depgifmm ON
+              sip_departamento.id_deplocal=depgifmm.id
+            LEFT JOIN sip_municipio ON
+              sip_ubicacionpre.municipio_id=sip_municipio.id
+            LEFT JOIN mungifmm ON
+              (sip_departamento.id_deplocal*1000+sip_municipio.id_munlocal)=
+                mungifmm.id
     "
   end
 
@@ -610,7 +601,7 @@ class Consgifmm < ActiveRecord::Base
   end # def crea_consulta
 
   def self.refresca_consulta(ordenar_por = nil)
-    if !ActiveRecord::Base.connection.data_source_exists? '#{CONSULTA}'
+    if !ActiveRecord::Base.connection.data_source_exists? "#{CONSULTA}"
       crea_consulta(ordenar_por = nil)
     else
       ActiveRecord::Base.connection.execute(

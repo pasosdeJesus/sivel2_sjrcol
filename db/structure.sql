@@ -2471,6 +2471,66 @@ CREATE VIEW public.cvp2 AS
 
 
 --
+-- Name: depgifmm; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.depgifmm (
+    id bigint NOT NULL,
+    nombre character varying(500) NOT NULL COLLATE public.es_co_utf_8,
+    observaciones character varying(5000),
+    fechacreacion date NOT NULL,
+    fechadeshabilitacion date,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: depgifmm_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.depgifmm_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: depgifmm_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.depgifmm_id_seq OWNED BY public.depgifmm.id;
+
+
+--
+-- Name: depmun_gifmm; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.depmun_gifmm (
+    departamento character varying(512) COLLATE public.es_co_utf_8,
+    codmun integer,
+    municipio character varying(512) COLLATE public.es_co_utf_8
+);
+
+
+--
+-- Name: depmun_sip; Type: VIEW; Schema: public; Owner: -
+--
+
+CREATE VIEW public.depmun_sip AS
+ SELECT sip_departamento.id_deplocal AS coddep,
+    sip_departamento.nombre AS departamento,
+    ((sip_departamento.id_deplocal * 1000) + sip_municipio.id_munlocal) AS codmun,
+    sip_municipio.nombre AS municipio
+   FROM (public.sip_departamento
+     JOIN public.sip_municipio ON ((sip_municipio.id_departamento = sip_departamento.id)))
+  WHERE ((sip_departamento.id_pais = 170) AND (sip_municipio.fechadeshabilitacion IS NULL))
+  ORDER BY sip_departamento.nombre, sip_municipio.nombre;
+
+
+--
 -- Name: derecho_procesosjr; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -3476,6 +3536,40 @@ CREATE SEQUENCE public.mr519_gen_valorcampo_id_seq
 --
 
 ALTER SEQUENCE public.mr519_gen_valorcampo_id_seq OWNED BY public.mr519_gen_valorcampo.id;
+
+
+--
+-- Name: mungifmm; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.mungifmm (
+    id bigint NOT NULL,
+    nombre character varying(500) NOT NULL COLLATE public.es_co_utf_8,
+    observaciones character varying(5000),
+    fechacreacion date NOT NULL,
+    fechadeshabilitacion date,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: mungifmm_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.mungifmm_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: mungifmm_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.mungifmm_id_seq OWNED BY public.mungifmm.id;
 
 
 --
@@ -5597,9 +5691,8 @@ CREATE MATERIALIZED VIEW public.sivel2_gen_consexpcaso AS
      LEFT JOIN public.sivel2_gen_etnia etnia ON ((vcontacto.id_etnia = etnia.id)))
      LEFT JOIN public.sivel2_sjr_ultimaatencion ultimaatencion ON ((ultimaatencion.id_caso = caso.id)))
   WHERE (conscaso.caso_id IN ( SELECT sivel2_gen_conscaso.caso_id
-           FROM (public.sivel2_gen_conscaso
-             JOIN public.sivel2_sjr_casosjr ON ((sivel2_sjr_casosjr.id_caso = sivel2_gen_conscaso.caso_id)))
-          WHERE (sivel2_sjr_casosjr.oficina_id = 4)
+           FROM public.sivel2_gen_conscaso
+          WHERE ((sivel2_gen_conscaso.caso_id = ANY (ARRAY[3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 31, 29, 35, 37, 38, 39, 130, 77, 78, 45, 79, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 57, 100, 103, 104, 106, 107, 108, 109, 111, 112, 113, 114, 66, 117, 118, 119, 120, 70, 121, 122, 123, 124, 125, 126, 136, 157, 148, 168, 169, 161, 170, 175, 176, 172, 173, 174, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 110, 101, 116, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 102, 207, 235, 1, 2, 25, 28, 30, 32, 34, 33, 36, 27, 206, 208, 8, 115, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 247, 249, 248, 105, 250, 251, 252, 254, 255, 256, 257, 258, 260, 261, 262, 263, 264, 265, 259, 266, 267])) AND (sivel2_gen_conscaso.caso_id = 264))
           ORDER BY sivel2_gen_conscaso.fecharec DESC, sivel2_gen_conscaso.caso_id))
   ORDER BY conscaso.fecha, conscaso.caso_id
   WITH NO DATA;
@@ -7693,6 +7786,13 @@ ALTER TABLE ONLY public.cor1440_gen_valorcampotind ALTER COLUMN id SET DEFAULT n
 
 
 --
+-- Name: depgifmm id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.depgifmm ALTER COLUMN id SET DEFAULT nextval('public.depgifmm_id_seq'::regclass);
+
+
+--
 -- Name: detallefinanciero id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -7872,6 +7972,13 @@ ALTER TABLE ONLY public.mr519_gen_respuestafor ALTER COLUMN id SET DEFAULT nextv
 --
 
 ALTER TABLE ONLY public.mr519_gen_valorcampo ALTER COLUMN id SET DEFAULT nextval('public.mr519_gen_valorcampo_id_seq'::regclass);
+
+
+--
+-- Name: mungifmm id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.mungifmm ALTER COLUMN id SET DEFAULT nextval('public.mungifmm_id_seq'::regclass);
 
 
 --
@@ -8651,6 +8758,14 @@ ALTER TABLE ONLY public.sivel2_sjr_declaroante
 
 
 --
+-- Name: depgifmm depgifmm_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.depgifmm
+    ADD CONSTRAINT depgifmm_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: sivel2_sjr_derecho derecho_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -9064,6 +9179,14 @@ ALTER TABLE ONLY public.mr519_gen_respuestafor
 
 ALTER TABLE ONLY public.mr519_gen_valorcampo
     ADD CONSTRAINT mr519_gen_valorcampo_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: mungifmm mungifmm_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.mungifmm
+    ADD CONSTRAINT mungifmm_pkey PRIMARY KEY (id);
 
 
 --
@@ -14011,6 +14134,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20201214215209'),
 ('20201230210601'),
 ('20201231194433'),
-('20210108202122');
+('20210108202122'),
+('20210109125429');
 
 

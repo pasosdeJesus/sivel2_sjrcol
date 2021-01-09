@@ -41,8 +41,11 @@ class Consgifmm < ActiveRecord::Base
 
 
   def departamento_gifmm
-    if actividad.ubicacionpre && actividad.ubicacionpre.departamento
-      GifmmHelper::departamento_gifmm(actividad.ubicacionpre.departamento.nombre)
+    if actividad.ubicacionpre && actividad.ubicacionpre.departamento && 
+        Depgifmm.where(
+        id: actividad.ubicacionpre.departamento.id_deplocal
+      ).exists?
+      Depgifmm.find(actividad.ubicacionpre.departamento.id_deplocal).nombre
     else
       ''
     end
@@ -127,10 +130,13 @@ class Consgifmm < ActiveRecord::Base
 
   def municipio_gifmm
     if actividad.ubicacionpre && actividad.ubicacionpre.municipio
-      GifmmHelper::municipio_gifmm(actividad.ubicacionpre.municipio.nombre)
-    else
-      ''
+      cmun = actividad.ubicacionpre.departamento.id_deplocal*1000 +
+        actividad.ubicacionpre.municipio.id_munlocal 
+      if Mungifmm.where(id: cmun).exists?
+        return Mungifmm.find(cmun).nombre
+      end
     end
+    return ''
   end
 
 

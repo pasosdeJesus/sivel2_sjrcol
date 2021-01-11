@@ -1,4 +1,4 @@
-class PrimariaTdocumentoSiFalta < ActiveRecord::Migration[6.1]
+class PrimariaTdocumentoSiFalta < ActiveRecord::Migration[6.0]
   def up
     r=execute "SELECT * FROM information_schema.table_constraints " +
       "WHERE table_name='sip_tdocumento' AND constraint_type='PRIMARY KEY'"

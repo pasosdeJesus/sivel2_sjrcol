@@ -43,13 +43,13 @@
   </td>
   <td>
     <%= f.association :unidadayuda,
-      collection: Unidadayuda.habilitados,
+      collection: Unidadayuda.habilitados.reorder(:orden),
       label_method: :nombre,
       value_method: :id,
       label: false,
       wrapper_html: {style: "width: 8em"},
       input_html: {
-        class: 'chosen-select'
+        #class: 'chosen-select'
       }
     %>
   </td>

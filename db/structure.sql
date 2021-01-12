@@ -7405,7 +7405,8 @@ CREATE TABLE public.unidadayuda (
     fechacreacion date NOT NULL,
     fechadeshabilitacion date,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    orden integer
 );
 
 
@@ -14080,6 +14081,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20201230210601'),
 ('20201231194433'),
 ('20210108202122'),
-('20210109125429');
+('20210109125429'),
+('20210112021105');
 
 

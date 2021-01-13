@@ -252,7 +252,12 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
     when 'contacto_etnia'
       victimac.etnia.nombre
     when 'contacto_orientacionsexual'
-      victimac.orientacionsexual
+      orientaciones = Sip::OrientacionsexualHelper::ORIENTACIONES
+      orientaciones.each do |ori|
+        if ori[1].to_s == victimac.orientacionsexual.to_s
+          return ori[0].to_s
+        end
+      end
     when 'contacto_maternidad'
       victimasjrc.maternidad.nombre
     when 'contacto_estadocivil'

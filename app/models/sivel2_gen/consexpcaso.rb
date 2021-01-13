@@ -184,23 +184,23 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
       victimasf = Sivel2Gen::Victima.where(id_caso: caso_id).where.not(id_persona: contacto.id)
       if !victimasf.empty?
         victimaf = victimasf[numero.to_i-1]
-        if victimaf
+        if !victimaf.nil?
           personaf = Sip::Persona.find(victimaf.id_persona)
           victimasjrf = Sivel2Sjr::Victimasjr.where(id_victima: victimaf.id)[0]
           if cpersonasimple.include? campo
-            return personaf.send(campo)
+            return personaf.send(campo) if personaf.send(campo)
           end
           if cpersonadoble.include? campo
             return personaf.send(campo).nombre if personaf.send(campo)
           end
           if cvictimasimple.include? campo
-            return victimaf.send(campo)
+            return victimaf.send(campo) if victimaf.send(campo)
           end
           if cvictimadoble.include? campo
-            return victimaf.send(campo).nombre if victimaf.send(campo)
+            return victimaf.send(campo) ? victimaf.send(campo).nombre : ''
           end
           if cvictimasjrdoble.include? campo
-            return victimasjrf.send(campo).nombre if victimasjrf.send(campo)
+            return victimasjrf.send(campo) ? victimasjrf.send(campo).nombre : ''
           end
           if cvictimasjrbool.include? campo
             if victimasjrf.send(campo)
@@ -219,20 +219,24 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
               return Sivel2Gen::AnexoVictima.where(victima_id: victimaf.id, tipoanexo_id: 11).count.to_s
             end
           end
+        else
+          return ''
         end
+      else
+        return ''
       end
     end
     case atr.to_s
     when 'contacto_anionac'
-      contacto.anionac
+      contacto.anionac if contacto.anionac
     when 'contacto_mesnac'
-      contacto.mesnac
+      contacto.mesnac if contacto.mesnac
     when 'contacto_dianac'
-      contacto.dianac
+      contacto.dianac if contacto.dianac
     when 'contacto_tdocumento'
-      contacto.tdocumento.nombre if contacto.tdocumento
+      contacto.tdocumento ? contacto.tdocumento.nombre : ''
     when 'contacto_numerodocumento'
-      contacto.numerodocumento
+      contacto.numerodocumento if contacto.numerodocumento
     when 'contacto_pais'
       contacto.pais.nombre if contacto.pais
     when 'contacto_departamento'
@@ -242,26 +246,30 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
     when 'contacto_clase'
       contacto.clase.nombre if contacto.clase
     when 'telefono'
-      casosjr.telefono
+      casosjr.telefono if casosjr.telefono
     when 'direccion'
-      casosjr.direccion
+      casosjr.direccion if casosjr.direccion
     when 'contacto_numeroanexos'
       Sivel2Gen::AnexoVictima.where(victima_id: victimac.id).where.not(tipoanexo_id: 11).count.to_s
     when 'contacto_numeroanexosconsen'
       Sivel2Gen::AnexoVictima.where(victima_id: victimac.id, tipoanexo_id: 11).count.to_s
     when 'contacto_etnia'
-      victimac.etnia.nombre
+      victimac.etnia ? victimac.etnia.nombre : ''
     when 'contacto_orientacionsexual'
       orientaciones = Sip::OrientacionsexualHelper::ORIENTACIONES
-      orientaciones.each do |ori|
-        if ori[1].to_s == victimac.orientacionsexual.to_s
-          return ori[0].to_s
+      if victimac.orientacionsexual
+        orientaciones.each do |ori|
+          if ori[1].to_s == victimac.orientacionsexual.to_s
+            return ori[0].to_s
+          end
         end
+      else
+        return ''
       end
     when 'contacto_maternidad'
-      victimasjrc.maternidad.nombre
+      victimasjrc.maternidad ? victimasjrc.maternidad.nombre : ''
     when 'contacto_estadocivil'
-      victimasjrc.estadocivil.nombre
+      victimasjrc.estadocivil ? victimasjrc.estadocivil.nombre : ''
     when 'contacto_discapacidad'
       victimasjrc.discapacidad ? victimasjrc.discapacidad.nombre : ''
     when 'contacto_cabezafamilia'
@@ -295,17 +303,17 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
         victimasjrc.actualtrabajando.nil? ? "No responde" : "No"
       end
     when 'contacto_profesion'
-      victimac.profesion.nombre
+      victimac.profesion ? victimac.profesion.nombre : ''
     when 'contacto_actividadoficio'
       Sivel2Gen::Actividadoficio.find(victimasjrc.id_actividadoficio).nombre
     when 'contacto_filiacion'
-      victimac.filiacion.nombre
+      victimac.filiacion ? victimac.filiacion.nombre : ''
     when 'contacto_organizacion'
-      victimac.organizacion.nombre
+      victimac.organizacion ? victimac.organizacion.nombre : ''
     when 'contacto_vinculoestado'
-      victimac.vinculoestado.nombre
+      victimac.vinculoestado ? victimac.vinculoestado.nombre : ''
     when 'contacto_comosupo'
-      casosjr.comosupo.nombre
+      casosjr.comosupo ? casosjr.comosupo.nombre : ''
     when 'contacto_consentimientosjr'
       casosjr.concentimientosjr ? "Si" : "No"
     when 'contacto_consentimientobd'

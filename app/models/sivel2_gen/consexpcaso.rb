@@ -172,12 +172,14 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
         ubicacion = ubicaciones[numero.to_i-1]
         if ubicacion
           if cubidob.include? campo
-            return ubicacion.send(campo).nombre
+            return ubicacion.send(campo) ? ubicacion.send(campo).nombre : ''
           end
           if cubisim.include? campo
-            return ubicacion.send(campo)
+            return ubicacion.send(campo) ?  ubicacion.send(campo) : ''
           end
         end
+      else
+        return ''
       end
     end
     

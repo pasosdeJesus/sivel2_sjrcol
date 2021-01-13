@@ -198,6 +198,44 @@ class Ability < Sivel2Sjr::Ability
     'agresionenpais',
     'causaagrpais'
   ]
+  CAMPOS_DESPLAZA_SIMPLES = [
+    'fechaexpulsion',
+    'fechallegada',
+    'descripcion',
+    'otrosdatos',
+    'declaro',
+    'hechosdeclarados',
+    'fechadeclaracion',
+    'oficioantes',
+    'materialesperdidos',
+    'inmaterialesperdidos',
+    'documentostierra'
+  ]
+  CAMPOS_DESPLAZA_RELA = [
+    'clasifdesp',
+    'tipodesp',
+    'declaroante',
+    'inclusion',
+    'acreditacion',
+    'modalidadtierra'
+  ]
+  CAMPOS_DESPLAZA_MULTI = [
+    'categoria'
+  ]
+  CAMPOS_DESPLAZA_ESPECIALES = [
+    'expulsion',
+    'llegada',
+    'modalidadgeo',
+    'submodalidadgeo'
+  ]
+  CAMPOS_DESPLAZA_BOOL = [
+    'retornado',
+    'reubicado',
+    'connacionalretorno',
+    'acompestado',
+    'connacionaldeportado',
+    'protegiorupta'
+  ]
   campos_personavic = [
        'nombres',
        'actividadoficio',
@@ -254,6 +292,11 @@ class Ability < Sivel2Sjr::Ability
         CAMPOS_MIGRA_SIMPLES +
         CAMPOS_MIGRA_RELA +
         CAMPOS_MIGRA_MULTI +
+        CAMPOS_DESPLAZA_SIMPLES +
+        CAMPOS_DESPLAZA_RELA +
+        CAMPOS_DESPLAZA_MULTI +
+        CAMPOS_DESPLAZA_BOOL +
+        CAMPOS_DESPLAZA_ESPECIALES +
         [
         :asesor,
         :beneficiarias_0_5,

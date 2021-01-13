@@ -188,13 +188,13 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
           personaf = Sip::Persona.find(victimaf.id_persona)
           victimasjrf = Sivel2Sjr::Victimasjr.where(id_victima: victimaf.id)[0]
           if cpersonasimple.include? campo
-            return personaf.send(campo) if personaf.send(campo)
+            return personaf.send(campo) ? personaf.send(campo) : ''
           end
           if cpersonadoble.include? campo
-            return personaf.send(campo).nombre if personaf.send(campo)
+            return personaf.send(campo).nombre ? personaf.send(campo) : ''
           end
           if cvictimasimple.include? campo
-            return victimaf.send(campo) if victimaf.send(campo)
+            return victimaf.send(campo) ? victimaf.send(campo) : ''
           end
           if cvictimadoble.include? campo
             return victimaf.send(campo) ? victimaf.send(campo).nombre : ''
@@ -212,7 +212,8 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
           if especiales.include? campo
             case campo.to_s
             when 'actividadoficio'
-              return Sivel2Gen::Actividadoficio.find(victimasjrf.id_actividadoficio).nombre if victimasjrf.id_actividadoficio
+              aof = Sivel2Gen::Actividadoficio.find(victimasjrf.id_actividadoficio)
+              return aof ? aof.nombre : ''
             when 'numeroanexos'
               return Sivel2Gen::AnexoVictima.where(victima_id: victimaf.id).where.not(tipoanexo_id: 11).count.to_s
             when 'numeroanexosconsen'
@@ -228,27 +229,27 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
     end
     case atr.to_s
     when 'contacto_anionac'
-      contacto.anionac if contacto.anionac
+      contacto.anionac ? contacto.anionac : ''
     when 'contacto_mesnac'
-      contacto.mesnac if contacto.mesnac
+      contacto.mesnac ? contacto.mesnac : ''
     when 'contacto_dianac'
-      contacto.dianac if contacto.dianac
+      contacto.dianac ? contacto.dianac : ''
     when 'contacto_tdocumento'
       contacto.tdocumento ? contacto.tdocumento.nombre : ''
     when 'contacto_numerodocumento'
-      contacto.numerodocumento if contacto.numerodocumento
+      contacto.numerodocumento ? contacto.numerodocumento : ''
     when 'contacto_pais'
-      contacto.pais.nombre if contacto.pais
+      contacto.pais ? contacto.pais.nombre : ''
     when 'contacto_departamento'
-      contacto.departamento.nombre if contacto.departamento
+      contacto.departamento ? contacto.departamento.nombre : ''
     when 'contacto_municipio'
-      contacto.municipio.nombre if contacto.municipio
+      contacto.municipio ? contacto.municipio.nombre : ''
     when 'contacto_clase'
-      contacto.clase.nombre if contacto.clase
+      contacto.clase ? contacto.clase.nombre : ''
     when 'telefono'
-      casosjr.telefono if casosjr.telefono
+      casosjr.telefono ? casosjr.telefono : ''
     when 'direccion'
-      casosjr.direccion if casosjr.direccion
+      casosjr.direccion ? casosjr.direccion : ''
     when 'contacto_numeroanexos'
       Sivel2Gen::AnexoVictima.where(victima_id: victimac.id).where.not(tipoanexo_id: 11).count.to_s
     when 'contacto_numeroanexosconsen'

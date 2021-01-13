@@ -258,7 +258,7 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
     when 'contacto_estadocivil'
       victimasjrc.estadocivil.nombre
     when 'contacto_discapacidad'
-      victimasjrc.discapacidad.nombre
+      victimasjrc.discapacidad ? victimasjrc.discapacidad.nombre : ''
     when 'contacto_cabezafamilia'
       if victimasjrc.cabezafamilia
         "Si"

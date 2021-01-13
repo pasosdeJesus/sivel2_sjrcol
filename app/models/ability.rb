@@ -145,6 +145,17 @@ class Ability < Sivel2Sjr::Ability
 
   prefijos_personas_campos = ['contacto', 'familiar1', 'familiar2', 
                              'familiar3', 'familiar4', 'familiar5']
+  prefijos_ubicaciones_campos = ['ubicacion1', 'ubicacion2', 'ubicacion3'] 
+  CAMPOS_UBICACIONES = [
+    'pais', 'departamento',
+    'municipio',
+    'clase',
+    'longitud',
+    'latitud',
+    'lugar',
+    'sitio',
+    'tsitio'
+  ]
   campos_personavic = [
        'nombres',
        'actividadoficio',
@@ -187,10 +198,17 @@ class Ability < Sivel2Sjr::Ability
       campos_personas_casos.push((pp + '_' + campo).to_sym)
     end
   end
+  campos_ubicaciones_casos = []
+  prefijos_ubicaciones_campos.each do |pu| 
+    CAMPOS_UBICACIONES.each do |campo| 
+      campos_ubicaciones_casos.push((pu + '_' + campo).to_sym)
+    end
+  end
   CAMPOS_PLANTILLAS_PROPIAS = {
     'Caso' => {
       campos: 
         campos_personas_casos +
+        campos_ubicaciones_casos +
         [
         :asesor,
         :beneficiarias_0_5,

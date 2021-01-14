@@ -42,7 +42,7 @@ class CamposDesplazamientoPlantillahcm44 < ActiveRecord::Migration[6.0]
 
 
   def up
-    numid = 950 
+    numid = 320 
     col = 'IP'
     CAMPOS.each do |campo|
       cp=Heb412Gen::Campoplantillahcm.new(
@@ -60,7 +60,7 @@ class CamposDesplazamientoPlantillahcm44 < ActiveRecord::Migration[6.0]
   def down
     execute <<-SQL
       DELETE FROM heb412_gen_campoplantillahcm WHERE
-        id>='950' AND id<='#{CAMPOS.length+949}'
+        id>='320' AND id<='#{CAMPOS.length+319}'
     SQL
   end
 end

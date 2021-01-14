@@ -205,7 +205,7 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
     if m
       numero = m[1].split("_")[0]
       campo = m[1].split("_")[1]
-      victimasf = Sivel2Gen::Victima.where(id_caso: caso_id).where.not(id_persona: contacto.id).order(:created_at)
+      victimasf = Sivel2Gen::Victima.where(id_caso: caso_id).where.not(id_persona: contacto.id).order(:id)
       if !victimasf.empty?
         victimaf = victimasf[numero.to_i-1]
         if !victimaf.nil?

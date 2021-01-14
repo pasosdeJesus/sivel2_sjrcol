@@ -210,18 +210,29 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
     desplazamiento = Sivel2Sjr::Desplazamiento.where(id_caso: caso_id)[0]
     if desplazamiento
       if desplaza_simples.include? atr.to_s
-        return desplazamiento.send(atr.to_s) if desplazamiento.send(atr.to_s)
+        if atr.to_s == 'declaro'
+          case desplazamiento.send(atr.to_s)
+          when 'S'
+            return 'Si'
+          when 'N'
+            return 'No'
+          when 'R'
+            return 'NO SABE / NO RESPONDE'
+          end
+        else
+          return desplazamiento.send(atr.to_s) ? desplazamiento.send(atr.to_s) : ''
+        end
       end
       if desplaza_rela.include? atr.to_s
         return desplazamiento.send(atr.to_s).nil? ? "No aplica o nulo" : desplazamiento.send(atr.to_s).nombre
       end
       if desplaza_multi.include? atr.to_s
-        return desplazamiento.send(atr.to_s).pluck(:nombre).join(", ") 
+        return desplazamiento.send(atr.to_s).count > 0 ? desplazamiento.send(atr.to_s).pluck(:nombre).join(", ") : ''
       end
       if desplaza_bool.include? atr.to_s
         if desplazamiento.send(atr.to_s)
           return "Si"
-        else 
+        else
           return desplazamiento.send(atr.to_s).nil? ? 'No responde' : 'No'
         end
       end
@@ -231,15 +242,16 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
         res = ::DesplazamientoHelper.modageo_desplazamiento(exp, lle)
         case atr.to_s
         when 'expulsion', 'llegada'
-          return Sip::UbicacionHelper.formato_ubicacion(desplazamiento.send(atr.to_s))
+          return desplazamiento.send(atr.to_s) ? Sip::UbicacionHelper.formato_ubicacion(desplazamiento.send(atr.to_s)) : ''
         when 'modalidadgeo'
-          return res[0]
+          return res ? res[0] : ''
         when 'submodalidadgeo'
-          return res[1]
+          return res ? res[1] : ''
         end
       end
+    else
+      return ''
     end
-    
 
     ## 5 Victimas
     cpersonasimple = [

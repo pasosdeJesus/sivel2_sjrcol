@@ -189,14 +189,16 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
     migracion = Sivel2Sjr::Migracion.where(caso_id: caso_id)[0]
     if migracion
       if migra_simples.include? atr.to_s
-        return migracion.send(atr.to_s) if migracion.send(atr.to_s)
+        return migracion.send(atr.to_s) ? migracion.send(atr.to_s) : ''
       end
       if migra_rela.include? atr.to_s
         return migracion.send(atr.to_s).nil? ? "No aplica o nulo" : migracion.send(atr.to_s).nombre
       end
       if migra_multi.include? atr.to_s
-        return migracion.send(atr.to_s).pluck(:nombre).join(", ") 
+        return migracion.send(atr.to_s).count > 0  ? migracion.send(atr.to_s).pluck(:nombre).join(", ") : '' 
       end
+    else
+      return ''
     end
      
     ## 5 Victimas

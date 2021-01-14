@@ -170,7 +170,6 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
       campo = cubi[1].split("_")[1]
       if !ubicaciones.empty?
         ubicacion = ubicaciones[numero.to_i-1]
-        byebug
         if ubicacion
           if cubidob.include? campo
             return ubicacion.send(campo) ? ubicacion.send(campo).nombre : ''

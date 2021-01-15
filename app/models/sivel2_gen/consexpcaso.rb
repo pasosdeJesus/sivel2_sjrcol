@@ -182,24 +182,6 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
         return ''
       end
     end
-    ## Migración del caso
-    migra_simples = ::Ability::CAMPOS_MIGRA_SIMPLES
-    migra_rela = ::Ability::CAMPOS_MIGRA_RELA
-    migra_multi = ::Ability::CAMPOS_MIGRA_MULTI
-    migracion = Sivel2Sjr::Migracion.where(caso_id: caso_id)[0]
-    if migracion
-      if migra_simples.include? atr.to_s
-        return migracion.send(atr.to_s) ? migracion.send(atr.to_s) : ''
-      end
-      if migra_rela.include? atr.to_s
-        return migracion.send(atr.to_s).nil? ? "No aplica o nulo" : migracion.send(atr.to_s).nombre
-      end
-      if migra_multi.include? atr.to_s
-        return migracion.send(atr.to_s).count > 0  ? migracion.send(atr.to_s).pluck(:nombre).join(", ") : '' 
-      end
-    else
-      return ''
-    end
 
     # Desplazamiento del Caso
     desplaza_simples = ::Ability::CAMPOS_DESPLAZA_SIMPLES
@@ -208,8 +190,8 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
     desplaza_bool = ::Ability::CAMPOS_DESPLAZA_BOOL
     desplaza_espe = ::Ability::CAMPOS_DESPLAZA_ESPECIALES
     desplazamiento = Sivel2Sjr::Desplazamiento.where(id_caso: caso_id)[0]
-    if desplazamiento
-      if desplaza_simples.include? atr.to_s
+    if desplaza_simples.include? atr.to_s
+      if desplazamiento
         if atr.to_s == 'declaro'
           case desplazamiento.send(atr.to_s)
           when 'S'
@@ -222,21 +204,37 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
         else
           return desplazamiento.send(atr.to_s) ? desplazamiento.send(atr.to_s) : ''
         end
+      else
+        return ''
       end
-      if desplaza_rela.include? atr.to_s
+    end
+    if desplaza_rela.include? atr.to_s
+      if desplazamiento
         return desplazamiento.send(atr.to_s).nil? ? "No aplica o nulo" : desplazamiento.send(atr.to_s).nombre
+      else
+        return ''
       end
-      if desplaza_multi.include? atr.to_s
+    end
+    if desplaza_multi.include? atr.to_s
+      if desplazamiento
         return desplazamiento.send(atr.to_s).count > 0 ? desplazamiento.send(atr.to_s).pluck(:nombre).join(", ") : ''
+      else
+        return ''
       end
-      if desplaza_bool.include? atr.to_s
+    end
+    if desplaza_bool.include? atr.to_s
+      if desplazamiento
         if desplazamiento.send(atr.to_s)
           return "Si"
         else
           return desplazamiento.send(atr.to_s).nil? ? 'No responde' : 'No'
         end
+      else
+        return ''
       end
-      if desplaza_espe.include? atr.to_s
+    end
+    if desplaza_espe.include? atr.to_s
+      if desplazamiento
         exp = desplazamiento.expulsion
         lle = desplazamiento.llegada
         res = ::DesplazamientoHelper.modageo_desplazamiento(exp, lle)
@@ -248,9 +246,9 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
         when 'submodalidadgeo'
           return res ? res[1] : ''
         end
+      else
+        return ''
       end
-    else
-      return ''
     end
 
     ## 5 Victimas
@@ -269,7 +267,6 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
          'regimensalud', 'escolaridad']
     ccasosjr = ['comosupo', 'consentimientosjr', 'consentimientobd']
     especiales = ['actividadoficio', 'numeroanexos', 'numeroanexosconsen']
-
     orientaciones = Sip::OrientacionsexualHelper::ORIENTACIONES
     m = /familiar(.*)$/.match(atr.to_s)
     if m
@@ -295,7 +292,7 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
                 end
               end
             else
-              return ''
+              return victimaf.send(campo) ? victimaf.send(campo) : ''
             end
           end
           if cvictimadoble.include? campo
@@ -329,6 +326,53 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
         return ''
       end
     end
+    ## Migración del caso
+    migra_simples = ::Ability::CAMPOS_MIGRA_SIMPLES
+    migra_rela = ::Ability::CAMPOS_MIGRA_RELA
+    migra_multi = ::Ability::CAMPOS_MIGRA_MULTI
+    migracion = Sivel2Sjr::Migracion.where(caso_id: caso_id)[0]
+    if migra_simples.include? atr.to_s
+      if migracion
+        return migracion.send(atr.to_s).nil? ? '' : migracion.send(atr.to_s)
+      else 
+        return ''
+      end
+    end
+    if migra_rela.include? atr.to_s
+      if migracion
+        return migracion.send(atr.to_s).nil? ? "No aplica o nulo" : migracion.send(atr.to_s).nombre
+      else 
+        return ''
+      end
+    end
+    if migra_multi.include? atr.to_s
+      if migracion
+        if atr.to_s == 'causaagresion'
+          causasagresion = migracion.send(atr.to_s).pluck(:nombre)
+          causasagresion.each_with_index do |cag, index|
+            if cag == 'Otra'
+              otracausa = migracion.otracausaagresion
+              causasagresion[index] = "Otra: #{otracausa}"
+            end
+          end
+          return migracion.send(atr.to_s).count > 0  ? causasagresion.join(", ") : '' 
+        elsif atr.to_s == 'causaagrpais'
+          causasagresion = migracion.send(atr.to_s).pluck(:nombre)
+          causasagresion.each_with_index do |cag, index|
+            if cag == 'Otra'
+              otracausa = migracion.otracausagrpais
+              causasagresion[index] = "Otra: #{otracausa}"
+            end
+          end
+          return migracion.send(atr.to_s).count > 0  ? causasagresion.join(", ") : '' 
+        else
+          return migracion.send(atr.to_s).count > 0  ? migracion.send(atr.to_s).pluck(:nombre).join(", ") : '' 
+        end
+      else 
+        return ''
+      end
+    end
+    ## CONTACTO
     case atr.to_s
     when 'contacto_anionac'
       contacto.anionac ? contacto.anionac : ''

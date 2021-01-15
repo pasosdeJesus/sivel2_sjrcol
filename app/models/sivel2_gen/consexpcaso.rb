@@ -251,6 +251,7 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
          'regimensalud', 'escolaridad']
     ccasosjr = ['comosupo', 'consentimientosjr', 'consentimientobd']
     especiales = ['actividadoficio', 'numeroanexos', 'numeroanexosconsen']
+    orientaciones = Sip::OrientacionsexualHelper::ORIENTACIONES
 
     m = /familiar(.*)$/.match(atr.to_s)
     if m
@@ -269,7 +270,15 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
             return personaf.send(campo) ? personaf.send(campo).nombre : ''
           end
           if cvictimasimple.include? campo
-            return victimaf.send(campo) ? victimaf.send(campo) : ''
+            if victimaf.send(campo) and campo= "orientacionsexual"
+              orientaciones.each do |ori|
+                if ori[1].to_s == victimaf.send(campo).to_s
+                  return ori[0].to_s
+                end
+              end
+            else
+              return victimaf.send(campo) ? victimaf.send(campo) : ''
+            end
           end
           if cvictimadoble.include? campo
             return victimaf.send(campo) ? victimaf.send(campo).nombre : ''
@@ -379,7 +388,6 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
     when 'contacto_etnia'
       victimac.etnia ? victimac.etnia.nombre : ''
     when 'contacto_orientacionsexual'
-      orientaciones = Sip::OrientacionsexualHelper::ORIENTACIONES
       if victimac.orientacionsexual
         orientaciones.each do |ori|
           if ori[1].to_s == victimac.orientacionsexual.to_s

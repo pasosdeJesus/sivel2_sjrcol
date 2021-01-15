@@ -156,6 +156,48 @@ class Ability < Sivel2Sjr::Ability
     'sitio',
     'tsitio'
   ]
+  CAMPOS_MIGRA_SIMPLES = [
+    'fechasalida',
+    'fechallegada',
+    'ubifamilia',
+    'valor_pago',
+    'concepto_pago',
+    'actor_pago',
+    'perpetradoresagresion',
+    'perpeagresenpais',
+    'observacionesref',
+    'fechaNpi',
+    'salvoNpi',
+    'tiempoenpais'
+  ]
+  CAMPOS_MIGRA_RELA = [
+    'salida_pais',
+    'salida_departamento',
+    'salida_municipio',
+    'salida_clase',
+    'llegada_pais',
+    'llegada_departamento',
+    'llegada_municipio',
+    'llegada_clase',
+    'viadeingreso',
+    'causamigracion',
+    'pagoingreso',
+    'perfilmigracion',
+    'migracontactopre',
+    'statusmigratorio',
+    'proteccion',
+    'autoridadrefugio',
+    'causaRefugio',
+    'miembrofamiliar',
+    'tipoproteccion'
+  ]
+  CAMPOS_MIGRA_MULTI = [
+    'dificultadmigracion',
+    'agresionmigracion',
+    'causaagresion',
+    'agresionenpais',
+    'causaagrpais'
+  ]
   campos_personavic = [
        'nombres',
        'actividadoficio',
@@ -209,6 +251,9 @@ class Ability < Sivel2Sjr::Ability
       campos: 
         campos_personas_casos +
         campos_ubicaciones_casos +
+        CAMPOS_MIGRA_SIMPLES +
+        CAMPOS_MIGRA_RELA +
+        CAMPOS_MIGRA_MULTI +
         [
         :asesor,
         :beneficiarias_0_5,

@@ -190,8 +190,8 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
     desplaza_bool = ::Ability::CAMPOS_DESPLAZA_BOOL
     desplaza_espe = ::Ability::CAMPOS_DESPLAZA_ESPECIALES
     desplazamiento = Sivel2Sjr::Desplazamiento.where(id_caso: caso_id)[0]
-    if desplazamiento
-      if desplaza_simples.include? atr.to_s
+    if desplaza_simples.include? atr.to_s
+      if desplazamiento
         if atr.to_s == 'declaro'
           case desplazamiento.send(atr.to_s)
           when 'S'
@@ -204,21 +204,37 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
         else
           return desplazamiento.send(atr.to_s) ? desplazamiento.send(atr.to_s) : ''
         end
+      else
+        return ''
       end
-      if desplaza_rela.include? atr.to_s
+    end
+    if desplaza_rela.include? atr.to_s
+      if desplazamiento
         return desplazamiento.send(atr.to_s).nil? ? "No aplica o nulo" : desplazamiento.send(atr.to_s).nombre
+      else
+        return ''
       end
-      if desplaza_multi.include? atr.to_s
+    end
+    if desplaza_multi.include? atr.to_s
+      if desplazamiento
         return desplazamiento.send(atr.to_s).count > 0 ? desplazamiento.send(atr.to_s).pluck(:nombre).join(", ") : ''
+      else
+        return ''
       end
-      if desplaza_bool.include? atr.to_s
+    end
+    if desplaza_bool.include? atr.to_s
+      if desplazamiento
         if desplazamiento.send(atr.to_s)
           return "Si"
         else
           return desplazamiento.send(atr.to_s).nil? ? 'No responde' : 'No'
         end
+      else
+        return ''
       end
-      if desplaza_espe.include? atr.to_s
+    end
+    if desplaza_espe.include? atr.to_s
+      if desplazamiento
         exp = desplazamiento.expulsion
         lle = desplazamiento.llegada
         res = ::DesplazamientoHelper.modageo_desplazamiento(exp, lle)
@@ -230,9 +246,9 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
         when 'submodalidadgeo'
           return res ? res[1] : ''
         end
+      else
+        return ''
       end
-    else
-      return ''
     end
 
     ## 5 Victimas

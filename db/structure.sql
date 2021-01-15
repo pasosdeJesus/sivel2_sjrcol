@@ -5698,12 +5698,8 @@ CREATE MATERIALIZED VIEW public.sivel2_gen_consexpcaso AS
      LEFT JOIN public.sivel2_gen_etnia etnia ON ((vcontacto.id_etnia = etnia.id)))
      LEFT JOIN public.sivel2_sjr_ultimaatencion ultimaatencion ON ((ultimaatencion.id_caso = caso.id)))
   WHERE (conscaso.caso_id IN ( SELECT sivel2_gen_conscaso.caso_id
-           FROM ((((public.sivel2_gen_conscaso
-             JOIN public.sivel2_sjr_casosjr ON ((sivel2_sjr_casosjr.id_caso = sivel2_gen_conscaso.caso_id)))
-             JOIN public.sivel2_gen_caso ON ((sivel2_gen_caso.id = sivel2_gen_conscaso.caso_id)))
-             JOIN public.sivel2_gen_victima ON ((sivel2_gen_victima.id_caso = sivel2_gen_caso.id)))
-             JOIN public.sip_persona ON ((sip_persona.id = sivel2_gen_victima.id_persona)))
-          WHERE ((sivel2_gen_conscaso.caso_id = ANY (ARRAY[3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 31, 29, 35, 37, 38, 39, 130, 77, 78, 45, 79, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 57, 100, 103, 104, 106, 107, 108, 109, 111, 112, 113, 114, 66, 117, 118, 119, 120, 70, 121, 122, 123, 124, 125, 126, 136, 157, 148, 168, 169, 161, 170, 175, 176, 172, 173, 174, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 110, 101, 116, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 102, 207, 235, 1, 2, 25, 28, 30, 32, 34, 33, 36, 27, 206, 208, 8, 115, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 247, 249, 248, 105, 250, 251, 252, 254, 255, 256, 257, 258, 260, 261, 262, 263, 264, 265, 259, 266, 267])) AND (sivel2_gen_conscaso.caso_id = 266) AND ((sivel2_sjr_casosjr.contacto_id = sip_persona.id) AND ((sip_persona.nombres)::text ~~* '%aaa%'::text)))
+           FROM public.sivel2_gen_conscaso
+          WHERE ((sivel2_gen_conscaso.caso_id = ANY (ARRAY[3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 31, 29, 35, 37, 38, 39, 130, 77, 78, 45, 79, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 57, 100, 103, 104, 106, 107, 108, 109, 111, 112, 113, 114, 66, 117, 118, 119, 120, 70, 121, 122, 123, 124, 125, 126, 136, 157, 148, 168, 169, 161, 170, 175, 176, 172, 173, 174, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 110, 101, 116, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 102, 207, 235, 1, 2, 25, 28, 30, 32, 34, 33, 36, 27, 206, 208, 8, 115, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 247, 249, 248, 105, 250, 251, 252, 254, 255, 256, 257, 258, 260, 261, 262, 263, 264, 265, 259, 266, 267])) AND (sivel2_gen_conscaso.caso_id = 266))
           ORDER BY sivel2_gen_conscaso.fecharec DESC, sivel2_gen_conscaso.caso_id))
   ORDER BY conscaso.fecha, conscaso.caso_id
   WITH NO DATA;
@@ -14151,6 +14147,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210111235535'),
 ('20210112021105'),
 ('20210113024104'),
-('20210113205441');
+('20210113205441'),
+('20210114003743');
 
 

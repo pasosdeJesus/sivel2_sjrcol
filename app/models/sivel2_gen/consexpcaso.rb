@@ -182,24 +182,6 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
         return ''
       end
     end
-    ## Migración del caso
-    migra_simples = ::Ability::CAMPOS_MIGRA_SIMPLES
-    migra_rela = ::Ability::CAMPOS_MIGRA_RELA
-    migra_multi = ::Ability::CAMPOS_MIGRA_MULTI
-    migracion = Sivel2Sjr::Migracion.where(caso_id: caso_id)[0]
-    if migracion
-      if migra_simples.include? atr.to_s
-        return migracion.send(atr.to_s) ? migracion.send(atr.to_s) : ''
-      end
-      if migra_rela.include? atr.to_s
-        return migracion.send(atr.to_s).nil? ? "No aplica o nulo" : migracion.send(atr.to_s).nombre
-      end
-      if migra_multi.include? atr.to_s
-        return migracion.send(atr.to_s).count > 0  ? migracion.send(atr.to_s).pluck(:nombre).join(", ") : '' 
-      end
-    else
-      return ''
-    end
 
     # Desplazamiento del Caso
     desplaza_simples = ::Ability::CAMPOS_DESPLAZA_SIMPLES
@@ -270,7 +252,6 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
     ccasosjr = ['comosupo', 'consentimientosjr', 'consentimientobd']
     especiales = ['actividadoficio', 'numeroanexos', 'numeroanexosconsen']
 
-    orientaciones = Sip::OrientacionsexualHelper::ORIENTACIONES
     m = /familiar(.*)$/.match(atr.to_s)
     if m
       numero = m[1].split("_")[0]
@@ -288,15 +269,7 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
             return personaf.send(campo) ? personaf.send(campo).nombre : ''
           end
           if cvictimasimple.include? campo
-            if victimaf.send(campo) and campo= "orientacionsexual"
-              orientaciones.each do |ori|
-                if ori[1].to_s == victimaf.send(campo).to_s
-                  return ori[0].to_s
-                end
-              end
-            else
-              return ''
-            end
+            return victimaf.send(campo) ? victimaf.send(campo) : ''
           end
           if cvictimadoble.include? campo
             return victimaf.send(campo) ? victimaf.send(campo).nombre : ''
@@ -329,6 +302,53 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
         return ''
       end
     end
+    ## Migración del caso
+    migra_simples = ::Ability::CAMPOS_MIGRA_SIMPLES
+    migra_rela = ::Ability::CAMPOS_MIGRA_RELA
+    migra_multi = ::Ability::CAMPOS_MIGRA_MULTI
+    migracion = Sivel2Sjr::Migracion.where(caso_id: caso_id)[0]
+    if migra_simples.include? atr.to_s
+      if migracion
+        return migracion.send(atr.to_s).nil? ? '' : migracion.send(atr.to_s)
+      else 
+        return ''
+      end
+    end
+    if migra_rela.include? atr.to_s
+      if migracion
+        return migracion.send(atr.to_s).nil? ? "No aplica o nulo" : migracion.send(atr.to_s).nombre
+      else 
+        return ''
+      end
+    end
+    if migra_multi.include? atr.to_s
+      if migracion
+        if atr.to_s == 'causaagresion'
+          causasagresion = migracion.send(atr.to_s).pluck(:nombre)
+          causasagresion.each_with_index do |cag, index|
+            if cag == 'Otra'
+              otracausa = migracion.otracausaagresion
+              causasagresion[index] = "Otra: #{otracausa}"
+            end
+          end
+          return migracion.send(atr.to_s).count > 0  ? causasagresion.join(", ") : '' 
+        elsif atr.to_s == 'causaagrpais'
+          causasagresion = migracion.send(atr.to_s).pluck(:nombre)
+          causasagresion.each_with_index do |cag, index|
+            if cag == 'Otra'
+              otracausa = migracion.otracausagrpais
+              causasagresion[index] = "Otra: #{otracausa}"
+            end
+          end
+          return migracion.send(atr.to_s).count > 0  ? causasagresion.join(", ") : '' 
+        else
+          return migracion.send(atr.to_s).count > 0  ? migracion.send(atr.to_s).pluck(:nombre).join(", ") : '' 
+        end
+      else 
+        return ''
+      end
+    end
+    ## CONTACTO
     case atr.to_s
     when 'contacto_anionac'
       contacto.anionac ? contacto.anionac : ''
@@ -359,6 +379,7 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
     when 'contacto_etnia'
       victimac.etnia ? victimac.etnia.nombre : ''
     when 'contacto_orientacionsexual'
+      orientaciones = Sip::OrientacionsexualHelper::ORIENTACIONES
       if victimac.orientacionsexual
         orientaciones.each do |ori|
           if ori[1].to_s == victimac.orientacionsexual.to_s

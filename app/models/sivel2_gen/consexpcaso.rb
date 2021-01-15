@@ -200,7 +200,59 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
     else
       return ''
     end
-     
+
+    # Desplazamiento del Caso
+    desplaza_simples = ::Ability::CAMPOS_DESPLAZA_SIMPLES
+    desplaza_rela = ::Ability::CAMPOS_DESPLAZA_RELA
+    desplaza_multi = ::Ability::CAMPOS_DESPLAZA_MULTI
+    desplaza_bool = ::Ability::CAMPOS_DESPLAZA_BOOL
+    desplaza_espe = ::Ability::CAMPOS_DESPLAZA_ESPECIALES
+    desplazamiento = Sivel2Sjr::Desplazamiento.where(id_caso: caso_id)[0]
+    if desplazamiento
+      if desplaza_simples.include? atr.to_s
+        if atr.to_s == 'declaro'
+          case desplazamiento.send(atr.to_s)
+          when 'S'
+            return 'Si'
+          when 'N'
+            return 'No'
+          when 'R'
+            return 'NO SABE / NO RESPONDE'
+          end
+        else
+          return desplazamiento.send(atr.to_s) ? desplazamiento.send(atr.to_s) : ''
+        end
+      end
+      if desplaza_rela.include? atr.to_s
+        return desplazamiento.send(atr.to_s).nil? ? "No aplica o nulo" : desplazamiento.send(atr.to_s).nombre
+      end
+      if desplaza_multi.include? atr.to_s
+        return desplazamiento.send(atr.to_s).count > 0 ? desplazamiento.send(atr.to_s).pluck(:nombre).join(", ") : ''
+      end
+      if desplaza_bool.include? atr.to_s
+        if desplazamiento.send(atr.to_s)
+          return "Si"
+        else
+          return desplazamiento.send(atr.to_s).nil? ? 'No responde' : 'No'
+        end
+      end
+      if desplaza_espe.include? atr.to_s
+        exp = desplazamiento.expulsion
+        lle = desplazamiento.llegada
+        res = ::DesplazamientoHelper.modageo_desplazamiento(exp, lle)
+        case atr.to_s
+        when 'expulsion', 'llegada'
+          return desplazamiento.send(atr.to_s) ? Sip::UbicacionHelper.formato_ubicacion(desplazamiento.send(atr.to_s)) : ''
+        when 'modalidadgeo'
+          return res ? res[0] : ''
+        when 'submodalidadgeo'
+          return res ? res[1] : ''
+        end
+      end
+    else
+      return ''
+    end
+
     ## 5 Victimas
     cpersonasimple = [
          'nombres', 'apellidos', 'sexo', 'anionac', 'mesnac', 'dianac',

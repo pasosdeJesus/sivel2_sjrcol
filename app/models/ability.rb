@@ -159,7 +159,8 @@ class Ability < Sivel2Sjr::Ability
     'division',
     'otro'
   ]
->>>>>>> 1a35598... tres primeros presuntos responsables (#165)
+  prefijos_ubicaciones_campos = ['ubicacion1', 'ubicacion2', 'ubicacion3']
+  prefijos_actos_campos = ['acto1', 'acto2', 'acto3', 'acto4', 'acto5']
   CAMPOS_UBICACIONES = [
     'pais', 'departamento',
     'municipio',
@@ -261,7 +262,13 @@ class Ability < Sivel2Sjr::Ability
     'fecha',
     'usuario',
     'observaciones'
->>>>>>> bfcd483... 5 primeras etiquetas (#172)
+  ]
+  CAMPOS_ACTOS = [
+    'presponsable',
+    'categoria',
+    'persona',
+    'fecha',
+    'desplazamiento'
   ]
   campos_personavic = [
        'nombres',
@@ -329,6 +336,12 @@ class Ability < Sivel2Sjr::Ability
       campos_etiquetas_casos.push((et + '_' + campo).to_sym)
     end
   end
+  campos_actos_casos = []
+  prefijos_actos_campos.each do |pac| 
+    CAMPOS_ACTOS.each do |campo| 
+      campos_actos_casos.push((pac + '_' + campo).to_sym)
+    end
+  end
   CAMPOS_PLANTILLAS_PROPIAS = {
     'Caso' => {
       campos: 
@@ -336,6 +349,7 @@ class Ability < Sivel2Sjr::Ability
         campos_ubicaciones_casos +
         campos_presponsables_casos +
         campos_etiquetas_casos +
+        campos_actos_casos +
         CAMPOS_MIGRA_SIMPLES +
         CAMPOS_MIGRA_RELA +
         CAMPOS_MIGRA_MULTI +

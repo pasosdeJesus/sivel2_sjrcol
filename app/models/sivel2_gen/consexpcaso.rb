@@ -191,17 +191,24 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
       campo = cacto[1].split("_")[1]
       if !actos.empty?
         acto = actos[numero.to_i-1]
-        actosjr = Sivel2Sjr::Actosjr.where(id_acto: acto.id)[0]
-        case campo
-        when 'presponsable', 'categoria'
-          return acto.send(campo) ? acto.send(campo).nombre : ''
-        when 'persona'
-          return acto.send(campo) ? acto.send(campo).nombres : ''
-        when 'fecha'
-          return actosjr ? actosjr.fecha : ''
-        when 'desplazamiento'
-          desplaza = Sivel2Sjr::Desplazamiento.where(id: actosjr.desplazamiento_id)[0]
-          return desplaza ? desplaza.fechaexpulsion : ''
+        if acto
+          actosjr = Sivel2Sjr::Actosjr.where(id_acto: acto.id)[0]
+          case campo
+          when 'presponsable', 'categoria'
+            return acto.send(campo) ? acto.send(campo).nombre : ''
+          when 'persona'
+            return acto.send(campo) ? acto.send(campo).nombres : ''
+          when 'fecha'
+            return actosjr ? actosjr.fecha : ''
+          when 'desplazamiento'
+            desplaza = Sivel2Sjr::Desplazamiento.where(id: actosjr.desplazamiento_id)[0]
+            return desplaza ? desplaza.fechaexpulsion : ''
+          end
+        else
+          case campo
+          when 'presponsable', 'categoria', 'persona', 'fecha', 'desplazamiento'
+            return ''
+          end
         end
       else
         case campo

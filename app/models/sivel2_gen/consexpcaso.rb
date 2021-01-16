@@ -232,9 +232,15 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
           if cprsim.include? campo
             return presponsable.send(campo) ?  presponsable.send(campo) : ''
           end
+        else
+          if cprdob.include? campo or cprsim.include? campo
+            return ''
+          end
         end
       else
-        return ''
+        if cprdob.include? campo or cprsim.include? campo
+          return ''
+        end
       end
     end
 

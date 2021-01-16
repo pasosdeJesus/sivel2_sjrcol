@@ -146,6 +146,7 @@ class Ability < Sivel2Sjr::Ability
   prefijos_personas_campos = ['contacto', 'familiar1', 'familiar2', 
                              'familiar3', 'familiar4', 'familiar5']
   prefijos_ubicaciones_campos = ['ubicacion1', 'ubicacion2', 'ubicacion3'] 
+  prefijos_respuestas_campos = ['respuesta1','respuesta2', 'respuesta3', 'respuesta4', 'respuesta5'] 
   CAMPOS_UBICACIONES = [
     'pais', 'departamento',
     'municipio',
@@ -236,6 +237,12 @@ class Ability < Sivel2Sjr::Ability
     'connacionaldeportado',
     'protegiorupta'
   ]
+  CAMPOS_RESPUESTAS = [
+    'actividad',
+    'fecha',
+    'proyectofinanciero',
+    'actividadpf'
+  ]
   campos_personavic = [
        'nombres',
        'actividadoficio',
@@ -282,6 +289,12 @@ class Ability < Sivel2Sjr::Ability
   prefijos_ubicaciones_campos.each do |pu| 
     CAMPOS_UBICACIONES.each do |campo| 
       campos_ubicaciones_casos.push((pu + '_' + campo).to_sym)
+    end
+  end
+  campos_respuestas_casos = []
+  prefijos_respuestas_campos.each do |res| 
+    CAMPOS_RESPUESTAS.each do |campo| 
+      campos_respuestas_casos.push((res + '_' + campo).to_sym)
     end
   end
   CAMPOS_PLANTILLAS_PROPIAS = {

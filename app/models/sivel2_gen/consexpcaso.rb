@@ -243,6 +243,9 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
         when 'presponsable', 'categoria', 'persona', 'fecha', 'desplazamiento'
           return ''
         end
+      end
+    end
+
     ## 3 primeros presuntos responsables
     cprdob = ['presponsable']
     cprsim = ['bloque', 'frente', 'brigada', 'batallon', 'division', 'otro']

@@ -215,6 +215,9 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
         when 'presponsable', 'categoria', 'persona', 'fecha', 'desplazamiento'
           return ''
         end
+      end
+    end
+
     ## 3 primeros presuntos responsables
     cprdob = ['presponsable']
     cprsim = ['bloque', 'frente', 'brigada', 'batallon', 'division', 'otro']
@@ -433,8 +436,15 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
         return ''
       end
     end
-    ## CONTACTO
+    caso = Sivel2Gen::Caso.find(caso_id)
+    numeroanexos = Sivel2Gen::AnexoCaso.where(id_caso: caso_id).count
     case atr.to_s
+    ## Hechos y Número de anexos
+    when 'memo'
+      caso.memo ? caso.memo : ''
+    when 'numeroanexos'
+      caso ? numeroanexos : ''
+    ## CONTACTO
     when 'contacto_anionac'
       contacto.anionac ? contacto.anionac : ''
     when 'contacto_mesnac'

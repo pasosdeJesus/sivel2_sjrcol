@@ -215,6 +215,26 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
         when 'presponsable', 'categoria', 'persona', 'fecha', 'desplazamiento'
           return ''
         end
+    ## 3 primeros presuntos responsables
+    cprdob = ['presponsable']
+    cprsim = ['bloque', 'frente', 'brigada', 'batallon', 'division', 'otro']
+    cpr = /presponsable(.*)$/.match(atr.to_s)
+    presponsables = Sivel2Gen::CasoPresponsable.where(id_caso: caso_id)
+    if cpr
+      numero = cpr[1].split("_")[0]
+      campo = cpr[1].split("_")[1]
+      if !presponsables.empty?
+        presponsable = presponsables[numero.to_i-1]
+        if presponsable
+          if cprdob.include? campo
+            return presponsable.send(campo) ? presponsable.send(campo).nombre : ''
+          end
+          if cprsim.include? campo
+            return presponsable.send(campo) ?  presponsable.send(campo) : ''
+          end
+        end
+      else
+        return ''
       end
     end
 

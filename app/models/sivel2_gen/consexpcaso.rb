@@ -160,6 +160,7 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
     contacto =  Sip::Persona.find(casosjr.contacto_id)
     victimac = Sivel2Gen::Victima.where(id_persona: contacto.id)[0]
     victimasjrc = Sivel2Sjr::Victimasjr.where(id_victima: victimac.id)[0]
+
     ## 3 primeras ubicaciones
     cubidob = ['pais', 'departamento', 'municipio', 'clase', 'tsitio']
     cubisim = ['longitud', 'latitud', 'sitio', 'lugar']
@@ -168,7 +169,7 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
     if cubi
       numero = cubi[1].split("_")[0]
       campo = cubi[1].split("_")[1]
-      if !ubicaciones.empty?
+      if ubicaciones.count >= numero.to_i
         ubicacion = ubicaciones[numero.to_i-1]
         if ubicacion
           if cubidob.include? campo

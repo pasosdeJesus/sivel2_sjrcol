@@ -148,6 +148,7 @@ class Ability < Sivel2Sjr::Ability
   prefijos_ubicaciones_campos = ['ubicacion1', 'ubicacion2', 'ubicacion3'] 
   prefijos_presponsables_campos = ['presponsable1', 'presponsable2', 'presponsable3'] 
   prefijos_respuestas_campos = ['respuesta1','respuesta2', 'respuesta3', 'respuesta4', 'respuesta5'] 
+  prefijos_etiquetas_campos = ['etiqueta1', 'etiqueta2', 'etiqueta3', 'etiqueta4', 'etiqueta5'] 
   CAMPOS_CASOPRESPONSABLES = [
     'presponsable',
     'tipo',
@@ -255,6 +256,13 @@ class Ability < Sivel2Sjr::Ability
     'proyectofinanciero',
     'actividadpf'
   ]
+  CAMPOS_ETIQUETAS =  [
+    'etiqueta',
+    'fecha',
+    'usuario',
+    'observaciones'
+>>>>>>> bfcd483... 5 primeras etiquetas (#172)
+  ]
   campos_personavic = [
        'nombres',
        'actividadoficio',
@@ -315,12 +323,19 @@ class Ability < Sivel2Sjr::Ability
       campos_ubicaciones_casos.push((pr + '_' + campo).to_sym)
     end
   end
+  campos_etiquetas_casos = []
+  prefijos_etiquetas_campos.each do |et| 
+    CAMPOS_ETIQUETAS.each do |campo| 
+      campos_etiquetas_casos.push((et + '_' + campo).to_sym)
+    end
+  end
   CAMPOS_PLANTILLAS_PROPIAS = {
     'Caso' => {
       campos: 
         campos_personas_casos +
         campos_ubicaciones_casos +
         campos_presponsables_casos +
+        campos_etiquetas_casos +
         CAMPOS_MIGRA_SIMPLES +
         CAMPOS_MIGRA_RELA +
         CAMPOS_MIGRA_MULTI +

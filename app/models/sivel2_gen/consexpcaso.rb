@@ -494,6 +494,43 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
         return ''
       end
     end
+    ## 5 Respuestas a Caso
+    cres = /respuesta(.*)$/.match(atr.to_s)
+    respuestas = Sivel2Sjr::ActividadCasosjr.where(casosjr_id: caso_id)
+    if cres
+      numero = cres[1].split("_")[0]
+      campo = cres[1].split("_")[1]
+      if !respuestas.empty?
+        respuesta = respuestas[numero.to_i-1]
+        if respuesta
+          actividad = Cor1440Gen::Actividad.where(id: respuesta.actividad_id)[0]
+          case campo
+          when 'actividad'
+            return actividad ? actividad.id : ''
+          when 'fecha'
+            return actividad ? actividad.fecha : ''
+          when 'proyectofinanciero'
+            convenios_ids = Cor1440Gen::ActividadProyectofinanciero.where(actividad_id: actividad.id).pluck(:proyectofinanciero_id)
+            proyectosfinancieros = Cor1440Gen::Proyectofinanciero.find(convenios_ids - [10])
+            return proyectosfinancieros ? proyectosfinancieros.pluck(:nombre).join(', ') : ''
+          when 'actividadpf'
+            actividadespf_ids = Cor1440Gen::ActividadActividadpf.where(actividad_id: actividad.id).pluck(:actividadpf_id)
+            actividadespf = Cor1440Gen::Actividadpf.find(actividadespf_ids)
+            return actividadespf ? actividadespf.pluck(:titulo).join(', ') : ''
+          end
+        else
+          case campo
+          when 'actividad', 'fecha', 'proyectofinanciero', 'actividadpf'
+            return ''
+          end
+        end
+      else
+        case campo
+        when 'actividad', 'fecha', 'proyectofinanciero', 'actividadpf'
+          return ''
+        end
+      end
+    end
     caso = Sivel2Gen::Caso.find(caso_id)
     numeroanexos = Sivel2Gen::AnexoCaso.where(id_caso: caso_id).count
     case atr.to_s

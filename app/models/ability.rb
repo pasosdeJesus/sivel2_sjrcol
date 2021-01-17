@@ -146,6 +146,20 @@ class Ability < Sivel2Sjr::Ability
   prefijos_personas_campos = ['contacto', 'familiar1', 'familiar2', 
                              'familiar3', 'familiar4', 'familiar5']
   prefijos_ubicaciones_campos = ['ubicacion1', 'ubicacion2', 'ubicacion3'] 
+  prefijos_presponsables_campos = ['presponsable1', 'presponsable2', 'presponsable3'] 
+  prefijos_respuestas_campos = ['respuesta1','respuesta2', 'respuesta3', 'respuesta4', 'respuesta5'] 
+  prefijos_etiquetas_campos = ['etiqueta1', 'etiqueta2', 'etiqueta3', 'etiqueta4', 'etiqueta5'] 
+  CAMPOS_CASOPRESPONSABLES = [
+    'presponsable',
+    'tipo',
+    'bloque',
+    'frente',
+    'brigada',
+    'batallon',
+    'division',
+    'otro'
+  ]
+  prefijos_ubicaciones_campos = ['ubicacion1', 'ubicacion2', 'ubicacion3']
   prefijos_actos_campos = ['acto1', 'acto2', 'acto3', 'acto4', 'acto5']
   prefijos_presponsables_campos = ['presponsable1', 'presponsable2', 'presponsable3'] 
   prefijos_etiquetas_campos = ['etiqueta1', 'etiqueta2', 'etiqueta3', 'etiqueta4', 'etiqueta5'] 
@@ -249,6 +263,18 @@ class Ability < Sivel2Sjr::Ability
     'connacionaldeportado',
     'protegiorupta'
   ]
+  CAMPOS_RESPUESTAS = [
+    'actividad',
+    'fecha',
+    'proyectofinanciero',
+    'actividadpf'
+  ]
+  CAMPOS_ETIQUETAS =  [
+    'etiqueta',
+    'fecha',
+    'usuario',
+    'observaciones'
+  ]
   CAMPOS_ACTOS = [
     'presponsable',
     'categoria',
@@ -310,6 +336,24 @@ class Ability < Sivel2Sjr::Ability
       campos_ubicaciones_casos.push((pu + '_' + campo).to_sym)
     end
   end
+  campos_respuestas_casos = []
+  prefijos_respuestas_campos.each do |res| 
+    CAMPOS_RESPUESTAS.each do |campo| 
+      campos_respuestas_casos.push((res + '_' + campo).to_sym)
+    end
+  end
+  campos_presponsables_casos = []
+  prefijos_presponsables_campos.each do |pr| 
+    CAMPOS_CASOPRESPONSABLES.each do |campo| 
+      campos_ubicaciones_casos.push((pr + '_' + campo).to_sym)
+    end
+  end
+  campos_etiquetas_casos = []
+  prefijos_etiquetas_campos.each do |et| 
+    CAMPOS_ETIQUETAS.each do |campo| 
+      campos_etiquetas_casos.push((et + '_' + campo).to_sym)
+    end
+  end
   campos_actos_casos = []
   prefijos_actos_campos.each do |pac| 
     CAMPOS_ACTOS.each do |campo| 
@@ -333,6 +377,8 @@ class Ability < Sivel2Sjr::Ability
       campos: 
         campos_personas_casos +
         campos_ubicaciones_casos +
+        campos_presponsables_casos +
+        campos_etiquetas_casos +
         campos_actos_casos +
         campos_presponsables_casos +
         campos_etiquetas_casos +

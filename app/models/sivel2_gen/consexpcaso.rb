@@ -354,6 +354,37 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
         return ''
       end
     end
+
+    ## 5 Etiquetas
+    ceti = /etiqueta(.*)$/.match(atr.to_s)
+    etiquetas = Sivel2Gen::CasoEtiqueta.where(id_caso: caso_id)
+    if ceti
+      numero = ceti[1].split("_")[0]
+      campo = ceti[1].split("_")[1]
+      if !etiquetas.empty?
+        etiqueta = etiquetas[numero.to_i-1]
+        if etiqueta
+          case campo
+          when 'etiqueta'
+            return etiqueta.send(campo) ? etiqueta.send(campo).nombre : ''
+          when 'usuario'
+            return etiqueta.send(campo) ? etiqueta.send(campo).nusuario : ''
+          when 'fecha', 'observaciones'
+            return etiqueta ? etiqueta.send(campo) : ''
+          end
+        else
+          case campo
+          when 'etiqueta', 'usuario', 'fecha', 'observaciones'
+            return ''
+          end
+        end
+      else
+        case campo
+        when 'etiqueta', 'usuario', 'fecha', 'observaciones'
+          return ''
+        end
+      end
+    end
     ## Migración del caso
     migra_simples = ::Ability::CAMPOS_MIGRA_SIMPLES
     migra_rela = ::Ability::CAMPOS_MIGRA_RELA

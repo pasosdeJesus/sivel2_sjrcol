@@ -377,7 +377,7 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
             return personaf.send(campo) ? personaf.send(campo).nombre : ''
           end
           if cvictimasimple.include? campo
-            if victimaf.send(campo) and campo= "orientacionsexual"
+            if victimaf.send(campo) and campo == "orientacionsexual"
               orientaciones.each do |ori|
                 if ori[1].to_s == victimaf.send(campo).to_s
                   return ori[0].to_s

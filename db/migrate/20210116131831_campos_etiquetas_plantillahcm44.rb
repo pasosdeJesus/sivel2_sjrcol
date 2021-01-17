@@ -20,7 +20,7 @@ class CamposEtiquetasPlantillahcm44 < ActiveRecord::Migration[6.0]
 
 
   def up
-    numid = 522  
+    numid = 930
     col = 'MG'
     (1..5).each do |numet|
       CAMPOS.each do |campo|
@@ -40,7 +40,7 @@ class CamposEtiquetasPlantillahcm44 < ActiveRecord::Migration[6.0]
   def down
     execute <<-SQL
       DELETE FROM heb412_gen_campoplantillahcm WHERE
-        id>='522' AND id<='#{CAMPOS.length*5+521}'
+        id>='930' AND id<='949'
     SQL
   end
 

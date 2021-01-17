@@ -260,7 +260,7 @@ module Sivel2Sjr
       end
       Sivel2Gen::Conscaso.refresca_conscaso
       cc = Sivel2Gen::Conscaso.where(caso_id: params[:id])
-      ce = Sivel2Gen::Consexpcaso.crea_consexpcaso(cc, nil)
+      Sivel2Gen::Consexpcaso.crea_consexpcaso(cc, nil)
       @registro = @basica = Sivel2Gen::Consexpcaso.
         where(caso_id: params[:id]).take
     end

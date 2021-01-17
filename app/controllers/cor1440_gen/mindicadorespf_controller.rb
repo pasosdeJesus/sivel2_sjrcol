@@ -160,8 +160,8 @@ module Cor1440Gen
       hombres3 = calcula_benef_por_sexo(lac3, 'M', ffin, false)
       mujeres3 = calcula_benef_por_sexo(lac3, 'F', ffin, false)
       sinsexo3 = calcula_benef_por_sexo(lac3, 'S', ffin, false)
-      grupo3 = hombres2[0] + mujeres2[0] + sinsexo2[0] +
-        hombres2[1] + mujeres2[1] + sinsexo2[1]
+      grupo3 = hombres3[0] + mujeres3[0] + sinsexo3[0] +
+        hombres3[1] + mujeres3[1] + sinsexo3[1]
       menores = []
       mayores = []
       grupo3.each do |f|
@@ -232,7 +232,7 @@ module Cor1440Gen
     # reciben ayuda humanitaria de emergencia con reglas 
     # y actividades de PRM 2020',
       def calcula_maternidad(idacs, idmat)
-        meternidad = Sivel2Gen::Victima.
+        return Sivel2Gen::Victima.
           joins('JOIN sivel2_sjr_victimasjr ON sivel2_gen_victima.id=sivel2_sjr_victimasjr.id_victima').
           joins('JOIN sip_persona ON sip_persona.id=sivel2_gen_victima.id_persona').
           joins('JOIN sivel2_sjr_actividad_casosjr ON casosjr_id=sivel2_gen_victima.id_caso').

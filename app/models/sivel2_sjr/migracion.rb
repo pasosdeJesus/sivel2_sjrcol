@@ -107,7 +107,7 @@ class Sivel2Sjr::Migracion < ActiveRecord::Base
     if self.id && self.fechallegada
       fechallegada = self.fechallegada.to_datetime
       hoy = Date.today
-      dias = hoy -fechallegada
+      dias = hoy - fechallegada
       return dias.to_i
     end
     return ''

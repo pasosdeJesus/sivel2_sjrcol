@@ -357,7 +357,6 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
     cvictimasjrdoble = [
          'maternidad', 'estadocivil', 'discapacidad', 'rolfamilia', 
          'regimensalud', 'escolaridad']
-    ccasosjr = ['comosupo', 'consentimientosjr', 'consentimientobd']
     especiales = ['actividadoficio', 'numeroanexos', 'numeroanexosconsen']
     orientaciones = Sip::OrientacionsexualHelper::ORIENTACIONES
     m = /familiar(.*)$/.match(atr.to_s)

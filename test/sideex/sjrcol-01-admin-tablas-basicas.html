@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 	<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
-	<title>sjrcol-31-directornal-tablas-basicas</title>
+	<title>sjrcol-01-admin-tablas-basicas</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
@@ -34,6 +34,38 @@
 <tr><td>clickAt</td><td>link=Eliminar<datalist><option>link=Eliminar</option><option>css=a.btn.btn-danger</option><option>//a[contains(text(),'Eliminar')]</option><option>xpath=(//a[contains(@href, '/admin/dificultadesmigracion/101')])[2]</option><option>//div[4]/a</option></datalist></td><td>36,20</td>
 </tr>
 <tr><td>assertText</td><td>css=h1<datalist><option>css=h1</option><option>//h1</option></datalist></td><td>Accidentes o Dificultades en la migración</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">tabla-departamentos-gifmm</td></tr>
+</thead>
+<tbody>
+<tr><td>clickAt</td><td>id=navbarDropdownAdministrar<datalist><option>id=navbarDropdownAdministrar</option><option>link=Administrar</option><option>css=#navbarDropdownAdministrar</option><option>//a[contains(text(),'Administrar')]</option><option>//a[@id='navbarDropdownAdministrar']</option><option>//div[@id='navbarSupportedContent']/ul[2]/li[2]/a</option><option>xpath=(//a[contains(@href, '#')])[6]</option><option>//ul[2]/li[2]/a</option></datalist></td><td>57,22</td>
+</tr>
+<tr><td>clickAt</td><td>link=Tablas Básicas<datalist><option>link=Tablas Básicas</option><option>//a[contains(text(),'Tablas Básicas')]</option><option>//div[@id='navbarSupportedContent']/ul[2]/li[2]/div/a[5]</option><option>//a[contains(@href, '/tablasbasicas')]</option><option>//ul[2]/li[2]/div/a[5]</option></datalist></td><td>64,10</td>
+</tr>
+<tr><td>clickAt</td><td>link=Departamentos GIFMM<datalist><option>link=Departamentos GIFMM</option><option>//a[contains(text(),'Departamentos GIFMM')]</option><option>//a[contains(@href, 'admin/depsgifmm')]</option><option>//li[24]/a</option></datalist></td><td>106,3</td>
+</tr>
+<tr><td>runScript</td><td>window.scrollTo(0,0)<datalist><option>window.scrollTo(0,0)</option></datalist></td><td></td>
+</tr>
+<tr><td>clickAt</td><td>css=a.btn.btn-primary<datalist><option>css=a.btn.btn-primary</option><option>xpath=(//a[contains(text(),'Nuevo')])[2]</option><option>//a[contains(@href, '/admin/depsgifmm/nueva.%23%3CDepgifmm::ActiveRecord_Relation:0x0000108ceea88e88%3E')]</option><option>//div/div/a</option></datalist></td><td>45,18</td>
+</tr>
+<tr><td>clickAt</td><td>id=depgifmm_nombre<datalist><option>id=depgifmm_nombre</option><option>name=depgifmm[nombre]</option><option>css=#depgifmm_nombre</option><option>//input[@id='depgifmm_nombre']</option><option>//form[@id='new_depgifmm']/div[2]/input</option><option>//div[2]/input</option></datalist></td><td>109,12</td>
+</tr>
+<tr><td>type</td><td>id=depgifmm_nombre<datalist><option>id=depgifmm_nombre</option><option>name=depgifmm[nombre]</option><option>css=#depgifmm_nombre</option><option>//input[@id='depgifmm_nombre']</option><option>//form[@id='new_depgifmm']/div[2]/input</option><option>//div[2]/input</option></datalist></td><td>aaa</td>
+</tr>
+<tr><td>clickAt</td><td>id=depgifmm_observaciones<datalist><option>id=depgifmm_observaciones</option><option>name=depgifmm[observaciones]</option><option>css=#depgifmm_observaciones</option><option>//textarea[@id='depgifmm_observaciones']</option><option>//form[@id='new_depgifmm']/div[3]/textarea</option><option>//textarea</option></datalist></td><td>115,10</td>
+</tr>
+<tr><td>type</td><td>id=depgifmm_observaciones<datalist><option>id=depgifmm_observaciones</option><option>name=depgifmm[observaciones]</option><option>css=#depgifmm_observaciones</option><option>//textarea[@id='depgifmm_observaciones']</option><option>//form[@id='new_depgifmm']/div[3]/textarea</option><option>//textarea</option></datalist></td><td>bbb</td>
+</tr>
+<tr><td>clickAt</td><td>name=commit<datalist><option>name=commit</option><option>css=input[name="commit"]</option><option>//input[@name='commit']</option><option>//form[@id='new_depgifmm']/div[6]/input</option><option>//div[6]/input</option></datalist></td><td>56,22</td>
+</tr>
+<tr><td>chooseOkOnNextConfirmation</td><td><datalist><option></option></datalist></td><td></td>
+</tr>
+<tr><td>clickAt</td><td>link=Eliminar<datalist><option>link=Eliminar</option><option>css=a.btn.btn-danger</option><option>//a[contains(text(),'Eliminar')]</option><option>xpath=(//a[contains(@href, '/admin/depsgifmm/101')])[2]</option><option>//div[4]/a</option></datalist></td><td>56,14</td>
+</tr>
+<tr><td>assertText</td><td>css=h1<datalist><option>css=h1</option><option>//h1</option></datalist></td><td>Departamentos GIFMM</td>
 </tr>
 </tbody></table>
 <table cellpadding="1" cellspacing="1" border="1">
@@ -1823,8 +1855,6 @@
 	<td>bbb</td>
 </tr>
 <tr><td>clickAt</td><td>css=a.chosen-single.chosen-default &gt; span<datalist><option>css=a.chosen-single.chosen-default &gt; span</option><option>//div[@id='oficina_pais_id_chosen']/a/span</option><option>//a/span</option></datalist></td><td>60,9</td>
-</tr>
-<tr><td>assertText</td><td>css=h1<datalist><option>css=h1</option><option>//h1</option></datalist></td><td>Nueva Oficina</td>
 </tr>
 <tr><td>runScript</td><td>$('.chosen-select').removeAttr('style'); $('.chosen-container').remove(); $('.chosen-select').removeClass('chosen-select')<datalist><option>$('.chosen-select').removeAttr('style'); $('.chosen-container').remove(); $('.chosen-select').removeClass('chosen-select')</option></datalist></td><td></td>
 </tr>

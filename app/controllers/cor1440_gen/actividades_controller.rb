@@ -96,12 +96,12 @@ module Cor1440Gen
     end
 
     def atributos_form
-      atributos_show - [:id]
+      atributos_show - [:id] + [:observaciones]
     end
 
     # Elementos de la presentacion de una actividad
     def atributos_presenta
-      return [ 
+      [ 
         :id, 
         :fecha, 
         :oficina, 

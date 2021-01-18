@@ -643,14 +643,33 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
       caso.memo ? caso.memo : ''
     when 'numeroanexos'
       caso ? numeroanexos : ''
+
+    when 'ultimaatencion_as_humanitaria'
+      resp_ultimaatencion(11,110)
+    when 'ultimaatencion_ac_juridica'
+      r = ''
+      if resp_ultimaatencion(14,140) != ''
+         r += resp_ultimaatencion(14,140) + ": " + 
+           resp_ultimaatencion(14,141) + '. '
+      end
+      if resp_ultimaatencion(14,142) != ''
+         r += resp_ultimaatencion(14,142) + ": " + 
+           resp_ultimaatencion(14,143) + '. '
+      end
+      r
+    when 'ultimaatencion_as_juridica'
+      resp_ultimaatencion(13,130)
     when 'ultimaatencion_derechosvul'
       resp_ultimaatencion(10,100)
-    when 'ultimaatencion_as_humanitaria'
-      resp_ultimaatencion(10,110)
-    when 'ultimaatencion_as_juridica'
-      resp_ultimaatencion(10,130)
+    when 'ultimaatencion_descripcion_at'
+      ultatencion = Cor1440Gen::Actividad.
+        where(id: ultimaatencion_actividad_id).take
+      if !ultatencion
+        return "Problema no existe actividad #{ultimaatencion_actividad_id}"
+      end
+      ultatencion.objetivo ? ultatencion.objetivo : ''
     when 'ultimaatencion_otros_ser_as'
-      resp_ultimaatencion(10,150)
+      resp_ultimaatencion(15,150)
 
     else
       if respond_to?(atr)

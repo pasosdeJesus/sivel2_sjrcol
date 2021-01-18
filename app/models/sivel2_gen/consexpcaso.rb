@@ -14,7 +14,7 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
         conscaso.expulsion,
         conscaso.llegada,
         conscaso.memo AS descripcion,
-        CAST(EXTRACT(MONTH FROM ultimaatencion.fechaatencion) AS INTEGER) AS ultimaatencion_mes,
+        CAST(EXTRACT(MONTH FROM ultimaatencion.fecha) AS INTEGER) AS ultimaatencion_mes,
         conscaso.ultimaatencion_fecha,
         conscaso.contacto,
         contacto.nombres AS contacto_nombres,
@@ -91,32 +91,32 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
           WHERE victima.id_caso=caso.id AND sip_persona.sexo='F' 
           AND id_rangoedad='10') AS beneficiarias_60_,
 
-        ARRAY_TO_STRING(ARRAY(SELECT nombre FROM public.sivel2_sjr_derecho 
-          JOIN public.sivel2_sjr_derecho_respuesta ON id_derecho=sivel2_sjr_derecho.id
-          WHERE id_respuesta=ultimaatencion.id), ', ')
-          AS ultimaatencion_derechosvul,
-        ARRAY_TO_STRING(ARRAY(SELECT nombre FROM public.sivel2_sjr_ayudasjr
-          JOIN public.sivel2_sjr_ayudasjr_respuesta ON id_ayudasjr=sivel2_sjr_ayudasjr.id
-          WHERE id_respuesta=ultimaatencion.id), ', ') || 
-          ' ' || ultimaatencion.detallear AS ultimaatencion_as_humanitaria,
-        ARRAY_TO_STRING(ARRAY(SELECT nombre FROM public.sivel2_sjr_aslegal
-          JOIN public.sivel2_sjr_aslegal_respuesta ON id_aslegal=sivel2_sjr_aslegal.id
-          WHERE id_respuesta=ultimaatencion.id), ', ') || 
-          ' ' || ultimaatencion.detalleal AS ultimaatencion_as_juridica,
-        ARRAY_TO_STRING(ARRAY(SELECT nombre FROM public.sivel2_sjr_motivosjr
-          JOIN public.sivel2_sjr_motivosjr_respuesta ON id_motivosjr=sivel2_sjr_motivosjr.id
-          WHERE id_respuesta=ultimaatencion.id), ', ') || 
-          ' ' || ultimaatencion.detallemotivo AS ultimaatencion_otros_ser_as,
-        ultimaatencion.descatencion AS ultimaatencion_descripcion_at,
-        ARRAY_TO_STRING(ARRAY(SELECT supracategoria.id_tviolencia || ':' || 
-          categoria.supracategoria_id || ':' || categoria.id || ' ' ||
-          categoria.nombre FROM public.sivel2_gen_categoria AS categoria, 
-          public.sivel2_gen_supracategoria AS supracategoria,
-          public.sivel2_gen_acto AS acto
-          WHERE categoria.id=acto.id_categoria
-          AND supracategoria.id=categoria.supracategoria_id
-          AND acto.id_caso=caso.id), ', ')
-        AS tipificacion,
+--        ARRAY_TO_STRING(ARRAY(SELECT nombre FROM public.sivel2_sjr_derecho 
+--         JOIN public.sivel2_sjr_derecho_respuesta ON id_derecho=sivel2_sjr_derecho.id
+--          WHERE id_respuesta=ultimaatencion.id), '; ')
+--          AS ultimaatencion_derechosvul,
+--        ARRAY_TO_STRING(ARRAY(SELECT nombre FROM public.sivel2_sjr_ayudasjr
+--          JOIN public.sivel2_sjr_ayudasjr_respuesta ON id_ayudasjr=sivel2_sjr_ayudasjr.id
+--          WHERE id_respuesta=ultimaatencion.id), ', ') || 
+--          ' ' || ultimaatencion.detallear AS ultimaatencion_as_humanitaria,
+--        ARRAY_TO_STRING(ARRAY(SELECT nombre FROM public.sivel2_sjr_aslegal
+--          JOIN public.sivel2_sjr_aslegal_respuesta ON id_aslegal=sivel2_sjr_aslegal.id
+--          WHERE id_respuesta=ultimaatencion.id), ', ') || 
+--          ' ' || ultimaatencion.detalleal AS ultimaatencion_as_juridica,
+--        ARRAY_TO_STRING(ARRAY(SELECT nombre FROM public.sivel2_sjr_motivosjr
+--          JOIN public.sivel2_sjr_motivosjr_respuesta ON id_motivosjr=sivel2_sjr_motivosjr.id
+--          WHERE id_respuesta=ultimaatencion.id), ', ') || 
+--          ' ' || ultimaatencion.detallemotivo AS ultimaatencion_otros_ser_as,
+--        ultimaatencion.descatencion AS ultimaatencion_descripcion_at,
+          ARRAY_TO_STRING(ARRAY(SELECT supracategoria.id_tviolencia || ':' || 
+            categoria.supracategoria_id || ':' || categoria.id || ' ' ||
+            categoria.nombre FROM public.sivel2_gen_categoria AS categoria, 
+            public.sivel2_gen_supracategoria AS supracategoria,
+            public.sivel2_gen_acto AS acto
+            WHERE categoria.id=acto.id_categoria
+            AND supracategoria.id=categoria.supracategoria_id
+            AND acto.id_caso=caso.id), ', ')
+          AS tipificacion,
         ARRAY_TO_STRING(ARRAY(SELECT nombres || ' ' || apellidos 
           FROM public.sip_persona AS persona, 
           public.sivel2_gen_victima AS victima WHERE persona.id=victima.id_persona 
@@ -125,10 +125,10 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
         ARRAY_TO_STRING(ARRAY(SELECT departamento.nombre ||  ' / ' 
           || municipio.nombre 
           FROM public.sip_ubicacion AS ubicacion 
-					LEFT JOIN public.sip_departamento AS departamento 
-						ON (ubicacion.id_departamento = departamento.id)
-        	LEFT JOIN public.sip_municipio AS municipio 
-						ON (ubicacion.id_municipio=municipio.id)
+          LEFT JOIN public.sip_departamento AS departamento 
+            ON (ubicacion.id_departamento = departamento.id)
+          LEFT JOIN public.sip_municipio AS municipio 
+            ON (ubicacion.id_municipio=municipio.id)
           WHERE ubicacion.id_caso=caso.id), ', ')
         AS ubicaciones, 
         ARRAY_TO_STRING(ARRAY(SELECT nombre 
@@ -137,7 +137,8 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
           WHERE presponsable.id=caso_presponsable.id_presponsable
           AND caso_presponsable.id_caso=caso.id), ', ')
         AS presponsables, 
-        casosjr.memo1612 as memo1612
+        casosjr.memo1612 as memo1612,
+        ultimaatencion.actividad_id AS ultimaatencion_actividad_id
         FROM public.sivel2_gen_conscaso AS conscaso
         JOIN public.sivel2_sjr_casosjr AS casosjr ON casosjr.id_caso=conscaso.caso_id
         JOIN public.sivel2_gen_caso AS caso ON casosjr.id_caso = caso.id 
@@ -151,8 +152,20 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
         LEFT JOIN public.sivel2_gen_etnia AS etnia ON
             vcontacto.id_etnia=etnia.id
         LEFT JOIN public.sivel2_sjr_ultimaatencion AS ultimaatencion ON
-            ultimaatencion.id_caso = caso.id
+            ultimaatencion.caso_id = caso.id
       "
+  end
+
+
+  def resp_ultimaatencion(formulario_id, campo_id)
+    ultatencion = Cor1440Gen::Actividad.
+      where(id: ultimaatencion_actividad_id).take
+    if !ultatencion
+      return "Problema no existe actividad #{ultimaatencion_actividad_id}"
+    end
+    r =  Mr519Gen::ApplicationHelper.presenta_valor(
+      ultatencion, formulario_id, campo_id)
+    r ? r : ''
   end
 
   def presenta(atr)
@@ -535,12 +548,7 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
     caso = Sivel2Gen::Caso.find(caso_id)
     numeroanexos = Sivel2Gen::AnexoCaso.where(id_caso: caso_id).count
     case atr.to_s
-    ## Hechos y Número de anexos
-    when 'memo'
-      caso.memo ? caso.memo : ''
-    when 'numeroanexos'
-      caso ? numeroanexos : ''
-    ## CONTACTO
+      ## CONTACTO
     when 'contacto_anionac'
       contacto.anionac ? contacto.anionac : ''
     when 'contacto_mesnac'
@@ -631,11 +639,24 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
       casosjr.concentimientosjr ? "Si" : "No"
     when 'contacto_consentimientobd'
       casosjr.concentimientobd ? "Si" : "No"
+    when 'memo'
+      caso.memo ? caso.memo : ''
+    when 'numeroanexos'
+      caso ? numeroanexos : ''
+    when 'ultimaatencion_derechosvul'
+      resp_ultimaatencion(10,100)
+    when 'ultimaatencion_as_humanitaria'
+      resp_ultimaatencion(10,110)
+    when 'ultimaatencion_as_juridica'
+      resp_ultimaatencion(10,130)
+    when 'ultimaatencion_otros_ser_as'
+      resp_ultimaatencion(10,150)
+
     else
       if respond_to?(atr)
         send(atr)
       else
-        "Atributo no definido #{atr}"
+        caso.presenta(atr)
       end
     end
   end

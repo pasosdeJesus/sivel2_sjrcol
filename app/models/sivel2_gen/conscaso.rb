@@ -74,41 +74,48 @@ class Sivel2Gen::Conscaso < ActiveRecord::Base
   }
 
   def self.refresca_conscaso
+    if !ActiveRecord::Base.connection.data_source_exists? 'sivel2_sjr_ultimaatencion_aux'
+      ActiveRecord::Base.connection.execute(
+        "CREATE OR REPLACE VIEW sivel2_sjr_ultimaatencion_aux AS 
+           SELECT casosjr.id_caso AS caso_id, 
+             max(a.fecha) AS fecha, MAX(a.id) AS actividad_id 
+             FROM public.sivel2_sjr_actividad_casosjr AS ac 
+             JOIN public.cor1440_gen_actividad AS a ON ac.actividad_id=a.id 
+             JOIN public.sivel2_sjr_casosjr AS casosjr ON 
+               ac.casosjr_id=casosjr.id_caso 
+             GROUP BY 1 ORDER BY 1,2"
+      )
+    end
     if !ActiveRecord::Base.connection.data_source_exists? 'sivel2_sjr_ultimaatencion'
       ActiveRecord::Base.connection.execute(
         "CREATE OR REPLACE VIEW sivel2_sjr_ultimaatencion AS 
-        (SELECT respuesta.id_caso, respuesta.id, respuesta.fechaatencion, 
-           respuesta.descatencion, respuesta.detallemotivo, 
-           respuesta.detalleal, respuesta.detallear,
-           sip_edad_de_fechanac_fecharef(contacto.anionac, contacto.mesnac,
-             contacto.dianac, CAST(EXTRACT(YEAR FROM fechaatencion) AS INTEGER),
-              CAST(EXTRACT(MONTH FROM fechaatencion) AS INTEGER),
-              CAST(EXTRACT(DAY FROM fechaatencion) AS INTEGER) ) AS contacto_edad
-          FROM public.sivel2_sjr_respuesta AS respuesta 
-            JOIN public.sivel2_sjr_casosjr AS casosjr ON respuesta.id_caso=casosjr.id_caso
-            JOIN sip_persona as contacto ON contacto.id=casosjr.contacto_id
-          WHERE (respuesta.id_caso, fechaatencion) in 
-            (SELECT id_caso, MAX(fechaatencion)
-              FROM public.sivel2_sjr_respuesta GROUP BY 1)" +
-#        UNION
-#        SELECT casosjr.id_caso, a.id, a.fecha, a.objetivo, a.resultado, '', '',
-#           sip_edad_de_fechanac_fecharef(contacto.anionac, contacto.mesnac,
-#             contacto.dianac, CAST(EXTRACT(YEAR FROM a.fecha) AS INTEGER),
-#              CAST(EXTRACT(MONTH FROM a.fecha) AS INTEGER),
-#              CAST(EXTRACT(DAY FROM a.fecha) AS INTEGER) ) AS contacto_edad
-#          FROM public.sivel2_sjr_actividad_casosjr AS ac
-#          JOIN public.cor1440_gen_actividad AS a ON ac.actividad_id=a.id
-#          JOIN public.sivel2_sjr_casosjr AS casosjr ON ac.casosjr_id=casosjr.id_caso
-#          JOIN sip_persona as contacto ON contacto.id=casosjr.contacto_id
-#      );"
-      ")")
+           SELECT casosjr.id_caso AS caso_id, 
+             a.id AS actividad_id,
+             a.fecha AS fecha, 
+             a.objetivo, 
+             a.resultado,
+             sip_edad_de_fechanac_fecharef(contacto.anionac, contacto.mesnac, 
+               contacto.dianac, CAST(EXTRACT(YEAR FROM a.fecha) AS INTEGER),
+               CAST(EXTRACT(MONTH FROM a.fecha) AS INTEGER),
+               CAST(EXTRACT(DAY FROM a.fecha) AS INTEGER) ) AS contacto_edad
+             FROM sivel2_sjr_ultimaatencion_aux AS uaux 
+             JOIN public.sivel2_sjr_actividad_casosjr AS ac
+               ON ac.actividad_id=uaux.actividad_id AND
+                  ac.casosjr_id=uaux.caso_id
+             JOIN public.cor1440_gen_actividad AS a ON ac.actividad_id=a.id 
+             JOIN public.sivel2_sjr_casosjr AS casosjr ON 
+               ac.casosjr_id=casosjr.id_caso 
+             JOIN public.sip_persona AS contacto ON
+               contacto.id=casosjr.contacto_id"
+      )
     end
+
     if !ActiveRecord::Base.connection.data_source_exists? 'sivel2_gen_conscaso'
       ActiveRecord::Base.connection.execute(
         "CREATE OR REPLACE VIEW sivel2_gen_conscaso1 
         AS SELECT casosjr.id_caso as caso_id, 
         (contacto.nombres || ' ' || contacto.apellidos) AS contacto,
-        ultimaatencion.fechaatencion AS ultimaatencion_fecha,
+        ultimaatencion.fecha AS ultimaatencion_fecha,
         casosjr.fecharec,
         oficina.nombre AS oficina,
         usuario.nusuario,
@@ -144,7 +151,7 @@ class Sivel2Gen::Conscaso < ActiveRecord::Base
           JOIN public.sivel2_gen_victima AS vcontacto ON 
             vcontacto.id_persona = contacto.id AND vcontacto.id_caso = caso.id
           LEFT JOIN public.sivel2_sjr_ultimaatencion AS ultimaatencion ON
-            ultimaatencion.id_caso = caso.id
+            ultimaatencion.caso_id = caso.id
       ")
       ActiveRecord::Base.connection.execute(
         "CREATE MATERIALIZED VIEW sivel2_gen_conscaso 

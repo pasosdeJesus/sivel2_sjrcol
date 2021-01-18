@@ -8,5 +8,6 @@ class Sivel2Gen::Caso < ActiveRecord::Base
     foreign_key: "caso_id", validate: true, dependent: :destroy
   accepts_nested_attributes_for :migracion, allow_destroy: true, 
     reject_if: :all_blank
+
 end
 

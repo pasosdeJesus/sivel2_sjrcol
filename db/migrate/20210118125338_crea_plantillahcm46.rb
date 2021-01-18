@@ -74,7 +74,7 @@ class CreaPlantillahcm46 < ActiveRecord::Migration[6.0]
 
   def up
     execute <<-SQL
-      INSERT INTO public.heb412_gen_plantillahcm (id, ruta, fuente, licencia, vista, nombremenu, filainicial) VALUES (46, 'Plantillas/listado_de_convenios_financiados.ods', 'PdJ', 'Dominio Publico', 'Proyecto', 'Listado de Convenios Financiados Extracompletos', 5);
+      INSERT INTO public.heb412_gen_plantillahcm (id, ruta, fuente, licencia, vista, nombremenu, filainicial) VALUES (46, 'Plantillas/listado_extracompleto_de_convenios_financiados.ods', 'PdJ', 'Dominio Publico', 'Proyecto', 'Listado extracompleto de convenios financiados', 5);
     SQL
 
    numid = 2300

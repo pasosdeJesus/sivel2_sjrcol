@@ -90,24 +90,6 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
             sip_persona.id=victima.id_persona
           WHERE victima.id_caso=caso.id AND sip_persona.sexo='F' 
           AND id_rangoedad='10') AS beneficiarias_60_,
-
---        ARRAY_TO_STRING(ARRAY(SELECT nombre FROM public.sivel2_sjr_derecho 
---         JOIN public.sivel2_sjr_derecho_respuesta ON id_derecho=sivel2_sjr_derecho.id
---          WHERE id_respuesta=ultimaatencion.id), '; ')
---          AS ultimaatencion_derechosvul,
---        ARRAY_TO_STRING(ARRAY(SELECT nombre FROM public.sivel2_sjr_ayudasjr
---          JOIN public.sivel2_sjr_ayudasjr_respuesta ON id_ayudasjr=sivel2_sjr_ayudasjr.id
---          WHERE id_respuesta=ultimaatencion.id), ', ') || 
---          ' ' || ultimaatencion.detallear AS ultimaatencion_as_humanitaria,
---        ARRAY_TO_STRING(ARRAY(SELECT nombre FROM public.sivel2_sjr_aslegal
---          JOIN public.sivel2_sjr_aslegal_respuesta ON id_aslegal=sivel2_sjr_aslegal.id
---          WHERE id_respuesta=ultimaatencion.id), ', ') || 
---          ' ' || ultimaatencion.detalleal AS ultimaatencion_as_juridica,
---        ARRAY_TO_STRING(ARRAY(SELECT nombre FROM public.sivel2_sjr_motivosjr
---          JOIN public.sivel2_sjr_motivosjr_respuesta ON id_motivosjr=sivel2_sjr_motivosjr.id
---          WHERE id_respuesta=ultimaatencion.id), ', ') || 
---          ' ' || ultimaatencion.detallemotivo AS ultimaatencion_otros_ser_as,
---        ultimaatencion.descatencion AS ultimaatencion_descripcion_at,
           ARRAY_TO_STRING(ARRAY(SELECT supracategoria.id_tviolencia || ':' || 
             categoria.supracategoria_id || ':' || categoria.id || ' ' ||
             categoria.nombre FROM public.sivel2_gen_categoria AS categoria, 
@@ -661,7 +643,7 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
       resp_ultimaatencion(13,130)
     when 'ultimaatencion_derechosvul'
       resp_ultimaatencion(10,100)
-    when 'ultimaatencion_descripcion_at'
+    when 'ultimaatencion_descripcion_at', 'ultimaatencion_objetivo'
       ultatencion = Cor1440Gen::Actividad.
         where(id: ultimaatencion_actividad_id).take
       if !ultatencion

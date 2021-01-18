@@ -502,9 +502,9 @@ class Ability < Sivel2Sjr::Ability
         :ultimaatencion_as_humanitaria,
         :ultimaatencion_as_juridica,
         :ultimaatencion_derechosvul,
-        :ultimaatencion_descripcion_at,
         :ultimaatencion_fecha,
         :ultimaatencion_mes,
+        :ultimaatencion_objetivo,
         :ultimaatencion_otros_ser_as,
         :victimas
       ],

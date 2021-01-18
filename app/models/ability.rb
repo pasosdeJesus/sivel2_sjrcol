@@ -143,38 +143,53 @@ class Ability < Sivel2Sjr::Ability
     Sivel2Gen::Consexpcaso.crea_consexpcaso(nil)
   end
 
-  prefijos_personas_campos = ['contacto', 'familiar1', 'familiar2', 
-                             'familiar3', 'familiar4', 'familiar5']
-  prefijos_ubicaciones_campos = ['ubicacion1', 'ubicacion2', 'ubicacion3'] 
-  prefijos_presponsables_campos = ['presponsable1', 'presponsable2', 'presponsable3'] 
-  prefijos_respuestas_campos = ['respuesta1','respuesta2', 'respuesta3', 'respuesta4', 'respuesta5'] 
-  prefijos_etiquetas_campos = ['etiqueta1', 'etiqueta2', 'etiqueta3', 'etiqueta4', 'etiqueta5'] 
-  CAMPOS_CASOPRESPONSABLES = [
-    'presponsable',
-    'tipo',
-    'bloque',
-    'frente',
-    'brigada',
-    'batallon',
-    'division',
-    'otro'
+  # CAMPOS PARA EXPORTAR DESDE CASOS
+
+  PREFIJOS_PERSONAS_CAMPOS = ['contacto', 'familiar1', 'familiar2', 
+                              'familiar3', 'familiar4', 'familiar5']
+
+  CAMPOS_PERSONAVIC = [
+    'nombres',
+    'actividadoficio',
+    'actualtrabajando',
+    'apellidos',
+    'asisteescuela',
+    'anionac',
+    'cabezafamilia',
+    'dianac',
+    'discapacidad',
+    'estadocivil',
+    'escolaridad',
+    'filiacion',
+    'identificacion',
+    'pais',
+    'departamento',
+    'municipio',
+    'clase',
+    'mesnac',
+    'maternidad',
+    'numerodocumento',
+    'numeroanexos',
+    'numeroanexosconsen',
+    'organizacion',
+    'profesion',
+    'regimensalud',
+    'sexo',
+    'etnia',
+    'edad_ultimaatencion',
+    'orientacionsexual',
+    'rangoedad_ultimaatencion',
+    'rolfamilia',
+    'tdocumento',
+    'tienesisben',
+    'vinculoestado'
   ]
-  prefijos_ubicaciones_campos = ['ubicacion1', 'ubicacion2', 'ubicacion3']
-  prefijos_actos_campos = ['acto1', 'acto2', 'acto3', 'acto4', 'acto5']
-  prefijos_presponsables_campos = ['presponsable1', 'presponsable2', 'presponsable3'] 
-  prefijos_etiquetas_campos = ['etiqueta1', 'etiqueta2', 'etiqueta3', 'etiqueta4', 'etiqueta5'] 
-  CAMPOS_CASOPRESPONSABLES = [
-    'presponsable',
-    'tipo',
-    'bloque',
-    'frente',
-    'brigada',
-    'batallon',
-    'division',
-    'otro'
-  ]
+
+  PREFIJOS_UBICACIONES_CAMPOS = ['ubicacion1', 'ubicacion2', 'ubicacion3'] 
+
   CAMPOS_UBICACIONES = [
-    'pais', 'departamento',
+    'pais', 
+    'departamento',
     'municipio',
     'clase',
     'longitud',
@@ -183,6 +198,7 @@ class Ability < Sivel2Sjr::Ability
     'sitio',
     'tsitio'
   ]
+
   CAMPOS_MIGRA_SIMPLES = [
     'fechasalida',
     'fechallegada',
@@ -263,18 +279,22 @@ class Ability < Sivel2Sjr::Ability
     'connacionaldeportado',
     'protegiorupta'
   ]
-  CAMPOS_RESPUESTAS = [
-    'actividad',
-    'fecha',
-    'proyectofinanciero',
-    'actividadpf'
+
+  PREFIJOS_PRESPONSABLES_CAMPOS = ['presponsable1', 'presponsable2', 
+                                   'presponsable3'] 
+  CAMPOS_CASOPRESPONSABLES = [
+    'presponsable',
+    'tipo',
+    'bloque',
+    'frente',
+    'brigada',
+    'batallon',
+    'division',
+    'otro'
   ]
-  CAMPOS_ETIQUETAS =  [
-    'etiqueta',
-    'fecha',
-    'usuario',
-    'observaciones'
-  ]
+
+  PREFIJOS_ACTOS_CAMPOS = ['acto1', 'acto2', 'acto3', 'acto4', 'acto5']
+
   CAMPOS_ACTOS = [
     'presponsable',
     'categoria',
@@ -282,115 +302,87 @@ class Ability < Sivel2Sjr::Ability
     'fecha',
     'desplazamiento'
   ]
+
+  PREFIJOS_RESPUESTAS_CAMPOS = ['respuesta1','respuesta2', 'respuesta3', 
+                                'respuesta4', 'respuesta5'] 
+
+  CAMPOS_RESPUESTAS = [
+    'actividad',
+    'fecha',
+    'proyectofinanciero',
+    'actividadpf'
+  ]
+
+  PREFIJOS_ETIQUETAS_CAMPOS = ['etiqueta1', 'etiqueta2', 'etiqueta3', 
+                               'etiqueta4', 'etiqueta5'] 
+
   CAMPOS_ETIQUETAS =  [
     'etiqueta',
     'fecha',
     'usuario',
     'observaciones'
   ]
-  campos_personavic = [
-       'nombres',
-       'actividadoficio',
-       'actualtrabajando',
-       'apellidos',
-       'asisteescuela',
-       'anionac',
-       'cabezafamilia',
-       'dianac',
-       'discapacidad',
-       'estadocivil',
-       'escolaridad',
-       'filiacion',
-       'identificacion',
-       'pais',
-       'departamento',
-       'municipio',
-       'clase',
-       'mesnac',
-       'maternidad',
-       'numerodocumento',
-       'numeroanexos',
-       'numeroanexosconsen',
-       'organizacion',
-       'profesion',
-       'regimensalud',
-       'sexo',
-       'etnia',
-       'edad_ultimaatencion',
-       'orientacionsexual',
-       'rangoedad_ultimaatencion',
-       'rolfamilia',
-       'tdocumento',
-       'tienesisben',
-       'vinculoestado'
-  ]
-  campos_personas_casos = []
-  prefijos_personas_campos.each do |pp| 
-    campos_personavic.each do |campo| 
-      campos_personas_casos.push((pp + '_' + campo).to_sym)
+
+  CAMPOS_PERSONAS_CASOS = []
+  PREFIJOS_PERSONAS_CAMPOS.each do |pp| 
+    CAMPOS_PERSONAVIC.each do |campo| 
+      CAMPOS_PERSONAS_CASOS.push((pp + '_' + campo).to_sym)
     end
   end
-  campos_ubicaciones_casos = []
-  prefijos_ubicaciones_campos.each do |pu| 
+
+  CAMPOS_UBICACIONES_CASOS = []
+  PREFIJOS_UBICACIONES_CAMPOS.each do |pu| 
     CAMPOS_UBICACIONES.each do |campo| 
-      campos_ubicaciones_casos.push((pu + '_' + campo).to_sym)
+      CAMPOS_UBICACIONES_CASOS.push((pu + '_' + campo).to_sym)
     end
   end
-  campos_respuestas_casos = []
-  prefijos_respuestas_campos.each do |res| 
+
+  CAMPOS_RESPUESTAS_CASOS = []
+  PREFIJOS_RESPUESTAS_CAMPOS.each do |res| 
     CAMPOS_RESPUESTAS.each do |campo| 
-      campos_respuestas_casos.push((res + '_' + campo).to_sym)
+      CAMPOS_RESPUESTAS_CASOS.push((res + '_' + campo).to_sym)
     end
   end
-  campos_presponsables_casos = []
-  prefijos_presponsables_campos.each do |pr| 
+
+  CAMPOS_PRESPONSABLES_CASOS = []
+  PREFIJOS_PRESPONSABLES_CAMPOS.each do |pr| 
     CAMPOS_CASOPRESPONSABLES.each do |campo| 
-      campos_ubicaciones_casos.push((pr + '_' + campo).to_sym)
+      CAMPOS_UBICACIONES_CASOS.push((pr + '_' + campo).to_sym)
     end
   end
-  campos_etiquetas_casos = []
-  prefijos_etiquetas_campos.each do |et| 
-    CAMPOS_ETIQUETAS.each do |campo| 
-      campos_etiquetas_casos.push((et + '_' + campo).to_sym)
-    end
-  end
-  campos_actos_casos = []
-  prefijos_actos_campos.each do |pac| 
+
+  CAMPOS_ACTOS_CASOS = []
+  PREFIJOS_ACTOS_CAMPOS.each do |pac| 
     CAMPOS_ACTOS.each do |campo| 
-      campos_actos_casos.push((pac + '_' + campo).to_sym)
+      CAMPOS_ACTOS_CASOS.push((pac + '_' + campo).to_sym)
     end
   end
-  campos_presponsables_casos = []
-  prefijos_presponsables_campos.each do |pr| 
-    CAMPOS_CASOPRESPONSABLES.each do |campo| 
-      campos_ubicaciones_casos.push((pr + '_' + campo).to_sym)
-    end
-  end
-  campos_etiquetas_casos = []
-  prefijos_etiquetas_campos.each do |et| 
+
+  CAMPOS_ETIQUETAS_CASOS = []
+  PREFIJOS_ETIQUETAS_CAMPOS.each do |et| 
     CAMPOS_ETIQUETAS.each do |campo| 
-      campos_etiquetas_casos.push((et + '_' + campo).to_sym)
+      CAMPOS_ETIQUETAS_CASOS.push((et + '_' + campo).to_sym)
     end
   end
+
   CAMPOS_PLANTILLAS_PROPIAS = {
     'Caso' => {
       campos: 
-        campos_personas_casos +
-        campos_ubicaciones_casos +
-        campos_presponsables_casos +
-        campos_etiquetas_casos +
-        campos_actos_casos +
-        campos_presponsables_casos +
-        campos_etiquetas_casos +
-        CAMPOS_MIGRA_SIMPLES +
-        CAMPOS_MIGRA_RELA +
-        CAMPOS_MIGRA_MULTI +
-        CAMPOS_DESPLAZA_SIMPLES +
-        CAMPOS_DESPLAZA_RELA +
-        CAMPOS_DESPLAZA_MULTI +
-        CAMPOS_DESPLAZA_BOOL +
-        CAMPOS_DESPLAZA_ESPECIALES +
-        [
+      CAMPOS_PERSONAS_CASOS +
+      CAMPOS_UBICACIONES_CASOS +
+      CAMPOS_MIGRA_SIMPLES +
+      CAMPOS_MIGRA_RELA +
+      CAMPOS_MIGRA_MULTI +
+      CAMPOS_DESPLAZA_SIMPLES +
+      CAMPOS_DESPLAZA_RELA +
+      CAMPOS_DESPLAZA_MULTI +
+      CAMPOS_DESPLAZA_BOOL +
+      CAMPOS_DESPLAZA_ESPECIALES + 
+      CAMPOS_RESPUESTAS_CASOS + 
+      CAMPOS_PRESPONSABLES_CASOS +
+      CAMPOS_ACTOS_CASOS +
+      CAMPOS_ETIQUETAS_CASOS +
+      [
         :asesor,
         :beneficiarias_0_5,
         :beneficiarias_6_12,
@@ -433,8 +425,9 @@ class Ability < Sivel2Sjr::Ability
         :victimas
       ],
       controlador: 'Sivel2Sjr::CasosController',
-        ruta: '/casos'
+      ruta: '/casos'
     },
+
     'Actividad' => {
       campos: [
         Cor1440Gen::Actividad.human_attribute_name(

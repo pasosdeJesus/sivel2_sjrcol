@@ -329,7 +329,7 @@ class Ability < Sivel2Sjr::Ability
     'financiador',
     'fechainicio',
     'fechacierre',
-    'responable',
+    'responsable',
     'compromisos',
     'observaciones',
     'monto',

@@ -22,7 +22,7 @@ class CreaPlantillahcm46 < ActiveRecord::Migration[6.0]
     'financiador',
     'fechainicio',
     'fechacierre',
-    'responable',
+    'responsable',
     'compromisos',
     'observaciones',
     'monto',

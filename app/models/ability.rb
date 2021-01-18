@@ -323,6 +323,54 @@ class Ability < Sivel2Sjr::Ability
     'observaciones'
   ]
 
+  CAMPOS_PROYECTOS_FINANCIEROS_BAS = [
+    'id',
+    'nombres',
+    'financiador',
+    'fechainicio',
+    'fechacierre',
+    'responsable',
+    'compromisos',
+    'observaciones',
+    'monto',
+    'area',
+    'equipotrabajo',
+    'objetivos',
+    'obj1_cod',
+    'obj1_texto',
+    'obj2_cod',
+    'obj2_texto',
+    'indicadores_obj',
+    'resultados',
+    'indicadoresres',
+    'actividadespf'
+  ]
+
+  CAMPOS_INDICADORES_OBJ = [
+    'refobj',
+    'codigo',
+    'nombre',
+    'tipo',
+  ]
+  CAMPOS_RESULTADOS = [
+    'refobj',
+    'codigo',
+    'resultado'
+  ]
+  CAMPOS_INDICADORES_RES = [ 
+    'refres',
+    'codigo',
+    'tipo',
+    'indicador'
+  ]
+  CAMPOS_ACTIVIDADESPF = [
+    'refresultado',
+    'codigo',
+    'tipo',
+    'actividad',
+    'descripcion',
+    'indicadoresgifmm'
+  ]
   CAMPOS_PERSONAS_CASOS = []
   PREFIJOS_PERSONAS_CAMPOS.each do |pp| 
     CAMPOS_PERSONAVIC.each do |campo| 
@@ -362,6 +410,39 @@ class Ability < Sivel2Sjr::Ability
   PREFIJOS_ETIQUETAS_CAMPOS.each do |et| 
     CAMPOS_ETIQUETAS.each do |campo| 
       CAMPOS_ETIQUETAS_CASOS.push((et + '_' + campo).to_sym)
+    end
+  end
+
+  PREFIJOS_CAMPOS_INDICADORES_OBJ = ['indicadorobj1', 'indicadorobj2', 'indicadorobj3', 'indicadorobj4']
+  CAMPOS_INDICADORES_OBJ_T = []
+  PREFIJOS_CAMPOS_INDICADORES_OBJ.each do |cod| 
+    CAMPOS_INDICADORES_OBJ.each do |campo| 
+      CAMPOS_INDICADORES_OBJ_T.push((cod + '_' + campo).to_sym)
+    end
+  end
+
+  PREFIJOS_CAMPOS_RESULTADOS = ['resultado1', 'resultado2', 'resultado3', 'resultado4']
+  CAMPOS_RESULTADOS_T= []
+  PREFIJOS_CAMPOS_RESULTADOS.each do |cod|
+    CAMPOS_RESULTADOS.each do |campo|
+      CAMPOS_RESULTADOS_T.push((cod + '_' + campo).to_sym)
+    end
+  end
+
+  PREFIJOS_CAMPOS_INDICADORES_RES = ['indicadorres1', 'indicadorres2', 'indicadorres3', 'indicadorres4', 'indicadorres5', 'indicadorres6']
+  CAMPOS_INDICADORES_RES_T = []
+  PREFIJOS_CAMPOS_INDICADORES_RES.each do |cod| 
+    CAMPOS_INDICADORES_RES.each do |campo| 
+      CAMPOS_INDICADORES_RES_T.push((cod + '_' + campo).to_sym)
+    end
+  end
+
+
+  PREFIJOS_CAMPOS_ACTIVIDADESPF = ['actividadpf1', 'actividadpf2', 'actividadpf3', 'actividadpf4', 'actividadpf5', 'actividadpf6', 'actividadpf7', 'actividadpf8']
+  CAMPOS_ACTIVIDADESPF_T = []
+  PREFIJOS_CAMPOS_ACTIVIDADESPF.each do |cod|
+    CAMPOS_ACTIVIDADESPF.each do |campo| 
+      CAMPOS_ACTIVIDADESPF_T.push((cod + '_' + campo).to_sym)
     end
   end
 
@@ -548,6 +629,16 @@ class Ability < Sivel2Sjr::Ability
       ],
       controlador: 'Cor1440Gen::ActividadesController',
       ruta: '/actividades'
+    },
+    'Proyecto' => {
+      campos: 
+        CAMPOS_PROYECTOS_FINANCIEROS_BAS+
+        CAMPOS_INDICADORES_OBJ_T +
+        CAMPOS_RESULTADOS_T +
+        CAMPOS_INDICADORES_RES_T +
+        CAMPOS_ACTIVIDADESPF_T,
+      controlador: 'Sivel2Sjr::CasosController',
+      ruta: '/proyectofinanciero'
     },
     'Consgifmm' => {
       solo_multiple: true,

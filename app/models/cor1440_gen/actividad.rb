@@ -394,6 +394,18 @@ module Cor1440Gen
           ''
         end
 
+      when 'listado_casos_ids'
+        casosjr_ids.join(', ')
+
+      when 'numero_detalles_financieros'
+        detallefinanciero.count
+
+      when 'detalles_financieros_ids'
+        detallefinanciero_ids.join(', ')
+
+      when 'organizaciones_sociales_ids'
+        actorsocial_ids.join(', ')
+
       when 'mes'
         if fecha
           Sip::FormatoFechaHelper::MESES[fecha.month]
@@ -468,9 +480,6 @@ module Cor1440Gen
           v.etnia.nombre == 'MESTIZO' ||
           v.etnia.nombre == 'SIN INFORMACIÓN'
         }
-
-      when 'parte_rmrp'
-        'Si'
 
       when 'poblacion_hombres_adultos'
         p1 = poblacion_hombres_r_g_solore(4) +

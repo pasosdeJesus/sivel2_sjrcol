@@ -23,12 +23,12 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
           AS contacto_identificacion,
         contacto.sexo AS contacto_sexo,
         COALESCE(etnia.nombre, '') AS contacto_etnia,
-        ultimaatencion.contacto_edad AS contacto_edad_ultimaatencion,
+        ultimaatencion.contacto_edad AS edad_ultimaatencion,
         (SELECT rango FROM public.sivel2_gen_rangoedad 
           WHERE fechadeshabilitacion IS NULL 
           AND limiteinferior<=ultimaatencion.contacto_edad AND 
           ultimaatencion.contacto_edad<=limitesuperior LIMIT 1) 
-        AS contacto_rangoedad_ultimaatencion,
+        AS rangoedad_ultimaatencion,
         (SELECT COUNT(*) FROM 
           public.sivel2_gen_victima AS victima JOIN public.sip_persona ON
             sip_persona.id=victima.id_persona
@@ -151,15 +151,22 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
   end
 
   def poblacion_ultimaatencion(sexo, inf, sup)
-    byebug
     ultatencion = Cor1440Gen::Actividad.
       where(id: ultimaatencion_actividad_id).take
     if !ultatencion
       return "Problema no existe actividad #{ultimaatencion_actividad_id}"
     end
 
+    cond_edad = ''
+    if inf && inf >= 0
+      cond_edad += " AND ua_edad>='#{inf}'"
+    end
+    if sup && sup >= 0
+      cond_edad += " AND ua_edad<='#{sup}'"
+    end
+
     r=Sivel2Gen::Victima.connection.execute("
-        (SELECT COUNT(*) FROM (
+        SELECT COUNT(*) FROM (
           SELECT v.id, sip_edad_de_fechanac_fecharef(
             p.anionac, p.mesnac, p.dianac,
             '#{ultatencion.fecha.year}',
@@ -167,10 +174,11 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
             '#{ultatencion.fecha.day}') AS ua_edad 
           FROM public.sivel2_gen_victima AS v
           JOIN public.sip_persona AS p ON p.id=v.id_persona
-          WHERE v.id_caso=? AND sip_persona.sexo=?)) ", 
-            self.caso_id, sexo)
-    byebug
-    return   r.count
+          WHERE v.id_caso='#{self.caso_id}' AND 
+           p.sexo='#{sexo}') AS sub
+        WHERE TRUE=TRUE 
+        #{cond_edad}")
+    return   r[0]['count'].to_i
   end
 
 
@@ -699,7 +707,7 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
       poblacion_ultimaatencion('S', 18, 26)
     when 'ultimaatencion_beneficiarios_ss_27_59'
       poblacion_ultimaatencion('S', 27, 59)
-    when 'ultimaatencion_beneficiarios_ss_27_59'
+    when 'ultimaatencion_beneficiarios_ss_60_'
       poblacion_ultimaatencion('S', 60, nil)
 
     when 'ultimaatencion_derechosvul'

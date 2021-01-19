@@ -40,3 +40,5 @@ yarn-debug.log*
 .yarn-integrity
 
 /config/master.key
+log/
+*core

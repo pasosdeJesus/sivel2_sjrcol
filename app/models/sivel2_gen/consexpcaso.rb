@@ -150,6 +150,30 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
     r ? r : ''
   end
 
+  def poblacion_ultimaatencion(sexo, inf, sup)
+    byebug
+    ultatencion = Cor1440Gen::Actividad.
+      where(id: ultimaatencion_actividad_id).take
+    if !ultatencion
+      return "Problema no existe actividad #{ultimaatencion_actividad_id}"
+    end
+
+    r=Sivel2Gen::Victima.connection.execute("
+        (SELECT COUNT(*) FROM (
+          SELECT v.id, sip_edad_de_fechanac_fecharef(
+            p.anionac, p.mesnac, p.dianac,
+            '#{ultatencion.fecha.year}',
+            '#{ultatencion.fecha.month}',
+            '#{ultatencion.fecha.day}') AS ua_edad 
+          FROM public.sivel2_gen_victima AS v
+          JOIN public.sip_persona AS p ON p.id=v.id_persona
+          WHERE v.id_caso=? AND sip_persona.sexo=?)) ", 
+            self.caso_id, sexo)
+    byebug
+    return   r.count
+  end
+
+
   def presenta(atr)
     casosjr = Sivel2Sjr::Casosjr.find(caso_id)
     contacto =  Sip::Persona.find(casosjr.contacto_id)
@@ -641,6 +665,43 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
       r
     when 'ultimaatencion_as_juridica'
       resp_ultimaatencion(13,130)
+    when 'ultimaatencion_beneficiarios_0_5'
+      poblacion_ultimaatencion('M', 0, 5)
+    when 'ultimaatencion_beneficiarios_6_12'
+      poblacion_ultimaatencion('M', 0, 5)
+    when 'ultimaatencion_beneficiarios_13_17'
+      poblacion_ultimaatencion('M', 13, 17)
+    when 'ultimaatencion_beneficiarios_18_26'
+      poblacion_ultimaatencion('M', 18, 26)
+    when 'ultimaatencion_beneficiarios_27_59'
+      poblacion_ultimaatencion('M', 27, 59)
+    when 'ultimaatencion_beneficiarios_60_'
+      poblacion_ultimaatencion('M', 60, nil)
+    when 'ultimaatencion_beneficiarias_0_5'
+      poblacion_ultimaatencion('F', 0, 5)
+    when 'ultimaatencion_beneficiarias_6_12'
+      poblacion_ultimaatencion('F', 0, 5)
+    when 'ultimaatencion_beneficiarias_13_17'
+      poblacion_ultimaatencion('F', 13, 17)
+    when 'ultimaatencion_beneficiarias_18_26'
+      poblacion_ultimaatencion('F', 18, 26)
+    when 'ultimaatencion_beneficiarias_27_59'
+      poblacion_ultimaatencion('F', 27, 59)
+    when 'ultimaatencion_beneficiarias_60_'
+      poblacion_ultimaatencion('F', 60, nil)
+    when 'ultimaatencion_beneficiarios_ss_0_5'
+      poblacion_ultimaatencion('S', 0, 5)
+    when 'ultimaatencion_beneficiarios_ss_6_12'
+      poblacion_ultimaatencion('S', 0, 5)
+    when 'ultimaatencion_beneficiarios_ss_13_17'
+      poblacion_ultimaatencion('S', 13, 17)
+    when 'ultimaatencion_beneficiarios_ss_18_26'
+      poblacion_ultimaatencion('S', 18, 26)
+    when 'ultimaatencion_beneficiarios_ss_27_59'
+      poblacion_ultimaatencion('S', 27, 59)
+    when 'ultimaatencion_beneficiarios_ss_27_59'
+      poblacion_ultimaatencion('S', 60, nil)
+
     when 'ultimaatencion_derechosvul'
       resp_ultimaatencion(10,100)
     when 'ultimaatencion_descripcion_at', 'ultimaatencion_objetivo'

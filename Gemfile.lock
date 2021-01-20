@@ -13,7 +13,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: d6e317eccbaff33d87b97de5cad6990ce486d39f
+  revision: 9ab49dfbb0190f97b82f9405ba158c9ce2b0e84c
   specs:
     heb412_gen (1.0.b6)
       mr519_gen
@@ -182,7 +182,7 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     colorize (0.8.1)
-    concurrent-ruby (1.1.7)
+    concurrent-ruby (1.1.8)
     crass (1.0.6)
     devise (4.7.3)
       bcrypt (~> 3.0)

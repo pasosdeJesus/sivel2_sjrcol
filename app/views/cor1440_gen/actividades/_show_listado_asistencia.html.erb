@@ -1,0 +1,51 @@
+<table class="tablalistadoasistencia table  table-bordered table-sm ">
+  <thead class="thead-light">
+    <tr>
+      <th>Nombres</th>
+      <th>Apellidos</th>
+      <th colspan="2">Identificación</th>
+      <th>Sexo</th>
+      <th>Año nac.</th>
+      <th>Mes</th>
+      <th>Dia</th>
+      <th>Org. social</th>
+      <th>Perfil</th>
+    </tr>
+  </thead>
+  <tbody id="asistencia">
+    <% @registro.asistencia.each do |asistencia| %>
+      <tr>
+        <td>
+          <%= asistencia.persona.nombres if asistencia.persona.nombres %>
+        </td>
+        <td>
+          <%= asistencia.persona.apellidos if asistencia.persona.apellidos %>
+        </td>
+        <td>
+          <%= asistencia.persona.tdocumento.sigla if asistencia.persona.tdocumento%>
+        </td>
+        <td>
+          <%= asistencia.persona.numerodocumento if asistencia.persona.numerodocumento %>
+        </td>
+        <td>
+          <%= asistencia.persona.sexo if asistencia.persona.sexo %>
+        </td>
+        <td>
+          <%= asistencia.persona.anionac if asistencia.persona.anionac %>
+        </td>
+        <td>
+          <%= asistencia.persona.mesnac if asistencia.persona.mesnac %>
+        </td>
+        <td>
+          <%= asistencia.persona.dianac if asistencia.persona.dianac %>
+        </td>
+        <td>
+          <%= asistencia.actorsocial.presenta_nombre if asistencia.actorsocial %>
+        </td>
+        <td>
+          <%= asistencia.perfilactorsocial.nombre if asistencia.perfilactorsocial %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

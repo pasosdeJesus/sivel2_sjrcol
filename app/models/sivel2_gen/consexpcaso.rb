@@ -22,13 +22,35 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
         (COALESCE(tdocumento.sigla, '') || ' ' || contacto.numerodocumento) 
           AS contacto_identificacion,
         contacto.sexo AS contacto_sexo,
+        sip_edad_de_fechanac_fecharef(
+          contacto.anionac, contacto.mesnac, contacto.dianac, 
+          CAST(EXTRACT(YEAR FROM conscaso.fecharec) AS INTEGER),
+          CAST(EXTRACT(MONTH FROM conscaso.fecharec) AS INTEGER),
+          CAST(EXTRACT(DAY FROM conscaso.fecharec) AS INTEGER))
+          AS contacto_edad_fecharec,
+        (SELECT rango FROM public.sivel2_gen_rangoedad 
+          WHERE fechadeshabilitacion IS NULL 
+          AND limiteinferior<=
+            sip_edad_de_fechanac_fecharef(
+            contacto.anionac, contacto.mesnac, contacto.dianac, 
+            CAST(EXTRACT(YEAR FROM conscaso.fecharec) AS INTEGER),
+            CAST(EXTRACT(MONTH FROM conscaso.fecharec) AS INTEGER),
+            CAST(EXTRACT(DAY FROM conscaso.fecharec) AS INTEGER))
+          AND limitesuperior>=
+            sip_edad_de_fechanac_fecharef(
+            contacto.anionac, contacto.mesnac, contacto.dianac, 
+            CAST(EXTRACT(YEAR FROM conscaso.fecharec) AS INTEGER),
+            CAST(EXTRACT(MONTH FROM conscaso.fecharec) AS INTEGER),
+            CAST(EXTRACT(DAY FROM conscaso.fecharec) AS INTEGER))
+          LIMIT 1) AS contacto_rangoedad_fecharec,
         COALESCE(etnia.nombre, '') AS contacto_etnia,
-        ultimaatencion.contacto_edad AS edad_ultimaatencion,
+        ultimaatencion.contacto_edad AS contacto_edad_ultimaatencion,
         (SELECT rango FROM public.sivel2_gen_rangoedad 
           WHERE fechadeshabilitacion IS NULL 
           AND limiteinferior<=ultimaatencion.contacto_edad AND 
           ultimaatencion.contacto_edad<=limitesuperior LIMIT 1) 
-        AS rangoedad_ultimaatencion,
+        AS contacto_rangoedad_ultimaatencion,
+
         (SELECT COUNT(*) FROM 
           public.sivel2_gen_victima AS victima JOIN public.sip_persona ON
             sip_persona.id=victima.id_persona
@@ -53,12 +75,17 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
           public.sivel2_gen_victima AS victima JOIN public.sip_persona ON
             sip_persona.id=victima.id_persona
           WHERE victima.id_caso=caso.id AND sip_persona.sexo='M' 
-          AND id_rangoedad='10') AS beneficiarios_27_59,
+          AND id_rangoedad='11') AS beneficiarios_27_59,
         (SELECT COUNT(*) FROM 
           public.sivel2_gen_victima AS victima JOIN public.sip_persona ON
             sip_persona.id=victima.id_persona
           WHERE victima.id_caso=caso.id AND sip_persona.sexo='M' 
-          AND id_rangoedad='10') AS beneficiarios_60_,
+          AND id_rangoedad='12') AS beneficiarios_60_,
+        (SELECT COUNT(*) FROM 
+          public.sivel2_gen_victima AS victima JOIN public.sip_persona ON
+            sip_persona.id=victima.id_persona
+          WHERE victima.id_caso=caso.id AND sip_persona.sexo='M' 
+          AND id_rangoedad='6') AS beneficiarios_se,
 
         (SELECT COUNT(*) FROM 
           public.sivel2_gen_victima AS victima JOIN public.sip_persona ON
@@ -84,13 +111,55 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
           public.sivel2_gen_victima AS victima JOIN public.sip_persona ON
             sip_persona.id=victima.id_persona
           WHERE victima.id_caso=caso.id AND sip_persona.sexo='F' 
-          AND id_rangoedad='10') AS beneficiarias_27_59,
+          AND id_rangoedad='11') AS beneficiarias_27_59,
         (SELECT COUNT(*) FROM 
           public.sivel2_gen_victima AS victima JOIN public.sip_persona ON
             sip_persona.id=victima.id_persona
           WHERE victima.id_caso=caso.id AND sip_persona.sexo='F' 
-          AND id_rangoedad='10') AS beneficiarias_60_,
-          ARRAY_TO_STRING(ARRAY(SELECT supracategoria.id_tviolencia || ':' || 
+          AND id_rangoedad='12') AS beneficiarias_60_,
+        (SELECT COUNT(*) FROM 
+          public.sivel2_gen_victima AS victima JOIN public.sip_persona ON
+            sip_persona.id=victima.id_persona
+          WHERE victima.id_caso=caso.id AND sip_persona.sexo='F' 
+          AND id_rangoedad='6') AS beneficiarias_se,
+
+        (SELECT COUNT(*) FROM 
+          public.sivel2_gen_victima AS victima JOIN public.sip_persona ON
+            sip_persona.id=victima.id_persona
+          WHERE victima.id_caso=caso.id AND sip_persona.sexo='S' 
+          AND id_rangoedad='7') AS beneficiarios_ss_0_5,
+        (SELECT COUNT(*) FROM 
+          public.sivel2_gen_victima AS victima JOIN public.sip_persona ON
+            sip_persona.id=victima.id_persona
+          WHERE victima.id_caso=caso.id AND sip_persona.sexo='S' 
+          AND id_rangoedad='8') AS beneficiarios_ss_6_12,
+        (SELECT COUNT(*) FROM 
+          public.sivel2_gen_victima AS victima JOIN public.sip_persona ON
+            sip_persona.id=victima.id_persona
+          WHERE victima.id_caso=caso.id AND sip_persona.sexo='S' 
+          AND id_rangoedad='9') AS beneficiarios_ss_13_17,
+        (SELECT COUNT(*) FROM 
+          public.sivel2_gen_victima AS victima JOIN public.sip_persona ON
+            sip_persona.id=victima.id_persona
+          WHERE victima.id_caso=caso.id AND sip_persona.sexo='S' 
+          AND id_rangoedad='10') AS beneficiarios_ss_18_26,
+        (SELECT COUNT(*) FROM 
+          public.sivel2_gen_victima AS victima JOIN public.sip_persona ON
+            sip_persona.id=victima.id_persona
+          WHERE victima.id_caso=caso.id AND sip_persona.sexo='S' 
+          AND id_rangoedad='11') AS beneficiarios_ss_27_59,
+        (SELECT COUNT(*) FROM 
+          public.sivel2_gen_victima AS victima JOIN public.sip_persona ON
+            sip_persona.id=victima.id_persona
+          WHERE victima.id_caso=caso.id AND sip_persona.sexo='S' 
+          AND id_rangoedad='12') AS beneficiarios_ss_60_,
+        (SELECT COUNT(*) FROM 
+          public.sivel2_gen_victima AS victima JOIN public.sip_persona ON
+            sip_persona.id=victima.id_persona
+          WHERE victima.id_caso=caso.id AND sip_persona.sexo='S' 
+          AND id_rangoedad='6') AS beneficiarios_ss_se,
+
+        ARRAY_TO_STRING(ARRAY(SELECT supracategoria.id_tviolencia || ':' || 
             categoria.supracategoria_id || ':' || categoria.id || ' ' ||
             categoria.nombre FROM public.sivel2_gen_categoria AS categoria, 
             public.sivel2_gen_supracategoria AS supracategoria,

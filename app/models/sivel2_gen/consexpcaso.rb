@@ -150,11 +150,20 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
     r ? r : ''
   end
 
-  def poblacion_ultimaatencion(sexo, inf, sup)
+  # Retorna cantidad de víctimas del caso caso_id
+  # que tienen el sexo dado con edad entre inf y sup para la fecha
+  # de la actividad con id actividad_id.
+  # Caso especiales: 
+  #   * si inf es nil peor sup no busca víctimas hasta de sup años
+  #   * si inf no es nil pero sup es nil búsca víctimas desde inf años
+  #   * si tanto inf como sup son nil busca víctimas sin edad
+  #
+  # Caso especial si inf y sup son nil busca víctimas sin edad
+  def self.poblacion_ultimaatencion(caso_id, actividad_id, sexo, inf, sup)
     ultatencion = Cor1440Gen::Actividad.
-      where(id: ultimaatencion_actividad_id).take
+      where(id: actividad_id).take
     if !ultatencion
-      return "Problema no existe actividad #{ultimaatencion_actividad_id}"
+      return "Problema no existe actividad #{actividad_id}"
     end
 
     cond_edad = ''
@@ -163,6 +172,9 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
     end
     if sup && sup >= 0
       cond_edad += " AND ua_edad<='#{sup}'"
+    end
+    if !inf && !sup
+      cond_edad += " AND ua_edad IS NULL"
     end
 
     r=Sivel2Gen::Victima.connection.execute("
@@ -174,7 +186,7 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
             '#{ultatencion.fecha.day}') AS ua_edad 
           FROM public.sivel2_gen_victima AS v
           JOIN public.sip_persona AS p ON p.id=v.id_persona
-          WHERE v.id_caso='#{self.caso_id}' AND 
+          WHERE v.id_caso='#{caso_id}' AND 
            p.sexo='#{sexo}') AS sub
         WHERE TRUE=TRUE 
         #{cond_edad}")
@@ -674,41 +686,68 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
     when 'ultimaatencion_as_juridica'
       resp_ultimaatencion(13,130)
     when 'ultimaatencion_beneficiarios_0_5'
-      poblacion_ultimaatencion('M', 0, 5)
+      self.class.poblacion_ultimaatencion(
+        caso_id, ultimaatencion_actividad_id, 'M', 0, 5)
     when 'ultimaatencion_beneficiarios_6_12'
-      poblacion_ultimaatencion('M', 0, 5)
+      self.class.poblacion_ultimaatencion(
+        caso_id, ultimaatencion_actividad_id, 'M', 6, 12)
     when 'ultimaatencion_beneficiarios_13_17'
-      poblacion_ultimaatencion('M', 13, 17)
+      self.class.poblacion_ultimaatencion(
+        caso_id, ultimaatencion_actividad_id, 'M', 13, 17)
     when 'ultimaatencion_beneficiarios_18_26'
-      poblacion_ultimaatencion('M', 18, 26)
+      self.class.poblacion_ultimaatencion(
+        caso_id, ultimaatencion_actividad_id, 'M', 18, 26)
     when 'ultimaatencion_beneficiarios_27_59'
-      poblacion_ultimaatencion('M', 27, 59)
+      self.class.poblacion_ultimaatencion(
+        caso_id, ultimaatencion_actividad_id, 'M', 27, 59)
     when 'ultimaatencion_beneficiarios_60_'
-      poblacion_ultimaatencion('M', 60, nil)
+      self.class.poblacion_ultimaatencion(
+        caso_id, ultimaatencion_actividad_id, 'M', 60, nil)
+    when 'ultimaatencion_beneficiarios_se'
+      self.class.poblacion_ultimaatencion(
+        caso_id, ultimaatencion_actividad_id, 'M', nil, nil)
     when 'ultimaatencion_beneficiarias_0_5'
-      poblacion_ultimaatencion('F', 0, 5)
+      self.class.poblacion_ultimaatencion(
+        caso_id, ultimaatencion_actividad_id, 'F', 0, 5)
     when 'ultimaatencion_beneficiarias_6_12'
-      poblacion_ultimaatencion('F', 0, 5)
+      self.class.poblacion_ultimaatencion(
+        caso_id, ultimaatencion_actividad_id, 'F', 6, 12)
     when 'ultimaatencion_beneficiarias_13_17'
-      poblacion_ultimaatencion('F', 13, 17)
+      self.class.poblacion_ultimaatencion(
+        caso_id, ultimaatencion_actividad_id, 'F', 13, 17)
     when 'ultimaatencion_beneficiarias_18_26'
-      poblacion_ultimaatencion('F', 18, 26)
+      self.class.poblacion_ultimaatencion(
+        caso_id, ultimaatencion_actividad_id, 'F', 18, 26)
     when 'ultimaatencion_beneficiarias_27_59'
-      poblacion_ultimaatencion('F', 27, 59)
+      self.class.poblacion_ultimaatencion(
+        caso_id, ultimaatencion_actividad_id, 'F', 27, 59)
     when 'ultimaatencion_beneficiarias_60_'
-      poblacion_ultimaatencion('F', 60, nil)
+      self.class.poblacion_ultimaatencion(
+        caso_id, ultimaatencion_actividad_id, 'F', 60, nil)
+    when 'ultimaatencion_beneficiarias_se'
+      self.class.poblacion_ultimaatencion(
+        caso_id, ultimaatencion_actividad_id, 'F', nil, nil)
     when 'ultimaatencion_beneficiarios_ss_0_5'
-      poblacion_ultimaatencion('S', 0, 5)
+      self.class.poblacion_ultimaatencion(
+        caso_id, ultimaatencion_actividad_id, 'S', 0, 5)
     when 'ultimaatencion_beneficiarios_ss_6_12'
-      poblacion_ultimaatencion('S', 0, 5)
+      self.class.poblacion_ultimaatencion(
+        caso_id, ultimaatencion_actividad_id, 'S', 6, 12)
     when 'ultimaatencion_beneficiarios_ss_13_17'
-      poblacion_ultimaatencion('S', 13, 17)
+      self.class.poblacion_ultimaatencion(
+        caso_id, ultimaatencion_actividad_id, 'S', 13, 17)
     when 'ultimaatencion_beneficiarios_ss_18_26'
-      poblacion_ultimaatencion('S', 18, 26)
+      self.class.poblacion_ultimaatencion(
+        caso_id, ultimaatencion_actividad_id, 'S', 18, 26)
     when 'ultimaatencion_beneficiarios_ss_27_59'
-      poblacion_ultimaatencion('S', 27, 59)
+      self.class.poblacion_ultimaatencion(
+        caso_id, ultimaatencion_actividad_id, 'S', 27, 59)
     when 'ultimaatencion_beneficiarios_ss_60_'
-      poblacion_ultimaatencion('S', 60, nil)
+      self.class.poblacion_ultimaatencion(
+        caso_id, ultimaatencion_actividad_id, 'S', 60, nil)
+    when 'ultimaatencion_beneficiarios_ss_se'
+      self.class.poblacion_ultimaatencion(
+        caso_id, ultimaatencion_actividad_id, 'S', nil, nil)
 
     when 'ultimaatencion_derechosvul'
       resp_ultimaatencion(10,100)

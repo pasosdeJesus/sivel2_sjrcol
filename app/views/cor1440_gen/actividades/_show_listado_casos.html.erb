@@ -1,0 +1,82 @@
+<p>
+   <table class="tablalistadocasos table  table-bordered table-sm ">
+     <thead class="thead-light">
+       <tr><th rowspan='2' width='6em'>Número de Caso</th>
+         <th colspan='4' style='text-align: center'>Contacto</th>
+         <th colspan='3' style='text-align: center'>Familia</th>
+       </tr>
+       <tr>
+         <th>Nombres</th>
+         <th>Apellidos</th>
+         <th widht='6em'>Tipo Id.</th>
+         <th>Número .Id</th>
+         <th>Mujeres</th>
+         <th>Hombres</th>
+         <th>Sexo Sin Inf</th>
+       </tr>
+     </thead>
+     <tbody id="actividad_casosjr">
+      <% @registro.casosjr.order(:id_caso).each do |casosjr| %>
+       <tr>
+         <td>
+           <%= casosjr.id %>
+         </td>
+         <td>
+           <span>
+             <%= casosjr.contacto.nombres if casosjr.contacto.nombres %>
+           </span>
+         </td>
+         <td>
+           <span>
+             <%= casosjr.contacto.apellidos if casosjr.contacto.apellidos %>
+           </span>
+         </td>
+         <td>
+           <span>
+             <%= casosjr.contacto.tdocumento.sigla if casosjr.contacto.tdocumento %>
+           </span>
+         </td>
+         <td>
+           <span>
+             <%= casosjr.contacto.numerodocumento if casosjr.contacto.numerodocumento %>
+           </span>
+         </td>
+         <td>
+          <%
+            rangoedad = {'S' => {}, 'M' => {}, 'F' => {}}
+            Cor1440Gen::Rangoedadac.habilitados.all.each do |rac|
+              rangoedad['S'][rac.id] = 0
+              rangoedad['M'][rac.id] = 0
+              rangoedad['F'][rac.id] = 0
+            end
+            totsexo = {}
+            if @registro && 
+                casosjr && casosjr.caso && 
+                casosjr.caso.victima && @registro.fecha
+              Sivel2Sjr::RangoedadHelper.poblacion_por_sexo_rango(
+                casosjr.caso.id, @registro.fecha.year,
+                @registro.fecha.month,
+                @registro.fecha.day,
+                'Cor1440Gen::Rangoedadac', 
+                rangoedad, 
+                totsexo)
+            end 
+          %> 
+           <span>
+             <%= totsexo['F'] %>
+           </span>
+         <td>
+           <span>
+             <%= totsexo['M'] %>
+           </span>
+         </td>
+         <td>
+           <span>
+             <%= totsexo['S'] %>
+           </span>
+         </td>
+       </tr>
+       <% end %>
+     </tbody>
+   </table>
+</p>

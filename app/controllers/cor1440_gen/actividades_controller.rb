@@ -92,7 +92,8 @@ module Cor1440Gen
         :actorsocial,
         :poblacion,
         :anexos,
-        :listado_asistencia
+        :listado_asistencia,
+        :listado_casos
       ]
     end
 

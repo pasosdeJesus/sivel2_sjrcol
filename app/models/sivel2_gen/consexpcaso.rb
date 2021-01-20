@@ -27,7 +27,7 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
           CAST(EXTRACT(YEAR FROM conscaso.fecharec) AS INTEGER),
           CAST(EXTRACT(MONTH FROM conscaso.fecharec) AS INTEGER),
           CAST(EXTRACT(DAY FROM conscaso.fecharec) AS INTEGER))
-          AS contacto_edad_fecharec,
+          AS contacto_edad_fecha_recepcion,
         (SELECT rango FROM public.sivel2_gen_rangoedad 
           WHERE fechadeshabilitacion IS NULL 
           AND limiteinferior<=
@@ -42,7 +42,28 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
             CAST(EXTRACT(YEAR FROM conscaso.fecharec) AS INTEGER),
             CAST(EXTRACT(MONTH FROM conscaso.fecharec) AS INTEGER),
             CAST(EXTRACT(DAY FROM conscaso.fecharec) AS INTEGER))
-          LIMIT 1) AS contacto_rangoedad_fecharec,
+          LIMIT 1) AS contacto_rangoedad_fecha_recepcion,
+        sip_edad_de_fechanac_fecharef(
+          contacto.anionac, contacto.mesnac, contacto.dianac, 
+          CAST(EXTRACT(YEAR FROM conscaso.fecha) AS INTEGER),
+          CAST(EXTRACT(MONTH FROM conscaso.fecha) AS INTEGER),
+          CAST(EXTRACT(DAY FROM conscaso.fecha) AS INTEGER))
+          AS contacto_edad_fecha_salida,
+        (SELECT rango FROM public.sivel2_gen_rangoedad 
+          WHERE fechadeshabilitacion IS NULL 
+          AND limiteinferior<=
+            sip_edad_de_fechanac_fecharef(
+            contacto.anionac, contacto.mesnac, contacto.dianac, 
+            CAST(EXTRACT(YEAR FROM conscaso.fecha) AS INTEGER),
+            CAST(EXTRACT(MONTH FROM conscaso.fecha) AS INTEGER),
+            CAST(EXTRACT(DAY FROM conscaso.fecha) AS INTEGER))
+          AND limitesuperior>=
+            sip_edad_de_fechanac_fecharef(
+            contacto.anionac, contacto.mesnac, contacto.dianac, 
+            CAST(EXTRACT(YEAR FROM conscaso.fecha) AS INTEGER),
+            CAST(EXTRACT(MONTH FROM conscaso.fecha) AS INTEGER),
+            CAST(EXTRACT(DAY FROM conscaso.fecha) AS INTEGER))
+          LIMIT 1) AS contacto_rangoedad_fecha_salida,
         COALESCE(etnia.nombre, '') AS contacto_etnia,
         ultimaatencion.contacto_edad AS contacto_edad_ultimaatencion,
         (SELECT rango FROM public.sivel2_gen_rangoedad 
@@ -55,109 +76,109 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
           public.sivel2_gen_victima AS victima JOIN public.sip_persona ON
             sip_persona.id=victima.id_persona
           WHERE victima.id_caso=caso.id AND sip_persona.sexo='M' 
-          AND id_rangoedad='7') AS beneficiarios_0_5,
+          AND id_rangoedad='7') AS beneficiarios_0_5_fecha_salida,
         (SELECT COUNT(*) FROM 
           public.sivel2_gen_victima AS victima JOIN public.sip_persona ON
             sip_persona.id=victima.id_persona
           WHERE victima.id_caso=caso.id AND sip_persona.sexo='M' 
-          AND id_rangoedad='8') AS beneficiarios_6_12,
+          AND id_rangoedad='8') AS beneficiarios_6_12_fecha_salida,
         (SELECT COUNT(*) FROM 
           public.sivel2_gen_victima AS victima JOIN public.sip_persona ON
             sip_persona.id=victima.id_persona
           WHERE victima.id_caso=caso.id AND sip_persona.sexo='M' 
-          AND id_rangoedad='9') AS beneficiarios_13_17,
+          AND id_rangoedad='9') AS beneficiarios_13_17_fecha_salida,
         (SELECT COUNT(*) FROM 
           public.sivel2_gen_victima AS victima JOIN public.sip_persona ON
             sip_persona.id=victima.id_persona
           WHERE victima.id_caso=caso.id AND sip_persona.sexo='M' 
-          AND id_rangoedad='10') AS beneficiarios_18_26,
+          AND id_rangoedad='10') AS beneficiarios_18_26_fecha_salida,
         (SELECT COUNT(*) FROM 
           public.sivel2_gen_victima AS victima JOIN public.sip_persona ON
             sip_persona.id=victima.id_persona
           WHERE victima.id_caso=caso.id AND sip_persona.sexo='M' 
-          AND id_rangoedad='11') AS beneficiarios_27_59,
+          AND id_rangoedad='11') AS beneficiarios_27_59_fecha_salida,
         (SELECT COUNT(*) FROM 
           public.sivel2_gen_victima AS victima JOIN public.sip_persona ON
             sip_persona.id=victima.id_persona
           WHERE victima.id_caso=caso.id AND sip_persona.sexo='M' 
-          AND id_rangoedad='12') AS beneficiarios_60_,
+          AND id_rangoedad='12') AS beneficiarios_60m_fecha_salida,
         (SELECT COUNT(*) FROM 
           public.sivel2_gen_victima AS victima JOIN public.sip_persona ON
             sip_persona.id=victima.id_persona
           WHERE victima.id_caso=caso.id AND sip_persona.sexo='M' 
-          AND id_rangoedad='6') AS beneficiarios_se,
+          AND id_rangoedad='6') AS beneficiarios_se_fecha_salida,
 
         (SELECT COUNT(*) FROM 
           public.sivel2_gen_victima AS victima JOIN public.sip_persona ON
             sip_persona.id=victima.id_persona
           WHERE victima.id_caso=caso.id AND sip_persona.sexo='F' 
-          AND id_rangoedad='7') AS beneficiarias_0_5,
+          AND id_rangoedad='7') AS beneficiarias_0_5_fecha_salida,
         (SELECT COUNT(*) FROM 
           public.sivel2_gen_victima AS victima JOIN public.sip_persona ON
             sip_persona.id=victima.id_persona
           WHERE victima.id_caso=caso.id AND sip_persona.sexo='F' 
-          AND id_rangoedad='8') AS beneficiarias_6_12,
+          AND id_rangoedad='8') AS beneficiarias_6_12_fecha_salida,
         (SELECT COUNT(*) FROM 
           public.sivel2_gen_victima AS victima JOIN public.sip_persona ON
             sip_persona.id=victima.id_persona
           WHERE victima.id_caso=caso.id AND sip_persona.sexo='F' 
-          AND id_rangoedad='9') AS beneficiarias_13_17,
+          AND id_rangoedad='9') AS beneficiarias_13_17_fecha_salida,
         (SELECT COUNT(*) FROM 
           public.sivel2_gen_victima AS victima JOIN public.sip_persona ON
             sip_persona.id=victima.id_persona
           WHERE victima.id_caso=caso.id AND sip_persona.sexo='F' 
-          AND id_rangoedad='10') AS beneficiarias_18_26,
+          AND id_rangoedad='10') AS beneficiarias_18_26_fecha_salida,
         (SELECT COUNT(*) FROM 
           public.sivel2_gen_victima AS victima JOIN public.sip_persona ON
             sip_persona.id=victima.id_persona
           WHERE victima.id_caso=caso.id AND sip_persona.sexo='F' 
-          AND id_rangoedad='11') AS beneficiarias_27_59,
+          AND id_rangoedad='11') AS beneficiarias_27_59_fecha_salida,
         (SELECT COUNT(*) FROM 
           public.sivel2_gen_victima AS victima JOIN public.sip_persona ON
             sip_persona.id=victima.id_persona
           WHERE victima.id_caso=caso.id AND sip_persona.sexo='F' 
-          AND id_rangoedad='12') AS beneficiarias_60_,
+          AND id_rangoedad='12') AS beneficiarias_60m_fecha_salida,
         (SELECT COUNT(*) FROM 
           public.sivel2_gen_victima AS victima JOIN public.sip_persona ON
             sip_persona.id=victima.id_persona
           WHERE victima.id_caso=caso.id AND sip_persona.sexo='F' 
-          AND id_rangoedad='6') AS beneficiarias_se,
+          AND id_rangoedad='6') AS beneficiarias_se_fecha_salida,
 
         (SELECT COUNT(*) FROM 
           public.sivel2_gen_victima AS victima JOIN public.sip_persona ON
             sip_persona.id=victima.id_persona
           WHERE victima.id_caso=caso.id AND sip_persona.sexo='S' 
-          AND id_rangoedad='7') AS beneficiarios_ss_0_5,
+          AND id_rangoedad='7') AS beneficiarios_ss_0_5_fecha_salida,
         (SELECT COUNT(*) FROM 
           public.sivel2_gen_victima AS victima JOIN public.sip_persona ON
             sip_persona.id=victima.id_persona
           WHERE victima.id_caso=caso.id AND sip_persona.sexo='S' 
-          AND id_rangoedad='8') AS beneficiarios_ss_6_12,
+          AND id_rangoedad='8') AS beneficiarios_ss_6_12_fecha_salida,
         (SELECT COUNT(*) FROM 
           public.sivel2_gen_victima AS victima JOIN public.sip_persona ON
             sip_persona.id=victima.id_persona
           WHERE victima.id_caso=caso.id AND sip_persona.sexo='S' 
-          AND id_rangoedad='9') AS beneficiarios_ss_13_17,
+          AND id_rangoedad='9') AS beneficiarios_ss_13_17_fecha_salida,
         (SELECT COUNT(*) FROM 
           public.sivel2_gen_victima AS victima JOIN public.sip_persona ON
             sip_persona.id=victima.id_persona
           WHERE victima.id_caso=caso.id AND sip_persona.sexo='S' 
-          AND id_rangoedad='10') AS beneficiarios_ss_18_26,
+          AND id_rangoedad='10') AS beneficiarios_ss_18_26_fecha_salida,
         (SELECT COUNT(*) FROM 
           public.sivel2_gen_victima AS victima JOIN public.sip_persona ON
             sip_persona.id=victima.id_persona
           WHERE victima.id_caso=caso.id AND sip_persona.sexo='S' 
-          AND id_rangoedad='11') AS beneficiarios_ss_27_59,
+          AND id_rangoedad='11') AS beneficiarios_ss_27_59_fecha_salida,
         (SELECT COUNT(*) FROM 
           public.sivel2_gen_victima AS victima JOIN public.sip_persona ON
             sip_persona.id=victima.id_persona
           WHERE victima.id_caso=caso.id AND sip_persona.sexo='S' 
-          AND id_rangoedad='12') AS beneficiarios_ss_60_,
+          AND id_rangoedad='12') AS beneficiarios_ss_60m_fecha_salida,
         (SELECT COUNT(*) FROM 
           public.sivel2_gen_victima AS victima JOIN public.sip_persona ON
             sip_persona.id=victima.id_persona
           WHERE victima.id_caso=caso.id AND sip_persona.sexo='S' 
-          AND id_rangoedad='6') AS beneficiarios_ss_se,
+          AND id_rangoedad='6') AS beneficiarios_ss_se_fecha_salida,
 
         ARRAY_TO_STRING(ARRAY(SELECT supracategoria.id_tviolencia || ':' || 
             categoria.supracategoria_id || ':' || categoria.id || ' ' ||
@@ -219,6 +240,42 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
     r ? r : ''
   end
 
+  
+  # Retorna cantidad de víctimas del caso caso_id
+  # que tienen el sexo dado con edad entre inf y sup para la fecha dada
+  # de la actividad con id actividad_id.
+  # Caso especiales: 
+  #   * si inf es nil peor sup no busca víctimas hasta de sup años
+  #   * si inf no es nil pero sup es nil búsca víctimas desde inf años
+  #   * si tanto inf como sup son nil busca víctimas sin edad
+  #
+  # Caso especial si inf y sup son nil busca víctimas sin edad
+  def self.poblacion_a_fecha(caso_id, anio, mes, dia, sexo, inf, sup)
+    cond_edad = ''
+    if inf && inf >= 0
+      cond_edad += " AND edad>='#{inf}'"
+    end
+    if sup && sup >= 0
+      cond_edad += " AND edad<='#{sup}'"
+    end
+    if !inf && !sup
+      cond_edad += " AND edad IS NULL"
+    end
+
+    r=Sivel2Gen::Victima.connection.execute("
+        SELECT COUNT(*) FROM (
+          SELECT v.id, sip_edad_de_fechanac_fecharef(
+            p.anionac, p.mesnac, p.dianac,
+            '#{anio}', '#{mes}', '#{dia}') AS edad 
+          FROM public.sivel2_gen_victima AS v
+          JOIN public.sip_persona AS p ON p.id=v.id_persona
+          WHERE v.id_caso='#{caso_id}' AND 
+           p.sexo='#{sexo}') AS sub
+        WHERE TRUE=TRUE 
+        #{cond_edad}")
+    return   r[0]['count'].to_i
+  end
+
   # Retorna cantidad de víctimas del caso caso_id
   # que tienen el sexo dado con edad entre inf y sup para la fecha
   # de la actividad con id actividad_id.
@@ -235,31 +292,9 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
       return "Problema no existe actividad #{actividad_id}"
     end
 
-    cond_edad = ''
-    if inf && inf >= 0
-      cond_edad += " AND ua_edad>='#{inf}'"
-    end
-    if sup && sup >= 0
-      cond_edad += " AND ua_edad<='#{sup}'"
-    end
-    if !inf && !sup
-      cond_edad += " AND ua_edad IS NULL"
-    end
-
-    r=Sivel2Gen::Victima.connection.execute("
-        SELECT COUNT(*) FROM (
-          SELECT v.id, sip_edad_de_fechanac_fecharef(
-            p.anionac, p.mesnac, p.dianac,
-            '#{ultatencion.fecha.year}',
-            '#{ultatencion.fecha.month}',
-            '#{ultatencion.fecha.day}') AS ua_edad 
-          FROM public.sivel2_gen_victima AS v
-          JOIN public.sip_persona AS p ON p.id=v.id_persona
-          WHERE v.id_caso='#{caso_id}' AND 
-           p.sexo='#{sexo}') AS sub
-        WHERE TRUE=TRUE 
-        #{cond_edad}")
-    return   r[0]['count'].to_i
+    poblacion_a_fecha(
+      caso_id, ultatencion.fecha.year, ultatencion.fecha.month,
+      ultatencion.fecha.day, sexo, inf, sup)
   end
 
 
@@ -643,6 +678,92 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
     caso = Sivel2Gen::Caso.find(caso_id)
     numeroanexos = Sivel2Gen::AnexoCaso.where(id_caso: caso_id).count
     case atr.to_s
+    when 'beneficiarios_0_5_fecha_recepcion'
+      self.class.poblacion_a_fecha(
+        caso_id, fecharecepcion.year, fecharecepcion.month, fecharecepcion.day,
+       'M', 0, 5)
+    when 'beneficiarios_6_12_fecha_recepcion'
+      self.class.poblacion_a_fecha(
+        caso_id, fecharecepcion.year, fecharecepcion.month, fecharecepcion.day,
+       'M', 6, 12)
+    when 'beneficiarios_13_17_fecha_recepcion'
+      self.class.poblacion_a_fecha(
+        caso_id, fecharecepcion.year, fecharecepcion.month, fecharecepcion.day,
+       'M', 13, 17)
+    when 'beneficiarios_18_26_fecha_recepcion'
+      self.class.poblacion_a_fecha(
+        caso_id, fecharecepcion.year, fecharecepcion.month, fecharecepcion.day,
+       'M', 18, 26)
+    when 'beneficiarios_27_59_fecha_recepcion'
+      self.class.poblacion_a_fecha(
+        caso_id, fecharecepcion.year, fecharecepcion.month, fecharecepcion.day,
+       'M', 27, 59)
+    when 'beneficiarios_60m_fecha_recepcion'
+      self.class.poblacion_a_fecha(
+        caso_id, fecharecepcion.year, fecharecepcion.month, fecharecepcion.day,
+       'M', 60, nil)
+    when 'beneficiarios_se_fecha_recepcion'
+      self.class.poblacion_a_fecha(
+        caso_id, fecharecepcion.year, fecharecepcion.month, fecharecepcion.day,
+       'M', nil, nil)
+    when 'beneficiarias_0_5_fecha_recepcion'
+      self.class.poblacion_a_fecha(
+        caso_id, fecharecepcion.year, fecharecepcion.month, fecharecepcion.day,
+       'F', 0, 5)
+    when 'beneficiarias_6_12_fecha_recepcion'
+      self.class.poblacion_a_fecha(
+        caso_id, fecharecepcion.year, fecharecepcion.month, fecharecepcion.day,
+       'F', 6, 12)
+    when 'beneficiarias_13_17_fecha_recepcion'
+      self.class.poblacion_a_fecha(
+        caso_id, fecharecepcion.year, fecharecepcion.month, fecharecepcion.day,
+       'F', 13, 17)
+    when 'beneficiarias_18_26_fecha_recepcion'
+      self.class.poblacion_a_fecha(
+        caso_id, fecharecepcion.year, fecharecepcion.month, fecharecepcion.day,
+       'F', 18, 26)
+    when 'beneficiarias_27_59_fecha_recepcion'
+      self.class.poblacion_a_fecha(
+        caso_id, fecharecepcion.year, fecharecepcion.month, fecharecepcion.day,
+       'F', 27, 59)
+    when 'beneficiarias_60m_fecha_recepcion'
+      self.class.poblacion_a_fecha(
+        caso_id, fecharecepcion.year, fecharecepcion.month, fecharecepcion.day,
+       'F', 60, nil)
+    when 'beneficiarias_se_fecha_recepcion'
+      self.class.poblacion_a_fecha(
+        caso_id, fecharecepcion.year, fecharecepcion.month, fecharecepcion.day,
+       'F', nil, nil)
+    when 'beneficiarios_ss_0_5_fecha_recepcion'
+      self.class.poblacion_a_fecha(
+        caso_id, fecharecepcion.year, fecharecepcion.month, fecharecepcion.day,
+       'S', 0, 5)
+    when 'beneficiarios_ss_6_12_fecha_recepcion'
+      self.class.poblacion_a_fecha(
+        caso_id, fecharecepcion.year, fecharecepcion.month, fecharecepcion.day,
+       'S', 6, 12)
+    when 'beneficiarios_ss_13_17_fecha_recepcion'
+      self.class.poblacion_a_fecha(
+        caso_id, fecharecepcion.year, fecharecepcion.month, fecharecepcion.day,
+       'S', 13, 17)
+    when 'beneficiarios_ss_18_26_fecha_recepcion'
+      self.class.poblacion_a_fecha(
+        caso_id, fecharecepcion.year, fecharecepcion.month, fecharecepcion.day,
+       'S', 18, 26)
+    when 'beneficiarios_ss_27_59_fecha_recepcion'
+      self.class.poblacion_a_fecha(
+        caso_id, fecharecepcion.year, fecharecepcion.month, fecharecepcion.day,
+       'S', 27, 59)
+    when 'beneficiarios_ss_60m_fecha_recepcion'
+      self.class.poblacion_a_fecha(
+        caso_id, fecharecepcion.year, fecharecepcion.month, fecharecepcion.day,
+       'S', 60, nil)
+    when 'beneficiarios_ss_se_fecha_recepcion'
+      self.class.poblacion_a_fecha(
+        caso_id, fecharecepcion.year, fecharecepcion.month, fecharecepcion.day,
+       'S', nil, nil)
+
+
       ## CONTACTO
     when 'contacto_anionac'
       contacto.anionac ? contacto.anionac : ''
@@ -769,7 +890,7 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
     when 'ultimaatencion_beneficiarios_27_59'
       self.class.poblacion_ultimaatencion(
         caso_id, ultimaatencion_actividad_id, 'M', 27, 59)
-    when 'ultimaatencion_beneficiarios_60_'
+    when 'ultimaatencion_beneficiarios_60m'
       self.class.poblacion_ultimaatencion(
         caso_id, ultimaatencion_actividad_id, 'M', 60, nil)
     when 'ultimaatencion_beneficiarios_se'
@@ -790,7 +911,7 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
     when 'ultimaatencion_beneficiarias_27_59'
       self.class.poblacion_ultimaatencion(
         caso_id, ultimaatencion_actividad_id, 'F', 27, 59)
-    when 'ultimaatencion_beneficiarias_60_'
+    when 'ultimaatencion_beneficiarias_60m'
       self.class.poblacion_ultimaatencion(
         caso_id, ultimaatencion_actividad_id, 'F', 60, nil)
     when 'ultimaatencion_beneficiarias_se'
@@ -811,7 +932,7 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
     when 'ultimaatencion_beneficiarios_ss_27_59'
       self.class.poblacion_ultimaatencion(
         caso_id, ultimaatencion_actividad_id, 'S', 27, 59)
-    when 'ultimaatencion_beneficiarios_ss_60_'
+    when 'ultimaatencion_beneficiarios_ss_60m'
       self.class.poblacion_ultimaatencion(
         caso_id, ultimaatencion_actividad_id, 'S', 60, nil)
     when 'ultimaatencion_beneficiarios_ss_se'

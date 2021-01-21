@@ -124,11 +124,10 @@ module Cor1440Gen
         end
       end
       #Exporta Campos básicos de Convenios Financiados
-      basicos = ::Ability::CAMPOS_PROYECTOS_FINANCIEROS_BAS
       case atr.to_s
       when 'nombres'
         nombre
-      when 'financiador', 'area'
+      when 'financiador'
         financiador ? financiador.pluck(:nombre).join(',') : ''
       when 'area'
         proyecto ? proyecto.pluck(:nombre).join(',') : ''

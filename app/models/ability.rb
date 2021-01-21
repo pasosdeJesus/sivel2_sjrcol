@@ -168,9 +168,9 @@ class Ability < Sivel2Sjr::Ability
     'clase',
     'mesnac',
     'maternidad',
-    'numerodocumento',
     'numeroanexos',
     'numeroanexosconsen',
+    'numerodocumento',
     'organizacion',
     'profesion',
     'regimensalud',
@@ -225,7 +225,7 @@ class Ability < Sivel2Sjr::Ability
     'pagoingreso',
     'perfilmigracion',
     'migracontactopre',
-    'statusmigratorio',
+    'estatus_migratorio',
     'proteccion',
     'autoridadrefugio',
     'causaRefugio',
@@ -462,6 +462,18 @@ class Ability < Sivel2Sjr::Ability
       CAMPOS_ACTOS_CASOS +
       CAMPOS_ETIQUETAS_CASOS +
       [
+        :actividades_departamentos,
+        :actividades_municipios,
+        :actividades_perfiles,
+        :actividades_a_humanitaria_tipos_de_ayuda,
+        :actividades_a_humanitaria_valor_de_ayuda,
+        :actividades_a_humanitaria_modalidades_entrega,
+        :actividades_a_humanitarias_convenios_financiados,
+        :actividad_asesorias_juridicas,
+        :actividades_as_juridicas_convenios_financiados,
+        :actividades_acompañamientos_psicosociales,
+        :actividades_a_psicosociales_convenios_financiados,
+
         :asesor,
 
         :beneficiarias_0_5_fecha_recepcion,
@@ -529,6 +541,8 @@ class Ability < Sivel2Sjr::Ability
         :memo,
         :memo1612,
         :numeroanexos,
+        :numero_beneficiarios,
+        :numero_madres_gestantes,
         :oficina,
         :presponsables,
         :tipificacion,

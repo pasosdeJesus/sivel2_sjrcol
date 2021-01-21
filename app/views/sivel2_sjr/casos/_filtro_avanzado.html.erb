@@ -272,44 +272,6 @@
 
     <div class="row filtro-fila">
       <div class="offset-sm-0 col-sm-2 offset-md-1 col-md-1">
-        <%= Sivel2Gen::Caso.human_attribute_name(:ultimaatencion_fecha) %>
-      </div>
-      <div class="offset-sm-0 col-sm-4 offset-md-0 col-md-3">
-        <%= f.input :ultimaatencion_fechaini,
-          maxlength: 10, 
-          size: 10,
-          label: false,
-          placeholder: 'Inicial',
-          input_html: {
-          "data-behaviour" => "datepicker"
-          }
-        %>
-      </div>
-      <div class="offset-sm-0 col-sm-4 offset-md-1 col-md-3">
-        <%= f.input :ultimaatencion_fechafin,
-          maxlength: 10, 
-          size: 10,
-          label: false,
-          placeholder: 'Final',
-          input_html: {
-          "data-behaviour" => "datepicker"
-          }
-        %>
-    </div>
-      <div class="offset-sm-0 col-sm-1 text-center">
-        <%= f.input :inc_ultimaatencion_fecha,
-          as: :boolean, 
-          label: false,
-          input_html: { checked: "checked" }
-        %>
-      </div>
-      <div class="offset-sm-0 col-sm-1 text-center">
-        <%= f.radio_button(:orden, :ultimaatencion_fecha) %>
-      </div>
-    </div>
-
-    <div class="row filtro-fila">
-      <div class="offset-sm-0 col-sm-2 offset-md-1 col-md-1">
         <%= Sivel2Gen::Caso.human_attribute_name(:memo) %>
       </div>
       <div class="offset-sm-0 col-sm-9 offset-md-0 col-md-7">
@@ -474,6 +436,86 @@
       <div class="offset-sm-0 col-sm-1 text-center">
         <%= f.radio_button(:orden, :codigo) %>
       </div>
+    </div>
+
+    <div class="row filtro-fila">
+          &nbsp;
+    </div>
+
+
+    <div class="row filtro-fila">
+      <div class="offset-sm-0 col-sm-2 offset-md-1 col-md-1">
+        <%= Sivel2Gen::Caso.human_attribute_name(:ultimaatencion_fecha) %>
+      </div>
+      <div class="offset-sm-0 col-sm-4 offset-md-0 col-md-3">
+        <%= f.input :ultimaatencion_fechaini,
+          maxlength: 10, 
+          size: 10,
+          label: false,
+          placeholder: 'Inicial',
+          input_html: {
+          "data-behaviour" => "datepicker"
+          }
+        %>
+      </div>
+      <div class="offset-sm-0 col-sm-4 offset-md-1 col-md-3">
+        <%= f.input :ultimaatencion_fechafin,
+          maxlength: 10, 
+          size: 10,
+          label: false,
+          placeholder: 'Final',
+          input_html: {
+          "data-behaviour" => "datepicker"
+          }
+        %>
+    </div>
+      <div class="offset-sm-0 col-sm-1 text-center">
+        <%= f.input :inc_ultimaatencion_fecha,
+          as: :boolean, 
+          label: false,
+          input_html: { checked: "checked" }
+        %>
+      </div>
+      <div class="offset-sm-0 col-sm-1 text-center">
+        <%= f.radio_button(:orden, :ultimaatencion_fecha) %>
+      </div>
+    </div>
+
+    <div class="row filtro-fila">
+      <div class="offset-sm-0 col-sm-2 offset-md-1 col-md-1">
+        Fechas de atenciones
+      </div>
+      <div class="offset-sm-0 col-sm-4 offset-md-0 col-md-3">
+        <%= f.input :atenciones_fechaini,
+          maxlength: 10, 
+          size: 10,
+          label: false,
+          placeholder: 'Inicial',
+          input_html: {
+          "data-behaviour" => "datepicker"
+          }
+        %>
+      </div>
+      <div class="offset-sm-0 col-sm-4 offset-md-1 col-md-3">
+        <%= f.input :atenciones_fechafin,
+          maxlength: 10, 
+          size: 10,
+          label: false,
+          placeholder: 'Final',
+          input_html: {
+          "data-behaviour" => "datepicker"
+          }
+        %>
+    </div>
+      <div class="offset-sm-0 col-sm-1 text-center">
+      </div>
+      <div class="offset-sm-0 col-sm-1 text-center">
+      </div>
+    </div>
+
+
+    <div class="row filtro-fila">
+          &nbsp;
     </div>
 
     <div class="row filtro-fila">

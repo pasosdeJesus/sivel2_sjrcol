@@ -5,21 +5,7 @@ require 'sivel2_sjr/concerns/models/conscaso'
 class Sivel2Gen::Conscaso < ActiveRecord::Base
   include Sivel2Sjr::Concerns::Models::Conscaso
 
-  scope :filtro_numerodocumento, lambda { |a|
-    joins('JOIN sivel2_gen_victima ON sivel2_gen_victima.id_caso='+
-          'sivel2_gen_conscaso.caso_id').joins('JOIN sip_persona ON '+
-          'sivel2_gen_victima.id_persona = sip_persona.id')
-      .where('sip_persona.numerodocumento=?', a)
-  }
-
-  scope :filtro_tdocumento, lambda { |a|
-    joins('JOIN sivel2_gen_victima ON sivel2_gen_victima.id_caso='+
-          'sivel2_gen_conscaso.caso_id').joins('JOIN sip_persona ON '+
-          'sivel2_gen_victima.id_persona = sip_persona.id')
-      .where('sip_persona.tdocumento_id=?', a.to_i)
-  }
-
-  scope :filtro_expulsion_pais_id, lambda { |id|
+   scope :filtro_expulsion_pais_id, lambda { |id|
     where('(caso_id, fecha) IN (SELECT sip_ubicacion.id_caso, 
           sivel2_sjr_desplazamiento.fechaexpulsion FROM
           public.sivel2_sjr_desplazamiento JOIN public.sip_ubicacion 
@@ -73,17 +59,34 @@ class Sivel2Gen::Conscaso < ActiveRecord::Base
           WHERE sip_ubicacion.id_municipio = ?)', id)
   }
 
+  scope :filtro_numerodocumento, lambda { |a|
+    joins('JOIN sivel2_gen_victima ON sivel2_gen_victima.id_caso='+
+          'sivel2_gen_conscaso.caso_id').joins('JOIN sip_persona ON '+
+          'sivel2_gen_victima.id_persona = sip_persona.id')
+      .where('sip_persona.numerodocumento=?', a)
+  }
+
+  scope :filtro_tdocumento, lambda { |a|
+    joins('JOIN sivel2_gen_victima ON sivel2_gen_victima.id_caso='+
+          'sivel2_gen_conscaso.caso_id').joins('JOIN sip_persona ON '+
+          'sivel2_gen_victima.id_persona = sip_persona.id')
+      .where('sip_persona.tdocumento_id=?', a.to_i)
+  }
+
+
   def self.refresca_conscaso
     if !ActiveRecord::Base.connection.data_source_exists? 'sivel2_sjr_ultimaatencion_aux'
       ActiveRecord::Base.connection.execute(
         "CREATE OR REPLACE VIEW sivel2_sjr_ultimaatencion_aux AS 
-           SELECT casosjr.id_caso AS caso_id, 
-             max(a.fecha) AS fecha, MAX(a.id) AS actividad_id 
-             FROM public.sivel2_sjr_actividad_casosjr AS ac 
-             JOIN public.cor1440_gen_actividad AS a ON ac.actividad_id=a.id 
-             JOIN public.sivel2_sjr_casosjr AS casosjr ON 
-               ac.casosjr_id=casosjr.id_caso 
-             GROUP BY 1 ORDER BY 1,2"
+           SELECT ac1.casosjr_id AS caso_id, a1.fecha, a1.id AS actividad_id
+           FROM  public.sivel2_sjr_actividad_casosjr AS ac1
+             LEFT JOIN public.cor1440_gen_actividad AS a1 ON ac1.actividad_id=a1.id
+             WHERE (ac1.casosjr_id, a1.fecha, a1.id) IN
+           (SELECT ac2.casosjr_id, a2.fecha, a2.id AS actividad_id
+             FROM public.sivel2_sjr_actividad_casosjr AS ac2
+             JOIN public.cor1440_gen_actividad AS a2 ON ac2.actividad_id=a2.id
+             WHERE ac2.casosjr_id=ac1.casosjr_id
+             ORDER BY 2 DESC, 3 DESC LIMIT 1);"
       )
     end
     if !ActiveRecord::Base.connection.data_source_exists? 'sivel2_sjr_ultimaatencion'
@@ -99,12 +102,9 @@ class Sivel2Gen::Conscaso < ActiveRecord::Base
                CAST(EXTRACT(MONTH FROM a.fecha) AS INTEGER),
                CAST(EXTRACT(DAY FROM a.fecha) AS INTEGER) ) AS contacto_edad
              FROM sivel2_sjr_ultimaatencion_aux AS uaux 
-             JOIN public.sivel2_sjr_actividad_casosjr AS ac
-               ON ac.actividad_id=uaux.actividad_id AND
-                  ac.casosjr_id=uaux.caso_id
-             JOIN public.cor1440_gen_actividad AS a ON ac.actividad_id=a.id 
+             JOIN public.cor1440_gen_actividad AS a ON uaux.actividad_id=a.id 
              JOIN public.sivel2_sjr_casosjr AS casosjr ON 
-               ac.casosjr_id=casosjr.id_caso 
+               uaux.caso_id=casosjr.id_caso 
              JOIN public.sip_persona AS contacto ON
                contacto.id=casosjr.contacto_id"
       )

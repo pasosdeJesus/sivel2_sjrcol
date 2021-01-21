@@ -168,9 +168,9 @@ class Ability < Sivel2Sjr::Ability
     'clase',
     'mesnac',
     'maternidad',
-    'numerodocumento',
     'numeroanexos',
     'numeroanexosconsen',
+    'numerodocumento',
     'organizacion',
     'profesion',
     'regimensalud',
@@ -225,7 +225,7 @@ class Ability < Sivel2Sjr::Ability
     'pagoingreso',
     'perfilmigracion',
     'migracontactopre',
-    'statusmigratorio',
+    'estatus_migratorio',
     'proteccion',
     'autoridadrefugio',
     'causaRefugio',
@@ -444,132 +444,8 @@ class Ability < Sivel2Sjr::Ability
     end
   end
 
+
   CAMPOS_PLANTILLAS_PROPIAS = {
-    'Caso' => {
-      campos: 
-      CAMPOS_PERSONAS_CASOS +
-      CAMPOS_UBICACIONES_CASOS +
-      CAMPOS_MIGRA_SIMPLES +
-      CAMPOS_MIGRA_RELA +
-      CAMPOS_MIGRA_MULTI +
-      CAMPOS_DESPLAZA_SIMPLES +
-      CAMPOS_DESPLAZA_RELA +
-      CAMPOS_DESPLAZA_MULTI +
-      CAMPOS_DESPLAZA_BOOL +
-      CAMPOS_DESPLAZA_ESPECIALES + 
-      CAMPOS_RESPUESTAS_CASOS + 
-      CAMPOS_PRESPONSABLES_CASOS +
-      CAMPOS_ACTOS_CASOS +
-      CAMPOS_ETIQUETAS_CASOS +
-      [
-        :asesor,
-
-        :beneficiarias_0_5_fecha_recepcion,
-        :beneficiarias_6_12_fecha_recepcion,
-        :beneficiarias_13_17_fecha_recepcion,
-        :beneficiarias_18_26_fecha_recepcion,
-        :beneficiarias_27_59_fecha_recepcion,
-        :beneficiarias_60m_fecha_recepcion,
-        :beneficiarias_se_fecha_recepcion,
-        :beneficiarios_0_5_fecha_recepcion,
-        :beneficiarios_6_12_fecha_recepcion,
-        :beneficiarios_13_17_fecha_recepcion,
-        :beneficiarios_18_26_fecha_recepcion,
-        :beneficiarios_27_59_fecha_recepcion,
-        :beneficiarios_60m_fecha_recepcion,
-        :beneficiarios_se_fecha_recepcion,
-        :beneficiarios_ss_0_5_fecha_recepcion,
-        :beneficiarios_ss_6_12_fecha_recepcion,
-        :beneficiarios_ss_13_17_fecha_recepcion,
-        :beneficiarios_ss_18_26_fecha_recepcion,
-        :beneficiarios_ss_27_59_fecha_recepcion,
-        :beneficiarios_ss_60m_fecha_recepcion,
-        :beneficiarios_ss_se_fecha_recepcion,
-
-        :beneficiarias_0_5_fecha_salida,
-        :beneficiarias_6_12_fecha_salida,
-        :beneficiarias_13_17_fecha_salida,
-        :beneficiarias_18_26_fecha_salida,
-        :beneficiarias_27_59_fecha_salida,
-        :beneficiarias_60m_fecha_salida,
-        :beneficiarias_se_fecha_salida,
-        :beneficiarios_0_5_fecha_salida,
-        :beneficiarios_6_12_fecha_salida,
-        :beneficiarios_13_17_fecha_salida,
-        :beneficiarios_18_26_fecha_salida,
-        :beneficiarios_27_59_fecha_salida,
-        :beneficiarios_60m_fecha_salida,
-        :beneficiarios_se_fecha_salida,
-        :beneficiarios_ss_0_5_fecha_salida,
-        :beneficiarios_ss_6_12_fecha_salida,
-        :beneficiarios_ss_13_17_fecha_salida,
-        :beneficiarios_ss_18_26_fecha_salida,
-        :beneficiarios_ss_27_59_fecha_salida,
-        :beneficiarios_ss_60m_fecha_salida,
-        :beneficiarios_ss_se_fecha_salida,
-
-        :caso_id,
-        :contacto_comosupo,
-        :contacto_consentimientosjr,
-        :contacto_consentimientobd,
-        :contacto_edad_fecha_recepcion,
-        :contacto_edad_fecha_salida,
-        :contacto_edad_ultimaatencion,
-        :contacto_rangoedad_fecha_recepcion,
-        :contacto_rangoedad_fecha_salida,
-        :contacto_rangoedad_ultimaatencion,
-        :contacto,
-        :descripcion,
-        :direccion,
-        :expulsion,
-        :fechadespemb,
-        :fecharecepcion,
-        :hora,
-        :llegada,
-        :memo,
-        :memo1612,
-        :numeroanexos,
-        :oficina,
-        :presponsables,
-        :tipificacion,
-        :telefono,
-        :ubicaciones,
-        :ultimaatencion_actividad_id,
-        :ultimaatencion_ac_juridica,
-        :ultimaatencion_as_humanitaria,
-        :ultimaatencion_as_juridica,
-        :ultimaatencion_beneficiarios_0_5,
-        :ultimaatencion_beneficiarios_6_12,
-        :ultimaatencion_beneficiarios_13_17,
-        :ultimaatencion_beneficiarios_18_26,
-        :ultimaatencion_beneficiarios_27_59,
-        :ultimaatencion_beneficiarios_60m,
-        :ultimaatencion_beneficiarios_se,
-        :ultimaatencion_beneficiarias_0_5,
-        :ultimaatencion_beneficiarias_6_12,
-        :ultimaatencion_beneficiarias_13_17,
-        :ultimaatencion_beneficiarias_18_26,
-        :ultimaatencion_beneficiarias_27_59,
-        :ultimaatencion_beneficiarias_60m,
-        :ultimaatencion_beneficiarias_se,
-        :ultimaatencion_beneficiarios_ss_0_5,
-        :ultimaatencion_beneficiarios_ss_6_12,
-        :ultimaatencion_beneficiarios_ss_13_17,
-        :ultimaatencion_beneficiarios_ss_18_26,
-        :ultimaatencion_beneficiarios_ss_27_59,
-        :ultimaatencion_beneficiarios_ss_60m,
-        :ultimaatencion_beneficiarios_ss_se,
-        :ultimaatencion_derechosvul,
-        :ultimaatencion_fecha,
-        :ultimaatencion_mes,
-        :ultimaatencion_objetivo,
-        :ultimaatencion_otros_ser_as,
-        :victimas
-      ],
-      controlador: 'Sivel2Sjr::CasosController',
-      ruta: '/casos'
-    },
-
     'Actividad' => {
       campos: [
         Cor1440Gen::Actividad.human_attribute_name(
@@ -691,16 +567,170 @@ class Ability < Sivel2Sjr::Ability
       controlador: 'Cor1440Gen::ActividadesController',
       ruta: '/actividades'
     },
-    'Proyecto' => {
-      campos: 
-        CAMPOS_PROYECTOS_FINANCIEROS_BAS+
-        CAMPOS_INDICADORES_OBJ_T +
-        CAMPOS_RESULTADOS_T +
-        CAMPOS_INDICADORES_RES_T +
-        CAMPOS_ACTIVIDADESPF_T,
-      controlador: 'Sivel2Sjr::CasosController',
-      ruta: '/proyectofinanciero'
+
+    'Actorsocial' => {
+      campos: [
+        'actualización',
+        'anotaciones',
+        'creación',
+        'departamento',
+        'dirección',
+        'email',
+        'fax',
+        'id',
+        'municipio',
+        'nit',
+        'nombre',
+        'país',
+        'población_relacionada',
+        'teléfono',
+        'tipo',
+        'web'
+      ],
+      controlador: 'Sip::Actorsocial',
+      ruta: '/actorsocial'
     },
+
+
+    'Caso' => {
+      campos: 
+      CAMPOS_PERSONAS_CASOS +
+      CAMPOS_UBICACIONES_CASOS +
+      CAMPOS_MIGRA_SIMPLES +
+      CAMPOS_MIGRA_RELA +
+      CAMPOS_MIGRA_MULTI +
+      CAMPOS_DESPLAZA_SIMPLES +
+      CAMPOS_DESPLAZA_RELA +
+      CAMPOS_DESPLAZA_MULTI +
+      CAMPOS_DESPLAZA_BOOL +
+      CAMPOS_DESPLAZA_ESPECIALES + 
+      CAMPOS_RESPUESTAS_CASOS + 
+      CAMPOS_PRESPONSABLES_CASOS +
+      CAMPOS_ACTOS_CASOS +
+      CAMPOS_ETIQUETAS_CASOS +
+      [
+        :actividades_departamentos,
+        :actividades_municipios,
+        :actividades_perfiles,
+        :actividades_a_humanitaria_tipos_de_ayuda,
+        :actividades_a_humanitaria_valor_de_ayuda,
+        :actividades_a_humanitaria_modalidades_entrega,
+        :actividades_a_humanitarias_convenios_financiados,
+        :actividad_asesorias_juridicas,
+        :actividades_as_juridicas_convenios_financiados,
+        :actividades_acompañamientos_psicosociales,
+        :actividades_a_psicosociales_convenios_financiados,
+
+        :asesor,
+
+        :beneficiarias_0_5_fecha_recepcion,
+        :beneficiarias_6_12_fecha_recepcion,
+        :beneficiarias_13_17_fecha_recepcion,
+        :beneficiarias_18_26_fecha_recepcion,
+        :beneficiarias_27_59_fecha_recepcion,
+        :beneficiarias_60m_fecha_recepcion,
+        :beneficiarias_se_fecha_recepcion,
+        :beneficiarios_0_5_fecha_recepcion,
+        :beneficiarios_6_12_fecha_recepcion,
+        :beneficiarios_13_17_fecha_recepcion,
+        :beneficiarios_18_26_fecha_recepcion,
+        :beneficiarios_27_59_fecha_recepcion,
+        :beneficiarios_60m_fecha_recepcion,
+        :beneficiarios_se_fecha_recepcion,
+        :beneficiarios_ss_0_5_fecha_recepcion,
+        :beneficiarios_ss_6_12_fecha_recepcion,
+        :beneficiarios_ss_13_17_fecha_recepcion,
+        :beneficiarios_ss_18_26_fecha_recepcion,
+        :beneficiarios_ss_27_59_fecha_recepcion,
+        :beneficiarios_ss_60m_fecha_recepcion,
+        :beneficiarios_ss_se_fecha_recepcion,
+
+        :beneficiarias_0_5_fecha_salida,
+        :beneficiarias_6_12_fecha_salida,
+        :beneficiarias_13_17_fecha_salida,
+        :beneficiarias_18_26_fecha_salida,
+        :beneficiarias_27_59_fecha_salida,
+        :beneficiarias_60m_fecha_salida,
+        :beneficiarias_se_fecha_salida,
+        :beneficiarios_0_5_fecha_salida,
+        :beneficiarios_6_12_fecha_salida,
+        :beneficiarios_13_17_fecha_salida,
+        :beneficiarios_18_26_fecha_salida,
+        :beneficiarios_27_59_fecha_salida,
+        :beneficiarios_60m_fecha_salida,
+        :beneficiarios_se_fecha_salida,
+        :beneficiarios_ss_0_5_fecha_salida,
+        :beneficiarios_ss_6_12_fecha_salida,
+        :beneficiarios_ss_13_17_fecha_salida,
+        :beneficiarios_ss_18_26_fecha_salida,
+        :beneficiarios_ss_27_59_fecha_salida,
+        :beneficiarios_ss_60m_fecha_salida,
+        :beneficiarios_ss_se_fecha_salida,
+
+        :caso_id,
+        :contacto_comosupo,
+        :contacto_consentimientosjr,
+        :contacto_consentimientobd,
+        :contacto_edad_fecha_recepcion,
+        :contacto_edad_fecha_salida,
+        :contacto_edad_ultimaatencion,
+        :contacto_rangoedad_fecha_recepcion,
+        :contacto_rangoedad_fecha_salida,
+        :contacto_rangoedad_ultimaatencion,
+        :contacto,
+        :descripcion,
+        :direccion,
+        :expulsion,
+        :fechadespemb,
+        :fecharecepcion,
+        :hora,
+        :llegada,
+        :memo,
+        :memo1612,
+        :numeroanexos,
+        :numero_beneficiarios,
+        :numero_madres_gestantes,
+        :oficina,
+        :presponsables,
+        :tipificacion,
+        :telefono,
+        :ubicaciones,
+        :ultimaatencion_actividad_id,
+        :ultimaatencion_ac_juridica,
+        :ultimaatencion_as_humanitaria,
+        :ultimaatencion_as_juridica,
+        :ultimaatencion_beneficiarios_0_5,
+        :ultimaatencion_beneficiarios_6_12,
+        :ultimaatencion_beneficiarios_13_17,
+        :ultimaatencion_beneficiarios_18_26,
+        :ultimaatencion_beneficiarios_27_59,
+        :ultimaatencion_beneficiarios_60m,
+        :ultimaatencion_beneficiarios_se,
+        :ultimaatencion_beneficiarias_0_5,
+        :ultimaatencion_beneficiarias_6_12,
+        :ultimaatencion_beneficiarias_13_17,
+        :ultimaatencion_beneficiarias_18_26,
+        :ultimaatencion_beneficiarias_27_59,
+        :ultimaatencion_beneficiarias_60m,
+        :ultimaatencion_beneficiarias_se,
+        :ultimaatencion_beneficiarios_ss_0_5,
+        :ultimaatencion_beneficiarios_ss_6_12,
+        :ultimaatencion_beneficiarios_ss_13_17,
+        :ultimaatencion_beneficiarios_ss_18_26,
+        :ultimaatencion_beneficiarios_ss_27_59,
+        :ultimaatencion_beneficiarios_ss_60m,
+        :ultimaatencion_beneficiarios_ss_se,
+        :ultimaatencion_derechosvul,
+        :ultimaatencion_fecha,
+        :ultimaatencion_mes,
+        :ultimaatencion_objetivo,
+        :ultimaatencion_otros_ser_as,
+        :victimas
+      ],
+      controlador: 'Sivel2Sjr::CasosController',
+      ruta: '/casos'
+    },
+
     'Consgifmm' => {
       solo_multiple: true,
       campos: [
@@ -762,8 +792,18 @@ class Ability < Sivel2Sjr::Ability
       ],
       controlador: '::Consgifmm',
       ruta: '/consgifmm'
-    }
+    },
 
+    'Proyecto' => {
+      campos: 
+        CAMPOS_PROYECTOS_FINANCIEROS_BAS+
+        CAMPOS_INDICADORES_OBJ_T +
+        CAMPOS_RESULTADOS_T +
+        CAMPOS_INDICADORES_RES_T +
+        CAMPOS_ACTIVIDADESPF_T,
+      controlador: 'Cor1440Gen::Proyectofinanciero',
+      ruta: '/proyectosfinanciero'
+    }
 
   }
 

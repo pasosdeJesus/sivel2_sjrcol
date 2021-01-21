@@ -229,6 +229,16 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
   end
 
 
+  # Retorna valores a campos de formularios incrustados en 
+  # actividades que tengan el caso en el listado de casos
+  def valores_campos_respuestafor_actividades(campo_id)
+      resp_ids = casosjr.actividad.joins(:respuestafor).
+        pluck('mr519_gen_respuestafor.id')
+      Mr519Gen::Valorcampo.joins(:respuestafor).
+        where('mr519_gen_respuestafor.id IN (?)', resp_ids).
+        where(campo_id: campo_id)
+  end
+
   def resp_ultimaatencion(formulario_id, campo_id)
     ultatencion = Cor1440Gen::Actividad.
       where(id: ultimaatencion_actividad_id).take
@@ -549,9 +559,11 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
               aof = Sivel2Gen::Actividadoficio.find(victimasjrf.id_actividadoficio)
               return aof ? aof.nombre : ''
             when 'numeroanexos'
-              return Sivel2Gen::AnexoVictima.where(victima_id: victimaf.id).where.not(tipoanexo_id: 11).count.to_s
+              return Sivel2Gen::AnexoVictima.where(victima_id: victimaf.id).
+                where.not(tipoanexo_id: 11).count.to_s
             when 'numeroanexosconsen'
-              return Sivel2Gen::AnexoVictima.where(victima_id: victimaf.id, tipoanexo_id: 11).count.to_s
+              return Sivel2Gen::AnexoVictima.where(
+                victima_id: victimaf.id, tipoanexo_id: 11).count.to_s
             end
           end
         else
@@ -606,7 +618,13 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
     end
     if migra_rela.include? atr.to_s
       if migracion
-        return migracion.send(atr.to_s).nil? ? "No aplica o nulo" : migracion.send(atr.to_s).nombre
+        case atr.to_s
+        when 'estatus_migratorio'
+          m = migracion.send('statusmigratorio')
+        else
+          m = migracion.send(atr.to_s)
+        end
+        m.nil? ? '' : m.nombre
       else 
         return ''
       end
@@ -676,8 +694,97 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
       end
     end
     caso = Sivel2Gen::Caso.find(caso_id)
-    numeroanexos = Sivel2Gen::AnexoCaso.where(id_caso: caso_id).count
     case atr.to_s
+    when 'actividades_departamentos'
+      lai = casosjr.actividades_con_caso_ids
+      Cor1440Gen::Actividad.where(id: lai).map{|a| a.presenta('departamento')}.
+        select{|d| d != ''}.uniq.join('. ')
+
+    when 'actividades_municipios'
+      lai = casosjr.actividades_con_caso_ids
+      Cor1440Gen::Actividad.where(id: lai).map{|a| a.presenta('municipio')}.
+        select{|m| m != ''}.uniq.join('. ')
+
+    when 'actividades_perfiles'
+      bids = casosjr.beneficiarios_activos.pluck(:id_persona).uniq
+      Cor1440Gen::Asistencia.where(persona_id: bids).
+        joins(:perfilactorsocial).pluck('sip_perfilactorsocial.nombre').
+        uniq.join('. ')
+
+    when 'actividades_a_humanitaria_tipos_de_ayuda'
+      bids = casosjr.beneficiarios_activos.pluck(:id_persona).uniq
+      dfs = Detallefinanciero.joins(:persona).where(
+        'sip_persona.id IN (?)', bids)
+      us = dfs.joins(:unidadayuda).pluck('unidadayuda.nombre').uniq
+      us.join('. ')
+
+    when 'actividades_a_humanitaria_valor_de_ayuda'
+      bids = casosjr.beneficiarios_activos.pluck(:id_persona).uniq
+      dfs = Detallefinanciero.joins(:persona).where(
+        'sip_persona.id IN (?)', bids)
+      suma = 0
+      dfs.each do |d|
+        cantidad = d.persona_ids.intersection(bids).count
+        if d.valorunitario
+          suma += cantidad * d.valorunitario
+        end
+      end
+      suma
+
+    when 'actividades_a_humanitaria_modalidades_entrega'
+      bids = casosjr.beneficiarios_activos.pluck(:id_persona).uniq
+      dfs = Detallefinanciero.joins(:persona).where(
+        'sip_persona.id IN (?)', bids)
+      us = dfs.joins(:modalidadentrega).pluck('modalidadentrega.nombre').uniq
+      us.join('. ')
+
+    when 'actividades_a_humanitarias_convenios_financiados'
+      bids = casosjr.beneficiarios_activos.pluck(:id_persona).uniq
+      dfs = Detallefinanciero.joins(:persona).where(
+        'sip_persona.id IN (?)', bids)
+      us = dfs.joins(:proyectofinanciero).
+        pluck('cor1440_gen_proyectofinanciero.nombre').uniq
+      us.join('. ')
+
+    when 'actividades_asesorias_juridicas'
+      vcs = valores_campos_respuestafor_actividades(130)
+      r = vcs.map {|v| v.presenta_valor(false)}.uniq.join('. ')
+      r += ' - Nota: Para presentar mejor implementar detalle de asesoria '\
+        'jurídica por beneficiario (estilo detalle de ayuda humanitaria).'
+      r
+
+    when 'actividades_as_juridicas_convenios_financiados'
+      vcs = valores_campos_respuestafor_actividades(130)
+      rf = vcs.joins(:respuestafor).pluck('mr519_gen_respuestafor.id')
+      ac = Cor1440Gen::Actividad.joins(:respuestafor).
+        where('mr519_gen_respuestafor.id IN (?)', rf).distinct
+      ac.joins(:proyectofinanciero).
+        pluck('cor1440_gen_proyectofinanciero.nombre').uniq.join('. ')  +
+        ' - Nota: para presentar mejor implementar prerequisito R-2098'\
+        'o mejor aún especificar detalle de asesoria jurídica por '\
+        'beneficiario (estilo detalle de ayuda humanitaria).'
+
+    when 'actividades_acompañamientos_psicosociales'
+      vcs = valores_campos_respuestafor_actividades(150)
+      r = vcs.map {|v| v.presenta_valor(false)}.uniq.join('. ')
+      r += ' - Nota: Se presentan otros servicios y asesorias porque '\
+        'no se han especificado tipos de acompañamiento psicosocial, y '\
+        'de hacerlo deberían especificarse por beneficiario (estilo '\
+        'detalle de ayuda humanitaria).'
+      r
+
+    when 'actividades_a_psicosociales_convenios_financiados'
+      vcs = valores_campos_respuestafor_actividades(150)
+      rf = vcs.joins(:respuestafor).pluck('mr519_gen_respuestafor.id')
+      ac = Cor1440Gen::Actividad.joins(:respuestafor).
+        where('mr519_gen_respuestafor.id IN (?)', rf).distinct
+      ac.joins(:proyectofinanciero).
+        pluck('cor1440_gen_proyectofinanciero.nombre').uniq.join('. ')  +
+        ' - Nota: Se presentan otros convenios en actividades con otros '\
+        'servicios y asesorias porque no se han especificado '\
+        'acompañamiento psicosocial por beneficiario'
+
+ 
     when 'beneficiarios_0_5_fecha_recepcion'
       self.class.poblacion_a_fecha(
         caso_id, fecharecepcion.year, fecharecepcion.month, fecharecepcion.day,
@@ -788,9 +895,11 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
     when 'direccion'
       casosjr.direccion ? casosjr.direccion : ''
     when 'contacto_numeroanexos'
-      Sivel2Gen::AnexoVictima.where(victima_id: victimac.id).where.not(tipoanexo_id: 11).count.to_s
+      Sivel2Gen::AnexoVictima.where(victima_id: victimac.id).where.
+        not(tipoanexo_id: 11).count.to_s
     when 'contacto_numeroanexosconsen'
-      Sivel2Gen::AnexoVictima.where(victima_id: victimac.id, tipoanexo_id: 11).count.to_s
+      Sivel2Gen::AnexoVictima.where(
+        victima_id: victimac.id, tipoanexo_id: 11).count.to_s
     when 'contacto_etnia'
       victimac.etnia ? victimac.etnia.nombre : ''
     when 'contacto_orientacionsexual'
@@ -858,8 +967,12 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
     when 'memo'
       caso.memo ? caso.memo : ''
     when 'numeroanexos'
-      caso ? numeroanexos : ''
-
+      Sivel2Gen::AnexoCaso.where(id_caso: caso_id).count
+    when 'numero_beneficiarios'
+      caso.victimasjr.where(fechadesagregacion: nil).count
+    when 'numero_madres_gestantes'
+      caso.victimasjr.where(fechadesagregacion: nil).
+        where(id_maternidad: 1).count
     when 'ultimaatencion_as_humanitaria'
       resp_ultimaatencion(11,110)
     when 'ultimaatencion_ac_juridica'

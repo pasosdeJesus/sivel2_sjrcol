@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: 07d0cd3c6ff5e213a30f87befbab6946b12508bf
+  revision: 6fb8e2feab7dcc815093b9eafba542f4dd667339
   specs:
     cor1440_gen (1.0b3)
       devise
@@ -65,7 +65,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 1053999bd18e9fd8273cfb93eafd184ae150bf29
+  revision: 18cb2a712f7ac877f3e5840bd5aecfaa6ef21c22
   specs:
     sivel2_gen (2.0b13)
       devise
@@ -74,7 +74,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 2627810289141f3961f6d882ed8d0f57337e48cc
+  revision: 88b00fb2cd96058d65125ef5b953ba9609032ac7
   specs:
     sivel2_sjr (2.0b10)
       rails
@@ -342,7 +342,7 @@ GEM
       sprockets (>= 3.0.0)
     terrapin (0.6.0)
       climate_control (>= 0.0.3, < 1.0)
-    thor (1.0.1)
+    thor (1.1.0)
     thread_safe (0.3.6)
     tilt (2.0.10)
     tiny-color-rails (0.0.2)

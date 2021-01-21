@@ -18,17 +18,34 @@ module Sivel2Sjr
 
     # Campos en filtro
     def campos_filtro1
-      [:codigo,
-       :fechaini, :fechafin, 
-       :fecharecini, :fecharecfin, 
-       :oficina_id, :usuario_id,
-       :ultimaatencion_fechaini, :ultimaatencion_fechafin,
-       :expulsion_pais_id, :expulsion_departamento_id, :expulsion_municipio_id,
-       :llegada_pais_id, :llegada_departamento_id, :llegada_municipio_id,
-       :nombressp, :apellidossp, :tdocumento, :numerodocumento,
-       :nombres, :apellidos, :sexo, :rangoedad_id, 
-       :categoria_id,
-       :descripcion
+      [
+        :apellidos, 
+        :apellidossp, 
+        :atenciones_fechaini,
+        :atenciones_fechafin,
+        :categoria_id,
+        :codigo,
+        :descripcion,
+        :expulsion_pais_id, 
+        :expulsion_departamento_id, 
+        :expulsion_municipio_id,
+        :fechaini, 
+        :fechafin, 
+        :fecharecini, 
+        :fecharecfin, 
+        :llegada_pais_id, 
+        :llegada_departamento_id, 
+        :llegada_municipio_id,
+        :nombressp, 
+        :numerodocumento,
+        :nombres, 
+        :oficina_id, 
+        :rangoedad_id, 
+        :sexo, 
+        :tdocumento, 
+        :ultimaatencion_fechaini, 
+        :ultimaatencion_fechafin,
+        :usuario_id,
       ]
     end
 

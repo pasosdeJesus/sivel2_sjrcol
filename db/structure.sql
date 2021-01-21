@@ -5225,14 +5225,19 @@ ALTER SEQUENCE public.sivel2_gen_combatiente_id_seq OWNED BY public.sivel2_gen_c
 --
 
 CREATE VIEW public.sivel2_sjr_ultimaatencion_aux AS
- SELECT casosjr.id_caso AS caso_id,
-    max(a.fecha) AS fecha,
-    max(a.id) AS actividad_id
-   FROM ((public.sivel2_sjr_actividad_casosjr ac
-     JOIN public.cor1440_gen_actividad a ON ((ac.actividad_id = a.id)))
-     JOIN public.sivel2_sjr_casosjr casosjr ON ((ac.casosjr_id = casosjr.id_caso)))
-  GROUP BY casosjr.id_caso
-  ORDER BY casosjr.id_caso, (max(a.fecha));
+ SELECT ac1.casosjr_id AS caso_id,
+    a1.fecha,
+    a1.id AS actividad_id
+   FROM (public.sivel2_sjr_actividad_casosjr ac1
+     LEFT JOIN public.cor1440_gen_actividad a1 ON ((ac1.actividad_id = a1.id)))
+  WHERE ((ac1.casosjr_id, a1.fecha, a1.id) IN ( SELECT ac2.casosjr_id,
+            a2.fecha,
+            a2.id AS actividad_id
+           FROM (public.sivel2_sjr_actividad_casosjr ac2
+             JOIN public.cor1440_gen_actividad a2 ON ((ac2.actividad_id = a2.id)))
+          WHERE (ac2.casosjr_id = ac1.casosjr_id)
+          ORDER BY a2.fecha DESC, a2.id DESC
+         LIMIT 1));
 
 
 --
@@ -5246,10 +5251,9 @@ CREATE VIEW public.sivel2_sjr_ultimaatencion AS
     a.objetivo,
     a.resultado,
     public.sip_edad_de_fechanac_fecharef(contacto.anionac, contacto.mesnac, contacto.dianac, (date_part('year'::text, a.fecha))::integer, (date_part('month'::text, a.fecha))::integer, (date_part('day'::text, a.fecha))::integer) AS contacto_edad
-   FROM ((((public.sivel2_sjr_ultimaatencion_aux uaux
-     JOIN public.sivel2_sjr_actividad_casosjr ac ON (((ac.actividad_id = uaux.actividad_id) AND (ac.casosjr_id = uaux.caso_id))))
-     JOIN public.cor1440_gen_actividad a ON ((ac.actividad_id = a.id)))
-     JOIN public.sivel2_sjr_casosjr casosjr ON ((ac.casosjr_id = casosjr.id_caso)))
+   FROM (((public.sivel2_sjr_ultimaatencion_aux uaux
+     JOIN public.cor1440_gen_actividad a ON ((uaux.actividad_id = a.id)))
+     JOIN public.sivel2_sjr_casosjr casosjr ON ((uaux.caso_id = casosjr.id_caso)))
      JOIN public.sip_persona contacto ON ((contacto.id = casosjr.contacto_id)));
 
 
@@ -5627,11 +5631,7 @@ CREATE MATERIALIZED VIEW public.sivel2_gen_consexpcaso AS
      JOIN public.sivel2_gen_victima vcontacto ON (((vcontacto.id_persona = contacto.id) AND (vcontacto.id_caso = caso.id))))
      LEFT JOIN public.sivel2_gen_etnia etnia ON ((vcontacto.id_etnia = etnia.id)))
      LEFT JOIN public.sivel2_sjr_ultimaatencion ultimaatencion ON ((ultimaatencion.caso_id = caso.id)))
-  WHERE (conscaso.caso_id IN ( SELECT sivel2_gen_conscaso.caso_id
-           FROM public.sivel2_gen_conscaso
-          WHERE ((sivel2_gen_conscaso.caso_id = ANY (ARRAY[3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 31, 29, 35, 37, 38, 39, 130, 77, 78, 45, 79, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 57, 100, 103, 104, 106, 107, 108, 109, 111, 112, 113, 114, 66, 117, 118, 119, 120, 70, 121, 122, 123, 124, 125, 126, 136, 157, 148, 168, 169, 161, 170, 175, 176, 172, 173, 174, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 110, 101, 116, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 102, 207, 235, 1, 2, 25, 28, 30, 32, 34, 33, 36, 27, 206, 208, 8, 115, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 247, 249, 248, 105, 250, 251, 252, 254, 255, 256, 257, 258, 260, 261, 262, 263, 264, 265, 259, 267, 266])) AND (sivel2_gen_conscaso.ultimaatencion_fecha >= '2020-06-01'::date))
-          ORDER BY sivel2_gen_conscaso.fecharec DESC, sivel2_gen_conscaso.caso_id))
-  ORDER BY conscaso.fecha, conscaso.caso_id
+  WHERE (true = false)
   WITH NO DATA;
 
 

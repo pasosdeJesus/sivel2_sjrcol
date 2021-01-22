@@ -760,7 +760,7 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
         where('mr519_gen_respuestafor.id IN (?)', rf).distinct
       ac.joins(:proyectofinanciero).
         pluck('cor1440_gen_proyectofinanciero.nombre').uniq.join('. ')  +
-        ' - Nota: para presentar mejor implementar prerequisito R-2098'\
+        ' - Nota: para presentar mejor implementar prerequisito R-2098 '\
         'o mejor aún especificar detalle de asesoria jurídica por '\
         'beneficiario (estilo detalle de ayuda humanitaria).'
 

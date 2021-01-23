@@ -1,0 +1,12 @@
+<% byebug %>
+<%= f.input :actividadpf_id,
+  collection: Cor1440Gen::Actividadpf.all,
+  label: false,
+  include_blank: true,
+  label_method: :presenta_nombre,
+  value_method: :id,
+  selected: Sip::ModeloHelper.poromision(params, :actividadpf),
+  input_html: { 
+    class: 'chosen-select',
+    "data-enviarautomatico" => "" } 
+%>

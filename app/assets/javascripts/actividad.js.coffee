@@ -290,5 +290,15 @@ $(document).on('focusin', '.actividad_detallefinanciero_persona', (e, papa) ->
   jrs_refresca_posibles_beneficiarios_casos()
 )
 
+# En caso de que en detalle financiero 
+# se seleccione el proyecto financiero 
 
-
+$(document).on('change', 'select[id^=actividad_detallefinanciero_attributes][id$=_convenioactividad]', (e) ->
+  console.log("entra")
+  ## if $(this).val() == "10"
+  idpi = $(this).parent().parent().next().find("[id$=_persona_ids]").attr('id')
+  beneficiarios = $("#"+ idpi).val()
+  if beneficiarios.length > 0 
+    idconvenio = $(this).val()
+    debugger
+)

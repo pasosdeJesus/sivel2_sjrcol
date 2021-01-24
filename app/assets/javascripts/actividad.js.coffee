@@ -295,10 +295,29 @@ $(document).on('focusin', '.actividad_detallefinanciero_persona', (e, papa) ->
 
 $(document).on('change', 'select[id^=actividad_detallefinanciero_attributes][id$=_convenioactividad]', (e) ->
   console.log("entra")
-  ## if $(this).val() == "10"
   idpi = $(this).parent().parent().next().find("[id$=_persona_ids]").attr('id')
+  eleconvenio = $(this)
   beneficiarios = $("#"+ idpi).val()
   if beneficiarios.length > 0 
     idconvenio = $(this).val()
-    debugger
+    root = window
+    rutac = root.puntomontaje + 'revisaben_detalle'
+    $.ajax({
+      url: rutac, 
+      data: {pf: idconvenio, ben_ids: beneficiarios},
+      dataType: 'json',
+      method: 'GET'
+    }).fail( (jqXHR, texto) ->
+      alert('Error - ')
+    ).done( (datos, r) ->
+      if datos.respuesta == true
+        elenm = $(eleconvenio.parent().parent().siblings()[8]).find("[id$=_numeromeses]")
+        elena = $(eleconvenio.parent().parent().siblings()[8]).find("[id$=_numeroasistencia]")
+        elenm.val(datos.numeromeses)
+        elenm.prop('disabled', 'disabled');
+        elenm.trigger('chosen:updated')
+        sip_remplaza_opciones_select(elena.attr('id'), datos.opsna, true);
+      console.log(datos)
+    )
+
 )

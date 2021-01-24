@@ -147,7 +147,7 @@ module Cor1440Gen
         end
       end
       opna = [*1..nm] - na
-      opsna = opna.map{|op| {id: op, nombre: op}}
+      opsna = opna.map{|op| {"id": op, "nombre": op}}
       respond_to do |format|
         format.json { render json: {respuesta: respuesta, numeromeses: nm, asistencias: opsna} }
       end

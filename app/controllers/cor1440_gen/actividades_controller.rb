@@ -130,6 +130,29 @@ module Cor1440Gen
     end
 
 
+    def revisaben_detalle
+      pfapf = params[:pf]
+      beneficiarios = params[:ben_ids].map{|b| b.to_i}
+      pf = Cor1440Gen::Proyectofinanciero.where(nombre: pfapf.split(" - ")[0])[0]
+      apf = Cor1440Gen::Actividadpf.where(titulo: pfapf.split(" - ")[1])[0]
+      dfs = Detallefinanciero.where(proyectofinanciero_id: pf.id).where(actividadpf_id: apf.id)
+      respuesta = false
+      nm = 0
+      na = []
+      dfs.each do |df|
+        if df.persona.pluck(:id) == beneficiarios
+          respuesta = true
+          nm = df.numeromeses if df.numeromeses > nm
+          na.push(df.numeroasistencia)
+        end
+      end
+      opna = [*1..nm] - na
+      opsna = opna.map{|op| {"id": op, "nombre": op}}
+      respond_to do |format|
+        format.json { render json: {respuesta: respuesta, numeromeses: nm, asistencias: opsna} }
+      end
+    end
+
     # Restringe más para conteo por beneficiario
     def filtra_contarb_actividad_por_parametros(contarb_actividad)
       @contarb_oficinaid = nil

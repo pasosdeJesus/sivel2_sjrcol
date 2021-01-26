@@ -74,6 +74,7 @@ Rails.application.routes.draw do
 
   get '/detallesfinancieros/nuevo' => 'detallesfinancieros#nuevo'
   
+  get '/revisaben_detalle' => 'cor1440_gen/actividades#revisaben_detalle'
 
   root "sip/hogar#index"
 

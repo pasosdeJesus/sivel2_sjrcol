@@ -290,5 +290,48 @@ $(document).on('focusin', '.actividad_detallefinanciero_persona', (e, papa) ->
   jrs_refresca_posibles_beneficiarios_casos()
 )
 
+# En caso de que en detalle financiero 
+# se seleccione el proyecto financiero y convenio se busca si han habido otros
+# detalles financierosc con este poryecto/convenio y estos beneficiarios
+# así, se deshabilita el campo numeromeses y se redefinen opciones de
+# numeroasistencia
 
+$(document).on('change', 'select[id^=actividad_detallefinanciero_attributes][id$=_persona_ids]', (e) ->
+  beneficiarios = $(this).val()
+  eleconvenio = $(this).parent().parent().prev().find("[id$=_convenioactividad]")
+  busca_detallesfinancieros_anteriores(beneficiarios, eleconvenio)
+)
+$(document).on('change', 'select[id^=actividad_detallefinanciero_attributes][id$=_convenioactividad]', (e) ->
+  idpi = $(this).parent().parent().next().find("[id$=_persona_ids]").attr('id')
+  eleconvenio = $(this)
+  beneficiarios = $("#"+ idpi).val()
+  busca_detallesfinancieros_anteriores(beneficiarios, eleconvenio)
+)
 
+@busca_detallesfinancieros_anteriores = (beneficiarios, eleconvenio) ->
+  convenio = eleconvenio.val()
+  elenm = $(eleconvenio.parent().parent().siblings()[8]).find("[id$=_numeromeses]")
+  elena = $(eleconvenio.parent().parent().siblings()[9]).find("[id$=_numeroasistencia]")
+  if beneficiarios.length > 0 && convenio
+    root = window
+    rutac = root.puntomontaje + 'revisaben_detalle'
+    $.ajax({
+      url: rutac, 
+      data: {pf: convenio, ben_ids: beneficiarios},
+      dataType: 'json',
+      method: 'GET'
+    }).fail( (jqXHR, texto) ->
+      alert('Error - ')
+    ).done( (datos, r) ->
+      if datos.respuesta == true
+        elenm.val(datos.numeromeses)
+        elenm.prop('disabled', 'disabled');
+        elenm.trigger('chosen:updated')
+        sip_remplaza_opciones_select(elena.attr('id'), datos.asistencias, true);
+      else
+         elenm.removeAttr('disabled');
+         elenm.val("")
+         elenm.trigger('chosen:updated')
+         elena.empty()
+         elena.trigger('chosen:updated')
+    )

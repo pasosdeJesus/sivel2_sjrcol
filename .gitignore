@@ -42,3 +42,13 @@ yarn-debug.log*
 /config/master.key
 log/
 *core
+.env
+*.sqlite
+bin/consolabd
+bin/cron-diario.sh
+bin/migra
+bit-ant/
+bitacora*
+*swp
+config/credentials.yml.enc
+tmpsql/

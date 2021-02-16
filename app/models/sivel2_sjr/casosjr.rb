@@ -35,4 +35,5 @@ class Sivel2Sjr::Casosjr < ActiveRecord::Base
       end
     end
 
+
 end

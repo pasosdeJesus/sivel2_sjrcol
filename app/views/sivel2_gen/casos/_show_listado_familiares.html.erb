@@ -1,0 +1,31 @@
+<table class="tablalistadovictima table  table-bordered table-sm ">
+  <thead class="thead-light">
+    <tr>
+      <th colspan="2">Nombre</th>
+      <th colspan="2">Identificación</th>
+      <th>Rol en familia</th>
+    </tr>
+  </thead>
+  <tbody id="victima">
+    <% @registro.victima.each do |victima| %>
+      <tr>
+        <td>
+          <%= victima.persona.nombres if victima.persona.nombres %>
+        </td>
+        <td>
+          <%= victima.persona.apellidos if victima.persona.apellidos %>
+        </td>
+        <td>
+          <%= victima.persona.tdocumento.sigla if victima.persona.tdocumento%>
+        </td>
+        <td>
+          <%= victima.persona.numerodocumento if victima.persona.numerodocumento %>
+        </td>
+        <td>
+          <%= Sivel2Sjr::Victimasjr.find(victima.id).rolfamilia.nombre if 
+          Sivel2Sjr::Victimasjr.find(victima.id).rolfamilia %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

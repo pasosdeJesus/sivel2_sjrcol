@@ -1,0 +1,27 @@
+<table class="tablalistadovictima table  table-bordered table-sm ">
+  <thead class="thead-light">
+    <tr>
+      <th>Fecha</th>
+      <th>Descripción</th>
+      <th>Enlace de descarga</th>
+    </tr>
+  </thead>
+  <tbody id="victima">
+    <% anexosids = Sivel2Gen::Caso.find(826).anexo_caso.pluck(:id_anexo) %>
+    <% anexos = Sip::Anexo.find(anexosids)%>
+    <% anexos.each do |anexo| %>
+      <tr>
+        <td>
+          <%= Sivel2Gen::AnexoCaso.where(id_anexo: anexo.id)[0].fecha if 
+          Sivel2Gen::AnexoCaso.where(id_anexo: anexo.id)[0] %>
+        </td>
+        <td>
+          <%= anexo.descripcion if anexo.descripcion %>
+        </td>
+        <td>
+          <a href="<%= sip.descarga_anexo_path(anexo.id) %>", style="text-decoration:none" data-turbolinks='false'><%= anexo.adjunto_file_name %></a>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -13,9 +13,11 @@ class Sivel2Gen::Caso < ActiveRecord::Base
     when 'asesor'
       casosjr.usuario.nusuario if casosjr.usuario
     when 'contacto'
-      casosjr.contacto.nombres + ' ' + casosjr.contacto.apellidos +
-        ' ' + casosjr.contacto.tdocumento.sigla + ' ' +
-        ' ' + casosjr.contacto.numerodocumento if casosjr.contacto
+      if casosjr.contacto
+        casosjr.contacto.nombres + ' ' + casosjr.contacto.apellidos +
+       ' ' + (casosjr.contacto.tdocumento.nil? ? '' : casosjr.contacto.tdocumento.sigla) + ' ' +
+       ' ' + (casosjr.contacto.numerodocumento.nil? ? '' : casosjr.contacto.numerodocumento)
+      end
     when 'direccion'
       casosjr.direccion if casosjr.direccion
     when 'telefono'

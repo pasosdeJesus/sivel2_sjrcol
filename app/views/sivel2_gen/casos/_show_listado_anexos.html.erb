@@ -7,7 +7,7 @@
     </tr>
   </thead>
   <tbody id="victima">
-    <% anexosids = Sivel2Gen::Caso.find(826).anexo_caso.pluck(:id_anexo) %>
+    <% anexosids = Sivel2Gen::Caso.find(@registro.id).anexo_caso.pluck(:id_anexo) %>
     <% anexos = Sip::Anexo.find(anexosids)%>
     <% anexos.each do |anexo| %>
       <tr>

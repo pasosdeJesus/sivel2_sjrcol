@@ -10,7 +10,7 @@ gem 'cancancan'
 
 gem 'chartkick'
 
-gem 'cocoon', 
+gem 'cocoon',
   git: 'https://github.com/vtamara/cocoon.git', branch: 'new_id_with_ajax' # Formularios anidados (algunos con ajax)
 
 gem 'coffee-rails' # CoffeeScript para recuersos .js.coffee y vistas
@@ -41,7 +41,8 @@ gem 'prawnto_2', '>= 0.3.1', :require => 'prawnto'
 
 gem 'prawn-table'
 
-gem 'rails', '~> 6.0.3.5'
+gem 'rails', #'~> 6.0.3.4'
+  git: 'https://github.com/rails/rails.git', branch: '6-1-stable'
 
 gem 'rails-i18n'
 
@@ -55,7 +56,7 @@ gem 'sassc-rails'
 
 gem 'simple_form'
 
-gem 'tiny-color-rails' 
+gem 'tiny-color-rails'
 
 gem 'twitter_cldr' # ICU con CLDR
 
@@ -67,45 +68,45 @@ gem 'will_paginate' # Listados en páginas
 
 
 #####
-# Motores que se sobrecargan vistas (deben ponerse en orden de apilamiento 
-# lógico y no alfabetico como las gemas anteriores) 
+# Motores que se sobrecargan vistas (deben ponerse en orden de apilamiento
+# lógico y no alfabetico como las gemas anteriores)
 
 gem 'sip', # Motor generico
-  git: 'https://github.com/pasosdeJesus/sip.git', branch: :main
-  #path: '../sip'
+  #git: 'https://github.com/pasosdeJesus/sip.git', branch: :main
+  path: '../sip'
 
 gem 'mr519_gen', # Motor de gestion de formularios y encuestas
-  git: 'https://github.com/pasosdeJesus/mr519_gen.git', branch: :main
-  #path: '../mr519_gen'
+  #git: 'https://github.com/pasosdeJesus/mr519_gen.git', branch: :main
+  path: '../mr519_gen'
 
 gem 'heb412_gen',  # Motor de nube y llenado de plantillas
-  git: 'https://github.com/pasosdeJesus/heb412_gen.git', branch: :main
-  #path: '../heb412_gen'
+  #git: 'https://github.com/pasosdeJesus/heb412_gen.git', branch: :main
+  path: '../heb412_gen'
 
 # Motor Cor1440_gen
-gem 'cor1440_gen', 
-  git: 'https://github.com/pasosdeJesus/cor1440_gen.git', branch: :main
-  #path: '../cor1440_gen'
+gem 'cor1440_gen',
+  #git: 'https://github.com/pasosdeJesus/cor1440_gen.git', branch: :main
+  path: '../cor1440_gen'
 
 # Motor Sal7711_gen
-gem 'sal7711_gen', 
-  git: 'https://github.com/pasosdeJesus/sal7711_gen.git', branch: :main
-  #path: '../sal7711_gen'
+gem 'sal7711_gen',
+  #git: 'https://github.com/pasosdeJesus/sal7711_gen.git', branch: :main
+  path: '../sal7711_gen'
 
 # Motor Sal7711_web
-gem 'sal7711_web', 
-  git: 'https://github.com/pasosdeJesus/sal7711_web.git', branch: :main
-  #path: '../sal7711_web'
+gem 'sal7711_web',
+  #git: 'https://github.com/pasosdeJesus/sal7711_web.git', branch: :main
+  path: '../sal7711_web'
 
 # Motor de SIVeL 2
-gem 'sivel2_gen', 
-  git: 'https://github.com/pasosdeJesus/sivel2_gen.git', branch: :main
-  #path: '../sivel2_gen'
+gem 'sivel2_gen',
+  #git: 'https://github.com/pasosdeJesus/sivel2_gen.git', branch: :main
+  path: '../sivel2_gen'
 
 # Motor de SIVeL 2 - SJR
-gem 'sivel2_sjr', 
-  git: 'https://github.com/pasosdeJesus/sivel2_sjr.git', branch: :main
-  #path: '../sivel2_sjr'
+gem 'sivel2_sjr',
+  #git: 'https://github.com/pasosdeJesus/sivel2_sjr.git', branch: :main
+  path: '../sivel2_sjr'
 
 group :development, :test do
 
@@ -123,7 +124,7 @@ group :development do
 
   gem 'rails-erd'
 
-  gem 'web-console' # Consola irb en páginas 
+  gem 'web-console' # Consola irb en páginas
 
 end
 
@@ -140,7 +141,7 @@ end
 
 
 group :production do
-  
+
   gem 'unicorn' # Para despliegue
 
 end

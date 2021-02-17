@@ -1,0 +1,163 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th rowspan='2'>
+        Resultado
+      </th>
+      <th rowspan='2'>
+        Actividad de marco lógico
+      </th>
+      <th rowspan='2'>
+        Total<br>Actividades
+      </th>
+      <th colspan='3'><span data-toggle='tooltip' title="Número de beneficiarios (posiblemente repetidos) contados con la tabla de población">Participaciones Población</span></th>
+      </th>
+      <th colspan='3'><span data-toggle='tooltip' title="Número de asistentes (posiblemente repetidos) según listado de asistencia">Participaciones Asistentes</span></th>
+      <th colspan='3'><span data-toggle='tooltip' title="Número de asistentes únicos de los listados de asistencia">Asistentes únicos</span></th>
+      <th colspan='3'><span data-toggle='tooltip' title="Tasa 'Participaciones de asistentes' / 'Asistentes únicos'">Frecuencia de asistencia</span></th>
+    </tr>
+    <tr>
+        <th>F</th>
+        <th>M</th>
+        <th>S</th>
+        <th>F</th>
+        <th>M</th>
+        <th>S</th>
+        <th>F</th>
+        <th>M</th>
+        <th>S</th>
+        <th>F</th>
+        <th>M</th>
+        <th>S</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% a = Cor1440Gen::Actividadpf.where(
+      proyectofinanciero_id: @contar_pfid).
+      joins('JOIN cor1440_gen_resultadopf as rpf on cor1440_gen_actividadpf.resultadopf_id=rpf.id').
+      order('rpf.numero, nombrecorto')%>
+    <% a.each do |a| %>
+      <tr>
+        <% # Una misma actividad puede tener varias actividades de convenio del
+           # mismo proyecto por eso no sacar totales
+        %>
+        <% consb = @contar_actividad.where('cor1440_gen_actividad.id IN 
+          (SELECT actividad_id FROM cor1440_gen_actividad_actividadpf
+           WHERE actividadpf_id=?)',a.id).
+          where('cor1440_gen_actividad.id IN 
+          (SELECT actividad_id FROM cor1440_gen_actividad_proyectofinanciero
+           WHERE proyectofinanciero_id=?)',@contar_pfid)
+         %>
+       <td><%= a.resultadopf.codigo_completo if a.resultadopf %></td>
+        <td><%= a.nombrecorto %> <%= a.titulo%></td>
+        <td>
+          <% tot = consb.count %>
+          <%= tot %>
+        </td>
+        <td>
+          <% consbr = consb.joins(:actividad_rangoedadac) %> 
+          <% #fl = consbr.sum(:fl) %>
+          <% fr = consbr.sum(:fr) %>
+          <%= fr %>
+        </td>
+        <td>
+          <% #ml = consbr.sum(:ml) %>
+          <% mr = consbr.sum(:mr) %>
+          <%= mr %>
+        </td>
+        <td>
+          <% sr = consbr.sum(:s) %>
+          <%= sr %>
+        </td>
+        <td>
+        <% asistentes = consb.joins(:asistencia).joins(:persona) %>
+        <% af = asistentes.where('sip_persona.sexo': :F).select('cor1440_gen_asistencia.persona_id').count %>
+        <%= af %>
+        </td>
+        <td>
+          <% am = asistentes.where('sip_persona.sexo': :M).select('cor1440_gen_asistencia.persona_id').count %>
+          <%= am %>
+        </td>
+        <td>
+          <% as = asistentes.where('sip_persona.sexo': :S).select('cor1440_gen_asistencia.persona_id').count %>
+          <%= as %>
+        </td>
+        <td>
+          <% asistunicos = consb.joins(:asistencia).select('distinct cor1440_gen_asistencia.persona_id').pluck('cor1440_gen_asistencia.persona_id') %> 
+          <% uf = Sip::Persona.where(id: asistunicos).where(sexo: :F).count %>
+          <%= uf %>
+        </td>
+        <td>
+          <% um = Sip::Persona.where(id: asistunicos).where(sexo: :M).count %>
+          <%= um %>
+        </td>
+        <td>
+          <% us = Sip::Persona.where(id: asistunicos).where(sexo: :S).count %>
+          <%= us %>
+        </td>
+        <td>
+          <%= if uf > 0 then f =af.to_f/uf; f.round(1); end %>
+        </td>
+        <td>
+          <%= if um > 0 then f =am.to_f/um; f.round(1); end %>
+        </td>
+        <td>
+          <%= if us > 0 then f =as.to_f/us; f.round(1); end %>
+        </td>
+
+      </tr>
+    <% end %>
+    <tr>
+      <% consb = @contar_actividad.where('cor1440_gen_actividad.id NOT IN 
+          (SELECT actividad_id FROM cor1440_gen_actividad_actividadpf
+           JOIN cor1440_gen_actividadpf ON 
+            cor1440_gen_actividad_actividadpf.actividadpf_id=
+            cor1440_gen_actividadpf.id
+           WHERE cor1440_gen_actividadpf.proyectofinanciero_id=?)',@contar_pfid).
+           where('cor1440_gen_actividad.id IN (SELECT actividad_id FROM 
+                 cor1440_gen_actividad_proyectofinanciero WHERE 
+                proyectofinanciero_id=?)', @contar_pfid)
+         %>
+       <td> </td>
+       <td><em>Sin actividad de convenio</em><br>
+        <% sep = '' %>
+        <% consb.each do |a| %>
+          <%= sep %><%= link_to(a.id, cor1440_gen.actividad_path(a.id)) %> 
+          <% sep = ", " %>
+        <% end %>
+      </td>
+      <td>
+        <% tot = consb.count %>
+        <%= tot %>
+      </td>
+      <td>
+        <% consbr = consb.joins(:actividad_rangoedadac) %> 
+        <% fl = consbr.sum(:fl) %>
+        <%= fl %>
+      </td>
+      <td>
+        <% fr = consbr.sum(:fr) %>
+        <%= fr %>
+      </td>
+      <td>
+        <% ml = consbr.sum(:ml) %>
+        <%= ml %>
+      </td>
+      <td>
+        <% mr = consbr.sum(:mr) %>
+        <%= mr %>
+      </td>
+      <td>
+        <% sr = consbr.sum(:s) %>
+        <%= sr %>
+      </td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td></td>
+      <td colspan="5">No se hacen sumas verticales por columna porque una actividad puede tener varias actividades de marco lógico</td>
+    </tr>
+  </tfoot>
+
+</table>

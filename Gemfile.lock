@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: 95d56681d27a77d77c47f969db626870bef88da3
+  revision: bf11f070164b7b9e18e061c6f49d3a8b7330c4df
   branch: main
   specs:
     cor1440_gen (1.0b3)
@@ -52,7 +52,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 687275bf8222107cd6e13793a34171b03c3afcb2
+  revision: 6b2e67e60459a96373f8f0796b705bfaa540beb9
   branch: main
   specs:
     sip (2.0.b11)

@@ -1,0 +1,16 @@
+<table class="table  table-bordered table-sm ">
+  <thead class="thead-light">
+    <tr>
+      <th> Convenio financiero </th>
+      <th> Actividades del marco lógico </th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @registro.proyectofinanciero.each do |proyecto| %> 
+      <tr>
+        <td><%= proyecto.nombre %></td>
+        <td><%= @registro.actividadpf.where(proyectofinanciero_id: proyecto.id).pluck(:titulo).join(", ")%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

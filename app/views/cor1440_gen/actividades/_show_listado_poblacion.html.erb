@@ -1,0 +1,56 @@
+<table class="tablapoblacion table  table-bordered table-sm ">
+  <thead class="thead-light">
+    <tr><th>Rango de Edad</th>
+      <th><%= Cor1440Gen.actividadg1 %></th>
+      <th><%= Cor1440Gen.actividadg2 %></th>
+      <th><%= Cor1440Gen.actividadg3 %></th>
+      <th><%= Cor1440Gen.actividadg4 %></th>
+      <th><%= Cor1440Gen.actividadg5 %></th>
+      <th>Total</th></tr>
+  </thead>
+  <tbody id="actividad_rangoedadac">
+    <tr>
+      <th scope='row'>Total</th>
+      <td id="tactividadfl">
+        <b> <%= fl = @registro.actividad_rangoedadac.sum(:fl) %> </b>
+      </td>
+      <td id="tactividadfr">
+        <b> <%= fr = @registro.actividad_rangoedadac.sum(:fr) %> </b>
+      </td>
+      <td id="tactividadml">
+        <b> <%= ml = @registro.actividad_rangoedadac.sum(:ml) %> </b>
+      </td>
+      <td id="tactividadmr">
+        <b> <%= mr = @registro.actividad_rangoedadac.sum(:mr) %> </b>
+      </td>
+      <td id="tactividads">
+        <b> <%= sr = @registro.actividad_rangoedadac.sum(:s) %> </b>
+      </td>
+      <td id="tactividadtot">
+        <b> <%= fr + fl + mr + ml + sr %> </b>
+      </td>
+    </tr>
+    <% @registro.actividad_rangoedadac.each do |rango| %>
+      <tr>
+        <td>
+          <%= Cor1440Gen::Rangoedadac.find(rango.rangoedadac_id).nombre %>
+        </td>
+        <td>
+          <%= rango.fl? ? rango.fl : 0 %>
+        </td>
+        <td>
+          <%= rango.fr? ? rango.fr : 0 %>
+        </td>
+        <td>
+          <%= rango.ml? ? rango.ml : 0%>
+        </td>
+        <td>
+          <%= rango.mr? ? rango.mr : 0 %>
+        </td>
+        <td>
+          <%= rango.s? ? rango.s : 0 %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

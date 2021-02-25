@@ -89,11 +89,14 @@ module Cor1440Gen
         :respuestafor,
         :objetivo,
         :resultado, 
+        :observaciones,
         :actorsocial,
         :poblacion,
-        :anexos,
+        :listado_proyectos,
+        :listado_poblacion,
         :listado_asistencia,
-        :listado_casos
+        :listado_casos,
+        :anexos
       ]
     end
 

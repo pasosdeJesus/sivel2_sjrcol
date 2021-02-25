@@ -1022,6 +1022,21 @@ CREATE TABLE public.cor1440_gen_proyectofinanciero (
 
 
 --
+-- Name: depgifmm; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.depgifmm (
+    id bigint NOT NULL,
+    nombre character varying(500) NOT NULL COLLATE public.es_co_utf_8,
+    observaciones character varying(5000),
+    fechacreacion date NOT NULL,
+    fechadeshabilitacion date,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
 -- Name: detallefinanciero; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1056,6 +1071,43 @@ CREATE TABLE public.detallefinanciero_persona (
 
 
 --
+-- Name: mungifmm; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.mungifmm (
+    id bigint NOT NULL,
+    nombre character varying(500) NOT NULL COLLATE public.es_co_utf_8,
+    observaciones character varying(5000),
+    fechacreacion date NOT NULL,
+    fechadeshabilitacion date,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: sip_ubicacionpre; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.sip_ubicacionpre (
+    id bigint NOT NULL,
+    nombre character varying(2000) NOT NULL COLLATE public.es_co_utf_8,
+    pais_id integer,
+    departamento_id integer,
+    municipio_id integer,
+    clase_id integer,
+    lugar character varying(500),
+    sitio character varying(500),
+    tsitio_id integer,
+    latitud double precision,
+    longitud double precision,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    nombre_sin_pais character varying(500)
+);
+
+
+--
 -- Name: consgifmm; Type: MATERIALIZED VIEW; Schema: public; Owner: -
 --
 
@@ -1082,11 +1134,18 @@ CREATE MATERIALIZED VIEW public.consgifmm AS
     ( SELECT cor1440_gen_proyectofinanciero.nombre
            FROM public.cor1440_gen_proyectofinanciero
           WHERE (detallefinanciero.proyectofinanciero_id = cor1440_gen_proyectofinanciero.id)) AS conveniofinanciado_nombre,
-    ( SELECT cor1440_gen_actividad.nombre
+    ( SELECT cor1440_gen_actividadpf.titulo
            FROM public.cor1440_gen_actividadpf
-          WHERE (detallefinanciero.actividadpf_id = cor1440_gen_actividadpf.id)) AS actividadmarcologico_nombre
-   FROM (public.detallefinanciero
+          WHERE (detallefinanciero.actividadpf_id = cor1440_gen_actividadpf.id)) AS actividadmarcologico_nombre,
+    depgifmm.nombre AS departamento_gifmm,
+    mungifmm.nombre AS municipio_gifmm
+   FROM ((((((public.detallefinanciero
      JOIN public.cor1440_gen_actividad ON ((detallefinanciero.actividad_id = cor1440_gen_actividad.id)))
+     LEFT JOIN public.sip_ubicacionpre ON ((cor1440_gen_actividad.ubicacionpre_id = sip_ubicacionpre.id)))
+     LEFT JOIN public.sip_departamento ON ((sip_ubicacionpre.departamento_id = sip_departamento.id)))
+     LEFT JOIN public.depgifmm ON ((sip_departamento.id_deplocal = depgifmm.id)))
+     LEFT JOIN public.sip_municipio ON ((sip_ubicacionpre.municipio_id = sip_municipio.id)))
+     LEFT JOIN public.mungifmm ON ((((sip_departamento.id_deplocal * 1000) + sip_municipio.id_munlocal) = mungifmm.id)))
   WITH NO DATA;
 
 
@@ -2389,11 +2448,11 @@ CREATE SEQUENCE public.respuesta_seq
 
 
 --
--- Name: sivel2_sjr_ayudasjr_respuesta; Type: TABLE; Schema: public; Owner: -
+-- Name: sivel2_sjr_ayudaestado_respuesta; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE public.sivel2_sjr_ayudasjr_respuesta (
-    id_ayudasjr integer DEFAULT 0 NOT NULL,
+CREATE TABLE public.sivel2_sjr_ayudaestado_respuesta (
+    id_ayudaestado integer DEFAULT 0 NOT NULL,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     id_respuesta integer NOT NULL
@@ -2451,12 +2510,12 @@ CREATE VIEW public.cres1 AS
  SELECT caso.id AS id_caso,
     respuesta.fechaatencion,
     casosjr.oficina_id,
-    ayudasjr_respuesta.id_ayudasjr
+    ayudaestado_respuesta.id_ayudaestado
    FROM public.sivel2_gen_caso caso,
     public.sivel2_sjr_casosjr casosjr,
     public.sivel2_sjr_respuesta respuesta,
-    public.sivel2_sjr_ayudasjr_respuesta ayudasjr_respuesta
-  WHERE ((caso.id = casosjr.id_caso) AND (caso.id = respuesta.id_caso) AND (respuesta.id = ayudasjr_respuesta.id_respuesta));
+    public.sivel2_sjr_ayudaestado_respuesta ayudaestado_respuesta
+  WHERE ((caso.id = casosjr.id_caso) AND (caso.id = respuesta.id_caso) AND (respuesta.id = ayudaestado_respuesta.id_respuesta));
 
 
 --
@@ -2496,18 +2555,6 @@ CREATE TABLE public.sivel2_sjr_ayudaestado_derecho (
 
 
 --
--- Name: sivel2_sjr_ayudaestado_respuesta; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.sivel2_sjr_ayudaestado_respuesta (
-    id_ayudaestado integer DEFAULT 0 NOT NULL,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone,
-    id_respuesta integer NOT NULL
-);
-
-
---
 -- Name: cvp2; Type: VIEW; Schema: public; Owner: -
 --
 
@@ -2518,21 +2565,6 @@ CREATE VIEW public.cvp2 AS
    FROM public.sivel2_sjr_ayudaestado_respuesta ar,
     public.sivel2_sjr_ayudaestado_derecho ad
   WHERE (ar.id_ayudaestado = ad.ayudaestado_id);
-
-
---
--- Name: depgifmm; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.depgifmm (
-    id bigint NOT NULL,
-    nombre character varying(500) NOT NULL COLLATE public.es_co_utf_8,
-    observaciones character varying(5000),
-    fechacreacion date NOT NULL,
-    fechadeshabilitacion date,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
 
 
 --
@@ -2552,6 +2584,32 @@ CREATE SEQUENCE public.depgifmm_id_seq
 --
 
 ALTER SEQUENCE public.depgifmm_id_seq OWNED BY public.depgifmm.id;
+
+
+--
+-- Name: depmun_gifmm; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.depmun_gifmm (
+    departamento character varying(512) COLLATE public.es_co_utf_8,
+    codmun integer,
+    municipio character varying(512) COLLATE public.es_co_utf_8
+);
+
+
+--
+-- Name: depmun_sip; Type: VIEW; Schema: public; Owner: -
+--
+
+CREATE VIEW public.depmun_sip AS
+ SELECT sip_departamento.id_deplocal AS coddep,
+    sip_departamento.nombre AS departamento,
+    ((sip_departamento.id_deplocal * 1000) + sip_municipio.id_munlocal) AS codmun,
+    sip_municipio.nombre AS municipio
+   FROM (public.sip_departamento
+     JOIN public.sip_municipio ON ((sip_municipio.id_departamento = sip_departamento.id)))
+  WHERE ((sip_departamento.id_pais = 170) AND (sip_municipio.fechadeshabilitacion IS NULL))
+  ORDER BY sip_departamento.nombre, sip_municipio.nombre;
 
 
 --
@@ -2676,6 +2734,29 @@ CREATE SEQUENCE public.discapacidad_id_seq
 --
 
 ALTER SEQUENCE public.discapacidad_id_seq OWNED BY public.discapacidad.id;
+
+
+--
+-- Name: sivel2_sjr_actividad_casosjr; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.sivel2_sjr_actividad_casosjr (
+    id bigint NOT NULL,
+    actividad_id integer,
+    casosjr_id integer
+);
+
+
+--
+-- Name: ej; Type: VIEW; Schema: public; Owner: -
+--
+
+CREATE VIEW public.ej AS
+ SELECT sivel2_sjr_respuesta.id_caso
+   FROM public.sivel2_sjr_respuesta
+UNION
+ SELECT sivel2_sjr_actividad_casosjr.casosjr_id AS id_caso
+   FROM public.sivel2_sjr_actividad_casosjr;
 
 
 --
@@ -3537,21 +3618,6 @@ CREATE SEQUENCE public.mr519_gen_valorcampo_id_seq
 --
 
 ALTER SEQUENCE public.mr519_gen_valorcampo_id_seq OWNED BY public.mr519_gen_valorcampo.id;
-
-
---
--- Name: mungifmm; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.mungifmm (
-    id bigint NOT NULL,
-    nombre character varying(500) NOT NULL COLLATE public.es_co_utf_8,
-    observaciones character varying(5000),
-    fechacreacion date NOT NULL,
-    fechadeshabilitacion date,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
 
 
 --
@@ -4698,28 +4764,6 @@ CREATE TABLE public.sip_tsitio (
 
 
 --
--- Name: sip_ubicacionpre; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.sip_ubicacionpre (
-    id bigint NOT NULL,
-    nombre character varying(2000) NOT NULL COLLATE public.es_co_utf_8,
-    pais_id integer,
-    departamento_id integer,
-    municipio_id integer,
-    clase_id integer,
-    lugar character varying(500),
-    sitio character varying(500),
-    tsitio_id integer,
-    latitud double precision,
-    longitud double precision,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
-    nombre_sin_pais character varying(500)
-);
-
-
---
 -- Name: sip_ubicacionpre_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -5178,29 +5222,23 @@ ALTER SEQUENCE public.sivel2_gen_combatiente_id_seq OWNED BY public.sivel2_gen_c
 
 
 --
--- Name: sivel2_sjr_actividad_casosjr; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.sivel2_sjr_actividad_casosjr (
-    id bigint NOT NULL,
-    actividad_id integer,
-    casosjr_id integer
-);
-
-
---
 -- Name: sivel2_sjr_ultimaatencion_aux; Type: VIEW; Schema: public; Owner: -
 --
 
 CREATE VIEW public.sivel2_sjr_ultimaatencion_aux AS
- SELECT casosjr.id_caso AS caso_id,
-    max(a.fecha) AS fecha,
-    max(a.id) AS actividad_id
-   FROM ((public.sivel2_sjr_actividad_casosjr ac
-     JOIN public.cor1440_gen_actividad a ON ((ac.actividad_id = a.id)))
-     JOIN public.sivel2_sjr_casosjr casosjr ON ((ac.casosjr_id = casosjr.id_caso)))
-  GROUP BY casosjr.id_caso
-  ORDER BY casosjr.id_caso, (max(a.fecha));
+ SELECT ac1.casosjr_id AS caso_id,
+    a1.fecha,
+    a1.id AS actividad_id
+   FROM (public.sivel2_sjr_actividad_casosjr ac1
+     LEFT JOIN public.cor1440_gen_actividad a1 ON ((ac1.actividad_id = a1.id)))
+  WHERE ((ac1.casosjr_id, a1.fecha, a1.id) IN ( SELECT ac2.casosjr_id,
+            a2.fecha,
+            a2.id AS actividad_id
+           FROM (public.sivel2_sjr_actividad_casosjr ac2
+             JOIN public.cor1440_gen_actividad a2 ON ((ac2.actividad_id = a2.id)))
+          WHERE (ac2.casosjr_id = ac1.casosjr_id)
+          ORDER BY a2.fecha DESC, a2.id DESC
+         LIMIT 1));
 
 
 --
@@ -5214,10 +5252,9 @@ CREATE VIEW public.sivel2_sjr_ultimaatencion AS
     a.objetivo,
     a.resultado,
     public.sip_edad_de_fechanac_fecharef(contacto.anionac, contacto.mesnac, contacto.dianac, (date_part('year'::text, a.fecha))::integer, (date_part('month'::text, a.fecha))::integer, (date_part('day'::text, a.fecha))::integer) AS contacto_edad
-   FROM ((((public.sivel2_sjr_ultimaatencion_aux uaux
-     JOIN public.sivel2_sjr_actividad_casosjr ac ON (((ac.actividad_id = uaux.actividad_id) AND (ac.casosjr_id = uaux.caso_id))))
-     JOIN public.cor1440_gen_actividad a ON ((ac.actividad_id = a.id)))
-     JOIN public.sivel2_sjr_casosjr casosjr ON ((ac.casosjr_id = casosjr.id_caso)))
+   FROM (((public.sivel2_sjr_ultimaatencion_aux uaux
+     JOIN public.cor1440_gen_actividad a ON ((uaux.actividad_id = a.id)))
+     JOIN public.sivel2_sjr_casosjr casosjr ON ((uaux.caso_id = casosjr.id_caso)))
      JOIN public.sip_persona contacto ON ((contacto.id = casosjr.contacto_id)));
 
 
@@ -5595,17 +5632,7 @@ CREATE MATERIALIZED VIEW public.sivel2_gen_consexpcaso AS
      JOIN public.sivel2_gen_victima vcontacto ON (((vcontacto.id_persona = contacto.id) AND (vcontacto.id_caso = caso.id))))
      LEFT JOIN public.sivel2_gen_etnia etnia ON ((vcontacto.id_etnia = etnia.id)))
      LEFT JOIN public.sivel2_sjr_ultimaatencion ultimaatencion ON ((ultimaatencion.caso_id = caso.id)))
-  WHERE (conscaso.caso_id IN ( SELECT sivel2_gen_conscaso.caso_id
-           FROM (((public.sivel2_gen_conscaso
-             JOIN public.sivel2_sjr_casosjr ON ((sivel2_sjr_casosjr.id_caso = sivel2_gen_conscaso.caso_id)))
-             JOIN public.sivel2_gen_victima ON ((sivel2_gen_victima.id_caso = sivel2_gen_conscaso.caso_id)))
-             JOIN public.sip_persona ON ((sivel2_gen_victima.id_persona = sip_persona.id)))
-          WHERE ((sivel2_gen_conscaso.caso_id = ANY (ARRAY[31, 760, 761, 271, 200, 201, 202, 203, 204, 65, 272, 67, 68, 69, 70, 71, 171, 241, 570, 141, 76, 441, 340, 111, 443, 210, 18, 81, 82, 278, 574, 214, 180, 215, 578, 87, 27, 150, 581, 282, 765, 766, 90, 120, 283, 184, 250, 767, 768, 770, 455, 772, 342, 254, 773, 314, 159, 99, 129, 315, 316, 317, 599, 229, 318, 789, 319, 296, 297, 299, 300, 301, 302, 303, 343, 321, 322, 323, 324, 325, 328, 329, 330, 331, 332, 333, 334, 335, 336, 337, 338, 339, 348, 366, 365, 372, 377, 379, 380, 382, 383, 384, 385, 386, 387, 388, 389, 390, 391, 392, 393, 394, 395, 396, 397, 398, 399, 771, 400, 401, 431, 402, 403, 404, 405, 406, 407, 408, 409, 410, 470, 432, 341, 295, 298, 344, 345, 346, 347, 378, 381, 413, 427, 428, 429, 430, 433, 471, 472, 492, 473, 474, 442, 444, 448, 475, 476, 452, 477, 481, 460, 461, 414, 415, 416, 417, 418, 419, 420, 421, 422, 423, 424, 425, 426, 479, 482, 459, 465, 466, 467, 468, 483, 484, 485, 486, 480, 487, 488, 490, 491, 501, 493, 494, 507, 497, 498, 499, 500, 502, 503, 496, 504, 505, 506, 508, 509, 510, 511, 512, 513, 514, 515, 516, 517, 518, 519, 520, 521, 569, 571, 575, 579, 582, 592, 763, 600, 769, 774, 776, 778, 780, 781, 782, 783, 784, 787, 790, 635, 791, 792, 799, 800, 801, 802, 803, 809, 716, 811, 719, 815, 820, 829, 728, 839, 840, 841, 842, 843, 844, 845, 846, 847, 848, 849, 850, 851, 852, 853, 888, 856, 857, 855, 858, 859, 860, 861, 862, 863, 864, 865, 866, 867, 868, 869, 870, 871, 872, 873, 874, 875, 876, 877, 878, 879, 880, 881, 882, 883, 884, 885, 886, 887, 889, 890, 891, 892, 893, 894, 895, 896, 897, 898, 899, 900, 901, 902, 903, 904, 905, 906, 522, 523, 524, 525, 526, 527, 528, 529, 758, 759, 533, 534, 535, 536, 568, 537, 538, 539, 540, 541, 542, 543, 544, 545, 577, 546, 547, 548, 549, 550, 590, 551, 552, 554, 593, 555, 557, 558, 576, 553, 559, 560, 561, 562, 580, 563, 764, 564, 565, 566, 775, 777, 779, 785, 786, 788, 611, 797, 798, 804, 805, 806, 621, 807, 793, 808, 810, 812, 813, 814, 643, 816, 817, 818, 819, 821, 822, 823, 824, 825, 826, 827, 729, 828, 830, 720, 723, 726, 727, 832, 833, 834, 831, 748, 837, 838, 752, 754, 907, 908, 909, 910, 911, 912, 913, 914, 915, 916, 917, 918, 919, 920, 921, 922, 923, 924, 925, 926, 927, 928, 929, 930, 931, 932, 933, 934, 935, 936, 937, 938, 939, 940, 941, 942, 943, 944, 945, 946, 947, 948, 949, 950, 951, 952, 953, 954, 955, 956, 957, 958, 959, 960, 961, 962, 963, 964, 965, 966, 967, 968, 969, 970, 972, 973, 974, 975, 977, 978, 979, 980, 981, 982, 983, 985, 1006, 987, 988, 989, 990, 991, 992, 993, 994, 995, 996, 997, 998, 999, 1000, 1001, 1002, 1003, 1005, 1007, 1008, 1010, 1009, 1011, 1012, 1014, 1015, 1016, 1019, 1018, 1020, 1021, 1022, 1023, 1024, 1025, 1026, 1027, 1028, 1029, 1030, 1031, 1032, 1034, 1035, 1036, 1037, 1038, 1039, 1040, 1041, 1042, 1043, 1044, 1045, 1046, 1047, 1048, 1049, 1050, 1051, 1052, 1053, 1054, 1055, 1056, 1057, 1058, 1059, 1060, 1061, 1062, 1063, 1064, 1065, 1066, 1067, 1068, 1069, 1070, 1071, 1072, 1073, 1074, 1075, 1076, 1077, 1078, 1079, 1081, 1082, 1083, 1084, 1085, 1086, 1087, 1089, 1090, 1092, 1094, 1093, 1096, 1097, 1098, 1099, 1100, 1101, 1102, 1103, 1105, 1106, 1107, 1108, 1109, 1110, 1104, 1111, 1112, 1113, 1115, 1116, 1095, 1114])) AND (sivel2_sjr_casosjr.oficina_id = 7) AND (sivel2_gen_conscaso.caso_id IN ( SELECT sivel2_gen_victima_1.id_caso
-                   FROM (public.sivel2_gen_victima sivel2_gen_victima_1
-                     JOIN public.sip_persona sip_persona_1 ON ((sivel2_gen_victima_1.id_persona = sip_persona_1.id)))
-                  WHERE (sip_persona_1.sexo = 'S'::bpchar))) AND (sip_persona.tdocumento_id = 1))
-          ORDER BY sivel2_gen_conscaso.fecharec DESC, sivel2_gen_conscaso.caso_id))
-  ORDER BY conscaso.fecha, conscaso.caso_id
+  WHERE (true = false)
   WITH NO DATA;
 
 
@@ -5854,6 +5881,30 @@ CREATE TABLE public.sivel2_gen_iglesia (
     observaciones character varying(5000),
     CONSTRAINT iglesia_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
+
+
+--
+-- Name: sivel2_gen_iniciador; Type: VIEW; Schema: public; Owner: -
+--
+
+CREATE VIEW public.sivel2_gen_iniciador AS
+ SELECT s3.id_caso,
+    s3.fechainicio,
+    s3.id_usuario,
+    usuario.nusuario
+   FROM public.usuario,
+    ( SELECT s2.id_caso,
+            s2.fechainicio,
+            min(s2.id_usuario) AS id_usuario
+           FROM public.sivel2_gen_caso_usuario s2,
+            ( SELECT f1.id_caso,
+                    min(f1.fechainicio) AS m
+                   FROM public.sivel2_gen_caso_usuario f1
+                  GROUP BY f1.id_caso) c
+          WHERE ((s2.id_caso = c.id_caso) AND (s2.fechainicio = c.m))
+          GROUP BY s2.id_caso, s2.fechainicio
+          ORDER BY s2.id_caso, s2.fechainicio) s3
+  WHERE (usuario.id = s3.id_usuario);
 
 
 --
@@ -6547,6 +6598,18 @@ CREATE TABLE public.sivel2_sjr_ayudasjr (
 CREATE TABLE public.sivel2_sjr_ayudasjr_derecho (
     ayudasjr_id integer,
     derecho_id integer
+);
+
+
+--
+-- Name: sivel2_sjr_ayudasjr_respuesta; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.sivel2_sjr_ayudasjr_respuesta (
+    id_ayudasjr integer DEFAULT 0 NOT NULL,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    id_respuesta integer NOT NULL
 );
 
 
@@ -14172,6 +14235,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20201021104257'),
 ('20201030102713'),
 ('20201031182132'),
+('20201119110342'),
 ('20201119125643'),
 ('20201121162913'),
 ('20201130020715'),

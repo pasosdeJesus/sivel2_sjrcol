@@ -52,3 +52,4 @@ bitacora*
 *swp
 config/credentials.yml.enc
 tmpsql/
+.env

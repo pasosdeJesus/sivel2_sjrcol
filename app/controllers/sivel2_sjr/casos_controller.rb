@@ -16,6 +16,25 @@ module Sivel2Sjr
       ['Caso']
     end
 
+    def atributos_show
+      [
+        # basicos
+        :id,
+        :fecharec,
+        :oficina,
+        :fecha,
+        :memo,
+        :created_at,
+        :asesor,
+        :contacto,
+        :direccion,
+        :telefono,
+        :atenciones,
+        :listado_familiares,
+        :listado_anexos
+      ]
+    end
+
     # Campos en filtro
     def campos_filtro1
       [
@@ -25,6 +44,7 @@ module Sivel2Sjr
         :atenciones_fechafin,
         :categoria_id,
         :codigo,
+        :departamento_id,
         :descripcion,
         :expulsion_pais_id, 
         :expulsion_departamento_id, 

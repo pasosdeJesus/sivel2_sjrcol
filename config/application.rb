@@ -2,37 +2,78 @@ require_relative 'boot'
 
 require 'rails/all'
 
-# Require the gems listed in Gemfile, including any gems
-# you've limited to :test, :development, or :production.
+# Requerir las gemas listas en el Gemfile, incluyendo gemas que haya
+# limitado a :test, :development, o :production.
 Bundler.require(*Rails.groups)
 
 module Sivel2Sjrcol
   class Application < Rails::Application
-    # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 6.0
 
-    # Settings in config/environments/* take precedence over those specified here.
-    # Application configuration can go into files in config/initializers
-    # -- all .rb files in that directory are automatically loaded after loading
-    # the framework and any gems in your application.
-    
-    config.time_zone = 'Bogota'
+    # config.load_defaults 6.0
+
+    # Las configuraciones de config/environments/* tienen precedencia
+    # sobre las especifciadas aquí.
+    #
+    # La configuración de la aplicación debería ir en archivos en
+    # config/initializers -- todos los archivos .rb de esa ruta
+    # se cargan automáticamente
+
+    # Establecer Time.zone a la zona por omisión y que Active Record se
+    # convierta a esa zona.
+    # ejecute "rake -D time" para ver tareas relacionadas con encontrar
+    # nombres de zonas. Por omisión es UTC.
+    config.time_zone = 'America/Bogota'
+
+    # El locale predeterminado es :en y se cargan todas las traducciones
+    # de config/locales/*.rb,yml 
+    # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     config.i18n.default_locale = :es
+
     config.active_record.schema_format = :sql
-    config.x.formato_fecha = 'yyyy-mm-dd'
-    config.x.heb412_ruta = Rails.root.join('public', 'heb412') 
-    
-    config.x.url_colchon = 'colchon-articulos'
+
+    config.railties_order = [:main_app, Sivel2Sjr::Engine, 
+                             Cor1440Gen::Engine, Sivel2Gen::Engine,
+                             Heb412Gen::Engine, Mr519Gen::Engine, 
+                             Sip::Engine, :all]
+
+    config.hosts <<  ENV.fetch('CONFIG_HOSTS', 'defensor.info').downcase
+
+    config.relative_url_root = ENV.fetch('RUTA_RELATIVA', '/')
+
+    # sip
+    config.x.formato_fecha = ENV.fetch('FORMATO_FECHA', 'yyyy-mm-dd')
+
+    # heb412
+    config.x.heb412_ruta = Pathname(
+      ENV.fetch('HEB412_RUTA', Rails.root.join('public', 'heb412').to_s)
+    )
+
+    # sivel2
+    config.x.sivel2_consulta_web_publica = ENV['SIVEL2_CONSWEB_PUBLICA'] &&
+      ENV['SIVEL2_CONSWEB_PUBLICA'] != ''
+
+    config.x.sivel2_consweb_max = ENV.fetch('SIVEL2_CONSWEB_MAX', 2000)
+
+    config.x.sivel2_consweb_epilogo = ENV.fetch(
+      'SIVEL2_CONSWEB_EPILOGO',
+      "<br>Si requiere más puede suscribirse a SIVeL Pro"
+    ).html_safe
+
+    config.x.sivel2_mapaosm_diasatras = ENV.fetch(
+      'SIVEL2_CONSWEB_EPILOGO', 182)
+
+    # sal7711
+    config.x.url_colchon = ENV.fetch('COLCHON_ARTICULOS', 'colchon-articulos')
     config.x.sal7711_presencia_adjunto = true
     config.x.sal7711_presencia_adjuntodesc = true
     config.x.sal7711_presencia_fuenteprensa = true
     config.x.sal7711_presencia_fecha = true
     config.x.sal7711_presencia_pagina = false
 
-    config.x.cor1440_permisos_por_oficina = true
 
-    config.hosts << ENV['CONFIG_HOSTS'] || '127.0.0.1'
-
-    #config.web_console.permission = ['186.102.147.134']
-  end
+    # cor1440
+    config.x.cor1440_permisos_por_oficina = 
+      (ENV['COR1440_PERMISOS_POR_OFICINA'] && ENV['COR1440_PERMISOS_POR_OFICINA'] != '')
+   end
 end
+

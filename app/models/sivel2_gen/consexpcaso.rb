@@ -512,7 +512,7 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
          'maternidad', 'estadocivil', 'discapacidad', 'rolfamilia', 
          'regimensalud', 'escolaridad']
     especiales = ['actividadoficio', 'numeroanexos', 'numeroanexosconsen']
-    orientaciones = Sip::OrientacionsexualHelper::ORIENTACIONES
+    orientaciones = Sip::Persona::ORIENTACION_OPCIONES
     m = /familiar(.*)$/.match(atr.to_s)
     if m
       numero = m[1].split("_")[0]

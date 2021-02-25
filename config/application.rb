@@ -36,21 +36,17 @@ module Sivel2Sjrcol
                              Heb412Gen::Engine, Mr519Gen::Engine, 
                              Sip::Engine, :all]
 
-    config.hosts <<  (ENV['CONFIG_HOSTS'] && ENV['CONFIG_HOSTS'] != '' ? 
-                      ENV['CONFIG_HOSTS'].downcase : 
-                      'defensor.info'.downcase)
+    config.hosts <<  ENV.fetch('CONFIG_HOSTS', 'defensor.info').downcase
 
     config.relative_url_root = ENV.fetch('RUTA_RELATIVA', '/')
-
 
     # sip
     config.x.formato_fecha = ENV.fetch('FORMATO_FECHA', 'yyyy-mm-dd')
 
-
     # heb412
-    config.x.heb412_ruta = ENV['HEB412_RUTA'] && ENV['HEB412_RUTA'] != '' ?
-      Pathname(ENV['HEB412_RUTA']) : Rails.root.join('public', 'heb412')
-
+    config.x.heb412_ruta = Pathname(
+      ENV.fetch('HEB412_RUTA', Rails.root.join('public', 'heb412').to_s)
+    )
 
     # sivel2
     config.x.sivel2_consulta_web_publica = ENV['SIVEL2_CONSWEB_PUBLICA'] &&

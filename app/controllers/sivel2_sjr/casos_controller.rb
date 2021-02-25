@@ -44,6 +44,7 @@ module Sivel2Sjr
         :atenciones_fechafin,
         :categoria_id,
         :codigo,
+        :departamento_id,
         :descripcion,
         :expulsion_pais_id, 
         :expulsion_departamento_id, 

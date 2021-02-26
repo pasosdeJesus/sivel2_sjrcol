@@ -1,20 +1,22 @@
 <table class="tablalistadoasistencia table  table-bordered table-sm ">
   <thead class="thead-light">
     <tr>
+      <th>Código de persona</th>
       <th>Nombres</th>
       <th>Apellidos</th>
       <th colspan="2">Identificación</th>
       <th>Sexo</th>
-      <th>Año nac.</th>
-      <th>Mes</th>
-      <th>Dia</th>
-      <th>Org. social</th>
+      <th>Edad</th>
       <th>Perfil</th>
+      <th>Caso asociado</th>
     </tr>
   </thead>
   <tbody id="asistencia">
     <% @registro.asistencia.each do |asistencia| %>
       <tr>
+        <td>
+          <%= asistencia.persona.id if asistencia.persona.id %>
+        </td>
         <td>
           <%= asistencia.persona.nombres if asistencia.persona.nombres %>
         </td>
@@ -31,19 +33,20 @@
           <%= asistencia.persona.sexo if asistencia.persona.sexo %>
         </td>
         <td>
-          <%= asistencia.persona.anionac if asistencia.persona.anionac %>
-        </td>
-        <td>
-          <%= asistencia.persona.mesnac if asistencia.persona.mesnac %>
-        </td>
-        <td>
-          <%= asistencia.persona.dianac if asistencia.persona.dianac %>
-        </td>
-        <td>
-          <%= asistencia.actorsocial.presenta_nombre if asistencia.actorsocial %>
+          <% if asistencia.persona %>
+            <%= edad_de_fechanac_fecha(
+              asistencia.persona.anionac, asistencia.persona.mesnac, 
+              asistencia.persona.dianac, Date.today.year, 
+              Date.today.month, Date.today.day)
+            %>
+          <% end %>
         </td>
         <td>
           <%= asistencia.perfilactorsocial.nombre if asistencia.perfilactorsocial %>
+        </td>
+        <td>
+          <% casoa = Sivel2Gen::Victima.where(id_persona: asistencia.persona.id).pluck(:id_caso) %>
+          <%= casoa.empty? ? "Sin caso asociado" : casoa.join(', ') %>
         </td>
       </tr>
     <% end %>

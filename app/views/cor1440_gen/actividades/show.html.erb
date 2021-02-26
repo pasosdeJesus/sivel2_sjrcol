@@ -1,0 +1,36 @@
+<h1> Actividad </h1>
+<div class="row">
+  <div class="col-md-6">
+    <b>Id:</b> <%= @actividad.id %> <br>
+    <b>Fecha de realización:</b> <%= @actividad.fecha %><br>
+
+    <b>Oficina:</b> <%= @actividad.oficina.nombre if @actividad.oficina %>
+  </div>
+  <div class="col-md-6">
+    <b>Nombre:</b> <%= @actividad.nombre %><br>
+    <b>Responsable:</b> <%= @actividad.responsable.nombre if @actividad.responsable%><br>
+    <b>Caso asociado:</b> <%= @actividad.oficina.nombre if @actividad.oficina %>
+  </div>
+</div>
+<br>
+<%= render 'show_listado_proyectos' %> 
+<br>
+<h3>Listado de Asistencia</h3>
+<%= render 'show_listado_asistencia' %> 
+<br>
+<h3>Listado de Casos</h3>
+<%= render 'show_listado_casos' %> 
+<br>
+<h3>Población</h3>
+<%= render 'show_listado_poblacion' %> 
+<div class="row">
+  <div class="col-md-6">
+    <b>Resultado:</b> <%= @actividad.resultado %> <br>
+    <b>Observaciones:</b> <%= @actividad.observaciones %><br>
+  </div>
+</div>
+<br>
+<h3>Anexos</h3>
+<%= render 'show_listado_anexos' %> 
+<br>
+<%= render partial: 'show_acciones' %>

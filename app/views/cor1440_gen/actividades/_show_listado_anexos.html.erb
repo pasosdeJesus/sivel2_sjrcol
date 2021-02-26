@@ -1,0 +1,22 @@
+<table class="tablalistadovictima table  table-bordered table-sm ">
+  <thead class="thead-light">
+    <tr>
+      <th>Descripción</th>
+      <th>Enlace de descarga</th>
+    </tr>
+  </thead>
+  <tbody id="victima">
+    <% anexosids = Cor1440Gen::ActividadSipAnexo.where(actividad_id: @registro.id).pluck(:anexo_id) %>
+    <% anexos = Sip::Anexo.find(anexosids)%>
+    <% anexos.each do |anexo| %>
+      <tr>
+        <td>
+          <%= anexo.descripcion if anexo.descripcion %>
+        </td>
+        <td>
+          <a href="<%= sip.descarga_anexo_path(anexo.id) %>", style="text-decoration:none" data-turbolinks='false'><%= anexo.adjunto_file_name %></a>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

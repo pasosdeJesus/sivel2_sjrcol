@@ -2389,11 +2389,11 @@ CREATE SEQUENCE public.respuesta_seq
 
 
 --
--- Name: sivel2_sjr_progestado_respuesta; Type: TABLE; Schema: public; Owner: -
+-- Name: sivel2_sjr_ayudasjr_respuesta; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE public.sivel2_sjr_progestado_respuesta (
-    id_progestado integer DEFAULT 0 NOT NULL,
+CREATE TABLE public.sivel2_sjr_ayudasjr_respuesta (
+    id_ayudasjr integer DEFAULT 0 NOT NULL,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     id_respuesta integer NOT NULL
@@ -2451,12 +2451,12 @@ CREATE VIEW public.cres1 AS
  SELECT caso.id AS id_caso,
     respuesta.fechaatencion,
     casosjr.oficina_id,
-    progestado_respuesta.id_progestado
+    ayudasjr_respuesta.id_ayudasjr
    FROM public.sivel2_gen_caso caso,
     public.sivel2_sjr_casosjr casosjr,
     public.sivel2_sjr_respuesta respuesta,
-    public.sivel2_sjr_progestado_respuesta progestado_respuesta
-  WHERE ((caso.id = casosjr.id_caso) AND (caso.id = respuesta.id_caso) AND (respuesta.id = progestado_respuesta.id_respuesta));
+    public.sivel2_sjr_ayudasjr_respuesta ayudasjr_respuesta
+  WHERE ((caso.id = casosjr.id_caso) AND (caso.id = respuesta.id_caso) AND (respuesta.id = ayudasjr_respuesta.id_respuesta));
 
 
 --
@@ -5597,7 +5597,7 @@ CREATE MATERIALIZED VIEW public.sivel2_gen_consexpcaso AS
      LEFT JOIN public.sivel2_sjr_ultimaatencion ultimaatencion ON ((ultimaatencion.caso_id = caso.id)))
   WHERE (conscaso.caso_id IN ( SELECT sivel2_gen_conscaso.caso_id
            FROM public.sivel2_gen_conscaso
-          WHERE (sivel2_gen_conscaso.caso_id = 1117)))
+          WHERE (sivel2_gen_conscaso.caso_id = 1124)))
   WITH NO DATA;
 
 
@@ -6543,18 +6543,6 @@ CREATE TABLE public.sivel2_sjr_ayudasjr_derecho (
 
 
 --
--- Name: sivel2_sjr_ayudasjr_respuesta; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.sivel2_sjr_ayudasjr_respuesta (
-    id_ayudasjr integer DEFAULT 0 NOT NULL,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone,
-    id_respuesta integer NOT NULL
-);
-
-
---
 -- Name: sivel2_sjr_categoria_desplazamiento; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -7139,6 +7127,18 @@ CREATE TABLE public.sivel2_sjr_progestado (
 CREATE TABLE public.sivel2_sjr_progestado_derecho (
     progestado_id integer,
     derecho_id integer
+);
+
+
+--
+-- Name: sivel2_sjr_progestado_respuesta; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.sivel2_sjr_progestado_respuesta (
+    id_progestado integer DEFAULT 0 NOT NULL,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    id_respuesta integer NOT NULL
 );
 
 
@@ -14201,6 +14201,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210121103247'),
 ('20210121224746'),
 ('20210201101144'),
-('20210206191033');
+('20210206191033'),
+('20210225154422'),
+('20210226155035');
 
 

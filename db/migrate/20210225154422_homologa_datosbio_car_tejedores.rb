@@ -19,6 +19,10 @@ class HomologaDatosbioCarTejedores < ActiveRecord::Migration[6.0]
   }
 
   def up
+    if Mr519Gen::Formulario.where(id: 101).count == 0 ||
+      Mr519Gen::Formulario.find(101).nombreinterno != 'car_tejedores'
+      return
+    end
     nump = 1
     dbs = Sip::Datosbio.where('persona_id IS NOT NULL').
       where('telefono IS NOT NULL AND TRIM(telefono)<>\'\'').

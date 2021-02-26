@@ -625,7 +625,9 @@ module Cor1440Gen
       when /^poblacion_sinsexo_g[0-9]*$/
         g = atr[21..-1].to_i
         poblacion_gen_infijo('sinsexo_g', g)
-
+      
+      when 'observaciones'
+        self.observaciones
       else
         presenta_actividad(atr)
       end

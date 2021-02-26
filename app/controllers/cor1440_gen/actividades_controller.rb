@@ -78,22 +78,23 @@ module Cor1440Gen
       [ :id, 
         :nombre, 
         :fecha_localizada, 
-        :lugar, 
+        :responsable,
         :oficina, 
+        :listado_poblacion,
+        :lugar, 
+        :listado_proyectos,
         :proyectosfinancieros, 
-        :actividadpf, 
         :proyectos,
         :actividadareas, 
-        :responsable,
         :corresponsables,
         :respuestafor,
         :objetivo,
         :resultado, 
+        :observaciones,
         :actorsocial,
-        :poblacion,
-        :anexos,
         :listado_asistencia,
-        :listado_casos
+        :listado_casos,
+        :anexos
       ]
     end
 

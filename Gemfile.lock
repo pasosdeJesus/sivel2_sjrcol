@@ -52,7 +52,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 28814ac3577e7561f6186ad17e141fe1d9296cc1
+  revision: 96efc700364bd319a535a756f7c85775c5bf3336
   branch: main
   specs:
     sip (2.0.b11)
@@ -81,7 +81,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 1673b1c327f7c11a60207d06850caaaa4866e954
+  revision: 1e9823f6f42b2e5c3dd12cbb5c072356fa70631b
   branch: main
   specs:
     sivel2_sjr (2.0b10)
@@ -237,7 +237,7 @@ GEM
     method_source (1.0.0)
     mime-types (3.3.1)
       mime-types-data (~> 3.2015)
-    mime-types-data (3.2021.0212)
+    mime-types-data (3.2021.0225)
     mimemagic (0.3.5)
     mini_mime (1.0.2)
     mini_portile2 (2.5.0)

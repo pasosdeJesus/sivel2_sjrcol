@@ -1,3 +1,6 @@
+<% casos_ids = @registro.casosjr.order(:id_caso).pluck(:id_caso) %>
+<% victimas = Sivel2Gen::Victima.where(id_caso: casos_ids) %>
+Total: <%= @registro.asistencia.count + victimas.count  %>
 <table class="tablalistadoasistencia table  table-bordered table-sm ">
   <thead class="thead-light">
     <tr>
@@ -47,6 +50,48 @@
         <td>
           <% casoa = Sivel2Gen::Victima.where(id_persona: asistencia.persona.id).pluck(:id_caso) %>
           <%= casoa.empty? ? "Sin caso asociado" : casoa.join(', ') %>
+        </td>
+      </tr>
+    <% end %>
+    <% victimas.each do |victima| %>
+      <tr>
+        <td>
+          <%= victima.persona.id if victima.persona.id %>
+        </td>
+        <td>
+          <%= victima.persona.nombres if victima.persona.nombres %>
+        </td>
+        <td>
+          <%= victima.persona.apellidos if victima.persona.apellidos %>
+        </td>
+        <td>
+          <%= victima.persona.tdocumento.sigla if victima.persona.tdocumento%>
+        </td>
+        <td>
+          <%= victima.persona.numerodocumento if victima.persona.numerodocumento %>
+        </td>
+        <td>
+          <%= victima.persona.sexo if victima.persona.sexo %>
+        </td>
+        <td>
+          <% if victima.persona %>
+            <% edad =  edad_de_fechanac_fecha(
+              victima.persona.anionac, victima.persona.mesnac, 
+              victima.persona.dianac, Date.today.year, 
+              Date.today.month, Date.today.day)
+            %>
+            <% if edad != -1 %>
+              <%= edad %>
+            <% else %>
+              No indica
+            <% end %>
+          <% end %>
+        </td>
+        <td>
+           No Aplica
+        </td>
+        <td>
+          <%= victima.id_caso %>
         </td>
       </tr>
     <% end %>

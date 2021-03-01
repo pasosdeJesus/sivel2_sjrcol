@@ -4,12 +4,15 @@
     <b>Id:</b> <%= @actividad.id %> <br>
     <b>Fecha de realización:</b> <%= @actividad.fecha %><br>
 
-    <b>Oficina:</b> <%= @actividad.oficina.nombre if @actividad.oficina %>
+    <b>Oficina:</b> <%= @actividad.oficina.nombre if @actividad.oficina %> <br>
+    <b>Departamento:</b> <%= @actividad.presenta('departamento') %>
   </div>
   <div class="col-md-6">
     <b>Nombre:</b> <%= @actividad.nombre %><br>
     <b>Responsable:</b> <%= @actividad.responsable.nombre if @actividad.responsable%><br>
-    <b>Caso asociado:</b> <%= @actividad.oficina.nombre if @actividad.oficina %>
+    <b>Caso asociado:</b> <%= @actividad.oficina.nombre if 
+      @actividad.oficina %><br>
+    <b>Municipio:</b> <%= @actividad.presenta('municipio') %>
   </div>
 </div>
 <br>

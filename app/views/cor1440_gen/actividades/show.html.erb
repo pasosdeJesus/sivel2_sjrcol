@@ -5,12 +5,7 @@
     <b>Fecha de realización:</b> <%= @actividad.fecha %><br>
 
     <b>Oficina:</b> <%= @actividad.oficina.nombre if @actividad.oficina %> <br>
-    <b>Departamento:</b> 
-    <% if @actividad.presenta('departamento') != "" %>
-      <%= @actividad.presenta('departamento') %>
-    <% else %>
-      No indica
-    <% end %><br>
+    <b>Departamento:</b><%= @actividad.presenta('departamento') %><br>
   </div>
   <div class="col-md-6">
     <b>Nombre:</b> <%= @actividad.nombre %><br>
@@ -21,12 +16,7 @@
     <% else %>
       <%= @actividad.casosjr.pluck(:id_caso).join(", ") %>
     <% end %><br>
-    <b>Municipio:</b> 
-    <% if @actividad.presenta('municipio') != "" %>
-      <%= @actividad.presenta('municipio') %>
-    <% else %>
-      No indica
-    <% end %><br>
+    <b>Municipio:</b><%= @actividad.presenta('municipio') %><br>
   </div>
 </div>
 <br>

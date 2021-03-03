@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: 05895433c925997c28c2601af5fb16b3ddb160ac
+  revision: 64bc9841d1923fd81a4aedf8c1e46c28cba2d2c6
   branch: main
   specs:
     cor1440_gen (1.0b3)
@@ -14,7 +14,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 310aeef0d8e4c8e3411fd22db36f2e795c9020bf
+  revision: 4941801fa6559713a421a4feb128ce9f19171d18
   branch: main
   specs:
     heb412_gen (1.0.b6)
@@ -25,7 +25,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/mr519_gen.git
-  revision: 2a6ca202b7fd7ecec40933964bc34e9d1afe6c32
+  revision: 75055e84eb7e5d8a43d029a3e676af0f07d04315
   branch: main
   specs:
     mr519_gen (0.2.0)
@@ -34,7 +34,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: 0638e30ca903c4de25ac6946ea9fd1e1cb96e88d
+  revision: 97d578cbebbc7610d64c03c4bcfbd8a66ac259cd
   branch: main
   specs:
     sal7711_gen (1.0.b3)
@@ -43,7 +43,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: 0f15e758f9b45efd12e3a6cd414d18a59a9dcfd4
+  revision: 515bf4e7090effb211f216fd6e197de5ace82d0d
   branch: main
   specs:
     sal7711_web (1.0.a3)
@@ -52,7 +52,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 193b1f68a6e7dd664b318fedc06d0f504f749402
+  revision: 0bfebc3466de1f5a9919b4fbaa7cfd48d5bc00e1
   branch: main
   specs:
     sip (2.0.b11)
@@ -71,17 +71,17 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: b93d9de60e8965521a57bcb56b7bd63a44fe1c69
+  revision: 7eac047dfc6c3db1500c9f48a04906968e4bbf6b
   branch: main
   specs:
-    sivel2_gen (2.0b13)
+    sivel2_gen (2.0b14)
       devise
       jquery-rails
       rails
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 1e9823f6f42b2e5c3dd12cbb5c072356fa70631b
+  revision: e1127ac1a14ee7117591b9c9e675d387cfecd053
   branch: main
   specs:
     sivel2_sjr (2.0b10)
@@ -273,7 +273,7 @@ GEM
       prawn (>= 1.0.0)
       rails (>= 3.2)
     public_suffix (4.0.6)
-    puma (5.2.1)
+    puma (5.2.2)
       nio4r (~> 2.0)
     racc (1.5.2)
     rack (2.2.3)

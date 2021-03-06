@@ -700,6 +700,31 @@
       </div>
     </div> <!-- row -->
 
+    <div class="row">
+      <div class="offset-md-0 col-md-6">
+        <label class="form-check-label">
+          ¿Cómo valora el trato que le han dado las autoridades migratorias en este país?
+        </label>
+        <%= f.input :tratoauto, 
+          label: false,
+          input_html: {
+            value: f.object.tratoauto ? f.object.tratoauto : ''
+          }
+        %>
+      </div>
+      <div class="offset-md-0 col-md-6">
+        <label class="form-check-label">
+          ¿Cómo valora el trato que le han dado los residentes de este país?
+        </label>
+        <%= f.input :tratoresi, 
+          label: false,
+          input_html: {
+            value: f.object.tratoresi ? f.object.tratoresi : ''
+          }
+        %>
+      </div>
+    </div> <!-- row -->
+
     <%= link_to_remove_association "Eliminar Migracion", f, 
       {class: 'btn-danger', :'data-existing' => 'true'} 
     %>

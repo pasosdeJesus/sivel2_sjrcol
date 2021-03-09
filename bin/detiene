@@ -14,6 +14,9 @@ if (test "$RAILS_ENV" = "production") then {
     exit 1;
   } fi;
 
-doas sh /etc/rc.d/$RC -d stop
+  doas sh /etc/rc.d/$RC -d stop
+  if (test -f "bin/detiene-local") then {
+    . bin/detiene-local;
+  } fi;
 } fi;
 

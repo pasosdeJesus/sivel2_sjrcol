@@ -1,7 +1,14 @@
 # encoding: UTF-8
 
 class Sivel2Sjr::Migracion < ActiveRecord::Base
+
   attr_accessor :tiempoenpais
+  attr_accessor :salida_pais_id
+  attr_accessor :salida_departamento_id
+  attr_accessor :salida_municipio_id
+  attr_accessor :salida_clase_id
+
+
   has_and_belongs_to_many :agresionmigracion, 
     class_name: 'Agresionmigracion',
     foreign_key: :migracion_id, 
@@ -100,9 +107,68 @@ class Sivel2Sjr::Migracion < ActiveRecord::Base
     optional: true
   belongs_to :tipoproteccion,
     class_name: 'Tipoproteccion', foreign_key: "tipoproteccion_id", optional: true
-  
+
   validates :fechasalida, presence: true
-  
+
+  def salida_pais_id=(val)
+    @salida_p_id = val
+    up = Sip::Ubicacionpre.where(pais_id: val, departamento_id: nil)
+    if !up.empty?
+      self.salidaubicacionpre_id = up[0].id
+    else
+      self.salidaubicacionpre_id = nil
+    end
+  end
+  def salida_pais_id
+    if self.salidaubicacionpre_id
+      return Sip::Ubicacionpre.find(self.salidaubicacionpre_id).pais_id
+    else
+      return ''
+    end 
+  end
+
+  def salida_departamento_id=(val)
+    @salida_d_id = val!="" ? val : nil
+    if self.salidaubicacionpre_id
+      self.salidaubicacionpre_id = Sip::Ubicacionpre.where(pais_id: @salida_p_id, departamento_id: @salida_d_id)[0].id
+    end
+  end
+  def salida_departamento_id
+    if self.salidaubicacionpre_id
+      return Sip::Ubicacionpre.find(self.salidaubicacionpre_id).departamento_id
+    else
+      return ''
+    end 
+  end
+
+  def salida_municipio_id=(val)
+    @salida_m_id = val!="" ? val : nil
+    if self.salidaubicacionpre_id
+      self.salidaubicacionpre_id = Sip::Ubicacionpre.where(pais_id: @salida_p_id, departamento_id: @salida_d_id, municipio_id: @salida_m_id)[0].id
+    end
+  end
+  def salida_municipio_id
+    if self.salidaubicacionpre_id
+      return Sip::Ubicacionpre.find(self.salidaubicacionpre_id).municipio_id
+    else
+      return ''
+    end 
+  end
+
+  def salida_clase_id=(val)
+    @salida_c_id = val!="" ? val : nil
+    if self.salidaubicacionpre_id
+      self.salidaubicacionpre_id = Sip::Ubicacionpre.where(pais_id: @salida_p_id, departamento_id: @salida_d_id, municipio_id: @salida_m_id, clase_id: @salida_c_id)[0].id
+    end
+  end
+  def salida_clase_id
+    if self.salidaubicacionpre_id
+      return Sip::Ubicacionpre.find(self.salidaubicacionpre_id).clase_id
+    else
+      return ''
+    end 
+  end
+
   def tiempoenpais
     if self.id && self.fechallegada
       fechallegada = self.fechallegada.to_datetime

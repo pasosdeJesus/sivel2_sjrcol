@@ -266,6 +266,7 @@ module Sivel2Sjr
           :salida_departamento_id,
           :salida_municipio_id,
           :salida_clase_id,
+          :salida_ubicacionpre_id,
           :salvoNpi,
           :se_establece_en_sitio_llegada,
           :statusmigratorio_id,

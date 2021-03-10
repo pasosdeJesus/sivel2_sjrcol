@@ -9,6 +9,11 @@ class CambiaCamposubicacionMigracion < ActiveRecord::Migration[6.1]
       ubicacionpre = Sip::Ubicacionpre.where(pais_id: salida_pais, departamento_id: salida_departamento, municipio_id: salida_municipio, clase_id: salida_clase)
       if ubicacionpre[0]
         migracion.salidaubicacionpre_id = ubicacionpre[0].id
+      else 
+        puts "En ubicacionpre no se encontró salida_pais=#{salida_pais}, "\
+          "salida_departamento=#{salida_departamento}, salida_municipio=#{salida_municipio}, "\
+          "salida_clase=#{salida_clase}"
+        exit 1
       end
       migracion.save! 
     end

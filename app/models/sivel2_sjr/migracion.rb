@@ -112,7 +112,12 @@ class Sivel2Sjr::Migracion < ActiveRecord::Base
 
   def salida_pais_id=(val)
     @salida_p_id = val
-    self.salidaubicacionpre_id = Sip::Ubicacionpre.where(pais_id: val, departamento_id: nil)[0].id
+    up = Sip::Ubicacionpre.where(pais_id: val, departamento_id: nil)
+    if !up.empty?
+      self.salidaubicacionpre_id = up[0].id
+    else
+      self.salidaubicacionpre_id = nil
+    end
   end
   def salida_pais_id
     if self.salidaubicacionpre_id
@@ -123,7 +128,7 @@ class Sivel2Sjr::Migracion < ActiveRecord::Base
   end
 
   def salida_departamento_id=(val)
-    @salida_d_id = val
+    @salida_d_id = val!="" ? val : nil
     if self.salidaubicacionpre_id
       self.salidaubicacionpre_id = Sip::Ubicacionpre.where(pais_id: @salida_p_id, departamento_id: @salida_d_id)[0].id
     end
@@ -137,7 +142,7 @@ class Sivel2Sjr::Migracion < ActiveRecord::Base
   end
 
   def salida_municipio_id=(val)
-    @salida_m_id = val
+    @salida_m_id = val!="" ? val : nil
     if self.salidaubicacionpre_id
       self.salidaubicacionpre_id = Sip::Ubicacionpre.where(pais_id: @salida_p_id, departamento_id: @salida_d_id, municipio_id: @salida_m_id)[0].id
     end
@@ -151,7 +156,7 @@ class Sivel2Sjr::Migracion < ActiveRecord::Base
   end
 
   def salida_clase_id=(val)
-    @salida_c_id = val
+    @salida_c_id = val!="" ? val : nil
     if self.salidaubicacionpre_id
       self.salidaubicacionpre_id = Sip::Ubicacionpre.where(pais_id: @salida_p_id, departamento_id: @salida_d_id, municipio_id: @salida_m_id, clase_id: @salida_c_id)[0].id
     end

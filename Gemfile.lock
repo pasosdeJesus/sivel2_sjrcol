@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: fd4454aeb8b950e90650ef09fe5615ccf6e4ede1
+  revision: e57b5f5a82a26b5e98e63040b8a2139fa8eb09d9
   branch: main
   specs:
     cor1440_gen (1.0b3)
@@ -14,7 +14,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 4941801fa6559713a421a4feb128ce9f19171d18
+  revision: e205237d233d6cc1f071fe042c96b0b598adf53c
   branch: main
   specs:
     heb412_gen (1.0.b6)
@@ -25,7 +25,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/mr519_gen.git
-  revision: 75055e84eb7e5d8a43d029a3e676af0f07d04315
+  revision: 5bda61e16ad0006acb1fcaea961ad54130e0a140
   branch: main
   specs:
     mr519_gen (0.2.0)
@@ -34,7 +34,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: 97d578cbebbc7610d64c03c4bcfbd8a66ac259cd
+  revision: 8bdea6ab2404d8a790b88b9924cc5254da46c325
   branch: main
   specs:
     sal7711_gen (1.0.b3)
@@ -43,7 +43,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: 515bf4e7090effb211f216fd6e197de5ace82d0d
+  revision: 6f8d52387f1a7c2147e73c5bd6f8124fd121efe7
   branch: main
   specs:
     sal7711_web (1.0.a3)
@@ -52,7 +52,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 0bfebc3466de1f5a9919b4fbaa7cfd48d5bc00e1
+  revision: 6d830ff53bffe40c610585b798cc3811c7a55536
   branch: main
   specs:
     sip (2.0.b11)
@@ -71,7 +71,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 7eac047dfc6c3db1500c9f48a04906968e4bbf6b
+  revision: a2210280f976ac95640153ad8c6ab835768efd47
   branch: main
   specs:
     sivel2_gen (2.0b14)
@@ -81,7 +81,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: e1127ac1a14ee7117591b9c9e675d387cfecd053
+  revision: 683ed0b1e4d8f8d065ebe012cb9f601f38920418
   branch: main
   specs:
     sivel2_sjr (2.0b10)
@@ -211,7 +211,7 @@ GEM
       railties (>= 3.2)
     erubi (1.10.0)
     execjs (2.7.0)
-    ffi (1.14.2)
+    ffi (1.15.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     i18n (1.8.9)

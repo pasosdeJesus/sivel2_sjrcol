@@ -1,21 +1,38 @@
 class CambiaCamposubicacionMigracion < ActiveRecord::Migration[6.1]
 
   def agrega_sip_ubicacionpre
+    t = Sivel2Sjr::Migracion.all.count
+    c = 0
+    ultp = 0
     Sivel2Sjr::Migracion.all.each do |migracion|
-      salida_pais = migracion.salida_pais_id
-      salida_departamento = migracion.salida_departamento_id
-      salida_municipio = migracion.salida_municipio_id
-      salida_clase = migracion.salida_clase_id
-      ubicacionpre = Sip::Ubicacionpre.where(pais_id: salida_pais, departamento_id: salida_departamento, municipio_id: salida_municipio, clase_id: salida_clase)
-      if ubicacionpre[0]
-        migracion.salidaubicacionpre_id = ubicacionpre[0].id
+      salida_pais = migracion.salida_pais_id_porborrar
+      salida_departamento = migracion.salida_departamento_id_porborrar
+      salida_municipio = migracion.salida_municipio_id_porborrar
+      salida_clase = migracion.salida_clase_id_porborrar
+      if !salida_pais && !salida_departamento && !salida_municipio && 
+          !salida_clase
+        puts "Migración #{migracion.id} no tiene salida"
       else 
-        puts "En ubicacionpre no se encontró salida_pais=#{salida_pais}, "\
-          "salida_departamento=#{salida_departamento}, salida_municipio=#{salida_municipio}, "\
-          "salida_clase=#{salida_clase}"
-        exit 1
+        ubicacionpre = Sip::Ubicacionpre.where(
+          pais_id: salida_pais, departamento_id: salida_departamento, 
+          municipio_id: salida_municipio, clase_id: salida_clase)
+        if ubicacionpre[0]
+          migracion.salidaubicacionpre_id = ubicacionpre[0].id
+          migracion.save! 
+        else
+          #byebug
+          puts "En ubicacionpre no se encontró salida_pais=#{salida_pais}, "\
+            "salida_departamento=#{salida_departamento}, salida_municipio=#{salida_municipio}, "\
+            "salida_clase=#{salida_clase}"
+          exit 1
+        end
       end
-      migracion.save! 
+      c += 1
+      p = c*100/t
+      if p.to_i > ultp 
+        ultp = p.to_i
+        puts "Procesados #{c} migraciones (#{ultp} %)"
+      end
     end
   end
 
@@ -45,12 +62,12 @@ class CambiaCamposubicacionMigracion < ActiveRecord::Migration[6.1]
   end
 
   def up
-    agrega_sip_ubicacionpre
     cambianombres_borrar
+    agrega_sip_ubicacionpre
   end
 
   def down
-    cambianombres_sinborrar
     quita_sip_ubicacionpre
+    cambianombres_sinborrar
   end
 end

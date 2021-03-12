@@ -171,19 +171,18 @@ module Sivel2Sjr
         lleg_dep_id = (mp[:llegada_departamento_id] && mp[:llegada_departamento_id]!="") ? mp[:llegada_departamento_id].to_i : nil
         lleg_mun_id = (mp[:llegada_municipio_id] && mp[:llegada_municipio_id]!="") ? mp[:llegada_municipio_id].to_i : nil
         lleg_clas_id = (mp[:llegada_clase_id] && mp[:llegada_clase_id]!="") ? mp[:llegada_clase_id].to_i : nil
-        ubipre = Sip::Ubicacionpre.where(pais_id: lleg_pais_id, departamento_id: lleg_dep_id, municipio_id: lleg_mun_id, clase_id: lleg_clas_id)
+        ubiprelleg = Sip::Ubicacionpre.where(pais_id: lleg_pais_id, departamento_id: lleg_dep_id, municipio_id: lleg_mun_id, clase_id: lleg_clas_id)
         mi = Sivel2Sjr::Migracion.find(mp[:id].to_i)
-        mi.llegadaubicacionpre_id = ubipre[0] ? ubipre[0].id : nil
+        mi.llegadaubicacionpre_id = ubiprelleg[0] ? ubiprelleg[0].id : nil
         mi.save!
-      end
 
-        lleg_pais_id = (mp[:destino_pais_id] && mp[:destino_pais_id]!="") ? mp[:destino_pais_id].to_i : nil
-        lleg_dep_id = (mp[:destino_departamento_id] && mp[:destino_departamento_id]!="") ? mp[:destino_departamento_id].to_i : nil
-        lleg_mun_id = (mp[:destino_municipio_id] && mp[:destino_municipio_id]!="") ? mp[:destino_municipio_id].to_i : nil
-        lleg_clas_id = (mp[:destino_clase_id] && mp[:destino_clase_id]!="") ? mp[:destino_clase_id].to_i : nil
-        ubipre = Sip::Ubicacionpre.where(pais_id: lleg_pais_id, departamento_id: lleg_dep_id, municipio_id: lleg_mun_id, clase_id: lleg_clas_id)
+        des_pais_id = (mp[:destino_pais_id] && mp[:destino_pais_id]!="") ? mp[:destino_pais_id].to_i : nil
+        des_dep_id = (mp[:destino_departamento_id] && mp[:destino_departamento_id]!="") ? mp[:destino_departamento_id].to_i : nil
+        des_mun_id = (mp[:destino_municipio_id] && mp[:destino_municipio_id]!="") ? mp[:destino_municipio_id].to_i : nil
+        des_clas_id = (mp[:destino_clase_id] && mp[:destino_clase_id]!="") ? mp[:destino_clase_id].to_i : nil
+        ubipredes = Sip::Ubicacionpre.where(pais_id: des_pais_id, departamento_id: des_dep_id, municipio_id: des_mun_id, clase_id: des_clas_id)
         mi = Sivel2Sjr::Migracion.find(mp[:id].to_i)
-        mi.destinoubicacionpre_id = ubipre[0] ? ubipre[0].id : nil
+        mi.destinoubicacionpre_id = ubipredes[0] ? ubipredes[0].id : nil
         mi.save!
       end
 

@@ -7,6 +7,10 @@ class Sivel2Sjr::Migracion < ActiveRecord::Base
   attr_accessor :salida_departamento_id
   attr_accessor :salida_municipio_id
   attr_accessor :salida_clase_id
+  attr_accessor :llegada_pais_id
+  attr_accessor :llegada_departamento_id
+  attr_accessor :llegada_municipio_id
+  attr_accessor :llegada_clase_id
 
 
   has_and_belongs_to_many :agresionmigracion, 
@@ -112,9 +116,9 @@ class Sivel2Sjr::Migracion < ActiveRecord::Base
 
   def salida_pais_id=(val)
     @salida_p_id = val
-    up = Sip::Ubicacionpre.where(pais_id: val, departamento_id: nil)
-    if !up.empty?
-      self.salidaubicacionpre_id = up[0].id
+    ups = Sip::Ubicacionpre.where(pais_id: val, departamento_id: nil)
+    if !ups.empty?
+      self.salidaubicacionpre_id = ups[0].id
     else
       self.salidaubicacionpre_id = nil
     end
@@ -164,6 +168,35 @@ class Sivel2Sjr::Migracion < ActiveRecord::Base
   def salida_clase_id
     if self.salidaubicacionpre_id
       return Sip::Ubicacionpre.find(self.salidaubicacionpre_id).clase_id
+    else
+      return ''
+    end 
+  end
+
+  def llegada_pais_id
+    if self.llegadaubicacionpre_id
+      return Sip::Ubicacionpre.find(self.llegadaubicacionpre_id).pais_id
+    else
+      return ''
+    end
+  end
+  def llegada_departamento_id
+    if self.llegadaubicacionpre_id
+      return Sip::Ubicacionpre.find(self.llegadaubicacionpre_id).departamento_id
+    else
+      return ''
+    end 
+  end
+  def llegada_municipio_id
+    if self.llegadaubicacionpre_id
+      return Sip::Ubicacionpre.find(self.llegadaubicacionpre_id).municipio_id
+    else
+      return ''
+    end 
+  end
+  def llegada_clase_id
+    if self.llegadaubicacionpre_id
+      return Sip::Ubicacionpre.find(self.llegadaubicacionpre_id).clase_id
     else
       return ''
     end 

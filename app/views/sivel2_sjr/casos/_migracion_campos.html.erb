@@ -296,18 +296,25 @@
             class: 'chosen-select' 
           } %>
       </div>
-      <div class="col-md-2">
-        <%= f.association :llegada_clase,
-          collection: Sip::Clase.habilitados,
-          label_method: :nombre,
-          value_method: :id,
-          label: false,
-          input_html: {
-            "data-toggle" => 'tooltip',
-            placeholder: 'Centro poblado',
-            'data-placeholder' => "Centro poblado de llegada...",
-            class: 'chosen-select' 
-          } %>
+      <a data-toggle="collapse" href='#restoubillegada'>
+        <h5> + </h5>
+      </a>
+    </div>
+    <div class="collapse" id="restoubillegada">
+      <div class="row">
+        <div class="col-md-3">
+          <%= f.association :llegada_clase,
+            collection: Sip::Clase.habilitados,
+            label_method: :nombre,
+            value_method: :id,
+            label: false,
+            input_html: {
+              "data-toggle" => 'tooltip',
+              placeholder: 'Centro poblado',
+              'data-placeholder' => "Centro poblado de llegada...",
+              class: 'chosen-select' 
+            } %>
+        </div>
       </div>
     </div>
     <% tiempoestilo = f.object.tiempoenpais == "" ? 

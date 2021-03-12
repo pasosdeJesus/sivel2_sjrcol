@@ -186,6 +186,16 @@ module Sivel2Sjr
         mi.save!
       end
 
+        lleg_pais_id = (mp[:destino_pais_id] && mp[:destino_pais_id]!="") ? mp[:destino_pais_id].to_i : nil
+        lleg_dep_id = (mp[:destino_departamento_id] && mp[:destino_departamento_id]!="") ? mp[:destino_departamento_id].to_i : nil
+        lleg_mun_id = (mp[:destino_municipio_id] && mp[:destino_municipio_id]!="") ? mp[:destino_municipio_id].to_i : nil
+        lleg_clas_id = (mp[:destino_clase_id] && mp[:destino_clase_id]!="") ? mp[:destino_clase_id].to_i : nil
+        ubipre = Sip::Ubicacionpre.where(pais_id: lleg_pais_id, departamento_id: lleg_dep_id, municipio_id: lleg_mun_id, clase_id: lleg_clas_id)
+        mi = Sivel2Sjr::Migracion.find(mp[:id].to_i)
+        mi.destinoubicacionpre_id = ubipre[0] ? ubipre[0].id : nil
+        mi.save!
+      end
+
     # Convertir valores de radios tri-estado, el valor 3 en el 
       # botón de radio es nil en la base de datos
       if params && params[:caso] && params[:caso][:victima_attributes]

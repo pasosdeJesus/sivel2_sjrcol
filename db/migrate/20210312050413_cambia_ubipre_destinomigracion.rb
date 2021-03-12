@@ -21,11 +21,16 @@ def agrega_sip_ubicacionpre
         else
          # byebug
           puts "En ubicacionpre no se encontró destino_pais=#{destino_pais}, "\
+<<<<<<< HEAD
             "destino_departamento=#{destino_departamento}, "\
             "destino_municipio=#{destino_municipio}, "\
             "destino_clase=#{destino_clase} "\
             "de la migración #{migracion.id}, "\
             "caso #{migracion.caso_id}"
+=======
+            "destino_departamento=#{destino_departamento}, destino_municipio=#{destino_municipio}, "\
+            "destino_clase=#{destino_clase}"
+>>>>>>> 0509487... funciona destino
           exit 1
         end
       end

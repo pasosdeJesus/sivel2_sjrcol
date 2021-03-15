@@ -6977,10 +6977,10 @@ CREATE TABLE public.sivel2_sjr_migracion (
     llegada_municipio_id_porborrar integer,
     llegada_clase_id_porborrar integer,
     se_establece_en_sitio_llegada boolean,
-    destino_pais_id integer,
-    destino_departamento_id integer,
-    destino_municipio_id integer,
-    destino_clase_id integer,
+    destino_pais_id_porborrar integer,
+    destino_departamento_id_porborrar integer,
+    destino_municipio_id_porborrar integer,
+    destino_clase_id_porborrar integer,
     migracontactopre_id integer,
     statusmigratorio_id integer,
     perfilmigracion_id integer,
@@ -7015,7 +7015,8 @@ CREATE TABLE public.sivel2_sjr_migracion (
     tratoauto character varying(5000),
     tratoresi character varying(5000),
     salidaubicacionpre_id integer,
-    llegadaubicacionpre_id integer
+    llegadaubicacionpre_id integer,
+    destinoubicacionpre_id integer
 );
 
 
@@ -12033,6 +12034,14 @@ ALTER TABLE ONLY public.sivel2_sjr_agreenpais_migracion
 
 
 --
+-- Name: sivel2_sjr_migracion fk_rails_5eaabddcc1; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sivel2_sjr_migracion
+    ADD CONSTRAINT fk_rails_5eaabddcc1 FOREIGN KEY (destinoubicacionpre_id) REFERENCES public.sip_ubicacionpre(id);
+
+
+--
 -- Name: detallefinanciero fk_rails_61118f6437; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -12085,7 +12094,7 @@ ALTER TABLE ONLY public.sivel2_gen_combatiente
 --
 
 ALTER TABLE ONLY public.sivel2_sjr_migracion
-    ADD CONSTRAINT fk_rails_6505ff3874 FOREIGN KEY (destino_pais_id) REFERENCES public.sip_pais(id);
+    ADD CONSTRAINT fk_rails_6505ff3874 FOREIGN KEY (destino_pais_id_porborrar) REFERENCES public.sip_pais(id);
 
 
 --
@@ -12269,7 +12278,7 @@ ALTER TABLE ONLY public.sal7711_gen_articulo_categoriaprensa
 --
 
 ALTER TABLE ONLY public.sivel2_sjr_migracion
-    ADD CONSTRAINT fk_rails_7df3b1dac4 FOREIGN KEY (destino_municipio_id) REFERENCES public.sip_municipio(id);
+    ADD CONSTRAINT fk_rails_7df3b1dac4 FOREIGN KEY (destino_municipio_id_porborrar) REFERENCES public.sip_municipio(id);
 
 
 --
@@ -12453,7 +12462,7 @@ ALTER TABLE ONLY public.sal7711_gen_articulo
 --
 
 ALTER TABLE ONLY public.sivel2_sjr_migracion
-    ADD CONSTRAINT fk_rails_9ac58740d5 FOREIGN KEY (destino_clase_id) REFERENCES public.sip_clase(id);
+    ADD CONSTRAINT fk_rails_9ac58740d5 FOREIGN KEY (destino_clase_id_porborrar) REFERENCES public.sip_clase(id);
 
 
 --
@@ -12533,7 +12542,7 @@ ALTER TABLE ONLY public.sivel2_sjr_causaagrpais_migracion
 --
 
 ALTER TABLE ONLY public.sivel2_sjr_migracion
-    ADD CONSTRAINT fk_rails_ae90834e27 FOREIGN KEY (destino_departamento_id) REFERENCES public.sip_departamento(id);
+    ADD CONSTRAINT fk_rails_ae90834e27 FOREIGN KEY (destino_departamento_id_porborrar) REFERENCES public.sip_departamento(id);
 
 
 --
@@ -14321,6 +14330,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210308211112'),
 ('20210308214507'),
 ('20210311041611'),
-('20210311041939');
+('20210311041939'),
+('20210312045631'),
+('20210312050413');
 
 

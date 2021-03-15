@@ -12,6 +12,10 @@ class Sivel2Sjr::Migracion < ActiveRecord::Base
   attr_accessor :llegada_municipio_id
   attr_accessor :llegada_clase_id
 
+  attr_accessor :destino_pais_id
+  attr_accessor :destino_departamento_id
+  attr_accessor :destino_municipio_id
+  attr_accessor :destino_clase_id
 
   has_and_belongs_to_many :agresionmigracion, 
     class_name: 'Agresionmigracion',
@@ -212,4 +216,32 @@ class Sivel2Sjr::Migracion < ActiveRecord::Base
     return ''
   end
 
+  def destino_pais_id
+    if self.destinoubicacionpre_id
+      return Sip::Ubicacionpre.find(self.destinoubicacionpre_id).pais_id
+    else
+      return ''
+    end
+  end
+  def destino_departamento_id
+    if self.destinoubicacionpre_id
+      return Sip::Ubicacionpre.find(self.destinoubicacionpre_id).departamento_id
+    else
+      return ''
+    end 
+  end
+  def destino_municipio_id
+    if self.destinoubicacionpre_id
+      return Sip::Ubicacionpre.find(self.destinoubicacionpre_id).municipio_id
+    else
+      return ''
+    end 
+  end
+  def destino_clase_id
+    if self.destinoubicacionpre_id
+      return Sip::Ubicacionpre.find(self.destinoubicacionpre_id).clase_id
+    else
+      return ''
+    end 
+  end
 end

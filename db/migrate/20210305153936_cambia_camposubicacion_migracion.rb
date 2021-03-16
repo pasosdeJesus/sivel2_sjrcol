@@ -22,8 +22,11 @@ class CambiaCamposubicacionMigracion < ActiveRecord::Migration[6.1]
         else
           #byebug
           puts "En ubicacionpre no se encontró salida_pais=#{salida_pais}, "\
-            "salida_departamento=#{salida_departamento}, salida_municipio=#{salida_municipio}, "\
-            "salida_clase=#{salida_clase}"
+            "salida_departamento=#{salida_departamento}, "\
+            "salida_municipio=#{salida_municipio}, "\
+            "salida_clase=#{salida_clase}, "\
+            "migración=#{migracion.id}, "\
+            "caso=#{migracion.caso_id}"
           exit 1
         end
       end

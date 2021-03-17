@@ -7,15 +7,22 @@ class Sivel2Sjr::Migracion < ActiveRecord::Base
   attr_accessor :salida_departamento_id
   attr_accessor :salida_municipio_id
   attr_accessor :salida_clase_id
+  attr_accessor :salida_sitio, :salida_lugar, :salida_tsitio_id
+  attr_accessor :salida_latitud, :salida_longitud
+
   attr_accessor :llegada_pais_id
   attr_accessor :llegada_departamento_id
   attr_accessor :llegada_municipio_id
   attr_accessor :llegada_clase_id
+  attr_accessor :llegada_sitio, :llegada_lugar, :llegada_tsitio_id
+  attr_accessor :llegada_latitud, :llegada_longitud
 
   attr_accessor :destino_pais_id
   attr_accessor :destino_departamento_id
   attr_accessor :destino_municipio_id
   attr_accessor :destino_clase_id
+  attr_accessor :destino_sitio, :destino_lugar, :destino_tsitio_id
+  attr_accessor :destino_latitud, :destino_longitud
 
   has_and_belongs_to_many :agresionmigracion, 
     class_name: 'Agresionmigracion',
@@ -65,6 +72,8 @@ class Sivel2Sjr::Migracion < ActiveRecord::Base
     optional: true
   belongs_to :destino_clase, 
     class_name: 'Sip::Clase', foreign_key: "destino_clase_id", optional: true
+  belongs_to :destino_tsitio, 
+    class_name: 'Sip::Tsitio', foreign_key: "destino_tsitio_id", optional: true
   belongs_to :viadeingreso,
     class_name: 'Viadeingreso', foreign_key: "viadeingreso_id", optional: true
   belongs_to :causamigracion, 
@@ -81,6 +90,8 @@ class Sivel2Sjr::Migracion < ActiveRecord::Base
     optional: true
   belongs_to :llegada_clase, 
     class_name: 'Sip::Clase', foreign_key: "llegada_clase_id", optional: true
+  belongs_to :llegada_tsitio, 
+    class_name: 'Sip::Tsitio', foreign_key: "llegada_tsitio_id", optional: true
 
   belongs_to :miembrofamiliar,
     class_name: 'Miembrofamiliar', foreign_key: "miembrofamiliar_id", optional: true
@@ -108,6 +119,8 @@ class Sivel2Sjr::Migracion < ActiveRecord::Base
     optional: true
   belongs_to :salida_clase, 
    class_name: 'Sip::Clase', foreign_key: "salida_clase_id", optional: true
+  belongs_to :salida_tsitio, 
+    class_name: 'Sip::Tsitio', foreign_key: "salida_tsitio_id", optional: true
  
   belongs_to :statusmigratorio,
     class_name: 'Sivel2Sjr::Statusmigratorio', 
@@ -118,15 +131,6 @@ class Sivel2Sjr::Migracion < ActiveRecord::Base
 
   validates :fechasalida, presence: true
 
-  def salida_pais_id=(val)
-    @salida_p_id = val
-    ups = Sip::Ubicacionpre.where(pais_id: val, departamento_id: nil)
-    if !ups.empty?
-      self.salidaubicacionpre_id = ups[0].id
-    else
-      self.salidaubicacionpre_id = nil
-    end
-  end
   def salida_pais_id
     if self.salidaubicacionpre_id
       return Sip::Ubicacionpre.find(self.salidaubicacionpre_id).pais_id
@@ -135,12 +139,6 @@ class Sivel2Sjr::Migracion < ActiveRecord::Base
     end 
   end
 
-  def salida_departamento_id=(val)
-    @salida_d_id = val!="" ? val : nil
-    if self.salidaubicacionpre_id
-      self.salidaubicacionpre_id = Sip::Ubicacionpre.where(pais_id: @salida_p_id, departamento_id: @salida_d_id)[0].id
-    end
-  end
   def salida_departamento_id
     if self.salidaubicacionpre_id
       return Sip::Ubicacionpre.find(self.salidaubicacionpre_id).departamento_id
@@ -149,12 +147,6 @@ class Sivel2Sjr::Migracion < ActiveRecord::Base
     end 
   end
 
-  def salida_municipio_id=(val)
-    @salida_m_id = val!="" ? val : nil
-    if self.salidaubicacionpre_id
-      self.salidaubicacionpre_id = Sip::Ubicacionpre.where(pais_id: @salida_p_id, departamento_id: @salida_d_id, municipio_id: @salida_m_id)[0].id
-    end
-  end
   def salida_municipio_id
     if self.salidaubicacionpre_id
       return Sip::Ubicacionpre.find(self.salidaubicacionpre_id).municipio_id
@@ -163,15 +155,49 @@ class Sivel2Sjr::Migracion < ActiveRecord::Base
     end 
   end
 
-  def salida_clase_id=(val)
-    @salida_c_id = val!="" ? val : nil
-    if self.salidaubicacionpre_id
-      self.salidaubicacionpre_id = Sip::Ubicacionpre.where(pais_id: @salida_p_id, departamento_id: @salida_d_id, municipio_id: @salida_m_id, clase_id: @salida_c_id)[0].id
-    end
-  end
   def salida_clase_id
     if self.salidaubicacionpre_id
       return Sip::Ubicacionpre.find(self.salidaubicacionpre_id).clase_id
+    else
+      return ''
+    end 
+  end
+
+  def salida_lugar
+    if self.salidaubicacionpre_id
+      return Sip::Ubicacionpre.find(self.salidaubicacionpre_id).lugar
+    else
+      return ''
+    end 
+  end
+
+  def salida_sitio
+    if self.salidaubicacionpre_id
+      return Sip::Ubicacionpre.find(self.salidaubicacionpre_id).sitio
+    else
+      return ''
+    end 
+  end
+
+  def salida_latitud
+    if self.salidaubicacionpre_id
+      return Sip::Ubicacionpre.find(self.salidaubicacionpre_id).latitud
+    else
+      return ''
+    end 
+  end
+
+  def salida_longitud
+    if self.salidaubicacionpre_id
+      return Sip::Ubicacionpre.find(self.salidaubicacionpre_id).longitud
+    else
+      return ''
+    end 
+  end
+
+  def salida_tsitio_id
+    if self.salidaubicacionpre_id
+      return Sip::Ubicacionpre.find(self.salidaubicacionpre_id).tsitio_id
     else
       return ''
     end 
@@ -216,6 +242,47 @@ class Sivel2Sjr::Migracion < ActiveRecord::Base
     return ''
   end
 
+
+  def llegada_lugar
+    if self.llegadaubicacionpre_id
+      return Sip::Ubicacionpre.find(self.llegadaubicacionpre_id).lugar
+    else
+      return ''
+    end 
+  end
+
+  def llegada_sitio
+    if self.llegadaubicacionpre_id
+      return Sip::Ubicacionpre.find(self.llegadaubicacionpre_id).sitio
+    else
+      return ''
+    end 
+  end
+
+  def llegada_latitud
+    if self.llegadaubicacionpre_id
+      return Sip::Ubicacionpre.find(self.llegadaubicacionpre_id).latitud
+    else
+      return ''
+    end 
+  end
+
+  def llegada_longitud
+    if self.llegadaubicacionpre_id
+      return Sip::Ubicacionpre.find(self.llegadaubicacionpre_id).longitud
+    else
+      return ''
+    end 
+  end
+
+  def llegada_tsitio_id
+    if self.llegadaubicacionpre_id
+      return Sip::Ubicacionpre.find(self.llegadaubicacionpre_id).tsitio_id
+    else
+      return ''
+    end 
+  end
+
   def destino_pais_id
     if self.destinoubicacionpre_id
       return Sip::Ubicacionpre.find(self.destinoubicacionpre_id).pais_id
@@ -244,4 +311,46 @@ class Sivel2Sjr::Migracion < ActiveRecord::Base
       return ''
     end 
   end
+
+  def destino_lugar
+    if self.destinoubicacionpre_id
+      return Sip::Ubicacionpre.find(self.destinoubicacionpre_id).lugar
+    else
+      return ''
+    end 
+  end
+
+  def destino_sitio
+    if self.destinoubicacionpre_id
+      return Sip::Ubicacionpre.find(self.destinoubicacionpre_id).sitio
+    else
+      return ''
+    end 
+  end
+
+  def destino_latitud
+    if self.destinoubicacionpre_id
+      return Sip::Ubicacionpre.find(self.destinoubicacionpre_id).latitud
+    else
+      return ''
+    end 
+  end
+
+  def destino_longitud
+    if self.destinoubicacionpre_id
+      return Sip::Ubicacionpre.find(self.destinoubicacionpre_id).longitud
+    else
+      return ''
+    end 
+  end
+
+  def destino_tsitio_id
+    if self.destinoubicacionpre_id
+      return Sip::Ubicacionpre.find(self.destinoubicacionpre_id).tsitio_id
+    else
+      return ''
+    end 
+  end
+
+
 end

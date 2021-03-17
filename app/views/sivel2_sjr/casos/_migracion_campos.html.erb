@@ -60,7 +60,7 @@
         <h5> + </h5>
       </a>
     </div>
-    <div class="collapse" id="restoubisalida">
+    <div class="collapse campos_ubicacionpre" id="restoubisalida">
       <div class="row">
         <div class="col-md-3">
           <%= f.association :salida_clase,
@@ -73,6 +73,63 @@
               placeholder: 'Centro poblado',
               'data-placeholder' => "Centro poblado de salida...",
               class: 'chosen-select' 
+            } %>
+        </div>
+        <div class="col-md-3">
+          <%= f.input :salida_lugar,
+            label: false,
+            input_html: {
+              "data-toggle" => 'tooltip',
+              placeholder: 'Lugar salida'
+            } %>
+        </div>
+
+        <% 
+          ph = 'Sitio de Salida'
+          ac = {'data-autocompleta' => 'no',
+                "data-toggle" => 'tooltip'}
+           if (!f.object.salida_sitio || f.object.salida_sitio == '')
+             ph = 'Sitio salida... (Buscar)'
+             ac = {"data-toggle" => 'tooltip'}
+           end
+         %>
+        <div class="col-md-3">
+          <%= f.input :salida_sitio,
+            label: false,
+            placeholder: ph, 
+            input_html: ac %>
+        </div>
+        <div class="col-md-3">
+          <%= f.association :salida_tsitio,
+            collection: Sip::Tsitio.where(fechadeshabilitacion: nil).order(:nombre),
+            label_method: :nombre,
+            value_method: :id,
+            label: false,
+            include_blank: false,
+            selected: 1,
+            input_html: {
+              "data-toggle" => 'tooltip',
+              "title" => 'Seleccione el tipo de sitio'
+            } %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <%= f.input :salida_latitud,
+            label: false,
+            as: :float,
+            input_html: {
+              "data-toggle" => 'tooltip',
+              placeholder: 'Latitud'
+            } %>
+        </div>
+        <div class="col-md-3">
+          <%= f.input :salida_longitud,
+            label: false,
+            as: :float,
+            input_html: {
+              "data-toggle" => 'tooltip',
+              placeholder: 'Longitud'
             } %>
         </div>
       </div>
@@ -315,6 +372,63 @@
               class: 'chosen-select' 
             } %>
         </div>
+        <div class="col-md-3">
+          <%= f.input :llegada_lugar,
+            label: false,
+            input_html: {
+              "data-toggle" => 'tooltip',
+              placeholder: 'Lugar llegada'
+            } %>
+        </div>
+
+        <% 
+          ph = 'Sitio de Llegada'
+          ac = {'data-autocompleta' => 'no',
+                "data-toggle" => 'tooltip'}
+           if (!f.object.llegada_sitio || f.object.llegada_sitio == '')
+             ph = 'Sitio llegada... (Buscar)'
+             ac = {"data-toggle" => 'tooltip'}
+           end
+         %>
+        <div class="col-md-3">
+          <%= f.input :llegada_sitio,
+            label: false,
+            placeholder: ph, 
+            input_html: ac %>
+        </div>
+        <div class="col-md-3">
+          <%= f.association :llegada_tsitio,
+            collection: Sip::Tsitio.where(fechadeshabilitacion: nil).order(:nombre),
+            label_method: :nombre,
+            value_method: :id,
+            label: false,
+            include_blank: false,
+            selected: 1,
+            input_html: {
+              "data-toggle" => 'tooltip',
+              "title" => 'Seleccione el tipo de sitio'
+            } %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <%= f.input :llegada_latitud,
+            label: false,
+            as: :float,
+            input_html: {
+              "data-toggle" => 'tooltip',
+              placeholder: 'Latitud'
+            } %>
+        </div>
+        <div class="col-md-3">
+          <%= f.input :llegada_longitud,
+            label: false,
+            as: :float,
+            input_html: {
+              "data-toggle" => 'tooltip',
+              placeholder: 'Longitud'
+            } %>
+        </div>
       </div>
     </div>
     <% tiempoestilo = f.object.tiempoenpais == "" ? 
@@ -411,22 +525,103 @@
             'data-placeholder' => "Municipio de destino...",
             class: 'chosen-select' 
           } %>
+      </div> 
+      <div style="<%= edest %>" >
+        <a data-toggle="collapse" href='#restoubidestino'>
+          <h5> + </h5>
+        </a>
       </div>
-      <div class="col-md-2">
-        <%= f.association :destino_clase,
-          collection: Sip::Clase.habilitados,
-          label_method: :nombre,
-          value_method: :id,
-          label: false,
-          wrapper_html: {
-            style: edest
-          },
-          input_html: {
-            "data-toggle" => 'tooltip',
-            placeholder: 'Centro poblado',
-            'data-placeholder' => "Centro poblado de destino...",
-            class: 'chosen-select' 
-          } %>
+    </div>
+    <div class="collapse campos_ubicacionpre" id="restoubidestino">
+      <div class="row">
+        <div class="col-md-3">
+          <%= f.association :destino_clase,
+            collection: Sip::Clase.habilitados,
+            label_method: :nombre,
+            value_method: :id,
+            label: false,
+            wrapper_html: {
+              style: edest
+            },
+            input_html: {
+              "data-toggle" => 'tooltip',
+              placeholder: 'Centro poblado',
+              'data-placeholder' => "Centro poblado de destino...",
+              class: 'chosen-select' 
+            } %>
+        </div>
+        <div class="col-md-3">
+          <%= f.input :destino_lugar,
+            label: false,
+            wrapper_html: {
+              style: edest
+            },
+            input_html: {
+              "data-toggle" => 'tooltip',
+              placeholder: 'Lugar destino'
+            } %>
+        </div>
+
+        <% 
+          ph = 'Sitio de Destino'
+          ac = {'data-autocompleta' => 'no',
+                "data-toggle" => 'tooltip'}
+           if (!f.object.destino_sitio || f.object.destino_sitio == '')
+             ph = 'Sitio destino... (Buscar)'
+             ac = {"data-toggle" => 'tooltip'}
+           end
+         %>
+        <div class="col-md-3">
+          <%= f.input :destino_sitio,
+            label: false,
+            placeholder: ph, 
+            wrapper_html: {
+              style: edest
+            },
+            input_html: ac %>
+        </div>
+        <div class="col-md-3">
+          <%= f.association :destino_tsitio,
+            collection: Sip::Tsitio.where(fechadeshabilitacion: nil).order(:nombre),
+            label_method: :nombre,
+            value_method: :id,
+            label: false,
+            include_blank: false,
+            selected: 1,
+            wrapper_html: {
+              style: edest
+            },
+            input_html: {
+              "data-toggle" => 'tooltip',
+              "title" => 'Seleccione el tipo de sitio'
+            } %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <%= f.input :destino_latitud,
+            label: false,
+            as: :float,
+            wrapper_html: {
+              style: edest
+            },
+            input_html: {
+              "data-toggle" => 'tooltip',
+              placeholder: 'Latitud'
+            } %>
+        </div>
+        <div class="col-md-3">
+          <%= f.input :destino_longitud,
+            label: false,
+            as: :float,
+            wrapper_html: {
+              style: edest
+            },
+            input_html: {
+              "data-toggle" => 'tooltip',
+              placeholder: 'Longitud'
+            } %>
+        </div>
       </div>
     </div>
 

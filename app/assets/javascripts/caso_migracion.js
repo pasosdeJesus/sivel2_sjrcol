@@ -70,18 +70,41 @@ $(document).on('change',
       '_destino_clase_id').parentElement
     var fd = document.getElementById('caso_migracion_attributes_'+pid[3]+
       '_fechaendestino').parentElement
+    var restoubipre = $(this).parent().parent().parent().next().children()[4]
+    var ld = document.getElementById('caso_migracion_attributes_'+pid[3]+
+      '_destino_lugar').parentElement
+    var sd = document.getElementById('caso_migracion_attributes_'+pid[3]+
+      '_destino_sitio').parentElement
+    var tsd = document.getElementById('caso_migracion_attributes_'+pid[3]+
+      '_destino_tsitio_id').parentElement
+    var latd = document.getElementById('caso_migracion_attributes_'+pid[3]+
+      '_destino_latitud').parentElement
+    var lond = document.getElementById('caso_migracion_attributes_'+pid[3]+
+      '_destino_longitud').parentElement
     if (+evento.target.value != 2) {
       pd.style.display = 'none'
       dd.style.display = 'none'
       md.style.display = 'none'
       cd.style.display = 'none'
       fd.style.display = 'none'
+      restoubipre.style.display = 'none'
+      ld.style.display = 'none'
+      sd.style.display = 'none'
+      tsd.style.display = 'none'
+      latd.style.display = 'none'
+      lond.style.display = 'none'
     } else {
       pd.style.display = ''
       dd.style.display = ''
       md.style.display = ''
       cd.style.display = ''
       fd.style.display = ''
+      restoubipre.style.display = ''
+      ld.style.display = ''
+      sd.style.display = ''
+      tsd.style.display = ''
+      latd.style.display = ''
+      lond.style.display = ''
     }
   }
 )
@@ -151,3 +174,35 @@ $(document).on('change', '#persona_id_pais',
   }
 )
 
+$(document).on('focusin', 
+'input[id^=caso_migracion_attributes][id$=_salida_sitio]', 
+  function(e) {
+    root = window
+    busca_ubicacionpre($(this), root)
+  }
+)
+
+busca_ubicacionpre = function(s, root) {
+  sip_arregla_puntomontaje(root)
+  cnom = s.attr('id')
+  v = $("#" + cnom).data('autocompleta')
+  if (v != 1 && v != "no"){ 
+    $("#" + cnom).data('autocompleta', 1)
+    divcp = s.closest('.campos_ubicacionpre')
+    if (typeof divcp == 'undefined'){
+      alert('No se ubico .campos_ubicacionpre')
+      return
+    }
+    $("#" + cnom).autocomplete({
+      source: root.puntomontaje + "ubicacionespre.json",
+      minLength: 2,
+      select: function( event, ui ){ 
+        if (ui.item){ 
+          event.stopPropagation()
+          event.preventDefault()
+        }
+      }
+    })
+  }
+  return
+}

@@ -231,20 +231,6 @@ module Sivel2Sjr
         des_dep_id = (mp[:destino_departamento_id] && mp[:destino_departamento_id]!="") ? mp[:destino_departamento_id].to_i : nil
         des_mun_id = (mp[:destino_municipio_id] && mp[:destino_municipio_id]!="") ? mp[:destino_municipio_id].to_i : nil
         des_clas_id = (mp[:destino_clase_id] && mp[:destino_clase_id]!="") ? mp[:destino_clase_id].to_i : nil
-        ubipredes = Sip::Ubicacionpre.where(pais_id: des_pais_id, departamento_id: des_dep_id, municipio_id: des_mun_id, clase_id: des_clas_id)
-        mi = Sivel2Sjr::Migracion.find(mp[:id].to_i)
-        mi.destinoubicacionpre_id = ubipredes[0] ? ubipredes[0].id : nil
-        mi.save!
-
-        des_pais_id = (mp[:destino_pais_id] && mp[:destino_pais_id]!="") ? mp[:destino_pais_id].to_i : nil
-        des_dep_id = (mp[:destino_departamento_id] && mp[:destino_departamento_id]!="") ? mp[:destino_departamento_id].to_i : nil
-        des_mun_id = (mp[:destino_municipio_id] && mp[:destino_municipio_id]!="") ? mp[:destino_municipio_id].to_i : nil
-        des_clas_id = (mp[:destino_clase_id] && mp[:destino_clase_id]!="") ? mp[:destino_clase_id].to_i : nil
-        ubipredes = Sip::Ubicacionpre.where(pais_id: des_pais_id, departamento_id: des_dep_id, municipio_id: des_mun_id, clase_id: des_clas_id)
-        mi = Sivel2Sjr::Migracion.find(mp[:id].to_i)
-        mi.destinoubicacionpre_id = ubipredes[0] ? ubipredes[0].id : nil
-        mi.save!
-
         des_lug = (mp[:destino_lugar] && mp[:destino_lugar]!="") ? mp[:destino_lugar] : nil
         des_sit = (mp[:destino_sitio] && mp[:destino_sitio]!="") ? mp[:destino_sitio] : nil
         des_tsit = (mp[:destino_tsitio_id] && mp[:destino_tsitio_id]!="") ? mp[:destino_tsitio_id] : nil

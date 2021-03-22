@@ -30,9 +30,11 @@
             class: 'chosen-select' 
           } %>
       </div>
+      <% pa =  f.object.salida_pais_id %>
+      <% col = pa ? Sip::Departamento.habilitados.where(id_pais: pa).order(:nombre) : [] %>
       <div class="col-md-2">
         <%= f.association :salida_departamento,
-          collection: Sip::Departamento.habilitados,
+          collection: col,
           label_method: :nombre,
           value_method: :id,
           label: false,
@@ -43,9 +45,11 @@
             class: 'chosen-select' 
           } %>
       </div>
+      <% dep =  f.object.salida_departamento_id %>
+      <% col = dep ? Sip::Municipio.habilitados.where(id_departamento: dep).order(:nombre) : [] %>
       <div class="col-md-2">
         <%= f.association :salida_municipio,
-          collection: Sip::Municipio.habilitados,
+          collection: col,
           label_method: :nombre,
           value_method: :id,
           label: false,
@@ -63,8 +67,10 @@
     <div class="collapse campos_ubicacionpre" id="restoubisalida">
       <div class="row">
         <div class="col-md-3">
+        <% mun =  f.object.salida_municipio_id %>
+        <% col = mun ? Sip::Clase.habilitados.where(id_municipio: mun).order(:nombre) : [] %>
           <%= f.association :salida_clase,
-            collection: Sip::Clase.habilitados,
+            collection: col,
             label_method: :nombre,
             value_method: :id,
             label: false,
@@ -327,9 +333,11 @@
             class: 'chosen-select' 
           } %>
       </div>
+      <% pa =  f.object.llegada_pais_id %>
+      <% col = pa ? Sip::Departamento.habilitados.where(id_pais: pa).order(:nombre) : [] %>
       <div class="col-md-2">
         <%= f.association :llegada_departamento,
-          collection: Sip::Departamento.habilitados,
+          collection: col,
           label_method: :nombre,
           value_method: :id,
           label: false,
@@ -340,9 +348,11 @@
             class: 'chosen-select' 
           } %>
       </div>
+      <% dep =  f.object.llegada_departamento_id %>
+      <% col = dep ? Sip::Municipio.habilitados.where(id_departamento: dep).order(:nombre) : [] %>
       <div class="col-md-2">
         <%= f.association :llegada_municipio,
-          collection: Sip::Municipio.habilitados,
+          collection: col,
           label_method: :nombre,
           value_method: :id,
           label: false,
@@ -360,8 +370,10 @@
     <div class="collapse" id="restoubillegada">
       <div class="row">
         <div class="col-md-3">
+          <% mun =  f.object.llegada_municipio_id %>
+          <% col = mun ? Sip::Clase.where(id_municipio: mun).order(:nombre) : [] %>
           <%= f.association :llegada_clase,
-            collection: Sip::Clase.habilitados,
+            collection: col,
             label_method: :nombre,
             value_method: :id,
             label: false,
@@ -494,9 +506,11 @@
             class: 'chosen-select' 
           } %>
       </div>
+      <% pa =  f.object.destino_pais_id %>
+      <% col = pa ? Sip::Departamento.habilitados.where(id_pais: pa).order(:nombre) : [] %>
       <div class="col-md-2">
         <%= f.association :destino_departamento,
-          collection: Sip::Departamento.habilitados,
+          collection: col,
           label_method: :nombre,
           value_method: :id,
           label: false,
@@ -510,9 +524,11 @@
             class: 'chosen-select' 
           } %>
       </div>
+      <% dep =  f.object.destino_departamento_id %>
+      <% col = dep ? Sip::Municipio.habilitados.where(id_departamento: dep).order(:nombre) : [] %>
       <div class="col-md-2">
         <%= f.association :destino_municipio,
-          collection: Sip::Municipio.habilitados,
+          collection: col,
           label_method: :nombre,
           value_method: :id,
           label: false,
@@ -534,9 +550,11 @@
     </div>
     <div class="collapse campos_ubicacionpre" id="restoubidestino">
       <div class="row">
+        <% mun =  f.object.destino_municipio_id %>
+        <% col = mun ? Sip::Clase.habilitados.where(id_municipio: mun).order(:nombre) : [] %>
         <div class="col-md-3">
           <%= f.association :destino_clase,
-            collection: Sip::Clase.habilitados,
+            collection: col,
             label_method: :nombre,
             value_method: :id,
             label: false,

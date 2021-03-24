@@ -166,7 +166,7 @@ module Sivel2Sjr
     end
 
     def update
-      caso_params[:migracion_attributes].each do |clave, mp|
+      (caso_params[:migracion_attributes] || []).each do |clave, mp|
         mi = Sivel2Sjr::Migracion.find(mp[:id].to_i)
 
         sal_pais_id = (mp[:salida_pais_id] && mp[:salida_pais_id]!="") ? mp[:salida_pais_id].to_i : nil

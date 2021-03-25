@@ -19,6 +19,7 @@
 //= require cor1440_gen/motor
 //= require sal7711_web/motor
 //= require chartkick
+//= require highcharts
 //= require_tree .
 
 document.addEventListener('turbolinks:load', function() {

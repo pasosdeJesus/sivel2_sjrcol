@@ -14,7 +14,7 @@ class Sivel2Gen::Caso < ActiveRecord::Base
       casosjr.usuario.nusuario if casosjr.usuario
     when 'contacto'
       if casosjr && casosjr.contacto
-        (casosjr.contacto.nombres + ' ' + casosjr.contacto.apellidos +
+        casosjr.contacto.nombres + ' ' + casosjr.contacto.apellidos +
        ' ' + ((casosjr.contacto.tdocumento.nil? ||
                casosjr.contacto.tdocumento.sigla.nil?) ? '' : 
               casosjr.contacto.tdocumento.sigla) + ' ' +

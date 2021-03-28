@@ -394,6 +394,44 @@ module Sivel2Sjr
       ]
     end
 
+    def desplazamiento_params
+      [
+        :desplazamiento_attributes => [
+          :acompestado, 
+          :connacionaldeportado,
+          :connacionalretorno,
+          :declaro, 
+          :descripcion, 
+          :documentostierra,
+          :establecerse,
+          :fechadeclaracion,
+          :fechadeclaracion_localizada,
+          :fechaexpulsion, 
+          :fechaexpulsion_localizada, 
+          :fechallegada, 
+          :fechallegada_localizada, 
+          :hechosdeclarados,
+          :id, 
+          :id_acreditacion, 
+          :id_clasifdesp, 
+          :id_declaroante, 
+          :id_expulsion, 
+          :id_inclusion,
+          :id_llegada, 
+          :id_modalidadtierra,
+          :id_tipodesp, 
+          :inmaterialesperdidos,
+          :materialesperdidos, 
+          :protegiorupta, 
+          :oficioantes, 
+          :otrosdatos,
+          :retornado,
+          :reubicado, 
+          :_destroy,
+          :categoria_ids => []
+        ]
+      ]
+    end
     def importa_dato(datosent, datossal, menserror, registro = nil, 
                      opciones = {})
       importa_dato_gen(datosent, datossal, menserror, registro, opciones)

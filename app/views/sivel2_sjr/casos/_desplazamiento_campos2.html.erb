@@ -109,4 +109,12 @@
     inline_label: Sivel2Sjr::Desplazamiento.human_attribute_name(:protegiorupta)
 %>
 <%= f.input :documentostierra, as: :text %>
-
+<div class="row">
+  <div class="col-md-3">
+    <%= f.input :establecerse, as: :radio_buttons,
+      collection: [[true, 'Si'] ,[false, 'No'] ,[nil, 'No Responde']],
+      label_method: :second, value_method: :first,
+      label: "¿Piensa establecerse en este lugar?"
+    %>
+  </div>
+</div>

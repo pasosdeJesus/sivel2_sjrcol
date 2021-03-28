@@ -64,7 +64,7 @@
         <h5> + </h5>
       </a>
     </div>
-    <div class="collapse campos_ubicacionpre" id="restoubisalida">
+    <div class="collapse div_ubicacionpre" id="restoubisalida">
       <div class="row">
         <div class="col-md-3">
         <% mun =  f.object.salida_municipio_id %>
@@ -81,29 +81,31 @@
               class: 'chosen-select' 
             } %>
         </div>
-        <div class="col-md-3">
-          <%= f.input :salida_lugar,
-            label: false,
-            input_html: {
-              "data-toggle" => 'tooltip',
-              placeholder: 'Lugar salida'
-            } %>
-        </div>
-
         <% 
-          ph = 'Sitio de Salida'
+          ph = 'Lugar de Salida'
           ac = {'data-autocompleta' => 'no',
                 "data-toggle" => 'tooltip'}
-           if (!f.object.salida_sitio || f.object.salida_sitio == '')
-             ph = 'Sitio salida... (Buscar)'
+           if (!f.object.salida_lugar || f.object.salida_lugar == '')
+             ph = 'Lugar salida... (Buscar)'
              ac = {"data-toggle" => 'tooltip'}
            end
          %>
         <div class="col-md-3">
+            <%= f.input :salida_lugar,
+              label: false,
+              placeholder: ph,
+              input_html: ac
+            %>
+            <%= f.input :salidaubicacionpre_id, as: :hidden %>
+        </div>
+
+        <div class="col-md-3">
           <%= f.input :salida_sitio,
             label: false,
-            placeholder: ph, 
-            input_html: ac %>
+            placeholder: 'Sitio de salida', 
+            input_html: {
+              "data-toggle" => 'tooltip'
+            } %>
         </div>
         <div class="col-md-3">
           <%= f.association :salida_tsitio,
@@ -112,7 +114,7 @@
             value_method: :id,
             label: false,
             include_blank: false,
-            selected: 1,
+            selected: f.object.salida_tsitio_id ? f.object.salida_tsitio_id : 1,
             input_html: {
               "data-toggle" => 'tooltip',
               "title" => 'Seleccione el tipo de sitio'
@@ -367,7 +369,7 @@
         <h5> + </h5>
       </a>
     </div>
-    <div class="collapse" id="restoubillegada">
+    <div class="collapse div_ubicacionpre" id="restoubillegada">
       <div class="row">
         <div class="col-md-3">
           <% mun =  f.object.llegada_municipio_id %>
@@ -384,29 +386,30 @@
               class: 'chosen-select' 
             } %>
         </div>
-        <div class="col-md-3">
-          <%= f.input :llegada_lugar,
-            label: false,
-            input_html: {
-              "data-toggle" => 'tooltip',
-              placeholder: 'Lugar llegada'
-            } %>
-        </div>
-
         <% 
-          ph = 'Sitio de Llegada'
+          ph = 'Lugar de Llegada'
           ac = {'data-autocompleta' => 'no',
                 "data-toggle" => 'tooltip'}
-           if (!f.object.llegada_sitio || f.object.llegada_sitio == '')
-             ph = 'Sitio llegada... (Buscar)'
+           if (!f.object.llegada_lugar || f.object.llegada_lugar == '')
+             ph = 'Lugar llegada... (Buscar)'
              ac = {"data-toggle" => 'tooltip'}
            end
          %>
         <div class="col-md-3">
+            <%= f.input :llegada_lugar,
+              label: false,
+              placeholder: ph,
+              input_html: ac
+            %>
+            <%= f.input :llegadaubicacionpre_id, as: :hidden %>
+        </div>
+        <div class="col-md-3">
           <%= f.input :llegada_sitio,
             label: false,
-            placeholder: ph, 
-            input_html: ac %>
+            placeholder: 'Sitio de llegada', 
+            input_html: {
+              "data-toggle" => 'tooltip'
+            } %>
         </div>
         <div class="col-md-3">
           <%= f.association :llegada_tsitio,
@@ -415,7 +418,7 @@
             value_method: :id,
             label: false,
             include_blank: false,
-            selected: 1,
+            selected: f.object.llegada_tsitio_id ? f.object.llegada_tsitio_id : 1,
             input_html: {
               "data-toggle" => 'tooltip',
               "title" => 'Seleccione el tipo de sitio'
@@ -548,7 +551,7 @@
         </a>
       </div>
     </div>
-    <div class="collapse campos_ubicacionpre" id="restoubidestino">
+    <div class="collapse div_ubicacionpre" id="restoubidestino">
       <div class="row">
         <% mun =  f.object.destino_municipio_id %>
         <% col = mun ? Sip::Clase.habilitados.where(id_municipio: mun).order(:nombre) : [] %>
@@ -568,35 +571,30 @@
               class: 'chosen-select' 
             } %>
         </div>
-        <div class="col-md-3">
-          <%= f.input :destino_lugar,
-            label: false,
-            wrapper_html: {
-              style: edest
-            },
-            input_html: {
-              "data-toggle" => 'tooltip',
-              placeholder: 'Lugar destino'
-            } %>
-        </div>
-
         <% 
-          ph = 'Sitio de Destino'
+          ph = 'Lugar de Destino'
           ac = {'data-autocompleta' => 'no',
                 "data-toggle" => 'tooltip'}
-           if (!f.object.destino_sitio || f.object.destino_sitio == '')
-             ph = 'Sitio destino... (Buscar)'
+           if (!f.object.destino_lugar || f.object.destino_lugar == '')
+             ph = 'Lugar destino... (Buscar)'
              ac = {"data-toggle" => 'tooltip'}
            end
          %>
         <div class="col-md-3">
+            <%= f.input :destino_lugar,
+              label: false,
+              placeholder: ph,
+              input_html: ac
+            %>
+            <%= f.input :destinoubicacionpre_id, as: :hidden %>
+        </div>
+        <div class="col-md-3">
           <%= f.input :destino_sitio,
             label: false,
-            placeholder: ph, 
-            wrapper_html: {
-              style: edest
-            },
-            input_html: ac %>
+            placeholder: 'Sitio de destino', 
+            input_html: {
+              "data-toggle" => 'tooltip'
+            } %>
         </div>
         <div class="col-md-3">
           <%= f.association :destino_tsitio,
@@ -605,7 +603,7 @@
             value_method: :id,
             label: false,
             include_blank: false,
-            selected: 1,
+            selected: f.object.destino_tsitio_id ? f.object.destino_tsitio_id : 1,
             wrapper_html: {
               style: edest
             },

@@ -175,34 +175,79 @@ $(document).on('change', '#persona_id_pais',
 )
 
 $(document).on('focusin', 
-'input[id^=caso_migracion_attributes][id$=_salida_sitio]', 
+'input[id^=caso_migracion_attributes][id$=_salida_lugar]', 
   function(e) {
     root = window
-    busca_ubicacionpre($(this), root)
+    busca_ubicacionpre_lugar($(this))
   }
 )
 
-busca_ubicacionpre = function(s, root) {
+$(document).on('focusin', 
+'input[id^=caso_migracion_attributes][id$=_llegada_lugar]', 
+  function(e) {
+    root = window
+    busca_ubicacionpre_lugar($(this))
+  }
+)
+
+$(document).on('focusin', 
+'input[id^=caso_migracion_attributes][id$=_destino_lugar]', 
+  function(e) {
+    root = window
+    busca_ubicacionpre_lugar($(this))
+  }
+)
+
+function busca_ubicacionpre_lugar(s) {
+  root = window
   sip_arregla_puntomontaje(root)
   cnom = s.attr('id')
   v = $("#" + cnom).data('autocompleta')
-  if (v != 1 && v != "no"){ 
+  if (v != 1 && v != "no"){
     $("#" + cnom).data('autocompleta', 1)
-    divcp = s.closest('.campos_ubicacionpre')
-    if (typeof divcp == 'undefined'){
-      alert('No se ubico .campos_ubicacionpre')
+    // Buscamos un div con clase div_ubicacionpre dentro del cual
+    // están tanto el campo ubicacionpre_id como el campo
+    // ubicacionpre_texto 
+    ubipre = s.closest('.div_ubicacionpre')
+    if (typeof ubipre == 'undefined'){
+      alert('No se ubico .div_ubicacionpre')
+      return
+    }
+    if ($(ubipre).find("[id$='ubicacionpre_id']").length != 1) {
+      alert('Dentro de .div_ubicacionpre no se ubicó ubicacionpre_id')
+      return
+    }
+    if ($(ubipre).find("[id$='_lugar']").length != 1) {
+      alert('Dentro de .div_ubicacionpre no se ubicó ubicacionpre_texto')
       return
     }
     $("#" + cnom).autocomplete({
-      source: root.puntomontaje + "ubicacionespre.json",
+      source: root.puntomontaje + "ubicacionespre_lugar.json",
       minLength: 2,
       select: function( event, ui ){ 
         if (ui.item){ 
+          autocompleta_ubicacionpre_lugar(ui.item.value, ui.item.pais_id, ui.item.departamento_id, ui.item.municipio_id, ui.item.clase_id, ui.item.tsitio_id, ui.item.lugar, ui.item.sitio, ui.item.latitud, ui.item.longitud, ubipre, root)
           event.stopPropagation()
           event.preventDefault()
         }
       }
     })
   }
+  return
+}
+
+function autocompleta_ubicacionpre_lugar(etiqueta, pais, dep, mun, clas, tsit, lug, sit, lat, lon, ubipre, root){
+  sip_arregla_puntomontaje(root)
+  ubipre.prev().find('[id$=_pais_id]').val(pais).trigger('chosen:updated').change()
+  ubipre.prev().find('[id$=_departamento_id]').val(dep).trigger('chosen:updated').change()
+  ubipre.prev().find('[id$=_municipio_id]').val(mun).trigger('chosen:updated').change()
+  ubipre.find('[id$=_clase_id]').val(clas)
+  ubipre.find('[id$=_lugar]').val(lug)
+  ubipre.find('[id$=_sitio]').val(sit)
+  ubipre.find('[id$=_latitud]').val(lat)
+  ubipre.find('[id$=_longitud]').val(lon)
+  ubipre.find('[id$=_tsitio_id]').val(tsit).trigger('chosen:updated')
+
+  $(document).trigger("sip:autocompletada-ubicacionpre")
   return
 }

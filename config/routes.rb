@@ -58,6 +58,8 @@ Rails.application.routes.draw do
       as: :ubicacionespre
     get '/ubicacionespre_mundep' => 'sip/ubicacionespre#mundep',
       as: :ubicacionespre_mundep
+    get '/ubicacionespre_lugar' => 'sip/ubicacionespre#lugar',
+      as: :ubicacionespre_lugar
 
     get '/actividadespf/nueva' => 'cor1440_gen/actividadespf#new',
       as: :nueva_actividadespf

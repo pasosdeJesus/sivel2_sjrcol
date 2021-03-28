@@ -188,11 +188,36 @@ module Sivel2Sjr
             dep = Sip::Departamento.find(sal_dep_id).nombre + " / "
             mu = Sip::Municipio.find(sal_mun_id).nombre + " / "
             cla = Sip::Clase.find(sal_clas_id).nombre + " / "
+            tsit = Sip::Tsitio.find(sal_tsit).nombre + " / "
             sit = sal_sit ? sal_sit + " / " : ""
-            lug = sal_lug ? sal_lug + " / " : ""
-            nombre = sit + lug + cla + mu + dep + pa
-            nombre_sinp = sit + lug + cla + mu + dep
-            miubipre = Sip::Ubicacionpre.create!(nombre: nombre, pais_id: sal_pais_id, departamento_id: sal_dep_id, municipio_id: sal_mun_id, clase_id: sal_clas_id, lugar: sal_lug, sitio: sal_sit, latitud: sal_latitud, longitud: sal_longitud, tsitio_id: sal_tsit, nombre_sin_pais: nombre_sinp)
+            lug = sal_lug ? sal_lug : ""
+            ## Latitud y longitud
+            if !sal_latitud
+              lat = Sip::Clase.find(sal_clas_id) ? Sip::Clase.find(sal_clas_id).latitud : nil
+              if !lat
+                lat = Sip::Departamento.find(sal_dep_id) ? Sip::Departamento.find(sal_dep_id).latitud : nil
+                if !lat
+                  lat = Sip::Pais.find(sal_pais_id) ? Sip::Pais.find(sal_pais_id).latitud : nil
+                end
+              end
+            else
+              lat = sal_latitud
+            end
+            if !sal_longitud
+              lon = Sip::Clase.find(sal_clas_id) ? Sip::Clase.find(sal_clas_id).longitud : nil
+              if !lon
+                lon = Sip::Departamento.find(sal_dep_id) ? Sip::Departamento.find(sal_dep_id).longitud : nil
+                if !lon
+                  lon = Sip::Pais.find(sal_pais_id) ? Sip::Pais.find(sal_pais_id).longitud : nil
+                end
+              end
+            else
+              lon = sal_longitud
+            end
+
+            nombre = sit + lug + " : " + tsit + cla + mu + dep + pa + " @ " + lat.to_s + ", " + lon.to_s
+            nombre_sinp = sit + lug + " : " + tsit + cla + mu + dep[..-4] + " @ " + lat.to_s + ", " + lon.to_s
+            miubipre = Sip::Ubicacionpre.create!(nombre: nombre, pais_id: sal_pais_id, departamento_id: sal_dep_id, municipio_id: sal_mun_id, clase_id: sal_clas_id, lugar: sal_lug, sitio: sal_sit, latitud: lat, longitud: lon, tsitio_id: sal_tsit, nombre_sin_pais: nombre_sinp)
             mi.salidaubicacionpre_id = miubipre ? miubipre.id : nil
             mi.save!
           end
@@ -217,11 +242,35 @@ module Sivel2Sjr
             dep = Sip::Departamento.find(lleg_dep_id).nombre + " / "
             mu = Sip::Municipio.find(lleg_mun_id).nombre + " / "
             cla = Sip::Clase.find(lleg_clas_id).nombre + " / "
+            tsit = Sip::Tsitio.find(lleg_tsit).nombre + " / "
             sit = lleg_sit ? lleg_sit + " / " : ""
             lug = lleg_lug ? lleg_lug + " / " : ""
-            nombre = sit + lug + cla + mu + dep + pa
-            nombre_sinp = sit + lug + cla + mu + dep
-            miubipre = Sip::Ubicacionpre.create!(nombre: nombre, pais_id: lleg_pais_id, departamento_id: lleg_dep_id, municipio_id: lleg_mun_id, clase_id: lleg_clas_id, lugar: lleg_lug, sitio: lleg_sit, latitud: lleg_latitud, longitud: lleg_longitud, nombre_sin_pais: nombre_sinp, tsitio_id: lleg_tsit)
+            ## Latitud y longitud
+            if !lleg_latitud
+              lat = Sip::Clase.find(lleg_clas_id) ? Sip::Clase.find(lleg_clas_id).latitud : nil
+              if !lat
+                lat = Sip::Departamento.find(lleg_dep_id) ? Sip::Departamento.find(lleg_dep_id).latitud : nil
+                if !lat
+                  lat = Sip::Pais.find(lleg_pais_id) ? Sip::Pais.find(lleg_pais_id).latitud : nil
+                end
+              end
+            else
+              lat = lleg_latitud
+            end
+            if !lleg_longitud
+              lon = Sip::Clase.find(lleg_clas_id) ? Sip::Clase.find(lleg_clas_id).longitud : nil
+              if !lon
+                lon = Sip::Departamento.find(lleg_dep_id) ? Sip::Departamento.find(lleg_dep_id).longitud : nil
+                if !lon
+                  lon = Sip::Pais.find(lleg_pais_id) ? Sip::Pais.find(lleg_pais_id).longitud : nil
+                end
+              end
+            else
+              lon = lleg_longitud
+            end
+            nombre = sit + lug + " : " + tsit + cla + mu + dep + pa + " @ " + lat.to_s + ", " + lon.to_s
+            nombre_sinp = sit + lug + " : " + tsit + cla + mu + dep[..-4] + " @ " + lat.to_s + ", " + lon.to_s
+            miubipre = Sip::Ubicacionpre.create!(nombre: nombre, pais_id: lleg_pais_id, departamento_id: lleg_dep_id, municipio_id: lleg_mun_id, clase_id: lleg_clas_id, lugar: lleg_lug, sitio: lleg_sit, latitud: lat, longitud: lon, nombre_sin_pais: nombre_sinp, tsitio_id: lleg_tsit)
             mi.llegadaubicacionpre_id = miubipre ? miubipre.id : nil
             mi.save!
           end
@@ -246,11 +295,36 @@ module Sivel2Sjr
             dep = Sip::Departamento.find(des_dep_id).nombre + " / "
             mu = Sip::Municipio.find(des_mun_id).nombre + " / "
             cla = Sip::Clase.find(des_clas_id).nombre + " / "
+            tsit = Sip::Tsitio.find(des_tsit).nombre + " / "
             sit = des_sit ? des_sit + " / " : ""
             lug = des_lug ? des_lug + " / " : ""
-            nombre = sit + lug + cla + mu + dep + pa
-            nombre_sinp = sit + lug + cla + mu + dep
-            miubipre = Sip::Ubicacionpre.create!(nombre: nombre, pais_id: des_pais_id, departamento_id: des_dep_id, municipio_id: des_mun_id, clase_id: des_clas_id, lugar: des_lug, sitio: des_sit, latitud: des_latitud, longitud: des_longitud, nombre_sin_pais: nombre_sinp, tsitio_id: des_tsit)
+            ## Latitud y longitud
+            if !des_latitud
+              lat = Sip::Clase.find(des_clas_id) ? Sip::Clase.find(des_clas_id).latitud : nil
+              if !lat
+                lat = Sip::Departamento.find(des_dep_id) ? Sip::Departamento.find(des_dep_id).latitud : nil
+                if !lat
+                  lat = Sip::Pais.find(des_pais_id) ? Sip::Pais.find(des_pais_id).latitud : nil
+                end
+              end
+            else
+              lat = des_latitud
+            end
+            if !des_longitud
+              lon = Sip::Clase.find(des_clas_id) ? Sip::Clase.find(des_clas_id).longitud : nil
+              if !lon
+                lon = Sip::Departamento.find(des_dep_id) ? Sip::Departamento.find(des_dep_id).longitud : nil
+                if !lon
+                  lon = Sip::Pais.find(des_pais_id) ? Sip::Pais.find(des_pais_id).longitud : nil
+                end
+              end
+            else
+              lon = des_longitud
+            end
+
+            nombre = sit + lug + " : " + tsit + cla + mu + dep + pa + " @ " + lat.to_s + ", " + lon.to_s
+            nombre_sinp = sit + lug + " : " + tsit + cla + mu + dep[..-4] + " @ " + lat.to_s + ", " + lon.to_s
+            miubipre = Sip::Ubicacionpre.create!(nombre: nombre, pais_id: des_pais_id, departamento_id: des_dep_id, municipio_id: des_mun_id, clase_id: des_clas_id, lugar: des_lug, sitio: des_sit, latitud: lat, longitud: lon, nombre_sin_pais: nombre_sinp, tsitio_id: des_tsit)
             mi.destinoubicacionpre_id = miubipre ? miubipre.id : nil
             mi.save!
           end

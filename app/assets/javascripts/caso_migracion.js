@@ -70,7 +70,7 @@ $(document).on('change',
       '_destino_clase_id').parentElement
     var fd = document.getElementById('caso_migracion_attributes_'+pid[3]+
       '_fechaendestino').parentElement
-    var restoubipre = $(this).parent().parent().parent().next().children()[4]
+    var restoubipre = $(this).parent().parent().parent().next().children()[5]
     var ld = document.getElementById('caso_migracion_attributes_'+pid[3]+
       '_destino_lugar').parentElement
     var sd = document.getElementById('caso_migracion_attributes_'+pid[3]+
@@ -175,34 +175,90 @@ $(document).on('change', '#persona_id_pais',
 )
 
 $(document).on('focusin', 
-'input[id^=caso_migracion_attributes][id$=_salida_sitio]', 
+'input[id^=caso_migracion_attributes][id$=_salida_lugar]', 
   function(e) {
     root = window
-    busca_ubicacionpre($(this), root)
+    pais = $(this.parentNode.parentNode.parentNode.parentNode.previousElementSibling.children[1].children[0].children[0]).val()
+    dep = $(this.parentNode.parentNode.parentNode.parentNode.previousElementSibling.children[2].children[0].children[0]).val()
+    mun = $(this.parentNode.parentNode.parentNode.parentNode.previousElementSibling.children[3].children[0].children[0]).val()
+    clas = $(this.parentNode.parentNode.previousElementSibling.children[0].children[0]).val()
+    ubi = [pais, dep, mun, clas]
+    busca_ubicacionpre_lugar($(this), ubi)
   }
 )
 
-busca_ubicacionpre = function(s, root) {
+$(document).on('focusin', 
+'input[id^=caso_migracion_attributes][id$=_llegada_lugar]', 
+  function(e) {
+    root = window
+    pais = $(this.parentNode.parentNode.parentNode.parentNode.previousElementSibling.children[1].children[0].children[0]).val()
+    dep = $(this.parentNode.parentNode.parentNode.parentNode.previousElementSibling.children[2].children[0].children[0]).val()
+    mun = $(this.parentNode.parentNode.parentNode.parentNode.previousElementSibling.children[3].children[0].children[0]).val()
+    clas = $(this.parentNode.parentNode.previousElementSibling.children[0].children[0]).val()
+    ubi = [pais, dep, mun, clas]
+    busca_ubicacionpre_lugar($(this), ubi)
+  }
+)
+
+$(document).on('focusin', 
+'input[id^=caso_migracion_attributes][id$=_destino_lugar]', 
+  function(e) {
+    root = window
+    pais = $(this.parentNode.parentNode.parentNode.parentNode.previousElementSibling.children[1].children[0].children[0]).val()
+    dep = $(this.parentNode.parentNode.parentNode.parentNode.previousElementSibling.children[2].children[0].children[0]).val()
+    mun = $(this.parentNode.parentNode.parentNode.parentNode.previousElementSibling.children[3].children[0].children[0]).val()
+    clas = $(this.parentNode.parentNode.previousElementSibling.children[0].children[0]).val()
+    ubi = [pais, dep, mun, clas]
+    busca_ubicacionpre_lugar($(this), ubi)
+  }
+)
+
+function busca_ubicacionpre_lugar(s, ubi) {
+  root = window
   sip_arregla_puntomontaje(root)
   cnom = s.attr('id')
   v = $("#" + cnom).data('autocompleta')
-  if (v != 1 && v != "no"){ 
+  if (v != 1 && v != "no"){
     $("#" + cnom).data('autocompleta', 1)
-    divcp = s.closest('.campos_ubicacionpre')
-    if (typeof divcp == 'undefined'){
-      alert('No se ubico .campos_ubicacionpre')
+    // Buscamos un div con clase div_ubicacionpre dentro del cual
+    // están tanto el campo ubicacionpre_id como el campo
+    // ubicacionpre_texto 
+    ubipre = s.closest('.div_ubicacionpre')
+    if (typeof ubipre == 'undefined'){
+      alert('No se ubico .div_ubicacionpre')
+      return
+    }
+    if ($(ubipre).find("[id$='ubicacionpre_id']").length != 1) {
+      alert('Dentro de .div_ubicacionpre no se ubicó ubicacionpre_id')
+      return
+    }
+    if ($(ubipre).find("[id$='_lugar']").length != 1) {
+      alert('Dentro de .div_ubicacionpre no se ubicó ubicacionpre_texto')
       return
     }
     $("#" + cnom).autocomplete({
-      source: root.puntomontaje + "ubicacionespre.json",
+      source: root.puntomontaje + "ubicacionespre_lugar.json" + '?pais=' + ubi[0]+ '&dep=' + ubi[1] + '&mun=' + ubi[2] + '&clas=' + ubi[3],
+      cacheLength: 0,
       minLength: 2,
       select: function( event, ui ){ 
         if (ui.item){ 
+          autocompleta_ubicacionpre_lugar(ui.item.tsitio_id, ui.item.lugar, ui.item.sitio, ui.item.latitud, ui.item.longitud, ubipre, root)
           event.stopPropagation()
           event.preventDefault()
         }
       }
     })
   }
+  return
+}
+
+function autocompleta_ubicacionpre_lugar(tsit, lug, sit, lat, lon, ubipre, root){
+  sip_arregla_puntomontaje(root)
+  ubipre.find('[id$=_lugar]').val(lug)
+  ubipre.find('[id$=_sitio]').val(sit)
+  ubipre.find('[id$=_latitud]').val(lat)
+  ubipre.find('[id$=_longitud]').val(lon)
+  ubipre.find('[id$=_tsitio_id]').val(tsit).trigger('chosen:updated')
+  $(document).trigger("sip:autocompletada-ubicacionpre")
   return
 }

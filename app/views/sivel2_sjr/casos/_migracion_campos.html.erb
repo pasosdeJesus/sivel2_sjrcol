@@ -17,7 +17,7 @@
             "data-toggle" => 'tooltip'
           } %>
       </div>
-      <div class="col-md-3">
+      <div class="col-md-2">
         <%= f.association :salida_pais,
           collection: Sip::Pais.habilitados,
           label_method: :nombre,
@@ -60,50 +60,54 @@
             class: 'chosen-select' 
           } %>
       </div>
-      <a data-toggle="collapse" href='#restoubisalida'>
-        <h5> + </h5>
-      </a>
+      <% mun =  f.object.salida_municipio_id %>
+      <% col = mun ? Sip::Clase.habilitados.where(id_municipio: mun).order(:nombre) : [] %>
+      <div class="col-md-2">
+        <%= f.association :salida_clase,
+          collection: col,
+          label_method: :nombre,
+          value_method: :id,
+          label: false,
+          input_html: {
+            "data-toggle" => 'tooltip',
+            placeholder: 'Centro poblado',
+            'data-placeholder' => "Centro poblado de salida...",
+            class: 'chosen-select' 
+          } %>
+      </div>
+      <div class="col-md-1">
+        <a data-toggle="collapse" href='#restoubisalida'>
+          <h5> + </h5>
+        </a>
+      </div>
     </div>
-    <div class="collapse campos_ubicacionpre" id="restoubisalida">
+    <div class="collapse div_ubicacionpre" id="restoubisalida">
       <div class="row">
-        <div class="col-md-3">
-        <% mun =  f.object.salida_municipio_id %>
-        <% col = mun ? Sip::Clase.habilitados.where(id_municipio: mun).order(:nombre) : [] %>
-          <%= f.association :salida_clase,
-            collection: col,
-            label_method: :nombre,
-            value_method: :id,
-            label: false,
-            input_html: {
-              "data-toggle" => 'tooltip',
-              placeholder: 'Centro poblado',
-              'data-placeholder' => "Centro poblado de salida...",
-              class: 'chosen-select' 
-            } %>
-        </div>
-        <div class="col-md-3">
-          <%= f.input :salida_lugar,
-            label: false,
-            input_html: {
-              "data-toggle" => 'tooltip',
-              placeholder: 'Lugar salida'
-            } %>
-        </div>
-
         <% 
-          ph = 'Sitio de Salida'
+          ph = 'Barrio o vereda de Salida'
           ac = {'data-autocompleta' => 'no',
                 "data-toggle" => 'tooltip'}
-           if (!f.object.salida_sitio || f.object.salida_sitio == '')
-             ph = 'Sitio salida... (Buscar)'
+           if (!f.object.salida_lugar || f.object.salida_lugar == '')
+             ph = 'Barrio o vereda salida... (Buscar)'
              ac = {"data-toggle" => 'tooltip'}
            end
          %>
         <div class="col-md-3">
+            <%= f.input :salida_lugar,
+              label: false,
+              placeholder: ph,
+              input_html: ac
+            %>
+            <%= f.input :salidaubicacionpre_id, as: :hidden %>
+        </div>
+
+        <div class="col-md-3">
           <%= f.input :salida_sitio,
             label: false,
-            placeholder: ph, 
-            input_html: ac %>
+            placeholder: 'Dirección o finca', 
+            input_html: {
+              "data-toggle" => 'tooltip'
+            } %>
         </div>
         <div class="col-md-3">
           <%= f.association :salida_tsitio,
@@ -112,7 +116,7 @@
             value_method: :id,
             label: false,
             include_blank: false,
-            selected: 1,
+            selected: f.object.salida_tsitio_id ? f.object.salida_tsitio_id : 1,
             input_html: {
               "data-toggle" => 'tooltip',
               "title" => 'Seleccione el tipo de sitio'
@@ -320,7 +324,7 @@
             "data-toggle" => 'tooltip'
           } %>
       </div>
-      <div class="col-md-3">
+      <div class="col-md-2">
         <%= f.association :llegada_pais,
           collection: Sip::Pais.habilitados,
           label_method: :nombre,
@@ -363,50 +367,53 @@
             class: 'chosen-select' 
           } %>
       </div>
-      <a data-toggle="collapse" href='#restoubillegada'>
-        <h5> + </h5>
-      </a>
+      <% mun =  f.object.llegada_municipio_id %>
+      <% col = mun ? Sip::Clase.where(id_municipio: mun).order(:nombre) : [] %>
+      <div class="col-md-2">
+        <%= f.association :llegada_clase,
+          collection: col,
+          label_method: :nombre,
+          value_method: :id,
+          label: false,
+          input_html: {
+            "data-toggle" => 'tooltip',
+            placeholder: 'Centro poblado',
+            'data-placeholder' => "Centro poblado de llegada...",
+            class: 'chosen-select' 
+          } %>
+      </div>
+      <div class="col-md-1">
+        <a data-toggle="collapse" href='#restoubillegada'>
+          <h5> + </h5>
+        </a>
+      </div>
     </div>
-    <div class="collapse" id="restoubillegada">
+    <div class="collapse div_ubicacionpre" id="restoubillegada">
       <div class="row">
-        <div class="col-md-3">
-          <% mun =  f.object.llegada_municipio_id %>
-          <% col = mun ? Sip::Clase.where(id_municipio: mun).order(:nombre) : [] %>
-          <%= f.association :llegada_clase,
-            collection: col,
-            label_method: :nombre,
-            value_method: :id,
-            label: false,
-            input_html: {
-              "data-toggle" => 'tooltip',
-              placeholder: 'Centro poblado',
-              'data-placeholder' => "Centro poblado de llegada...",
-              class: 'chosen-select' 
-            } %>
-        </div>
-        <div class="col-md-3">
-          <%= f.input :llegada_lugar,
-            label: false,
-            input_html: {
-              "data-toggle" => 'tooltip',
-              placeholder: 'Lugar llegada'
-            } %>
-        </div>
-
         <% 
-          ph = 'Sitio de Llegada'
+          ph = 'Barrio o vereda de Llegada'
           ac = {'data-autocompleta' => 'no',
                 "data-toggle" => 'tooltip'}
-           if (!f.object.llegada_sitio || f.object.llegada_sitio == '')
-             ph = 'Sitio llegada... (Buscar)'
+           if (!f.object.llegada_lugar || f.object.llegada_lugar == '')
+             ph = 'Barrio o vereda llegada... (Buscar)'
              ac = {"data-toggle" => 'tooltip'}
            end
          %>
         <div class="col-md-3">
+            <%= f.input :llegada_lugar,
+              label: false,
+              placeholder: ph,
+              input_html: ac
+            %>
+            <%= f.input :llegadaubicacionpre_id, as: :hidden %>
+        </div>
+        <div class="col-md-3">
           <%= f.input :llegada_sitio,
             label: false,
-            placeholder: ph, 
-            input_html: ac %>
+            placeholder: 'Dirección o finca', 
+            input_html: {
+              "data-toggle" => 'tooltip'
+            } %>
         </div>
         <div class="col-md-3">
           <%= f.association :llegada_tsitio,
@@ -415,7 +422,7 @@
             value_method: :id,
             label: false,
             include_blank: false,
-            selected: 1,
+            selected: f.object.llegada_tsitio_id ? f.object.llegada_tsitio_id : 1,
             input_html: {
               "data-toggle" => 'tooltip',
               "title" => 'Seleccione el tipo de sitio'
@@ -490,7 +497,7 @@
             "data-toggle" => 'tooltip'
           } %>
       </div>
-      <div class="col-md-3">
+      <div class="col-md-2">
         <%= f.association :destino_pais,
           collection: Sip::Pais.habilitados,
           label_method: :nombre,
@@ -542,61 +549,56 @@
             class: 'chosen-select' 
           } %>
       </div> 
+      <% mun =  f.object.destino_municipio_id %>
+      <% col = mun ? Sip::Clase.habilitados.where(id_municipio: mun).order(:nombre) : [] %>
+      <div class="col-md-2">
+        <%= f.association :destino_clase,
+          collection: col,
+          label_method: :nombre,
+          value_method: :id,
+          label: false,
+          wrapper_html: {
+            style: edest
+          },
+          input_html: {
+            "data-toggle" => 'tooltip',
+            placeholder: 'Centro poblado',
+            'data-placeholder' => "Centro poblado de destino...",
+            class: 'chosen-select' 
+          } %>
+      </div>
       <div style="<%= edest %>" >
         <a data-toggle="collapse" href='#restoubidestino'>
           <h5> + </h5>
         </a>
       </div>
     </div>
-    <div class="collapse campos_ubicacionpre" id="restoubidestino">
+    <div class="collapse div_ubicacionpre" id="restoubidestino">
       <div class="row">
-        <% mun =  f.object.destino_municipio_id %>
-        <% col = mun ? Sip::Clase.habilitados.where(id_municipio: mun).order(:nombre) : [] %>
-        <div class="col-md-3">
-          <%= f.association :destino_clase,
-            collection: col,
-            label_method: :nombre,
-            value_method: :id,
-            label: false,
-            wrapper_html: {
-              style: edest
-            },
-            input_html: {
-              "data-toggle" => 'tooltip',
-              placeholder: 'Centro poblado',
-              'data-placeholder' => "Centro poblado de destino...",
-              class: 'chosen-select' 
-            } %>
-        </div>
-        <div class="col-md-3">
-          <%= f.input :destino_lugar,
-            label: false,
-            wrapper_html: {
-              style: edest
-            },
-            input_html: {
-              "data-toggle" => 'tooltip',
-              placeholder: 'Lugar destino'
-            } %>
-        </div>
-
         <% 
-          ph = 'Sitio de Destino'
+          ph = 'Barrio o vereda de Destino'
           ac = {'data-autocompleta' => 'no',
                 "data-toggle" => 'tooltip'}
-           if (!f.object.destino_sitio || f.object.destino_sitio == '')
-             ph = 'Sitio destino... (Buscar)'
+           if (!f.object.destino_lugar || f.object.destino_lugar == '')
+             ph = 'Barrio o vereda destino... (Buscar)'
              ac = {"data-toggle" => 'tooltip'}
            end
          %>
         <div class="col-md-3">
+            <%= f.input :destino_lugar,
+              label: false,
+              placeholder: ph,
+              input_html: ac
+            %>
+            <%= f.input :destinoubicacionpre_id, as: :hidden %>
+        </div>
+        <div class="col-md-3">
           <%= f.input :destino_sitio,
             label: false,
-            placeholder: ph, 
-            wrapper_html: {
-              style: edest
-            },
-            input_html: ac %>
+            placeholder: 'Dirección o finca', 
+            input_html: {
+              "data-toggle" => 'tooltip'
+            } %>
         </div>
         <div class="col-md-3">
           <%= f.association :destino_tsitio,
@@ -605,7 +607,7 @@
             value_method: :id,
             label: false,
             include_blank: false,
-            selected: 1,
+            selected: f.object.destino_tsitio_id ? f.object.destino_tsitio_id : 1,
             wrapper_html: {
               style: edest
             },

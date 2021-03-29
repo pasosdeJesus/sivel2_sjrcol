@@ -70,7 +70,7 @@ $(document).on('change',
       '_destino_clase_id').parentElement
     var fd = document.getElementById('caso_migracion_attributes_'+pid[3]+
       '_fechaendestino').parentElement
-    var restoubipre = $(this).parent().parent().parent().next().children()[4]
+    var restoubipre = $(this).parent().parent().parent().next().children()[5]
     var ld = document.getElementById('caso_migracion_attributes_'+pid[3]+
       '_destino_lugar').parentElement
     var sd = document.getElementById('caso_migracion_attributes_'+pid[3]+
@@ -178,7 +178,12 @@ $(document).on('focusin',
 'input[id^=caso_migracion_attributes][id$=_salida_lugar]', 
   function(e) {
     root = window
-    busca_ubicacionpre_lugar($(this))
+    pais = $(this.parentNode.parentNode.parentNode.parentNode.previousElementSibling.children[1].children[0].children[0]).val()
+    dep = $(this.parentNode.parentNode.parentNode.parentNode.previousElementSibling.children[2].children[0].children[0]).val()
+    mun = $(this.parentNode.parentNode.parentNode.parentNode.previousElementSibling.children[3].children[0].children[0]).val()
+    clas = $(this.parentNode.parentNode.previousElementSibling.children[0].children[0]).val()
+    ubi = [pais, dep, mun, clas]
+    busca_ubicacionpre_lugar($(this), ubi)
   }
 )
 
@@ -186,7 +191,12 @@ $(document).on('focusin',
 'input[id^=caso_migracion_attributes][id$=_llegada_lugar]', 
   function(e) {
     root = window
-    busca_ubicacionpre_lugar($(this))
+    pais = $(this.parentNode.parentNode.parentNode.parentNode.previousElementSibling.children[1].children[0].children[0]).val()
+    dep = $(this.parentNode.parentNode.parentNode.parentNode.previousElementSibling.children[2].children[0].children[0]).val()
+    mun = $(this.parentNode.parentNode.parentNode.parentNode.previousElementSibling.children[3].children[0].children[0]).val()
+    clas = $(this.parentNode.parentNode.previousElementSibling.children[0].children[0]).val()
+    ubi = [pais, dep, mun, clas]
+    busca_ubicacionpre_lugar($(this), ubi)
   }
 )
 
@@ -194,11 +204,16 @@ $(document).on('focusin',
 'input[id^=caso_migracion_attributes][id$=_destino_lugar]', 
   function(e) {
     root = window
-    busca_ubicacionpre_lugar($(this))
+    pais = $(this.parentNode.parentNode.parentNode.parentNode.previousElementSibling.children[1].children[0].children[0]).val()
+    dep = $(this.parentNode.parentNode.parentNode.parentNode.previousElementSibling.children[2].children[0].children[0]).val()
+    mun = $(this.parentNode.parentNode.parentNode.parentNode.previousElementSibling.children[3].children[0].children[0]).val()
+    clas = $(this.parentNode.parentNode.previousElementSibling.children[0].children[0]).val()
+    ubi = [pais, dep, mun, clas]
+    busca_ubicacionpre_lugar($(this), ubi)
   }
 )
 
-function busca_ubicacionpre_lugar(s) {
+function busca_ubicacionpre_lugar(s, ubi) {
   root = window
   sip_arregla_puntomontaje(root)
   cnom = s.attr('id')
@@ -222,11 +237,12 @@ function busca_ubicacionpre_lugar(s) {
       return
     }
     $("#" + cnom).autocomplete({
-      source: root.puntomontaje + "ubicacionespre_lugar.json",
+      source: root.puntomontaje + "ubicacionespre_lugar.json" + '?pais=' + ubi[0]+ '&dep=' + ubi[1] + '&mun=' + ubi[2] + '&clas=' + ubi[3],
+      cacheLength: 0,
       minLength: 2,
       select: function( event, ui ){ 
         if (ui.item){ 
-          autocompleta_ubicacionpre_lugar(ui.item.value, ui.item.pais_id, ui.item.departamento_id, ui.item.municipio_id, ui.item.clase_id, ui.item.tsitio_id, ui.item.lugar, ui.item.sitio, ui.item.latitud, ui.item.longitud, ubipre, root)
+          autocompleta_ubicacionpre_lugar(ui.item.tsitio_id, ui.item.lugar, ui.item.sitio, ui.item.latitud, ui.item.longitud, ubipre, root)
           event.stopPropagation()
           event.preventDefault()
         }
@@ -236,18 +252,13 @@ function busca_ubicacionpre_lugar(s) {
   return
 }
 
-function autocompleta_ubicacionpre_lugar(etiqueta, pais, dep, mun, clas, tsit, lug, sit, lat, lon, ubipre, root){
+function autocompleta_ubicacionpre_lugar(tsit, lug, sit, lat, lon, ubipre, root){
   sip_arregla_puntomontaje(root)
-  ubipre.prev().find('[id$=_pais_id]').val(pais).trigger('chosen:updated').change()
-  ubipre.prev().find('[id$=_departamento_id]').val(dep).trigger('chosen:updated').change()
-  ubipre.prev().find('[id$=_municipio_id]').val(mun).trigger('chosen:updated').change()
-  ubipre.find('[id$=_clase_id]').val(clas)
   ubipre.find('[id$=_lugar]').val(lug)
   ubipre.find('[id$=_sitio]').val(sit)
   ubipre.find('[id$=_latitud]').val(lat)
   ubipre.find('[id$=_longitud]').val(lon)
   ubipre.find('[id$=_tsitio_id]').val(tsit).trigger('chosen:updated')
-
   $(document).trigger("sip:autocompletada-ubicacionpre")
   return
 }

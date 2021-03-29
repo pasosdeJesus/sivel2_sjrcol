@@ -184,31 +184,37 @@ module Sivel2Sjr
             mi.salidaubicacionpre_id = ubipresal[0] ? ubipresal[0].id : nil
             mi.save!
           else
-            pa = Sip::Pais.find(sal_pais_id).nombre
-            dep = Sip::Departamento.find(sal_dep_id).nombre + " / "
-            mu = Sip::Municipio.find(sal_mun_id).nombre + " / "
-            cla = Sip::Clase.find(sal_clas_id).nombre + " / "
-            tsit = Sip::Tsitio.find(sal_tsit).nombre + " / "
+            pa = sal_pais_id ? Sip::Pais.find(sal_pais_id).nombre : ""
+            dep = sal_dep_id ? Sip::Departamento.find(sal_dep_id).nombre + " / " : " / " 
+            mu = sal_mun_id ? Sip::Municipio.find(sal_mun_id).nombre + " / " : " / "
+            cla = sal_clas_id ? Sip::Clase.find(sal_clas_id).nombre + " / " : " / "
+            tsit = sal_tsit ?  Sip::Tsitio.find(sal_tsit).nombre + " / " : " / "
             sit = sal_sit ? sal_sit + " / " : ""
             lug = sal_lug ? sal_lug : ""
             ## Latitud y longitud
             if !sal_latitud
-              lat = Sip::Clase.find(sal_clas_id) ? Sip::Clase.find(sal_clas_id).latitud : nil
+              lat = sal_clas_id ? Sip::Clase.find(sal_clas_id).latitud : nil
               if !lat
-                lat = Sip::Departamento.find(sal_dep_id) ? Sip::Departamento.find(sal_dep_id).latitud : nil
+                lat = sal_mun_id ? Sip::Municipio.find(sal_mun_id).latitud : nil
                 if !lat
-                  lat = Sip::Pais.find(sal_pais_id) ? Sip::Pais.find(sal_pais_id).latitud : nil
+                  lat = sal_dep_id ? Sip::Departamento.find(sal_dep_id).latitud : nil
+                  if !lat
+                    lat = sal_pais_id ? Sip::Pais.find(sal_pais_id).latitud : nil
+                  end
                 end
               end
             else
               lat = sal_latitud
             end
             if !sal_longitud
-              lon = Sip::Clase.find(sal_clas_id) ? Sip::Clase.find(sal_clas_id).longitud : nil
+              lon = sal_clas_id ? Sip::Clase.find(sal_clas_id).longitud : nil
               if !lon
-                lon = Sip::Departamento.find(sal_dep_id) ? Sip::Departamento.find(sal_dep_id).longitud : nil
+                lon = sal_mun_id ? Sip::Municipio.find(sal_mun_id).longitud : nil
                 if !lon
-                  lon = Sip::Pais.find(sal_pais_id) ? Sip::Pais.find(sal_pais_id).longitud : nil
+                  lon = sal_dep_id ? Sip::Departamento.find(sal_dep_id).longitud : nil
+                  if !lon
+                    lon = sal_pais_id ? Sip::Pais.find(sal_pais_id).longitud : nil
+                  end
                 end
               end
             else
@@ -238,36 +244,44 @@ module Sivel2Sjr
             mi.llegadaubicacionpre_id = ubiprelleg[0] ? ubiprelleg[0].id : nil
             mi.save!
           else
+            pa = lleg_pais_id ? Sip::Pais.find(lleg_pais_id).nombre : ""
+            dep = lleg_dep_id ? Sip::Departamento.find(lleg_dep_id).nombre + " / " : " / " 
+            mu = lleg_mun_id ? Sip::Municipio.find(lleg_mun_id).nombre + " / " : " / "
+            cla = lleg_clas_id ? Sip::Clase.find(lleg_clas_id).nombre + " / " : " / "
+            tsit = lleg_tsit ?  Sip::Tsitio.find(lleg_tsit).nombre + " / " : " / "
             pa = Sip::Pais.find(lleg_pais_id).nombre
-            dep = Sip::Departamento.find(lleg_dep_id).nombre + " / "
-            mu = Sip::Municipio.find(lleg_mun_id).nombre + " / "
-            cla = Sip::Clase.find(lleg_clas_id).nombre + " / "
-            tsit = Sip::Tsitio.find(lleg_tsit).nombre + " / "
             sit = lleg_sit ? lleg_sit + " / " : ""
             lug = lleg_lug ? lleg_lug + " / " : ""
             ## Latitud y longitud
             if !lleg_latitud
-              lat = Sip::Clase.find(lleg_clas_id) ? Sip::Clase.find(lleg_clas_id).latitud : nil
+              lat = lleg_clas_id ? Sip::Clase.find(lleg_clas_id).latitud : nil
               if !lat
-                lat = Sip::Departamento.find(lleg_dep_id) ? Sip::Departamento.find(lleg_dep_id).latitud : nil
+                lat = lleg_mun_id ? Sip::Municipio.find(lleg_mun_id).latitud : nil
                 if !lat
-                  lat = Sip::Pais.find(lleg_pais_id) ? Sip::Pais.find(lleg_pais_id).latitud : nil
+                  lat = lleg_dep_id ? Sip::Departamento.find(lleg_dep_id).latitud : nil
+                  if !lat
+                    lat = lleg_pais_id ? Sip::Pais.find(lleg_pais_id).latitud : nil
+                  end
                 end
               end
             else
               lat = lleg_latitud
             end
             if !lleg_longitud
-              lon = Sip::Clase.find(lleg_clas_id) ? Sip::Clase.find(lleg_clas_id).longitud : nil
+              lon = lleg_clas_id ? Sip::Clase.find(lleg_clas_id).longitud : nil
               if !lon
-                lon = Sip::Departamento.find(lleg_dep_id) ? Sip::Departamento.find(lleg_dep_id).longitud : nil
+                lon = lleg_mun_id ? Sip::Municipio.find(lleg_mun_id).longitud : nil
                 if !lon
-                  lon = Sip::Pais.find(lleg_pais_id) ? Sip::Pais.find(lleg_pais_id).longitud : nil
+                  lon = lleg_dep_id ? Sip::Departamento.find(lleg_dep_id).longitud : nil
+                  if !lon
+                    lon = lleg_pais_id ? Sip::Pais.find(lleg_pais_id).longitud : nil
+                  end
                 end
               end
             else
               lon = lleg_longitud
             end
+
             nombre = sit + lug + " : " + tsit + cla + mu + dep + pa + " @ " + lat.to_s + ", " + lon.to_s
             nombre_sinp = sit + lug + " : " + tsit + cla + mu + dep[..-4] + " @ " + lat.to_s + ", " + lon.to_s
             miubipre = Sip::Ubicacionpre.create!(nombre: nombre, pais_id: lleg_pais_id, departamento_id: lleg_dep_id, municipio_id: lleg_mun_id, clase_id: lleg_clas_id, lugar: lleg_lug, sitio: lleg_sit, latitud: lat, longitud: lon, nombre_sin_pais: nombre_sinp, tsitio_id: lleg_tsit)
@@ -291,31 +305,37 @@ module Sivel2Sjr
             mi.destinoubicacionpre_id = ubipredes[0] ? ubipredes[0].id : nil
             mi.save!
           else
-            pa = Sip::Pais.find(des_pais_id).nombre
-            dep = Sip::Departamento.find(des_dep_id).nombre + " / "
-            mu = Sip::Municipio.find(des_mun_id).nombre + " / "
-            cla = Sip::Clase.find(des_clas_id).nombre + " / "
-            tsit = Sip::Tsitio.find(des_tsit).nombre + " / "
+            pa = des_pais_id ? Sip::Pais.find(des_pais_id).nombre : ""
+            dep = des_dep_id ? Sip::Departamento.find(des_dep_id).nombre + " / " : " / " 
+            mu = des_mun_id ? Sip::Municipio.find(des_mun_id).nombre + " / " : " / "
+            cla = des_clas_id ? Sip::Clase.find(des_clas_id).nombre + " / " : " / "
+            tsit = des_tsit ?  Sip::Tsitio.find(des_tsit).nombre + " / " : " / "
             sit = des_sit ? des_sit + " / " : ""
             lug = des_lug ? des_lug + " / " : ""
             ## Latitud y longitud
             if !des_latitud
-              lat = Sip::Clase.find(des_clas_id) ? Sip::Clase.find(des_clas_id).latitud : nil
+              lat = des_clas_id ? Sip::Clase.find(des_clas_id).latitud : nil
               if !lat
-                lat = Sip::Departamento.find(des_dep_id) ? Sip::Departamento.find(des_dep_id).latitud : nil
+                lat = des_mun_id ? Sip::Municipio.find(des_mun_id).latitud : nil
                 if !lat
-                  lat = Sip::Pais.find(des_pais_id) ? Sip::Pais.find(des_pais_id).latitud : nil
+                  lat = des_dep_id ? Sip::Departamento.find(des_dep_id).latitud : nil
+                  if !lat
+                    lat = des_pais_id ? Sip::Pais.find(des_pais_id).latitud : nil
+                  end
                 end
               end
             else
               lat = des_latitud
             end
             if !des_longitud
-              lon = Sip::Clase.find(des_clas_id) ? Sip::Clase.find(des_clas_id).longitud : nil
+              lon = des_clas_id ? Sip::Clase.find(des_clas_id).longitud : nil
               if !lon
-                lon = Sip::Departamento.find(des_dep_id) ? Sip::Departamento.find(des_dep_id).longitud : nil
+                lon = des_mun_id ? Sip::Municipio.find(des_mun_id).longitud : nil
                 if !lon
-                  lon = Sip::Pais.find(des_pais_id) ? Sip::Pais.find(des_pais_id).longitud : nil
+                  lon = des_dep_id ? Sip::Departamento.find(des_dep_id).longitud : nil
+                  if !lon
+                    lon = des_pais_id ? Sip::Pais.find(des_pais_id).longitud : nil
+                  end
                 end
               end
             else

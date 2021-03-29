@@ -257,6 +257,68 @@ module Sivel2Sjr
         end
       end
 
+      (caso_params[:desplazamiento_attributes] || []).each do |clave, dp|
+        mi = Sivel2Sjr::Desplazamiento.find(dp[:id].to_i)
+        des_pais_id = (dp[:destino_pais_id] && dp[:destino_pais_id]!="") ? dp[:destino_pais_id].to_i : nil
+        des_dep_id = (dp[:destino_departamento_id] && dp[:destino_departamento_id]!="") ? dp[:destino_departamento_id].to_i : nil
+        des_mun_id = (dp[:destino_municipio_id] && dp[:destino_municipio_id]!="") ? dp[:destino_municipio_id].to_i : nil
+        des_clas_id = (dp[:destino_clase_id] && dp[:destino_clase_id]!="") ? dp[:destino_clase_id].to_i : nil
+        des_lug = (dp[:destino_lugar] && dp[:destino_lugar]!="") ? dp[:destino_lugar] : nil
+        des_sit = (dp[:destino_sitio] && dp[:destino_sitio]!="") ? dp[:destino_sitio] : nil
+        des_tsit = (dp[:destino_tsitio_id] && dp[:destino_tsitio_id]!="") ? dp[:destino_tsitio_id] : nil
+        des_latitud = (dp[:destino_latitud] && dp[:destino_latitud]!="") ? dp[:destino_latitud] : nil
+        des_longitud = (dp[:destino_longitud] && dp[:destino_longitud]!="") ? dp[:destino_longitud] : nil
+        if des_pais_id
+          ubipredes = Sip::Ubicacionpre.where(pais_id: des_pais_id, departamento_id: des_dep_id, municipio_id: des_mun_id, clase_id: des_clas_id, lugar: des_lug, sitio: des_sit)
+          if ubipredes[0]
+            mi.destinoubicacionpre_id = ubipredes[0] ? ubipredes[0].id : nil
+            mi.save!
+          else
+            pa = des_pais_id ? Sip::Pais.find(des_pais_id).nombre : ""
+            dep = des_dep_id ? Sip::Departamento.find(des_dep_id).nombre + " / " : " / " 
+            mu = des_mun_id ? Sip::Municipio.find(des_mun_id).nombre + " / " : " / "
+            cla = des_clas_id ? Sip::Clase.find(des_clas_id).nombre + " / " : " / "
+            tsit = des_tsit ?  Sip::Tsitio.find(des_tsit).nombre + " / " : " / "
+            sit = des_sit ? des_sit + " / " : ""
+            lug = des_lug ? des_lug + " / " : ""
+            ## Latitud y longitud
+            if !des_latitud
+              lat = des_clas_id ? Sip::Clase.find(des_clas_id).latitud : nil
+              if !lat
+                lat = des_mun_id ? Sip::Municipio.find(des_mun_id).latitud : nil
+                if !lat
+                  lat = des_dep_id ? Sip::Departamento.find(des_dep_id).latitud : nil
+                  if !lat
+                    lat = des_pais_id ? Sip::Pais.find(des_pais_id).latitud : nil
+                  end
+                end
+              end
+            else
+              lat = des_latitud
+            end
+            if !des_longitud
+              lon = des_clas_id ? Sip::Clase.find(des_clas_id).longitud : nil
+              if !lon
+                lon = des_mun_id ? Sip::Municipio.find(des_mun_id).longitud : nil
+                if !lon
+                  lon = des_dep_id ? Sip::Departamento.find(des_dep_id).longitud : nil
+                  if !lon
+                    lon = des_pais_id ? Sip::Pais.find(des_pais_id).longitud : nil
+                  end
+                end
+              end
+            else
+              lon = des_longitud
+            end
+
+            nombre = sit + lug + " : " + tsit + cla + mu + dep + pa + " @ " + lat.to_s + ", " + lon.to_s
+            nombre_sinp = sit + lug + " : " + tsit + cla + mu + dep[..-4] + " @ " + lat.to_s + ", " + lon.to_s
+            miubipre = Sip::Ubicacionpre.create!(nombre: nombre, pais_id: des_pais_id, departamento_id: des_dep_id, municipio_id: des_mun_id, clase_id: des_clas_id, lugar: des_lug, sitio: des_sit, latitud: lat, longitud: lon, nombre_sin_pais: nombre_sinp, tsitio_id: des_tsit)
+            mi.destinoubicacionpre_id = miubipre ? miubipre.id : nil
+            mi.save!
+          end
+        end 
+      end
     # Convertir valores de radios tri-estado, el valor 3 en el 
       # botón de radio es nil en la base de datos
       if params && params[:caso] && params[:caso][:victima_attributes]
@@ -402,6 +464,15 @@ module Sivel2Sjr
           :connacionalretorno,
           :declaro, 
           :descripcion, 
+          :destino_clase_id,
+          :destino_departamento_id,
+          :destino_municipio_id,
+          :destino_pais_id,
+          :destino_latitud,
+          :destino_longitud,
+          :destino_lugar,
+          :destino_sitio,
+          :destino_tsitio_id,
           :documentostierra,
           :establecerse,
           :fechadeclaracion,

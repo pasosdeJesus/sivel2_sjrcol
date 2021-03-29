@@ -110,11 +110,167 @@
 %>
 <%= f.input :documentostierra, as: :text %>
 <div class="row">
-  <div class="col-md-3">
-    <%= f.input :establecerse, as: :radio_buttons,
-      collection: [[true, 'Si'] ,[false, 'No'] ,[nil, 'No Responde']],
-      label_method: :second, value_method: :first,
-      label: "¿Piensa establecerse en este lugar?"
-    %>
+  <div class="col-md-12">
+    <label>¿Piensa establecerse en este lugar?</label></br>
+    <%=
+      f.collection_radio_buttons(
+      :establecerse, [[true, 'Si'] ,[false, 'No'] ,[nil, 'No Responde']], :first, :last  ) do |b|
+      b.label(class: "mr-4") { b.radio_button + b.text }
+    end
+      %>
   </div>
 </div>
+<% edest = !f.object.establecerse || 
+  f.object.establecerse != true ? 
+  'display:none' : '' %>
+<div class="row">
+  <div class="col-md-3">
+    Lugar de Destino: 
+  </div>
+  <div class="col-md-2">
+    <%= f.association :destino_pais,
+      collection: Sip::Pais.habilitados,
+      label_method: :nombre,
+      value_method: :id,
+      label: false,
+      wrapper_html: {
+        style: edest
+      },
+      input_html: {
+        "data-toggle" => 'tooltip',
+        placeholder: 'País de destino',
+        'data-placeholder' => "País de destino...",
+        class: 'chosen-select' 
+      } %>
+  </div>
+  <% pa =  f.object.destino_pais_id %>
+  <% col = pa ? Sip::Departamento.habilitados.where(id_pais: pa).order(:nombre) : [] %>
+  <div class="col-md-2">
+    <%= f.association :destino_departamento,
+      collection: col,
+      label_method: :nombre,
+      value_method: :id,
+      label: false,
+      wrapper_html: {
+        style: edest
+      },
+      input_html: {
+        "data-toggle" => 'tooltip',
+        placeholder: 'Departamento',
+        'data-placeholder' => "Departamento de destino...",
+        class: 'chosen-select' 
+      } %>
+  </div>
+  <% dep =  f.object.destino_departamento_id %>
+  <% col = dep ? Sip::Municipio.habilitados.where(id_departamento: dep).order(:nombre) : [] %>
+  <div class="col-md-2">
+    <%= f.association :destino_municipio,
+      collection: col,
+      label_method: :nombre,
+      value_method: :id,
+      label: false,
+      wrapper_html: {
+        style: edest
+      },
+      input_html: {
+        "data-toggle" => 'tooltip',
+        placeholder: 'Municipio',
+        'data-placeholder' => "Municipio de destino...",
+        class: 'chosen-select' 
+      } %>
+  </div> 
+  <% mun =  f.object.destino_municipio_id %>
+  <% col = mun ? Sip::Clase.habilitados.where(id_municipio: mun).order(:nombre) : [] %>
+  <div class="col-md-2">
+    <%= f.association :destino_clase,
+      collection: col,
+      label_method: :nombre,
+      value_method: :id,
+      label: false,
+      wrapper_html: {
+        style: edest
+      },
+      input_html: {
+        "data-toggle" => 'tooltip',
+        placeholder: 'Centro poblado',
+        'data-placeholder' => "Centro poblado de destino...",
+        class: 'chosen-select' 
+      } %>
+  </div>
+  <div style="<%= edest %>" >
+    <a data-toggle="collapse" href='#restoubidestino'>
+      <h5> + </h5>
+    </a>
+  </div>
+</div>
+<div class="collapse div_ubicacionpre" id="restoubidestino">
+  <div class="row">
+    <% 
+      ph = 'Barrio o vereda de Destino'
+      ac = {'data-autocompleta' => 'no',
+            "data-toggle" => 'tooltip'}
+       if (!f.object.destino_lugar || f.object.destino_lugar == '')
+         ph = 'Barrio o vereda destino... (Buscar)'
+         ac = {"data-toggle" => 'tooltip'}
+       end
+     %>
+    <div class="col-md-3">
+        <%= f.input :destino_lugar,
+          label: false,
+          placeholder: ph,
+          input_html: ac
+        %>
+        <%= f.input :destinoubicacionpre_id, as: :hidden %>
+    </div>
+    <div class="col-md-3">
+      <%= f.input :destino_sitio,
+        label: false,
+        placeholder: 'Dirección o finca', 
+        input_html: {
+          "data-toggle" => 'tooltip'
+        } %>
+    </div>
+    <div class="col-md-3">
+      <%= f.association :destino_tsitio,
+        collection: Sip::Tsitio.where(fechadeshabilitacion: nil).order(:nombre),
+       label_method: :nombre,
+        value_method: :id,
+        label: false,
+        include_blank: false,
+        selected: f.object.destino_tsitio_id ? f.object.destino_tsitio_id : 1,
+        wrapper_html: {
+          style: edest
+        },
+        input_html: {
+          "data-toggle" => 'tooltip',
+          "title" => 'Seleccione el tipo de sitio'
+        } %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      <%= f.input :destino_latitud,
+        label: false,
+        as: :float,
+        wrapper_html: {
+          style: edest
+        },
+        input_html: {
+          "data-toggle" => 'tooltip',
+          placeholder: 'Latitud'
+        } %>
+    </div>
+    <div class="col-md-3">
+      <%= f.input :destino_longitud,
+        label: false,
+        as: :float,
+        wrapper_html: {
+          style: edest
+        },
+        input_html: {
+          "data-toggle" => 'tooltip',
+          placeholder: 'Longitud'
+        } %>
+    </div>
+  </div>
+</div> 

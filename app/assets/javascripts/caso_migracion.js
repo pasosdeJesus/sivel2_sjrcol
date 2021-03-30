@@ -52,6 +52,28 @@ $(document).on('cocoon:after-insert', '#migracion',
       });
     }
 
+    // Poner ids para expandir/contraer ubicaciones
+    // Debe estar en sincronia con
+    // app/views/sip/ubicacionpre/_dos_filas_confecha
+    control = $('#ubicacionpre-salida-0').parent()
+    cocoonid = control.find('[id$=fechasalida]').attr('id').split('_')[3]
+
+    console.log(cocoonid);
+
+    ['salida', 'llegada', 'destino'].forEach(function (v, i) {
+      control = $('#ubicacionpre-' + v + '-0').parent()
+      control.find('#ubicacionpre-' + v + '-0').attr('id', 
+        'ubicacionpre-' + v + '-'+ cocoonid)
+      control.find('#resto-' + v + '-0').attr('id', 
+        'resto-' + v + '-'+ cocoonid)
+      control.find('#restocp-' + v + '-0').attr('id', 
+        'restocp-' + v + '-'+ cocoonid)
+      b = control.find('button[data-target$=' + v + '-0]')
+      console.log(b.attr('data-target'))
+      b.attr('data-target', 
+        '#resto-' + v + '-' + cocoonid + ',#restocp-' + v + '-' + cocoonid)
+    })
+
     e.stopPropagation()
   }
 )
@@ -60,52 +82,13 @@ $(document).on('change',
   '[id^=caso_migracion_attributes_][id$=_perfilmigracion_id]', 
   function (evento) {
     pid = evento.target.getAttribute('id').split('_')
-    var pd = document.getElementById('caso_migracion_attributes_'+pid[3]+
-      '_destino_pais_id').parentElement
-    var dd = document.getElementById('caso_migracion_attributes_'+pid[3]+
-      '_destino_departamento_id').parentElement
-    var md = document.getElementById('caso_migracion_attributes_'+pid[3]+
-      '_destino_municipio_id').parentElement
-    var cd = document.getElementById('caso_migracion_attributes_'+pid[3]+
-      '_destino_clase_id').parentElement
-    var fd = document.getElementById('caso_migracion_attributes_'+pid[3]+
-      '_fechaendestino').parentElement
-    var restoubipre = $(this).parent().parent().parent().next().children()[5]
-    var ld = document.getElementById('caso_migracion_attributes_'+pid[3]+
-      '_destino_lugar').parentElement
-    var sd = document.getElementById('caso_migracion_attributes_'+pid[3]+
-      '_destino_sitio').parentElement
-    var tsd = document.getElementById('caso_migracion_attributes_'+pid[3]+
-      '_destino_tsitio_id').parentElement
-    var latd = document.getElementById('caso_migracion_attributes_'+pid[3]+
-      '_destino_latitud').parentElement
-    var lond = document.getElementById('caso_migracion_attributes_'+pid[3]+
-      '_destino_longitud').parentElement
-    if (+evento.target.value != 2) {
-      pd.style.display = 'none'
-      dd.style.display = 'none'
-      md.style.display = 'none'
-      cd.style.display = 'none'
-      fd.style.display = 'none'
-      restoubipre.style.display = 'none'
-      ld.style.display = 'none'
-      sd.style.display = 'none'
-      tsd.style.display = 'none'
-      latd.style.display = 'none'
-      lond.style.display = 'none'
+    if (+evento.target.value == 2) {
+      d = 'block'
     } else {
-      pd.style.display = ''
-      dd.style.display = ''
-      md.style.display = ''
-      cd.style.display = ''
-      fd.style.display = ''
-      restoubipre.style.display = ''
-      ld.style.display = ''
-      sd.style.display = ''
-      tsd.style.display = ''
-      latd.style.display = ''
-      lond.style.display = ''
+      d = 'none'
     }
+    $(evento.target).closest('.controls').
+      find('[id^=ubicacionpre-destino]').css('display', d)
   }
 )
 

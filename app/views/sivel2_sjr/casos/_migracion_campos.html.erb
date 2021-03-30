@@ -6,9 +6,11 @@
         Salida
       </div>
     </div>
+    <% htmlid=f.object && f.object.id ? f.object.id : 0 %>
     <%= render partial: 'sip/ubicacionespre/dos_filas_confecha', locals: {
       f: f,
-      estiloper: '',
+      htmlid: "salida-#{htmlid}",
+      estilogen: '',
       campofecha: :fechasalida,
       campofecha_etiqueta: 'Fecha de salida',
       campopais: :salida_pais,
@@ -202,7 +204,8 @@
     </div>
     <%= render partial: 'sip/ubicacionespre/dos_filas_confecha', locals: {
       f: f,
-      estiloper: '',
+      htmlid: "llegada-#{htmlid}",
+      estilogen: '',
       campofecha: :fechallegada,
       campofecha_etiqueta: 'Fecha de llegada',
       campopais: :llegada_pais,
@@ -258,11 +261,12 @@
     </div>
     <% edest = !f.object.perfilmigracion || 
       f.object.perfilmigracion_id != 2 ? 
-      'display:none' : '' %>
+      'display: none' : 'display: block' %>
 
-    <!--%= render partial: 'sip/ubicacionespre/dos_filas_confecha', locals: {
+    <%= render partial: 'sip/ubicacionespre/dos_filas_confecha', locals: {
       f: f,
-      estiloper: edest,
+      htmlid: "destino-#{htmlid}",
+      estilogen: edest,
       campofecha: :fechaendestino,
       campofecha_etiqueta: 'Fecha de destino',
       campopais: :destino_pais,
@@ -285,171 +289,7 @@
       campolatitud_etiqueta: 'Latitud',
       campolongitud: :destino_longitud,
       campolongitud_etiqueta: 'Longitud'
-    } %-->
-
-
-    <div class="row">
-      <div class="col-md-3">
-        <%= f.input :fechaendestino, 
-          as: :string, 
-          label: false,
-          wrapper_html: {
-            style: edest
-          },
-          input_html: {
-            value: f.object.fechaendestino ? f.object.fechaendestino : '',
-            placeholder: 'Fecha en Destino',
-            "data-behaviour" => "datepicker",
-            "data-toggle" => 'tooltip'
-          } %>
-      </div>
-      <div class="col-md-2">
-        <%= f.association :destino_pais,
-          collection: Sip::Pais.habilitados,
-          label_method: :nombre,
-          value_method: :id,
-          label: false,
-          wrapper_html: {
-            style: edest
-          },
-          input_html: {
-            "data-toggle" => 'tooltip',
-            placeholder: 'País de destino',
-            'data-placeholder' => "País de destino...",
-            class: 'chosen-select' 
-          } %>
-      </div>
-      <% pa =  f.object.destino_pais_id %>
-      <% col = pa ? Sip::Departamento.habilitados.where(id_pais: pa).order(:nombre) : [] %>
-      <div class="col-md-2">
-        <%= f.association :destino_departamento,
-          collection: col,
-          label_method: :nombre,
-          value_method: :id,
-          label: false,
-          wrapper_html: {
-            style: edest
-          },
-          input_html: {
-            "data-toggle" => 'tooltip',
-            placeholder: 'Departamento',
-            'data-placeholder' => "Departamento de destino...",
-            class: 'chosen-select' 
-          } %>
-      </div>
-      <% dep =  f.object.destino_departamento_id %>
-      <% col = dep ? Sip::Municipio.habilitados.where(id_departamento: dep).order(:nombre) : [] %>
-      <div class="col-md-2">
-        <%= f.association :destino_municipio,
-          collection: col,
-          label_method: :nombre,
-          value_method: :id,
-          label: false,
-          wrapper_html: {
-            style: edest
-          },
-          input_html: {
-            "data-toggle" => 'tooltip',
-            placeholder: 'Municipio',
-            'data-placeholder' => "Municipio de destino...",
-            class: 'chosen-select' 
-          } %>
-      </div> 
-      <% mun =  f.object.destino_municipio_id %>
-      <% col = mun ? Sip::Clase.habilitados.where(id_municipio: mun).order(:nombre) : [] %>
-      <div class="col-md-2">
-        <%= f.association :destino_clase,
-          collection: col,
-          label_method: :nombre,
-          value_method: :id,
-          label: false,
-          wrapper_html: {
-            style: edest
-          },
-          input_html: {
-            "data-toggle" => 'tooltip',
-            placeholder: 'Centro poblado',
-            'data-placeholder' => "Centro poblado de destino...",
-            class: 'chosen-select' 
-          } %>
-      </div>
-      <div style="<%= edest %>" >
-        <a data-toggle="collapse" href='#restoubidestino'>
-          <h5> + </h5>
-        </a>
-      </div>
-    </div>
-    <div class="collapse div_ubicacionpre" id="restoubidestino">
-      <div class="row">
-        <% 
-          ph = 'Barrio o vereda de Destino'
-          ac = {'data-autocompleta' => 'no',
-                "data-toggle" => 'tooltip'}
-           if (!f.object.destino_lugar || f.object.destino_lugar == '')
-             ph = 'Barrio o vereda destino... (Buscar)'
-             ac = {"data-toggle" => 'tooltip'}
-           end
-         %>
-        <div class="col-md-3">
-            <%= f.input :destino_lugar,
-              label: false,
-              placeholder: ph,
-              input_html: ac
-            %>
-            <%= f.input :destinoubicacionpre_id, as: :hidden %>
-        </div>
-        <div class="col-md-3">
-          <%= f.input :destino_sitio,
-            label: false,
-            placeholder: 'Dirección o finca', 
-            input_html: {
-              "data-toggle" => 'tooltip'
-            } %>
-        </div>
-        <div class="col-md-3">
-          <%= f.association :destino_tsitio,
-            collection: Sip::Tsitio.where(fechadeshabilitacion: nil).order(:nombre),
-            label_method: :nombre,
-            value_method: :id,
-            label: false,
-            include_blank: false,
-            selected: f.object.destino_tsitio_id ? f.object.destino_tsitio_id : 1,
-            wrapper_html: {
-              style: edest
-            },
-            input_html: {
-              "data-toggle" => 'tooltip',
-              "title" => 'Seleccione el tipo de sitio'
-            } %>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-3">
-          <%= f.input :destino_latitud,
-            label: false,
-            as: :float,
-            wrapper_html: {
-              style: edest
-            },
-            input_html: {
-              "data-toggle" => 'tooltip',
-              placeholder: 'Latitud'
-            } %>
-        </div>
-        <div class="col-md-3">
-          <%= f.input :destino_longitud,
-            label: false,
-            as: :float,
-            wrapper_html: {
-              style: edest
-            },
-            input_html: {
-              "data-toggle" => 'tooltip',
-              placeholder: 'Longitud'
-            } %>
-        </div>
-      </div>
-    </div>
+    } %>
 
     <div class="row">
       <div class="offset-md-0 col-md-6">

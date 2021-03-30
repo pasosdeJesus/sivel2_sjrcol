@@ -1,0 +1,148 @@
+<div class="row" style="<%= estiloper %>">
+  <div class="offset-md-0 col-md-3">
+    <%= f.input campofecha, #:fechasalida, 
+      as: :string, 
+      label: false,
+      input_html: { 
+        placeholder: campofecha_etiqueta, #'Fecha de salida',
+        "data-behaviour" => "datepicker",
+        "data-toggle" => 'tooltip'
+      } %>
+  </div>
+  <div class="col-md-2">
+    <%= f.association campopais, #:salida_pais,
+      collection: Sip::Pais.habilitados,
+      label_method: :nombre,
+      value_method: :id,
+      label: false,
+      input_html: {
+        "data-toggle" => 'tooltip',
+        placeholder: campopais_etiqueta, #'País de salida',
+        'data-placeholder' => "#{campopais_etiqueta}...",
+        class: 'chosen-select' 
+      } %>
+  </div>
+  <% pa =  f.object.send("#{campopais}_id") #salida_pais_id %>
+  <% col = pa ? Sip::Departamento.habilitados.where(id_pais: pa).
+    order(:nombre) : [] %>
+  <div class="col-md-2">
+    <%= f.association campodepartamento, #:salida_departamento,
+      collection: col,
+      label_method: :nombre,
+      value_method: :id,
+      label: false,
+      input_html: {
+        "data-toggle" => 'tooltip',
+        placeholder: campodepartamento_etiqueta, #'Departamento',
+        'data-placeholder' => "#{campodepartamento_etiqueta}...",
+        class: 'chosen-select' 
+      } %>
+  </div>
+
+  <% dep =  f.object.send("#{campodepartamento}_id") #salida_departamento_id %>
+  <% col = dep ? Sip::Municipio.habilitados.where(id_departamento: dep).
+    order(:nombre) : [] %>
+  <div class="col-md-2">
+    <%= f.association campomunicipio, #:salida_municipio,
+      collection: col,
+      label_method: :nombre,
+      value_method: :id,
+      label: false,
+      input_html: {
+        'data-toggle' => 'tooltip',
+        placeholder: campomunicipio_etiqueta, #'Municipio',
+        'data-placeholder' => "#{campomunicipio_etiqueta}...",
+        class: 'chosen-select' 
+      } %>
+  </div>
+
+  <div class="col-md-1" style='<%= estiloper %>'>
+    <button type='button' 
+            class='btn btn-secondary btn-xs data-toggle'
+            data-toggle="collapse"
+            data-target='<%= "##{idresto},##{idresto}_cp" %>'>
+      +
+    </button>
+  </div>
+
+  <% mun =  f.object.send("#{campomunicipio}_id") #salida_municipio_id %>
+  <% col = mun ? Sip::Clase.habilitados.where(id_municipio: mun).
+    order(:nombre) : [] %>
+  <div class="col-md-2 collapse" id='<%= "#{idresto}_cp" %>'>
+    <%= f.association campocentropoblado, #:salida_clase,
+      collection: col,
+      label_method: :nombre,
+      value_method: :id,
+      label: false,
+      input_html: {
+        "data-toggle" => 'tooltip',
+        placeholder: campocentropoblado_etiqueta, #'Centro poblado',
+        'data-placeholder' => "#{campocentropoblado_etiqueta}...",
+        class: 'chosen-select' 
+      } %>
+  </div>
+
+</div>
+
+<div class="collapse div_ubicacionpre" id='<%= idresto %>'>
+  <div class="row" style="<%= estiloper %>">
+    <% ph = campolugar_etiqueta #'Barrio o vereda de Salida' %>
+    <% ac = {'data-autocompleta' => 'no',
+             "data-toggle" => 'tooltip'} %>
+    <% if (!f.object.send(campolugar) || 
+        f.object.send(campolugar) == '') %>
+      <% ph = "#{campolugar_etiqueta}... (Buscar)"
+         #'Barrio o vereda salida... (Buscar)' %>
+      <% ac = {"data-toggle" => 'tooltip'} %>
+    <% end %>
+    <div class="col-md-3">
+      <%= f.input campolugar, #:salida_lugar,
+        label: false,
+        placeholder: ph,
+        input_html: ac %>
+      <%= f.input campoubicacionpre_id, #as: :hidd:salidaubicacionpre_id, 
+        as: :hidden %>
+    </div>
+
+    <div class="col-md-3">
+      <%= f.input campositio, #:salida_sitio,
+        label: false,
+        placeholder: campositio_etiqueta, #'Dirección o finca', 
+        input_html: {
+          "data-toggle" => 'tooltip'
+        } %>
+    </div>
+    <div class="col-md-2">
+      <%= f.association campotsitio, #:salida_tsitio,
+        collection: Sip::Tsitio.where(fechadeshabilitacion: nil).order(:nombre),
+        label_method: :nombre,
+        value_method: :id,
+        label: false,
+        include_blank: false,
+        selected: f.object.send("#{campotsitio}_id") ? #salida_tsitio_id ? 
+          f.object.send("#{campotsitio}_id") : 1, #salida_tsitio_id : 1,
+        input_html: {
+          "data-toggle" => 'tooltip',
+          "title" => "Seleccione el #{campotsitio_etiqueta}" #tipo de sitio'
+        } %>
+    </div>
+    <div class="col-md-2">
+      <%= f.input campolatitud, #:salida_latitud,
+        label: false,
+        as: :float,
+        input_html: {
+          "data-toggle" => 'tooltip',
+          placeholder: campolatitud_etiqueta #'Latitud'
+        } %>
+    </div>
+    <div class="col-md-2">
+      <%= f.input campolongitud, #:salida_longitud,
+        label: false,
+        as: :float,
+        input_html: {
+          "data-toggle" => 'tooltip',
+          placeholder: campolongitud_etiqueta #'Longitud'
+        } %>
+    </div>
+  </div>
+</div>

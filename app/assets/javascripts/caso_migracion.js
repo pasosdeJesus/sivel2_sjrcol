@@ -164,7 +164,7 @@ $(document).on('focusin',
     pais = $(this.parentNode.parentNode.parentNode.parentNode.previousElementSibling.children[1].children[0].children[0]).val()
     dep = $(this.parentNode.parentNode.parentNode.parentNode.previousElementSibling.children[2].children[0].children[0]).val()
     mun = $(this.parentNode.parentNode.parentNode.parentNode.previousElementSibling.children[3].children[0].children[0]).val()
-    clas = $(this.parentNode.parentNode.previousElementSibling.children[0].children[0]).val()
+    clas = $(this.parentNode.parentNode.parentNode.parentNode.previousElementSibling.children[5].children[0].children[0]).val()
     ubi = [pais, dep, mun, clas]
     busca_ubicacionpre_lugar($(this), ubi)
   }
@@ -177,7 +177,7 @@ $(document).on('focusin',
     pais = $(this.parentNode.parentNode.parentNode.parentNode.previousElementSibling.children[1].children[0].children[0]).val()
     dep = $(this.parentNode.parentNode.parentNode.parentNode.previousElementSibling.children[2].children[0].children[0]).val()
     mun = $(this.parentNode.parentNode.parentNode.parentNode.previousElementSibling.children[3].children[0].children[0]).val()
-    clas = $(this.parentNode.parentNode.previousElementSibling.children[0].children[0]).val()
+    clas = $(this.parentNode.parentNode.parentNode.parentNode.previousElementSibling.children[5].children[0].children[0]).val()
     ubi = [pais, dep, mun, clas]
     busca_ubicacionpre_lugar($(this), ubi)
   }
@@ -190,7 +190,7 @@ $(document).on('focusin',
     pais = $(this.parentNode.parentNode.parentNode.parentNode.previousElementSibling.children[1].children[0].children[0]).val()
     dep = $(this.parentNode.parentNode.parentNode.parentNode.previousElementSibling.children[2].children[0].children[0]).val()
     mun = $(this.parentNode.parentNode.parentNode.parentNode.previousElementSibling.children[3].children[0].children[0]).val()
-    clas = $(this.parentNode.parentNode.previousElementSibling.children[0].children[0]).val()
+    clas = $(this.parentNode.parentNode.parentNode.parentNode.previousElementSibling.children[5].children[0].children[0]).val()
     ubi = [pais, dep, mun, clas]
     busca_ubicacionpre_lugar($(this), ubi)
   }
@@ -244,4 +244,210 @@ function autocompleta_ubicacionpre_lugar(tsit, lug, sit, lat, lon, ubipre, root)
   ubipre.find('[id$=_tsitio_id]').val(tsit).trigger('chosen:updated')
   $(document).trigger("sip:autocompletada-ubicacionpre")
   return
+}
+//Salida
+$(document).on('change', 
+  '[id^=caso_migracion_attributes_][id$=salida_pais_id]', 
+  function (evento) {
+    fija_coordenadas(evento, "salida", $(this), "paises")
+})
+$(document).on('change', 
+  '[id^=caso_migracion_attributes_][id$=salida_departamento_id]', 
+  function (evento) {
+    if($(this).val()==""){
+      pid = evento.target.getAttribute('id').split('_')
+      pais = $('#caso_migracion_attributes_' + pid[3] + '_' + campoubi + '_pais_id')
+      fija_coordenadas(evento, "salida", pais, "paises")
+    }else{
+      deshabilita_otros_sinohaymun(evento, "salida")
+      fija_coordenadas(evento, "salida", $(this), "departamentos")
+    }
+})
+$(document).on('change', 
+  '[id^=caso_migracion_attributes_][id$=salida_municipio_id]', 
+  function (evento) {
+    if($(this).val()==""){
+      deshabilita_otros_sinohaymun(evento, "salida")
+      pid = evento.target.getAttribute('id').split('_')
+      dep = $('#caso_migracion_attributes_' + pid[3] + '_' + campoubi + '_departamento_id')
+      fija_coordenadas(evento, "salida", dep, "departamentos")
+    }else{
+      habilita_otros_sihaymun(evento, 1, "salida")
+      fija_coordenadas(evento, "salida", $(this), "municipios")
+    }
+})
+$(document).on('change', 
+  '[id^=caso_migracion_attributes_][id$=salida_clase_id]', 
+  function (evento) {
+    if($(this).val()==""){
+      pid = evento.target.getAttribute('id').split('_')
+      mun = $('#caso_migracion_attributes_' + pid[3] + '_' + campoubi + '_municipio_id')
+      fija_coordenadas(evento, "salida", mun, "municipios")
+    }else{
+      habilita_otros_sihaymun(evento, 1, "salida")
+      fija_coordenadas(evento, "salida", $(this), "clases")
+    }
+})
+$(document).on('change', 
+  '[id^=caso_migracion_attributes_][id$=salida_lugar]', 
+  function (evento) {
+    habilita_otros_sihaymun(evento, 2, "salida")
+})
+
+//Llegada
+$(document).on('change', 
+  '[id^=caso_migracion_attributes_][id$=llegada_pais_id]', 
+  function (evento) {
+    fija_coordenadas(evento, "llegada", $(this), "paises")
+})
+$(document).on('change', 
+  '[id^=caso_migracion_attributes_][id$=llegada_departamento_id]', 
+  function (evento) {
+    if($(this).val()==""){
+      pid = evento.target.getAttribute('id').split('_')
+      pais = $('#caso_migracion_attributes_' + pid[3] + '_' + campoubi + '_pais_id')
+      fija_coordenadas(evento, "llegada", pais, "paises")
+    }else{
+      deshabilita_otros_sinohaymun(evento, "llegada")
+      fija_coordenadas(evento, "llegada", $(this), "departamentos")
+    }
+})
+$(document).on('change', 
+  '[id^=caso_migracion_attributes_][id$=llegada_municipio_id]', 
+  function (evento) {
+    if($(this).val()==""){
+      deshabilita_otros_sinohaymun(evento, "llegada")
+      pid = evento.target.getAttribute('id').split('_')
+      dep = $('#caso_migracion_attributes_' + pid[3] + '_' + campoubi + '_departamento_id')
+      fija_coordenadas(evento, "llegada", dep, "departamentos")
+    }else{
+      habilita_otros_sihaymun(evento, 1, "llegada")
+      fija_coordenadas(evento, "llegada", $(this), "municipios")
+    }
+})
+$(document).on('change', 
+  '[id^=caso_migracion_attributes_][id$=llegada_clase_id]', 
+  function (evento) {
+    if($(this).val()==""){
+      pid = evento.target.getAttribute('id').split('_')
+      mun = $('#caso_migracion_attributes_' + pid[3] + '_' + campoubi + '_municipio_id')
+      fija_coordenadas(evento, "llegada", mun, "municipios")
+    }else{
+      habilita_otros_sihaymun(evento, 1, "llegada")
+      fija_coordenadas(evento, "llegada", $(this), "clases")
+    }
+})
+$(document).on('change', 
+  '[id^=caso_migracion_attributes_][id$=llegada_lugar]', 
+  function (evento) {
+    habilita_otros_sihaymun(evento, 2, "llegada")
+})
+
+//Destino
+$(document).on('change', 
+  '[id^=caso_migracion_attributes_][id$=destino_pais_id]', 
+  function (evento) {
+    fija_coordenadas(evento, "destino", $(this), "paises")
+})
+$(document).on('change', 
+  '[id^=caso_migracion_attributes_][id$=destino_departamento_id]', 
+  function (evento) {
+    if($(this).val()==""){
+      pid = evento.target.getAttribute('id').split('_')
+      pais = $('#caso_migracion_attributes_' + pid[3] + '_' + campoubi + '_pais_id')
+      fija_coordenadas(evento, "destino", pais, "paises")
+    }else{
+      deshabilita_otros_sinohaymun(evento, "destino")
+      fija_coordenadas(evento, "destino", $(this), "departamentos")
+    }
+})
+$(document).on('change', 
+  '[id^=caso_migracion_attributes_][id$=destino_municipio_id]', 
+  function (evento) {
+    if($(this).val()==""){
+      deshabilita_otros_sinohaymun(evento, "destino")
+      pid = evento.target.getAttribute('id').split('_')
+      dep = $('#caso_migracion_attributes_' + pid[3] + '_' + campoubi + '_departamento_id')
+      fija_coordenadas(evento, "destino", dep, "departamentos")
+    }else{
+      habilita_otros_sihaymun(evento, 1, "destino")
+      fija_coordenadas(evento, "destino", $(this), "municipios")
+    }
+})
+$(document).on('change', 
+  '[id^=caso_migracion_attributes_][id$=destino_clase_id]', 
+  function (evento) {
+    if($(this).val()==""){
+      pid = evento.target.getAttribute('id').split('_')
+      mun = $('#caso_migracion_attributes_' + pid[3] + '_' + campoubi + '_municipio_id')
+      fija_coordenadas(evento, "destino", mun, "municipios")
+    }else{
+      habilita_otros_sihaymun(evento, 1, "destino")
+      fija_coordenadas(evento, "destino", $(this), "clases")
+    }
+})
+$(document).on('change', 
+  '[id^=caso_migracion_attributes_][id$=destino_lugar]', 
+  function (evento) {
+    habilita_otros_sihaymun(evento, 2, "destino")
+})
+
+// Funciones
+function fija_coordenadas(e, campoubi, elemento, ubi_plural){
+  pid = e.target.getAttribute('id').split('_')
+  latitud = $('#caso_migracion_attributes_' + pid[3] + '_' + campoubi + '_latitud')
+  longitud = $('#caso_migracion_attributes_' + pid[3] + '_' + campoubi + '_longitud')
+  id = $(elemento).val()
+  root = window
+  $.getJSON(root.puntomontaje + "admin/" + ubi_plural +".json", function(o){
+    ubi = o.filter(function(item){
+      return item.id == id
+    })
+    if(ubi[0]){
+      if(ubi[0].latitud){
+        latitud.val(ubi[0].latitud).trigger('chosen:updated')
+        longitud.val(ubi[0].longitud).trigger('chosen:updated')
+      }
+    }else{
+      latitud.val(null).trigger('chosen:updated')
+      longitud.val(null).trigger('chosen:updated')
+    }
+  });
+}
+
+function deshabilita_otros_sinohaymun(e, campoubi){
+  pid = e.target.getAttribute('id').split('_')
+  lugar = $('#caso_migracion_attributes_' + pid[3] + '_' + campoubi + '_lugar')
+  sitio = $('#caso_migracion_attributes_' + pid[3] + '_' + campoubi + '_sitio')
+  tsitio = $('#caso_migracion_attributes_' + pid[3] + '_' + campoubi + '_tsitio_id')
+  latitud = $('#caso_migracion_attributes_' + pid[3] + '_' + campoubi + '_latitud')
+  longitud = $('#caso_migracion_attributes_' + pid[3] + '_' + campoubi + '_longitud')
+  lugar.val("")
+  lugar.attr('disabled', true).trigger('chosen:updated')
+  sitio.val(null)
+  sitio.attr('disabled', true).trigger('chosen:updated')
+  tsitio.val(1)
+  tsitio.attr('disabled', true).trigger('chosen:updated')
+  latitud.val("")
+  latitud.attr('disabled', true).trigger('chosen:updated')
+  longitud.val("")
+  longitud.attr('disabled', true).trigger('chosen:updated')
+}
+
+function habilita_otros_sihaymun(e, tipo, campoubi){
+  pid = e.target.getAttribute('id').split('_')
+  lugar = $('#caso_migracion_attributes_' + pid[3] + '_' + campoubi + '_lugar')
+  sitio = $('#caso_migracion_attributes_' + pid[3] + '_' + campoubi + '_sitio')
+  tsitio = $('#caso_migracion_attributes_' + pid[3] + '_' + campoubi + '_tsitio_id')
+  latitud = $('#caso_migracion_attributes_' + pid[3] + '_' + campoubi + '_latitud')
+  longitud = $('#caso_migracion_attributes_' + pid[3] + '_' + campoubi + '_longitud')
+  if(tipo == 1){
+    lugar.attr('disabled', false).trigger('chosen:updated')
+    tsitio.attr('disabled', false).trigger('chosen:updated')
+  }
+  if(tipo == 2){
+    sitio.attr('disabled', false).trigger('chosen:updated')
+    latitud.attr('disabled', false).trigger('chosen:updated')
+    longitud.attr('disabled', false).trigger('chosen:updated')
+  }
 }

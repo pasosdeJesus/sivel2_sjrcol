@@ -33,8 +33,10 @@ module Sip
           "f_unaccent(ubicacionpre.nombre)) " +
           "@@ to_tsquery('spanish', '#{consNomubi}')";
 
-        cons = "SELECT TRIM(nombre) AS value, pais_id, departamento_id, municipio_id, clase_id, tsitio_id, lugar, sitio, latitud, longitud " +
-          "FROM public.sip_ubicacionpre AS ubicacionpre " +
+        cons = "SELECT TRIM(nombre) AS value, pais_id, departamento_id, "\
+          "municipio_id, clase_id, tsitio_id, lugar, sitio, "\
+          "latitud, longitud "\
+          "FROM public.sip_ubicacionpre AS ubicacionpre "\
           "WHERE #{where} #{pais} #{dep} #{mun} #{clas}"
         r = ActiveRecord::Base.connection.select_all cons
         respond_to do |format|

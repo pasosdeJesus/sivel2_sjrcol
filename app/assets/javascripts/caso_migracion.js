@@ -157,49 +157,36 @@ $(document).on('change', '#persona_id_pais',
   }
 )
 
-$(document).on('focusin', 
-'input[id^=caso_migracion_attributes][id$=_salida_lugar]', 
-  function(e) {
-    root = window
-    ubicacionpre = $(this).closest('.ubicacionpre')
-    if (ubicacionpre.length != 1) {
-      alert('No se encontró ubicacionpre para ' + 
-        $(this).attr('id'))
-    }
-
-    pais = ubicacionpre.find('[id$=pais_id]').val()
-    dep = ubicacionpre.find('[id$=departamento_id]').val()
-    mun = ubicacionpre.find('[id$=municipio_id]').val()
-    clas = ubicacionpre.find('[id$=clase_id]').val()
-    ubi = [pais, dep, mun, clas]
-    busca_ubicacionpre_lugar($(this), ubi)
+function maneja_evento_busca_ubicacionpre_lugar(e) {
+  root = window
+  ubicacionpre = $(this).closest('.ubicacionpre')
+  if (ubicacionpre.length != 1) {
+    alert('No se encontró ubicacionpre para ' + 
+      $(this).attr('id'))
   }
+
+  pais = ubicacionpre.find('[id$=pais_id]').val()
+  dep = ubicacionpre.find('[id$=departamento_id]').val()
+  mun = ubicacionpre.find('[id$=municipio_id]').val()
+  clas = ubicacionpre.find('[id$=clase_id]').val()
+  ubi = [pais, dep, mun, clas]
+  busca_ubicacionpre_lugar($(this), ubi)
+}
+
+
+$(document).on('focusin', 
+  'input[id^=caso_migracion_attributes][id$=_salida_lugar]', 
+  maneja_evento_busca_ubicacionpre_lugar
 )
 
 $(document).on('focusin', 
-'input[id^=caso_migracion_attributes][id$=_llegada_lugar]', 
-  function(e) {
-    root = window
-    pais = $(this.parentNode.parentNode.parentNode.parentNode.previousElementSibling.children[1].children[0].children[0]).val()
-    dep = $(this.parentNode.parentNode.parentNode.parentNode.previousElementSibling.children[2].children[0].children[0]).val()
-    mun = $(this.parentNode.parentNode.parentNode.parentNode.previousElementSibling.children[3].children[0].children[0]).val()
-    clas = $(this.parentNode.parentNode.parentNode.parentNode.previousElementSibling.children[5].children[0].children[0]).val()
-    ubi = [pais, dep, mun, clas]
-    busca_ubicacionpre_lugar($(this), ubi)
-  }
+  'input[id^=caso_migracion_attributes][id$=_llegada_lugar]', 
+  maneja_evento_busca_ubicacionpre_lugar
 )
 
 $(document).on('focusin', 
-'input[id^=caso_migracion_attributes][id$=_destino_lugar]', 
-  function(e) {
-    root = window
-    pais = $(this.parentNode.parentNode.parentNode.parentNode.previousElementSibling.children[1].children[0].children[0]).val()
-    dep = $(this.parentNode.parentNode.parentNode.parentNode.previousElementSibling.children[2].children[0].children[0]).val()
-    mun = $(this.parentNode.parentNode.parentNode.parentNode.previousElementSibling.children[3].children[0].children[0]).val()
-    clas = $(this.parentNode.parentNode.parentNode.parentNode.previousElementSibling.children[5].children[0].children[0]).val()
-    ubi = [pais, dep, mun, clas]
-    busca_ubicacionpre_lugar($(this), ubi)
-  }
+  'input[id^=caso_migracion_attributes][id$=_destino_lugar]', 
+  maneja_evento_busca_ubicacionpre_lugar
 )
 
 function busca_ubicacionpre_lugar(s, ubi) {
@@ -231,7 +218,7 @@ function busca_ubicacionpre_lugar(s, ubi) {
       minLength: 2,
       select: function( event, ui ){ 
         if (ui.item){ 
-          autocompleta_ubicacionpre_lugar(ui.item.tsitio_id, ui.item.lugar, ui.item.sitio, ui.item.latitud, ui.item.longitud, ubipre, root)
+          autocompleta_ubicacionpre_lugar(ui.item.clase_id, ui.item.tsitio_id, ui.item.lugar, ui.item.sitio, ui.item.latitud, ui.item.longitud, ubipre, root)
           event.stopPropagation()
           event.preventDefault()
         }
@@ -241,8 +228,9 @@ function busca_ubicacionpre_lugar(s, ubi) {
   return
 }
 
-function autocompleta_ubicacionpre_lugar(tsit, lug, sit, lat, lon, ubipre, root){
+function autocompleta_ubicacionpre_lugar(clase_id, tsit, lug, sit, lat, lon, ubipre, root){
   sip_arregla_puntomontaje(root)
+  ubipre.parent().find('[id$=_clase_id]').val(clase_id).trigger('chosen:updated')
   ubipre.find('[id$=_lugar]').val(lug)
   ubipre.find('[id$=_sitio]').val(sit)
   ubipre.find('[id$=_latitud]').val(lat)

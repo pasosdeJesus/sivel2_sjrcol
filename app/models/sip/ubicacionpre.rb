@@ -5,8 +5,7 @@ module Sip
     include Sip::Concerns::Models::Ubicacionpre
 
     def self.nomenclatura(pais, departamento, municipio,
-                          clase, lugar, sitio, tsitio, 
-                          latitud, longitud)
+                          clase, lugar, sitio)
       if pais.to_s.strip == ''
         nombre = nil
         nombre_sinp = nil
@@ -27,43 +26,27 @@ module Sip
          municipio.to_s.strip + ' / ' +
          departamento.to_s
       elsif sitio.to_s.strip == ''
-        nombre = lugar.to_s + 
-          (tsitio.to_s.strip == '' ? '' : ' : ' + tsitio.to_s) + ' / ' +
+        nombre = lugar.to_s + ' / ' +
           (clase.to_s.strip == '' ? '' : clase.to_s.strip + ' / ') +
           municipio.to_s.strip + ' / ' +
           departamento.to_s.strip + ' / ' +
-          pais.to_s + (
-             (latitud.to_f != 0.0 && longitud.to_f != 0.0) ?
-             ' @' + latitud.to_f.to_s + ',' + longitud.to_f.to_s : ''
-          )
-        nombre_sinp = lugar.to_s + 
-          (tsitio.to_s.strip == '' ? '' : ' : ' + tsitio.to_s) + ' / ' +
+          pais.to_s
+        nombre_sinp = lugar.to_s + ' / ' +
           (clase.to_s.strip == '' ? '' : clase.to_s.strip + ' / ') +
           municipio.to_s.strip + ' / ' +
-          departamento.to_s + (
-             (latitud.to_f != 0.0 && longitud.to_f != 0.0) ?
-             ' @' + latitud.to_f.to_s + ',' + longitud.to_f.to_s : ''
-          )
+          departamento.to_s 
       else
         nombre = sitio.to_s + ' / ' +
-          lugar.to_s + 
-          (tsitio.to_s.strip == '' ? '' : ' : ' + tsitio.to_s) + ' / ' +
+          lugar.to_s + ' / ' +
           (clase.to_s.strip == '' ? '' : clase.to_s.strip + ' / ') +
           municipio.to_s.strip + ' / ' +
           departamento.to_s.strip + ' / ' +
-          pais.to_s + (
-             (latitud.to_f != 0.0 && longitud.to_f != 0.0) ?
-             ' @' + latitud.to_f.to_s + ',' + longitud.to_f.to_s : ''
-          )
+          pais.to_s
         nombre_sinp = sitio.to_s + ' / ' +
-          lugar.to_s + 
-          (tsitio.to_s.strip == '' ? '' : ' : ' + tsitio.to_s) + ' / ' +
+          lugar.to_s + ' / ' +
           (clase.to_s.strip == '' ? '' : clase.to_s.strip + ' / ') +
           municipio.to_s.strip + ' / ' +
-          departamento.to_s + (
-             (latitud.to_f != 0.0 && longitud.to_f != 0.0) ?
-             ' @' + latitud.to_f.to_s + ',' + longitud.to_f.to_s : ''
-          )
+          departamento.to_s 
       end
 
       return [nombre, nombre_sinp]
@@ -75,10 +58,7 @@ module Sip
         self.departamento ? self.departamento.nombre : '',
         self.municipio ? self.municipio.nombre : '',
         self.clase ? self.clase.nombre : '',
-        self.lugar, self.sitio, 
-        self.tsitio ? self.tsitio.nombre : '',
-        self.latitud ? self.latitud : '',
-        self.longitud ? self.longitud : '')
+        self.lugar, self.sitio)
       return self.save
     end
 
@@ -191,7 +171,8 @@ module Sip
 
       if sitio.to_s.strip == ''
         ubi = Sip::Ubicacionpre.where(w).
-          where('lugar ILIKE ?', lugar.strip.gsub(/  */, ' '))
+          where('lugar ILIKE ?', lugar.strip.gsub(/  */, ' ')).
+          where("sitio IS NULL OR sitio=''")
         puts w
         puts ubi.to_sql
         if ubi.count > 0
@@ -211,8 +192,8 @@ module Sip
         w[:sitio] = ''
       else # Tiene sitio
         ubi = Sip::Ubicacionpre.where(w).
-          where('lugar ILIKE ?', lugar.strip.gsub(/  */, ' '))
-        where('sitio ILIKE ?', sitio.strip.gsub(/  */, ' '))
+          where('lugar ILIKE ?', lugar.strip.gsub(/  */, ' ')).
+          where('sitio ILIKE ?', sitio.strip.gsub(/  */, ' '))
         if ubi.count > 0
           # modificando existente
           ubi[0].tsitio_id = tsitio_id
@@ -239,10 +220,7 @@ module Sip
         omunicipio.nombre,
         oclase ? oclase.nombre : '',
         w[:lugar],
-        w[:sitio],
-        tsitio_id ? Sip::Tsitio.find(tsitio_id).nombre : '',
-        latitud,
-        longitud
+        w[:sitio]
       )
       nubi = Sip::Ubicacionpre.create!(w)
       if !nubi

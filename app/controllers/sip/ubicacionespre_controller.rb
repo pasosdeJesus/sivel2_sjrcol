@@ -22,10 +22,11 @@ module Sip
         if consNomubi.length > 0
           consNomubi+= ":*"
         end
-        pais = params[:pais].to_i
-        dep = params[:dep].to_i
-        mun = params[:mun].to_i
-        clas = params[:clas].to_i
+        pais = "AND pais_id=#{params[:pais].to_i}"
+        dep = "AND departamento_id=#{params[:dep].to_i}"
+        mun = "AND municipio_id=#{params[:mun].to_i}"
+        clas = params[:clas] && params[:clas] != '' ? 
+          "AND clase_id=#{params[:clas].to_i}" : ""
         # Usamos la funcion f_unaccent definida con el indice
         # en db/migrate/20200916022934_indice_ubicacionpre.rb
         where = " to_tsvector('spanish', " +
@@ -34,7 +35,7 @@ module Sip
 
         cons = "SELECT TRIM(nombre) AS value, pais_id, departamento_id, municipio_id, clase_id, tsitio_id, lugar, sitio, latitud, longitud " +
           "FROM public.sip_ubicacionpre AS ubicacionpre " +
-          "WHERE #{where} AND pais_id=#{pais} AND departamento_id=#{dep} AND municipio_id=#{mun} AND clase_id=#{clas}"
+          "WHERE #{where} #{pais} #{dep} #{mun} #{clas}"
         r = ActiveRecord::Base.connection.select_all cons
         respond_to do |format|
           format.json { render :json, inline: r.to_json }

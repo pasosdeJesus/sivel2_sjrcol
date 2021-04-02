@@ -161,10 +161,16 @@ $(document).on('focusin',
 'input[id^=caso_migracion_attributes][id$=_salida_lugar]', 
   function(e) {
     root = window
-    pais = $(this.parentNode.parentNode.parentNode.parentNode.previousElementSibling.children[1].children[0].children[0]).val()
-    dep = $(this.parentNode.parentNode.parentNode.parentNode.previousElementSibling.children[2].children[0].children[0]).val()
-    mun = $(this.parentNode.parentNode.parentNode.parentNode.previousElementSibling.children[3].children[0].children[0]).val()
-    clas = $(this.parentNode.parentNode.parentNode.parentNode.previousElementSibling.children[5].children[0].children[0]).val()
+    ubicacionpre = $(this).closest('.ubicacionpre')
+    if (ubicacionpre.length != 1) {
+      alert('No se encontró ubicacionpre para ' + 
+        $(this).attr('id'))
+    }
+
+    pais = ubicacionpre.find('[id$=pais_id]').val()
+    dep = ubicacionpre.find('[id$=departamento_id]').val()
+    mun = ubicacionpre.find('[id$=municipio_id]').val()
+    clas = ubicacionpre.find('[id$=clase_id]').val()
     ubi = [pais, dep, mun, clas]
     busca_ubicacionpre_lugar($(this), ubi)
   }

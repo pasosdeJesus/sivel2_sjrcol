@@ -141,9 +141,17 @@
 %>
 <%= f.input :materialesperdidos, as: :text %>
 <%= f.input :inmaterialesperdidos, as: :text %>
-<%= f.input :protegiorupta, 
-    boolean_style: :nested,
-    inline_label: Sivel2Sjr::Desplazamiento.human_attribute_name(:protegiorupta)
-%>
+<div class="row">
+  <div class="col-md-12">
+    <label> <%= Sivel2Sjr::Desplazamiento.human_attribute_name(:protegiorupta) %>
+</label></br>
+    <%=
+      f.collection_radio_buttons( :protegiorupta, [[true, 'Si'] ,[false, 'No'] ,['', 'No Responde']], :first, :last,
+        {checked: f.object.protegiorupta.nil? ? '' : f.object.protegiorupta }  ) do |b|
+          b.label(class: "mr-4") { b.radio_button + b.text }
+        end
+      %>
+  </div>
+</div>
 <%= f.input :documentostierra, as: :text %>
 

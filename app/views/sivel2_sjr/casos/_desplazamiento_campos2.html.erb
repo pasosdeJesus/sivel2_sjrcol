@@ -28,12 +28,6 @@
   label_method: :nombre,
   value_method: :id 
 %>
-<%= f.association :categoria, 
-  collection: Sivel2Gen::Categoria.habilitados.
-    where("tipocat <> 'I'"),
-  label_method: :nombre, 
-  value_method: :id 
-%>
 <%= f.input :otrosdatos, as: :text %>
 <%= f.input :declaro, collection: [["SI", :S], 
   ["NO", :N], ["NO SABE / NO RESPONDE", :R]], 
@@ -83,6 +77,12 @@
     %>
   </div>
   <div class="col-md-6">
+    <%= f.input :fechadeclaracion, 
+      input_html: { 
+      "data-behaviour" => "datepicker",
+      value: f.object.fechadeclaracion || '' },
+      as: :string %>
+
     <%= f.association :declaroante,
       collection: Sivel2Sjr::Declaroante.where(fechadeshabilitacion: nil),
       label_method: :nombre,
@@ -92,22 +92,15 @@
         "title" => 'Entidad ante la cual rindió su declaración'
       }
     %>
-  <%= f.association :acreditacion,
-    collection: Sivel2Sjr::Acreditacion.where(fechadeshabilitacion: nil),
-    label_method: :nombre,
-    value_method: :id,
-    input_html: {
-      "data-toggle" => 'tooltip',
-      "title" => 'Medio que tiene el solicitante para certificar su situación'
-    }
-  %>
-<%= f.input :fechadeclaracion, 
-  input_html: { 
-  "data-behaviour" => "datepicker",
-  value: f.object.fechadeclaracion || '' 
-},
-as: :string
-%>
+    <%= f.association :acreditacion,
+      collection: Sivel2Sjr::Acreditacion.where(fechadeshabilitacion: nil),
+      label_method: :nombre,
+      value_method: :id,
+      input_html: {
+        "data-toggle" => 'tooltip',
+        "title" => 'Medio que tiene el solicitante para certificar su situación'
+      }
+    %>
   </div>
 </div>
 <%= f.input :retornado, 
@@ -157,4 +150,24 @@ as: :string
   </div>
 </div>
 <%= f.input :documentostierra, as: :text %>
-<%= render partial: 'anexo_desplazamiento', locals: {f: f} %>
+
+<div class="row">
+  <div class="col-md-1">
+  </div>
+  <div class="col-md-11">
+    <a data-toggle="collapse" href='#anexosdesplazamiento'>
+      <h5>ANEXOS DEL DESPLAZAMIENTO</h5>
+    </a>
+    <div class="collapse multi-collapse" id="anexosdesplazamiento">
+      <%= render partial: 'anexo_desplazamiento', locals: {f: f} %>
+    </div>
+  </div>
+</div>
+
+<%= f.association :categoria, 
+  collection: Sivel2Gen::Categoria.habilitados.
+    where("tipocat <> 'I'"),
+  label_method: :nombre, 
+  value_method: :id 
+%>
+

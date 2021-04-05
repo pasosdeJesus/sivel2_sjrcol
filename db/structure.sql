@@ -6490,6 +6490,39 @@ CREATE TABLE public.sivel2_sjr_agremigracion_migracion (
 
 
 --
+-- Name: sivel2_sjr_anexo_desplazamiento; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.sivel2_sjr_anexo_desplazamiento (
+    id bigint NOT NULL,
+    fecha date,
+    desplazamiento_id integer NOT NULL,
+    anexo_id integer NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: sivel2_sjr_anexo_desplazamiento_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.sivel2_sjr_anexo_desplazamiento_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: sivel2_sjr_anexo_desplazamiento_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.sivel2_sjr_anexo_desplazamiento_id_seq OWNED BY public.sivel2_sjr_anexo_desplazamiento.id;
+
+
+--
 -- Name: sivel2_sjr_aslegal_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -8322,6 +8355,13 @@ ALTER TABLE ONLY public.sivel2_sjr_actividad_casosjr ALTER COLUMN id SET DEFAULT
 
 
 --
+-- Name: sivel2_sjr_anexo_desplazamiento id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sivel2_sjr_anexo_desplazamiento ALTER COLUMN id SET DEFAULT nextval('public.sivel2_sjr_anexo_desplazamiento_id_seq'::regclass);
+
+
+--
 -- Name: sivel2_sjr_aspsicosocial id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -10003,6 +10043,14 @@ ALTER TABLE ONLY public.sivel2_sjr_accionjuridica_respuesta
 
 ALTER TABLE ONLY public.sivel2_sjr_actividad_casosjr
     ADD CONSTRAINT sivel2_sjr_actividad_casosjr_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: sivel2_sjr_anexo_desplazamiento sivel2_sjr_anexo_desplazamiento_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sivel2_sjr_anexo_desplazamiento
+    ADD CONSTRAINT sivel2_sjr_anexo_desplazamiento_pkey PRIMARY KEY (id);
 
 
 --
@@ -11869,6 +11917,14 @@ ALTER TABLE ONLY public.sip_ubicacionpre
 
 
 --
+-- Name: sivel2_sjr_anexo_desplazamiento fk_rails_3c7aa8a2e4; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sivel2_sjr_anexo_desplazamiento
+    ADD CONSTRAINT fk_rails_3c7aa8a2e4 FOREIGN KEY (desplazamiento_id) REFERENCES public.sivel2_sjr_desplazamiento(id);
+
+
+--
 -- Name: sivel2_gen_caso_respuestafor fk_rails_3fd971983e; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -12210,6 +12266,14 @@ ALTER TABLE ONLY public.cor1440_gen_caracterizacionpersona
 
 ALTER TABLE ONLY public.heb412_gen_formulario_plantillahcm
     ADD CONSTRAINT fk_rails_6e214a7168 FOREIGN KEY (formulario_id) REFERENCES public.mr519_gen_formulario(id);
+
+
+--
+-- Name: sivel2_sjr_anexo_desplazamiento fk_rails_6e62e2f0cc; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sivel2_sjr_anexo_desplazamiento
+    ADD CONSTRAINT fk_rails_6e62e2f0cc FOREIGN KEY (anexo_id) REFERENCES public.sip_anexo(id);
 
 
 --
@@ -14398,6 +14462,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210401305106'),
 ('20210403174614'),
 ('20210403175939'),
-('20210403225927');
+('20210403225927'),
+('20210405045324');
 
 

@@ -829,6 +829,7 @@ CREATE TABLE public.sivel2_sjr_desplazamiento (
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     id integer DEFAULT nextval('public.desplazamiento_seq'::regclass) NOT NULL,
+    establecerse boolean,
     CONSTRAINT desplazamiento_declaro_check CHECK (((declaro = 'S'::bpchar) OR (declaro = 'N'::bpchar) OR (declaro = 'R'::bpchar)))
 );
 
@@ -14333,6 +14334,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210311041939'),
 ('20210312045631'),
 ('20210312050413'),
+('20210328012658'),
 ('20210401194637'),
 ('20210401210102'),
 ('20210401305106');

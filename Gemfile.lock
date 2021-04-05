@@ -81,7 +81,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: c699c2858397e79e9fed1a37efba3ebf21b7996b
+  revision: eca9d3cfde8f6df87d7799111c098726d10b64a7
   branch: main
   specs:
     sivel2_sjr (2.0b10)
@@ -232,7 +232,7 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.7.1)
       mini_mime (>= 0.1.1)
-    marcel (1.0.0)
+    marcel (1.0.1)
     method_source (1.0.0)
     mime-types (3.3.1)
       mime-types-data (~> 3.2015)

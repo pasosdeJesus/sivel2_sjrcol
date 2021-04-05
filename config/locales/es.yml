@@ -1,6 +1,8 @@
 
 es:
   attributes:
+    autoridaddeclaro: Autoridad ante la cual declaró
+    acreditacionestado: Acreditación del estado
     fechacreacion: Creación
     fechadeshabilitacion: Deshabilitación 
     formatoregex: Formato (exp. reg)
@@ -23,6 +25,7 @@ es:
     declaro:  Declaró
     hechosdeclarados: Hechos Declarados 
     fechadeclaracion:  Fecha de Declaración 
+    fechadeclaro:  Fecha de Declaración 
     declaroante: Declaro Ante
     inclusion: Inclusión RUV
     acreditacion: Acreditación

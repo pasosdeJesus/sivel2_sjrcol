@@ -64,6 +64,15 @@
     "title" => 'Entidad ante la cual rindió su declaración'
   }
 %>
+<%= f.input :fechadeclaro, 
+  input_html: { 
+    "data-behaviour" => "datepicker",
+    value: f.object.fechadeclaro || '' 
+  },
+  as: :string
+%>
+<%= f.input :autoridaddeclaro %>
+<%= f.input :acreditacionestado %>
 <div class="row">
   <div class="col-md-12">
     <table style="width:100%">

@@ -331,7 +331,9 @@ module Sivel2Sjr
     def desplazamiento_params
       [
         :desplazamiento_attributes => [
-          :acompestado, 
+          :acompestado,
+          :acreditacionestado,
+          :autoridaddeclaro,
           :connacionaldeportado,
           :connacionalretorno,
           :declaracionruv_id,
@@ -340,6 +342,7 @@ module Sivel2Sjr
           :documentostierra,
           :establecerse,
           :fechadeclaracion,
+          :fechadeclaro,
           :fechadeclaracion_localizada,
           :fechaexpulsion, 
           :fechaexpulsion_localizada, 

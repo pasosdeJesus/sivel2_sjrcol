@@ -830,6 +830,7 @@ CREATE TABLE public.sivel2_sjr_desplazamiento (
     updated_at timestamp without time zone,
     id integer DEFAULT nextval('public.desplazamiento_seq'::regclass) NOT NULL,
     establecerse boolean,
+    declaracionruv_id integer,
     CONSTRAINT desplazamiento_declaro_check CHECK (((declaro = 'S'::bpchar) OR (declaro = 'N'::bpchar) OR (declaro = 'R'::bpchar)))
 );
 
@@ -2568,6 +2569,40 @@ CREATE VIEW public.cvp2 AS
    FROM public.sivel2_sjr_ayudaestado_respuesta ar,
     public.sivel2_sjr_ayudaestado_derecho ad
   WHERE (ar.id_ayudaestado = ad.ayudaestado_id);
+
+
+--
+-- Name: declaracionruv; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.declaracionruv (
+    id bigint NOT NULL,
+    nombre character varying(500) NOT NULL COLLATE public.es_co_utf_8,
+    observaciones character varying(5000),
+    fechacreacion date NOT NULL,
+    fechadeshabilitacion date,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: declaracionruv_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.declaracionruv_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: declaracionruv_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.declaracionruv_id_seq OWNED BY public.declaracionruv.id;
 
 
 --
@@ -7888,6 +7923,13 @@ ALTER TABLE ONLY public.cor1440_gen_valorcampotind ALTER COLUMN id SET DEFAULT n
 
 
 --
+-- Name: declaracionruv id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.declaracionruv ALTER COLUMN id SET DEFAULT nextval('public.declaracionruv_id_seq'::regclass);
+
+
+--
 -- Name: depgifmm id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -8857,6 +8899,14 @@ ALTER TABLE ONLY public.cor1440_gen_valorcampoact
 
 ALTER TABLE ONLY public.cor1440_gen_valorcampotind
     ADD CONSTRAINT cor1440_gen_valorcampotind_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: declaracionruv declaracionruv_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.declaracionruv
+    ADD CONSTRAINT declaracionruv_pkey PRIMARY KEY (id);
 
 
 --
@@ -11312,6 +11362,14 @@ ALTER TABLE ONLY public.etapa
 
 ALTER TABLE ONLY public.cor1440_gen_actividad_valorcampotind
     ADD CONSTRAINT fk_rails_0104bf757c FOREIGN KEY (valorcampotind_id) REFERENCES public.cor1440_gen_valorcampotind(id);
+
+
+--
+-- Name: sivel2_sjr_desplazamiento fk_rails_015db0d437; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sivel2_sjr_desplazamiento
+    ADD CONSTRAINT fk_rails_015db0d437 FOREIGN KEY (declaracionruv_id) REFERENCES public.declaracionruv(id);
 
 
 --
@@ -14337,6 +14395,9 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210328012658'),
 ('20210401194637'),
 ('20210401210102'),
-('20210401305106');
+('20210401305106'),
+('20210403174614'),
+('20210403175939'),
+('20210403225927');
 
 

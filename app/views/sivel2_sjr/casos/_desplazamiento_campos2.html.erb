@@ -1,17 +1,4 @@
 <div class="row">
-  <div class="col-md-12">
-    <label>¿Piensa establecerse en este lugar?</label></br>
-    <%=
-      f.collection_radio_buttons(
-        :establecerse, [[true, 'Si'] ,[false, 'No'] ,['', 'No Responde']], :first, :last,
-        {checked: f.object.establecerse.nil? ? '' : f.object.establecerse }  ) do |b|
-          b.label(class: "mr-4") { b.radio_button + b.text }
-        end
-      %>
-  </div>
-</div>
-
-<div class="row">
   <div class="col-sm-4">
     <%= f.association :tipodesp,
       collection: Sivel2Sjr::Tipodesp.where(fechadeshabilitacion: nil),
@@ -29,6 +16,34 @@
     <input type="text" name="subclasificacion" readonly>
   </div>
 </div>
+
+<div class="row">
+  <div class="col-md-6">
+    <table style="width:100%">
+      <tbody>
+        <tr>
+          <td></td>
+          <td>Si</td>
+          <td>No</td>
+          <td>No responde</td>
+        </tr>
+        <tr>
+          <td>¿Piensa establecerse en este lugar?</td>
+          <%= f.collection_radio_buttons( :establecerse, 
+            [[true, 'Si'] ,[false, 'No'] ,['', 'No Responde']], :first, :last,
+            {checked: f.object.establecerse.nil? ? '' : 
+             f.object.establecerse }  ) do |b|%>
+              <td> 
+                <%= b.label(class: "mr-4") {b.radio_button} %>
+              </td> 
+          <% end %>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>
+
 
 <!--%= f.input :otrosdatos, as: :text %-->
 <!--%= f.input :declaro, collection: [["SI", :S], 
@@ -132,18 +147,34 @@
 %>
 <%= f.input :materialesperdidos, as: :text %>
 <%= f.input :inmaterialesperdidos, as: :text %>
+
 <div class="row">
-  <div class="col-md-12">
-    <label> <%= Sivel2Sjr::Desplazamiento.human_attribute_name(:protegiorupta) %>
-</label></br>
-    <%=
-      f.collection_radio_buttons( :protegiorupta, [[true, 'Si'] ,[false, 'No'] ,['', 'No Responde']], :first, :last,
-        {checked: f.object.protegiorupta.nil? ? '' : f.object.protegiorupta }  ) do |b|
-          b.label(class: "mr-4") { b.radio_button + b.text }
-        end
-      %>
+  <div class="col-md-6">
+    <table style="width:100%">
+      <tbody>
+        <tr>
+          <td></td>
+          <td>Si</td>
+          <td>No</td>
+          <td>No responde</td>
+        </tr>
+        <tr>
+          <td><%= Sivel2Sjr::Desplazamiento.human_attribute_name(
+            :protegiorupta) %></td>
+          <%= f.collection_radio_buttons( :protegiorupta, 
+            [[true, 'Si'] ,[false, 'No'] ,['', 'No Responde']], :first, :last,
+            {checked: f.object.protegiorupta.nil? ? '' : 
+             f.object.protegiorupta }  ) do |b|%>
+              <td> 
+                <%= b.label(class: "mr-4") {b.radio_button} %>
+              </td> 
+          <% end %>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
+
 <!-- %= f.input :documentostierra, as: :text %-->
 
 <div class="row">

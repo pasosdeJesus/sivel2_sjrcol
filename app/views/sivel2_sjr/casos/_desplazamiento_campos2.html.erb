@@ -49,24 +49,8 @@
     "title" => 'Descripción de los hechos declarados'
   }
 %>
-<%= f.input :fechadeclaracion, 
-  input_html: { 
-    "data-behaviour" => "datepicker",
-    value: f.object.fechadeclaracion || '' 
-  },
-  as: :string
-%>
-<%= f.association :declaroante,
-  collection: Sivel2Sjr::Declaroante.where(fechadeshabilitacion: nil),
-  label_method: :nombre,
-  value_method: :id,
-  input_html: {
-    "data-toggle" => 'tooltip',
-    "title" => 'Entidad ante la cual rindió su declaración'
-  }
-%>
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-6">
     <table style="width:100%">
       <tbody>
         <tr>
@@ -79,7 +63,7 @@
         <tr>
           <td>Declaración en el RUV</td>
           <%= f.collection_radio_buttons( :declaracionruv_id, 
-            Declaracionruv.all, :id, :nombre,
+            Declaracionruv.all.order(:id), :id, :nombre,
             { checked: f.object.declaracionruv_id ? f.object.declaracionruv_id : 3 }) do |b| %>
               <td> 
               <%= b.label(class: "mr-4") {b.radio_button} %>
@@ -88,26 +72,44 @@
         </tr>
       </tbody>
     </table>
+    <%= f.association :inclusion,
+      collection: Sivel2Sjr::Inclusion.where(fechadeshabilitacion: nil),
+      label_method: :nombre,
+      value_method: :id,
+      input_html: {
+        "data-toggle" => 'tooltip',
+        "title" => 'Inscripción del solicitante en el Registro Único de Víctimas'
+      }
+    %>
+  </div>
+  <div class="col-md-6">
+    <%= f.association :declaroante,
+      collection: Sivel2Sjr::Declaroante.where(fechadeshabilitacion: nil),
+      label_method: :nombre,
+      value_method: :id,
+      input_html: {
+        "data-toggle" => 'tooltip',
+        "title" => 'Entidad ante la cual rindió su declaración'
+      }
+    %>
+  <%= f.association :acreditacion,
+    collection: Sivel2Sjr::Acreditacion.where(fechadeshabilitacion: nil),
+    label_method: :nombre,
+    value_method: :id,
+    input_html: {
+      "data-toggle" => 'tooltip',
+      "title" => 'Medio que tiene el solicitante para certificar su situación'
+    }
+  %>
+<%= f.input :fechadeclaracion, 
+  input_html: { 
+  "data-behaviour" => "datepicker",
+  value: f.object.fechadeclaracion || '' 
+},
+as: :string
+%>
   </div>
 </div>
-<%= f.association :inclusion,
-  collection: Sivel2Sjr::Inclusion.where(fechadeshabilitacion: nil),
-  label_method: :nombre,
-  value_method: :id,
-  input_html: {
-    "data-toggle" => 'tooltip',
-    "title" => 'Inscripción del solicitante en el Registro Único de Víctimas'
-  }
-%>
-<%= f.association :acreditacion,
-  collection: Sivel2Sjr::Acreditacion.where(fechadeshabilitacion: nil),
-  label_method: :nombre,
-  value_method: :id,
-  input_html: {
-    "data-toggle" => 'tooltip',
-    "title" => 'Medio que tiene el solicitante para certificar su situación'
-  }
-%>
 <%= f.input :retornado, 
     boolean_style: :nested,
     inline_label: Sivel2Sjr::Desplazamiento.human_attribute_name(:retornado)

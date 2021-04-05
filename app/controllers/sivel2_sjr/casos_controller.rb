@@ -334,9 +334,11 @@ module Sivel2Sjr
           :acompestado, 
           :connacionaldeportado,
           :connacionalretorno,
-          :declaro,
+          :declaracionruv_id,
+          :declaro, 
           :descripcion, 
           :documentostierra,
+          :establecerse,
           :fechadeclaracion,
           :fechadeclaracion_localizada,
           :fechaexpulsion, 
@@ -361,7 +363,6 @@ module Sivel2Sjr
           :retornado,
           :reubicado, 
           :_destroy,
-          :declaracionruv_id,
           :categoria_ids => []
         ]
       ]

@@ -1,4 +1,16 @@
 <div class="row">
+  <div class="col-md-12">
+    <label>¿Piensa establecerse en este lugar?</label></br>
+    <%=
+      f.collection_radio_buttons(
+        :establecerse, [[true, 'Si'] ,[false, 'No'] ,[nil, 'No Responde']], :first, :last  ) do |b|
+          b.label(class: "mr-4") { b.radio_button + b.text }
+        end
+      %>
+  </div>
+</div>
+
+<div class="row">
   <div class="col-sm-6">
     <label>Modalidad geográfica:</label>
     <input type="text" name="clasificacion" readonly>

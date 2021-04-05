@@ -12,22 +12,24 @@
 </div>
 
 <div class="row">
-  <div class="col-sm-6">
+  <div class="col-sm-4">
+    <%= f.association :tipodesp,
+      collection: Sivel2Sjr::Tipodesp.where(fechadeshabilitacion: nil),
+      include_blank: false,
+      label_method: :nombre,
+      value_method: :id 
+    %>
+  </div>
+  <div class="col-sm-4">
     <label>Modalidad geográfica:</label>
     <input type="text" name="clasificacion" readonly>
   </div>
-  <div class="col-sm-6">
+  <div class="col-sm-4">
     <label>Sub-modalidad geográfica:</label>
     <input type="text" name="subclasificacion" readonly>
   </div>
 </div>
 
-<%= f.association :tipodesp,
-  collection: Sivel2Sjr::Tipodesp.where(fechadeshabilitacion: nil),
-  include_blank: false,
-  label_method: :nombre,
-  value_method: :id 
-%>
 <%= f.input :otrosdatos, as: :text %>
 <%= f.input :declaro, collection: [["SI", :S], 
   ["NO", :N], ["NO SABE / NO RESPONDE", :R]], 

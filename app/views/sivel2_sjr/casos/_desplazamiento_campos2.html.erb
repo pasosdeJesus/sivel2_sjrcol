@@ -3,7 +3,8 @@
     <label>¿Piensa establecerse en este lugar?</label></br>
     <%=
       f.collection_radio_buttons(
-        :establecerse, [[true, 'Si'] ,[false, 'No'] ,[nil, 'No Responde']], :first, :last  ) do |b|
+        :establecerse, [[true, 'Si'] ,[false, 'No'] ,['', 'No Responde']], :first, :last,
+        {checked: f.object.establecerse.nil? ? '' : f.object.establecerse }  ) do |b|
           b.label(class: "mr-4") { b.radio_button + b.text }
         end
       %>

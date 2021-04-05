@@ -363,7 +363,19 @@ module Sivel2Sjr
           :retornado,
           :reubicado, 
           :_destroy,
-          :categoria_ids => []
+          :categoria_ids => [],
+          :anexo_desplazamiento_attributes => [
+              :fecha_localizada,
+              :id, 
+              :desplazamiento_id,
+              :_destroy,
+              :sip_anexo_attributes => [
+                :adjunto, 
+                :descripcion, 
+                :id, 
+                :_destroy
+              ]
+            ]
         ]
       ]
     end

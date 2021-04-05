@@ -80,20 +80,18 @@ GIT
       rails
 
 GIT
-  remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: eca9d3cfde8f6df87d7799111c098726d10b64a7
-  branch: main
-  specs:
-    sivel2_sjr (2.0b10)
-      rails
-      sivel2_gen
-
-GIT
   remote: https://github.com/vtamara/cocoon.git
   revision: 9f1892403c3dbdb8f7d457a06f237ff58e7dfb07
   branch: new_id_with_ajax
   specs:
     cocoon (1.2.11)
+
+PATH
+  remote: ../sivel2_sjr
+  specs:
+    sivel2_sjr (2.0b10)
+      rails
+      sivel2_gen
 
 GEM
   remote: https://rubygems.org/

@@ -74,6 +74,7 @@
           <td>No</td>
           <td>No responde</td>
           <td>En valoración</td>
+          <td>Excluido</td>
         </tr>
         <tr>
           <td>Declaración en el RUV</td>
@@ -85,19 +86,20 @@
               </td> 
           <% end %>
         </tr>
+        <tr>
+          <td>Inclusión</td>
+          <%= f.collection_radio_buttons( :id_inclusion,
+            Sivel2Sjr::Inclusion.where(fechadeshabilitacion: nil).where.not(id: 0).order(:id), :id, :nombre,
+            { checked: f.object.id_inclusion ? f.object.id_inclusion : 0 }) do |b| %>
+              <td> 
+              <%= b.label(class: "mr-4") {b.radio_button } %>
+              </td> 
+          <% end %>
+        </tr>
       </tbody>
     </table>
   </div>
 </div>
-<%= f.association :inclusion,
-  collection: Sivel2Sjr::Inclusion.where(fechadeshabilitacion: nil),
-  label_method: :nombre,
-  value_method: :id,
-  input_html: {
-    "data-toggle" => 'tooltip',
-    "title" => 'Inscripción del solicitante en el Registro Único de Víctimas'
-  }
-%>
 <%= f.association :acreditacion,
   collection: Sivel2Sjr::Acreditacion.where(fechadeshabilitacion: nil),
   label_method: :nombre,

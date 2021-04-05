@@ -30,21 +30,19 @@
   </div>
 </div>
 
-<%= f.input :otrosdatos, as: :text %>
-<%= f.input :declaro, collection: [["SI", :S], 
+<!--%= f.input :otrosdatos, as: :text %-->
+<!--%= f.input :declaro, collection: [["SI", :S], 
   ["NO", :N], ["NO SABE / NO RESPONDE", :R]], 
   include_blank: false,
   input_html: {
     "data-toggle" => 'tooltip',
     "title" => 'Registre si el solicitante ha declarado ante alguna entidad'
-  }
-%>
-<%= f.input :hechosdeclarados, as: :text,
+  } %-->
+<!--%= f.input :hechosdeclarados, as: :text,
   input_html: {
     "data-toggle" => 'tooltip',
     "title" => 'Descripción de los hechos declarados'
-  }
-%>
+  } %-->
 <div class="row">
   <div class="col-md-6">
     <table style="width:100%">
@@ -105,33 +103,28 @@
     %>
   </div>
 </div>
-<%= f.input :retornado, 
+<!--%= f.input :retornado, 
     boolean_style: :nested,
-    inline_label: Sivel2Sjr::Desplazamiento.human_attribute_name(:retornado)
-%>
-<%= f.input :reubicado, 
+    inline_label: Sivel2Sjr::Desplazamiento.human_attribute_name(:retornado) %-->
+<!--%= f.input :reubicado, 
     boolean_style: :nested,
     inline_label: Sivel2Sjr::Desplazamiento.human_attribute_name(:reubicado)
-%>
-<%= f.input :connacionalretorno, 
+%-->
+<!--%= f.input :connacionalretorno, 
     boolean_style: :nested,
-    inline_label: Sivel2Sjr::Desplazamiento.human_attribute_name(:connacionalretorno)
-%>
-<%= f.input :acompestado, 
+    inline_label: Sivel2Sjr::Desplazamiento.human_attribute_name(:connacionalretorno) %-->
+<!--%= f.input :acompestado, 
     boolean_style: :nested,
-    inline_label: Sivel2Sjr::Desplazamiento.human_attribute_name(:acompestado)
-%>
-<%= f.input :connacionaldeportado, 
+    inline_label: Sivel2Sjr::Desplazamiento.human_attribute_name(:acompestado) %-->
+<!--%= f.input :connacionaldeportado, 
     boolean_style: :nested,
-    inline_label: Sivel2Sjr::Desplazamiento.human_attribute_name(:connacionaldeportado)
-%>
-<%= f.input :oficioantes,
+    inline_label: Sivel2Sjr::Desplazamiento.human_attribute_name(:connacionaldeportado) %-->
+<!--%= f.input :oficioantes,
   input_html: { 
     value: f.object.oficioantes || '',
     "data-toggle" => 'tooltip',
     "title" => 'Ocupación antes del desplazamiento'
-  }
-%>
+  } %-->
 <%= f.association :modalidadtierra,
   collection: Sivel2Sjr::Modalidadtierra .where(fechadeshabilitacion: nil),
   label_method: :nombre,
@@ -151,7 +144,7 @@
       %>
   </div>
 </div>
-<%= f.input :documentostierra, as: :text %>
+<!-- %= f.input :documentostierra, as: :text %-->
 
 <div class="row">
   <div class="col-md-1">
@@ -166,10 +159,9 @@
   </div>
 </div>
 
-<%= f.association :categoria, 
+<!-- %= f.association :categoria, 
   collection: Sivel2Gen::Categoria.habilitados.
     where("tipocat <> 'I'"),
   label_method: :nombre, 
-  value_method: :id 
-%>
+  value_method: :id %-->
 

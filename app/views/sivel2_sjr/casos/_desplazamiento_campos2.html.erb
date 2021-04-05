@@ -121,4 +121,28 @@
     inline_label: Sivel2Sjr::Desplazamiento.human_attribute_name(:protegiorupta)
 %>
 <%= f.input :documentostierra, as: :text %>
-
+<div class="row">
+  <div class="col-md-12">
+    <table style="width:100%">
+      <tbody>
+        <tr>
+          <td></td>
+          <td>Si</td>
+          <td>No</td>
+          <td>No responde</td>
+          <td>En valoración</td>
+        </tr>
+        <tr>
+          <td>Declaración e Inclusión en el RUV</td>
+          <%= f.collection_radio_buttons( :declaracionruv_id, 
+            Declaracionruv.all, :id, :nombre,
+            { checked: f.object.declaracionruv_id ? f.object.declaracionruv_id : 3 }) do |b| %>
+              <td> 
+              <%= b.label(class: "mr-4") {b.radio_button} %>
+              </td> 
+          <% end %>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -79,6 +79,7 @@ class Ability < Sivel2Sjr::Ability
     ['', 'causaagresion'],
     ['', 'causamigracion'],
     ['', 'depgifmm'],
+    ['', 'declaracionruv'],
     ['', 'dificultadmigracion'],
     ['', 'discapacidad'],
     ['', 'espaciopart'],

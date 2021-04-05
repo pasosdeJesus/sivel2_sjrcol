@@ -334,6 +334,7 @@ module Sivel2Sjr
           :acompestado, 
           :connacionaldeportado,
           :connacionalretorno,
+          :declaracionruv_id,
           :declaro, 
           :descripcion, 
           :documentostierra,

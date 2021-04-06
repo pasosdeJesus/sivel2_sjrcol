@@ -68,28 +68,41 @@
           <td>No</td>
           <td>No responde</td>
           <td>En valoración</td>
+          <td>Excluido</td>
         </tr>
         <tr>
           <td>Declaración en el RUV</td>
           <%= f.collection_radio_buttons( :declaracionruv_id, 
-            Declaracionruv.all.order(:id), :id, :nombre,
+            ::Declaracionruv.all.order(:id), :id, :nombre,
             { checked: f.object.declaracionruv_id ? f.object.declaracionruv_id : 3 }) do |b| %>
               <td> 
               <%= b.label(class: "mr-4") {b.radio_button} %>
               </td> 
           <% end %>
         </tr>
+        <tr>
+          <td><%= Sivel2Sjr::Desplazamiento.human_attribute_name(
+            :inclusion) %></td>
+          <%= f.collection_radio_buttons( 
+              :id_inclusion, 
+              Sivel2Sjr::Inclusion.all.habilitados.reorder(:pospres), 
+              :id, :nombre,
+              { checked: f.object.id_inclusion ? 
+                f.object.id_inclusion : 3 }) do |b| %>
+              <td> 
+                <%= b.label(class: "mr-4") {b.radio_button} %>
+              </td> 
+            <% end %>
+<!--
+              input_html: {
+                "data-toggle" => 'tooltip',
+                "title" => 'Inscripción del solicitante en el '\
+                'Registro Único de Víctimas'
+              }
+-->
+        </tr>
       </tbody>
     </table>
-    <%= f.association :inclusion,
-      collection: Sivel2Sjr::Inclusion.where(fechadeshabilitacion: nil),
-      label_method: :nombre,
-      value_method: :id,
-      input_html: {
-        "data-toggle" => 'tooltip',
-        "title" => 'Inscripción del solicitante en el Registro Único de Víctimas'
-      }
-    %>
   </div>
   <div class="col-md-6">
     <%= f.input :fechadeclaracion, 

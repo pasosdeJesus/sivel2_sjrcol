@@ -945,6 +945,8 @@ class Ability < Sivel2Sjr::Ability
         can :manage, Cor1440Gen::Proyectofinanciero
         can :manage, Cor1440Gen::Sectoractor
 
+        can :manage, Sip::Respaldo7z
+
         can :manage, Heb412Gen::Doc
         can :manage, Heb412Gen::Plantilladoc
         can :manage, Heb412Gen::Plantillahcm

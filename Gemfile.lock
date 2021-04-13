@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: 29c9a26e781cd20cfe2518bf587ee11af387002d
+  revision: 05f98373642314c5fb7b7b2d6f22d2429564e5de
   branch: main
   specs:
     cor1440_gen (1.0b3)
@@ -14,7 +14,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 6942d90e6df86998305538971c651fc01b1994e5
+  revision: 69d1104a5092097aad7378cecf51846b2a643f05
   branch: main
   specs:
     heb412_gen (1.0.b6)
@@ -25,7 +25,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/mr519_gen.git
-  revision: 6d265ec88f4fa9957f036e9c68103a7391be14af
+  revision: 1969c8b677adb638393777f7b0fb5c701494a564
   branch: main
   specs:
     mr519_gen (0.2.0)
@@ -34,7 +34,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: 7b75626fb37230fa228719da58457c08a4820ef2
+  revision: c2aab3e771089510a0c6828cc6f61211717d7f75
   branch: main
   specs:
     sal7711_gen (1.0.b3)
@@ -43,7 +43,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: 8e4488a9a5499af71c84f47e73f8cd06489563c7
+  revision: 5f63f5e409aa0fe4800f7a0aa92470eb44aced45
   branch: main
   specs:
     sal7711_web (1.0.a3)
@@ -52,7 +52,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: e29da93b88cc3923f87a6ccc8762e9aa5413e388
+  revision: b00dd2790b564a8aefe6104e0ddeb5810e4478fa
   branch: main
   specs:
     sip (2.0.b11)
@@ -71,7 +71,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: cf14bd3c171d77fd854d6937635df7f61b9f854b
+  revision: ceb260313dcb22b11afb223fce0d413d361a7c93
   branch: main
   specs:
     sivel2_gen (2.0b14)
@@ -81,7 +81,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 5603565ff09a3200d72d31d44bd7f4bbe32ba003
+  revision: 6e3326a3c81f0b744138bba178f5772f846d8431
   branch: main
   specs:
     sivel2_sjr (2.0b10)
@@ -98,60 +98,60 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
-    actioncable (6.1.3)
-      actionpack (= 6.1.3)
-      activesupport (= 6.1.3)
+    actioncable (6.1.3.1)
+      actionpack (= 6.1.3.1)
+      activesupport (= 6.1.3.1)
       nio4r (~> 2.0)
       websocket-driver (>= 0.6.1)
-    actionmailbox (6.1.3)
-      actionpack (= 6.1.3)
-      activejob (= 6.1.3)
-      activerecord (= 6.1.3)
-      activestorage (= 6.1.3)
-      activesupport (= 6.1.3)
+    actionmailbox (6.1.3.1)
+      actionpack (= 6.1.3.1)
+      activejob (= 6.1.3.1)
+      activerecord (= 6.1.3.1)
+      activestorage (= 6.1.3.1)
+      activesupport (= 6.1.3.1)
       mail (>= 2.7.1)
-    actionmailer (6.1.3)
-      actionpack (= 6.1.3)
-      actionview (= 6.1.3)
-      activejob (= 6.1.3)
-      activesupport (= 6.1.3)
+    actionmailer (6.1.3.1)
+      actionpack (= 6.1.3.1)
+      actionview (= 6.1.3.1)
+      activejob (= 6.1.3.1)
+      activesupport (= 6.1.3.1)
       mail (~> 2.5, >= 2.5.4)
       rails-dom-testing (~> 2.0)
-    actionpack (6.1.3)
-      actionview (= 6.1.3)
-      activesupport (= 6.1.3)
+    actionpack (6.1.3.1)
+      actionview (= 6.1.3.1)
+      activesupport (= 6.1.3.1)
       rack (~> 2.0, >= 2.0.9)
       rack-test (>= 0.6.3)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.0, >= 1.2.0)
-    actiontext (6.1.3)
-      actionpack (= 6.1.3)
-      activerecord (= 6.1.3)
-      activestorage (= 6.1.3)
-      activesupport (= 6.1.3)
+    actiontext (6.1.3.1)
+      actionpack (= 6.1.3.1)
+      activerecord (= 6.1.3.1)
+      activestorage (= 6.1.3.1)
+      activesupport (= 6.1.3.1)
       nokogiri (>= 1.8.5)
-    actionview (6.1.3)
-      activesupport (= 6.1.3)
+    actionview (6.1.3.1)
+      activesupport (= 6.1.3.1)
       builder (~> 3.1)
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.1, >= 1.2.0)
-    activejob (6.1.3)
-      activesupport (= 6.1.3)
+    activejob (6.1.3.1)
+      activesupport (= 6.1.3.1)
       globalid (>= 0.3.6)
-    activemodel (6.1.3)
-      activesupport (= 6.1.3)
-    activerecord (6.1.3)
-      activemodel (= 6.1.3)
-      activesupport (= 6.1.3)
-    activestorage (6.1.3)
-      actionpack (= 6.1.3)
-      activejob (= 6.1.3)
-      activerecord (= 6.1.3)
-      activesupport (= 6.1.3)
-      marcel (~> 0.3.1)
-      mimemagic (~> 0.3.2)
-    activesupport (6.1.3)
+    activemodel (6.1.3.1)
+      activesupport (= 6.1.3.1)
+    activerecord (6.1.3.1)
+      activemodel (= 6.1.3.1)
+      activesupport (= 6.1.3.1)
+    activestorage (6.1.3.1)
+      actionpack (= 6.1.3.1)
+      activejob (= 6.1.3.1)
+      activerecord (= 6.1.3.1)
+      activesupport (= 6.1.3.1)
+      marcel (~> 1.0.0)
+      mini_mime (~> 1.0.2)
+    activesupport (6.1.3.1)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
@@ -162,7 +162,7 @@ GEM
     andand (1.3.3)
     bcrypt (3.1.16)
     bindex (0.8.1)
-    bootsnap (1.7.2)
+    bootsnap (1.7.3)
       msgpack (~> 1.0)
     bootstrap-datepicker-rails (1.9.0.1)
       railties (>= 3.0)
@@ -177,7 +177,7 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
-    chartkick (3.4.2)
+    chartkick (4.0.3)
     childprocess (3.0.0)
     choice (0.2.0)
     chosen-rails (1.9.0)
@@ -214,7 +214,7 @@ GEM
     ffi (1.15.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
-    i18n (1.8.9)
+    i18n (1.8.10)
       concurrent-ruby (~> 1.0)
     jbuilder (2.11.2)
       activesupport (>= 5.0.0)
@@ -227,24 +227,25 @@ GEM
     json (2.5.1)
     kgio (2.11.3)
     libxml-ruby (3.2.1)
-    loofah (2.9.0)
+    loofah (2.9.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.7.1)
       mini_mime (>= 0.1.1)
-    marcel (0.3.3)
-      mimemagic (~> 0.3.2)
+    marcel (1.0.1)
     method_source (1.0.0)
     mime-types (3.3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2021.0225)
-    mimemagic (0.3.5)
-    mini_mime (1.0.2)
+    mimemagic (0.3.10)
+      nokogiri (~> 1)
+      rake
+    mini_mime (1.0.3)
     mini_portile2 (2.5.0)
     minitest (5.14.4)
     msgpack (1.4.2)
     nio4r (2.5.7)
-    nokogiri (1.11.2)
+    nokogiri (1.11.3)
       mini_portile2 (~> 2.5.0)
       racc (~> 1.4)
     odf-report (0.7.2)
@@ -281,20 +282,20 @@ GEM
       rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
-    rails (6.1.3)
-      actioncable (= 6.1.3)
-      actionmailbox (= 6.1.3)
-      actionmailer (= 6.1.3)
-      actionpack (= 6.1.3)
-      actiontext (= 6.1.3)
-      actionview (= 6.1.3)
-      activejob (= 6.1.3)
-      activemodel (= 6.1.3)
-      activerecord (= 6.1.3)
-      activestorage (= 6.1.3)
-      activesupport (= 6.1.3)
+    rails (6.1.3.1)
+      actioncable (= 6.1.3.1)
+      actionmailbox (= 6.1.3.1)
+      actionmailer (= 6.1.3.1)
+      actionpack (= 6.1.3.1)
+      actiontext (= 6.1.3.1)
+      actionview (= 6.1.3.1)
+      activejob (= 6.1.3.1)
+      activemodel (= 6.1.3.1)
+      activerecord (= 6.1.3.1)
+      activestorage (= 6.1.3.1)
+      activesupport (= 6.1.3.1)
       bundler (>= 1.15.0)
-      railties (= 6.1.3)
+      railties (= 6.1.3.1)
       sprockets-rails (>= 2.0.0)
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
@@ -309,9 +310,9 @@ GEM
     rails-i18n (6.0.0)
       i18n (>= 0.7, < 2)
       railties (>= 6.0.0, < 7)
-    railties (6.1.3)
-      actionpack (= 6.1.3)
-      activesupport (= 6.1.3)
+    railties (6.1.3.1)
+      actionpack (= 6.1.3.1)
+      activesupport (= 6.1.3.1)
       method_source
       rake (>= 0.8.7)
       thor (~> 1.0)
@@ -322,7 +323,7 @@ GEM
     responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)
-    rexml (3.2.4)
+    rexml (3.2.5)
     rspreadsheet (0.5.3)
       andand (>= 1.3)
       rubyzip (>= 1.3)
@@ -363,13 +364,13 @@ GEM
     tiny-color-rails (0.0.2)
       railties (>= 3.0)
     ttfunk (1.7.0)
-    twitter_cldr (6.4.0)
+    twitter_cldr (6.6.0)
       camertron-eprun
       cldr-plurals-runtime-rb (~> 1.1)
       tzinfo
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
-    unicorn (5.8.0)
+    unicorn (6.0.0)
       kgio (~> 2.6)
       raindrops (~> 0.7)
     warden (1.2.9)
@@ -447,4 +448,4 @@ DEPENDENCIES
   will_paginate
 
 BUNDLED WITH
-   2.2.11
+   2.2.15

@@ -7,7 +7,7 @@ module Cor1440Gen
     include Cor1440Gen::Concerns::Models::Actividadpf
 
     belongs_to :indicadorgifmm, foreign_key: 'indicadorgifmm_id',
-      optional: true, dependent: :destroy,
+      optional: true, 
       class_name: 'Indicadorgifmm'
     
     def presenta_detallefinanciero_pfacpf

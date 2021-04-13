@@ -166,7 +166,6 @@ module Sivel2Sjr
     end
 
     def update
-
       # Procesar ubicacionespre de migración
       (caso_params[:migracion_attributes] || []).each do |clave, mp|
         mi = Sivel2Sjr::Migracion.find(mp[:id].to_i)

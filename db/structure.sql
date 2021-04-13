@@ -800,9 +800,9 @@ CREATE TABLE public.sip_ubicacion (
 CREATE TABLE public.sivel2_sjr_desplazamiento (
     id_caso integer NOT NULL,
     fechaexpulsion date NOT NULL,
-    id_expulsion integer,
+    id_expulsion_porborrar integer,
     fechallegada date NOT NULL,
-    id_llegada integer,
+    id_llegada_porborrar integer,
     id_clasifdesp integer DEFAULT 0 NOT NULL,
     id_tipodesp integer DEFAULT 0 NOT NULL,
     descripcion character varying(5000),
@@ -831,6 +831,8 @@ CREATE TABLE public.sivel2_sjr_desplazamiento (
     id integer DEFAULT nextval('public.desplazamiento_seq'::regclass) NOT NULL,
     establecerse boolean,
     declaracionruv_id integer,
+    expulsionubicacionpre_id integer,
+    llegadaubicacionpre_id integer,
     CONSTRAINT desplazamiento_declaro_check CHECK (((declaro = 'S'::bpchar) OR (declaro = 'N'::bpchar) OR (declaro = 'R'::bpchar)))
 );
 
@@ -843,7 +845,7 @@ CREATE VIEW public.ultimodesplazamiento AS
  SELECT sivel2_sjr_desplazamiento.id,
     s.id_caso,
     s.fechaexpulsion,
-    sivel2_sjr_desplazamiento.id_expulsion
+    sivel2_sjr_desplazamiento.id_expulsion_porborrar AS id_expulsion
    FROM public.sivel2_sjr_desplazamiento,
     ( SELECT sivel2_sjr_desplazamiento_1.id_caso,
             max(sivel2_sjr_desplazamiento_1.fechaexpulsion) AS fechaexpulsion
@@ -929,7 +931,7 @@ CREATE VIEW public.cmunex AS
     public.sip_ubicacion ubicacion,
     public.sivel2_gen_victima victima,
     public.sivel2_sjr_casosjr casosjr
-  WHERE ((casosjr.id_caso = desplazamiento.id_caso) AND (desplazamiento.id_caso = victima.id_caso) AND (desplazamiento.id_expulsion = ubicacion.id));
+  WHERE ((casosjr.id_caso = desplazamiento.id_caso) AND (desplazamiento.id_caso = victima.id_caso) AND (desplazamiento.id_expulsion_porborrar = ubicacion.id));
 
 
 --
@@ -959,7 +961,7 @@ CREATE VIEW public.cmunrec AS
     public.sip_ubicacion ubicacion,
     public.sivel2_gen_victima victima,
     public.sivel2_sjr_casosjr casosjr
-  WHERE ((casosjr.id_caso = desplazamiento.id_caso) AND (desplazamiento.id_caso = victima.id_caso) AND (desplazamiento.id_llegada = ubicacion.id));
+  WHERE ((casosjr.id_caso = desplazamiento.id_caso) AND (desplazamiento.id_caso = victima.id_caso) AND (desplazamiento.id_llegada_porborrar = ubicacion.id));
 
 
 --
@@ -5364,13 +5366,13 @@ CREATE VIEW public.sivel2_gen_conscaso1 AS
             public.sip_municipio municipio,
             public.sip_ubicacion ubicacion,
             public.sivel2_sjr_desplazamiento desplazamiento
-          WHERE ((desplazamiento.fechaexpulsion = caso.fecha) AND (desplazamiento.id_caso = caso.id) AND (desplazamiento.id_expulsion = ubicacion.id) AND (ubicacion.id_departamento = departamento.id) AND (ubicacion.id_municipio = municipio.id))), ', '::text) AS expulsion,
+          WHERE ((desplazamiento.fechaexpulsion = caso.fecha) AND (desplazamiento.id_caso = caso.id) AND (desplazamiento.id_expulsion_porborrar = ubicacion.id) AND (ubicacion.id_departamento = departamento.id) AND (ubicacion.id_municipio = municipio.id))), ', '::text) AS expulsion,
     array_to_string(ARRAY( SELECT (((departamento.nombre)::text || ' / '::text) || (municipio.nombre)::text)
            FROM public.sip_departamento departamento,
             public.sip_municipio municipio,
             public.sip_ubicacion ubicacion,
             public.sivel2_sjr_desplazamiento desplazamiento
-          WHERE ((desplazamiento.fechaexpulsion = caso.fecha) AND (desplazamiento.id_caso = caso.id) AND (desplazamiento.id_llegada = ubicacion.id) AND (ubicacion.id_departamento = departamento.id) AND (ubicacion.id_municipio = municipio.id))), ', '::text) AS llegada,
+          WHERE ((desplazamiento.fechaexpulsion = caso.fecha) AND (desplazamiento.id_caso = caso.id) AND (desplazamiento.id_llegada_porborrar = ubicacion.id) AND (ubicacion.id_departamento = departamento.id) AND (ubicacion.id_municipio = municipio.id))), ', '::text) AS llegada,
     caso.memo
    FROM ((((((public.sivel2_sjr_casosjr casosjr
      JOIN public.sivel2_gen_caso caso ON ((casosjr.id_caso = caso.id)))
@@ -10644,7 +10646,7 @@ CREATE INDEX indice_sivel2_sjr_desplazamiento_on_id_caso ON public.sivel2_sjr_de
 -- Name: indice_sivel2_sjr_desplazamiento_on_id_llegada; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX indice_sivel2_sjr_desplazamiento_on_id_llegada ON public.sivel2_sjr_desplazamiento USING btree (id_llegada);
+CREATE INDEX indice_sivel2_sjr_desplazamiento_on_id_llegada ON public.sivel2_sjr_desplazamiento USING btree (id_llegada_porborrar);
 
 
 --
@@ -11287,7 +11289,7 @@ ALTER TABLE ONLY public.despacho
 --
 
 ALTER TABLE ONLY public.sivel2_sjr_desplazamiento
-    ADD CONSTRAINT desplazamiento_expulsion_fkey FOREIGN KEY (id_expulsion) REFERENCES public.sip_ubicacion(id);
+    ADD CONSTRAINT desplazamiento_expulsion_fkey FOREIGN KEY (id_expulsion_porborrar) REFERENCES public.sip_ubicacion(id);
 
 
 --
@@ -11343,7 +11345,7 @@ ALTER TABLE ONLY public.sivel2_sjr_desplazamiento
 --
 
 ALTER TABLE ONLY public.sivel2_sjr_desplazamiento
-    ADD CONSTRAINT desplazamiento_llegada_fkey FOREIGN KEY (id_llegada) REFERENCES public.sip_ubicacion(id);
+    ADD CONSTRAINT desplazamiento_llegada_fkey FOREIGN KEY (id_llegada_porborrar) REFERENCES public.sip_ubicacion(id);
 
 
 --
@@ -12387,6 +12389,14 @@ ALTER TABLE ONLY public.mr519_gen_valorcampo
 
 
 --
+-- Name: sivel2_sjr_desplazamiento fk_rails_8c6497f428; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sivel2_sjr_desplazamiento
+    ADD CONSTRAINT fk_rails_8c6497f428 FOREIGN KEY (llegadaubicacionpre_id) REFERENCES public.sip_ubicacionpre(id);
+
+
+--
 -- Name: sip_grupo_usuario fk_rails_8d24f7c1c0; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -13152,6 +13162,14 @@ ALTER TABLE ONLY public.cor1440_gen_formulario_tipoindicador
 
 ALTER TABLE ONLY public.cor1440_gen_anexo_proyectofinanciero
     ADD CONSTRAINT fk_rails_fd94296801 FOREIGN KEY (anexo_id) REFERENCES public.sip_anexo(id);
+
+
+--
+-- Name: sivel2_sjr_desplazamiento fk_rails_fe4eac003a; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sivel2_sjr_desplazamiento
+    ADD CONSTRAINT fk_rails_fe4eac003a FOREIGN KEY (expulsionubicacionpre_id) REFERENCES public.sip_ubicacionpre(id);
 
 
 --
@@ -14327,6 +14345,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210311041939'),
 ('20210312045631'),
 ('20210312050413'),
+('20210318024306'),
+('20210318040227'),
 ('20210328012658'),
 ('20210401194637'),
 ('20210401210102'),

@@ -30,6 +30,7 @@ class ActiveSupport::TestCase
  
   if Sip::Tclase.all.count == 0
     load "#{Rails.root}/db/seeds.rb"
+    MyApplication::Application.load_tasks
     Rake::Task['sip:indices'].invoke
   end
 

@@ -17,9 +17,13 @@ class CambiaUbidesplazamientoAUbicacionpre < ActiveRecord::Migration[6.1]
           desplazamiento.expulsionubicacionpre_id = ubicacionpre[0].id
         else
          # byebug
-          puts "En ubicacionpre no se encontró de expulsión pais=#{ubiex.id_pais}, "\
-            "departamento=#{ubiex.id_departamento}, municipio=#{ubiex.id_municipio}, "\
-            "clase=#{ubiex.id_clase}"
+          puts "En ubicacionpre no se encontró de expulsión "\
+            "pais=#{ubiex.id_pais}, "\
+            "departamento=#{ubiex.id_departamento}, "\
+            "municipio=#{ubiex.id_municipio}, "\
+            "clase=#{ubiex.id_clase}, "\
+            "desplazamiento=#{desplazamiento.id}, "\
+            "caso=#{desplazamiento.caso_id} "
           exit 1
         end
       end
@@ -35,13 +39,17 @@ class CambiaUbidesplazamientoAUbicacionpre < ActiveRecord::Migration[6.1]
           desplazamiento.llegadaubicacionpre_id = ubicacionpre[0].id
         else
          # byebug
-          puts "En ubicacionpre no se encontró de expulsión pais=#{ubilleg.id_pais}, "\
-            "departamento=#{ubilleg.id_departamento}, municipio=#{ubilleg.id_municipio}, "\
-            "clase=#{ubilleg.id_clase}"
+          puts "En ubicacionpre no se encontró llegada "\
+            "pais=#{ubilleg.id_pais}, "\
+            "departamento=#{ubilleg.id_departamento}, "\
+            "municipio=#{ubilleg.id_municipio}, "\
+            "clase=#{ubilleg.id_clase}, "\
+            "desplazamiento=#{desplazamiento.id}, "\
+            "caso=#{desplazamiento.caso_id} "
           exit 1
         end
       end
-      desplazamiento.save! if desplazamiento.save 
+      desplazamiento.save(validate: false)
       c += 1
       p = c*100/t
       if p.to_i > ultp 
@@ -55,7 +63,7 @@ class CambiaUbidesplazamientoAUbicacionpre < ActiveRecord::Migration[6.1]
     Sivel2Sjr::Desplazamiento.all.each do |desplazamiento|
       desplazamiento.expulsionubicacionpre_id = nil
       desplazamiento.llegadaubicacionpre_id = nil
-      desplazamiento.save! if desplazamiento.save 
+      desplazamiento.save(validate: false)
     end
   end
 

@@ -4,37 +4,10 @@ class Sivel2Sjr::Migracion < ActiveRecord::Base
 
   extend ::AccesoresUbicacionpre
 
-#  attr_accessor :destino_pais_id,
-#    :destino_departamento_id,
-#    :destino_municipio_id,
-#    :destino_clase_id,
-#    :destino_sitio, 
-#    :destino_lugar, 
-#    :destino_tsitio_id,
-#    :destino_latitud, 
-#    :destino_longitud
   accesores_ubicacionpre :destino
 
-#  attr_accessor :llegada_pais_id,
-#    :llegada_departamento_id,
-#    :llegada_municipio_id,
-#    :llegada_clase_id,
-#    :llegada_sitio, 
-#    :llegada_lugar, 
-#    :llegada_tsitio_id,
-#    :llegada_latitud, 
-#    :llegada_longitud
   accesores_ubicacionpre :llegada
 
-#  attr_accessor :salida_pais_id,
-#    :salida_departamento_id,
-#    :salida_municipio_id,
-#    :salida_clase_id,
-#    :salida_sitio, 
-#    :salida_lugar, 
-#    :salida_tsitio_id,
-#    :salida_latitud, 
-#    :salida_longitud
   accesores_ubicacionpre :salida
 
   attr_accessor :tiempoenpais

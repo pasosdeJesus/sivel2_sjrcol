@@ -1,102 +1,158 @@
 <div class="row">
-  <div class="col-sm-6">
+  <div class="col-sm-4">
+    <%= f.association :tipodesp,
+      collection: Sivel2Sjr::Tipodesp.where(fechadeshabilitacion: nil),
+      include_blank: false,
+      label_method: :nombre,
+      value_method: :id 
+    %>
+  </div>
+  <div class="col-sm-4">
     <label>Modalidad geográfica:</label>
     <input type="text" name="clasificacion" readonly>
   </div>
-  <div class="col-sm-6">
+  <div class="col-sm-4">
     <label>Sub-modalidad geográfica:</label>
     <input type="text" name="subclasificacion" readonly>
   </div>
 </div>
 
-<%= f.association :tipodesp,
-  collection: Sivel2Sjr::Tipodesp.where(fechadeshabilitacion: nil),
-  include_blank: false,
-  label_method: :nombre,
-  value_method: :id 
-%>
-<%= f.association :categoria, 
-  collection: Sivel2Gen::Categoria.habilitados.
-    where("tipocat <> 'I'"),
-  label_method: :nombre, 
-  value_method: :id 
-%>
-<%= f.input :otrosdatos, as: :text %>
-<%= f.input :declaro, collection: [["SI", :S], 
+<div class="row">
+  <div class="col-md-6">
+    <table style="width:100%">
+      <tbody>
+        <tr>
+          <td></td>
+          <td>Si</td>
+          <td>No</td>
+          <td>No responde</td>
+        </tr>
+        <tr>
+          <td>¿Piensa establecerse en este lugar?</td>
+          <%= f.collection_radio_buttons( :establecerse, 
+            [[true, 'Si'] ,[false, 'No'] ,['', 'No Responde']], :first, :last,
+            {checked: f.object.establecerse.nil? ? '' : 
+             f.object.establecerse }  ) do |b|%>
+              <td> 
+                <%= b.label(class: "mr-4") {b.radio_button} %>
+              </td> 
+          <% end %>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>
+
+
+<!--%= f.input :otrosdatos, as: :text %-->
+<!--%= f.input :declaro, collection: [["SI", :S], 
   ["NO", :N], ["NO SABE / NO RESPONDE", :R]], 
   include_blank: false,
   input_html: {
     "data-toggle" => 'tooltip',
     "title" => 'Registre si el solicitante ha declarado ante alguna entidad'
-  }
-%>
-<%= f.input :hechosdeclarados, as: :text,
+  } %-->
+<!--%= f.input :hechosdeclarados, as: :text,
   input_html: {
     "data-toggle" => 'tooltip',
     "title" => 'Descripción de los hechos declarados'
-  }
-%>
-<%= f.input :fechadeclaracion, 
-  input_html: { 
-    "data-behaviour" => "datepicker",
-    value: f.object.fechadeclaracion || '' 
-  },
-  as: :string
-%>
-<%= f.association :declaroante,
-  collection: Sivel2Sjr::Declaroante.where(fechadeshabilitacion: nil),
-  label_method: :nombre,
-  value_method: :id,
-  input_html: {
-    "data-toggle" => 'tooltip',
-    "title" => 'Entidad ante la cual rindió su declaración'
-  }
-%>
-<%= f.association :inclusion,
-  collection: Sivel2Sjr::Inclusion.where(fechadeshabilitacion: nil),
-  label_method: :nombre,
-  value_method: :id,
-  input_html: {
-    "data-toggle" => 'tooltip',
-    "title" => 'Inscripción del solicitante en el Registro Único de Víctimas'
-  }
-%>
-<%= f.association :acreditacion,
-  collection: Sivel2Sjr::Acreditacion.where(fechadeshabilitacion: nil),
-  label_method: :nombre,
-  value_method: :id,
-  input_html: {
-    "data-toggle" => 'tooltip',
-    "title" => 'Medio que tiene el solicitante para certificar su situación'
-  }
-%>
-<%= f.input :retornado, 
+  } %-->
+<div class="row">
+  <div class="col-md-6">
+    <table style="width:100%">
+      <tbody>
+        <tr>
+          <td></td>
+          <td>Si</td>
+          <td>No</td>
+          <td>No responde</td>
+          <td>En valoración</td>
+          <td>Excluido</td>
+        </tr>
+        <tr>
+          <td>Declaración en el RUV</td>
+          <%= f.collection_radio_buttons( :declaracionruv_id, 
+            ::Declaracionruv.all.order(:id), :id, :nombre,
+            { checked: f.object.declaracionruv_id ? f.object.declaracionruv_id : 3 }) do |b| %>
+              <td> 
+              <%= b.label(class: "mr-4") {b.radio_button} %>
+              </td> 
+          <% end %>
+        </tr>
+        <tr>
+          <td><%= Sivel2Sjr::Desplazamiento.human_attribute_name(
+            :inclusion) %></td>
+          <%= f.collection_radio_buttons( 
+              :id_inclusion, 
+              Sivel2Sjr::Inclusion.all.habilitados.reorder(:pospres), 
+              :id, :nombre,
+              { checked: f.object.id_inclusion ? 
+                f.object.id_inclusion : 3 }) do |b| %>
+              <td> 
+                <%= b.label(class: "mr-4") {b.radio_button} %>
+              </td> 
+            <% end %>
+<!--
+              input_html: {
+                "data-toggle" => 'tooltip',
+                "title" => 'Inscripción del solicitante en el '\
+                'Registro Único de Víctimas'
+              }
+-->
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-md-6">
+    <%= f.input :fechadeclaracion, 
+      input_html: { 
+      "data-behaviour" => "datepicker",
+      value: f.object.fechadeclaracion || '' },
+      as: :string %>
+
+    <%= f.association :declaroante,
+      collection: Sivel2Sjr::Declaroante.where(fechadeshabilitacion: nil),
+      label_method: :nombre,
+      value_method: :id,
+      input_html: {
+        "data-toggle" => 'tooltip',
+        "title" => 'Entidad ante la cual rindió su declaración'
+      }
+    %>
+    <%= f.association :acreditacion,
+      collection: Sivel2Sjr::Acreditacion.where(fechadeshabilitacion: nil),
+      label_method: :nombre,
+      value_method: :id,
+      input_html: {
+        "data-toggle" => 'tooltip',
+        "title" => 'Medio que tiene el solicitante para certificar su situación'
+      }
+    %>
+  </div>
+</div>
+<!--%= f.input :retornado, 
     boolean_style: :nested,
-    inline_label: Sivel2Sjr::Desplazamiento.human_attribute_name(:retornado)
-%>
-<%= f.input :reubicado, 
+    inline_label: Sivel2Sjr::Desplazamiento.human_attribute_name(:retornado) %-->
+<!--%= f.input :reubicado, 
     boolean_style: :nested,
     inline_label: Sivel2Sjr::Desplazamiento.human_attribute_name(:reubicado)
-%>
-<%= f.input :connacionalretorno, 
+%-->
+<!--%= f.input :connacionalretorno, 
     boolean_style: :nested,
-    inline_label: Sivel2Sjr::Desplazamiento.human_attribute_name(:connacionalretorno)
-%>
-<%= f.input :acompestado, 
+    inline_label: Sivel2Sjr::Desplazamiento.human_attribute_name(:connacionalretorno) %-->
+<!--%= f.input :acompestado, 
     boolean_style: :nested,
-    inline_label: Sivel2Sjr::Desplazamiento.human_attribute_name(:acompestado)
-%>
-<%= f.input :connacionaldeportado, 
+    inline_label: Sivel2Sjr::Desplazamiento.human_attribute_name(:acompestado) %-->
+<!--%= f.input :connacionaldeportado, 
     boolean_style: :nested,
-    inline_label: Sivel2Sjr::Desplazamiento.human_attribute_name(:connacionaldeportado)
-%>
-<%= f.input :oficioantes,
+    inline_label: Sivel2Sjr::Desplazamiento.human_attribute_name(:connacionaldeportado) %-->
+<!--%= f.input :oficioantes,
   input_html: { 
     value: f.object.oficioantes || '',
     "data-toggle" => 'tooltip',
     "title" => 'Ocupación antes del desplazamiento'
-  }
-%>
+  } %-->
 <%= f.association :modalidadtierra,
   collection: Sivel2Sjr::Modalidadtierra .where(fechadeshabilitacion: nil),
   label_method: :nombre,
@@ -104,11 +160,34 @@
 %>
 <%= f.input :materialesperdidos, as: :text %>
 <%= f.input :inmaterialesperdidos, as: :text %>
-<%= f.input :protegiorupta, 
-    boolean_style: :nested,
-    inline_label: Sivel2Sjr::Desplazamiento.human_attribute_name(:protegiorupta)
-%>
-<%= f.input :documentostierra, as: :text %>
+
+<div class="row">
+  <div class="col-md-6">
+    <table style="width:100%">
+      <tbody>
+        <tr>
+          <td></td>
+          <td>Si</td>
+          <td>No</td>
+          <td>No responde</td>
+        </tr>
+        <tr>
+          <td><%= Sivel2Sjr::Desplazamiento.human_attribute_name(
+            :protegiorupta) %></td>
+          <%= f.collection_radio_buttons( :protegiorupta, 
+            [[true, 'Si'] ,[false, 'No'] ,['', 'No Responde']], :first, :last,
+            {checked: f.object.protegiorupta.nil? ? '' : 
+             f.object.protegiorupta }  ) do |b|%>
+              <td> 
+                <%= b.label(class: "mr-4") {b.radio_button} %>
+              </td> 
+          <% end %>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
 <div class="row">
   <div class="col-md-12">
     <label>¿Piensa establecerse en este lugar?</label></br>
@@ -120,157 +199,59 @@
       %>
   </div>
 </div>
+<% htmlid=f.object && f.object.id ? f.object.id : 0 %>
 <% edest = !f.object.establecerse || 
   f.object.establecerse != true ? 
-  'display:none' : '' %>
+  'display: none' : 'display: block' %>
+    
+    <%= render partial: 'sip/ubicacionespre/dos_filas_confecha', locals: {
+      f: f,
+      htmlid: "destino-#{htmlid}",
+      estilogen: edest,
+      campofecha: :fechaendestino,
+      campofecha_etiqueta: 'Fecha de destino',
+      campopais: :destino_pais,
+      campopais_etiqueta: 'País de destino',
+      campodepartamento: :destino_departamento,
+      campodepartamento_etiqueta: 'Departamento de destino',
+      campomunicipio: :destino_municipio,
+      campomunicipio_etiqueta: 'Municipio de destino',
+      idresto: 'restodestino',
+      campocentropoblado: :destino_clase,
+      campocentropoblado_etiqueta: 'Centro poblado de destino',
+      campolugar: :destino_lugar,
+      campolugar_etiqueta: 'Barrio o vereda de destino',
+      campoubicacionpre_id: :destinoubicacionpre_id,
+      campositio: :destino_sitio,
+      campositio_etiqueta: 'Dirección o finca de destino',
+      campotsitio: :destino_tsitio,
+      campotsitio_etiqueta: 'Tipo de sitio de destino',
+      campolatitud: :destino_latitud,
+      campolatitud_etiqueta: 'Latitud',
+      campolongitud: :destino_longitud,
+      campolongitud_etiqueta: 'Longitud'
+    } %>
+
+
+
+<!-- %= f.input :documentostierra, as: :text %-->
+
 <div class="row">
-  <div class="col-md-3">
-    Lugar de Destino: 
+  <div class="col-md-1">
   </div>
-  <div class="col-md-2">
-    <%= f.association :destino_pais,
-      collection: Sip::Pais.habilitados,
-      label_method: :nombre,
-      value_method: :id,
-      label: false,
-      wrapper_html: {
-        style: edest
-      },
-      input_html: {
-        "data-toggle" => 'tooltip',
-        placeholder: 'País de destino',
-        'data-placeholder' => "País de destino...",
-        class: 'chosen-select' 
-      } %>
-  </div>
-  <% pa =  f.object.destino_pais_id %>
-  <% col = pa ? Sip::Departamento.habilitados.where(id_pais: pa).order(:nombre) : [] %>
-  <div class="col-md-2">
-    <%= f.association :destino_departamento,
-      collection: col,
-      label_method: :nombre,
-      value_method: :id,
-      label: false,
-      wrapper_html: {
-        style: edest
-      },
-      input_html: {
-        "data-toggle" => 'tooltip',
-        placeholder: 'Departamento',
-        'data-placeholder' => "Departamento de destino...",
-        class: 'chosen-select' 
-      } %>
-  </div>
-  <% dep =  f.object.destino_departamento_id %>
-  <% col = dep ? Sip::Municipio.habilitados.where(id_departamento: dep).order(:nombre) : [] %>
-  <div class="col-md-2">
-    <%= f.association :destino_municipio,
-      collection: col,
-      label_method: :nombre,
-      value_method: :id,
-      label: false,
-      wrapper_html: {
-        style: edest
-      },
-      input_html: {
-        "data-toggle" => 'tooltip',
-        placeholder: 'Municipio',
-        'data-placeholder' => "Municipio de destino...",
-        class: 'chosen-select' 
-      } %>
-  </div> 
-  <% mun =  f.object.destino_municipio_id %>
-  <% col = mun ? Sip::Clase.habilitados.where(id_municipio: mun).order(:nombre) : [] %>
-  <div class="col-md-2">
-    <%= f.association :destino_clase,
-      collection: col,
-      label_method: :nombre,
-      value_method: :id,
-      label: false,
-      wrapper_html: {
-        style: edest
-      },
-      input_html: {
-        "data-toggle" => 'tooltip',
-        placeholder: 'Centro poblado',
-        'data-placeholder' => "Centro poblado de destino...",
-        class: 'chosen-select' 
-      } %>
-  </div>
-  <div style="<%= edest %>" >
-    <a data-toggle="collapse" href='#restoubidestino'>
-      <h5> + </h5>
+  <div class="col-md-11">
+    <a data-toggle="collapse" href='#anexosdesplazamiento'>
+      <h5>ANEXOS DEL DESPLAZAMIENTO</h5>
     </a>
+    <div class="collapse multi-collapse" id="anexosdesplazamiento">
+      <%= render partial: 'anexo_desplazamiento', locals: {f: f} %>
+    </div>
   </div>
 </div>
-<div class="collapse div_ubicacionpre" id="restoubidestino">
-  <div class="row">
-    <% 
-      ph = 'Barrio o vereda de Destino'
-      ac = {'data-autocompleta' => 'no',
-            "data-toggle" => 'tooltip'}
-       if (!f.object.destino_lugar || f.object.destino_lugar == '')
-         ph = 'Barrio o vereda destino... (Buscar)'
-         ac = {"data-toggle" => 'tooltip'}
-       end
-     %>
-    <div class="col-md-3">
-        <%= f.input :destino_lugar,
-          label: false,
-          placeholder: ph,
-          input_html: ac
-        %>
-        <%= f.input :destinoubicacionpre_id, as: :hidden %>
-    </div>
-    <div class="col-md-3">
-      <%= f.input :destino_sitio,
-        label: false,
-        placeholder: 'Dirección o finca', 
-        input_html: {
-          "data-toggle" => 'tooltip'
-        } %>
-    </div>
-    <div class="col-md-3">
-      <%= f.association :destino_tsitio,
-        collection: Sip::Tsitio.where(fechadeshabilitacion: nil).order(:nombre),
-       label_method: :nombre,
-        value_method: :id,
-        label: false,
-        include_blank: false,
-        selected: f.object.destino_tsitio_id ? f.object.destino_tsitio_id : 1,
-        wrapper_html: {
-          style: edest
-        },
-        input_html: {
-          "data-toggle" => 'tooltip',
-          "title" => 'Seleccione el tipo de sitio'
-        } %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-3">
-      <%= f.input :destino_latitud,
-        label: false,
-        as: :float,
-        wrapper_html: {
-          style: edest
-        },
-        input_html: {
-          "data-toggle" => 'tooltip',
-          placeholder: 'Latitud'
-        } %>
-    </div>
-    <div class="col-md-3">
-      <%= f.input :destino_longitud,
-        label: false,
-        as: :float,
-        wrapper_html: {
-          style: edest
-        },
-        input_html: {
-          "data-toggle" => 'tooltip',
-          placeholder: 'Longitud'
-        } %>
-    </div>
-  </div>
-</div> 
+
+<!-- %= f.association :categoria, 
+  collection: Sivel2Gen::Categoria.habilitados.
+    where("tipocat <> 'I'"),
+  label_method: :nombre, 
+  value_method: :id %-->
+

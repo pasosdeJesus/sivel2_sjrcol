@@ -166,160 +166,54 @@ module Sivel2Sjr
     end
 
     def update
+      # Procesar ubicacionespre de migración
       (caso_params[:migracion_attributes] || []).each do |clave, mp|
         mi = Sivel2Sjr::Migracion.find(mp[:id].to_i)
-
-        sal_pais_id = (mp[:salida_pais_id] && mp[:salida_pais_id]!="") ? mp[:salida_pais_id].to_i : nil
-        sal_dep_id = (mp[:salida_departamento_id] && mp[:salida_departamento_id]!="") ? mp[:salida_departamento_id].to_i : nil
-        sal_mun_id = (mp[:salida_municipio_id] && mp[:salida_municipio_id]!="") ? mp[:salida_municipio_id].to_i : nil
-        sal_clas_id = (mp[:salida_clase_id] && mp[:salida_clase_id]!="") ? mp[:salida_clase_id].to_i : nil
-        sal_lug = (mp[:salida_lugar] && mp[:salida_lugar]!="") ? mp[:salida_lugar] : nil
-        sal_sit = (mp[:salida_sitio] && mp[:salida_sitio]!="") ? mp[:salida_sitio] : nil
-        sal_tsit = (mp[:salida_tsitio_id] && mp[:salida_tsitio_id]!="") ? mp[:salida_tsitio_id] : nil
-        sal_latitud = (mp[:salida_latitud] && mp[:salida_latitud]!="") ? mp[:salida_latitud] : nil
-        sal_longitud = (mp[:salida_longitud] && mp[:salida_longitud]!="") ? mp[:salida_longitud] : nil
-        if sal_pais_id
-          ubipresal = Sip::Ubicacionpre.where(pais_id: sal_pais_id, departamento_id: sal_dep_id, municipio_id: sal_mun_id, clase_id: sal_clas_id, lugar: sal_lug, sitio: sal_sit)
-          if ubipresal[0]
-            mi.salidaubicacionpre_id = ubipresal[0] ? ubipresal[0].id : nil
-            mi.save!
-          else
-            pa = Sip::Pais.find(sal_pais_id).nombre
-            dep = Sip::Departamento.find(sal_dep_id).nombre + " / "
-            mu = Sip::Municipio.find(sal_mun_id).nombre + " / "
-            cla = Sip::Clase.find(sal_clas_id).nombre + " / "
-            sit = sal_sit ? sal_sit + " / " : ""
-            lug = sal_lug ? sal_lug + " / " : ""
-            nombre = sit + lug + cla + mu + dep + pa
-            nombre_sinp = sit + lug + cla + mu + dep
-            miubipre = Sip::Ubicacionpre.create!(nombre: nombre, pais_id: sal_pais_id, departamento_id: sal_dep_id, municipio_id: sal_mun_id, clase_id: sal_clas_id, lugar: sal_lug, sitio: sal_sit, latitud: sal_latitud, longitud: sal_longitud, tsitio_id: sal_tsit, nombre_sin_pais: nombre_sinp)
-            mi.salidaubicacionpre_id = miubipre ? miubipre.id : nil
-            mi.save!
-          end
-        end
-
-        lleg_pais_id = (mp[:llegada_pais_id] && mp[:llegada_pais_id]!="") ? mp[:llegada_pais_id].to_i : nil
-        lleg_dep_id = (mp[:llegada_departamento_id] && mp[:llegada_departamento_id]!="") ? mp[:llegada_departamento_id].to_i : nil
-        lleg_mun_id = (mp[:llegada_municipio_id] && mp[:llegada_municipio_id]!="") ? mp[:llegada_municipio_id].to_i : nil
-        lleg_clas_id = (mp[:llegada_clase_id] && mp[:llegada_clase_id]!="") ? mp[:llegada_clase_id].to_i : nil
-        lleg_lug = (mp[:llegada_lugar] && mp[:llegada_lugar]!="") ? mp[:llegada_lugar] : nil
-        lleg_sit = (mp[:llegada_sitio] && mp[:llegada_sitio]!="") ? mp[:llegada_sitio] : nil
-        lleg_tsit = (mp[:llegada_tsitio_id] && mp[:llegada_tsitio_id]!="") ? mp[:llegada_tsitio_id] : nil
-        lleg_latitud = (mp[:llegada_latitud] && mp[:llegada_latitud]!="") ? mp[:llegada_latitud] : nil
-        lleg_longitud = (mp[:llegada_longitud] && mp[:llegada_longitud]!="") ? mp[:llegada_longitud] : nil
-        if lleg_pais_id
-          ubiprelleg = Sip::Ubicacionpre.where(pais_id: lleg_pais_id, departamento_id: lleg_dep_id, municipio_id: lleg_mun_id, clase_id: lleg_clas_id, lugar: lleg_lug, sitio: lleg_sit)
-          if ubiprelleg[0]
-            mi.llegadaubicacionpre_id = ubiprelleg[0] ? ubiprelleg[0].id : nil
-            mi.save!
-          else
-            pa = Sip::Pais.find(lleg_pais_id).nombre
-            dep = Sip::Departamento.find(lleg_dep_id).nombre + " / "
-            mu = Sip::Municipio.find(lleg_mun_id).nombre + " / "
-            cla = Sip::Clase.find(lleg_clas_id).nombre + " / "
-            sit = lleg_sit ? lleg_sit + " / " : ""
-            lug = lleg_lug ? lleg_lug + " / " : ""
-            nombre = sit + lug + cla + mu + dep + pa
-            nombre_sinp = sit + lug + cla + mu + dep
-            miubipre = Sip::Ubicacionpre.create!(nombre: nombre, pais_id: lleg_pais_id, departamento_id: lleg_dep_id, municipio_id: lleg_mun_id, clase_id: lleg_clas_id, lugar: lleg_lug, sitio: lleg_sit, latitud: lleg_latitud, longitud: lleg_longitud, nombre_sin_pais: nombre_sinp, tsitio_id: lleg_tsit)
-            mi.llegadaubicacionpre_id = miubipre ? miubipre.id : nil
-            mi.save!
-          end
-        end
-
-        des_pais_id = (mp[:destino_pais_id] && mp[:destino_pais_id]!="") ? mp[:destino_pais_id].to_i : nil
-        des_dep_id = (mp[:destino_departamento_id] && mp[:destino_departamento_id]!="") ? mp[:destino_departamento_id].to_i : nil
-        des_mun_id = (mp[:destino_municipio_id] && mp[:destino_municipio_id]!="") ? mp[:destino_municipio_id].to_i : nil
-        des_clas_id = (mp[:destino_clase_id] && mp[:destino_clase_id]!="") ? mp[:destino_clase_id].to_i : nil
-        des_lug = (mp[:destino_lugar] && mp[:destino_lugar]!="") ? mp[:destino_lugar] : nil
-        des_sit = (mp[:destino_sitio] && mp[:destino_sitio]!="") ? mp[:destino_sitio] : nil
-        des_tsit = (mp[:destino_tsitio_id] && mp[:destino_tsitio_id]!="") ? mp[:destino_tsitio_id] : nil
-        des_latitud = (mp[:destino_latitud] && mp[:destino_latitud]!="") ? mp[:destino_latitud] : nil
-        des_longitud = (mp[:destino_longitud] && mp[:destino_longitud]!="") ? mp[:destino_longitud] : nil
-        if des_pais_id
-          ubipredes = Sip::Ubicacionpre.where(pais_id: des_pais_id, departamento_id: des_dep_id, municipio_id: des_mun_id, clase_id: des_clas_id, lugar: des_lug, sitio: des_sit)
-          if ubipredes[0]
-            mi.destinoubicacionpre_id = ubipredes[0] ? ubipredes[0].id : nil
-            mi.save!
-          else
-            pa = Sip::Pais.find(des_pais_id).nombre
-            dep = Sip::Departamento.find(des_dep_id).nombre + " / "
-            mu = Sip::Municipio.find(des_mun_id).nombre + " / "
-            cla = Sip::Clase.find(des_clas_id).nombre + " / "
-            sit = des_sit ? des_sit + " / " : ""
-            lug = des_lug ? des_lug + " / " : ""
-            nombre = sit + lug + cla + mu + dep + pa
-            nombre_sinp = sit + lug + cla + mu + dep
-            miubipre = Sip::Ubicacionpre.create!(nombre: nombre, pais_id: des_pais_id, departamento_id: des_dep_id, municipio_id: des_mun_id, clase_id: des_clas_id, lugar: des_lug, sitio: des_sit, latitud: des_latitud, longitud: des_longitud, nombre_sin_pais: nombre_sinp, tsitio_id: des_tsit)
-            mi.destinoubicacionpre_id = miubipre ? miubipre.id : nil
-            mi.save!
-          end
-        end
+        mi.salidaubicacionpre_id = Sip::Ubicacionpre::buscar_o_agregar(
+          mp[:salida_pais_id], mp[:salida_departamento_id],
+          mp[:salida_municipio_id], mp[:salida_clase_id],
+          mp[:salida_lugar], mp[:salida_sitio], mp[:salida_tsitio_id],
+          mp[:salida_latitud], mp[:salida_longitud]
+        )
+        mi.llegadaubicacionpre_id = Sip::Ubicacionpre::buscar_o_agregar(
+          mp[:llegada_pais_id], mp[:llegada_departamento_id],
+          mp[:llegada_municipio_id], mp[:llegada_clase_id],
+          mp[:llegada_lugar], mp[:llegada_sitio], mp[:llegada_tsitio_id],
+          mp[:llegada_latitud], mp[:llegada_longitud]
+        )
+        mi.destinoubicacionpre_id = Sip::Ubicacionpre::buscar_o_agregar(
+          mp[:destino_pais_id], mp[:destino_departamento_id],
+          mp[:destino_municipio_id], mp[:destino_clase_id],
+          mp[:destino_lugar], mp[:destino_sitio], mp[:destino_tsitio_id],
+          mp[:destino_latitud], mp[:destino_longitud]
+        )
+        mi.save!
       end
 
       (caso_params[:desplazamiento_attributes] || []).each do |clave, dp|
-        mi = Sivel2Sjr::Desplazamiento.find(dp[:id].to_i)
-        des_pais_id = (dp[:destino_pais_id] && dp[:destino_pais_id]!="") ? dp[:destino_pais_id].to_i : nil
-        des_dep_id = (dp[:destino_departamento_id] && dp[:destino_departamento_id]!="") ? dp[:destino_departamento_id].to_i : nil
-        des_mun_id = (dp[:destino_municipio_id] && dp[:destino_municipio_id]!="") ? dp[:destino_municipio_id].to_i : nil
-        des_clas_id = (dp[:destino_clase_id] && dp[:destino_clase_id]!="") ? dp[:destino_clase_id].to_i : nil
-        des_lug = (dp[:destino_lugar] && dp[:destino_lugar]!="") ? dp[:destino_lugar] : nil
-        des_sit = (dp[:destino_sitio] && dp[:destino_sitio]!="") ? dp[:destino_sitio] : nil
-        des_tsit = (dp[:destino_tsitio_id] && dp[:destino_tsitio_id]!="") ? dp[:destino_tsitio_id] : nil
-        des_latitud = (dp[:destino_latitud] && dp[:destino_latitud]!="") ? dp[:destino_latitud] : nil
-        des_longitud = (dp[:destino_longitud] && dp[:destino_longitud]!="") ? dp[:destino_longitud] : nil
-        if des_pais_id
-          ubipredes = Sip::Ubicacionpre.where(pais_id: des_pais_id, departamento_id: des_dep_id, municipio_id: des_mun_id, clase_id: des_clas_id, lugar: des_lug, sitio: des_sit)
-          if ubipredes[0]
-            mi.destinoubicacionpre_id = ubipredes[0] ? ubipredes[0].id : nil
-            mi.save!
-          else
-            pa = des_pais_id ? Sip::Pais.find(des_pais_id).nombre : ""
-            dep = des_dep_id ? Sip::Departamento.find(des_dep_id).nombre + " / " : " / " 
-            mu = des_mun_id ? Sip::Municipio.find(des_mun_id).nombre + " / " : " / "
-            cla = des_clas_id ? Sip::Clase.find(des_clas_id).nombre + " / " : " / "
-            tsit = des_tsit ?  Sip::Tsitio.find(des_tsit).nombre + " / " : " / "
-            sit = des_sit ? des_sit + " / " : ""
-            lug = des_lug ? des_lug + " / " : ""
-            ## Latitud y longitud
-            if !des_latitud
-              lat = des_clas_id ? Sip::Clase.find(des_clas_id).latitud : nil
-              if !lat
-                lat = des_mun_id ? Sip::Municipio.find(des_mun_id).latitud : nil
-                if !lat
-                  lat = des_dep_id ? Sip::Departamento.find(des_dep_id).latitud : nil
-                  if !lat
-                    lat = des_pais_id ? Sip::Pais.find(des_pais_id).latitud : nil
-                  end
-                end
-              end
-            else
-              lat = des_latitud
-            end
-            if !des_longitud
-              lon = des_clas_id ? Sip::Clase.find(des_clas_id).longitud : nil
-              if !lon
-                lon = des_mun_id ? Sip::Municipio.find(des_mun_id).longitud : nil
-                if !lon
-                  lon = des_dep_id ? Sip::Departamento.find(des_dep_id).longitud : nil
-                  if !lon
-                    lon = des_pais_id ? Sip::Pais.find(des_pais_id).longitud : nil
-                  end
-                end
-              end
-            else
-              lon = des_longitud
-            end
-
-            nombre = sit + lug + " : " + tsit + cla + mu + dep + pa + " @ " + lat.to_s + ", " + lon.to_s
-            nombre_sinp = sit + lug + " : " + tsit + cla + mu + dep[..-4] + " @ " + lat.to_s + ", " + lon.to_s
-            miubipre = Sip::Ubicacionpre.create!(nombre: nombre, pais_id: des_pais_id, departamento_id: des_dep_id, municipio_id: des_mun_id, clase_id: des_clas_id, lugar: des_lug, sitio: des_sit, latitud: lat, longitud: lon, nombre_sin_pais: nombre_sinp, tsitio_id: des_tsit)
-            mi.destinoubicacionpre_id = miubipre ? miubipre.id : nil
-            mi.save!
-          end
-        end 
+        de = Sivel2Sjr::Desplazamiento.find(dp[:id].to_i)
+        de.expulsionubicacionpre_id = Sip::Ubicacionpre::buscar_o_agregar(
+          dp[:expulsion_pais_id], dp[:expulsion_departamento_id],
+          dp[:expulsion_municipio_id], dp[:expulsion_clase_id],
+          dp[:expulsion_lugar], dp[:expulsion_sitio], dp[:expulsion_tsitio_id],
+          dp[:expulsion_latitud], dp[:expulsion_longitud]
+        )
+        de.llegadaubicacionpre_id = Sip::Ubicacionpre::buscar_o_agregar(
+          dp[:llegada_pais_id], dp[:llegada_departamento_id],
+          dp[:llegada_municipio_id], dp[:llegada_clase_id],
+          dp[:llegada_lugar], dp[:llegada_sitio], dp[:llegada_tsitio_id],
+          dp[:llegada_latitud], dp[:llegada_longitud]
+        )
+        de.destinoubicacionpre_id = Sip::Ubicacionpre::buscar_o_agregar(
+          dp[:destino_pais_id], dp[:destino_departamento_id],
+          dp[:destino_municipio_id], dp[:destino_clase_id],
+          dp[:destino_lugar], dp[:destino_sitio], dp[:destino_tsitio_id],
+          dp[:destino_latitud], dp[:destino_longitud]
+        )
+        de.save!
       end
-    # Convertir valores de radios tri-estado, el valor 3 en el 
+      
+      # Convertir valores de radios tri-estado, el valor 3 en el 
       # botón de radio es nil en la base de datos
       if params && params[:caso] && params[:caso][:victima_attributes]
         params[:caso][:victima_attributes].each do |l, v|
@@ -462,6 +356,7 @@ module Sivel2Sjr
           :acompestado, 
           :connacionaldeportado,
           :connacionalretorno,
+          :declaracionruv_id,
           :declaro, 
           :descripcion, 
           :destino_clase_id,
@@ -499,10 +394,23 @@ module Sivel2Sjr
           :retornado,
           :reubicado, 
           :_destroy,
-          :categoria_ids => []
+          :categoria_ids => [],
+          :anexo_desplazamiento_attributes => [
+              :fecha_localizada,
+              :id, 
+              :desplazamiento_id,
+              :_destroy,
+              :sip_anexo_attributes => [
+                :adjunto, 
+                :descripcion, 
+                :id, 
+                :_destroy
+              ]
+            ]
         ]
       ]
     end
+
     def importa_dato(datosent, datossal, menserror, registro = nil, 
                      opciones = {})
       importa_dato_gen(datosent, datossal, menserror, registro, opciones)

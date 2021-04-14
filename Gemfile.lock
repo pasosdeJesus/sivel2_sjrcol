@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: 9a80d84f67dba1a4099b465536fecc5127ae3377
+  revision: 05f98373642314c5fb7b7b2d6f22d2429564e5de
   branch: main
   specs:
     cor1440_gen (1.0b3)
@@ -14,7 +14,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: eec5495836e9bbf14c2d94cf375c0f941c4e9f1e
+  revision: 69d1104a5092097aad7378cecf51846b2a643f05
   branch: main
   specs:
     heb412_gen (1.0.b6)
@@ -25,7 +25,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/mr519_gen.git
-  revision: 761ebc0f6c9e182d38278fccc9acbec33630fb59
+  revision: 1969c8b677adb638393777f7b0fb5c701494a564
   branch: main
   specs:
     mr519_gen (0.2.0)
@@ -34,7 +34,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: 31231f15e52e79455aa2ab1edea5dbf11d4ef507
+  revision: c2aab3e771089510a0c6828cc6f61211717d7f75
   branch: main
   specs:
     sal7711_gen (1.0.b3)
@@ -43,7 +43,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: bb9fbb71631956b97c923827d675f64b7402b825
+  revision: 5f63f5e409aa0fe4800f7a0aa92470eb44aced45
   branch: main
   specs:
     sal7711_web (1.0.a3)
@@ -52,7 +52,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 611f2d80c82f7ddbda403f8f0cd8f2b76a8c00b6
+  revision: b00dd2790b564a8aefe6104e0ddeb5810e4478fa
   branch: main
   specs:
     sip (2.0.b11)
@@ -71,13 +71,22 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 59b5e9ff5fbbeaaea888da5d25c830544739dd65
+  revision: ceb260313dcb22b11afb223fce0d413d361a7c93
   branch: main
   specs:
     sivel2_gen (2.0b14)
       devise
       jquery-rails
       rails
+
+GIT
+  remote: https://github.com/pasosdeJesus/sivel2_sjr.git
+  revision: 6e3326a3c81f0b744138bba178f5772f846d8431
+  branch: main
+  specs:
+    sivel2_sjr (2.0b10)
+      rails
+      sivel2_gen
 
 GIT
   remote: https://github.com/vtamara/cocoon.git
@@ -175,7 +184,7 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
-    chartkick (3.4.2)
+    chartkick (4.0.3)
     childprocess (3.0.0)
     choice (0.2.0)
     chosen-rails (1.9.0)
@@ -212,7 +221,7 @@ GEM
     ffi (1.15.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
-    i18n (1.8.9)
+    i18n (1.8.10)
       concurrent-ruby (~> 1.0)
     jbuilder (2.11.2)
       activesupport (>= 5.0.0)
@@ -225,12 +234,12 @@ GEM
     json (2.5.1)
     kgio (2.11.3)
     libxml-ruby (3.2.1)
-    loofah (2.9.0)
+    loofah (2.9.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.7.1)
       mini_mime (>= 0.1.1)
-    marcel (1.0.0)
+    marcel (1.0.1)
     method_source (1.0.0)
     mime-types (3.3.1)
       mime-types-data (~> 3.2015)
@@ -243,7 +252,7 @@ GEM
     minitest (5.14.4)
     msgpack (1.4.2)
     nio4r (2.5.7)
-    nokogiri (1.11.2)
+    nokogiri (1.11.3)
       mini_portile2 (~> 2.5.0)
       racc (~> 1.4)
     odf-report (0.7.2)
@@ -321,7 +330,7 @@ GEM
     responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)
-    rexml (3.2.4)
+    rexml (3.2.5)
     rspreadsheet (0.5.3)
       andand (>= 1.3)
       rubyzip (>= 1.3)

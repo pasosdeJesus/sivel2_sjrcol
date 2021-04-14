@@ -3,7 +3,13 @@ require 'sivel2_sjr/concerns/models/desplazamiento'
 
 class Sivel2Sjr::Desplazamiento < ActiveRecord::Base
   include Sivel2Sjr::Concerns::Models::Desplazamiento
+
+  accesores_ubicacionpre :destino
   
+  accesores_ubicacionpre :llegada
+  
+  accesores_ubicacionpre :expulsion
+
   has_and_belongs_to_many :categoria, 
     class_name: 'Sivel2Gen::Categoria',
     foreign_key: :desplazamiento_id, 
@@ -25,5 +31,6 @@ class Sivel2Sjr::Desplazamiento < ActiveRecord::Base
   accepts_nested_attributes_for :sip_anexo,  reject_if: :all_blank
 
   validates :tipodesp, presence: true
+
 end
 

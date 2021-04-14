@@ -190,6 +190,29 @@ module Sivel2Sjr
         mi.save!
       end
 
+      (caso_params[:desplazamiento_attributes] || []).each do |clave, dp|
+        de = Sivel2Sjr::Desplazamiento.find(dp[:id].to_i)
+        de.expulsionubicacionpre_id = Sip::Ubicacionpre::buscar_o_agregar(
+          dp[:expulsion_pais_id], dp[:expulsion_departamento_id],
+          dp[:expulsion_municipio_id], dp[:expulsion_clase_id],
+          dp[:expulsion_lugar], dp[:expulsion_sitio], dp[:expulsion_tsitio_id],
+          dp[:expulsion_latitud], dp[:expulsion_longitud]
+        )
+        de.llegadaubicacionpre_id = Sip::Ubicacionpre::buscar_o_agregar(
+          dp[:llegada_pais_id], dp[:llegada_departamento_id],
+          dp[:llegada_municipio_id], dp[:llegada_clase_id],
+          dp[:llegada_lugar], dp[:llegada_sitio], dp[:llegada_tsitio_id],
+          dp[:llegada_latitud], dp[:llegada_longitud]
+        )
+        de.destinoubicacionpre_id = Sip::Ubicacionpre::buscar_o_agregar(
+          dp[:destino_pais_id], dp[:destino_departamento_id],
+          dp[:destino_municipio_id], dp[:destino_clase_id],
+          dp[:destino_lugar], dp[:destino_sitio], dp[:destino_tsitio_id],
+          dp[:destino_latitud], dp[:destino_longitud]
+        )
+        de.save!
+      end
+      
       # Convertir valores de radios tri-estado, el valor 3 en el 
       # botón de radio es nil en la base de datos
       if params && params[:caso] && params[:caso][:victima_attributes]
@@ -336,6 +359,15 @@ module Sivel2Sjr
           :declaracionruv_id,
           :declaro, 
           :descripcion, 
+          :destino_clase_id,
+          :destino_departamento_id,
+          :destino_municipio_id,
+          :destino_pais_id,
+          :destino_latitud,
+          :destino_longitud,
+          :destino_lugar,
+          :destino_sitio,
+          :destino_tsitio_id,
           :documentostierra,
           :establecerse,
           :fechadeclaracion,

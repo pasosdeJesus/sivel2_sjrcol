@@ -79,7 +79,9 @@ module Sivel2Sjr
     end
 
     test "no valido" do
-      desplazamiento = Desplazamiento.new PRUEBA_DESPLAZAMIENTO
+      desplazamiento = Desplazamiento.new PRUEBA_DESPLAZAMIENTO.merge({ 
+        fechaexpulsion: nil 
+      })
       assert_not desplazamiento.valid?
       desplazamiento.destroy
     end

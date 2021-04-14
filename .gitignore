@@ -53,3 +53,4 @@ bitacora*
 config/credentials.yml.enc
 tmpsql/
 .env
+*.cp

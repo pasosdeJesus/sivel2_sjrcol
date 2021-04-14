@@ -50,37 +50,12 @@ class Sivel2Sjr::Migracion < ActiveRecord::Base
   belongs_to :causaRefugio, class_name: 'Sivel2Gen::Categoria', 
     foreign_key: "causaRefugio_id", optional: true
     
-  belongs_to :destino_pais, 
-    class_name: 'Sip::Pais', foreign_key: "destino_pais_id", optional: true
-  belongs_to :destino_departamento, 
-    class_name: 'Sip::Departamento', foreign_key: "destino_departamento_id", 
-    optional: true
-  belongs_to :destino_municipio, 
-    class_name: 'Sip::Municipio', foreign_key: "destino_municipio_id", 
-    optional: true
-  belongs_to :destino_clase, 
-    class_name: 'Sip::Clase', foreign_key: "destino_clase_id", optional: true
-  belongs_to :destino_tsitio, 
-    class_name: 'Sip::Tsitio', foreign_key: "destino_tsitio_id", optional: true
   belongs_to :viadeingreso,
     class_name: 'Viadeingreso', foreign_key: "viadeingreso_id", optional: true
   belongs_to :causamigracion, 
     class_name: 'Causamigracion', foreign_key: "causamigracion_id", optional: true
   belongs_to :pagoingreso, 
     class_name: 'Sip::Trivalente', foreign_key: "pagoingreso_id", optional: true  
-  belongs_to :llegada_pais, 
-    class_name: 'Sip::Pais', foreign_key: "llegada_pais_id", optional: true
-  belongs_to :llegada_departamento, 
-    class_name: 'Sip::Departamento', foreign_key: "llegada_departamento_id", 
-    optional: true
-  belongs_to :llegada_municipio, 
-    class_name: 'Sip::Municipio', foreign_key: "llegada_municipio_id", 
-    optional: true
-  belongs_to :llegada_clase, 
-    class_name: 'Sip::Clase', foreign_key: "llegada_clase_id", optional: true
-  belongs_to :llegada_tsitio, 
-    class_name: 'Sip::Tsitio', foreign_key: "llegada_tsitio_id", optional: true
-
   belongs_to :miembrofamiliar,
     class_name: 'Miembrofamiliar', foreign_key: "miembrofamiliar_id", optional: true
   belongs_to :migracontactopre,
@@ -97,28 +72,6 @@ class Sivel2Sjr::Migracion < ActiveRecord::Base
     foreign_key: "proteccion_id", 
     optional: true
   
-  belongs_to :salida_pais, 
-    class_name: 'Sip::Pais', foreign_key: "salida_pais_id", optional: true
-  belongs_to :salida_departamento, 
-    class_name: 'Sip::Departamento', foreign_key: "salida_departamento_id", 
-    optional: true
-  belongs_to :salida_municipio, 
-    class_name: 'Sip::Municipio', foreign_key: "salida_municipio_id", 
-    optional: true
-  belongs_to :salida_clase, 
-   class_name: 'Sip::Clase', foreign_key: "salida_clase_id", optional: true
-  belongs_to :salida_tsitio, 
-    class_name: 'Sip::Tsitio', foreign_key: "salida_tsitio_id", optional: true
-
-  belongs_to :salidaubicacionpre,
-    class_name: 'Sip::Ubicacionpre', foreign_key: "salidaubicacionpre_id", 
-    optional: true
-  belongs_to :llegadaubicacionpre,
-    class_name: 'Sip::Ubicacionpre', foreign_key: "llegadaubicacionpre_id", 
-    optional: true
-  belongs_to :destinoubicacionpre,
-    class_name: 'Sip::Ubicacionpre', foreign_key: "destinoubicacionpre_id", 
-    optional: true
 
   belongs_to :statusmigratorio,
     class_name: 'Sivel2Sjr::Statusmigratorio', 
@@ -128,76 +81,6 @@ class Sivel2Sjr::Migracion < ActiveRecord::Base
     class_name: 'Tipoproteccion', foreign_key: "tipoproteccion_id", optional: true
 
   validates :fechasalida, presence: true
-
-
-  def destino_pais_id
-    if self.destinoubicacionpre_id
-      return Sip::Ubicacionpre.find(self.destinoubicacionpre_id).pais_id
-    else
-      return ''
-    end
-  end
-  def destino_departamento_id
-    if self.destinoubicacionpre_id
-      return Sip::Ubicacionpre.find(self.destinoubicacionpre_id).departamento_id
-    else
-      return ''
-    end 
-  end
-  def destino_municipio_id
-    if self.destinoubicacionpre_id
-      return Sip::Ubicacionpre.find(self.destinoubicacionpre_id).municipio_id
-    else
-      return ''
-    end 
-  end
-  def destino_clase_id
-    if self.destinoubicacionpre_id
-      return Sip::Ubicacionpre.find(self.destinoubicacionpre_id).clase_id
-    else
-      return ''
-    end 
-  end
-
-  def destino_lugar
-    if self.destinoubicacionpre_id
-      return Sip::Ubicacionpre.find(self.destinoubicacionpre_id).lugar
-    else
-      return ''
-    end 
-  end
-
-  def destino_sitio
-    if self.destinoubicacionpre_id
-      return Sip::Ubicacionpre.find(self.destinoubicacionpre_id).sitio
-    else
-      return ''
-    end 
-  end
-
-  def destino_latitud
-    if self.destinoubicacionpre_id
-      return Sip::Ubicacionpre.find(self.destinoubicacionpre_id).latitud
-    else
-      return ''
-    end 
-  end
-
-  def destino_longitud
-    if self.destinoubicacionpre_id
-      return Sip::Ubicacionpre.find(self.destinoubicacionpre_id).longitud
-    else
-      return ''
-    end 
-  end
-
-  def destino_tsitio_id
-    if self.destinoubicacionpre_id
-      return Sip::Ubicacionpre.find(self.destinoubicacionpre_id).tsitio_id
-    else
-      return ''
-    end 
-  end
 
   def tiempoenpais
     if self.id && self.fechallegada

@@ -4,6 +4,13 @@ module Sip
   class Ubicacionpre < ActiveRecord::Base
     include Sip::Concerns::Models::Ubicacionpre
 
+    has_many :expulsion, class_name: "Sivel2Sjr::Desplazamiento", 
+      foreign_key: "expulsionubicacionpre_id", validate: true, 
+      dependent: :destroy
+    has_many :llegada, class_name: "Sivel2Sjr::Desplazamiento", 
+      foreign_key: "llegadaubicacionpre_id", validate: true, 
+      dependent: :destroy
+
     def self.nomenclatura(pais, departamento, municipio,
                           clase, lugar, sitio)
       if pais.to_s.strip == ''

@@ -91,69 +91,70 @@
   <div class="collapse div_ubicacionpre" id='resto-<%= htmlid %>'>
     <div class="row">
       <% ph = campolugar_etiqueta #'Barrio o vereda de Salida' %>
-      <% ac = {'data-autocompleta' => 'no',
-               "data-toggle" => 'tooltip'} %>
-             <% if (!f.object.send(campolugar) || 
-                 f.object.send(campolugar) == '') %>
-               <% ph = "#{campolugar_etiqueta}... (Buscar)"
-               #'Barrio o vereda salida... (Buscar)' %>
-             <% ac = {"data-toggle" => 'tooltip'} %>
-           <% end %>
-           <div class="col-md-3">
-             <%= f.input campolugar, #:salida_lugar,
-               label: false,
-               placeholder: ph,
-               disabled: estsinmun,
-               input_html: ac %>
-             <%= f.input campoubicacionpre_id, #as: :hidd:salidaubicacionpre_id, 
-               as: :hidden %>
-           </div>
+      <% ac = {
+        #'data-autocompleta' => 'no',
+        "data-toggle" => 'tooltip'} %>
+      <% if (!f.object.send(campolugar) || 
+          f.object.send(campolugar) == '') %>
+        <% ph = "#{campolugar_etiqueta}... (Buscar)" %>
+        <% #'Barrio o vereda salida... (Buscar)' %>
+        <% ac = {"data-toggle" => 'tooltip'} %>
+      <% end %>
+      <div class="col-md-3">
+        <%= f.input campolugar, #:salida_lugar,
+          label: false,
+          placeholder: ph,
+          disabled: estsinmun,
+          input_html: ac %>
+        <%= f.input campoubicacionpre_id, #as: :hidd:salidaubicacionpre_id, 
+          as: :hidden %>
+      </div>
 
-           <div class="col-md-3">
-             <%= f.input campositio, #:salida_sitio,
-               label: false,
-               placeholder: campositio_etiqueta, #'Dirección o finca', 
-               disabled: estsinmun,
-               input_html: {
-                 "data-toggle" => 'tooltip'
-               } %>
-           </div>
+      <div class="col-md-3">
+        <%= f.input campositio, #:salida_sitio,
+          label: false,
+          placeholder: campositio_etiqueta, #'Dirección o finca', 
+          disabled: estsinmun,
+          input_html: {
+            "data-toggle" => 'tooltip'
+          } %>
+      </div>
 
-           <div class="col-md-2">
-             <%= f.association campotsitio, #:salida_tsitio,
-               collection: Sip::Tsitio.where(fechadeshabilitacion: nil).order(:nombre),
-               label_method: :nombre,
-               value_method: :id,
-               label: false,
-               disabled: estsinmun,
-               include_blank: false,
-               selected: f.object.send("#{campotsitio}_id") ? #salida_tsitio_id ? 
-               f.object.send("#{campotsitio}_id") : 1, #salida_tsitio_id : 1,
-               input_html: {
-                 "data-toggle" => 'tooltip',
-                 "title" => "Seleccione el #{campotsitio_etiqueta}" #tipo de sitio'
-               } %>
-           </div>
-           <div class="col-md-2">
-             <%= f.input campolatitud, #:salida_latitud,
-               label: false,
-               as: :float,
-               disabled: estsinmun,
-               input_html: {
-                 "data-toggle" => 'tooltip',
-                 placeholder: campolatitud_etiqueta #'Latitud'
-               } %>
-           </div>
-           <div class="col-md-2">
-             <%= f.input campolongitud, #:salida_longitud,
-               label: false,
-               as: :float,
-               disabled: estsinmun,
-               input_html: {
-                 "data-toggle" => 'tooltip',
-                 placeholder: campolongitud_etiqueta #'Longitud'
-               } %>
-           </div>
+      <div class="col-md-2">
+        <%= f.association campotsitio, #:salida_tsitio,
+          collection: Sip::Tsitio.where(fechadeshabilitacion: nil).order(:nombre),
+          label_method: :nombre,
+          value_method: :id,
+          label: false,
+          disabled: estsinmun,
+          include_blank: false,
+          selected: f.object.send("#{campotsitio}_id") ? #salida_tsitio_id ? 
+          f.object.send("#{campotsitio}_id") : 1, #salida_tsitio_id : 1,
+          input_html: {
+            "data-toggle" => 'tooltip',
+            "title" => "Seleccione el #{campotsitio_etiqueta}" #tipo de sitio'
+          } %>
+      </div>
+      <div class="col-md-2">
+        <%= f.input campolatitud, #:salida_latitud,
+          label: false,
+          as: :float,
+          disabled: estsinmun,
+          input_html: {
+            "data-toggle" => 'tooltip',
+            placeholder: campolatitud_etiqueta #'Latitud'
+          } %>
+      </div>
+      <div class="col-md-2">
+        <%= f.input campolongitud, #:salida_longitud,
+          label: false,
+          as: :float,
+          disabled: estsinmun,
+          input_html: {
+            "data-toggle" => 'tooltip',
+            placeholder: campolongitud_etiqueta #'Longitud'
+          } %>
+      </div>
     </div>
   </div>
 </div>

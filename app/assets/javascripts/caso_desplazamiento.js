@@ -1,4 +1,6 @@
 
+//= require caso_migracion
+
 $(document).on('change', 
   'input[type=radio][name$="[establecerse]"]', 
   function (evento) {
@@ -12,4 +14,14 @@ $(document).on('change',
       find('[id^=ubicacionpre-destino]').css('display', d)
   }
 )
+
+
+registra_ubicacionpre_control2expandible(
+  'caso_desplazamiento_attributes', 'expulsion', window)
+
+registra_ubicacionpre_control2expandible(
+  'caso_desplazamiento_attributes', 'llegada', window)
+
+registra_ubicacionpre_control2expandible(
+  'caso_desplazamiento_attributes', 'destino', window)
 

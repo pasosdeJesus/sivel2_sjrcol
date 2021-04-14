@@ -1,0 +1,90 @@
+<div class='control-group nested-fields'>
+  <div class="controls">
+    <%= f.input :id, as: :hidden %>
+
+    <div class="row">
+      <div class="col-md-12">
+        Expulsión
+      </div>
+    </div>
+    <% htmlid=f.object && f.object.id ? f.object.id : 0 %>
+    <%= render partial: 'sip/ubicacionespre/dos_filas_confecha', locals: {
+      f: f,
+      htmlid: "expulsion-#{htmlid}",
+      estilogen: '',
+      campofecha: :fechaexpulsion,
+      campofecha_etiqueta: 'Fecha de expulsion',
+      campopais: :expulsion_pais,
+      campopais_etiqueta: 'País de expulsion',
+      campodepartamento: :expulsion_departamento,
+      campodepartamento_etiqueta: 'Departamento de expulsion',
+      campomunicipio: :expulsion_municipio,
+      campomunicipio_etiqueta: 'Municipio de expulsion',
+      idresto: 'restoexpulsion',
+      campocentropoblado: :expulsion_clase,
+      campocentropoblado_etiqueta: 'Centro poblado de expulsion',
+      campolugar: :expulsion_lugar,
+      campolugar_etiqueta: 'Barrio o vereda de expulsion',
+      campoubicacionpre_id: :expulsionubicacionpre_id,
+      campositio: :expulsion_sitio,
+      campositio_etiqueta: 'Dirección o finca de expulsion',
+      campotsitio: :expulsion_tsitio,
+      campotsitio_etiqueta: 'Tipo de sitio de expulsion',
+      campolatitud: :expulsion_latitud,
+      campolatitud_etiqueta: 'Latitud',
+      campolongitud: :expulsion_longitud,
+      campolongitud_etiqueta: 'Longitud'
+    } %>
+
+    <!-- Sólo un desplazamiento debe tener la fecha de desplazamiento 
+      emblemático de la pestaña datos básicos -->
+    <div class="row">
+      <div class="col-md-12">
+        Llegada
+      </div>
+    </div>
+
+      <%= render partial: 'sip/ubicacionespre/dos_filas_confecha', locals: {
+        f: f,
+        htmlid: "llegada-#{htmlid}",
+        estilogen: '',
+        campofecha: :fechallegada,
+        campofecha_etiqueta: 'Fecha de llegada',
+        campopais: :llegada_pais,
+        campopais_etiqueta: 'País de llegada',
+        campodepartamento: :llegada_departamento,
+        campodepartamento_etiqueta: 'Departamento de llegada',
+        campomunicipio: :llegada_municipio,
+        campomunicipio_etiqueta: 'Municipio de llegada',
+        idresto: 'restollegada',
+        campocentropoblado: :llegada_clase,
+        campocentropoblado_etiqueta: 'Centro poblado de llegada',
+        campolugar: :llegada_lugar,
+        campolugar_etiqueta: 'Barrio o vereda de llegada',
+        campoubicacionpre_id: :llegadaubicacionpre_id,
+        campositio: :llegada_sitio,
+        campositio_etiqueta: 'Dirección o finca de llegada',
+        campotsitio: :llegada_tsitio,
+        campotsitio_etiqueta: 'Tipo de sitio de llegada',
+        campolatitud: :llegada_latitud,
+        campolatitud_etiqueta: 'Latitud',
+        campolongitud: :llegada_longitud,
+        campolongitud_etiqueta: 'Longitud'
+      } %>
+
+
+    <%= f.input :descripcion, 
+      label: 'Descripción',
+      input_html: {
+        "data-toggle" => 'tooltip',
+        "title" => 'Descripción del desplazamiento (Utilice mayúsculas y minúsculas)'
+      }
+    %>
+
+    <%= render 'desplazamiento_campos2', f: f %>
+
+    <%= link_to_remove_association "Eliminar Desplazamiento", f, 
+      {class: 'btn-danger', :'data-existing' => 'true'} 
+    %>
+  </div>
+</div>

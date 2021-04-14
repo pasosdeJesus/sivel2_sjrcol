@@ -1,14 +1,16 @@
 <div class='ubicacionpre' id='ubicacionpre-<%= htmlid %>' style='<%= estilogen %>'>
   <div class="row">
     <div class="offset-md-0 col-md-3">
-      <%= f.input campofecha, #:fechasalida, 
-        as: :string, 
-        label: false,
-        input_html: { 
-          placeholder: campofecha_etiqueta, #'Fecha de salida',
-          "data-behaviour" => "datepicker",
-          "data-toggle" => 'tooltip'
-        } %>
+      <% if campofecha %>
+        <%= f.input campofecha, #:fechasalida, 
+          as: :string, 
+          label: false,
+          input_html: { 
+            placeholder: campofecha_etiqueta, #'Fecha de salida',
+            "data-behaviour" => "datepicker",
+            "data-toggle" => 'tooltip'
+          } %>
+      <% end %>
     </div>
     <div class="col-md-2">
       <%= f.association campopais, #:salida_pais,

@@ -9,7 +9,7 @@ module AccesoresUbicacionpre
   # expulsionubicacionpre_id, destinoubicacionpre_id o 
   # llegadaubicacionpre_id.
   def accesores_ubicacionpre(prefijo)
-    self.send(:belongs_to, "#{prefijo.to_s}ubicacionpre".to_sym,
+    self.send(:belongs_to, "#{prefijo.to_s}".to_sym,
       class_name: 'Sip::Ubicacionpre', 
       foreign_key: "#{prefijo.to_s}ubicacionpre_id", 
       optional: true)
@@ -25,8 +25,8 @@ module AccesoresUbicacionpre
     self.send(:attr_accessor, "#{prefijo.to_s}_longitud")
 
     define_method("#{prefijo.to_s}_pais_id") do
-      self.send("#{prefijo.to_s}ubicacionpre") ?
-        self.send("#{prefijo.to_s}ubicacionpre").pais_id : ''
+      self.send("#{prefijo.to_s}") ?
+        self.send("#{prefijo.to_s}").pais_id : ''
     end
 
     self.send(:belongs_to, "#{prefijo.to_s}_pais".to_sym,
@@ -35,18 +35,18 @@ module AccesoresUbicacionpre
       optional: true)
 
     define_method("#{prefijo.to_s}_pais") do
-      self.send("#{prefijo.to_s}ubicacionpre") ?
-        self.send("#{prefijo.to_s}ubicacionpre").pais : nil 
+      self.send("#{prefijo.to_s}") ?
+        self.send("#{prefijo.to_s}").pais : nil 
     end
 
     define_method("#{prefijo.to_s}_departamento_id") do
-      self.send("#{prefijo.to_s}ubicacionpre") ?
-        self.send("#{prefijo.to_s}ubicacionpre").departamento_id : ''
+      self.send("#{prefijo.to_s}") ?
+        self.send("#{prefijo.to_s}").departamento_id : ''
     end
 
     define_method("#{prefijo.to_s}_departamento") do
-      self.send("#{prefijo.to_s}ubicacionpre") ?
-        self.send("#{prefijo.to_s}ubicacionpre").departamento : nil 
+      self.send("#{prefijo.to_s}") ?
+        self.send("#{prefijo.to_s}").departamento : nil 
     end
 
     self.send(:belongs_to, "#{prefijo.to_s}_departamento".to_sym,
@@ -55,13 +55,13 @@ module AccesoresUbicacionpre
       optional: true)
 
     define_method("#{prefijo.to_s}_municipio_id") do
-      self.send("#{prefijo.to_s}ubicacionpre") ?
-        self.send("#{prefijo.to_s}ubicacionpre").municipio_id : ''
+      self.send("#{prefijo.to_s}") ?
+        self.send("#{prefijo.to_s}").municipio_id : ''
     end
 
     define_method("#{prefijo.to_s}_municipio") do
-      self.send("#{prefijo.to_s}ubicacionpre") ?
-        self.send("#{prefijo.to_s}ubicacionpre").municipio : nil 
+      self.send("#{prefijo.to_s}") ?
+        self.send("#{prefijo.to_s}").municipio : nil 
     end
 
     self.send(:belongs_to, "#{prefijo.to_s}_municipio".to_sym,
@@ -70,13 +70,13 @@ module AccesoresUbicacionpre
       optional: true)
 
     define_method("#{prefijo.to_s}_clase_id") do
-      self.send("#{prefijo.to_s}ubicacionpre") ?
-        self.send("#{prefijo.to_s}ubicacionpre").clase_id : ''
+      self.send("#{prefijo.to_s}") ?
+        self.send("#{prefijo.to_s}").clase_id : ''
     end
 
     define_method("#{prefijo.to_s}_clase") do
-      self.send("#{prefijo.to_s}ubicacionpre") ?
-        self.send("#{prefijo.to_s}ubicacionpre").clase : nil 
+      self.send("#{prefijo.to_s}") ?
+        self.send("#{prefijo.to_s}").clase : nil 
     end
 
     self.send(:belongs_to, "#{prefijo.to_s}_clase".to_sym,
@@ -85,23 +85,23 @@ module AccesoresUbicacionpre
       optional: true)
 
     define_method("#{prefijo.to_s}_lugar") do
-      self.send("#{prefijo.to_s}ubicacionpre") ?
-        self.send("#{prefijo.to_s}ubicacionpre").lugar : ''
+      self.send("#{prefijo.to_s}") ?
+        self.send("#{prefijo.to_s}").lugar : ''
     end
 
     define_method("#{prefijo.to_s}_sitio") do
-      self.send("#{prefijo.to_s}ubicacionpre") ?
-        self.send("#{prefijo.to_s}ubicacionpre").sitio : ''
+      self.send("#{prefijo.to_s}") ?
+        self.send("#{prefijo.to_s}").sitio : ''
     end
 
     define_method("#{prefijo.to_s}_tsitio_id") do
-      self.send("#{prefijo.to_s}ubicacionpre") ?
-        self.send("#{prefijo.to_s}ubicacionpre").tsitio_id : ''
+      self.send("#{prefijo.to_s}") ?
+        self.send("#{prefijo.to_s}").tsitio_id : ''
     end
 
     define_method("#{prefijo.to_s}_tsitio") do
-      self.send("#{prefijo.to_s}ubicacionpre") ?
-        self.send("#{prefijo.to_s}ubicacionpre").tsitio : nil 
+      self.send("#{prefijo.to_s}") ?
+        self.send("#{prefijo.to_s}").tsitio : nil 
     end
 
     self.send(:belongs_to, "#{prefijo.to_s}_tsitio".to_sym,
@@ -111,13 +111,13 @@ module AccesoresUbicacionpre
 
 
     define_method("#{prefijo.to_s}_latitud") do
-      self.send("#{prefijo.to_s}ubicacionpre") ?
-        self.send("#{prefijo.to_s}ubicacionpre").latitud : ''
+      self.send("#{prefijo.to_s}") ?
+        self.send("#{prefijo.to_s}").latitud : ''
     end
 
     define_method("#{prefijo.to_s}_longitud") do
-      self.send("#{prefijo.to_s}ubicacionpre") ?
-        self.send("#{prefijo.to_s}ubicacionpre").longitud : ''
+      self.send("#{prefijo.to_s}") ?
+        self.send("#{prefijo.to_s}").longitud : ''
     end
 
   end

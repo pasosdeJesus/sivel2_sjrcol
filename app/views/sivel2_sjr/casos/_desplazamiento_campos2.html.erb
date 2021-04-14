@@ -44,6 +44,38 @@
   </div>
 </div>
 
+<% htmlid=f.object && f.object.id ? f.object.id : 0 %>
+<% edest = !f.object.establecerse.nil? && f.object.establecerse == false ? 
+  'display: block' : 'display: none' %>
+
+<%= render partial: 'sip/ubicacionespre/dos_filas_confecha', locals: {
+  f: f,
+  htmlid: "destino-#{htmlid}",
+  estilogen: edest,
+  campofecha: nil,
+  campofecha_etiqueta: nil,
+  campopais: :destino_pais,
+  campopais_etiqueta: 'País de destino',
+  campodepartamento: :destino_departamento,
+  campodepartamento_etiqueta: 'Departamento de destino',
+  campomunicipio: :destino_municipio,
+  campomunicipio_etiqueta: 'Municipio de destino',
+  idresto: 'restodestino',
+  campocentropoblado: :destino_clase,
+  campocentropoblado_etiqueta: 'Centro poblado de destino',
+  campolugar: :destino_lugar,
+  campolugar_etiqueta: 'Barrio o vereda de destino',
+  campoubicacionpre_id: :destinoubicacionpre_id,
+  campositio: :destino_sitio,
+  campositio_etiqueta: 'Dirección o finca de destino',
+  campotsitio: :destino_tsitio,
+  campotsitio_etiqueta: 'Tipo de sitio de destino',
+  campolatitud: :destino_latitud,
+  campolatitud_etiqueta: 'Latitud',
+  campolongitud: :destino_longitud,
+  campolongitud_etiqueta: 'Longitud'
+} %>
+
 
 <!--%= f.input :otrosdatos, as: :text %-->
 <!--%= f.input :declaro, collection: [["SI", :S], 
@@ -187,50 +219,6 @@
     </table>
   </div>
 </div>
-
-<div class="row">
-  <div class="col-md-12">
-    <label>¿Piensa establecerse en este lugar?</label></br>
-    <%=
-      f.collection_radio_buttons(
-      :establecerse, [[true, 'Si'] ,[false, 'No'] ,[nil, 'No Responde']], :first, :last  ) do |b|
-      b.label(class: "mr-4") { b.radio_button + b.text }
-    end
-      %>
-  </div>
-</div>
-<% htmlid=f.object && f.object.id ? f.object.id : 0 %>
-<% edest = !f.object.establecerse || 
-  f.object.establecerse != true ? 
-  'display: none' : 'display: block' %>
-    
-    <%= render partial: 'sip/ubicacionespre/dos_filas_confecha', locals: {
-      f: f,
-      htmlid: "destino-#{htmlid}",
-      estilogen: edest,
-      campofecha: :fechaendestino,
-      campofecha_etiqueta: 'Fecha de destino',
-      campopais: :destino_pais,
-      campopais_etiqueta: 'País de destino',
-      campodepartamento: :destino_departamento,
-      campodepartamento_etiqueta: 'Departamento de destino',
-      campomunicipio: :destino_municipio,
-      campomunicipio_etiqueta: 'Municipio de destino',
-      idresto: 'restodestino',
-      campocentropoblado: :destino_clase,
-      campocentropoblado_etiqueta: 'Centro poblado de destino',
-      campolugar: :destino_lugar,
-      campolugar_etiqueta: 'Barrio o vereda de destino',
-      campoubicacionpre_id: :destinoubicacionpre_id,
-      campositio: :destino_sitio,
-      campositio_etiqueta: 'Dirección o finca de destino',
-      campotsitio: :destino_tsitio,
-      campotsitio_etiqueta: 'Tipo de sitio de destino',
-      campolatitud: :destino_latitud,
-      campolatitud_etiqueta: 'Latitud',
-      campolongitud: :destino_longitud,
-      campolongitud_etiqueta: 'Longitud'
-    } %>
 
 
 

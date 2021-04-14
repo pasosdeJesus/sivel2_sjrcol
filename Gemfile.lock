@@ -95,13 +95,6 @@ GIT
   specs:
     cocoon (1.2.11)
 
-PATH
-  remote: ../sivel2_sjr
-  specs:
-    sivel2_sjr (2.0b10)
-      rails
-      sivel2_gen
-
 GEM
   remote: https://rubygems.org/
   specs:

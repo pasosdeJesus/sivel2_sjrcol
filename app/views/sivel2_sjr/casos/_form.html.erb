@@ -34,9 +34,6 @@
           <li role="presentation" class="nav-item"><a href="#presponsables" class="fichacambia nav-link"
             aria-controls="presponsables" role="tab"
             data-toggle="tab">Presuntos Responsables</a></li>
-          <li role="presentation" class="nav-item"><a href="#antecedentes" class="fichacambia nav-link"
-            aria-controls="antecedentes" role="tab"
-            data-toggle="tab">Causas/Antecedentes</a></li>
           <li role="presentation" class="nav-item"><a href="#atencion" class="fichacambia nav-link"
             aria-controls="atencion" role="tab"
             data-toggle="tab">Respuesta Institucional y Seguimiento</a></li>
@@ -76,9 +73,6 @@
             <%= render 'sivel2_gen/casos/presponsables', :f => f %>
           </div>
 
-          <div role="tabpanel" class="tab-pane fade" id="antecedentes" >
-            <%= render 'antecedentes', :f => f %>
-          </div>
 
           <div role="tabpanel" class="tab-pane fade" id="atencion" >
             <%= render 'respuestas', :f => f %>

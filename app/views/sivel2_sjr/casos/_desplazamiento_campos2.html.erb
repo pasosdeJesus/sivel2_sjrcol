@@ -220,7 +220,11 @@
   </div>
 </div>
 
-
+<div id= "<%="actos_#{f.object.id}"%>">
+  <h6> Actos asociados a este desplazamiento </h6>
+  <% f_exp = f.object.fechaexpulsion %>
+  <%= render 'sivel2_gen/actos/actos_tabla', f_exp: f_exp %>
+</div>
 
 <!-- %= f.input :documentostierra, as: :text %-->
 

@@ -1,0 +1,83 @@
+<div style="padding-bottom: 18px;" class="input select caso_acto_presponsable">
+  <label class="select required control-label" for="caso_acto_id_presponsable">
+    <%= Sivel2Gen::Presponsable.human_attribute_name(:Presponsable) %>
+  </label>
+  <% p = options_from_collection_for_select(
+      Sivel2Gen::Presponsable.from('sivel2_gen_caso_presponsable, sivel2_gen_presponsable').where(
+        'sivel2_gen_caso_presponsable.id_presponsable=sivel2_gen_presponsable.id 
+      AND sivel2_gen_caso_presponsable.id_caso=?', @caso.id), "id", "nombre"
+      )
+  %>
+  <%=  select_tag "caso_acto_id_presponsable", p, multiple: true,
+    "data-toggle" => 'tooltip',
+    "title" => 'Seleccione de aquellos presuntos responsables que añadió en la pestaña anterior'
+  %>
+</div>
+<div style="padding-bottom: 18px;" class="input select caso_acto_categoria">
+  <label class="select required control-label" for="caso_acto_id_categoria">
+    Categoria</label>
+  <% c = options_from_collection_for_select(
+      Sivel2Gen::Categoria.from(
+        'sivel2_gen_categoria, sivel2_gen_supracategoria').where(
+          "sivel2_gen_categoria.supracategoria_id=sivel2_gen_supracategoria.id
+     AND sivel2_gen_categoria.fechadeshabilitacion IS NULL 
+     AND sivel2_gen_categoria.tipocat = 'I'
+     AND sivel2_gen_supracategoria.id_tviolencia <> 'R'").order(
+       'sivel2_gen_supracategoria.id_tviolencia', :id),
+       "id", 
+       lambda {|t| 
+         t.supracategoria.id_tviolencia + t.id.to_s + ' ' + t.nombre })
+  %>
+  <%= select_tag "caso_acto_id_categoria", c, multiple: true,
+    "data-toggle" => 'tooltip',
+    "title" => 'Seleccione el(los) tipo(s) de violencia asociados al hecho victimizante. Para seleccionar varios pulse CTRL y haga clic en las categorías que desee'
+  %>
+</div>
+<div style="padding-bottom: 18px;" class="input select caso_acto_persona">
+  <label class="select required control-label" for="caso_acto_id_persona">
+    Víctima</label>
+  <% p = options_from_collection_for_select(
+    Sip::Persona.from('sivel2_gen_victima, sip_persona').where(
+      'sivel2_gen_victima.id_persona=sip_persona.id AND sivel2_gen_victima.id_caso=?', @caso.id),
+      "id",
+      lambda {|t| t.nombres + ' ' + t.apellidos}) 
+    %>
+  <%= select_tag "caso_acto_id_persona", p, multiple: true,
+    "data-toggle" => 'tooltip',
+    "title" => 'Seleccione los nombres de una o más víctimas asociadas al presunto responsable y al tipo de violencia elegido'
+  %>
+</div>
+<div style="padding-bottom: 18px;" class="input select caso_acto_fecha">
+  <label class="select required control-label" for="caso_acto_fecha">
+    Fecha</label>
+    <%= text_field_tag "caso_acto_fecha", 
+      @caso.fecha, 
+      "data-behaviour" => "datepicker",
+      "data-toggle" => 'tooltip',
+      "title" => 'Del hecho victimizante'
+    %>
+</div>
+<div style="padding-bottom: 18px;" class="input select caso_acto_desplazamiento">
+  <label class="select required control-label" for="caso_acto_desplazamiento_id"> 
+    Causó desplazamiento</label>
+    <% d = options_from_collection_for_select(
+      Sivel2Sjr::Desplazamiento.
+      where(:id_caso => @caso.id),
+      "id", "fechaexpulsion")
+    %>
+    <%= select_tag "caso_acto_desplazamiento_id", d, 
+      include_blank: true,
+      "data-toggle" => 'tooltip',
+      "title" => 'Si el acto causó un desplazamiento seleccionar la fecha, de lo contrario dejar en blanco'
+    %>
+</div>
+
+<div style="padding-bottom: 18px;">
+<%= link_to 'Añadir Causa/Antecedente', '#',
+  class: 'agregaractos btn btn-primary' 
+%>
+</div>
+<div id="actos_tabla">
+  <%= render 'sivel2_gen/actos/actos_tabla', f_exp: nil  %>
+</div>
+

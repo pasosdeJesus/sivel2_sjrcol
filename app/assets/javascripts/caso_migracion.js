@@ -225,9 +225,15 @@ function ubicacionpre2expandible_autocompleta_lugar(clase_id, tsit, lug, sit, la
   ubipre.parent().find('[id$=_clase_id]').val(clase_id).trigger('chosen:updated')
   ubipre.find('[id$=_lugar]').val(lug)
   ubipre.find('[id$=_sitio]').val(sit)
+  if (lat != 0 && lat != null){
   ubipre.find('[id$=_latitud]').val(lat)
+  }
+  if (lon != 0 && lon != null){
   ubipre.find('[id$=_longitud]').val(lon)
-  ubipre.find('[id$=_tsitio_id]').val(tsit).trigger('chosen:updated')
+  }
+  if (tsit != null){
+    ubipre.find('[id$=_tsitio_id]').val(tsit).trigger('chosen:updated')
+  }
   $(document).trigger("sip:autocompletada-ubicacionpre")
   return
 }

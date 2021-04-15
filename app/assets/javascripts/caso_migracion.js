@@ -26,20 +26,20 @@ $(document).on('change',
   }
 )
 
-// Cambia id de elementos relacionados con el control de ubicacionpre
+// Cambia id de los campoubi relacionados con el control de ubicacionpre
 // expandible en 2 filas, que tengan id 0.
-function ubicacionpre2expandible_cambia_ids(elemento, nuevaid) {
-  control = $('#ubicacionpre-' + elemento + '-0').parent()
-  control.find('#ubicacionpre-' + elemento + '-0').attr('id', 
-    'ubicacionpre-' + elemento + '-'+ cocoonid)
-  control.find('#resto-' + elemento + '-0').attr('id', 
-    'resto-' + elemento + '-'+ cocoonid)
-  control.find('#restocp-' + elemento + '-0').attr('id', 
-    'restocp-' + elemento + '-'+ cocoonid)
-  b = control.find('button[data-target$=' + elemento + '-0]')
+function ubicacionpre2expandible_cambia_ids(campoubi, nuevaid) {
+  control = $('#ubicacionpre-' + campoubi + '-0').parent()
+  control.find('#ubicacionpre-' + campoubi + '-0').attr('id', 
+    'ubicacionpre-' + campoubi + '-'+ cocoonid)
+  control.find('#resto-' + campoubi + '-0').attr('id', 
+    'resto-' + campoubi + '-'+ cocoonid)
+  control.find('#restocp-' + campoubi + '-0').attr('id', 
+    'restocp-' + campoubi + '-'+ cocoonid)
+  b = control.find('button[data-target$=' + campoubi + '-0]')
   console.log(b.attr('data-target'))
   b.attr('data-target', 
-    '#resto-' + elemento + '-' + cocoonid + ',#restocp-' + elemento + '-' + 
+    '#resto-' + campoubi + '-' + cocoonid + ',#restocp-' + campoubi + '-' + 
     cocoonid)
 }
 
@@ -138,9 +138,9 @@ $(document).on('change',
   function (evento) {
     pid = evento.target.getAttribute('id').split('_')
     var seleccionado = +evento.target.value //.substring(event.target.selectionStart, event.target.selectionEnd)
-    var sec_refugio = $('#caso_migracion_attributes_'+pid[3]+
+    var sec_refugio = $('#caso_migracion_attributes_' + pid[3]+
       '_fechaNpi').closest('.sec_refugio')[0]
-    var otra = $('#caso_migracion_attributes_'+pid[3]+
+    var otra = $('#caso_migracion_attributes_' + pid[3] +
       '_otronpi').parents()[1]
     if (seleccionado != 8 && seleccionado != 1) { // Refugiado o solicitante
       sec_refugio.style.display = 'none'
@@ -233,78 +233,75 @@ function ubicacionpre2expandible_autocompleta_lugar(clase_id, tsit, lug, sit, la
 }
 
 // iniid Inicio de identificacion por ejemplo 'caso_migracion_attributes'
-// elemento Identificación particular del que se registra por ejemplo 'salida'
+// campoubi Identificación particular del que se registra por ejemplo 'salida'
 //    (teniendo en cuenta que haya campos para el mismo, por ejemplo
 //    uno terminado en salida_lugar).
 // root Raiz
-function ubicacionpre2expandible_registra(iniid, elemento, root) {
+function ubicacionpre2expandible_registra(iniid, campoubi, root) {
   sip_arregla_puntomontaje(root)
 
   // Buscador en campo lugar
   $(document).on('focusin', 
-    'input[id^=' + iniid + '][id$=_' + elemento + '_lugar]', 
+    'input[id^=' + iniid + '][id$=_' + campoubi + '_lugar]', 
     ubicacionpre2expandible_maneja_evento_busca_lugar
   )
 
   // Cambia coordenadas al cambiar pais
   $(document).on('change', 
-    '[id^=' + iniid + '][id$=' + elemento + '_pais_id]', function (evento) {
-      fija_coordenadas(evento, elemento, $(this), "paises")
-      deshabilita_otros_sinohaymun(evento, elemento)
+    '[id^=' + iniid + '][id$=' + campoubi + '_pais_id]', function (evento) {
+      fija_coordenadas(evento, campoubi, $(this), "paises")
+      deshabilita_otros_sinohaymun(evento, campoubi)
     }
   )
 
   // Cambia coordenadas y deshabilita otros campos al cambiar departamento
   $(document).on('change', 
-    '[id^=' + iniid + '][id$=' + elemento + '_departamento_id]', 
+    '[id^=' + iniid + '][id$=' + campoubi + '_departamento_id]', 
     function (evento) {
       if($(this).val() == "") {
-        pid = evento.target.getAttribute('id').split('_')
-        pais = $('#caso_migracion_attributes_' + pid[3] + '_' + campoubi + 
-          '_pais_id')
-        fija_coordenadas(evento, elemento, pais, "paises")
+        ubp = $(evento.target).closest('.ubicacionpre')
+        pais = ubp.find('[id$='+campoubi+'_pais_id]')
+        fija_coordenadas(evento, campoubi, pais, "paises")
       } else {
-        fija_coordenadas(evento, elemento, $(this), "departamentos")
+        fija_coordenadas(evento, campoubi, $(this), "departamentos")
       }
-      deshabilita_otros_sinohaymun(evento, elemento)
+      deshabilita_otros_sinohaymun(evento, campoubi)
     })
 
   // Cambia coordenadas y habilita otros campos al cambiar municipio
   $(document).on('change', 
-    '[id^=' + iniid + '][id$=' + elemento + '_municipio_id]', 
+    '[id^=' + iniid + '][id$=' + campoubi + '_municipio_id]', 
     function (evento) {
       if($(this).val() == '') {
-        pid = evento.target.getAttribute('id').split('_')
-        dep = $('#caso_migracion_attributes_' + pid[3] + '_' + campoubi + 
-          '_departamento_id')
-        fija_coordenadas(evento, elemento, dep, "departamentos")
-        deshabilita_otros_sinohaymun(evento, elemento)
+        ubp = $(evento.target).closest('.ubicacionpre')
+        dep = ubp.find('[id$='+campoubi+'_departamento_id]')
+        fija_coordenadas(evento, campoubi, dep, "departamentos")
+        deshabilita_otros_sinohaymun(evento, campoubi)
       }else{
-        fija_coordenadas(evento, elemento, $(this), "municipios")
-        habilita_otros_sihaymun(evento, 1, elemento)
+        fija_coordenadas(evento, campoubi, $(this), "municipios")
+        habilita_otros_sihaymun(evento, 1, campoubi)
       }
     })
 
   // Cambia coordenadas y habilita otros campos al cambiar centro poblado
   $(document).on('change', 
-    '[id^=' + iniid + '][id$=' + elemento + '_clase_id]', 
+    '[id^=' + iniid + '][id$=' + campoubi + '_clase_id]', 
     function (evento) {
       if($(this).val()==""){
-        pid = evento.target.getAttribute('id').split('_')
-        mun = $('#caso_migracion_attributes_' + pid[3] + '_' + campoubi + 
-          '_municipio_id')
-        fija_coordenadas(evento, elemento, mun, "municipios")
+        ubp = $(evento.target).closest('.ubicacionpre')
+        mun = ubp.find('[id$='+campoubi+'_municipio_id]')
+        fija_coordenadas(evento, campoubi, mun, "municipios")
       }else{
-        fija_coordenadas(evento, elemento, $(this), "clases")
+        fija_coordenadas(evento, campoubi, $(this), "clases")
       }
-      habilita_otros_sihaymun(evento, 1, elemento)
+      habilita_otros_sihaymun(evento, 1, campoubi)
     })
 
   // Habilita otros campos al cambiar lugar
   $(document).on('change', 
-    '[id^=' + iniid + '][id$=' + elemento + '_lugar]', 
+    '[id^=' + iniid + '][id$=' + campoubi + '_lugar]', 
     function (evento) {
-      habilita_otros_sihaymun(evento, 2, elemento)
+      habilita_otros_sihaymun(evento, 2, campoubi)
     }
   )
 

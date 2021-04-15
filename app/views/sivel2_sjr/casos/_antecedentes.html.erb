@@ -5,7 +5,7 @@
         <th><%= Sivel2Sjr::Actosjr.human_attribute_name(:presponsable) %></th>
         <th><%= Sivel2Sjr::Actosjr.human_attribute_name(:categoria) %></th>
         <th><%= Sivel2Sjr::Actosjr.human_attribute_name(:victima) %></th>
-        <TH><%= Sivel2Sjr::Actosjr.human_attribute_name(:fecha) %></th>
+        <th><%= Sivel2Sjr::Actosjr.human_attribute_name(:fecha) %></th>
         <th>Causó <%= Sivel2Sjr::Actosjr.human_attribute_name(:desplazamiento) %></th>
         <th><%=t '.actions', :default => t("helpers.actions") %></th>
       </tr>
@@ -51,7 +51,8 @@
             %>
             <%=  select_tag "caso_acto_id_presponsable", p, multiple: true,
               "data-toggle" => 'tooltip',
-              "title" => 'Seleccione de aquellos presuntos responsables que añadió en la pestaña anterior'
+              "title" => 'Seleccione de aquellos presuntos responsables que añadió en la pestaña anterior',
+              style: 'width: 12em'
             %>
           </div>
         </td>
@@ -73,7 +74,8 @@
             %>
             <%= select_tag "caso_acto_id_categoria", c, multiple: true,
               "data-toggle" => 'tooltip',
-              "title" => 'Seleccione el(los) tipo(s) de violencia asociados al hecho victimizante. Para seleccionar varios pulse CTRL y haga clic en las categorías que desee'
+              "title" => 'Seleccione el(los) tipo(s) de violencia asociados al hecho victimizante. Para seleccionar varios pulse CTRL y haga clic en las categorías que desee',
+                style: 'width: 12em'
             %>
           </div>
         </td>
@@ -89,7 +91,8 @@
               %>
             <%= select_tag "caso_acto_id_persona", p, multiple: true,
               "data-toggle" => 'tooltip',
-              "title" => 'Seleccione los nombres de una o más víctimas asociadas al presunto responsable y al tipo de violencia elegido'
+              "title" => 'Seleccione los nombres de una o más víctimas asociadas al presunto responsable y al tipo de violencia elegido',
+                style: 'width: 12em'
             %>
           </div>
         </td>
@@ -101,7 +104,8 @@
                 @caso.fecha, 
                 "data-behaviour" => "datepicker",
                 "data-toggle" => 'tooltip',
-                "title" => 'Del hecho victimizante'
+                "title" => 'Del hecho victimizante',
+                style: 'width: 7em'
               %>
           </div>
         </td>
@@ -117,7 +121,8 @@
               <%= select_tag "caso_acto_desplazamiento_id", d, 
                 include_blank: true,
                 "data-toggle" => 'tooltip',
-                "title" => 'Si el acto causó un desplazamiento seleccionar la fecha, de lo contrario dejar en blanco'
+                "title" => 'Si el acto causó un desplazamiento seleccionar la fecha, de lo contrario dejar en blanco',
+                style: 'width: 7em'
               %>
           </div>
         </td>

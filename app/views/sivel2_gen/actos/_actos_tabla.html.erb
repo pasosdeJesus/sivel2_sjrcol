@@ -4,41 +4,118 @@
       <th><%= Sivel2Sjr::Actosjr.human_attribute_name(:presponsable) %></th>
       <th><%= Sivel2Sjr::Actosjr.human_attribute_name(:categoria) %></th>
       <th><%= Sivel2Sjr::Actosjr.human_attribute_name(:victima) %></th>
-      <TH><%= Sivel2Sjr::Actosjr.human_attribute_name(:fecha) %></th>
-      <th>Causó <%= Sivel2Sjr::Actosjr.human_attribute_name(:desplazamiento) %></th>
+      <th><%= Sivel2Sjr::Actosjr.human_attribute_name(:fecha) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
-  <tbody>
-  <% if @caso && @caso.actosjr %>
-    <% fexpulsion = f_exp ? f_exp : nil%> 
-    <% desplazamiento = Sivel2Sjr::Desplazamiento.where(id_caso: @caso.id, fechaexpulsion: fexpulsion)[0]%>
-    <% des_id = desplazamiento ? desplazamiento.id : nil %>
-    <% actos_des = @caso.actosjr.where(desplazamiento_id: des_id)%>
-    <% actos_des.try(:each) do |actosjr| %>
-      <tr>
-        <td><%= actosjr.acto.presponsable.nombre %></td>
-        <td><%= actosjr.acto.categoria.nombre %></td>
-        <td><%= actosjr.acto.persona.nombres + ' ' + 
-          actosjr.acto.persona.apellidos 
-          %></td>
-        <td><%= actosjr.fecha %></td>
-        <td><%= actosjr.desplazamiento.fechaexpulsion if 
-            actosjr.desplazamiento 
-        %></td>
-        <td>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-            '#',
-            :data => { 
-                :eliminaracto => "#{actosjr.id_acto}",
-            },
-            :class => 'btn btn-sm btn-danger eliminaracto' 
-          %>
-        </td>
-      </tr>
+  <tbody id='actorsjr'>
+    <% f.simple_fields_for :actosjr,
+      f.object.actosjr.order(:id) do |fa| %>
+      <%= render 'desplazamiento_actosjr_campos', :f => fa %>
     <% end %>
-  <% end %>
+
+    <div class='links'>
+      <%= link_to_add_association 'Agregar acto', f, :actosjr, {
+        :"data-association-insertion-node" => "tbody#actosjr", 
+        :"data-association-insertion-method" => "append", 
+        partial: 'actosjr_campos',
+        class: 'btn-primary', 
+        "data-ajax" => new_actosjr_path,
+        "data-ajaxdata" => "desplazamiento_id" } 
+      %>
+    </div> <!-- links -->
+    <tr>
+      <td>
+        <div style="padding-bottom: 18px;" 
+             class="input select caso_acto_presponsable">
+          <% p = options_from_collection_for_select(
+            Sivel2Gen::Presponsable.from(
+              'sivel2_gen_caso_presponsable, sivel2_gen_presponsable'
+            ).where(
+              'sivel2_gen_caso_presponsable.id_presponsable='\
+              'sivel2_gen_presponsable.id '\
+              'AND sivel2_gen_caso_presponsable.id_caso=?', @caso.id), 
+              "id", "nombre") 
+            %>
+          <%= select_tag(
+            "caso_acto_id_presponsable", p, multiple: true,
+            "data-toggle" => 'tooltip',
+            "title" => 'Seleccione de aquellos presuntos responsables que '\
+            'añadió en la pestaña anterior',
+            style: 'width: 12em') %>
+          <label class="select required control-label" 
+                 for="caso_acto_id_presponsable">
+            <%= Sivel2Gen::Presponsable.human_attribute_name(:Presponsable) %>
+          </label>
+        </div>
+      </td>
+      <td>
+        <div style="padding-bottom: 18px;" 
+             class="input select caso_acto_categoria">
+          <% c = options_from_collection_for_select(
+            Sivel2Gen::Categoria.from(
+              "sivel2_gen_categoria, sivel2_gen_supracategoria").where(
+                "sivel2_gen_categoria.supracategoria_id="\
+                "sivel2_gen_supracategoria.id "\
+                "AND sivel2_gen_categoria.fechadeshabilitacion IS NULL "\
+                "AND sivel2_gen_categoria.tipocat = 'I' "\
+                "AND sivel2_gen_supracategoria.id_tviolencia <> 'R'"
+              ).order('sivel2_gen_supracategoria.id_tviolencia', :id),
+              "id", 
+              lambda {|t| 
+                t.supracategoria.id_tviolencia + t.id.to_s + ' ' + t.nombre }) 
+              %>
+            <%= select_tag(
+              "caso_acto_id_categoria", c, multiple: true,
+              "data-toggle" => 'tooltip',
+              "title" => 'Seleccione el(los) tipo(s) de violencia asociados '\
+              'al hecho victimizante. Para seleccionar varios pulse CTRL '\
+              'y haga clic en las categorías que desee',
+              style: 'width: 12em') %>
+            <label class="select required control-label" 
+                   for="caso_acto_id_categoria">
+              Categoría
+            </label>
+        </div>
+      </td>
+      <td>
+        <div style="padding-bottom: 18px;" class="input select caso_acto_persona">
+          <% p = options_from_collection_for_select(
+            Sip::Persona.from('sivel2_gen_victima, sip_persona').where(
+              'sivel2_gen_victima.id_persona=sip_persona.id '\
+              'AND sivel2_gen_victima.id_caso=?', @caso.id),
+              "id",
+              lambda {|t| t.nombres + ' ' + t.apellidos}) 
+            %>
+          <%= select_tag(
+            "caso_acto_id_persona", p, multiple: true,
+            "data-toggle" => 'tooltip',
+            "title" => 'Seleccione los nombres de una o más víctimas '\
+            'asociadas al presunto responsable y al tipo de violencia elegido',
+            style: 'width: 12em') %>
+          <label class="select required control-label" 
+                 for="caso_acto_id_persona">Víctima</label>
+        </div>
+      </td>
+      <td>
+        <div style="padding-bottom: 18px;" class="input select caso_acto_fecha">
+          <%= f.input :actosjr_fecha, as: :string, html_input: {
+            "data-behaviour" => "datepicker",
+            "data-toggle" => 'tooltip',
+            "title" => 'Del hecho victimizante',
+            style: 'width: 7em'
+          } %>
+        </div>
+      </td>
+      <td>
+        <%= f.input :id, as: :hidden %>
+        <div style="padding-bottom: 18px;">
+          <%= link_to 'Añadir Causa/Antecedente', '#',
+            class: 'agregaractos btn btn-primary' 
+          %>
+        </div>
+      </td>
+    </tr>
+
   </tbody>
 </table>
-
-

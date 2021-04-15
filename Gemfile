@@ -109,7 +109,7 @@ gem 'sivel2_sjr',
 
 group :development, :test do
 
-  #gem 'byebug' # Depurar
+  gem 'byebug' # Depurar
 
   gem 'colorize' # Colores en terminal
 

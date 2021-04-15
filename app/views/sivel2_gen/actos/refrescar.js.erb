@@ -4,6 +4,7 @@
 <% if @params[:action] == "eliminar" %>
   <% des_id = @params[:desplazamiento_id]%>
 <% end %>
+  <% byebug %>
 <% if des_id == "" %>
   $("#actos_tabla").html("<%= escape_javascript(render('sivel2_sjr/casos/antecedentes')) %>");
 <% else %>

@@ -33,6 +33,11 @@ module Sivel2Sjr
       class_name: 'Sip::Anexo'
     accepts_nested_attributes_for :sip_anexo,  reject_if: :all_blank
 
+    accepts_nested_attributes_for :actosjr, reject_if: :all_blank
+    has_many :acto, through: :actosjr,
+      class_name: 'Sivel2Gen::Acto'
+    accepts_nested_attributes_for :acto,  reject_if: :all_blank
+
     validates :tipodesp, presence: true
 
 

@@ -74,6 +74,7 @@ module Sivel2Sjrcol
     # cor1440
     config.x.cor1440_permisos_por_oficina = 
       (ENV['COR1440_PERMISOS_POR_OFICINA'] && ENV['COR1440_PERMISOS_POR_OFICINA'] != '')
-   end
+
+  end
 end
 

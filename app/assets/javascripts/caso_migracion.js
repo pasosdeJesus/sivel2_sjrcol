@@ -26,6 +26,23 @@ $(document).on('change',
   }
 )
 
+// Cambia id de elementos relacionados con el control de ubicacionpre
+// expandible en 2 filas, que tengan id 0.
+function ubicacionpre2expandible_cambia_ids(elemento, nuevaid) {
+  control = $('#ubicacionpre-' + elemento + '-0').parent()
+  control.find('#ubicacionpre-' + elemento + '-0').attr('id', 
+    'ubicacionpre-' + elemento + '-'+ cocoonid)
+  control.find('#resto-' + elemento + '-0').attr('id', 
+    'resto-' + elemento + '-'+ cocoonid)
+  control.find('#restocp-' + elemento + '-0').attr('id', 
+    'restocp-' + elemento + '-'+ cocoonid)
+  b = control.find('button[data-target$=' + elemento + '-0]')
+  console.log(b.attr('data-target'))
+  b.attr('data-target', 
+    '#resto-' + elemento + '-' + cocoonid + ',#restocp-' + elemento + '-' + 
+    cocoonid)
+}
+
 $(document).on('cocoon:after-insert', '#migracion', 
   function (e) {
     $('[data-behaviour~=datepicker]').datepicker({
@@ -61,17 +78,7 @@ $(document).on('cocoon:after-insert', '#migracion',
     console.log(cocoonid);
 
     ['salida', 'llegada', 'destino'].forEach(function (v, i) {
-      control = $('#ubicacionpre-' + v + '-0').parent()
-      control.find('#ubicacionpre-' + v + '-0').attr('id', 
-        'ubicacionpre-' + v + '-'+ cocoonid)
-      control.find('#resto-' + v + '-0').attr('id', 
-        'resto-' + v + '-'+ cocoonid)
-      control.find('#restocp-' + v + '-0').attr('id', 
-        'restocp-' + v + '-'+ cocoonid)
-      b = control.find('button[data-target$=' + v + '-0]')
-      console.log(b.attr('data-target'))
-      b.attr('data-target', 
-        '#resto-' + v + '-' + cocoonid + ',#restocp-' + v + '-' + cocoonid)
+      ubicacionpre2expandible_cambia_ids(v, cocoonid)
     })
 
     e.stopPropagation()
@@ -157,7 +164,7 @@ $(document).on('change', '#persona_id_pais',
   }
 )
 
-function maneja_evento_busca_ubicacionpre_lugar(e) {
+function ubicacionpre2expandible_maneja_evento_busca_lugar(e) {
   root = window
   ubicacionpre = $(this).closest('.ubicacionpre')
   if (ubicacionpre.length != 1) {
@@ -170,11 +177,11 @@ function maneja_evento_busca_ubicacionpre_lugar(e) {
   mun = ubicacionpre.find('[id$=municipio_id]').val()
   clas = ubicacionpre.find('[id$=clase_id]').val()
   ubi = [pais, dep, mun, clas]
-  busca_ubicacionpre_lugar($(this), ubi)
+  ubicacionpre2expandible_busca_lugar($(this), ubi)
 }
 
 
-function busca_ubicacionpre_lugar(s, ubi) {
+function ubicacionpre2expandible_busca_lugar(s, ubi) {
   root = window
   sip_arregla_puntomontaje(root)
   cnom = s.attr('id')
@@ -203,7 +210,7 @@ function busca_ubicacionpre_lugar(s, ubi) {
       minLength: 2,
       select: function( event, ui ){ 
         if (ui.item){ 
-          autocompleta_ubicacionpre_lugar(ui.item.clase_id, ui.item.tsitio_id, ui.item.lugar, ui.item.sitio, ui.item.latitud, ui.item.longitud, ubipre, root)
+          ubicacionpre2expandible_autocompleta_lugar(ui.item.clase_id, ui.item.tsitio_id, ui.item.lugar, ui.item.sitio, ui.item.latitud, ui.item.longitud, ubipre, root)
           event.stopPropagation()
           event.preventDefault()
         }
@@ -213,7 +220,7 @@ function busca_ubicacionpre_lugar(s, ubi) {
   return
 }
 
-function autocompleta_ubicacionpre_lugar(clase_id, tsit, lug, sit, lat, lon, ubipre, root){
+function ubicacionpre2expandible_autocompleta_lugar(clase_id, tsit, lug, sit, lat, lon, ubipre, root){
   sip_arregla_puntomontaje(root)
   ubipre.parent().find('[id$=_clase_id]').val(clase_id).trigger('chosen:updated')
   ubipre.find('[id$=_lugar]').val(lug)
@@ -230,13 +237,13 @@ function autocompleta_ubicacionpre_lugar(clase_id, tsit, lug, sit, lat, lon, ubi
 //    (teniendo en cuenta que haya campos para el mismo, por ejemplo
 //    uno terminado en salida_lugar).
 // root Raiz
-function registra_ubicacionpre_control2expandible(iniid, elemento, root) {
+function ubicacionpre2expandible_registra(iniid, elemento, root) {
   sip_arregla_puntomontaje(root)
 
   // Buscador en campo lugar
   $(document).on('focusin', 
     'input[id^=' + iniid + '][id$=_' + elemento + '_lugar]', 
-    maneja_evento_busca_ubicacionpre_lugar
+    ubicacionpre2expandible_maneja_evento_busca_lugar
   )
 
   // Cambia coordenadas al cambiar pais
@@ -303,118 +310,22 @@ function registra_ubicacionpre_control2expandible(iniid, elemento, root) {
 
 }
 
-registra_ubicacionpre_control2expandible(
+ubicacionpre2expandible_registra(
   'caso_migracion_attributes', 'salida', window)
 
-registra_ubicacionpre_control2expandible(
+ubicacionpre2expandible_registra(
   'caso_migracion_attributes', 'llegada', window)
 
-registra_ubicacionpre_control2expandible(
+ubicacionpre2expandible_registra(
   'caso_migracion_attributes', 'destino', window)
 
-//Llegada
-$(document).on('change', 
-  '[id^=caso_migracion_attributes_][id$=llegada_pais_id]', 
-  function (evento) {
-    fija_coordenadas(evento, "llegada", $(this), "paises")
-})
-$(document).on('change', 
-  '[id^=caso_migracion_attributes_][id$=llegada_departamento_id]', 
-  function (evento) {
-    if($(this).val()==""){
-      pid = evento.target.getAttribute('id').split('_')
-      pais = $('#caso_migracion_attributes_' + pid[3] + '_' + campoubi + '_pais_id')
-      fija_coordenadas(evento, "llegada", pais, "paises")
-    }else{
-      deshabilita_otros_sinohaymun(evento, "llegada")
-      fija_coordenadas(evento, "llegada", $(this), "departamentos")
-    }
-})
-$(document).on('change', 
-  '[id^=caso_migracion_attributes_][id$=llegada_municipio_id]', 
-  function (evento) {
-    if($(this).val()==""){
-      deshabilita_otros_sinohaymun(evento, "llegada")
-      pid = evento.target.getAttribute('id').split('_')
-      dep = $('#caso_migracion_attributes_' + pid[3] + '_' + campoubi + '_departamento_id')
-      fija_coordenadas(evento, "llegada", dep, "departamentos")
-    }else{
-      habilita_otros_sihaymun(evento, 1, "llegada")
-      fija_coordenadas(evento, "llegada", $(this), "municipios")
-    }
-})
-$(document).on('change', 
-  '[id^=caso_migracion_attributes_][id$=llegada_clase_id]', 
-  function (evento) {
-    if($(this).val()==""){
-      pid = evento.target.getAttribute('id').split('_')
-      mun = $('#caso_migracion_attributes_' + pid[3] + '_' + campoubi + '_municipio_id')
-      fija_coordenadas(evento, "llegada", mun, "municipios")
-    }else{
-      habilita_otros_sihaymun(evento, 1, "llegada")
-      fija_coordenadas(evento, "llegada", $(this), "clases")
-    }
-})
-$(document).on('change', 
-  '[id^=caso_migracion_attributes_][id$=llegada_lugar]', 
-  function (evento) {
-    habilita_otros_sihaymun(evento, 2, "llegada")
-})
-
-//Destino
-$(document).on('change', 
-  '[id^=caso_migracion_attributes_][id$=destino_pais_id]', 
-  function (evento) {
-    fija_coordenadas(evento, "destino", $(this), "paises")
-})
-$(document).on('change', 
-  '[id^=caso_migracion_attributes_][id$=destino_departamento_id]', 
-  function (evento) {
-    if($(this).val()==""){
-      pid = evento.target.getAttribute('id').split('_')
-      pais = $('#caso_migracion_attributes_' + pid[3] + '_' + campoubi + '_pais_id')
-      fija_coordenadas(evento, "destino", pais, "paises")
-    }else{
-      deshabilita_otros_sinohaymun(evento, "destino")
-      fija_coordenadas(evento, "destino", $(this), "departamentos")
-    }
-})
-$(document).on('change', 
-  '[id^=caso_migracion_attributes_][id$=destino_municipio_id]', 
-  function (evento) {
-    if($(this).val()==""){
-      deshabilita_otros_sinohaymun(evento, "destino")
-      pid = evento.target.getAttribute('id').split('_')
-      dep = $('#caso_migracion_attributes_' + pid[3] + '_' + campoubi + '_departamento_id')
-      fija_coordenadas(evento, "destino", dep, "departamentos")
-    }else{
-      habilita_otros_sihaymun(evento, 1, "destino")
-      fija_coordenadas(evento, "destino", $(this), "municipios")
-    }
-})
-$(document).on('change', 
-  '[id^=caso_migracion_attributes_][id$=destino_clase_id]', 
-  function (evento) {
-    if($(this).val()==""){
-      pid = evento.target.getAttribute('id').split('_')
-      mun = $('#caso_migracion_attributes_' + pid[3] + '_' + campoubi + '_municipio_id')
-      fija_coordenadas(evento, "destino", mun, "municipios")
-    }else{
-      habilita_otros_sihaymun(evento, 1, "destino")
-      fija_coordenadas(evento, "destino", $(this), "clases")
-    }
-})
-$(document).on('change', 
-  '[id^=caso_migracion_attributes_][id$=destino_lugar]', 
-  function (evento) {
-    habilita_otros_sihaymun(evento, 2, "destino")
-})
 
 // Funciones
 function fija_coordenadas(e, campoubi, elemento, ubi_plural){
-  pid = e.target.getAttribute('id').split('_')
-  latitud = $('#caso_migracion_attributes_' + pid[3] + '_' + campoubi + '_latitud')
-  longitud = $('#caso_migracion_attributes_' + pid[3] + '_' + campoubi + '_longitud')
+  ubp = $(e.target).closest('.ubicacionpre')
+  latitud = ubp.find('[id$='+campoubi+'_latitud]')
+  longitud = ubp.find('[id$='+campoubi+'_longitud]')
+
   id = $(elemento).val()
   root = window
   $.getJSON(root.puntomontaje + "admin/" + ubi_plural +".json", function(o){

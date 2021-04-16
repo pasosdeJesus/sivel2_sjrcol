@@ -11,6 +11,24 @@ module Sip
       foreign_key: "llegadaubicacionpre_id", validate: true, 
       dependent: :destroy
 
+    attr_accessor :id_pais
+
+    def id_pais
+      self.pais_id
+    end
+
+    def id_departamento
+      self.departamento_id
+    end
+
+    def id_municipio
+      self.municipio_id
+    end
+
+    def id_clase
+      self.clase_id
+    end
+
     def self.nomenclatura(pais, departamento, municipio,
                           clase, lugar, sitio)
       if pais.to_s.strip == ''

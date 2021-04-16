@@ -383,8 +383,12 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
           when 'fecha'
             return actosjr ? actosjr.fecha : ''
           when 'desplazamiento'
-            desplaza = Sivel2Sjr::Desplazamiento.where(id: actosjr.desplazamiento_id)[0]
-            return desplaza ? desplaza.fechaexpulsion : ''
+            if !actosjr || !actosjr.desplazamiento_id
+              return ''
+            end
+            desplaza = Sivel2Sjr::Desplazamiento.
+              where(id: actosjr.desplazamiento_id)
+            return desplaza.count > 0 ? desplaza[0].fechaexpulsion : ''
           end
         else
           case campo
@@ -624,7 +628,7 @@ class Sivel2Gen::Consexpcaso < ActiveRecord::Base
         else
           m = migracion.send(atr.to_s)
         end
-        m.nil? ? '' : m.nombre
+        return m.nil? ? '' : m.nombre
       else 
         return ''
       end

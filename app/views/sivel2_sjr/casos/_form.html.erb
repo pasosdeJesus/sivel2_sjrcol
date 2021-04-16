@@ -34,15 +34,6 @@
           <li role="presentation" class="nav-item"><a href="#atencion" class="fichacambia nav-link"
             aria-controls="atencion" role="tab"
             data-toggle="tab">Respuesta Institucional y Seguimiento</a></li>
-          <li role="presentation" class="nav-item"><a href="#descripcion" class="fichacambia nav-link"
-            aria-controls="descripcion" role="tab"
-            data-toggle="tab">Descripción</a></li>
-          <li role="presentation" class="nav-item"><a href="#anexos" class="fichacambia nav-link"
-            aria-controls="anexos" role="tab"
-            data-toggle="tab">Anexos</a></li>
-          <li role="presentation" class="nav-item"><a href="#etiquetas" class="fichacambia nav-link"
-            aria-controls="etiquetas" role="tab"
-            data-toggle="tab">Etiquetas</a></li>
         </ul>
         <div class="tab-content">
           <%= f.simple_fields_for :casosjr do |s| %>
@@ -68,19 +59,7 @@
 
 
           <div role="tabpanel" class="tab-pane fade" id="atencion" >
-            <%= render 'respuestas', :f => f %>
-          </div>
-
-          <div role="tabpanel" class="tab-pane fade" id="descripcion" >
-            <%= render 'memo', :f => f, :s => s %>
-          </div>
-
-          <div role="tabpanel" class="tab-pane fade" id="anexos">
-            <%= render 'sivel2_gen/casos/anexos', :f => f  %>
-          </div>
-
-          <div role="tabpanel" class="tab-pane fade" id="etiquetas">
-            <%= render 'sivel2_gen/casos/etiquetas', :f => f  %>
+            <%= render 'respuestas', :f => f, :s => s %>
           </div>
 
         <% end %> <!-- form s -->

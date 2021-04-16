@@ -1,0 +1,48 @@
+<div class="panel-group" id="acordeonrs">
+
+  <%= render partial: 'respuesta_nuevaac', locals: {f: f} %>
+
+  <% # SEGUIMIENTO A CASOS %> 
+  <% ga = Cor1440Gen::Actividad.joins(
+    'INNER JOIN sivel2_sjr_actividad_casosjr ' +
+    'ON sivel2_sjr_actividad_casosjr.actividad_id = cor1440_gen_actividad.id').
+    where('sivel2_sjr_actividad_casosjr.casosjr_id = ?', f.object.id) %>
+  <% ga2 = ga.joins(
+    'INNER JOIN cor1440_gen_actividad_actividadpf '+
+    'ON cor1440_gen_actividad_actividadpf.actividad_id=cor1440_gen_actividad.id').
+    where('cor1440_gen_actividad_actividadpf.actividadpf_id=?', @actividadpf_seguimiento_id) %>
+  <% ga2.order(['cor1440_gen_actividad.fecha DESC', 
+                'cor1440_gen_actividad.id DESC']).each  do |ac| %>
+    <%= render partial: 'respuesta_segac', locals: { f: f, ac: ac } %>
+  <% end %>
+
+  <% # OTRAS ACTIVIDADES EN LAS QUE ESTE CASO ES BENEFICIARIO %>
+  <% ga3 = ga.where('cor1440_gen_actividad.id NOT IN ' +
+          '(SELECT actividad_id FROM cor1440_gen_actividad_actividadpf ' +
+          '  WHERE actividadpf_id = ?)', @actividadpf_seguimiento_id) %>
+  <% ga3.order(['cor1440_gen_actividad.fecha DESC', 
+                'cor1440_gen_actividad.id DESC']).each  do |ac| %>
+    <%= render partial: 'respuesta_caso_beneficiario', 
+      locals: { f: f, ac: ac} %>
+  <% end %>
+
+  <% # OTRAS ACTIVIDADES EN LAS QUE PERSONAS DE ESTE CASO SON BENEFICIARIOS %>
+  <% ga4 = Cor1440Gen::Actividad.joins(
+    'INNER JOIN cor1440_gen_asistencia ' +
+    'ON cor1440_gen_asistencia.actividad_id = cor1440_gen_actividad.id').
+    where('cor1440_gen_asistencia.persona_id IN ' + 
+          '(SELECT id_persona FROM sivel2_gen_victima WHERE ' +
+          '  sivel2_gen_victima.id_caso=?)', f.object.id) %>
+  <% ga4.order(['cor1440_gen_actividad.fecha DESC', 
+                'cor1440_gen_actividad.id DESC']).each  do |ac| %>
+    <%= render partial: 'respuesta_persona_beneficiaria', locals: {f: f, ac: ac} %>
+  <% end %>
+
+  <%= render 'memo', :f => f, :s => s %>
+  <a data-toggle="collapse" href='#anexoscol'>
+    <h5>ANEXOS</h5>
+  </a>
+  <div class="collapse multi-collapse" id="anexoscol">
+    <%= render 'sivel2_gen/casos/anexos', :f => f  %>
+  </div>
+</div> <!-- acordeon -->

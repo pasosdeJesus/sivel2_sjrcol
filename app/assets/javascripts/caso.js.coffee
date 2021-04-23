@@ -179,3 +179,20 @@ document.addEventListener('turbolinks:load', () ->
     for item in [0 .. items_victimas.length-1]
       agregar_colapsables_cocoon('victima', item)
 )
+
+# Agrega actos  
+$(document).on('click', 'a.agregaractos[href^="#"]', (e) ->
+  e.preventDefault()
+  root =  exports ? window
+  desplazamiento = $(this).attr('data-desplazamiento')
+  tn = Date.now()
+  d = -1
+  if (root.tagregaactos) 
+    d = (tn - root.tagregaactos)/1000
+  if (d == -1 || d>5) 
+    f=$('form')
+    a = root.puntomontaje + 'actos/agregar?desplazamiento=' + desplazamiento
+    $.post(a, f.serialize())
+    root.tagregaactos= Date.now()
+  return
+)

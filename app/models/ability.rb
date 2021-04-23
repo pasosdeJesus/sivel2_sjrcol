@@ -943,7 +943,6 @@ class Ability < Sivel2Sjr::Ability
         can :manage, Cor1440Gen::Informe
         can :manage, Cor1440Gen::Mindicadorpf
         can :manage, Cor1440Gen::Proyectofinanciero
-        can :manage, Cor1440Gen::Sectoractor
 
         can :manage, Sip::Respaldo7z
 

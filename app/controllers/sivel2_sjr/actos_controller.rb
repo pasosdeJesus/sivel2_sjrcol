@@ -6,37 +6,43 @@ module Sivel2Sjr
 
     # Crea nuevos actos procesando parámetros
     def agregar
+      des_id = params[:desplazamiento]
+      presponsable = "caso_acto_id_presponsable_#{des_id}"
+      categoria = "caso_acto_id_categoria_#{des_id}"
+      persona = "caso_acto_id_persona_#{des_id}"
+      fecha = "caso_acto_fecha_#{des_id}"
+      desplazamiento = "caso_acto_id_desplazamiento_#{des_id}"
       if params[:caso][:id].nil?
         respond_to do |format|
           format.html { render inline: 'Falta identificacion del caso' }
         end
         return
-      elsif !params[:caso_acto_id_presponsable]
+      elsif !params[presponsable]
         respond_to do |format|
           format.html { render inline: 'Debe tener Presunto Responsable' }
         end
         return
-      elsif !params[:caso_acto_id_categoria]
+      elsif !params[categoria]
         respond_to do |format|
           format.html { render inline: 'Debe tener Categoria' }
         end
         return
-      elsif !params[:caso_acto_id_persona]
+      elsif !params[persona]
         respond_to do |format|
           format.html { render inline: 'Debe tener Víctima' }
         end
         return
-      elsif !params[:caso_acto_fecha]
+      elsif !params[fecha]
         respond_to do |format|
           format.html { render inline: 'Debe tener Fecha' }
         end
         return
       else
-        params[:caso_acto_id_presponsable].each do |cpresp|
+        params[presponsable].each do |cpresp|
           presp = cpresp.to_i
-          params[:caso_acto_id_categoria].each do |ccat|
+          params[categoria].each do |ccat|
             cat = ccat.to_i
-            params[:caso_acto_id_persona].each do |cvic|
+            params[persona].each do |cvic|
               vic = cvic.to_i
               @caso = Sivel2Gen::Caso.find(params[:caso][:id])
               @caso.current_usuario = current_usuario
@@ -49,8 +55,8 @@ module Sivel2Sjr
               acto.caso = @caso
               acto.save
               actosjr = Sivel2Sjr::Actosjr.new(
-                fecha: params[:caso_acto_fecha],
-                desplazamiento_id: params[:caso_acto_desplazamiento_id]
+                fecha: params[fecha],
+                desplazamiento_id: params[desplazamiento]!="" ? params[desplazamiento].to_i : nil
               )
               actosjr.acto = acto
               actosjr.save!

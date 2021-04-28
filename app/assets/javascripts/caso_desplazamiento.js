@@ -56,6 +56,7 @@ $(document).on("click", ".togglepr", function() {
 // Nuevo Presunto responsable desde actos
 $(document).on("click", ".boton_agregarpr", function(e) {
   e.preventDefault()
+  desplazamiento = $(this).attr('data-desplazamiento')
   root =  window
   tn = Date.now()
   d = -1
@@ -64,13 +65,9 @@ $(document).on("click", ".boton_agregarpr", function(e) {
   }
   if (d == -1 || d>5){ 
     f=$('form')
-    a = root.puntomontaje + 'actos/agregarpr'
+    a = root.puntomontaje + 'actos/agregarpr?desplazamiento=' + desplazamiento
     $.post(a, f.serialize())
     root.tagregapr= Date.now()
   }
   return
-});
-
-$(document).on("click", ".togglemaspr", function() {
- $(this).parent().siblings(".maspr").modal('toggle');
 });

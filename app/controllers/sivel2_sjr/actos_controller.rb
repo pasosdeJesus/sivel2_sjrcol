@@ -73,6 +73,7 @@ module Sivel2Sjr
     def nuevopr
       des_id = params[:desplazamiento]
       nombre_pr = "nombre_nuevopr_#{des_id}"
+      papa_pr = "papa_nuevopr_#{des_id}"
       observaciones_pr = "observaciones_nuevopr_#{des_id}"
       if !params[nombre_pr]
         respond_to do |format|
@@ -80,33 +81,15 @@ module Sivel2Sjr
         end
         return
       else
-        @caso = Sivel2Gen::Caso.find(params[:caso][:id])
-        @caso.current_usuario = current_usuario
-        authorize! :update, @caso
+        papa = Sivel2Gen::Presponsable.where(id: params[papa_pr])
+        papa_id  = papa.empty? ? nil : papa[0].id
         pr = Sivel2Gen::Presponsable.new(
           nombre: params[nombre_pr],
-          observaciones: params[observaciones],
+          observaciones: params[observaciones_pr],
+          papa_id: papa_id, 
           fechacreacion: Date.today()
         )
         pr.save!
-        bloque_pr = "frente_nuevopr_#{des_id}"
-        frente_pr = "bloque_nuevopr_#{des_id}"
-        brigada_pr = "brigada_nuevopr_#{des_id}"
-        batallon_pr = "batallon_nuevopr_#{des_id}"
-        division_pr = "dvision_nuevopr_#{des_id}"
-        otro_pr = "otro_nuevopr_#{des_id}"
-        casopr = Sivel2Gen::CasoPresponsable.new(
-          id_caso: @caso,
-          id_presponsable: pr.id,
-          tipo: integer,
-          bloque: params[bloque_pr],
-          frente: params[frente_pr],
-          brigada: params[brigada_pr],
-          batallon: params[batallon_pr],
-          division: params[division_pr],
-          otro: params[otro_pr]
-        )
-        casopr.save!
       end
       @params = params
       respond_to do |format|

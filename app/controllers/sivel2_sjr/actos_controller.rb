@@ -70,6 +70,49 @@ module Sivel2Sjr
       end
     end
 
+    def nuevopr
+      des_id = params[:desplazamiento]
+      nombre_pr = "nombre_nuevopr_#{des_id}"
+      observaciones_pr = "observaciones_nuevopr_#{des_id}"
+      if !params[nombre_pr]
+        respond_to do |format|
+          format.html { render inline: 'El presunto responsable debe tener un nombre' }
+        end
+        return
+      else
+        @caso = Sivel2Gen::Caso.find(params[:caso][:id])
+        @caso.current_usuario = current_usuario
+        authorize! :update, @caso
+        pr = Sivel2Gen::Presponsable.new(
+          nombre: params[nombre_pr],
+          observaciones: params[observaciones],
+          fechacreacion: Date.today()
+        )
+        pr.save!
+        bloque_pr = "frente_nuevopr_#{des_id}"
+        frente_pr = "bloque_nuevopr_#{des_id}"
+        brigada_pr = "brigada_nuevopr_#{des_id}"
+        batallon_pr = "batallon_nuevopr_#{des_id}"
+        division_pr = "dvision_nuevopr_#{des_id}"
+        otro_pr = "otro_nuevopr_#{des_id}"
+        casopr = Sivel2Gen::CasoPresponsable.new(
+          id_caso: @caso,
+          id_presponsable: pr.id,
+          tipo: integer,
+          bloque: params[bloque_pr],
+          frente: params[frente_pr],
+          brigada: params[brigada_pr],
+          batallon: params[batallon_pr],
+          division: params[division_pr],
+          otro: params[otro_pr]
+        )
+        casopr.save!
+      end
+      @params = params
+      respond_to do |format|
+        format.js { render 'refrescar' }
+      end
+    end
     def eliminar
       acto = Sivel2Gen::Acto.where(id: params[:id_acto].to_i).take
       params[:desplazamiento_id] = Sivel2Sjr::Actosjr.where(id_acto: acto.id)[0].desplazamiento_id.to_s

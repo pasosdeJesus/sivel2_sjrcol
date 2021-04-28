@@ -45,7 +45,140 @@
             "title" => 'Seleccione de aquellos presuntos responsables que añadió en la pestaña anterior',
             class: 'chosen-select'
           %>
+
+        <div>
+          Nuevo
+          <a type='button' 
+                  class='btn data-toggle togglepr'
+                  data-toggle="collapse">
+                  <i class="fa fa-plus" aria-hidden="true"></i>
+          </a>
         </div>
+        <!-- Modal -->
+        <div class="modal fade nuevopr" tabindex="-1" role="dialog">
+          <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">Agregar Nuevo Presunto Responsable</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col-md-6">
+                    <label class="select required control-label" for="<%="nombre_nuevopr_#{des_id}"%>">
+                      Nombre</label> </br>
+                      <%= text_field_tag "nombre_nuevopr_#{des_id}" %>
+                    <label class="select required control-label" for="<%="observaciones_nuevopr_#{des_id}"%>">
+                  </div>
+                  <div class="col-md-6">
+                      Observaciones</label></br>
+                      <%= text_area_tag "observaciones_nuevopr_#{des_id}" %>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-4">
+                    <label class="select required control-label" for="<%="bloque_nuevopr_#{des_id}"%>">
+                      Bloque</label> </br>
+                    <%= text_field_tag "bloque_nuevopr_#{des_id}" %>
+                  </div>
+                  <div class="col-md-4">
+                    <label class="select required control-label" for="<%="frente_nuevopr_#{des_id}"%>">
+                      Frente</label> </br>
+                    <%= text_field_tag "frente_nuevopr_#{des_id}" %>
+                  </div>
+                  <div class="col-md-4">
+                    <label class="select required control-label" for="<%="division_nuevopr_#{des_id}"%>">
+                      División</label> </br>
+                    <%= text_field_tag "division_nuevopr_#{des_id}" %>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-4">
+                    <label class="select required control-label" for="<%="brigada_nuevopr_#{des_id}"%>">
+                      Brigada</label> </br>
+                    <%= text_field_tag "brigada_nuevopr_#{des_id}" %>
+                  </div>
+                  <div class="col-md-4">
+                    <label class="select required control-label" for="<%="batallon_nuevopr_#{des_id}"%>">
+                      Batallon</label> </br>
+                    <%= text_field_tag "batallon_nuevopr_#{des_id}" %>
+                  </div>
+                  <div class="col-md-4">
+                    <label class="select required control-label" for="<%="otro_nuevopr_#{des_id}"%>">
+                      Otro</label> </br>
+                    <%= text_field_tag "otro_nuevopr_#{des_id}" %>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                  <%= link_to 'Crear', '#', data: { desplazamiento: "#{des_id}" },
+                    class: 'btn btn-primary boton_agregarpr',
+                    "data-dismiss": "modal"
+                  %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          Más detalles
+          <a type='button' 
+                  class='btn data-toggle togglemaspr'
+                  data-toggle="collapse">
+                  <i class="fa fa-expand" aria-hidden="true"></i>
+          </a>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade maspr" tabindex="-1" role="dialog">
+          <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">Información adicional del Presunto Responsable</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col-md-4">
+                    <label class="select required control-label" for="<%="bloque_nuevopr_#{des_id}"%>">
+                      Bloque</label> </br>
+                    <%= "bloque" %>
+                  </div>
+                  <div class="col-md-4">
+                    <label class="select required control-label" for="<%="frente_nuevopr_#{des_id}"%>">
+                      Frente</label> </br>
+                    <%= "frente" %>
+                  </div>
+                  <div class="col-md-4">
+                    <label class="select required control-label" for="<%="division_nuevopr_#{des_id}"%>">
+                      División</label> </br>
+                    <%= "division" %>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-4">
+                    <label class="select required control-label" for="<%="brigada_nuevopr_#{des_id}"%>">
+                      Brigada</label> </br>
+                    <%= "brigada" %>
+                  </div>
+                  <div class="col-md-4">
+                    <label class="select required control-label" for="<%="batallon_nuevopr_#{des_id}"%>">
+                      Batallon</label> </br>
+                    <%= "batallon" %>
+                  </div>
+                  <div class="col-md-4">
+                    <label class="select required control-label" for="<%="otro_nuevopr_#{des_id}"%>">
+                      Otro</label> </br>
+                    <%= "otro" %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       </td>
       <td>
         <div style="padding-bottom: 18px;" class="input select caso_acto_categoria">

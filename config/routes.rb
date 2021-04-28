@@ -28,6 +28,8 @@ Rails.application.routes.draw do
       as: :actos_agregar
     get "/actos/eliminar" => 'sivel2_sjr/actos#eliminar',
       as: :actos_eliminar
+    patch "/actos/agregarpr" => 'sivel2_sjr/actos#nuevopr',
+      as: :actos_nuevopr
 
     get "/conteos/accionesjuridicas" => 'sivel2_sjr/conteos#accionesjuridicas', 
       as: :conteos_accionesjuridicas

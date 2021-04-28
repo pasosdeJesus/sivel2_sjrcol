@@ -38,10 +38,7 @@
       <td>
         <div style="padding-bottom: 18px;" class="input select caso_acto_presponsable">
           <% p = options_from_collection_for_select(
-              Sivel2Gen::Presponsable.from('sivel2_gen_caso_presponsable, sivel2_gen_presponsable').where(
-                'sivel2_gen_caso_presponsable.id_presponsable=sivel2_gen_presponsable.id 
-              AND sivel2_gen_caso_presponsable.id_caso=?', @caso.id), "id", "nombre"
-              )
+            Sivel2Gen::Presponsable.habilitados, "id", "nombre")
           %>
           <%=  select_tag "caso_acto_id_presponsable_#{des_id}", p, multiple: true,
             "data-toggle" => 'tooltip',

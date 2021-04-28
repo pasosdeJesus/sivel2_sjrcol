@@ -230,6 +230,11 @@ es:
         respuestapositiva: Respuestas positivas
         respuestanegativa: Respuestas negativas
         sinrespuesta: Sin Respuesta
+      "sivel2_sjr/actosjr":
+        presponsable: Presunto responsable
+        categoria: Categoría
+        victima: Víctima
+        fecha: Fecha
       "sivel2_sjr/aslegal": 
         Aslegal: Asesoría Jurídica
         Aslegales: Asesorías Jurídicas

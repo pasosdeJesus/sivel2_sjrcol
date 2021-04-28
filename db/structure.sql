@@ -5453,7 +5453,7 @@ CREATE SEQUENCE public.sivel2_gen_presponsable_id_seq
 CREATE TABLE public.sivel2_gen_presponsable (
     id integer DEFAULT nextval('public.sivel2_gen_presponsable_id_seq'::regclass) NOT NULL,
     nombre character varying(500) NOT NULL COLLATE public.es_co_utf_8,
-    papa integer,
+    papa_id integer,
     fechacreacion date DEFAULT ('now'::text)::date NOT NULL,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
@@ -13390,7 +13390,7 @@ ALTER TABLE ONLY public.sip_persona_trelacion
 --
 
 ALTER TABLE ONLY public.sivel2_gen_presponsable
-    ADD CONSTRAINT presponsable_papa_fkey FOREIGN KEY (papa) REFERENCES public.sivel2_gen_presponsable(id);
+    ADD CONSTRAINT presponsable_papa_fkey FOREIGN KEY (papa_id) REFERENCES public.sivel2_gen_presponsable(id);
 
 
 --
@@ -14502,6 +14502,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210414201956'),
 ('20210416134930'),
 ('20210417152053'),
-('20210419161145');
+('20210419161145'),
+('20210428143811');
 
 

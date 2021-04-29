@@ -49,3 +49,25 @@ $(document).on('cocoon:after-insert', '#desplazamiento',
     })
   }
 )
+
+$(document).on("click", ".togglepr", function() {
+ $(this).parent().siblings(".nuevopr").modal('toggle');
+});
+// Nuevo Presunto responsable desde actos
+$(document).on("click", ".boton_agregarpr", function(e) {
+  e.preventDefault()
+  desplazamiento = $(this).attr('data-desplazamiento')
+  root =  window
+  tn = Date.now()
+  d = -1
+  if (root.tagregapr){ 
+    d = (tn - root.tagregapr)/1000
+  }
+  if (d == -1 || d>5){ 
+    f=$('form')
+    a = root.puntomontaje + 'actos/agregarpr?desplazamiento=' + desplazamiento
+    $.post(a, f.serialize())
+    root.tagregapr= Date.now()
+  }
+  return
+});

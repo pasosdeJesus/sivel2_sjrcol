@@ -70,6 +70,32 @@ module Sivel2Sjr
       end
     end
 
+    def nuevopr
+      des_id = params[:desplazamiento]
+      nombre_pr = "nombre_nuevopr_#{des_id}"
+      papa_pr = "papa_nuevopr_#{des_id}"
+      observaciones_pr = "observaciones_nuevopr_#{des_id}"
+      if !params[nombre_pr]
+        respond_to do |format|
+          format.html { render inline: 'El presunto responsable debe tener un nombre' }
+        end
+        return
+      else
+        papa = Sivel2Gen::Presponsable.where(id: params[papa_pr])
+        papa_id  = papa.empty? ? nil : papa[0].id
+        pr = Sivel2Gen::Presponsable.new(
+          nombre: params[nombre_pr],
+          observaciones: params[observaciones_pr],
+          papa_id: papa_id, 
+          fechacreacion: Date.today()
+        )
+        pr.save!
+      end
+      @params = params
+      respond_to do |format|
+        format.js { render 'refrescar' }
+      end
+    end
     def eliminar
       acto = Sivel2Gen::Acto.where(id: params[:id_acto].to_i).take
       params[:desplazamiento_id] = Sivel2Sjr::Actosjr.where(id_acto: acto.id)[0].desplazamiento_id.to_s

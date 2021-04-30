@@ -14,7 +14,9 @@
 <% end %>
   <% if @params[:action] == "nuevopr" %>
   $(".caso_acto_id_presponsable").html('<%= escape_javascript options_from_collection_for_select(Sivel2Gen::Presponsable.habilitados, "id", "nombre") %>');
-  $(".caso_acto_id_presponsable").trigger("chosen:updated");
+$(".caso_acto_id_presponsable").trigger("chosen:updated");
+  $("#caso_acto_id_presponsable_<%= des_id %>").val([<%= @params[:id_nuevopr]%>]);
+  $("#caso_acto_id_presponsable_<%= des_id %>").trigger("chosen:updated");
   $("#nombre_nuevopr_<%= des_id %>").val("")
   $("#papa_nuevopr_<%= des_id %>").val("")
   $("#observaciones_nuevopr_<%= des_id %>").val("")

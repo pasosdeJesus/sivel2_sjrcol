@@ -59,7 +59,7 @@
           <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h4 class="modal-title">Agregar Nuevo Presunto Responsable</h4>
+                <h1>Nuevo Presunto Responsable</h1>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -68,18 +68,18 @@
                 <div class="row">
                   <div class="col-md-6">
                     <label class="select required control-label" for="<%="nombre_nuevopr_#{des_id}"%>">
-                      Nombre</label> </br>
-                      <%= text_field_tag "nombre_nuevopr_#{des_id}" %> </br>
+                      Nombre</label>
+                      <%= text_field_tag "nombre_nuevopr_#{des_id}", nil, class: 'form-control' %> </br>
                     <label class="select required control-label" for="<%="papa_nuevopr_#{des_id}"%>">
                       Presunto responsable papá</label> </br>
                       <% p = options_from_collection_for_select(
                         Sivel2Gen::Presponsable.habilitados, "id", "nombre")
                       %>
-                      <%=  select_tag "papa_nuevopr_#{des_id}", p, :prompt => "Seleccione uno"
+                      <%=  select_tag "papa_nuevopr_#{des_id}", p, :prompt => "Seleccione uno", class: 'form-control'
                       %>
                     <label class="select required control-label" for="<%="observaciones_nuevopr_#{des_id}"%>">
                       Observaciones</label></br>
-                      <%= text_area_tag "observaciones_nuevopr_#{des_id}" %> </br>
+                      <%= text_area_tag "observaciones_nuevopr_#{des_id}", nil, class: 'form-control' %> </br>
                   </div>
                 </div>
               </div>

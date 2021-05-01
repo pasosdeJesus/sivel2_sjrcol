@@ -27,7 +27,7 @@ ubicacionpre2expandible_registra(
 
 
 $(document).on('cocoon:after-insert', '#desplazamiento',
-  function (e) {
+  function (e, desplazamiento) {
     $('[data-behaviour~=datepicker]').datepicker({
       format: 'yyyy-mm-dd',
       autoclose: true,
@@ -47,6 +47,21 @@ $(document).on('cocoon:after-insert', '#desplazamiento',
     ['expulsion', 'llegada', 'destino'].forEach(function (v, i) {
       ubicacionpre2expandible_cambia_ids(v, cocoonid)
     })
+    //asigna id de tabla actos al crear
+    desplazamiento.find('.actos_div').attr("id", "actos_" + cocoonid)
+    desplazamiento.find('.actos_tabla').attr("id", "actos_tabla_" + cocoonid)
+    desplazamiento.find('#caso_acto_id_presponsable_').attr("name", "caso_acto_id_presponsable_" + cocoonid + "[]")
+    desplazamiento.find('#caso_acto_id_presponsable_').attr("id", "caso_acto_id_presponsable_" + cocoonid)
+    desplazamiento.find('#caso_acto_id_categoria_').attr("name", "caso_acto_id_categoria_" + cocoonid + "[]")
+    desplazamiento.find('#caso_acto_id_categoria_').attr("id", "caso_acto_id_categoria_" + cocoonid)
+    desplazamiento.find('#caso_acto_id_persona_').attr("name", "caso_acto_id_persona_" + cocoonid + "[]")
+    desplazamiento.find('#caso_acto_id_persona_').attr("id", "caso_acto_id_persona_" + cocoonid)
+    desplazamiento.find('#caso_acto_fecha_').attr("name", "caso_acto_fecha_" + cocoonid)
+    desplazamiento.find('#caso_acto_fecha_').attr("id", "caso_acto_fecha_" + cocoonid)
+    desplazamiento.find('#caso_acto_id_desplazamiento_').attr("name", "caso_acto_id_desplazamiento_" + cocoonid)
+    desplazamiento.find('#caso_acto_id_desplazamiento_').attr("id", "caso_acto_id_desplazamiento_" + cocoonid)
+    desplazamiento.find("#caso_acto_id_desplazamiento_" + cocoonid).val(cocoonid)
+    $('#actos_tabla_' + cocoonid).find("tr:not(:last, :first)").remove();
   }
 )
 

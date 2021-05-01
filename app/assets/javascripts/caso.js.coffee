@@ -185,6 +185,10 @@ $(document).on('click', 'a.agregaractos[href^="#"]', (e) ->
   e.preventDefault()
   root =  exports ? window
   desplazamiento = $(this).attr('data-desplazamiento')
+  if(desplazamiento == "")
+    if($(this).closest(".actos_tabla").parent().attr("id") != "actos_tabla")
+      id_tabla = $(this).closest(".actos_tabla").parent().attr("id")
+      desplazamiento = id_tabla.split("_")[1]
   tn = Date.now()
   d = -1
   if (root.tagregaactos) 

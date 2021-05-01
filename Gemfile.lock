@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: 544fb126a42c85ae6a6f00c6a3d45692cbb53824
+  revision: 0583e61e2820e86605c582f4d9770059c3e99841
   branch: main
   specs:
     cor1440_gen (1.0b3)
@@ -14,7 +14,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 6f9b09f6015fa8a02606b817b7070278391b6001
+  revision: 2fd98f74a16bb3e04c24a109ff30c2ed7a025e2b
   branch: main
   specs:
     heb412_gen (1.0.b6)
@@ -52,7 +52,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 2a719b64602362506898d5585f180bcab2071ce1
+  revision: 5995e85c4579fec748fdc60ca33226bd10208922
   branch: main
   specs:
     sip (2.0.b11)
@@ -71,7 +71,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 4ced7b6417a6fe864151ed79050b623e7b97a185
+  revision: d830ebe6826c81a18e6a789c3acd55737b61753e
   branch: main
   specs:
     sivel2_gen (2.0b14)
@@ -196,7 +196,7 @@ GEM
     colorize (0.8.1)
     concurrent-ruby (1.1.8)
     crass (1.0.6)
-    devise (4.7.3)
+    devise (4.8.0)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 4.1.0)
@@ -241,7 +241,7 @@ GEM
       nokogiri (~> 1)
       rake
     mini_mime (1.0.3)
-    mini_portile2 (2.5.0)
+    mini_portile2 (2.5.1)
     minitest (5.14.4)
     msgpack (1.4.2)
     nio4r (2.5.7)

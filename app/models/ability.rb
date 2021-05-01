@@ -947,6 +947,7 @@ class Ability < Sivel2Sjr::Ability
         can :manage, Sip::Respaldo7z
 
         can :manage, Heb412Gen::Doc
+        can :manage, Heb412Gen::Carpetaexclusiva
         can :manage, Heb412Gen::Plantilladoc
         can :manage, Heb412Gen::Plantillahcm
         can :manage, Heb412Gen::Plantillahcr

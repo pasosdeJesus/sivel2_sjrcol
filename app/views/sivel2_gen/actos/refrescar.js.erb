@@ -11,6 +11,7 @@
     <% desplazamiento = Sivel2Sjr::Desplazamiento.find(des_id) %>
     $("#actos_<%= des_id %>").html("<%= escape_javascript(render('sivel2_sjr/casos/antecedentes', desplazamiento: desplazamiento)) %>");
   <% end %>
+  $('.chosen-select').chosen()
 <% end %>
   <% if @params[:action] == "nuevopr" %>
   $(".caso_acto_id_presponsable").html('<%= escape_javascript options_from_collection_for_select(Sivel2Gen::Presponsable.habilitados, "id", "nombre") %>');

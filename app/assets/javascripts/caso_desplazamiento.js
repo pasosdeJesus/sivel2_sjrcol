@@ -61,10 +61,22 @@ $(document).on('cocoon:after-insert', '#desplazamiento',
     desplazamiento.find('#caso_acto_id_desplazamiento_').attr("name", "caso_acto_id_desplazamiento_" + cocoonid)
     desplazamiento.find('#caso_acto_id_desplazamiento_').attr("id", "caso_acto_id_desplazamiento_" + cocoonid)
     desplazamiento.find("#caso_acto_id_desplazamiento_" + cocoonid).val(cocoonid)
+    desplazamiento.find('#nombre_nuevopr_').attr("name", "nombre_nuevopr_" + cocoonid)
+    desplazamiento.find('#nombre_nuevopr_').attr("id", "nombre_nuevopr_" + cocoonid)
+    desplazamiento.find('#papa_nuevopr_').attr("name", "papa_nuevopr_" + cocoonid)
+    desplazamiento.find('#papa_nuevopr_').attr("papa", "nombre_nuevopr_" + cocoonid)
+    desplazamiento.find('#observaciones_nuevopr_').attr("name", "observaciones_nuevopr_" + cocoonid)
+    desplazamiento.find('#observaciones_nuevopr_').attr("id", "observaciones_nuevopr_" + cocoonid)
     $('#actos_tabla_' + cocoonid).find("tr:not(:last, :first)").remove();
   }
 )
-
+// al aliminar desplazamiento con coocon se eliminan sus actos
+$(document).on('cocoon:before-remove', '#desplazamiento',
+  function (e, desplazamiento) {
+    botones_eliminar = desplazamiento.find('.eliminaracto')
+    botones_eliminar.trigger("click")
+  }
+)
 $(document).on("click", ".togglepr", function() {
  $(this).parent().siblings(".nuevopr").modal('toggle');
 });
@@ -72,6 +84,12 @@ $(document).on("click", ".togglepr", function() {
 $(document).on("click", ".boton_agregarpr", function(e) {
   e.preventDefault()
   desplazamiento = $(this).attr('data-desplazamiento')
+  if(desplazamiento == ""){
+    if($(this).closest(".actos_tabla").parent().attr("id") != "actos_tabla"){
+      id_tabla = $(this).closest(".actos_tabla").parent().attr("id")
+      desplazamiento = id_tabla.split("_")[1]
+    }
+  }
   root =  window
   tn = Date.now()
   d = -1

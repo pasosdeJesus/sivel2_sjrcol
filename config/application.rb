@@ -75,6 +75,7 @@ module Sivel2Sjrcol
     config.x.cor1440_permisos_por_oficina = 
       (ENV['COR1440_PERMISOS_POR_OFICINA'] && ENV['COR1440_PERMISOS_POR_OFICINA'] != '')
 
+    config.web_console.permissions = ENV.fetch('WC_PERMISOS', '')
   end
 end
 

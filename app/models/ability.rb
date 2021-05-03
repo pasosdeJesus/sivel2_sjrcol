@@ -945,6 +945,7 @@ class Ability < Sivel2Sjr::Ability
         can :manage, Cor1440Gen::Proyectofinanciero
 
         can :manage, Sip::Respaldo7z
+        can [:new, :create, :show, :index], Sip::Claverespaldo # No editables
 
         can :manage, Heb412Gen::Doc
         can :manage, Heb412Gen::Carpetaexclusiva

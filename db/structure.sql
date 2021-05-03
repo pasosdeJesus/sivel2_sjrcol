@@ -4155,6 +4155,37 @@ ALTER SEQUENCE public.sip_bitacora_id_seq OWNED BY public.sip_bitacora.id;
 
 
 --
+-- Name: sip_claverespaldo; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.sip_claverespaldo (
+    id bigint NOT NULL,
+    clave character varying NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: sip_claverespaldo_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.sip_claverespaldo_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: sip_claverespaldo_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.sip_claverespaldo_id_seq OWNED BY public.sip_claverespaldo.id;
+
+
+--
 -- Name: sip_datosbio; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -8266,6 +8297,13 @@ ALTER TABLE ONLY public.sip_bitacora ALTER COLUMN id SET DEFAULT nextval('public
 
 
 --
+-- Name: sip_claverespaldo id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sip_claverespaldo ALTER COLUMN id SET DEFAULT nextval('public.sip_claverespaldo_id_seq'::regclass);
+
+
+--
 -- Name: sip_datosbio id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -9687,6 +9725,14 @@ ALTER TABLE ONLY public.sip_clase
 
 ALTER TABLE ONLY public.sip_clase
     ADD CONSTRAINT sip_clase_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: sip_claverespaldo sip_claverespaldo_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sip_claverespaldo
+    ADD CONSTRAINT sip_claverespaldo_pkey PRIMARY KEY (id);
 
 
 --
@@ -14560,6 +14606,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210419161145'),
 ('20210428143811'),
 ('20210430160739'),
-('20210501002133');
+('20210501002133'),
+('20210501112541');
 
 

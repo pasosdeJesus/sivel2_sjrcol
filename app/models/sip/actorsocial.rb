@@ -13,11 +13,9 @@ module Sip
         foreign_key: "municipio_id", validate: true, optional: true
       belongs_to :tipoactorsocial, class_name: "Sip::Tipoactorsocial",
         foreign_key: "tipoactorsocial_id", validate: true, optional: true
-      
 
       validates :tipoactorsocial_id, presence: true
       validates :nit, uniqueness: true, allow_blank: true
-
 
       def presenta(atr)
         case atr.to_s

@@ -173,6 +173,9 @@ es:
         "{:sectoractor_ids=>[]}": Población(es) relacionada(s)
         lineaactorsocial: Línea de trabajo
         lineaactorsocial_id: Línea de trabajo
+      "sip/claverespaldo":
+        Claverespaldo: Clave para respaldo automático
+        Clavesrespaldos: Claves para respaldos automáticos
       "sip/datosbio":
         afiliadoarl: Afiliado a ARL
         anioaprobacion: Año de aprobacioń

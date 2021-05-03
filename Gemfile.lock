@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: 0583e61e2820e86605c582f4d9770059c3e99841
+  revision: 9873bf8193b09e5ef7c422dbf757a050501d8fcd
   branch: main
   specs:
     cor1440_gen (1.0b3)
@@ -14,7 +14,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 2fd98f74a16bb3e04c24a109ff30c2ed7a025e2b
+  revision: 900293e88b673fa5ad28c48909da43b727bcd497
   branch: main
   specs:
     heb412_gen (1.0.b6)
@@ -25,7 +25,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/mr519_gen.git
-  revision: fee32d7da9bb95f2474793da5f778cdf1fa16b62
+  revision: b3d0a9130b6626d05ce4d3ff9f30ccfb8edcf87f
   branch: main
   specs:
     mr519_gen (0.2.0)
@@ -34,7 +34,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: d9a2936d726707751ae9898d3da3c35e2f571829
+  revision: cf28afd4359dd675e889c1b360f440eea82fc34d
   branch: main
   specs:
     sal7711_gen (1.0.b3)
@@ -43,7 +43,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: 183cb24e62396e17ca92d6e6202037bd641a7c2c
+  revision: 039d4f2521989402ab05935af3c5885492614e11
   branch: main
   specs:
     sal7711_web (1.0.a3)
@@ -52,7 +52,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 5995e85c4579fec748fdc60ca33226bd10208922
+  revision: c001af7e7681a0de8657df0211160ebe84d17e48
   branch: main
   specs:
     sip (2.0.b11)
@@ -177,7 +177,7 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
-    chartkick (4.0.3)
+    chartkick (4.0.4)
     childprocess (3.0.0)
     choice (0.2.0)
     chosen-rails (1.9.0)

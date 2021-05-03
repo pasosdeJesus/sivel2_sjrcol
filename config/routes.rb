@@ -31,6 +31,10 @@ Rails.application.routes.draw do
     patch "/actos/agregarpr" => 'sivel2_sjr/actos#nuevopr',
       as: :actos_nuevopr
 
+    # No se requiere edición
+    resources :clavesrespaldos, path_names: { new: 'nueva' },
+      controller: 'sip/clavesrespaldos'
+
     get "/conteos/accionesjuridicas" => 'sivel2_sjr/conteos#accionesjuridicas', 
       as: :conteos_accionesjuridicas
     get "/conteos/desplazamientos" => 'sivel2_sjr/conteos#desplazamientos', 

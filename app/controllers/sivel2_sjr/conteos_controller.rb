@@ -165,6 +165,45 @@ class Sivel2Sjr::ConteosController < ApplicationController
 
   end
 
+  def personas_vista_geo(que3, tablas3, where3)
+    ActiveRecord::Base.connection.execute(
+      "CREATE OR REPLACE VIEW  ultimodesplazamiento AS 
+    (SELECT sivel2_sjr_desplazamiento.id, s.id_caso, s.fechaexpulsion, 
+      sivel2_sjr_desplazamiento.expulsionubicacionpre_id 
+      FROM public.sivel2_sjr_desplazamiento, 
+      (SELECT  id_caso, MAX(sivel2_sjr_desplazamiento.fechaexpulsion) 
+       AS fechaexpulsion FROM public.sivel2_sjr_desplazamiento  GROUP BY 1) 
+       AS s WHERE sivel2_sjr_desplazamiento.id_caso=s.id_caso and 
+      sivel2_sjr_desplazamiento.fechaexpulsion=s.fechaexpulsion);")
+
+
+    if (@pDepartamento == "1") 
+      que3 << ["departamento_nombre", "Último Departamento Expulsor"]
+    end
+    if (@pMunicipio== "1") 
+      que3 << ["municipio_nombre", "Último Municipio Expulsor"]
+    end
+
+    return ["CREATE VIEW #{personas_cons2} AS SELECT #{personas_cons1}.*,
+    ubicacion.id_departamento, 
+    departamento.nombre AS departamento_nombre, 
+    ubicacion.id_municipio, municipio.nombre AS municipio_nombre, 
+    ubicacion.id_clase, clase.nombre AS clase_nombre, 
+    ultimodesplazamiento.fechaexpulsion FROM
+    #{personas_cons1} LEFT JOIN public.ultimodesplazamiento ON
+    (#{personas_cons1}.id_caso = ultimodesplazamiento.id_caso)
+    LEFT JOIN sip_ubicacion AS ubicacion ON 
+      (ultimodesplazamiento.expulsionubicacionpre_id = ubicacion.id) 
+    LEFT JOIN sip_departamento AS departamento ON 
+      (ubicacion.id_departamento=departamento.id) 
+    LEFT JOIN sip_municipio AS municipio ON 
+      (ubicacion.id_municipio=municipio.id)
+    LEFT JOIN sip_clase AS clase ON 
+      (ubicacion.id_clase=clase.id)
+    ", que3, tablas3, where3]
+  end
+
+
   def personas_filtros_especializados
     @opsegun =  [
       "", "ACTIVIDAD / OFICIO", "AÑO DE NACIMIENTO", 
@@ -209,7 +248,7 @@ class Sivel2Sjr::ConteosController < ApplicationController
     end
 
     whereex = consulta_and_sinap(
-      where, 'id_expulsion', 'ubicacion.id'
+      where, 'expulsionubicacionpre_id', 'ubicacion.id'
     )
     cons1 = 'cmunex'
     # expulsores
@@ -247,7 +286,7 @@ class Sivel2Sjr::ConteosController < ApplicationController
 
     # receptores
     wherel = consulta_and_sinap(
-      where, 'desplazamiento.id_llegada', 'ubicacion.id'
+      where, 'desplazamiento.llegadaubicacionpre_id', 'ubicacion.id'
     )
     cons2 = 'cmunrec'
     q2="CREATE OR REPLACE VIEW #{cons2} AS (
@@ -333,16 +372,16 @@ class Sivel2Sjr::ConteosController < ApplicationController
     @enctabla = ['Ruta', 'Desplazamientos de Grupos Familiares']
     @coltotales = []
     @cuerpotabla = ActiveRecord::Base.connection.select_all(
-      "SELECT ruta, cuenta FROM ((SELECT municipioubicacion(d1.id_expulsion) || ' - ' 
-        || municipioubicacion(d1.id_llegada) AS ruta, 
+      "SELECT ruta, cuenta FROM ((SELECT municipioubicacion(d1.expulsionubicacionpre_id) || ' - ' 
+        || municipioubicacion(d1.llegadaubicacionpre_id) AS ruta, 
         count(id) AS cuenta
       FROM public.sivel2_sjr_desplazamiento AS d1, sivel2_sjr_casosjr AS casosjr
       WHERE #{where}
       GROUP BY 1)
       UNION  
-      (SELECT municipioubicacion(d1.id_expulsion) || ' - ' 
-        || municipioubicacion(d1.id_llegada) || ' - '
-        || municipioubicacion(d2.id_llegada) AS ruta, 
+      (SELECT municipioubicacion(d1.expulsionubicacionpre_id) || ' - ' 
+        || municipioubicacion(d1.llegadaubicacionpre_id) || ' - '
+        || municipioubicacion(d2.llegadaubicacionpre_id) AS ruta, 
         count(d1.id_caso) AS cuenta
       FROM sivel2_sjr_casosjr AS casosjr,
         sivel2_sjr_desplazamiento AS d1, 
@@ -352,9 +391,9 @@ class Sivel2Sjr::ConteosController < ApplicationController
       WHERE #{where}
       AND d1.id_caso=d2.id_caso
       AND d1.fechaexpulsion < d2.fechaexpulsion
-      AND d1.id_llegada = l1.id
-      AND d2.id_llegada = l2.id
-      AND d2.id_expulsion = e2.id
+      AND d1.llegadaubicacionpre_id = l1.id
+      AND d2.llegadaubicacionpre_id = l2.id
+      AND d2.expulsionubicacionpre_id = e2.id
       GROUP BY 1)) as sub
       ORDER BY 2 DESC
       "

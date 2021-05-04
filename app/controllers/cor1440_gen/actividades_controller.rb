@@ -67,8 +67,8 @@ module Cor1440Gen
         :actividadpf,
         :objetivo,
         :ubicacion,
-        :poblacion_hombres_r,
         :poblacion_mujeres_r,
+        :poblacion_hombres_r,
         :poblacion_sinsexo,
         :anexos
       ]

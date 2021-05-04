@@ -79,6 +79,9 @@ es:
         nombre: 'Nombre (*)'
         fecha_localizada: 'Fecha (*)'
         lugar: Lugar
+        poblacion_mujeres_r: Población Mujeres
+        poblacion_hombres_r: Población Hombres
+        poblacion_sinsexo: Población sin especificar sexo
         poblacionmujeres: Población Mujeres
         poblacionhombres: Población Hombres
         proyectofinanciero: Convenio financiado

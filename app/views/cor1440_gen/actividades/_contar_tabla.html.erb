@@ -70,20 +70,25 @@
           <%= sr %>
         </td>
         <td>
-        <% asistentes = consb.joins(:asistencia).joins(:persona) %>
-        <% af = asistentes.where('sip_persona.sexo': :F).select('cor1440_gen_asistencia.persona_id').count %>
+        <% asistentes = consb.joins(:persona) %>
+        <% af = asistentes.where('sip_persona.sexo': :F).select(
+          'cor1440_gen_asistencia.persona_id').count %>
         <%= af %>
         </td>
         <td>
-          <% am = asistentes.where('sip_persona.sexo': :M).select('cor1440_gen_asistencia.persona_id').count %>
+          <% am = asistentes.where('sip_persona.sexo': :M).select(
+            'cor1440_gen_asistencia.persona_id').count %>
           <%= am %>
         </td>
         <td>
-          <% as = asistentes.where('sip_persona.sexo': :S).select('cor1440_gen_asistencia.persona_id').count %>
+          <% as = asistentes.where('sip_persona.sexo': :S).select(
+            'cor1440_gen_asistencia.persona_id').count %>
           <%= as %>
         </td>
         <td>
-          <% asistunicos = consb.joins(:asistencia).select('distinct cor1440_gen_asistencia.persona_id').pluck('cor1440_gen_asistencia.persona_id') %> 
+          <% asistunicos = consb.joins(:persona).
+            select('distinct cor1440_gen_asistencia.persona_id').
+            pluck('cor1440_gen_asistencia.persona_id') %> 
           <% uf = Sip::Persona.where(id: asistunicos).where(sexo: :F).count %>
           <%= uf %>
         </td>

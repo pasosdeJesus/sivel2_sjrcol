@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: 9873bf8193b09e5ef7c422dbf757a050501d8fcd
+  revision: e12279a3f957dcfe6b94562362e4962619692b75
   branch: main
   specs:
     cor1440_gen (1.0b3)
@@ -34,7 +34,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: cf28afd4359dd675e889c1b360f440eea82fc34d
+  revision: 058309de7dd41648aa46875ba4a43e679d16f40c
   branch: main
   specs:
     sal7711_gen (1.0.b3)
@@ -52,7 +52,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: c001af7e7681a0de8657df0211160ebe84d17e48
+  revision: 7a1b0ea522260a61b2177d8f69ed7d213d1a37b0
   branch: main
   specs:
     sip (2.0.b11)
@@ -162,7 +162,7 @@ GEM
     andand (1.3.3)
     bcrypt (3.1.16)
     bindex (0.8.1)
-    bootsnap (1.7.4)
+    bootsnap (1.7.5)
       msgpack (~> 1.0)
     bootstrap-datepicker-rails (1.9.0.1)
       railties (>= 3.0)

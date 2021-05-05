@@ -185,21 +185,21 @@ class Sivel2Sjr::ConteosController < ApplicationController
     end
 
     return ["CREATE VIEW #{personas_cons2} AS SELECT #{personas_cons1}.*,
-    ubicacion.id_departamento, 
+    ubicacion.departamento_id, 
     departamento.nombre AS departamento_nombre, 
-    ubicacion.id_municipio, municipio.nombre AS municipio_nombre, 
-    ubicacion.id_clase, clase.nombre AS clase_nombre, 
+    ubicacion.municipio_id, municipio.nombre AS municipio_nombre, 
+    ubicacion.clase_id, clase.nombre AS clase_nombre, 
     ultimodesplazamiento.fechaexpulsion FROM
     #{personas_cons1} LEFT JOIN public.ultimodesplazamiento ON
     (#{personas_cons1}.id_caso = ultimodesplazamiento.id_caso)
-    LEFT JOIN sip_ubicacion AS ubicacion ON 
+    LEFT JOIN sip_ubicacionpre AS ubicacion ON 
       (ultimodesplazamiento.expulsionubicacionpre_id = ubicacion.id) 
     LEFT JOIN sip_departamento AS departamento ON 
-      (ubicacion.id_departamento=departamento.id) 
+      (ubicacion.departamento_id=departamento.id) 
     LEFT JOIN sip_municipio AS municipio ON 
-      (ubicacion.id_municipio=municipio.id)
+      (ubicacion.municipio_id=municipio.id)
     LEFT JOIN sip_clase AS clase ON 
-      (ubicacion.id_clase=clase.id)
+      (ubicacion.clase_id=clase.id)
     ", que3, tablas3, where3]
   end
 
@@ -253,18 +253,18 @@ class Sivel2Sjr::ConteosController < ApplicationController
     cons1 = 'cmunex'
     # expulsores
     q1="CREATE OR REPLACE VIEW #{cons1} AS (
-        SELECT (SELECT nombre FROM public.sip_pais WHERE id=id_pais) AS pais, 
+        SELECT (SELECT nombre FROM public.sip_pais WHERE id=pais_id) AS pais, 
         (SELECT nombre FROM public.sip_departamento
-          WHERE id=ubicacion.id_departamento) AS departamento, 
+          WHERE id=ubicacion.departamento_id) AS departamento, 
         (SELECT nombre FROM public.sip_municipio
-          WHERE id=ubicacion.id_municipio) AS municipio, 
+          WHERE id=ubicacion.municipio_id) AS municipio, 
         CASE WHEN (casosjr.contacto_id = victima.id_persona) THEN 1 ELSE 0 END
           AS contacto,
         CASE WHEN (casosjr.contacto_id<>victima.id_persona) THEN 1 ELSE 0 END
           AS beneficiario, 
         1 as npersona
         FROM public.sivel2_sjr_desplazamiento AS desplazamiento, 
-          sip_ubicacion AS ubicacion, 
+          sip_ubicacionpre AS ubicacion, 
           sivel2_gen_victima AS victima,
           sivel2_sjr_casosjr AS casosjr
         WHERE #{whereex} 
@@ -290,18 +290,18 @@ class Sivel2Sjr::ConteosController < ApplicationController
     )
     cons2 = 'cmunrec'
     q2="CREATE OR REPLACE VIEW #{cons2} AS (
-      SELECT (SELECT nombre FROM public.sip_pais WHERE id=id_pais) AS pais, 
+      SELECT (SELECT nombre FROM public.sip_pais WHERE id=pais_id) AS pais, 
         (SELECT nombre FROM public.sip_departamento 
-          WHERE id=id_departamento) AS departamento, 
+          WHERE id=departamento_id) AS departamento, 
         (SELECT nombre FROM public.sip_municipio 
-        WHERE id=ubicacion.id_municipio) AS municipio, 
+        WHERE id=ubicacion.municipio_id) AS municipio, 
         CASE WHEN (casosjr.contacto_id = victima.id_persona) THEN 1 ELSE 0 END
           AS contacto,
         CASE WHEN (casosjr.contacto_id<>victima.id_persona) THEN 1 ELSE 0 END
           AS beneficiario, 
         1 as npersona
       FROM public.sivel2_sjr_desplazamiento AS desplazamiento, 
-        sip_ubicacion AS ubicacion, 
+        sip_ubicacionpre AS ubicacion, 
         sivel2_gen_victima AS victima,
         sivel2_sjr_casosjr AS casosjr
       WHERE 
@@ -358,12 +358,12 @@ class Sivel2Sjr::ConteosController < ApplicationController
     ActiveRecord::Base.connection.select_all("
       CREATE OR REPLACE FUNCTION municipioubicacion(int) RETURNS varchar AS
       $$
-        SELECT (SELECT nombre FROM public.sip_pais WHERE id=ubicacion.id_pais) 
+        SELECT (SELECT nombre FROM public.sip_pais WHERE id=ubicacion.pais_id) 
             || COALESCE((SELECT '/' || nombre FROM public.sip_departamento 
-            WHERE sip_departamento.id = ubicacion.id_departamento),'') 
+            WHERE sip_departamento.id = ubicacion.departamento_id),'') 
             || COALESCE((SELECT '/' || nombre FROM public.sip_municipio 
-            WHERE sip_municipio.id = ubicacion.id_municipio),'') 
-            FROM public.sip_ubicacion AS ubicacion 
+            WHERE sip_municipio.id = ubicacion.municipio_id),'') 
+            FROM public.sip_ubicacionpre AS ubicacion 
             WHERE ubicacion.id=$1;
       $$ 
       LANGUAGE SQL
@@ -385,9 +385,9 @@ class Sivel2Sjr::ConteosController < ApplicationController
         count(d1.id_caso) AS cuenta
       FROM sivel2_sjr_casosjr AS casosjr,
         sivel2_sjr_desplazamiento AS d1, 
-        sip_ubicacion AS l1, 
+        sip_ubicacionpre AS l1, 
         sivel2_sjr_desplazamiento as d2,
-        sip_ubicacion AS e2, sip_ubicacion AS l2
+        sip_ubicacionpre AS e2, sip_ubicacionpre AS l2
       WHERE #{where}
       AND d1.id_caso=d2.id_caso
       AND d1.fechaexpulsion < d2.fechaexpulsion

@@ -165,6 +165,45 @@ class Sivel2Sjr::ConteosController < ApplicationController
 
   end
 
+  def personas_vista_geo(que3, tablas3, where3)
+    ActiveRecord::Base.connection.execute(
+      "CREATE OR REPLACE VIEW  ultimodesplazamiento AS 
+    (SELECT sivel2_sjr_desplazamiento.id, s.id_caso, s.fechaexpulsion, 
+      sivel2_sjr_desplazamiento.expulsionubicacionpre_id 
+      FROM public.sivel2_sjr_desplazamiento, 
+      (SELECT  id_caso, MAX(sivel2_sjr_desplazamiento.fechaexpulsion) 
+       AS fechaexpulsion FROM public.sivel2_sjr_desplazamiento  GROUP BY 1) 
+       AS s WHERE sivel2_sjr_desplazamiento.id_caso=s.id_caso and 
+      sivel2_sjr_desplazamiento.fechaexpulsion=s.fechaexpulsion);")
+
+
+    if (@pDepartamento == "1") 
+      que3 << ["departamento_nombre", "Último Departamento Expulsor"]
+    end
+    if (@pMunicipio== "1") 
+      que3 << ["municipio_nombre", "Último Municipio Expulsor"]
+    end
+
+    return ["CREATE VIEW #{personas_cons2} AS SELECT #{personas_cons1}.*,
+    ubicacion.departamento_id, 
+    departamento.nombre AS departamento_nombre, 
+    ubicacion.municipio_id, municipio.nombre AS municipio_nombre, 
+    ubicacion.clase_id, clase.nombre AS clase_nombre, 
+    ultimodesplazamiento.fechaexpulsion FROM
+    #{personas_cons1} LEFT JOIN public.ultimodesplazamiento ON
+    (#{personas_cons1}.id_caso = ultimodesplazamiento.id_caso)
+    LEFT JOIN sip_ubicacionpre AS ubicacion ON 
+      (ultimodesplazamiento.expulsionubicacionpre_id = ubicacion.id) 
+    LEFT JOIN sip_departamento AS departamento ON 
+      (ubicacion.departamento_id=departamento.id) 
+    LEFT JOIN sip_municipio AS municipio ON 
+      (ubicacion.municipio_id=municipio.id)
+    LEFT JOIN sip_clase AS clase ON 
+      (ubicacion.clase_id=clase.id)
+    ", que3, tablas3, where3]
+  end
+
+
   def personas_filtros_especializados
     @opsegun =  [
       "", "ACTIVIDAD / OFICIO", "AÑO DE NACIMIENTO", 
@@ -209,23 +248,23 @@ class Sivel2Sjr::ConteosController < ApplicationController
     end
 
     whereex = consulta_and_sinap(
-      where, 'id_expulsion', 'ubicacion.id'
+      where, 'expulsionubicacionpre_id', 'ubicacion.id'
     )
     cons1 = 'cmunex'
     # expulsores
     q1="CREATE OR REPLACE VIEW #{cons1} AS (
-        SELECT (SELECT nombre FROM public.sip_pais WHERE id=id_pais) AS pais, 
+        SELECT (SELECT nombre FROM public.sip_pais WHERE id=pais_id) AS pais, 
         (SELECT nombre FROM public.sip_departamento
-          WHERE id=ubicacion.id_departamento) AS departamento, 
+          WHERE id=ubicacion.departamento_id) AS departamento, 
         (SELECT nombre FROM public.sip_municipio
-          WHERE id=ubicacion.id_municipio) AS municipio, 
+          WHERE id=ubicacion.municipio_id) AS municipio, 
         CASE WHEN (casosjr.contacto_id = victima.id_persona) THEN 1 ELSE 0 END
           AS contacto,
         CASE WHEN (casosjr.contacto_id<>victima.id_persona) THEN 1 ELSE 0 END
           AS beneficiario, 
         1 as npersona
         FROM public.sivel2_sjr_desplazamiento AS desplazamiento, 
-          sip_ubicacion AS ubicacion, 
+          sip_ubicacionpre AS ubicacion, 
           sivel2_gen_victima AS victima,
           sivel2_sjr_casosjr AS casosjr
         WHERE #{whereex} 
@@ -247,22 +286,22 @@ class Sivel2Sjr::ConteosController < ApplicationController
 
     # receptores
     wherel = consulta_and_sinap(
-      where, 'desplazamiento.id_llegada', 'ubicacion.id'
+      where, 'desplazamiento.llegadaubicacionpre_id', 'ubicacion.id'
     )
     cons2 = 'cmunrec'
     q2="CREATE OR REPLACE VIEW #{cons2} AS (
-      SELECT (SELECT nombre FROM public.sip_pais WHERE id=id_pais) AS pais, 
+      SELECT (SELECT nombre FROM public.sip_pais WHERE id=pais_id) AS pais, 
         (SELECT nombre FROM public.sip_departamento 
-          WHERE id=id_departamento) AS departamento, 
+          WHERE id=departamento_id) AS departamento, 
         (SELECT nombre FROM public.sip_municipio 
-        WHERE id=ubicacion.id_municipio) AS municipio, 
+        WHERE id=ubicacion.municipio_id) AS municipio, 
         CASE WHEN (casosjr.contacto_id = victima.id_persona) THEN 1 ELSE 0 END
           AS contacto,
         CASE WHEN (casosjr.contacto_id<>victima.id_persona) THEN 1 ELSE 0 END
           AS beneficiario, 
         1 as npersona
       FROM public.sivel2_sjr_desplazamiento AS desplazamiento, 
-        sip_ubicacion AS ubicacion, 
+        sip_ubicacionpre AS ubicacion, 
         sivel2_gen_victima AS victima,
         sivel2_sjr_casosjr AS casosjr
       WHERE 
@@ -319,12 +358,12 @@ class Sivel2Sjr::ConteosController < ApplicationController
     ActiveRecord::Base.connection.select_all("
       CREATE OR REPLACE FUNCTION municipioubicacion(int) RETURNS varchar AS
       $$
-        SELECT (SELECT nombre FROM public.sip_pais WHERE id=ubicacion.id_pais) 
+        SELECT (SELECT nombre FROM public.sip_pais WHERE id=ubicacion.pais_id) 
             || COALESCE((SELECT '/' || nombre FROM public.sip_departamento 
-            WHERE sip_departamento.id = ubicacion.id_departamento),'') 
+            WHERE sip_departamento.id = ubicacion.departamento_id),'') 
             || COALESCE((SELECT '/' || nombre FROM public.sip_municipio 
-            WHERE sip_municipio.id = ubicacion.id_municipio),'') 
-            FROM public.sip_ubicacion AS ubicacion 
+            WHERE sip_municipio.id = ubicacion.municipio_id),'') 
+            FROM public.sip_ubicacionpre AS ubicacion 
             WHERE ubicacion.id=$1;
       $$ 
       LANGUAGE SQL
@@ -333,28 +372,28 @@ class Sivel2Sjr::ConteosController < ApplicationController
     @enctabla = ['Ruta', 'Desplazamientos de Grupos Familiares']
     @coltotales = []
     @cuerpotabla = ActiveRecord::Base.connection.select_all(
-      "SELECT ruta, cuenta FROM ((SELECT municipioubicacion(d1.id_expulsion) || ' - ' 
-        || municipioubicacion(d1.id_llegada) AS ruta, 
+      "SELECT ruta, cuenta FROM ((SELECT municipioubicacion(d1.expulsionubicacionpre_id) || ' - ' 
+        || municipioubicacion(d1.llegadaubicacionpre_id) AS ruta, 
         count(id) AS cuenta
       FROM public.sivel2_sjr_desplazamiento AS d1, sivel2_sjr_casosjr AS casosjr
       WHERE #{where}
       GROUP BY 1)
       UNION  
-      (SELECT municipioubicacion(d1.id_expulsion) || ' - ' 
-        || municipioubicacion(d1.id_llegada) || ' - '
-        || municipioubicacion(d2.id_llegada) AS ruta, 
+      (SELECT municipioubicacion(d1.expulsionubicacionpre_id) || ' - ' 
+        || municipioubicacion(d1.llegadaubicacionpre_id) || ' - '
+        || municipioubicacion(d2.llegadaubicacionpre_id) AS ruta, 
         count(d1.id_caso) AS cuenta
       FROM sivel2_sjr_casosjr AS casosjr,
         sivel2_sjr_desplazamiento AS d1, 
-        sip_ubicacion AS l1, 
+        sip_ubicacionpre AS l1, 
         sivel2_sjr_desplazamiento as d2,
-        sip_ubicacion AS e2, sip_ubicacion AS l2
+        sip_ubicacionpre AS e2, sip_ubicacionpre AS l2
       WHERE #{where}
       AND d1.id_caso=d2.id_caso
       AND d1.fechaexpulsion < d2.fechaexpulsion
-      AND d1.id_llegada = l1.id
-      AND d2.id_llegada = l2.id
-      AND d2.id_expulsion = e2.id
+      AND d1.llegadaubicacionpre_id = l1.id
+      AND d2.llegadaubicacionpre_id = l2.id
+      AND d2.expulsionubicacionpre_id = e2.id
       GROUP BY 1)) as sub
       ORDER BY 2 DESC
       "

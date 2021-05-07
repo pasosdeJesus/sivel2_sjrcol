@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: 58b46acd22c94e48c6fae6d71ab5b515938ca429
+  revision: 542a10c729792586197948d11a8f1f74bcac49e4
   branch: main
   specs:
     cor1440_gen (1.0b3)
@@ -14,7 +14,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 1a23def0cf9d20820fe68814f6bd5440f3061af1
+  revision: 7b1802b79d4debeaf3581fb684d0c2c8c678737d
   branch: main
   specs:
     heb412_gen (1.0.b6)
@@ -25,7 +25,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/mr519_gen.git
-  revision: cd0af5756d45974421dd705bac39b2f6b0b56c0d
+  revision: a177a829c83e3e5553ef74d7dafb3b78d32642d5
   branch: main
   specs:
     mr519_gen (0.2.0)
@@ -34,7 +34,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: 078a8d4e9fe31af61b96923cc2749448fd9ca422
+  revision: 8fc06fec31d0ebf825cfe66d1bdaaf0b03f4c55c
   branch: main
   specs:
     sal7711_gen (1.0.b3)
@@ -43,7 +43,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: 8b61f86ef88ec21f02965a24b7945b6809caa055
+  revision: 537c8556fe86142bc2714fcb82fca77b3e37e7d4
   branch: main
   specs:
     sal7711_web (1.0.a3)
@@ -52,7 +52,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: b0d6a55d11f2f7187b8aa6dac0dd0a0f45768aff
+  revision: 7ca0c690fbc156de098b598341506794ac2365a7
   branch: main
   specs:
     sip (2.0.b11)
@@ -71,7 +71,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: 127b4bbb829b14eb0efe123b8931ae20a340ef77
+  revision: 236421e1dc2860f59a4f98b50758dc75bfc02781
   branch: main
   specs:
     sivel2_gen (2.0b14)
@@ -81,7 +81,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 2b00b79fd3639e05facf4905ebb86026bf23edf9
+  revision: d4b66b226098109d14ca13bb6274080404cdd4f7
   branch: main
   specs:
     sivel2_sjr (2.0b10)
@@ -274,7 +274,7 @@ GEM
       prawn (>= 1.0.0)
       rails (>= 3.2)
     public_suffix (4.0.6)
-    puma (5.2.2)
+    puma (5.3.0)
       nio4r (~> 2.0)
     racc (1.5.2)
     rack (2.2.3)

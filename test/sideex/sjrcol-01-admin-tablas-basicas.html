@@ -865,6 +865,32 @@
 </tbody></table>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
+<tr><td rowspan="1" colspan="3">tabla-declaraciones-en-el-ruv</td></tr>
+</thead>
+<tbody>
+<tr><td>clickAt</td><td>id=navbarDropdownAdministrar<datalist><option>id=navbarDropdownAdministrar</option><option>link=Administrar</option><option>css=#navbarDropdownAdministrar</option><option>//a[contains(text(),'Administrar')]</option><option>//a[@id='navbarDropdownAdministrar']</option><option>//div[@id='navbarSupportedContent']/ul[2]/li[2]/a</option><option>xpath=(//a[contains(@href, '#')])[6]</option><option>//ul[2]/li[2]/a</option></datalist></td><td>45,29</td>
+</tr>
+<tr><td>clickAt</td><td>link=Tablas Básicas<datalist><option>link=Tablas Básicas</option><option>//a[contains(text(),'Tablas Básicas')]</option><option>//div[@id='navbarSupportedContent']/ul[2]/li[2]/div/a[5]</option><option>//a[contains(@href, '/tablasbasicas')]</option><option>//ul[2]/li[2]/div/a[5]</option></datalist></td><td>84,14</td>
+</tr>
+<tr><td>clickAt</td><td>link=Declaraciones en el RUV<datalist><option>link=Declaraciones en el RUV</option><option>//a[contains(text(),'Declaraciones en el RUV')]</option><option>//a[contains(@href, 'admin/declaracionesruv')]</option><option>//li[23]/a</option></datalist></td><td>110,8</td>
+</tr>
+<tr><td>clickAt</td><td>link=Nueva<datalist><option>link=Nueva</option><option>css=a.btn.btn-primary</option><option>//a[contains(text(),'Nueva')]</option><option>//a[contains(@href, '/admin/declaracionesruv/nueva.%23%3CDeclaracionruv::ActiveRecord_Relation:0x0000067b4b9ec2e0%3E')]</option><option>//div[2]/a</option></datalist></td><td>32,22</td>
+</tr>
+<tr><td>clickAt</td><td>id=declaracionruv_nombre<datalist><option>id=declaracionruv_nombre</option><option>name=declaracionruv[nombre]</option><option>css=#declaracionruv_nombre</option><option>//input[@id='declaracionruv_nombre']</option><option>//form[@id='new_declaracionruv']/div[2]/input</option><option>//div[2]/input</option></datalist></td><td>118,4</td>
+</tr>
+<tr><td>type</td><td>id=declaracionruv_nombre<datalist><option>id=declaracionruv_nombre</option><option>name=declaracionruv[nombre]</option><option>css=#declaracionruv_nombre</option><option>//input[@id='declaracionruv_nombre']</option><option>//form[@id='new_declaracionruv']/div[2]/input</option><option>//div[2]/input</option></datalist></td><td>OTRA</td>
+</tr>
+<tr><td>clickAt</td><td>name=commit<datalist><option>name=commit</option><option>css=input[name="commit"]</option><option>//input[@name='commit']</option><option>//form[@id='new_declaracionruv']/div[6]/input</option><option>//div[6]/input</option></datalist></td><td>52,15</td>
+</tr>
+<tr><td>chooseOkOnNextConfirmation</td><td><datalist><option></option></datalist></td><td></td>
+</tr>
+<tr><td>clickAt</td><td>link=Eliminar<datalist><option>link=Eliminar</option><option>css=a.btn.btn-danger</option><option>//a[contains(text(),'Eliminar')]</option><option>xpath=(//a[contains(@href, '/admin/declaracionesruv/105')])[2]</option><option>//div[4]/a</option></datalist></td><td>26,19</td>
+</tr>
+<tr><td>assertText</td><td>css=h1<datalist><option>css=h1</option><option>//h1</option></datalist></td><td>Declaraciones en el RUV</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
 <tr><td rowspan="1" colspan="3">tabla-declaro-ante</td></tr>
 </thead>
 <tbody>
@@ -1062,6 +1088,8 @@
 <tr><td>clickAt</td><td>link=Administrar<datalist><option>link=Administrar</option><option>//a[contains(text(),'Administrar')]</option><option>xpath=(//a[contains(@href, '#')])[6]</option><option>//ul[2]/li[2]/a</option></datalist></td><td>64,20</td>
 </tr>
 <tr><td>clickAt</td><td>link=Tablas Básicas<datalist><option>link=Tablas Básicas</option><option>//a[contains(text(),'Tablas Básicas')]</option><option>//a[contains(@href, '/tablasbasicas')]</option><option>//ul[2]/li[2]/ul/li[4]/a</option></datalist></td><td>73,21</td>
+</tr>
+<tr><td>esperaAsercionTexto2s</td><td>link=Espacios de participación o redes<datalist><option>link=Espacios de participación o redes</option><option>//a[contains(text(),'Espacios de participación o redes')]</option><option>//a[contains(@href, 'admin/espaciospart')]</option><option>//li[20]/a</option></datalist></td><td>Espacios de participación o redes</td>
 </tr>
 <tr><td>clickAt</td><td>link=Espacios de participación o redes<datalist><option>link=Espacios de participación o redes</option><option>//a[contains(text(),'Espacios de participación o redes')]</option><option>//a[contains(@href, 'admin/espaciospart')]</option><option>//li[20]/a</option></datalist></td><td>56,12</td>
 </tr>
@@ -1400,46 +1428,40 @@
 </tbody></table>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">tabla-inclusiones</td></tr>
+<tr><td rowspan="1" colspan="3">tabla-inclusiones-en-ruv</td></tr>
 </thead>
 <tbody>
-<tr><td>clickAt</td><td>link=Administrar<datalist><option>link=Administrar</option><option>//a[contains(text(),'Administrar')]</option><option>xpath=(//a[contains(@href, '#')])[6]</option><option>//ul[2]/li[2]/a</option></datalist></td><td>39,23</td>
+<tr><td>clickAt</td><td>id=navbarDropdownAdministrar<datalist><option>id=navbarDropdownAdministrar</option><option>link=Administrar</option><option>css=#navbarDropdownAdministrar</option><option>//a[contains(text(),'Administrar')]</option><option>//a[@id='navbarDropdownAdministrar']</option><option>//div[@id='navbarSupportedContent']/ul[2]/li[2]/a</option><option>xpath=(//a[contains(@href, '#')])[6]</option><option>//ul[2]/li[2]/a</option></datalist></td><td>27,20</td>
 </tr>
-<tr>
-	<td>click</td>
-	<td>link=Tablas Básicas<datalist><option>link=Tablas Básicas</option></datalist></td>
-	<td></td>
+<tr><td>clickAt</td><td>link=Tablas Básicas<datalist><option>link=Tablas Básicas</option><option>//a[contains(text(),'Tablas Básicas')]</option><option>//div[@id='navbarSupportedContent']/ul[2]/li[2]/div/a[5]</option><option>//a[contains(@href, '/tablasbasicas')]</option><option>//ul[2]/li[2]/div/a[5]</option></datalist></td><td>81,19</td>
 </tr>
-<tr>
-	<td>click</td>
-	<td>link=Inclusiones<datalist><option>link=Inclusiones</option></datalist></td>
-	<td></td>
+<tr><td>clickAt</td><td>//li[37]<datalist><option>//li[37]</option></datalist></td><td>90,20</td>
 </tr>
-<tr><td>clickAt</td><td>link=Nueva<datalist><option>link=Nueva</option><option>css=a.btn.btn-primary</option><option>//a[contains(text(),'Nueva')]</option><option>//a[contains(@href, '/admin/actividadoficios/nueva')]</option><option>//div/div/a</option></datalist></td><td>25,17</td>
+<tr><td>clickAt</td><td>link=Inclusiones en RUV<datalist><option>link=Inclusiones en RUV</option><option>//a[contains(text(),'Inclusiones en RUV')]</option><option>//a[contains(@href, 'admin/inclusiones')]</option><option>//li[37]/a</option></datalist></td><td>96,12</td>
 </tr>
-<tr>
-	<td>type</td>
-	<td>id=inclusion_nombre<datalist><option>id=inclusion_nombre</option></datalist></td>
-	<td>aaa</td>
+<tr><td>clickAt</td><td>link=Nueva<datalist><option>link=Nueva</option><option>css=a.btn.btn-primary</option><option>//a[contains(text(),'Nueva')]</option><option>//a[contains(@href, '/admin/inclusiones/nueva.%23%3CSivel2Sjr::Inclusion::ActiveRecord_Relation:0x0000067b47f137e0%3E')]</option><option>//div/div/a</option></datalist></td><td>21,17</td>
 </tr>
-<tr>
-	<td>type</td>
-	<td>id=inclusion_observaciones<datalist><option>id=inclusion_observaciones</option></datalist></td>
-	<td>bbb</td>
+<tr><td>clickAt</td><td>id=inclusion_nombre<datalist><option>id=inclusion_nombre</option><option>name=inclusion[nombre]</option><option>css=#inclusion_nombre</option><option>//input[@id='inclusion_nombre']</option><option>//form[@id='new_inclusion']/div[2]/input</option><option>//div[2]/input</option></datalist></td><td>112,16</td>
 </tr>
-<tr>
-	<td>clickAt</td>
-	<td>name=commit<datalist><option>name=commit</option></datalist></td>
-	<td></td>
+<tr><td>type</td><td>id=inclusion_nombre<datalist><option>id=inclusion_nombre</option><option>name=inclusion[nombre]</option><option>css=#inclusion_nombre</option><option>//input[@id='inclusion_nombre']</option><option>//form[@id='new_inclusion']/div[2]/input</option><option>//div[2]/input</option></datalist></td><td>otra</td>
+</tr>
+<tr><td>clickAt</td><td>id=inclusion_observaciones<datalist><option>id=inclusion_observaciones</option><option>name=inclusion[observaciones]</option><option>css=#inclusion_observaciones</option><option>//textarea[@id='inclusion_observaciones']</option><option>//form[@id='new_inclusion']/div[3]/textarea</option><option>//textarea</option></datalist></td><td>78,21</td>
+</tr>
+<tr><td>type</td><td>id=inclusion_observaciones<datalist><option>id=inclusion_observaciones</option><option>name=inclusion[observaciones]</option><option>css=#inclusion_observaciones</option><option>//textarea[@id='inclusion_observaciones']</option><option>//form[@id='new_inclusion']/div[3]/textarea</option><option>//textarea</option></datalist></td><td>bbb</td>
+</tr>
+<tr><td>runScript</td><td>$('[type=number]').removeAttr('type')<datalist><option>$('[type=number]').removeAttr('type')</option><option>$('#rangoedad_limiteinferior').removeAttr('type')</option><option>$('#pais_codiso').removeAttr('type')</option></datalist></td><td></td>
+</tr>
+<tr><td>clickAt</td><td>id=inclusion_pospres<datalist><option>id=inclusion_pospres</option><option>name=inclusion[pospres]</option><option>css=#inclusion_pospres</option><option>//input[@id='inclusion_pospres']</option><option>//form[@id='new_inclusion']/div[4]/input</option><option>//div[4]/input</option></datalist></td><td>116,24</td>
+</tr>
+<tr><td>type</td><td>id=inclusion_pospres<datalist><option>id=inclusion_pospres</option><option>name=inclusion[pospres]</option><option>css=#inclusion_pospres</option><option>//input[@id='inclusion_pospres']</option><option>//form[@id='new_inclusion']/div[4]/input</option><option>//div[4]/input</option></datalist></td><td>1</td>
+</tr>
+<tr><td>clickAt</td><td>name=commit<datalist><option>name=commit</option><option>css=input[name="commit"]</option><option>//input[@name='commit']</option><option>//form[@id='new_inclusion']/div[7]/input</option><option>//div[7]/input</option></datalist></td><td>29,19</td>
 </tr>
 <tr><td>chooseOkOnNextConfirmation</td><td><datalist><option></option></datalist></td><td></td>
 </tr>
-<tr>
-	<td>click</td>
-	<td>link=Eliminar<datalist><option>link=Eliminar</option></datalist></td>
-	<td></td>
+<tr><td>clickAt</td><td>link=Eliminar<datalist><option>link=Eliminar</option><option>css=a.btn.btn-danger</option><option>//a[contains(text(),'Eliminar')]</option><option>xpath=(//a[contains(@href, '/admin/inclusiones/104')])[2]</option><option>//div[4]/a</option></datalist></td><td>52,15</td>
 </tr>
-<tr><td>assertText</td><td>css=h1<datalist><option>css=h1</option><option>//h1</option></datalist></td><td>Inclusiones</td>
+<tr><td>assertText</td><td>css=h1<datalist><option>css=h1</option><option>//h1</option></datalist></td><td>Inclusiones en RUV</td>
 </tr>
 </tbody></table>
 <table cellpadding="1" cellspacing="1" border="1">

@@ -23,7 +23,7 @@ class CambiaCamposubicacionLlegmigracion < ActiveRecord::Migration[6.1]
          # byebug
           puts "En ubicacionpre no se encontró llegada_pais=#{llegada_pais}, "\
             "llegada_departamento=#{llegada_departamento}, llegada_municipio=#{llegada_municipio}, "\
-            "llegada_clase=#{llegada_clase}"
+            "llegada_clase=#{llegada_clase}, migracion=#{migracion.id}"
           exit 1
         end
       end

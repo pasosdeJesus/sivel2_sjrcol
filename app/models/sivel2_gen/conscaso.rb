@@ -6,57 +6,33 @@ class Sivel2Gen::Conscaso < ActiveRecord::Base
   include Sivel2Sjr::Concerns::Models::Conscaso
 
    scope :filtro_expulsion_pais_id, lambda { |id|
-    where('(caso_id, fecha) IN (SELECT sip_ubicacion.id_caso, 
-          sivel2_sjr_desplazamiento.fechaexpulsion FROM
-          public.sivel2_sjr_desplazamiento JOIN public.sip_ubicacion 
-          ON sivel2_sjr_desplazamiento.id_expulsion=sip_ubicacion.id
-          AND sivel2_sjr_desplazamiento.id_caso=sip_ubicacion.id_caso
-          WHERE sip_ubicacion.id_pais = ?)', id)
+    where('caso_id IN (SELECT caso_id FROM public.emblematica 
+          WHERE emblematica.expulsionpais_id = ?)', id)
   }
 
   scope :filtro_expulsion_departamento_id, lambda { |id|
-    where('(caso_id, fecha) IN (SELECT sip_ubicacion.id_caso,
-          sivel2_sjr_desplazamiento.fechaexpulsion FROM
-          public.sivel2_sjr_desplazamiento JOIN public.sip_ubicacion 
-          ON sivel2_sjr_desplazamiento.id_expulsion=sip_ubicacion.id
-          AND sivel2_sjr_desplazamiento.id_caso=sip_ubicacion.id_caso
-          WHERE sip_ubicacion.id_departamento = ?)', id)
+    where('caso_id IN (SELECT caso_id FROM public.emblematica 
+          WHERE emblematica.expulsiondepartamento_id = ?)', id)
   }
 
   scope :filtro_expulsion_municipio_id, lambda { |id|
-    where('(caso_id, fecha) IN (SELECT sip_ubicacion.id_caso,
-          sivel2_sjr_desplazamiento.fechaexpulsion FROM
-          public.sivel2_sjr_desplazamiento JOIN public.sip_ubicacion 
-          ON sivel2_sjr_desplazamiento.id_expulsion=sip_ubicacion.id
-          AND sivel2_sjr_desplazamiento.id_caso=sip_ubicacion.id_caso
-          WHERE sip_ubicacion.id_municipio = ?)', id)
+    where('caso_id IN (SELECT caso_id FROM public.emblematica 
+          WHERE emblematica.expulsionmunicipio_id = ?)', id)
   }
 
   scope :filtro_llegada_pais_id, lambda { |id|
-    where('(caso_id, fecha) IN (SELECT sip_ubicacion.id_caso,
-          sivel2_sjr_desplazamiento.fechaexpulsion FROM
-          public.sivel2_sjr_desplazamiento JOIN public.sip_ubicacion 
-          ON sivel2_sjr_desplazamiento.id_llegada=sip_ubicacion.id
-          AND sivel2_sjr_desplazamiento.id_caso=sip_ubicacion.id_caso
-          WHERE sip_ubicacion.id_pais = ?)', id)
+    where('caso_id IN (SELECT caso_id FROM public.emblematica 
+          WHERE emblematica.llegadapais_id = ?)', id)
   }
 
   scope :filtro_llegada_departamento_id, lambda { |id|
-    where('(caso_id, fecha) IN (SELECT sip_ubicacion.id_caso,
-          sivel2_sjr_desplazamiento.fechaexpulsion FROM
-          public.sivel2_sjr_desplazamiento JOIN public.sip_ubicacion 
-          ON sivel2_sjr_desplazamiento.id_llegada=sip_ubicacion.id
-          AND sivel2_sjr_desplazamiento.id_caso=sip_ubicacion.id_caso
-          WHERE sip_ubicacion.id_departamento = ?)', id)
+    where('caso_id IN (SELECT caso_id FROM public.emblematica 
+          WHERE emblematica.llegadadepartamento_id = ?)', id)
   }
 
   scope :filtro_llegada_municipio_id, lambda { |id|
-    where('(caso_id, fecha) IN (SELECT sip_ubicacion.id_caso,
-          sivel2_sjr_desplazamiento.fechaexpulsion FROM
-          public.sivel2_sjr_desplazamiento JOIN public.sip_ubicacion 
-          ON sivel2_sjr_desplazamiento.id_llegada=sip_ubicacion.id
-          AND sivel2_sjr_desplazamiento.id_caso=sip_ubicacion.id_caso
-          WHERE sip_ubicacion.id_municipio = ?)', id)
+    where('caso_id IN (SELECT caso_id FROM public.emblematica 
+          WHERE emblematica.llegadamunicipio_id = ?)', id)
   }
 
   scope :filtro_numerodocumento, lambda { |a|
@@ -112,36 +88,144 @@ class Sivel2Gen::Conscaso < ActiveRecord::Base
 
     if !ActiveRecord::Base.connection.data_source_exists? 'sivel2_gen_conscaso'
       ActiveRecord::Base.connection.execute(
+        "CREATE OR REPLACE VIEW emblematica1
+        AS SELECT *
+        FROM ((SELECT 
+          caso.id AS caso_id,
+          caso.fecha,
+          'desplazamiento' AS despomigracion,
+          desplazamiento.id AS despomigracion_id,
+          ubicacionpreex.id AS expulsionubicacionpre_id,
+          paisex.id AS expulsionpais_id,
+          paisex.nombre AS expulsionpais,
+          departamentoex.id AS expulsiondepartamento_id,
+          departamentoex.nombre AS expulsiondepartamento,
+          municipioex.id AS expulsionmunicipio_id,
+          municipioex.nombre AS expulsionmunicipio,
+          COALESCE(municipioex.nombre, '') || ' / ' ||
+            COALESCE(departamentoex.nombre, '') || ' / ' ||
+            COALESCE(paisex.nombre, '') AS expulsionubicacionpre,
+          ubicacionprel.id AS llegadaubicacionpre_id,
+          paisl.id AS llegadapais_id,
+          paisl.nombre AS llegadapais,
+          departamentol.id AS llegadadepartamento_id,
+          departamentol.nombre AS llegadadepartamento,
+          municipiol.id AS llegadamunicipio_id,
+          municipiol.nombre AS llegadamunicipio,
+          COALESCE(municipiol.nombre, '') || ' / ' ||
+            COALESCE(departamentol.nombre, '') || ' / ' ||
+            COALESCE(paisl.nombre, '') AS llegadaubicacionpre
+          FROM public.sivel2_sjr_desplazamiento AS desplazamiento
+          JOIN sivel2_gen_caso AS caso ON
+            desplazamiento.id_caso=caso.id
+            AND desplazamiento.fechaexpulsion=caso.fecha
+          LEFT JOIN public.sip_ubicacionpre AS ubicacionpreex
+            ON ubicacionpreex.id=desplazamiento.expulsionubicacionpre_id
+          LEFT JOIN public.sip_pais AS paisex
+            ON ubicacionpreex.pais_id=paisex.id
+          LEFT JOIN public.sip_departamento AS departamentoex
+            ON ubicacionpreex.departamento_id=departamentoex.id
+          LEFT JOIN public.sip_municipio AS municipioex
+            ON ubicacionpreex.municipio_id=municipioex.id
+          LEFT JOIN public.sip_ubicacionpre AS ubicacionprel
+            ON ubicacionprel.id=desplazamiento.llegadaubicacionpre_id
+          LEFT JOIN public.sip_pais AS paisl
+            ON ubicacionprel.pais_id=paisl.id
+          LEFT JOIN public.sip_departamento AS departamentol
+            ON ubicacionprel.departamento_id=departamentol.id
+          LEFT JOIN public.sip_municipio AS municipiol
+            ON ubicacionprel.municipio_id=municipiol.id
+          ORDER BY desplazamiento.id
+          ) UNION
+          (SELECT 
+          caso.id AS caso_id,
+          caso.fecha,
+          'migracion' AS despomigracion,
+          migracion.id AS despomigracion_id,
+          ubicacionpres.id AS expulsionubicacionpre_id,
+          paiss.id AS expulsionpais_id,
+          paiss.nombre AS expulsionpais,
+          departamentos.id AS expulsiondepartamento_id,
+          departamentos.nombre AS expulsiondepartamento,
+          municipios.id AS expulsionmunicipio_id,
+          municipios.nombre AS expulsionmunicipio,
+          COALESCE(municipios.nombre, '') || ' / ' ||
+            COALESCE(departamentos.nombre, '') || ' / ' ||
+            COALESCE(paiss.nombre, '') AS expulsionubicacionpre,
+          ubicacionprel.id AS llegadaubicacionpre_id,
+          paisl.id AS llegadapais_id,
+          paisl.nombre AS llegadapais,
+          departamentol.id AS llegadadepartamento_id,
+          departamentol.nombre AS llegadadepartamento,
+          municipiol.id AS llegadamunicipio_id,
+          municipiol.nombre AS llegadamunicipio,
+          COALESCE(municipiol.nombre, '') || ' / ' ||
+            COALESCE(departamentol.nombre, '') || ' / ' ||
+            COALESCE(paisl.nombre, '') AS llegadaubicacionpre
+          FROM public.sivel2_sjr_migracion AS migracion
+          JOIN sivel2_gen_caso AS caso ON
+            migracion.caso_id=caso.id
+            AND migracion.fechasalida=caso.fecha
+          LEFT JOIN public.sip_ubicacionpre AS ubicacionpres
+            ON ubicacionpres.id=migracion.salidaubicacionpre_id
+          LEFT JOIN public.sip_pais AS paiss
+            ON ubicacionpres.pais_id=paiss.id
+          LEFT JOIN public.sip_departamento AS departamentos
+            ON ubicacionpres.departamento_id=departamentos.id
+          LEFT JOIN public.sip_municipio AS municipios
+            ON ubicacionpres.municipio_id=municipios.id
+          LEFT JOIN public.sip_ubicacionpre AS ubicacionprel
+            ON ubicacionprel.id=migracion.llegadaubicacionpre_id
+          LEFT JOIN public.sip_pais AS paisl
+            ON ubicacionprel.pais_id=paisl.id
+          LEFT JOIN public.sip_departamento AS departamentol
+            ON ubicacionprel.departamento_id=departamentol.id
+          LEFT JOIN public.sip_municipio AS municipiol
+            ON ubicacionprel.municipio_id=municipiol.id
+          ORDER BY migracion.id
+          ) 
+          ) AS sub
+        ORDER BY caso_id
+      ")
+      ActiveRecord::Base.connection.execute(
+        "CREATE OR REPLACE VIEW emblematica
+        AS SELECT 
+          caso.id AS caso_id,
+          caso.fecha,
+          (SELECT despomigracion FROM emblematica1 WHERE caso_id=caso.id LIMIT 1) AS despomigracion,
+          (SELECT despomigracion_id FROM emblematica1 WHERE caso_id=caso.id LIMIT 1) AS despomigracion_id,
+          (SELECT expulsionubicacionpre_id FROM emblematica1 WHERE caso_id=caso.id LIMIT 1) AS expulsionubicacionpre_id,
+          (SELECT expulsionpais_id FROM emblematica1 WHERE caso_id=caso.id LIMIT 1) AS expulsionpais_id,
+          (SELECT expulsionpais FROM emblematica1 WHERE caso_id=caso.id LIMIT 1) AS expulsionpais,
+          (SELECT expulsiondepartamento_id FROM emblematica1 WHERE caso_id=caso.id LIMIT 1) AS expulsiondepartamento_id,
+          (SELECT expulsiondepartamento FROM emblematica1 WHERE caso_id=caso.id LIMIT 1) AS expulsiondepartamento,
+          (SELECT expulsionmunicipio_id FROM emblematica1 WHERE caso_id=caso.id LIMIT 1) AS expulsionmunicipio_id,
+          (SELECT expulsionmunicipio FROM emblematica1 WHERE caso_id=caso.id LIMIT 1) AS expulsionmunicipio,
+          (SELECT expulsionubicacionpre FROM emblematica1 WHERE caso_id=caso.id LIMIT 1) AS expulsionubicacionpre,
+          (SELECT llegadaubicacionpre_id FROM emblematica1 WHERE caso_id=caso.id LIMIT 1) AS llegadaubicacionpre_id,
+          (SELECT llegadapais_id FROM emblematica1 WHERE caso_id=caso.id LIMIT 1) AS llegadapais_id,
+          (SELECT llegadapais FROM emblematica1 WHERE caso_id=caso.id LIMIT 1) AS llegadapais,
+          (SELECT llegadadepartamento_id FROM emblematica1 WHERE caso_id=caso.id LIMIT 1) AS llegadadepartamento_id,
+          (SELECT llegadadepartamento FROM emblematica1 WHERE caso_id=caso.id LIMIT 1) AS llegadadepartamento,
+          (SELECT llegadamunicipio_id FROM emblematica1 WHERE caso_id=caso.id LIMIT 1) AS llegadamunicipio_id,
+          (SELECT llegadamunicipio FROM emblematica1 WHERE caso_id=caso.id LIMIT 1) AS llegadamunicipio,
+          (SELECT llegadaubicacionpre FROM emblematica1 WHERE caso_id=caso.id LIMIT 1) AS llegadaubicacionpre
+          FROM sivel2_gen_caso AS caso
+        ")
+
+      ActiveRecord::Base.connection.execute(
         "CREATE OR REPLACE VIEW sivel2_gen_conscaso1 
-        AS SELECT casosjr.id_caso as caso_id, 
+        AS SELECT casosjr.id_caso AS caso_id, 
         (contacto.nombres || ' ' || contacto.apellidos) AS contacto,
         ultimaatencion.fecha AS ultimaatencion_fecha,
         casosjr.fecharec,
         oficina.nombre AS oficina,
         usuario.nusuario,
         caso.fecha AS fecha,
-        ARRAY_TO_STRING(ARRAY(SELECT departamento.nombre || ' / ' || 
-        municipio.nombre
-        FROM public.sip_departamento AS departamento, 
-          public.sip_municipio AS municipio, 
-          public.sip_ubicacion AS ubicacion, 
-          public.sivel2_sjr_desplazamiento AS desplazamiento
-        WHERE desplazamiento.fechaexpulsion=caso.fecha
-        AND desplazamiento.id_caso=caso.id
-        AND desplazamiento.id_expulsion=ubicacion.id
-        AND ubicacion.id_departamento=departamento.id
-        AND ubicacion.id_municipio=municipio.id ), ', ') AS expulsion,
-        ARRAY_TO_STRING(ARRAY(SELECT departamento.nombre || ' / ' || 
-        municipio.nombre
-        FROM public.sip_departamento AS departamento, 
-          public.sip_municipio AS municipio, 
-          public.sip_ubicacion AS ubicacion, 
-          public.sivel2_sjr_desplazamiento AS desplazamiento
-        WHERE desplazamiento.fechaexpulsion=caso.fecha
-        AND desplazamiento.id_caso=caso.id
-        AND desplazamiento.id_llegada=ubicacion.id
-        AND ubicacion.id_departamento=departamento.id
-        AND ubicacion.id_municipio=municipio.id ), ', ') AS llegada,
+        (SELECT expulsionubicacionpre FROM 
+          emblematica WHERE emblematica.caso_id=caso.id LIMIT 1) AS expulsion,
+        (SELECT llegadaubicacionpre FROM 
+          emblematica WHERE emblematica.caso_id=caso.id LIMIT 1) AS llegada,
         caso.memo AS memo
         FROM public.sivel2_sjr_casosjr AS casosjr 
           JOIN public.sivel2_gen_caso AS caso ON casosjr.id_caso = caso.id 

@@ -93,6 +93,7 @@ module Sip
     # Si usa_latlon es falso y la ubicación con lugar
     # es válida ignora las que recibe y pone unas
     # de acuerdo al pais, departamento, municipio y clase
+    # Retorna id de ubicación que encuentra o que crea o nil si tiene problema
     def self.buscar_o_agregar(pais_id, departamento_id, municipio_id,
                        clase_id, lugar, sitio, tsitio_id,
                        latitud, longitud, usa_latlon = true)
@@ -101,7 +102,8 @@ module Sip
       longitud = usa_latlon ? longitud.to_f : 0.0
 
       if !pais_id || Sip::Pais.where(id: pais_id.to_i).count == 0
-        return nil end
+        return nil 
+      end
       opais = Sip::Pais.find(pais_id.to_i)
       if !usa_latlon
         latitud = opais.latitud
@@ -150,6 +152,7 @@ module Sip
       end
       w[:municipio_id] = omunicipio.id
 
+      # clase debe ser NULL para ubicaciones rurales
       if clase_id.to_i > 0 &&
           Sip::Clase.where(id: clase_id.to_i,
                            id_municipio: omunicipio.id).count == 0
@@ -159,9 +162,10 @@ module Sip
         end
         return Sip::Ubicacionpre.where(w).take.id
       end
-      w[:clase_id] = clase_id.to_i > 0 ? clase_id.to_i : nil
 
+      w[:clase_id] = nil  # Posiblemente Rural
       if clase_id.to_i > 0
+        w[:clase_id] = clase_id.to_i # Urbana
         oclase = Sip::Clase.find(clase_id.to_i)
         if !usa_latlon
           latitud = oclase.latitud
@@ -187,6 +191,41 @@ module Sip
       w.delete(:sitio)
       w.delete(:lugar)
 
+      # Revisamos posible error en información de entrada que pondría
+      # como lugar un centro poblado y en tal caso se retorna el centro
+      # poblado
+      if !w[:clase_id] && Sip::Clase.where(nombre: lugar.to_s.strip,
+                           id_municipio: omunicipio.id).count == 1
+        oclase = Sip::Clase.where(nombre: lugar.to_s.strip,
+                                  id_municipio: omunicipio.id).first
+        clase_id = w[:clase_id] = oclase.id
+        if Sip::Ubicacionpre.where(w).count == 0
+          puts 'Problema, no se encontró ubicación esperada ' + w
+          return nil
+        end
+        if sitio.to_s.strip == ''
+          puts "Ajustando ubicacion sin centro poblado, ni sitio pero con "\
+            "lugar '#{lugar.to_s.strip} / #{omunicipio.nombre}', "\
+            "para que coincida con centro poblado del mismo nombre. "
+          if tsitio_id != 2
+            puts "** Ignorando tsitio_id errado"
+          end
+          if latitud.to_f != oclase.latitud || longitud.to_f != oclase.longitud
+            puts "** Ignorando (latitud, longitud) erradas "\
+              "(#{latitud.to_f}, #{longitud.to_f})"
+          end
+          return Sip::Ubicacionpre.where(w).take.id
+        else
+          puts "** Ajustando ubicacion sin centro poblado, pero con sitio y "\
+            "con lugar igual a centro poblado "\
+            "'#{sitio.to_s.strip} / #{lugar.to_s.strip} / #{omunicipio.nombre}', "\
+            "para que el sitio sea lugar y lugar sea centro poblado "\
+            "necesitamos nombres únicos para ubicaciones/polígonos diferentes."
+          lugar = sitio.to_s.strip
+          sitio = ''
+        end
+      end
+
       # Preparamos tsitio_id
       tsitio_id = tsitio_id.to_i > 0 ? tsitio_id.to_i : nil
       if tsitio_id && Sip::Tsitio.where(id: tsitio_id.to_i).count == 0
@@ -198,8 +237,8 @@ module Sip
         ubi = Sip::Ubicacionpre.where(w).
           where('lugar ILIKE ?', lugar.strip.gsub(/  */, ' ')).
           where("sitio IS NULL OR sitio=''")
-        puts w
-        puts ubi.to_sql
+        #puts w
+        #puts ubi.to_sql
         if ubi.count > 0
            # modificando existente
           ubi[0].tsitio_id = tsitio_id
@@ -235,7 +274,8 @@ module Sip
         w[:sitio] = sitio.strip.gsub(/  */, ' ')
       end
 
-      # Añadimos nuevo teniendo en cuenta que lugar y sitio ya estan dilig.
+      # Intentamos añadir nuevo teniendo en cuenta que lugar y sitio 
+      # ya estan dilig.
       w[:tsitio_id] = tsitio_id
       w[:latitud] = latitud
       w[:longitud] = longitud
@@ -247,6 +287,12 @@ module Sip
         w[:lugar],
         w[:sitio]
       )
+      if Sip::Ubicacionpre.where(nombre: w[:nombre]).count == 1 
+        puts "Problema, ya hay una ubicación con el nombre #{w[:nombre]}. "\
+          "Proveniente de #{w.inspect}. Se usará esa ignorando la "\
+          "informacińo recibida"
+        return Sip::Ubicacionpre.where(nombre: w[:nombre]).first.id
+      end
       nubi = Sip::Ubicacionpre.create!(w)
       if !nubi
         puts "Problema creando ubi #{nubi}"

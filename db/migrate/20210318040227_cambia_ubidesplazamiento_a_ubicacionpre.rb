@@ -10,51 +10,67 @@ class CambiaUbidesplazamientoAUbicacionpre < ActiveRecord::Migration[6.1]
         puts "Desplazamiento #{desplazamiento.id} no tiene expulsion"
       else 
         ubiex = Sip::Ubicacion.find(expulsion)
-        ubicacionpre = Sip::Ubicacionpre.where(
-          pais_id: ubiex.id_pais, departamento_id: ubiex.id_departamento, 
-          municipio_id: ubiex.id_municipio, clase_id: ubiex.id_clase)
-        if ubicacionpre[0]
-          desplazamiento.expulsionubicacionpre_id = ubicacionpre[0].id
-        else
-         # byebug
-          puts "En ubicacionpre no se encontró de expulsión "\
+        ubicacionpre = Sip::Ubicacionpre::buscar_o_agregar(
+          ubiex.id_pais, ubiex.id_departamento,
+          ubiex.id_municipio, ubiex.id_clase,
+          ubiex.lugar, ubiex.sitio,
+          ubiex.id_tsitio, ubiex.latitud,
+          ubiex.longitud, ubiex.latitud && ubiex.longitud && 
+            ubiex.latitud != 0 && ubiex.longitud != 0)
+        if !ubicacionpre
+          puts "Problema encontrando o creando ubicaciónpre para expulsión en"\
+            "caso=#{desplazamiento.id_caso}, "\
+            "desplazamiento=#{desplazamiento.id}, "\
+            "ubicacion=#{ubiex.id}: "\
             "pais=#{ubiex.id_pais}, "\
             "departamento=#{ubiex.id_departamento}, "\
             "municipio=#{ubiex.id_municipio}, "\
             "clase=#{ubiex.id_clase}, "\
-            "desplazamiento=#{desplazamiento.id}, "\
-            "caso=#{desplazamiento.caso_id} "
+            "lugar=#{ubiex.lugar}, "\
+            "sitio=#{ubiex.sitio}, "\
+            "tsitio=#{ubiex.tsitio ? ubiex.tsitio.nombre : '' }, "\
+            "latitud=#{ubiex.latitud}, "\
+            "longitud=#{ubiex.longitud} "
           exit 1
         end
+        desplazamiento.expulsionubicacionpre_id = ubicacionpre
       end
       llegada = desplazamiento.id_llegada_porborrar
       if !llegada
         puts "Desplazamiento #{desplazamiento.id} no tiene llegada"
       else 
         ubilleg = Sip::Ubicacion.find(llegada)
-        ubicacionpre = Sip::Ubicacionpre.where(
-          pais_id: ubilleg.id_pais, departamento_id: ubilleg.id_departamento, 
-          municipio_id: ubilleg.id_municipio, clase_id: ubilleg.id_clase)
-        if ubicacionpre[0]
-          desplazamiento.llegadaubicacionpre_id = ubicacionpre[0].id
-        else
-         # byebug
-          puts "En ubicacionpre no se encontró llegada "\
+        ubicacionpre = Sip::Ubicacionpre::buscar_o_agregar(
+          ubilleg.id_pais, ubilleg.id_departamento,
+          ubilleg.id_municipio, ubilleg.id_clase,
+          ubilleg.lugar, ubilleg.sitio,
+          ubilleg.id_tsitio, ubilleg.latitud,
+          ubilleg.longitud, ubilleg.latitud && ubilleg.longitud && 
+          ubilleg.latitud != 0 && ubilleg.longitud != 0)
+        if !ubicacionpre
+          puts "Problema encontrando o creando ubicaciónpre para llegada en"\
+            "caso=#{desplazamiento.id_caso}, "\
+            "desplazamiento=#{desplazamiento.id}, "\
+            "ubicacion=#{ubilleg.id}: "\
             "pais=#{ubilleg.id_pais}, "\
             "departamento=#{ubilleg.id_departamento}, "\
             "municipio=#{ubilleg.id_municipio}, "\
             "clase=#{ubilleg.id_clase}, "\
-            "desplazamiento=#{desplazamiento.id}, "\
-            "caso=#{desplazamiento.caso_id} "
-          exit 1
+            "lugar=#{ubilleg.lugar}, "\
+            "sitio=#{ubilleg.sitio}, "\
+            "tsitio=#{ubilleg.tsitio ? ubilleg.tsitio.nombre : '' }, "\
+            "latitud=#{ubilleg.latitud}, "\
+            "longitud=#{ubilleg.longitud} "
+          exit 1 
         end
+        desplazamiento.llegadaubicacionpre_id = ubicacionpre
       end
       desplazamiento.save(validate: false)
       c += 1
       p = c*100/t
       if p.to_i > ultp 
         ultp = p.to_i
-        puts "Procesadas #{c} desplazamientos (#{ultp} %)"
+        puts "Procesados #{c} desplazamientos (#{ultp} %)"
       end
     end
   end
@@ -81,8 +97,8 @@ class CambiaUbidesplazamientoAUbicacionpre < ActiveRecord::Migration[6.1]
        ALTER TABLE sivel2_sjr_desplazamiento RENAME id_expulsion_porborrar TO id_expulsion;
        ALTER TABLE sivel2_sjr_desplazamiento RENAME id_llegada_porborrar TO id_llegada;
      SQL
-     change_column_null(:sivel2_sjr_desplazamiento, :id_expulsion_porborrar, false)
-     change_column_null(:sivel2_sjr_desplazamiento, :id_llegada_porborrar, false)
+     change_column_null(:sivel2_sjr_desplazamiento, :id_expulsion, false)
+     change_column_null(:sivel2_sjr_desplazamiento, :id_llegada, false)
   end
 
   def up

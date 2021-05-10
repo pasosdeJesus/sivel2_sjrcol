@@ -121,8 +121,6 @@
         <% if current_usuario.rol == Ability::ROLADMIN || 
           current_usuario.rol == Ability::ROLDIR %>
           <%= opcion_menu "Tablas Básicas", sivel2_gen.tablasbasicas_path, desplegable: true %>
-          <%= opcion_menu "Copia de respaldo cifrada", 
-            sip.respaldo7z_path, desplegable: true %>
           <%= opcion_menu "Clave para respaldo automatico", 
             main_app.clavesrespaldos_path, desplegable: true %>
           <!-- %= #opcion_menu "Casos", admin_casos_path % -->

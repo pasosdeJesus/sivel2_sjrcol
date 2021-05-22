@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: de19b0ae9272cdf1ad3476da6dee061979e4ff53
+  revision: 59c32e4afc2ae83d4af734330dcc1e27df1d9074
   branch: main
   specs:
     cor1440_gen (1.0b3)
@@ -14,7 +14,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: a90ce2596ec3ee5cec69c3d29f309d0a4ec90666
+  revision: 6413cce0eaa7362033f6a5257a8e33359c734ffc
   branch: main
   specs:
     heb412_gen (1.0.b6)
@@ -25,7 +25,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/mr519_gen.git
-  revision: bb5067a8f414443bdfca9a7c390a99c3287f9f1e
+  revision: 68b951d6383155bc53cc138cde291950f18b1d3c
   branch: main
   specs:
     mr519_gen (0.2.0)
@@ -34,7 +34,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: e9f1a12fa5d80f46bdd2246128675151f7637975
+  revision: bc2e29620d3a844c2011e41b8aa9278193c46555
   branch: main
   specs:
     sal7711_gen (1.0.b3)
@@ -43,7 +43,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: d985d0a829960cb01c3827c473e953070bf93905
+  revision: 691ed35782231fce0a631e25ae0d7342e93cd06d
   branch: main
   specs:
     sal7711_web (1.0.a3)
@@ -52,7 +52,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 0093e0b276fee91e64a2813936ec09386a1c8d58
+  revision: c89eb86f30c8ea4b541bedace02cd5bbd684e808
   branch: main
   specs:
     sip (2.0.b11)
@@ -71,7 +71,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: f6f45115e14ceea85b3787e1ba5c96801af7a7c8
+  revision: d7e28325e37991eeafdd03293ba829cb5ce842d8
   branch: main
   specs:
     sivel2_gen (2.0b14)
@@ -81,7 +81,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 0a02269a3e23ae1bf95fe5a1ea1fbff9fd6cfa1a
+  revision: aa86744b81c11cba140ee94c9a5a503348ee7864
   branch: main
   specs:
     sivel2_sjr (2.0b10)
@@ -211,7 +211,7 @@ GEM
       railties (>= 3.2)
     erubi (1.10.0)
     execjs (2.8.1)
-    ffi (1.15.0)
+    ffi (1.15.1)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     i18n (1.8.10)
@@ -245,7 +245,7 @@ GEM
     minitest (5.14.4)
     msgpack (1.4.2)
     nio4r (2.5.7)
-    nokogiri (1.11.4)
+    nokogiri (1.11.5)
       mini_portile2 (~> 2.5.0)
       racc (~> 1.4)
     odf-report (0.7.2)
@@ -274,7 +274,7 @@ GEM
       prawn (>= 1.0.0)
       rails (>= 3.2)
     public_suffix (4.0.6)
-    puma (5.3.1)
+    puma (5.3.2)
       nio4r (~> 2.0)
     racc (1.5.2)
     rack (2.2.3)
@@ -380,7 +380,7 @@ GEM
       activemodel (>= 6.0.0)
       bindex (>= 0.4.0)
       railties (>= 6.0.0)
-    webpacker (5.3.0)
+    webpacker (5.4.0)
       activesupport (>= 5.2)
       rack-proxy (>= 0.6.1)
       railties (>= 5.2)

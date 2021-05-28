@@ -130,8 +130,8 @@ class CreaPlantillacasos < ActiveRecord::Migration[6.0]
 
   def down
     execute <<-SQL
-      DELETE FROM public.heb412_gen_campoplantillahcm WHERE id>='200' AND id<='400'
-      DELETE FROM public.heb412_gen_plantillahcm WHERE id='44'
+      DELETE FROM public.heb412_gen_campoplantillahcm WHERE id>='200' AND id<='400';
+      DELETE FROM public.heb412_gen_plantillahcm WHERE id='44';
     SQL
   end
 end

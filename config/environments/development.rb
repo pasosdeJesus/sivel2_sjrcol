@@ -7,7 +7,9 @@ Rails.application.configure do
   # it changes. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
   config.cache_classes = false
-
+  # En caso de eque la aplicacio³³n corre en un computador en una LAN co
+  # una puerta de enlace como proxy, definir config.hosts, ejemplo:
+  #config.hosts = "nodos.pasosdejesus.org"
   # Do not eager load code on boot.
   config.eager_load = false
 

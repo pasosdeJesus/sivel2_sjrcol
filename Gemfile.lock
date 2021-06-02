@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/cor1440_gen.git
-  revision: 702c34a44b558803310e53a80a2011875c958c08
+  revision: 10cc854e22aedb2df0593031da966e4784bcfaef
   branch: main
   specs:
     cor1440_gen (1.0b3)
@@ -14,7 +14,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: f87b5d67e24f94ae9970ddef2aeab8b6cf96a3eb
+  revision: 5d7a247f9c8b032c982be1913241d7c4e9893b4e
   branch: main
   specs:
     heb412_gen (1.0.b6)
@@ -25,7 +25,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/mr519_gen.git
-  revision: b00717baf7159c2f86cae935e849b319727016af
+  revision: 860448840eb79bc6f3244ef23be1374d1aec2301
   branch: main
   specs:
     mr519_gen (0.2.0)
@@ -34,7 +34,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_gen.git
-  revision: a3ccba076450b992dee0043f1e65695131d72af4
+  revision: 40543f80065235aedaadae5facb6d6025ba07f03
   branch: main
   specs:
     sal7711_gen (1.0.b3)
@@ -43,7 +43,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sal7711_web.git
-  revision: 34b0e52bcc1a3b31730b68c8367ae34e09894a7d
+  revision: 82a83f1b414b360ee64fdb70bc6583a6d89f92b1
   branch: main
   specs:
     sal7711_web (1.0.a3)
@@ -52,7 +52,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 524bdfe93a18508882dff552fcf080c1e523578b
+  revision: c4a3b76592e9948cd7614cce12ca0e07e6d8b8ea
   branch: main
   specs:
     sip (2.0.b11)
@@ -71,7 +71,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_gen.git
-  revision: a7b583418d1a5f537c4b841213abf38c9666b9cc
+  revision: 619712a6b219c7df534ea7395c77b0f62afa3c7d
   branch: main
   specs:
     sivel2_gen (2.0b14)
@@ -81,7 +81,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sivel2_sjr.git
-  revision: 105b27fb13035cbe892f2b8e0d01237c5b7fb557
+  revision: f168b1ef4ac28989a582e5450af22e6d7f3c06eb
   branch: main
   specs:
     sivel2_sjr (2.0b10)
@@ -196,7 +196,6 @@ GEM
     colorize (0.8.1)
     concurrent-ruby (1.1.8)
     crass (1.0.6)
-    date (3.1.0)
     devise (4.8.0)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -217,7 +216,6 @@ GEM
       activesupport (>= 4.2.0)
     i18n (1.8.10)
       concurrent-ruby (~> 1.0)
-    io-wait (0.1.0)
     jbuilder (2.11.2)
       activesupport (>= 5.0.0)
     jquery-rails (4.4.0)
@@ -243,16 +241,9 @@ GEM
       nokogiri (~> 1)
       rake
     mini_mime (1.0.3)
-    mini_portile2 (2.5.2)
-      net-ftp (~> 0.1)
+    mini_portile2 (2.5.3)
     minitest (5.14.4)
     msgpack (1.4.2)
-    net-ftp (0.1.2)
-      net-protocol
-      time
-    net-protocol (0.1.0)
-      io-wait
-      timeout
     nio4r (2.5.7)
     nokogiri (1.11.6)
       mini_portile2 (~> 2.5.0)
@@ -370,9 +361,6 @@ GEM
       climate_control (>= 0.0.3, < 1.0)
     thor (1.1.0)
     tilt (2.0.10)
-    time (0.1.0)
-      date
-    timeout (0.1.1)
     tiny-color-rails (0.0.2)
       railties (>= 3.0)
     ttfunk (1.7.0)
